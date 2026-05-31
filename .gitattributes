@@ -1,2 +1,12 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Vendored third-party assets are byte-pinned by Subresource Integrity (SRI).
+# Git must NOT touch their line endings, or the served bytes stop matching the
+# integrity hash in index.html and the browser blocks them — this took the map
+# down once (leaflet.css committed CRLF, normalized to LF, broke its SRI).
+vendor/** -text
+*.woff2 binary
+*.png binary
+*.webp binary
+*.ico binary
