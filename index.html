@@ -180,6 +180,9 @@
 .theme-light .traj-down{background:rgba(196,74,71,0.18)!important;color:#8A2620!important;}
 .theme-light .traj-flat{background:rgba(60,90,120,0.10)!important;color:#111827!important;}
 .theme-light .gl{border-bottom-color:rgba(60,90,120,0.30);}
+/* #12 'adjusted' trust-signal badge on auto-sanitized cells. */
+.adj-flag{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:0.8px;text-transform:uppercase;font-weight:700;color:#FCD34D;background:rgba(252,211,77,0.12);border:1px solid rgba(252,211,77,0.4);border-radius:3px;padding:1px 5px;margin-left:6px;vertical-align:middle;cursor:help;}
+.theme-light .adj-flag{color:#7A5A00;background:rgba(216,136,34,0.14);border-color:rgba(216,136,34,0.55);text-shadow:none;}
 /* ── #5 Light-mode yellow legibility: the bright yellows (#FCD34D) and amber
    (#FFA726) fail contrast on white. Give yellow TEXT a black outline (text-shadow)
    and yellow SVG FILLS a black stroke, globally, in light mode only. ── */
@@ -2721,7 +2724,7 @@ function spTab(tab, btn){
           return '<div class="sp-metric-sub" style="margin:10px 0 4px;">Tuition · '+tYrs[0]+'–'+tYrs[tYrs.length-1]+'</div>'+
             lineChart({years:tYrs,series:[{vals:s.tui_trend,color:'#FFA726'}],pinIndex:0,fmt:function(v){return '$'+Math.round(v/1000)+'K';},w:300,h:96,label:'Tuition'});
         })()+
-        '<div class="sp-sec-label" style="margin-top:10px;">Grant distribution · 2025</div>'+dpStackBar(scholBucketsForBar(s),SCHOL_BUCKETS)+
+        '<div class="sp-sec-label" style="margin-top:10px;">Grant distribution · 2025 '+adjFlag(scholAdjusted(s),'No-grant share')+'</div>'+dpStackBar(scholBucketsForBar(s),SCHOL_BUCKETS)+
       '</div>'+
       '<div class="sp-section"><div class="sp-sec-label">Outcomes (2024 grads · 2025 report)</div>'+
         r(gl('First-Time Bar'),s.bar?s.bar+'%':'—',colorFor('bar',s.bar))+
@@ -2936,6 +2939,26 @@ function scholBucketsForBar(s){
   const sumGrants = (s.schol_lt_pct||0)+(s.schol_mt_pct||0)+(s.schol_full_pct||0)+(s.schol_gt_pct||0);
   const derivedNone = Math.max(0, +(100 - sumGrants).toFixed(1));
   return {...s, schol_none_pct: derivedNone};
+}
+// #12 Detect when we auto-adjusted the source's reported "no grant" figure. The
+// 509's none count is known-unreliable (negatives, mis-reports); we re-derive it
+// as 100 − Σ(grant buckets). When the source value materially disagrees with the
+// derived one, that cell is flagged "adjusted" — a visible trust signal, not a
+// silent change. Returns null when nothing was adjusted.
+function scholAdjusted(s){
+  if(s==null || s.schol_none_pct==null) return null;
+  const sumGrants=(s.schol_lt_pct||0)+(s.schol_mt_pct||0)+(s.schol_full_pct||0)+(s.schol_gt_pct||0);
+  const derived=Math.max(0, +(100 - sumGrants).toFixed(1));
+  const src=+s.schol_none_pct;
+  if(Math.abs(derived - src) < 0.6) return null; // within rounding — not adjusted
+  return {src, derived};
+}
+// Small inline "adjusted" badge with the before→after in its tooltip.
+function adjFlag(adj, what){
+  if(!adj) return '';
+  const tip=(what||'Value')+' re-derived from the grant buckets: source reported '
+    +adj.src+'%, shown as '+adj.derived+'% (100 − Σ grant buckets). The ABA 509 "no-grant" count is frequently mis-reported.';
+  return '<span class="adj-flag gl" data-tip="'+tip.replace(/"/g,'&quot;')+'" tabindex="0">adjusted</span>';
 }
 // 100%-stacked scholarship distribution by year. X-axis starts at the OLDEST year
 // with data and runs to the present; interior years lacking data are marked missing.
@@ -3583,7 +3606,7 @@ function schoolDetailHTML(s){
     '<div class="dp-loc">'+(s.state||'—')+(s.school_type?' · '+s.school_type:'')+' · ABA 509 · Last synced May 31, 2026 (2025 cycle) · <a href="methodology.html" style="color:var(--blue);text-decoration:none;border-bottom:1px dotted rgba(90,171,203,0.5);">Methodology</a></div>'+
     '<div class="dp-grid">'+
       // ── 1. ADMISSIONS — who gets in ─────────────────────────────────────
-      '<div class="dp-card"><div class="dp-card-t">// 1 · Admissions 2025</div>'+
+      '<div class="dp-card"><div class="dp-card-t">1 · Admissions 2025</div>'+
         row('LSAT', pctTriple(s.lsat25,s.lsat50,s.lsat75) + trajBadge(s.lsat_trend,{dir:'asc'}))+
         row(gl('uGPA','uGPA'), pctTriple(s.gpa25,s.gpa50,s.gpa75, v=>v==null||v===''?'—':Number(v).toFixed(2)) + trajBadge(s.gpa_trend,{dir:'asc',fmt:v=>Math.abs(v).toFixed(2)}))+
         row('Applications',num(s.apps) + trajBadge(s.apps_trend,{dir:'asc',fmt:v=>Math.round(Math.abs(v)).toLocaleString()}))+
@@ -3595,7 +3618,7 @@ function schoolDetailHTML(s){
         '<div class="dp-chart-t">Acceptance rate · '+(accYrs.length?accYrs[0]+'–'+accYrs[accYrs.length-1]:'—')+'</div>'+accChart+
       '</div>'+
       // ── 2. COST & SCHOLARSHIPS — what it costs ──────────────────────────
-      '<div class="dp-card"><div class="dp-card-t">// 2 · Cost &amp; Scholarships 2025</div>'+
+      '<div class="dp-card"><div class="dp-card-t">2 · Cost &amp; Scholarships 2025</div>'+
         row('Resident Tuition',usd(s.tui) + trajBadge(s.tui_trend,{dir:'desc',fmt:v=>'$'+Math.round(Math.abs(v)/1000)+'K'}),colorFor('tui',s.tui))+
         row('Non-Resident',s.nrt&&s.nrt!==s.tui?usd(s.nrt):'Same as resident')+
         row('COL-Adj. Tuition',usd(realUSD(s.tui,s.state)))+
@@ -3612,15 +3635,15 @@ function schoolDetailHTML(s){
         (costPerBigLaw(s) ? '<div class="dp-row dp-row-net"><span class="dp-row-k">$ per BigLaw seat</span><span class="dp-row-v">'+usd(costPerBigLaw(s))+'</span></div>' : '')+
         (costPerBarPass(s) ? '<div class="dp-row dp-row-net"><span class="dp-row-k">$ per bar passer</span><span class="dp-row-v">'+usd(costPerBarPass(s))+'</span></div>' : '')+
         '<div class="dp-chart-t">Tuition · '+yrsLabel+'</div>'+tuiChart+
-        '<div class="dp-chart-t">% of students by grant size · over time</div>'+scholStackTime(s)+
+        '<div class="dp-chart-t">% of students by grant size · over time '+adjFlag(scholAdjusted(s),'No-grant share')+'</div>'+scholStackTime(s)+
         scholBreakdown(s)+
         // Conditional scholarship retention warn callout — the most underdisclosed risk in legal ed.
         ((s.cond!=null && s.cond > 5) ? '<div class="callout warn" style="margin-top:14px;"><div class="callout-eye">Conditional scholarship risk</div><p class="callout-p"><strong>'+s.cond+'%</strong> of conditional-scholarship recipients had their scholarship reduced or eliminated after Year 1. If your offer is contingent on a GPA threshold (e.g. top 50%), assume there\'s a <strong>'+s.cond+'% chance</strong> you lose it — and budget for the full sticker tuition in years 2 and 3.</p></div>' : '')+
       '</div>'+
       // ── 3. DEMOGRAPHICS — who's there ───────────────────────────────────
-      '<div class="dp-card"><div class="dp-card-t">// 3 · Demographics 2025</div>'+dpDemo(s)+'</div>'+
+      '<div class="dp-card"><div class="dp-card-t">3 · Demographics 2025</div>'+dpDemo(s)+'</div>'+
       // ── 4. CURRICULUM — what you'd actually study ───────────────────────
-      '<div class="dp-card"><div class="dp-card-t">// 4 · Curriculum 2025</div>'+
+      '<div class="dp-card"><div class="dp-card-t">4 · Curriculum 2025</div>'+
         row('Courses offered',num(s.cur_courses))+
         row('Seminars (offered · filled)',(s.cur_seminars!=null?Math.round(s.cur_seminars):'—')+' · '+(s.cur_sem_filled!=null?Math.round(s.cur_sem_filled):'—'))+
         row('Clinic seats filled',num(s.cur_clinics))+
@@ -3633,13 +3656,13 @@ function schoolDetailHTML(s){
         row('1L section size',num(s.cur_jd1_sec))+
       '</div>'+
       // ── 5. FACULTY & TRANSFERS — who teaches, who moves ─────────────────
-      '<div class="dp-card"><div class="dp-card-t">// 5 · Faculty &amp; Transfers</div>'+
+      '<div class="dp-card"><div class="dp-card-t">5 · Faculty &amp; Transfers</div>'+
         row('Total Faculty',num(s.fac_total))+row('Full-Time',num(s.fac_ft))+
         row('Faculty of Color',num(s.fac_poc))+
         row('Transfers In',num(s.trans_in))+row('Transfers Out',num(s.trans_out))+
       '</div>'+
       // ── 6. BAR PASSAGE — can grads pass the test ────────────────────────
-      '<div class="dp-card"><div class="dp-card-t">// 6 · Bar passage</div>'+
+      '<div class="dp-card"><div class="dp-card-t">6 · Bar passage</div>'+
         row(gl('First-Time Bar'),pct(s.bar) + trajBadge(s.bar_trend,{dir:'asc',suf:'pt'}),colorFor('bar',s.bar))+
         row(gl('2-Yr Ultimate'),pct(s.bar_2yr) + trajBadge(s.bar_2yr_trend,{dir:'asc',suf:'pt'}))+
         row(gl('State Avg Bar'),pct(s.bar_state_avg))+
@@ -3649,7 +3672,7 @@ function schoolDetailHTML(s){
       '</div>'+
       // ── 7. JOB OUTCOMES — where grads actually land ─────────────────────
       // ── 7. JOB OUTCOMES — every employment data point we have, with comparison ──
-      '<div class="dp-card"><div class="dp-card-t">// 7 · Job outcomes (2024 grads · 2025 report)</div>'+
+      '<div class="dp-card"><div class="dp-card-t">7 · Job outcomes (2024 grads · 2025 report)</div>'+
         // (a) Headline chips — graduates / FTLT / bar-required / seeking
         jobOutcomeHero(s)+
         // (b) Cost-per-outcome strip — 3-yr net cost ÷ outcome probability
@@ -3674,7 +3697,7 @@ function schoolDetailHTML(s){
         '</div>'+
       '</div>'+
       // ── 8. STATE MARKET — what the legal economy looks like in this state ─
-      '<div class="dp-card"><div class="dp-card-t">// 8 · '+(s.state||'')+' market · BLS 2024 · BEA RPP · HUD FMR 2025</div>'+
+      '<div class="dp-card"><div class="dp-card-t">8 · '+(s.state||'')+' market · BLS 2024 · BEA RPP · HUD FMR 2025</div>'+
         row('Attorney salary',pctTriple(blsField(s.state,'a_pct25'),medV,blsField(s.state,'a_pct75'), fmtUSD))+
         row('Mean salary',fmtUSD(meanV),colorFor('bls_mean',meanV))+
         row('Price Parity (US=100)',rppV!=null?rppV.toFixed(1):'—')+
@@ -3892,7 +3915,7 @@ function openModal(id){
       mr(gl('FTLT Employment'),s.ftlt_pct?s.ftlt_pct+'%':'—',colorFor('ftlt_pct',s.ftlt_pct))+
     '</div>'+
     (function(){var bm=blsMean(s.state)||s.bls_mean;var bMed=blsField(s.state,'a_median');var rv=rppVal(s.state);var rb=realUSD(bm,s.state);var fr=fmrRent(s.state,'br_1');return ''+
-    '<div class="mg mg-o"><div class="mgl">// '+(s.state||'')+' Market · BLS 2024 · BEA RPP 2024 · HUD FMR 2025</div>'+
+    '<div class="mg mg-o"><div class="mgl">'+(s.state||'')+' Market · BLS 2024 · BEA RPP 2024 · HUD FMR 2025</div>'+
       mr('Mean Annual Salary',bm?'$'+bm.toLocaleString():'—',colorFor('bls_mean',bm))+
       mr('Median Annual',bMed?'$'+bMed.toLocaleString():'—',colorFor('bls_mean',bMed))+
       mr('Price Parity (US=100)',rv!=null?rv.toFixed(1):'—','#5AABCB')+
@@ -3951,7 +3974,7 @@ function filterProfiles(){
   const col=s=>pinColor(s.bar);
   document.getElementById('profGrid').innerHTML=rows.map(s=>{
   const noData = !s.lsat50 && !s.bar && s.acc==null && !s.enr && !s.tui && !s.apps;
-  const closedBadge = s.closed_status ? '<div style="font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#FFA726;margin-top:6px;border:1px solid rgba(255,167,38,0.35);padding:3px 8px;display:inline-block;">// '+s.closed_status+'</div>' : '';
+  const closedBadge = s.closed_status ? '<div style="font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#FFA726;margin-top:6px;border:1px solid rgba(255,167,38,0.35);padding:3px 8px;display:inline-block;">'+s.closed_status+'</div>' : '';
   return `
     <div class="prof-card" role="button" tabindex="0" aria-label="Open full profile for ${s.full} in a new tab" onclick="navSchool('${s.id}')" onkeydown="cardKey(event,()=>navSchool('${s.id}'))" title="Open full profile in a new tab">
       <button class="pc-cmp${inCompare(s.id)?' on':''}" data-cmp="${s.id}" title="Add to comparison" aria-label="Add ${s.full} to comparison" onclick="event.stopPropagation();toggleCompare('${s.id}')">${inCompare(s.id)?'✓':'+'}</button>
