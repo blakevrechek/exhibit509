@@ -2,7 +2,7 @@
 // Strategy: stale-while-revalidate for the static shell (index.html, methodology.html,
 // about.html, terms.html, manifest, sitemap, self-hosted Leaflet + fonts), network-first
 // for everything else (Carto map tiles) so tiles stay fresh.
-const CACHE = 'exhibit-v1.18.1';
+const CACHE = 'exhibit-v1.18.2';
 // Relative URLs resolve against the SW script location (the deploy root, e.g.
 // /Exhibit/sw.js → entries cache as /Exhibit/index.html etc.). Hardcoding absolute
 // paths like '/index.html' would resolve to the host root and fail on GH Pages
