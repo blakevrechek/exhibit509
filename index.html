@@ -38,6 +38,10 @@
   --green:#4A9B6B;--red:#EF5350;--amber:#FFA726;
   --white:#F4F8FB;--dim:#A4C8DD;--dimmer:#7AAAC8;
   --chart-halo:#06111E; /* contrast outline behind chart value labels (dark theme = navy) */
+  /* #6 Fonts defined on the BASE root so dark + light render identical metrics.
+     Previously these lived only under .theme-light, so dark mode fell back to
+     default fonts and text visibly changed size between themes. */
+  --sans:'Nunito','Manrope',system-ui,sans-serif;--serif:'Playfair Display',serif;--mono:'Geist Mono',ui-monospace,monospace;
 }
 /* ── Light theme palette (toggle via documentElement.classList.add('theme-light')) ── */
 :root.theme-light{
