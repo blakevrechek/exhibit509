@@ -367,7 +367,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .pb-counsel-header{border-top:3px solid var(--counsel);}
 
 /* Map filters bar */
-/* Map filters relocated v1.24 — top-of-map horizontal toolbar, docked between the
+/* Map filters relocated v1.18.0 — top-of-map horizontal toolbar, docked between the
    left Match Me / Compare sidebar (ends at 380px) and the always-open right school
    panel (400px), sitting just under the global header. The left sidebar is now
    reserved exclusively for Match Me + Compare. */
@@ -420,7 +420,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
    header (school name + bar pass chip) isn't hidden by filter chips or the BLS
    tooltip card. Was top:76px causing the upper ~50px to be eaten. */
 /* schoolPanel sits at the natural top now that map-filter bar moved into the left
-   panel (v1.23) — frees ~50px of vertical space at the top of the right column. */
+   panel (v1.18.0) — frees ~50px of vertical space at the top of the right column. */
 #schoolPanel{position:fixed;top:76px;right:0;bottom:36px;width:400px;z-index:100;background:rgba(4,13,23,0.97);border-left:1px solid rgba(74,122,155,0.22);overflow-y:auto;transform:translateX(0);transition:transform .3s;}#schoolPanel.hidden{transform:translateX(100%);}
 #schoolPanel.open{transform:translateX(0);}
 .sp-close{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(4,13,23,0.98);border-bottom:1px solid rgba(74,122,155,0.15);}
@@ -430,7 +430,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .sp-tab{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border:1px solid rgba(74,122,155,0.2);background:transparent;color:var(--dim);cursor:pointer;transition:all .2s;}
 .sp-tab+.sp-tab{border-left:none;}
 .sp-tab.on{background:rgba(217,119,87,0.1);color:var(--orange);border-color:rgba(217,119,87,0.35);}
-/* School-panel (right side) typography tightened v1.23 — was visibly scaled-too-big
+/* School-panel (right side) typography tightened v1.18.0 — was visibly scaled-too-big
    per owner. Reduced metric/value sizes by ~15%, tighter section padding, smaller
    section labels, more breathable line-height. */
 .sp-header{padding:14px 16px 10px;border-bottom:1px solid rgba(74,122,155,0.12);}
@@ -1423,7 +1423,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
     More
   </button>
 </nav>
-<!-- Disclaimer bar removed v1.21.0 — provenance now lives in the footer. -->
+<!-- Disclaimer bar removed v1.18.0 — provenance now lives in the footer. -->
 <style>:root{--banner-h:0px;}</style>
 
 <div id="cookieBar" style="position:fixed;bottom:0;left:0;right:0;z-index:1000;background:#0B1826;border-top:1px solid rgba(217,119,87,0.4);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;box-shadow:0 -2px 12px rgba(0,0,0,0.5);">
@@ -1772,8 +1772,8 @@ function fmtUSD(v){ return v==null?"—":"$"+v.toLocaleString(); }
 // ═══════════════════════════════════════════════════════════════════════════
 const DATA_INVARIANTS = {
   total_schools: 208,         // 197 active/newly + 11 closed/transitioning (now included as historical entries)
-  schools_inline: 208,        // all inline as of v1.8 — closed entries surface their pre-closure history
-  year_count: 15              // 2011–2025 inclusive (15-year span; pre-2018 added in v1.8 from Historic + v2 sheets)
+  schools_inline: 208,        // all inline as of v1.18.0 — closed entries surface their pre-closure history
+  year_count: 15              // 2011–2025 inclusive (15-year span; pre-2018 added in v1.18.0 from Historic + v2 sheets)
 };
 // Verifiable count of the data cells actually shipped inline on this page:
 // every non-null scalar field, plus every per-year trend entry, across S.
@@ -2043,7 +2043,7 @@ function searchTypeaheadKey(e){
   }
 }
 
-// Disclaimer banner is now persistent (per v1.8.1 owner directive) — no dismiss; always visible.
+// Disclaimer banner is now persistent (per v1.18.0 owner directive) — no dismiss; always visible.
 // ── COOKIE notice dismiss (persists via localStorage) ──
 // ── Light/Dark theme toggle (persists via localStorage). Note: many inline styles
 // use literal rgba(4,13,23,...) and won't fully invert — full theming would require
@@ -2852,7 +2852,7 @@ function lineChart(opts){
     const pv=years.map(y=>pin.vals?pin.vals[y]:null);
     let li=-1; for(let i=pv.length-1;i>=0;i--){ if(pv[i]!=null){ li=i; break; } }
     if(li>=0){ const v=pv[li], x=X(li), yy=Y(v), last=(li===years.length-1);
-      // Endpoint label placement rule (v1.25): if the line is RISING into the
+      // Endpoint label placement rule (v1.18.0): if the line is RISING into the
       // endpoint, drop the label BELOW the marker (clears the ascending line and
       // the top edge it would otherwise clip); if FALLING, lift it ABOVE. Clamp
       // to the chart box so it can never get cut off. The --chart-halo var gives a
@@ -2899,7 +2899,7 @@ function lineChart(opts){
 
 // ── Full school detail page (items 5 & 9): opens in a new tab via #school/<id> ─
 // ── Scholarship distribution ────────────────────────────────────────────────
-// Canonical buckets per owner directive (v1.8.1): student-favorability gradient.
+// Canonical buckets per owner directive (v1.18.0): student-favorability gradient.
 // "No grant" is DERIVED = 100 - (lt + mt + full + gt) — the source's none count is
 // known to be unreliable (negatives, mis-reports); the derivation guarantees the
 // stack sums to 100% and avoids fabricated bad data.
@@ -3196,7 +3196,7 @@ function outcomeFunnel(s){
 
 function navSchool(id){
   // HASH ROUTES — safest, work anywhere, no 404.html or server-side rewrites needed.
-  // Reverted from clean /school/<slug> paths in v1.16.1 because GH Pages without a
+  // Reverted from clean /school/<slug> paths in v1.18.0 because GH Pages without a
   // deployed 404.html serves real 404s for any unknown path. When the project moves
   // to a custom domain with rewrites (Netlify _redirects, Vercel rewrites, Cloudflare),
   // flip CLEAN_URLS to true and the deep-link helpers below will re-engage.
@@ -4809,8 +4809,8 @@ function openShareModal(){
   const plats = [
     {id:'twitter',  l:'Twitter / X', c:'#1DA1F2', svg:'<path d="M22 5.92a8.2 8.2 0 0 1-2.36.65 4.12 4.12 0 0 0 1.81-2.27 8.23 8.23 0 0 1-2.6 1 4.1 4.1 0 0 0-7 3.74A11.65 11.65 0 0 1 3 4.69a4.1 4.1 0 0 0 1.27 5.48 4.1 4.1 0 0 1-1.86-.51v.05a4.1 4.1 0 0 0 3.29 4.02 4.1 4.1 0 0 1-1.85.07 4.1 4.1 0 0 0 3.83 2.85A8.23 8.23 0 0 1 2 18.29a11.62 11.62 0 0 0 6.29 1.84c7.55 0 11.68-6.25 11.68-11.67v-.53A8.33 8.33 0 0 0 22 5.92z"/>'},
     {id:'reddit',   l:'Reddit',      c:'#FF4500', svg:'<circle cx="12" cy="12" r="10"/><circle cx="8" cy="12" r="1.4" fill="currentColor"/><circle cx="16" cy="12" r="1.4" fill="currentColor"/><path d="M8.5 15s1 1.5 3.5 1.5S15.5 15 15.5 15"/>'},
-    {id:'linkedin', l:'LinkedIn ✎',  c:'#0077B5', svg:'<path d="M4 8h3v12H4zM5.5 3a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5zM9 8h3v1.7c.5-.9 1.6-1.9 3.5-1.9 3 0 4.5 2 4.5 5V20h-3v-5.6c0-1.5-.6-2.5-2-2.5-1.2 0-2 .9-2 2.5V20H9z"/>'},
-    {id:'facebook', l:'Facebook',    c:'#1877F2', svg:'<path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.54V9.86c0-2.51 1.5-3.9 3.78-3.9 1.1 0 2.24.2 2.24.2v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.77l-.44 2.9h-2.33V22c4.78-.76 8.44-4.92 8.44-9.94z"/>'},
+    {id:'linkedin', l:'LinkedIn ✎',  c:'#0077B5', svg:'<path d="M4 8h3v12H4zM5.5 3a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5zM9 8h3v1.18.0c.5-.9 1.6-1.9 3.5-1.9 3 0 4.5 2 4.5 5V20h-3v-5.6c0-1.5-.6-2.5-2-2.5-1.2 0-2 .9-2 2.5V20H9z"/>'},
+    {id:'facebook', l:'Facebook',    c:'#1877F2', svg:'<path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.54V9.86c0-2.51 1.5-3.9 3.78-3.9 1.1 0 2.24.2 2.24.2v1.18.0h-1.26c-1.24 0-1.63.77-1.63 1.56v1.18.0h2.77l-.44 2.9h-2.33V22c4.78-.76 8.44-4.92 8.44-9.94z"/>'},
     {id:'whatsapp', l:'WhatsApp',    c:'#25D366', svg:'<path d="M17.5 14.4c-.3-.1-1.8-.9-2.1-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.3 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5-.2 0-.4 0-.6 0-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4 0 1.4 1 2.8 1.1 3 .1.2 2 3 4.8 4.1 1.7.7 2.3.7 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2 0-.1-.2-.2-.5-.3zM12 2A10 10 0 0 0 2 12c0 1.8.5 3.5 1.3 5L2 22l5.1-1.3A10 10 0 0 0 22 12 10 10 0 0 0 12 2z"/>'},
     {id:'telegram', l:'Telegram',    c:'#26A5E4', svg:'<path d="M21.94 4.84a1.5 1.5 0 0 0-1.62-.25L3.43 11a1 1 0 0 0 0 1.86l4.78 1.9 1.9 5.78a1 1 0 0 0 .77.66 1 1 0 0 0 .94-.32l2.6-2.83 4.1 3a1 1 0 0 0 1.55-.6L22 6a1.5 1.5 0 0 0-.06-1.16zM10.43 14.06l-.4 3.12-1.4-4.18 7.43-5.6z"/>'},
     {id:'bluesky',  l:'Bluesky',     c:'#0085FF', svg:'<path d="M6.5 3c2 0 4 2 5.5 5 1.5-3 3.5-5 5.5-5 1.8 0 3.5 1.5 3.5 3.5 0 1.5-1 3-1.5 4 .5 1 1.5 2.5 1.5 4 0 2-1.7 3.5-3.5 3.5-2 0-4-2-5.5-5-1.5 3-3.5 5-5.5 5-1.8 0-3.5-1.5-3.5-3.5 0-1.5 1-3 1.5-4-.5-1-1.5-2.5-1.5-4C3 4.5 4.7 3 6.5 3z"/>'},
@@ -4840,7 +4840,7 @@ function openShareModal(){
   document.body.appendChild(m);
 }
 
-// Disclaimer bar removed v1.21.0 — --banner-h is hardcoded to 0 in the inline
+// Disclaimer bar removed v1.18.0 — --banner-h is hardcoded to 0 in the inline
 // <style> after the header; the dynamic syncBannerHeight observer is no longer
 // needed. Provenance lives in the footer.
 // Honor #school/X or #compare=… in URL on first load
