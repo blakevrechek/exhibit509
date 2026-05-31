@@ -2255,13 +2255,14 @@ function toggleBLS(){
   blsOn=!blsOn;
   const btn=document.getElementById('blsToggle');
   const leg=document.getElementById('blsLegend');
-  const legTitle=document.getElementById('legTitle');
+  const legRows=document.getElementById('legRows');
+  const legSelect=document.getElementById('legSelect');
   btn.classList.toggle('on',blsOn);
-  leg.style.display=blsOn?'block':'none';
-  legTitle.style.display=blsOn?'none':'block';
-  document.querySelectorAll('.leg-row').forEach((r,i)=>{
-    if(i<5) r.style.display=blsOn?'none':'flex';
-  });
+  if(leg) leg.style.display=blsOn?'block':'none';
+  // While the BLS salary overlay is on, hide the per-metric pin legend + its
+  // selector (they describe pin colors, which the overlay temporarily replaces).
+  if(legRows) legRows.style.display=blsOn?'none':'block';
+  if(legSelect) legSelect.style.display=blsOn?'none':'block';
   if(blsOn) drawBLSLayer();
   else{ blsLayers.forEach(l=>l.remove()); blsLayers=[]; }
 }
@@ -2285,11 +2286,14 @@ const STATE_CENTERS = {
 
 function drawBLSLayer(){
   if(!mapInst) return;
-  Object.entries(BLS).forEach(([state,salary])=>{
+  // BLS is a nested {state:{year:{a_mean,...}}} object — pull the latest mean
+  // attorney wage per state via blsMean() rather than treating the value as a number.
+  Object.keys(BLS).forEach(state=>{
     const center=STATE_CENTERS[state];
     if(!center) return;
+    const salary=blsMean(state);
     const col=blsColor(salary);
-    if(!col) return;
+    if(salary==null || !col) return;
     const c=L.circle(center,{
       radius:160000,fillColor:col,fillOpacity:0.25,
       color:col,weight:1,opacity:0.4
