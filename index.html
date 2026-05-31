@@ -37,6 +37,7 @@
   --blue:#5AABCB;--orange:#D97757;--od:#A0522D;
   --green:#4A9B6B;--red:#EF5350;--amber:#FFA726;
   --white:#F4F8FB;--dim:#A4C8DD;--dimmer:#7AAAC8;
+  --chart-halo:#06111E; /* contrast outline behind chart value labels (dark theme = navy) */
 }
 /* ── Light theme palette (toggle via documentElement.classList.add('theme-light')) ── */
 :root.theme-light{
@@ -44,6 +45,7 @@
   --blue:#1E5A88;--orange:#C95B2C;--od:#A0522D;
   --green:#2F7E4F;--red:#C44A47;--amber:#D88822;
   --white:#000000;--dim:#1F2937;--dimmer:#374151;
+  --chart-halo:#FFFFFF; /* light theme = white halo so dark digits stay legible */
   --sans:'Nunito','Manrope',system-ui,sans-serif;--serif:'Playfair Display',serif;--mono:'Geist Mono',ui-monospace,monospace;--counsel:#1E5631;--counsel-l:#2D8044;--counsel-pale:rgba(30,86,49,0.15);
   /* ── Chart palette: 5-stop semantic ramp + neutral (Okabe-Ito-derived, colorblind-safe ordering) ── */
   /* very bad → bad/danger → ok → good → great (e.g. 100% bar pass, top stipend) */
@@ -2564,10 +2566,17 @@ function lineChart(opts){
     const pv=years.map(y=>pin.vals?pin.vals[y]:null);
     let li=-1; for(let i=pv.length-1;i>=0;i--){ if(pv[i]!=null){ li=i; break; } }
     if(li>=0){ const v=pv[li], x=X(li), yy=Y(v), last=(li===years.length-1);
-      svg+='<circle cx="'+x.toFixed(1)+'" cy="'+yy.toFixed(1)+'" r="3.6" fill="'+pin.color+'" stroke="'+'#06111E'+'" stroke-width="1.5"/>';
-      // Endpoint label: lifted 11px clear of the marker + paint-order:stroke with a 3px
-      // navy halo so the digits stay legible even when they cross the trend line.
-      svg+='<text x="'+(x+(last?-6:6)).toFixed(1)+'" y="'+(yy-11).toFixed(1)+'" font-family="Geist Mono,ui-monospace,monospace" font-size="11" font-weight="700" fill="'+pin.color+'" stroke="#06111E" stroke-width="3" paint-order="stroke" text-anchor="'+(last?'end':'start')+'">'+opts.fmt(v)+'</text>';
+      // Endpoint label placement rule (v1.25): if the line is RISING into the
+      // endpoint, drop the label BELOW the marker (clears the ascending line and
+      // the top edge it would otherwise clip); if FALLING, lift it ABOVE. Clamp
+      // to the chart box so it can never get cut off. The --chart-halo var gives a
+      // theme-aware contrast outline (navy on dark, white on light).
+      let prev=null; for(let i=li-1;i>=0;i--){ if(pv[i]!=null){ prev=pv[i]; break; } }
+      const rising = prev!=null && v>prev;
+      let ly = rising ? yy+16 : yy-11;
+      ly = Math.max(PT+9, Math.min(PT+innerH-3, ly));
+      svg+='<circle cx="'+x.toFixed(1)+'" cy="'+yy.toFixed(1)+'" r="3.6" fill="'+pin.color+'" style="stroke:var(--chart-halo)" stroke-width="1.5"/>';
+      svg+='<text x="'+(x+(last?-6:6)).toFixed(1)+'" y="'+ly.toFixed(1)+'" font-family="Geist Mono,ui-monospace,monospace" font-size="11" font-weight="700" fill="'+pin.color+'" style="stroke:var(--chart-halo)" stroke-width="3" paint-order="stroke" text-anchor="'+(last?'end':'start')+'">'+opts.fmt(v)+'</text>';
     }
   }
   // Hover overlay: invisible rects per year that drive a shared <g> tooltip via :hover
