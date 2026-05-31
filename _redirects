@@ -1,0 +1,15 @@
+# Cloudflare Pages redirect + rewrite rules.
+# Spec: https://developers.cloudflare.com/pages/configuration/redirects/
+
+# SPA routing: any /school/<slug>, /compare/<ids>, /match/<stats> path
+# serves index.html with a 200 (NOT a redirect). The SPA reads the path
+# from location.pathname on load and renders the appropriate view.
+# This is what makes clean URLs work without the 404.html hack.
+/school/*    /index.html    200
+/compare/*   /index.html    200
+/match/*     /index.html    200
+
+# Legacy GH Pages subpath: redirect /Exhibit/* and /exhibit/* to the root
+# of the new domain so any pre-launch shares still resolve.
+/Exhibit/*   /:splat        301
+/exhibit/*   /:splat        301

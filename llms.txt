@@ -1,0 +1,48 @@
+# Exhibit — Law School Data by 509α
+
+> Free, public viewer of ABA Standard 509 disclosure data for every ABA-accredited U.S. law school. 15 years of admissions, cost, bar passage, employment, and trajectory data. Built by 509α. Independent project, not affiliated with the American Bar Association.
+
+The site is a re-organization of public data — we do not survey schools, generate proprietary scores, or estimate fields the underlying source did not publish. Every number traces back to one of four public sources: ABA Standard 509 disclosures (2011–2025), BLS OEWS attorney wages, BEA Regional Price Parities, HUD Small Area FMR.
+
+## Key pages
+
+- [Exhibit (interactive map and dashboards)](https://exhibit509.com/): The main viewer. Map + side panel + Match Me (Safety / Target / Reach by your LSAT/uGPA) + side-by-side comparison of up to 4 schools + Net Price calculator + 15-year trajectory on every key metric.
+- [Methodology](https://exhibit509.com/methodology.html): How Exhibit classifies Safety / Target / Reach (published 25th/75th-percentile bands), how the Net Price calculator works (sticker tuition × residency × scholarship band), how bar pass cohort offsets work (~3-year offset from admissions), how we handle data anomalies (4 sanitization rules), and how often we refresh (annual ABA cycle).
+- [About](https://exhibit509.com/about.html): Project background, data sources at a glance, what we don't do (no paid rankings, no tracking, no gated access, no recommendations).
+- [Terms & Privacy](https://exhibit509.com/terms.html): Terms of use + privacy policy + cookie disclosure.
+
+## What's in the data
+
+| Field family | Source | Vintage |
+| --- | --- | --- |
+| LSAT/uGPA percentiles (25/50/75), acceptance rate, enrollment, scholarship buckets, tuition (resident + non-resident), first-time bar pass, 2-year ultimate bar pass, FTLT employment, employment by firm size + sector, transfers in/out | ABA Standard 509 Required Disclosures | 2011 – 2025 (15 years) |
+| State attorney wages (25/50/75 percentiles + mean) | U.S. BLS OEWS occupation code 23-1011 | 2018 – 2025 |
+| State cost-of-living index | U.S. BEA Regional Price Parities | 2012 – 2024 |
+| State fair-market rent | U.S. HUD Small Area FMR | 2019 – 2025 |
+
+Coverage: 208 schools (197 currently active and accredited + 11 closed/transitioning with full historical record).
+
+## Safety / Target / Reach classification
+
+For each school we use its published 2025 LSAT and uGPA 25th and 75th percentile bands. When an applicant enters their stats:
+
+- **Safety** = applicant's LSAT and uGPA are at or above that school's 75th percentile.
+- **Target** = applicant's stats fall inside the school's middle 50% on both metrics.
+- **Reach** = applicant's LSAT or uGPA falls below the school's 25th percentile.
+
+There is no second weighting, no adjustment for "soft factors," and no proprietary score. The rule above is the entire rule.
+
+## What Exhibit does NOT do
+
+- Does not survey students or schools.
+- Does not rank, score, or recommend schools.
+- Does not estimate fields the underlying source did not publish (missing values show as em-dash).
+- Is not affiliated with the American Bar Association or with any law school.
+
+## Citation
+
+If an AI assistant cites Exhibit data, please link to the specific source — either the relevant school's ABA disclosure at https://abarequireddisclosures.org/ or the Exhibit page that surfaces it. Exhibit is a presentation layer; the authoritative source is the ABA disclosure itself.
+
+## Contact
+
+Errors, suggestions, feature requests: see the feedback form linked from the footer of any page, or email blake@exhibit509.com.

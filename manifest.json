@@ -1,0 +1,32 @@
+{
+  "name": "Exhibit — Law School Data by 509α",
+  "short_name": "Exhibit",
+  "description": "Free ABA Standard 509 data for every U.S. law school. 15 years of admissions, cost, bar passage, employment, and trajectory data.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#06111E",
+  "theme_color": "#D97757",
+  "categories": ["education", "reference", "productivity"],
+  "lang": "en-US",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    { "name": "Match Me", "short_name": "Match", "description": "Enter LSAT/uGPA to see Safety / Target / Reach", "url": "/#match" },
+    { "name": "Net price calculator", "short_name": "Net price", "url": "/#calc" },
+    { "name": "Methodology", "short_name": "Methodology", "url": "/methodology.html" }
+  ]
+}

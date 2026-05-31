@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAD8klEQVR42u3dv2sTfxzH8UsJRdzq1qWDgihSnBX8D8RFJ0cREYR2SOHoUEQ6FepQxwwqDq4ugqODP4J0FGnpIP4Fgt2c6hQJ1+SS1rt4+bwfj+nLt6V+v+H1zOeuqU1rfmHpKIOg5jwECAAEAAIAAYAAQAAgABAACAAEAAIAAYAAQAAgABAACABmRLuuL/z1wbW//7zc7XmkaaRW1X8neHD4RULAJRCkGkDZs/8kHwcnAKQcgFOAsDfBbopxCVSIxYlAUifAsFOg/0w/buxOBJI+AZa7vdKROxEIcQkkBNwDCIHoAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQhBAAhBAAhBAAghnHaU/9F8bTXLOysz8d/680m1X6+Tb2QvXr22dicACAAEAAJAAB4CIgvzXaCt7Z1sa3un9HM2H69njx7e//c/6+mzsX/WaZR9i3TuzNlscb1r0U6AdI17HQEBCAEBCAEBBAvh+svdkR/fuHHej1gIAD9rJACEIACEIIBANj9892PYAsDfRziubRZp+HV4mJ1bvDBxCP3Bjwph8POcADgRBIAQBIAQ3AMwHZcvXcw+vX839GO3bt/NPn7+UlsIUe4RnACEPhEEQOgQBEDoEARA6BAEQOgQBEDoEARA6BAEQOgQvBBWg7yzMjO/iLfuEPqDHxXC4Oc5AXAiOAFwIvSO/bu6TgoB0NgQpnHJ5BKIxl4auQdACCc4IVwCNURVvxy37MehI14auQkmaf/jO0ECYOaGX+V9gwAI9YwvABo/fK8DEH74dY5eADR++C6BMHwBYPgCCGtv/2Di3/dp+ALA8AWA4QsAwxcAhi8ADF8AGL4AMHwBYPgCwPAFkKKTvqNM5OELwDN+6OELwPBDD18AwTy/eSX7/WPP8AWA4QvA8BFAat7cuWr4AnBzO8y9t988UAKIN3wEYPgIIF9bndrbFnmLpNnh16MjABAACAAEAGG05heWjqr+osVv03kFcrLHqcjjVj+vAxi+ADB8AWD4AsDwBYDhCwDDFwCGLwAMXwAYvgAM3/AFYPiGLwDDN3wBGD4CMHwEYPgIwPARgOEjAMNHAIaPAAwfARg+AjB8BGD4CMDwEYDhIwDDRwCGjwAMHwEYPrEDMHxCBmD4hAzA8AkZgOETMgDDp2kqf4uk07yLueET8h7A8EkqgEmf/Q2fppj626QaP6EDgGQDGPfs7tkfJwA0SC3vFF+8IfbMT7gAwCUQCAAEAAIAAYAAQAAgABAACAAEAAIAAYAAQAAgABAAVOwPM0uBy6xg4g4AAAAASUVORK5CYII=">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAD8klEQVR42u3dv2sTfxzH8UsJRdzq1qWDgihSnBX8D8RFJ0cREYR2SOHoUEQ6FepQxwwqDq4ugqODP4J0FGnpIP4Fgt2c6hQJ1+SS1rt4+bwfj+nLt6V+v+H1zOeuqU1rfmHpKIOg5jwECAAEAAIAAYAAQAAgABAACAAEAAIAAYAAQAAgABAACABmRLuuL/z1wbW//7zc7XmkaaRW1X8neHD4RULAJRCkGkDZs/8kHwcnAKQcgFOAsDfBbopxCVSIxYlAUifAsFOg/0w/buxOBJI+AZa7vdKROxEIcQkkBNwDCIHoAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQhBAAhBAAhBAAghnHaU/9F8bTXLOysz8d/680m1X6+Tb2QvXr22dicACAAEAAJAAB4CIgvzXaCt7Z1sa3un9HM2H69njx7e//c/6+mzsX/WaZR9i3TuzNlscb1r0U6AdI17HQEBCAEBCAEBBAvh+svdkR/fuHHej1gIAD9rJACEIACEIIBANj9892PYAsDfRziubRZp+HV4mJ1bvDBxCP3Bjwph8POcADgRBIAQBIAQ3AMwHZcvXcw+vX839GO3bt/NPn7+UlsIUe4RnACEPhEEQOgQBEDoEARA6BAEQOgQBEDoEARA6BAEQOgQvBBWg7yzMjO/iLfuEPqDHxXC4Oc5AXAiOAFwIvSO/bu6TgoB0NgQpnHJ5BKIxl4auQdACCc4IVwCNURVvxy37MehI14auQkmaf/jO0ECYOaGX+V9gwAI9YwvABo/fK8DEH74dY5eADR++C6BMHwBYPgCCGtv/2Di3/dp+ALA8AWA4QsAwxcAhi8ADF8AGL4AMHwBYPgCwPAFkKKTvqNM5OELwDN+6OELwPBDD18AwTy/eSX7/WPP8AWA4QvA8BFAat7cuWr4AnBzO8y9t988UAKIN3wEYPgIIF9bndrbFnmLpNnh16MjABAACAAEAGG05heWjqr+osVv03kFcrLHqcjjVj+vAxi+ADB8AWD4AsDwBYDhCwDDFwCGLwAMXwAYvgAM3/AFYPiGLwDDN3wBGD4CMHwEYPgIwPARgOEjAMNHAIaPAAwfARg+AjB8BGD4CMDwEYDhIwDDRwCGjwAMHwEYPrEDMHxCBmD4hAzA8AkZgOETMgDDp2kqf4uk07yLueET8h7A8EkqgEmf/Q2fppj626QaP6EDgGQDGPfs7tkfJwA0SC3vFF+8IfbMT7gAwCUQCAAEAAIAAYAAQAAgABAACAAEAAIAAYAAQAAgABAAVOwPM0uBy6xg4g4AAAAASUVORK5CYII=">
+<title>Methodology · Exhibit by 509α</title>
+<meta name="description" content="How Exhibit classifies Safety / Target / Reach, where each number comes from, how often we refresh, and how we handle data anomalies.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://exhibit509.com/methodology.html">
+<style>
+  :root{
+    --navy:#06111E; --orange:#D97757; --white:#F4F8FB; --dim:#A4C8DD; --dimmer:#7AAAC8; --blue:#5AABCB;
+    --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+    --serif:Georgia,'Times New Roman',serif;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--navy);color:var(--white);font-family:var(--serif);line-height:1.7;}
+  .wrap{max-width:820px;margin:0 auto;padding:48px 24px 80px;}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--orange);}
+  h1{font-size:38px;margin:8px 0 4px;font-weight:700;}
+  .sub{font-family:var(--mono);font-size:12px;color:var(--dim);letter-spacing:0.5px;margin-bottom:32px;}
+  h2{font-size:18px;font-family:var(--mono);letter-spacing:0.5px;color:var(--orange);margin:38px 0 8px;text-transform:uppercase;}
+  h3{font-size:15px;font-family:var(--mono);letter-spacing:0.5px;color:var(--blue);margin:22px 0 6px;text-transform:uppercase;}
+  p,li{font-size:15px;color:#D6E5F0;}
+  code{font-family:var(--mono);font-size:13px;color:var(--orange);background:rgba(217,119,87,0.08);padding:1px 6px;border-radius:2px;}
+  a{color:var(--orange);}
+  .back{display:inline-block;margin-bottom:28px;font-family:var(--mono);font-size:12px;letter-spacing:1px;text-decoration:none;color:var(--dim);}
+  .back:hover{color:var(--orange);}
+  .stale{border-left:2px solid rgba(74,155,107,0.6);padding:10px 16px;background:rgba(74,155,107,0.06);font-family:var(--mono);font-size:12.5px;color:var(--dim);line-height:1.6;margin:18px 0;}
+  .stale strong{color:#7BD49C;}
+  table{width:100%;border-collapse:collapse;margin:14px 0;}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid rgba(74,122,155,0.20);font-family:var(--mono);font-size:13px;}
+  th{color:var(--orange);letter-spacing:1px;text-transform:uppercase;font-size:11px;font-weight:600;}
+  td{color:#D6E5F0;}
+  ul{padding-left:20px;}
+  footer{margin-top:56px;padding-top:20px;border-top:1px solid rgba(74,122,155,0.2);font-family:var(--mono);font-size:11px;color:var(--dimmer);letter-spacing:0.5px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">← Back to Exhibit</a>
+  <div class="eyebrow">// Methodology · v1.13</div>
+  <h1>How Exhibit works</h1>
+  <div class="sub">Where each number comes from · how we classify schools · how we refresh · how we handle data anomalies.</div>
+
+  <div class="stale">
+    <strong>Last synced:</strong> May 2026 · ABA Standard 509 disclosure cycle 2025 (the most recent published cycle) · BLS OEWS 2024 · BEA RPP 2024 · HUD SAFMR 2025.
+  </div>
+
+  <h2>Data sources</h2>
+  <table>
+    <thead><tr><th>Field family</th><th>Source</th><th>Vintage</th></tr></thead>
+    <tbody>
+      <tr><td>LSAT / uGPA 25-50-75, acceptance, enrollment, scholarships, tuition, bar passage, employment outcomes, transfers</td><td>ABA Standard 509 Required Disclosures</td><td>2011 – 2025 (15 yrs)</td></tr>
+      <tr><td>State attorney median / 25th / 75th wages</td><td>U.S. BLS OEWS (occupation code 23-1011)</td><td>2018 – 2025</td></tr>
+      <tr><td>State cost-of-living index</td><td>U.S. BEA Regional Price Parities</td><td>2012 – 2024</td></tr>
+      <tr><td>State fair-market rent</td><td>U.S. HUD Small Area FMR</td><td>2019 – 2025</td></tr>
+    </tbody>
+  </table>
+  <p>Every cell in Exhibit traces back to one of these four sources. The site is a re-organization of public data — we do not survey schools, we do not generate proprietary scores, and we do not estimate fields that the underlying source did not publish.</p>
+
+  <h2>Safety · Target · Reach classification</h2>
+  <p>For each school we use its published 2025 LSAT and uGPA <strong>25th and 75th percentile</strong> bands (the "middle 50%" of last year's entering class). When you enter your stats:</p>
+  <ul>
+    <li><strong style="color:#4A9B6B;">Safety</strong> — your LSAT <em>and</em> uGPA are at or above that school's 75th percentile.</li>
+    <li><strong style="color:#5AABCB;">Target</strong> — your stats fall <em>inside</em> the school's middle 50% on both metrics.</li>
+    <li><strong style="color:#FFA726;">Reach</strong> — your LSAT or uGPA falls <em>below</em> the school's 25th percentile.</li>
+  </ul>
+  <p>The single helper is <code>fitClass(school, lsat, gpa)</code>. There is no second weighting, no adjustment for "soft factors," and no proprietary score — the rule above is the entire rule. If you enter only one stat we apply the rule to that one stat alone.</p>
+  <p>If a school has not published a 25/75 (rare — happens on new accreditations), it's excluded from your Safety/Target/Reach results until the next disclosure cycle.</p>
+
+  <h2>Cost-of-attendance + loan math</h2>
+  <p>The Net Price calculator uses each school's <strong>resident</strong> sticker tuition if your selected home state matches the school's state; otherwise the <strong>non-resident</strong> figure. We subtract the school's <em>median</em> grant amount (from the same 509 disclosure) when no fitClass-based estimate is available; with fitClass we use the band: Safety → school's 75th-pct grant, Target → median grant, Reach → 25th-pct grant.</p>
+  <p>Loan amortization uses the standard fixed-rate formula <code>P · r · (1+r)<sup>n</sup> / ((1+r)<sup>n</sup> – 1)</code> over your selected term. The 3-year living cost is <code>(housing + other) × 9 academic months × 3 years</code>. These are illustrative — confirm current Grad PLUS and private loan rates with your lender before relying on the total cost number.</p>
+
+  <h2>Bar passage</h2>
+  <p>The headline <strong>First-Time Bar</strong> figure is the ABA-published first-time pass rate for the most recent reporting year (currently 2025, describing the 2024 graduating cohort). The <strong>2-Yr Ultimate</strong> figure is a separate ABA disclosure with a longer measurement window — it captures graduates who passed within two years of graduation. The two figures are not directly comparable across cohorts.</p>
+  <p>Importantly: a school's <code>bar</code> on any given row describes <em>graduates who entered roughly three years earlier</em>, while the <code>apps</code>/<code>offers</code>/<code>acceptance</code> figures on the same row describe the most recent <em>entering</em> class. Treat the bar number as evidence about the school three years ago.</p>
+
+  <h2>Employment outcomes</h2>
+  <p>FTLT Employment = "Full-Time, Long-Term, JD-Required or JD-Advantage" employment 10 months after graduation, per the school's ABA 509 outcome report. We display it as both a percent of the graduating class and an estimated graduate count (<code>graduates × pct / 100</code>).</p>
+  <p>The 10-category employment breakdown (MegaLaw 500+ / BigLaw 251-500 / Mid 101-250 / Small 2-100 / Clerkships / Public Interest / Government / Business / Academia / Solo / Seeking) is reported by the school in the same disclosure. We rank rows by applicant-mental-model desirability rather than alphabetically. The "vs national average" delta on each row compares the school's percent against the unweighted average across all 197 reporting schools.</p>
+
+  <h2>Trend charts + the 15-year history</h2>
+  <p>Every line chart on the site is built from year-by-year ABA 509 disclosures back to 2011. Where a metric was not collected in a given year (most notably the bar pass cadence change 2012-2017), the chart renders a <strong>dashed bridge</strong> through the missing years with hollow markers labeled <em>"YYYY not reported (interpolated)"</em>. The interpolation is for visual continuity only — we never replace null values with synthetic numbers anywhere a real cell exists.</p>
+
+  <h2>Data quality + outlier handling</h2>
+  <p>Two source files are reconciled — a hand-maintained <a href="https://docs.google.com/spreadsheets/d/1iFHIkqiZ1_VdMkpblE4yvuOe0Q5PJuu6BZHXMDDtlqo/edit?usp=sharing" target="_blank" rel="noopener">"Historic" spreadsheet</a> (treated as primary because it has been spot-checked against PDFs since 2011) and a machine-generated <a href="https://docs.google.com/spreadsheets/d/1PUvqEXyQp02Has5t2ko2cQWVoWtoB0DiQQuWHxiarXQ/edit?usp=sharing" target="_blank" rel="noopener">"v2" spreadsheet</a> (used to fill gaps the Historic file does not cover). The two files agree on 91.8% of overlapping cells; remaining disagreements are documented in a separate file shared with the maintainers.</p>
+  <!-- TODO: replace https://docs.google.com/spreadsheets/d/1iFHIkqiZ1_VdMkpblE4yvuOe0Q5PJuu6BZHXMDDtlqo/edit?usp=sharing and https://docs.google.com/spreadsheets/d/1PUvqEXyQp02Has5t2ko2cQWVoWtoB0DiQQuWHxiarXQ/edit?usp=sharing with the actual Google Sheets URLs once published. -->
+
+  <h3>Sanitization rules applied at inline time</h3>
+  <ul>
+    <li><strong>Negative scholarship counts</strong> in Historic (a known reporting artifact in 2015 and 2024 for ~10 schools) are nulled, not interpolated.</li>
+    <li><strong>Bar pass rates</strong> reported as fractions instead of percents are auto-normalized to %.</li>
+    <li><strong>Tuition values</strong> within a school's history that are 1.8× – 3.5× that school's whole-trend median are flagged as semester-misreports and halved; values above 3.5× the median are nulled. (This catches the small set of schools that briefly reported a per-academic-year credit-cost rather than an annual figure.)</li>
+    <li><strong>Per-credit-only schools</strong> (≈33 in 2025) are converted to annual using ≈ 29 credits per full-time academic year, the standard JD pacing.</li>
+  </ul>
+  <p>Every transformation is reversible from the original public disclosure. The methodology is public; the input files are public; the transformations are documented above.</p>
+
+  <h2>Refresh cadence</h2>
+  <p>The ABA publishes Standard 509 disclosures once per year, typically in the December–February window for the prior calendar year's data. We re-sync within the month following each ABA release. The "Last synced" date at the top of this page and in the disclaimer bar always reflects the most recent inline pull.</p>
+  <p>Wage (BLS), cost-of-living (BEA), and rent (HUD) feeds follow their own annual cadences — we re-pull each within a month of the respective agency's release.</p>
+
+  <h2>What Exhibit does NOT do</h2>
+  <ul>
+    <li>We do not survey students or schools. Every number is from a published government or ABA source.</li>
+    <li>We do not rank, score, or recommend schools.</li>
+    <li>We do not estimate fields the underlying source did not publish. Where a cell is missing, the UI shows <code>—</code>.</li>
+    <li>We are not affiliated with the American Bar Association or with any law school.</li>
+  </ul>
+
+  <h2>Spotted an error?</h2>
+  <p>Email <a href="mailto:blake@exhibit509.com">blake@exhibit509.com</a> or use the feedback form linked from the footer of any page. Data errors get fixed and the fix is documented in the next sync note.</p>
+
+  <p style="margin-top:36px;"><a href="index.html" style="font-family:var(--mono);font-size:13px;letter-spacing:1px;background:var(--orange);color:#06111E;padding:10px 18px;text-decoration:none;font-weight:700;">→ Back to Exhibit</a> &nbsp; <a href="about.html" style="font-family:var(--mono);font-size:12px;color:var(--dim);">About</a> &nbsp; <a href="terms.html" style="font-family:var(--mono);font-size:12px;color:var(--dim);">Terms · Privacy</a></p>
+
+  <footer>Exhibit — Free law school data, built by 509α. Sourced from official ABA Standard 509 disclosures. Last synced May 2026.</footer>
+</div>
+<a id="floatBack" href="index.html" aria-label="Back to Exhibit map" title="Back to Exhibit map">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+  Back to Exhibit map
+</a>
+<style>
+#floatBack{position:fixed;bottom:24px;right:24px;z-index:9000;display:flex;align-items:center;gap:8px;background:#D97757;color:#06111E;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;padding:12px 18px;border-radius:4px;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,0.4),0 0 0 1px rgba(217,119,87,0.3);transition:transform .15s,box-shadow .15s;}
+#floatBack:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,0,0,0.5),0 0 0 1px rgba(217,119,87,0.5);}
+</style>
+</body>
+</html>

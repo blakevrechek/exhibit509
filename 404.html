@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Exhibit — Loading</title>
+<meta name="robots" content="noindex">
+<style>
+  body{margin:0;background:#06111E;color:#A4C8DD;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;font-size:13px;letter-spacing:1px;}
+  .o{color:#D97757;font-size:24px;font-weight:800;letter-spacing:-0.5px;}
+  .d{opacity:0.6;font-size:11px;}
+</style>
+<script>
+  // SPA-on-GitHub-Pages redirect.
+  // We catch any path the static host can't find (/school/<slug>, /compare/X,Y, etc.),
+  // stash it in sessionStorage, and bounce to /. index.html reads the stash on load
+  // and restores the original path via history.replaceState before routing.
+  // (Standard spa-github-pages pattern by rafgraph — works without server rewrites.)
+  (function(){
+    var base = '/';
+    try {
+      var p = window.location.pathname + window.location.search + window.location.hash;
+      // Strip the GH Pages project subpath (case-insensitive), but PRESERVE the
+      // actual deployed case (capture group m[1]) when bouncing back to /. The
+      // repo is deployed at /Exhibit/ — a hardcoded lowercase redirect would 404.
+      var m = p.match(/^(\/[Ee]xhibit)(\/.*)?$/);
+      if(m){ p = m[2] || '/'; base = m[1] + '/'; }
+      sessionStorage.setItem('exhibit_spa_path', p);
+    } catch(e){}
+    window.location.replace(base);
+  })();
+</script>
+</head>
+<body>
+  <div class="o">Exhibit</div>
+  <div>Loading…</div>
+  <div class="d">If you aren't redirected, <a href="/" style="color:#D97757;">click here</a>.</div>
+</body>
+</html>

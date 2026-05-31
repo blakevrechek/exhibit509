@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAD8klEQVR42u3dv2sTfxzH8UsJRdzq1qWDgihSnBX8D8RFJ0cREYR2SOHoUEQ6FepQxwwqDq4ugqODP4J0FGnpIP4Fgt2c6hQJ1+SS1rt4+bwfj+nLt6V+v+H1zOeuqU1rfmHpKIOg5jwECAAEAAIAAYAAQAAgABAACAAEAAIAAYAAQAAgABAACABmRLuuL/z1wbW//7zc7XmkaaRW1X8neHD4RULAJRCkGkDZs/8kHwcnAKQcgFOAsDfBbopxCVSIxYlAUifAsFOg/0w/buxOBJI+AZa7vdKROxEIcQkkBNwDCIHoAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQhBAAhBAAhBAAghnHaU/9F8bTXLOysz8d/680m1X6+Tb2QvXr22dicACAAEAAJAAB4CIgvzXaCt7Z1sa3un9HM2H69njx7e//c/6+mzsX/WaZR9i3TuzNlscb1r0U6AdI17HQEBCAEBCAEBBAvh+svdkR/fuHHej1gIAD9rJACEIACEIIBANj9892PYAsDfRziubRZp+HV4mJ1bvDBxCP3Bjwph8POcADgRBIAQBIAQ3AMwHZcvXcw+vX839GO3bt/NPn7+UlsIUe4RnACEPhEEQOgQBEDoEARA6BAEQOgQBEDoEARA6BAEQOgQvBBWg7yzMjO/iLfuEPqDHxXC4Oc5AXAiOAFwIvSO/bu6TgoB0NgQpnHJ5BKIxl4auQdACCc4IVwCNURVvxy37MehI14auQkmaf/jO0ECYOaGX+V9gwAI9YwvABo/fK8DEH74dY5eADR++C6BMHwBYPgCCGtv/2Di3/dp+ALA8AWA4QsAwxcAhi8ADF8AGL4AMHwBYPgCwPAFkKKTvqNM5OELwDN+6OELwPBDD18AwTy/eSX7/WPP8AWA4QvA8BFAat7cuWr4AnBzO8y9t988UAKIN3wEYPgIIF9bndrbFnmLpNnh16MjABAACAAEAGG05heWjqr+osVv03kFcrLHqcjjVj+vAxi+ADB8AWD4AsDwBYDhCwDDFwCGLwAMXwAYvgAM3/AFYPiGLwDDN3wBGD4CMHwEYPgIwPARgOEjAMNHAIaPAAwfARg+AjB8BGD4CMDwEYDhIwDDRwCGjwAMHwEYPrEDMHxCBmD4hAzA8AkZgOETMgDDp2kqf4uk07yLueET8h7A8EkqgEmf/Q2fppj626QaP6EDgGQDGPfs7tkfJwA0SC3vFF+8IfbMT7gAwCUQCAAEAAIAAYAAQAAgABAACAAEAAIAAYAAQAAgABAAVOwPM0uBy6xg4g4AAAAASUVORK5CYII=">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAD8klEQVR42u3dv2sTfxzH8UsJRdzq1qWDgihSnBX8D8RFJ0cREYR2SOHoUEQ6FepQxwwqDq4ugqODP4J0FGnpIP4Fgt2c6hQJ1+SS1rt4+bwfj+nLt6V+v+H1zOeuqU1rfmHpKIOg5jwECAAEAAIAAYAAQAAgABAACAAEAAIAAYAAQAAgABAACABmRLuuL/z1wbW//7zc7XmkaaRW1X8neHD4RULAJRCkGkDZs/8kHwcnAKQcgFOAsDfBbopxCVSIxYlAUifAsFOg/0w/buxOBJI+AZa7vdKROxEIcQkkBNwDCIHoAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQhBAAhBAAhBAAghnHaU/9F8bTXLOysz8d/680m1X6+Tb2QvXr22dicACAAEAAJAAB4CIgvzXaCt7Z1sa3un9HM2H69njx7e//c/6+mzsX/WaZR9i3TuzNlscb1r0U6AdI17HQEBCAEBCAEBBAvh+svdkR/fuHHej1gIAD9rJACEIACEIIBANj9892PYAsDfRziubRZp+HV4mJ1bvDBxCP3Bjwph8POcADgRBIAQBIAQ3AMwHZcvXcw+vX839GO3bt/NPn7+UlsIUe4RnACEPhEEQOgQBEDoEARA6BAEQOgQBEDoEARA6BAEQOgQvBBWg7yzMjO/iLfuEPqDHxXC4Oc5AXAiOAFwIvSO/bu6TgoB0NgQpnHJ5BKIxl4auQdACCc4IVwCNURVvxy37MehI14auQkmaf/jO0ECYOaGX+V9gwAI9YwvABo/fK8DEH74dY5eADR++C6BMHwBYPgCCGtv/2Di3/dp+ALA8AWA4QsAwxcAhi8ADF8AGL4AMHwBYPgCwPAFkKKTvqNM5OELwDN+6OELwPBDD18AwTy/eSX7/WPP8AWA4QvA8BFAat7cuWr4AnBzO8y9t988UAKIN3wEYPgIIF9bndrbFnmLpNnh16MjABAACAAEAGG05heWjqr+osVv03kFcrLHqcjjVj+vAxi+ADB8AWD4AsDwBYDhCwDDFwCGLwAMXwAYvgAM3/AFYPiGLwDDN3wBGD4CMHwEYPgIwPARgOEjAMNHAIaPAAwfARg+AjB8BGD4CMDwEYDhIwDDRwCGjwAMHwEYPrEDMHxCBmD4hAzA8AkZgOETMgDDp2kqf4uk07yLueET8h7A8EkqgEmf/Q2fppj626QaP6EDgGQDGPfs7tkfJwA0SC3vFF+8IfbMT7gAwCUQCAAEAAIAAYAAQAAgABAACAAEAAIAAYAAQAAgABAAVOwPM0uBy6xg4g4AAAAASUVORK5CYII=">
+<title>About · Exhibit by 509α</title>
+<meta name="description" content="About Exhibit — a free, honest, public viewer of ABA Standard 509 disclosure data for every U.S. law school. Built by 509α.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://exhibit509.com/about.html">
+<style>
+  :root{
+    --navy:#06111E; --orange:#D97757; --white:#F4F8FB; --dim:#A4C8DD; --dimmer:#7AAAC8;
+    --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+    --serif:Georgia,'Times New Roman',serif;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--navy);color:var(--white);font-family:var(--serif);line-height:1.7;}
+  .wrap{max-width:820px;margin:0 auto;padding:48px 24px 80px;}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--orange);}
+  h1{font-size:38px;margin:8px 0 4px;font-weight:700;}
+  .sub{font-family:var(--mono);font-size:12px;color:var(--dim);letter-spacing:0.5px;margin-bottom:32px;}
+  h2{font-size:18px;font-family:var(--mono);letter-spacing:0.5px;color:var(--orange);margin:38px 0 8px;text-transform:uppercase;}
+  h3{font-size:16px;font-family:var(--mono);letter-spacing:0.5px;color:var(--dim);margin:24px 0 6px;text-transform:uppercase;}
+  p,li{font-size:15px;color:#D6E5F0;}
+  a{color:var(--orange);}
+  .back{display:inline-block;margin-bottom:28px;font-family:var(--mono);font-size:12px;letter-spacing:1px;text-decoration:none;color:var(--dim);}
+  .back:hover{color:var(--orange);}
+  .note{border-left:2px solid rgba(217,119,87,0.5);padding:10px 16px;background:rgba(217,119,87,0.06);font-family:var(--mono);font-size:12px;color:var(--dim);line-height:1.6;margin:18px 0;}
+  .pill-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:16px 0;}
+  .pill{background:rgba(255,255,255,0.03);border:1px solid rgba(74,122,155,0.18);padding:14px 16px;}
+  .pill-l{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;color:var(--orange);text-transform:uppercase;margin-bottom:6px;}
+  .pill-v{font-family:var(--mono);font-size:13px;color:var(--white);}
+  ul{padding-left:20px;}
+  footer{margin-top:56px;padding-top:20px;border-top:1px solid rgba(74,122,155,0.2);font-family:var(--mono);font-size:11px;color:var(--dimmer);letter-spacing:0.5px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">← Back to Exhibit</a>
+  <div class="eyebrow">// Exhibit · by 509α</div>
+  <h1>About Exhibit</h1>
+  <div class="sub">A free, honest, public viewer of ABA 509 disclosure data for every U.S. law school.</div>
+
+  <h2>What this is</h2>
+  <p><strong>Exhibit</strong> is a map-driven dashboard that organizes every ABA Standard 509 disclosure into one searchable place. It's free, open to anyone, no account required, and exists so that prospective law students can answer the questions that actually matter to their decision:</p>
+  <ul>
+    <li><em>Can I get in?</em> — admissions distributions (LSAT/uGPA 25/50/75), acceptance rates, reach/target/safety bucketing.</li>
+    <li><em>What will it cost?</em> — sticker tuition, scholarship distribution, net cost, 3-year totals.</li>
+    <li><em>Will I get a job?</em> — bar passage, employment outcomes, firm-size breakdown, top destination states.</li>
+    <li><em>How does it compare?</em> — pin up to four schools side-by-side and see best-in-row.</li>
+    <li><em>Is this school improving?</em> — 15-year trend lines on every key metric (2011–2025).</li>
+  </ul>
+
+  <h2>What the data is</h2>
+  <p>Every figure on the site originates from a public source:</p>
+  <div class="pill-grid">
+    <div class="pill"><div class="pill-l">Admissions, cost, scholarships, outcomes</div><div class="pill-v">ABA Standard 509 disclosures (2011–2025)</div></div>
+    <div class="pill"><div class="pill-l">State attorney wages</div><div class="pill-v">U.S. BLS OEWS (2024)</div></div>
+    <div class="pill"><div class="pill-l">Cost-of-living adjustment</div><div class="pill-v">U.S. BEA RPP (2024)</div></div>
+    <div class="pill"><div class="pill-l">State fair-market rent</div><div class="pill-v">U.S. HUD SAFMR (2025)</div></div>
+  </div>
+  <p>The 509 data is the same data the ABA itself publishes at <a href="https://abarequireddisclosures.org/" target="_blank" rel="noopener">abarequireddisclosures.org</a> — we just re-organize it so 15 years of disclosures across 208 schools is visible at a glance instead of one PDF at a time.</p>
+
+  <div class="note">⚠ Exhibit is an independent concept project. It is not affiliated with, associated with, or endorsed by the American Bar Association or any law school. Data may contain errors — verify all figures against the original 509 disclosure before relying on them for a decision.</div>
+
+  <h2>Why we built it</h2>
+  <p>The official ABA disclosure portal publishes the right data, but it's distributed across hundreds of one-school-one-year PDFs. Comparing five schools across the metrics that actually matter takes hours. We made the comparison <em>easy</em>, and we made the 15-year history visible, because <strong>trajectory is information</strong> — a school whose bar pass dropped 10 points over five years is telling you something the current-cycle number alone hides.</p>
+  <p>It's also free, and free is the point. The applicants who most need this information are the applicants who can least afford a paid analytics service.</p>
+
+  <h2>Who built it</h2>
+  <p><strong>509α</strong> — a small independent project run by <a href="mailto:blake@exhibit509.com">Blake Vrechek</a>. The community lives at <a href="https://skool.com/509alpha" target="_blank" rel="noopener">skool.com/509alpha</a>. The full historical dataset, the spreadsheet behind this site, and ongoing discussion all live there.</p>
+  <p>If you find a number that looks wrong, <strong>tell us</strong> — the feedback form in the footer goes straight to the maintainer. Data errors get fixed.</p>
+
+  <h2>What we don't do</h2>
+  <ul>
+    <li><strong>We don't sell rankings.</strong> No paid placement. No "sponsored" schools.</li>
+    <li><strong>We don't sell your data.</strong> No tracking cookies of our own. (Read the <a href="terms.html#privacy">Privacy Policy</a> for the third-party assets we load — Google Fonts, Leaflet, OpenStreetMap.)</li>
+    <li><strong>We don't gate the data.</strong> You don't need an account to see anything.</li>
+    <li><strong>We don't give legal or admissions advice.</strong> We organize public data. You make the call.</li>
+  </ul>
+
+  <h2>How to use it</h2>
+  <ul>
+    <li><strong>Map</strong> (default view): every accredited school as a pin. Color = first-time bar pass tier; ring style = same tier in a colorblind-safe encoding; size = total enrollment. Click any pin for the side panel.</li>
+    <li><strong>Find My Schools</strong>: enter your LSAT/uGPA — get Safety/Target/Reach lists based on the 25th/75th percentile band of each school's class.</li>
+    <li><strong>Compare</strong>: add 2–4 schools (+ Compare button on side panel or profile card) and open the side-by-side metric table.</li>
+    <li><strong>School profiles</strong> view: every school as a card, sortable by LSAT, bar pass, employment, tuition, acceptance, or name. Click a card to open the full detail page in a new tab.</li>
+    <li><strong>Schools by State</strong>: state-grouped browsing with BLS attorney wage overlay.</li>
+    <li><strong>Transfers</strong>: which schools have the largest 1L transfer cohorts going out and coming in (≥ 6 to appear; ≥ 12 surfaces the median incoming GPA).</li>
+  </ul>
+
+  <h2>Contact</h2>
+  <p>Errors, suggestions, feature requests: <a href="mailto:blake@exhibit509.com">blake@exhibit509.com</a> or the community at <a href="https://skool.com/509alpha" target="_blank" rel="noopener">skool.com/509alpha</a>.</p>
+
+  <p style="margin-top:36px;"><a href="index.html" style="font-family:var(--mono);font-size:13px;letter-spacing:1px;background:var(--orange);color:#06111E;padding:10px 18px;text-decoration:none;font-weight:700;">→ Open the Exhibit map</a> &nbsp; <a href="terms.html" style="font-family:var(--mono);font-size:12px;color:var(--dim);">Terms &amp; Privacy</a></p>
+
+  <footer>Exhibit — Free law school data, built by 509α. Not affiliated with the ABA. Concept site; data may contain errors.</footer>
+</div>
+<a id="floatBack" href="index.html" aria-label="Back to Exhibit map" title="Back to Exhibit map">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+  Back to Exhibit map
+</a>
+<style>
+#floatBack{position:fixed;bottom:24px;right:24px;z-index:9000;display:flex;align-items:center;gap:8px;background:#D97757;color:#06111E;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;padding:12px 18px;border-radius:4px;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,0.4),0 0 0 1px rgba(217,119,87,0.3);transition:transform .15s,box-shadow .15s;}
+#floatBack:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,0,0,0.5),0 0 0 1px rgba(217,119,87,0.5);}
+</style>
+</body>
+</html>

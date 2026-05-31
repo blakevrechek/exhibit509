@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAD8klEQVR42u3dv2sTfxzH8UsJRdzq1qWDgihSnBX8D8RFJ0cREYR2SOHoUEQ6FepQxwwqDq4ugqODP4J0FGnpIP4Fgt2c6hQJ1+SS1rt4+bwfj+nLt6V+v+H1zOeuqU1rfmHpKIOg5jwECAAEAAIAAYAAQAAgABAACAAEAAIAAYAAQAAgABAACABmRLuuL/z1wbW//7zc7XmkaaRW1X8neHD4RULAJRCkGkDZs/8kHwcnAKQcgFOAsDfBbopxCVSIxYlAUifAsFOg/0w/buxOBJI+AZa7vdKROxEIcQkkBNwDCIHoAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQhBAAhBAAhBAAghnHaU/9F8bTXLOysz8d/680m1X6+Tb2QvXr22dicACAAEAAJAAB4CIgvzXaCt7Z1sa3un9HM2H69njx7e//c/6+mzsX/WaZR9i3TuzNlscb1r0U6AdI17HQEBCAEBCAEBBAvh+svdkR/fuHHej1gIAD9rJACEIACEIIBANj9892PYAsDfRziubRZp+HV4mJ1bvDBxCP3Bjwph8POcADgRBIAQBIAQ3AMwHZcvXcw+vX839GO3bt/NPn7+UlsIUe4RnACEPhEEQOgQBEDoEARA6BAEQOgQBEDoEARA6BAEQOgQvBBWg7yzMjO/iLfuEPqDHxXC4Oc5AXAiOAFwIvSO/bu6TgoB0NgQpnHJ5BKIxl4auQdACCc4IVwCNURVvxy37MehI14auQkmaf/jO0ECYOaGX+V9gwAI9YwvABo/fK8DEH74dY5eADR++C6BMHwBYPgCCGtv/2Di3/dp+ALA8AWA4QsAwxcAhi8ADF8AGL4AMHwBYPgCwPAFkKKTvqNM5OELwDN+6OELwPBDD18AwTy/eSX7/WPP8AWA4QvA8BFAat7cuWr4AnBzO8y9t988UAKIN3wEYPgIIF9bndrbFnmLpNnh16MjABAACAAEAGG05heWjqr+osVv03kFcrLHqcjjVj+vAxi+ADB8AWD4AsDwBYDhCwDDFwCGLwAMXwAYvgAM3/AFYPiGLwDDN3wBGD4CMHwEYPgIwPARgOEjAMNHAIaPAAwfARg+AjB8BGD4CMDwEYDhIwDDRwCGjwAMHwEYPrEDMHxCBmD4hAzA8AkZgOETMgDDp2kqf4uk07yLueET8h7A8EkqgEmf/Q2fppj626QaP6EDgGQDGPfs7tkfJwA0SC3vFF+8IfbMT7gAwCUQCAAEAAIAAYAAQAAgABAACAAEAAIAAYAAQAAgABAAVOwPM0uBy6xg4g4AAAAASUVORK5CYII=">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAD8klEQVR42u3dv2sTfxzH8UsJRdzq1qWDgihSnBX8D8RFJ0cREYR2SOHoUEQ6FepQxwwqDq4ugqODP4J0FGnpIP4Fgt2c6hQJ1+SS1rt4+bwfj+nLt6V+v+H1zOeuqU1rfmHpKIOg5jwECAAEAAIAAYAAQAAgABAACAAEAAIAAYAAQAAgABAACABmRLuuL/z1wbW//7zc7XmkaaRW1X8neHD4RULAJRCkGkDZs/8kHwcnAKQcgFOAsDfBbopxCVSIxYlAUifAsFOg/0w/buxOBJI+AZa7vdKROxEIcQkkBNwDCIHoAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQgBAQhBAAhBAAhBAAghnHaU/9F8bTXLOysz8d/680m1X6+Tb2QvXr22dicACAAEAAJAAB4CIgvzXaCt7Z1sa3un9HM2H69njx7e//c/6+mzsX/WaZR9i3TuzNlscb1r0U6AdI17HQEBCAEBCAEBBAvh+svdkR/fuHHej1gIAD9rJACEIACEIIBANj9892PYAsDfRziubRZp+HV4mJ1bvDBxCP3Bjwph8POcADgRBIAQBIAQ3AMwHZcvXcw+vX839GO3bt/NPn7+UlsIUe4RnACEPhEEQOgQBEDoEARA6BAEQOgQBEDoEARA6BAEQOgQvBBWg7yzMjO/iLfuEPqDHxXC4Oc5AXAiOAFwIvSO/bu6TgoB0NgQpnHJ5BKIxl4auQdACCc4IVwCNURVvxy37MehI14auQkmaf/jO0ECYOaGX+V9gwAI9YwvABo/fK8DEH74dY5eADR++C6BMHwBYPgCCGtv/2Di3/dp+ALA8AWA4QsAwxcAhi8ADF8AGL4AMHwBYPgCwPAFkKKTvqNM5OELwDN+6OELwPBDD18AwTy/eSX7/WPP8AWA4QvA8BFAat7cuWr4AnBzO8y9t988UAKIN3wEYPgIIF9bndrbFnmLpNnh16MjABAACAAEAGG05heWjqr+osVv03kFcrLHqcjjVj+vAxi+ADB8AWD4AsDwBYDhCwDDFwCGLwAMXwAYvgAM3/AFYPiGLwDDN3wBGD4CMHwEYPgIwPARgOEjAMNHAIaPAAwfARg+AjB8BGD4CMDwEYDhIwDDRwCGjwAMHwEYPrEDMHxCBmD4hAzA8AkZgOETMgDDp2kqf4uk07yLueET8h7A8EkqgEmf/Q2fppj626QaP6EDgGQDGPfs7tkfJwA0SC3vFF+8IfbMT7gAwCUQCAAEAAIAAYAAQAAgABAACAAEAAIAAYAAQAAgABAAVOwPM0uBy6xg4g4AAAAASUVORK5CYII=">
+<title>Terms of Service &amp; Privacy Policy · Exhibit by 509α</title>
+<meta name="description" content="Terms of Service, Privacy Policy, and Cookie &amp; Cache Notice for Exhibit — a free ABA law school data viewer by 509α.">
+<link rel="canonical" href="https://exhibit509.com/terms.html">
+<style>
+  :root{
+    --navy:#06111E; --orange:#D97757; --white:#E8F4FF; --dim:#7AAAC8; --dimmer:#4A7A9B; --blue:#5AABCB;
+    --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+    --serif:Georgia,'Times New Roman',serif;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--navy);color:var(--white);font-family:var(--serif);line-height:1.7;}
+  .wrap{max-width:760px;margin:0 auto;padding:48px 24px 80px;}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--orange);}
+  h1{font-size:34px;margin:8px 0 4px;font-weight:700;}
+  .updated{font-family:var(--mono);font-size:11px;color:var(--dimmer);letter-spacing:1px;margin-bottom:32px;}
+  h2{font-size:18px;font-family:var(--mono);letter-spacing:0.5px;color:var(--orange);margin:34px 0 8px;text-transform:uppercase;}
+  h3{font-size:14px;font-family:var(--mono);letter-spacing:0.5px;color:var(--blue);margin:22px 0 6px;text-transform:uppercase;}
+  p,li{font-size:15px;color:#C9DCEA;}
+  a{color:var(--orange);}
+  code{font-family:var(--mono);font-size:13px;color:var(--orange);background:rgba(217,119,87,0.08);padding:1px 6px;border-radius:2px;}
+  .back{display:inline-block;margin-bottom:28px;font-family:var(--mono);font-size:12px;letter-spacing:1px;text-decoration:none;color:var(--dim);}
+  .back:hover{color:var(--orange);}
+  .note{border-left:2px solid rgba(217,119,87,0.5);padding:10px 16px;background:rgba(217,119,87,0.06);font-family:var(--mono);font-size:12px;color:var(--dim);line-height:1.6;margin:18px 0;}
+  table{width:100%;border-collapse:collapse;margin:14px 0;}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid rgba(74,122,155,0.20);font-family:var(--mono);font-size:13px;}
+  th{color:var(--orange);letter-spacing:1px;text-transform:uppercase;font-size:11px;font-weight:600;}
+  td{color:#C9DCEA;}
+  footer{margin-top:48px;padding-top:20px;border-top:1px solid rgba(74,122,155,0.2);font-family:var(--mono);font-size:11px;color:var(--dimmer);letter-spacing:0.5px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">← Back to Exhibit</a>
+  <div class="eyebrow">// Exhibit · by 509α</div>
+  <h1>Terms of Service</h1>
+  <div class="updated">Last updated: 2026-05-31</div>
+
+  <div class="note">Exhibit is an independent project. It is NOT affiliated with, associated with, or endorsed by the American Bar Association (ABA) or any law school. Data is sourced directly from public ABA Standard 509 disclosures and U.S. government datasets — verify all figures against the original source before relying on them.</div>
+
+  <h2>1. Acceptance of Terms</h2>
+  <p>By accessing or using Exhibit (the "Site"), located at <a href="https://exhibit509.com/">exhibit509.com</a>, you agree to these Terms of Service. If you do not agree, please do not use the Site.</p>
+
+  <h2>2. Nature of the Service</h2>
+  <p>Exhibit is a free, informational data viewer that organizes publicly available law school information, including data derived from ABA Standard 509 Required Disclosures and public datasets from the U.S. Bureau of Labor Statistics (BLS), Bureau of Economic Analysis (BEA), and Department of Housing and Urban Development (HUD). The Site is provided for general informational and educational purposes only.</p>
+
+  <h2>3. Not Professional Advice</h2>
+  <p>Nothing on the Site constitutes legal, financial, admissions, or career advice. Figures shown are summaries and may be incomplete, outdated, or inaccurate. Always consult official sources and qualified professionals before making decisions.</p>
+
+  <h2>4. No Warranty</h2>
+  <p>The Site is provided "as is" and "as available," without warranties of any kind, express or implied, including accuracy, completeness, fitness for a particular purpose, or non-infringement. We do not warrant that the Site will be uninterrupted, error-free, or secure.</p>
+
+  <h2>5. Limitation of Liability</h2>
+  <p>To the fullest extent permitted by law, the operators of Exhibit shall not be liable for any direct, indirect, incidental, consequential, or special damages arising from your use of, or inability to use, the Site or its data.</p>
+
+  <h2>6. Data Sources &amp; Attribution</h2>
+  <p>Source data originates from third parties, including <a href="https://abarequireddisclosures.org/" target="_blank" rel="noopener">abarequireddisclosures.org</a>, the U.S. Bureau of Labor Statistics (BLS), the U.S. Bureau of Economic Analysis (BEA), and the U.S. Department of Housing and Urban Development (HUD). Exhibit claims no affiliation with these organizations, and any names or marks belong to their respective owners.</p>
+
+  <h2>7. Copyright &amp; Legal Basis</h2>
+  <p>Exhibit presents <strong>raw factual data</strong> — tuition figures, bar-passage rates, GPA and LSAT medians, employment counts, and similar numbers. Under <em>Feist Publications, Inc. v. Rural Telephone Service Co.</em>, 499 U.S. 340 (1991), facts are not copyrightable: copyright protects an author's original selection and arrangement of a compilation, not the underlying facts themselves, which no one can own. Exhibit extracts and re-presents those underlying facts in its own independent organization and design.</p>
+  <p>The BLS, BEA, and HUD datasets are works prepared by officers or employees of the U.S. Government as part of their official duties and are therefore not subject to copyright protection in the United States under <a href="https://www.copyright.gov/title17/92chap1.html#105" target="_blank" rel="noopener">17 U.S.C. § 105</a>; they are effectively in the public domain.</p>
+  <div class="note">This section explains the basis on which Exhibit republishes factual data. It is a statement of the operators' understanding, not legal advice, and nothing here waives any third party's rights in original compilations, software, trademarks, or branding.</div>
+
+  <h2>8. Cookie &amp; Cache Notice</h2>
+  <p>Exhibit is a static website. We do <strong>not</strong> set tracking cookies, advertising cookies, or analytics cookies. We do not track you across sites. We have no advertising relationship with any school.</p>
+
+  <h3>8.1 What we store on your device</h3>
+  <p>The Site uses your browser's local storage to remember a small number of preferences that make repeat visits smoother. All of this stays on your device; none of it is transmitted to us.</p>
+  <table>
+    <thead><tr><th>Key</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td><code>exhibit_theme</code></td><td>Whether you chose light or dark mode.</td></tr>
+      <tr><td><code>exhibit_compare</code></td><td>The list of schools you've pinned for side-by-side comparison.</td></tr>
+      <tr><td><code>exhibit_profile</code></td><td>Your last LSAT / uGPA / state entries, so Match Me and the Net Price calculator stay pre-filled.</td></tr>
+      <tr><td><code>exhibit_calc</code></td><td>Your loan-calculator inputs (rates, principal, term).</td></tr>
+      <tr><td><code>exhibit_tour_seen</code></td><td>Whether you've completed the first-visit tour, so it doesn't re-fire.</td></tr>
+      <tr><td><code>exhibit_disclaimer_dismissed</code><br><code>exhibit_cookie_dismissed</code><br><code>exhibit_mobile_banner_dismissed</code></td><td>Whether you've dismissed the banners at the top/bottom of the page.</td></tr>
+    </tbody>
+  </table>
+  <p>You can clear all of this at any time via your browser's site-data settings. None of it is required to use the Site.</p>
+
+  <h3>8.2 Hosting &amp; cache</h3>
+  <p>Exhibit is hosted on <strong>Cloudflare Pages</strong>. As the hosting and content-delivery network, Cloudflare receives standard web request data (IP address, user-agent, request URL, timestamp) for every page load — this is what lets the Site serve and lets Cloudflare detect abuse, mitigate denial-of-service attacks, and route requests to the nearest edge location. Cloudflare's data handling is governed by its <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Privacy Policy</a> and <a href="https://www.cloudflare.com/cookie-policy/" target="_blank" rel="noopener">Cookie Policy</a>. Cloudflare may set its own technical cookies under its own privacy practices to operate the security and performance layer; we do not control those and we do not access their contents.</p>
+  <p>Static files (HTML, CSS, JS, images, the compressed ABA dataset) are cached on Cloudflare's global edge network so the Site loads quickly. Your browser also caches static assets to avoid re-downloading them on repeat visits. Cache headers are public and conservative — HTML refreshes every 5 minutes; images and the dataset bundle cache for one year with an <code>immutable</code> hint (a content change ships under a new filename, so the cache is safe).</p>
+  <p>The Site also installs a <strong>Service Worker</strong> (<code>sw.js</code>) that caches the app shell locally on your device for offline use and fast repeat loads. The cache is named after the current build (e.g. <code>exhibit-v1.16.2</code>); when a new build deploys, the old cache is purged automatically on your next visit. You can manually clear it via your browser's site-data settings.</p>
+
+  <h3>8.3 Third-party assets</h3>
+  <p>To render the map and typography, the Site loads a small number of assets from third parties. When your browser fetches these, those providers may receive your IP address and user-agent and may log them under their own privacy policies. We do not control that processing and we set no cookies through it. The third parties currently used:</p>
+  <ul>
+    <li><strong>Google Fonts</strong> — typeface files (Nunito, Playfair Display, Geist Mono). <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy policy</a>.</li>
+    <li><strong>Leaflet 1.9.4</strong> via cdnjs (Cloudflare) — the open-source mapping library. <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Privacy policy</a>.</li>
+    <li><strong>CARTO Dark Matter</strong> basemap tiles + <strong>OpenStreetMap</strong> data — the dark map basemap. <a href="https://carto.com/privacy/" target="_blank" rel="noopener">CARTO privacy</a> · <a href="https://wiki.osmfoundation.org/wiki/Privacy_Policy" target="_blank" rel="noopener">OSMF privacy</a>.</li>
+  </ul>
+  <p>If you prefer to avoid these requests, blocking third-party requests in your browser will still let the underlying data and tables render — only the map and styled fonts will degrade.</p>
+
+  <h2>9. Security</h2>
+  <p>The Site is served over HTTPS only. HTTP-to-HTTPS redirection is forced at the edge. <strong>HTTP Strict Transport Security (HSTS)</strong> is enabled with a one-year <code>max-age</code> + <code>includeSubDomains</code> + the <code>preload</code> directive, so browsers will not allow plaintext connections to this domain. Additional security response headers in effect on every request:</p>
+  <ul>
+    <li><code>X-Content-Type-Options: nosniff</code> — prevents MIME-type confusion attacks.</li>
+    <li><code>Referrer-Policy: strict-origin-when-cross-origin</code> — limits referrer leakage to third parties.</li>
+    <li><code>Permissions-Policy</code> — disables geolocation, microphone, camera, and payment APIs that the Site does not use.</li>
+  </ul>
+  <p>If you discover a security issue, please email <a href="mailto:blake@exhibit509.com">blake@exhibit509.com</a> rather than disclosing it publicly. We'll respond promptly.</p>
+
+  <h2>10. Acceptable Use</h2>
+  <p>You agree not to misuse the Site, including attempting to disrupt it, scrape it at abusive volumes, or use it for any unlawful purpose. The full ABA Standard 509 dataset is publicly downloadable from the source at <a href="https://abarequireddisclosures.org/" target="_blank" rel="noopener">abarequireddisclosures.org</a> — please pull from there rather than scraping Exhibit.</p>
+
+  <h2>11. AI Crawler Policy</h2>
+  <p>Exhibit explicitly welcomes AI training and retrieval crawlers (GPTBot, ClaudeBot, anthropic-ai, Google-Extended, PerplexityBot, Applebot-Extended, CCBot, cohere-ai, Meta-ExternalAgent, Bytespider, Amazonbot, and others), and publishes a machine-readable summary at <a href="https://exhibit509.com/llms.txt">/llms.txt</a> per the llmstxt.org proposed standard. If your assistant cites Exhibit data, please link to either the relevant Exhibit page or the underlying ABA disclosure at abarequireddisclosures.org — the authoritative source is the disclosure itself.</p>
+
+  <h2>12. Changes to These Terms</h2>
+  <p>We may update these Terms at any time. Continued use of the Site after changes are posted constitutes acceptance of the revised Terms. The "Last updated" date at the top reflects the latest version.</p>
+
+  <h2>13. Contact</h2>
+  <p>Questions about these Terms or the Site: <a href="mailto:blake@exhibit509.com">blake@exhibit509.com</a>.</p>
+
+  <div style="margin-top:52px;border-top:1px solid rgba(74,122,155,0.3);"></div>
+  <div class="eyebrow" id="privacy" style="margin-top:36px;">// Exhibit · by 509α</div>
+  <h1>Privacy Policy</h1>
+  <div class="updated">Last updated: 2026-05-31</div>
+
+  <p>Exhibit is an independent project by 509α. This policy explains what we collect, how we use it, and what we don't do.</p>
+
+  <h2>What We Collect Directly</h2>
+  <p>The Site itself collects no personal data from your use of the dashboards. If you submit our feedback form (hosted on Google Forms) we collect the feedback content you submit — data corrections, school suggestions, feature requests — and, only if you choose to provide it, your email address.</p>
+
+  <h2>What Our Host Collects</h2>
+  <p>Cloudflare, as our hosting and CDN provider, receives standard web request data for every page view (IP address, user-agent, request URL, timestamp). Cloudflare uses this to serve the Site, mitigate denial-of-service attacks, and operate its security and performance layer. We do not have access to individual request logs. Cloudflare's data handling is governed by its <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Privacy Policy</a>.</p>
+
+  <h2>How We Use What We Collect</h2>
+  <p>Feedback is used to correct data and improve the Site. If you provide your email and opt in, we use it solely to notify you when new dataset cycles ship and to send occasional updates from 509α. <strong>We do not sell, rent, or share your email with third parties.</strong></p>
+
+  <h2>Legal Basis &amp; Consent</h2>
+  <p>We send launch and update emails only with your consent, given via the opt-in checkbox on our form. You can withdraw that consent at any time by clicking unsubscribe in any email or by contacting us — we'll honor it promptly.</p>
+
+  <h2>Processors</h2>
+  <p>Form responses are collected and stored through Google Forms (subject to Google's privacy practices). When we send emails, we may use a third-party email provider to manage delivery and unsubscribes. The Site is hosted on Cloudflare Pages, which may log basic technical request data as described above.</p>
+
+  <h2>Retention</h2>
+  <p>We retain your email until you ask us to delete it, or until we no longer have a legitimate purpose for keeping it. Feedback content is retained as part of our development history so we can track which corrections have been applied.</p>
+
+  <h2>Your Choices</h2>
+  <p>You can unsubscribe from emails anytime, and you can request deletion of your email or feedback by emailing <a href="mailto:blake@exhibit509.com">blake@exhibit509.com</a>. We aim to respond within 14 days. If you're an EU/UK resident, GDPR rights of access, rectification, erasure, restriction, and portability apply — same email reaches us.</p>
+
+  <h2>Children</h2>
+  <p>The Site is intended for prospective law students, who are adults. We do not knowingly collect personal information from anyone under 16. If you believe a child has submitted information through our form, please contact us and we'll delete it.</p>
+
+  <h2>Changes</h2>
+  <p>We may update this policy; the "Last updated" date reflects the latest version.</p>
+
+  <footer>Exhibit — Free law school data, built by 509α. Hosted on Cloudflare Pages. Not affiliated with the ABA. Source data at <a href="https://abarequireddisclosures.org/" target="_blank" rel="noopener" style="color:var(--dimmer);">abarequireddisclosures.org</a>.</footer>
+</div>
+<a id="floatBack" href="index.html" aria-label="Back to Exhibit map" title="Back to Exhibit map">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+  Back to Exhibit map
+</a>
+<style>
+#floatBack{position:fixed;bottom:24px;right:24px;z-index:9000;display:flex;align-items:center;gap:8px;background:#D97757;color:#06111E;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;padding:12px 18px;border-radius:4px;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,0.4),0 0 0 1px rgba(217,119,87,0.3);transition:transform .15s,box-shadow .15s;}
+#floatBack:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,0,0,0.5),0 0 0 1px rgba(217,119,87,0.5);}
+</style>
+</body>
+</html>
