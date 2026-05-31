@@ -233,10 +233,17 @@ header{position:fixed;top:0;left:0;right:0;z-index:1000;height:52px;display:flex
 .ip-law{color:var(--orange);font-weight:800;}
 /* Map stats tile — total schools shown + per-color-tier breakdown for the active map metric. */
 .map-stats{background:linear-gradient(180deg,rgba(217,119,87,0.07) 0%,rgba(217,119,87,0.02) 100%);border:1px solid rgba(217,119,87,0.22);border-left:3px solid var(--orange);border-radius:6px;padding:13px 15px 11px;margin-bottom:18px;}
-.ms-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:11px;gap:8px;}
-.ms-eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:1.6px;text-transform:uppercase;color:var(--orange);font-weight:700;}
+.ms-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:10px;}
+.ms-eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:1.6px;text-transform:uppercase;color:var(--orange);font-weight:700;text-align:right;line-height:1.3;}
+.ms-count-big{display:flex;align-items:center;gap:8px;}
+.ms-count-unit{font-family:var(--mono);font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:var(--dim);line-height:1.05;}
 .ms-total{font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:0.4px;white-space:nowrap;}
-.ms-total-n{font-family:var(--sans);font-size:20px;font-weight:800;color:var(--white);letter-spacing:-0.5px;font-variant-numeric:tabular-nums;}
+.ms-total-n{font-family:var(--sans);font-size:30px;font-weight:800;color:var(--white);letter-spacing:-1px;font-variant-numeric:tabular-nums;line-height:1;}
+.ms-filters{font-family:var(--mono);font-size:10px;letter-spacing:0.3px;color:var(--dim);line-height:1.7;margin-bottom:11px;}
+.ms-filt-chip{display:inline-block;background:rgba(217,119,87,0.16);border:1px solid rgba(217,119,87,0.34);color:var(--orange);border-radius:3px;padding:1px 6px;margin:0 3px 3px 0;font-weight:600;}
+.ms-filt-none{color:var(--dimmer);font-style:normal;}
+.theme-light .ms-count-unit,.theme-light .ms-filters{color:#374151!important;}
+.theme-light .ms-filt-none{color:#64748B!important;}
 .ms-row{display:flex;align-items:center;gap:8px;padding:3px 0;}
 .ms-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
 .ms-label{font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:0.3px;flex:1;white-space:nowrap;}
@@ -362,7 +369,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .bls-toggle.on{background:rgba(74,155,107,0.15);border-color:#4A9B6B;}
 
 /* Map count + legend */
-.map-count{position:fixed;bottom:50px;left:8px;z-index:100;background:rgba(8,14,22,0.92);border:1px solid rgba(74,122,155,0.20);border-radius:3px;padding:7px 14px;font-family:var(--mono);font-size:12px;color:var(--dim);letter-spacing:2px;backdrop-filter:blur(8px);font-weight:500;}
+.map-count{position:fixed;bottom:50px;left:8px;z-index:100;background:rgba(8,14,22,0.82);border:1px solid rgba(74,122,155,0.16);border-radius:3px;padding:4px 9px;font-family:var(--mono);font-size:9.5px;color:var(--dimmer);letter-spacing:1.2px;backdrop-filter:blur(8px);font-weight:500;opacity:0.8;}
 #mapLegend{position:fixed;bottom:24px;right:360px;z-index:100;background:rgba(4,13,23,0.9);border:1px solid rgba(74,122,155,0.18);padding:10px 14px;}
 .leg-title{font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:2px;text-transform:uppercase;margin-bottom:7px;}
 .leg-row{display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;color:#5A8AAA;margin-bottom:3px;}
@@ -1053,7 +1060,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
 <li><a href="terms.html">Terms & Privacy</a></li>
 <li><a href="llms.txt">llms.txt</a> — machine-readable summary for AI crawlers</li>
 </ul>
-<p style="margin-top:36px;color:#7AAAC8;font-family:'JetBrains Mono',monospace;font-size:12px;">Built by 509α. Last synced May 2026.</p>
+<p style="margin-top:36px;color:#7AAAC8;font-family:'JetBrains Mono',monospace;font-size:12px;">Built by 509α. Last synced May 31, 2026.</p>
 </div>
 </noscript>
 
@@ -1165,7 +1172,11 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
 
       <!-- Map stats tile: total shown + per-color-tier counts, animated on filter change -->
       <div class="map-stats" id="mapStats">
-        <div class="ms-head"><span class="ms-eyebrow" id="msMetricLabel">First-Time Bar</span><span class="ms-total"><span class="ms-total-n" id="msTotal">0</span>&nbsp;on map</span></div>
+        <div class="ms-head">
+          <span class="ms-count-big"><span class="ms-total-n" id="msTotal">0</span> <span class="ms-count-unit">schools<br>on map</span></span>
+          <span class="ms-eyebrow" id="msMetricLabel">By First-Time Bar</span>
+        </div>
+        <div class="ms-filters" id="msFilters"></div>
         <div id="msTiers"></div>
       </div>
 
@@ -1343,7 +1354,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
   </div>
 
   <!-- Map count -->
-  <div class="map-count" id="mapCount">Showing 194 schools on map</div>
+  <div class="map-count" id="mapCount">194 schools shown</div>
 
   <!-- Legend -->
   <div id="mapLegend">
@@ -1419,7 +1430,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
     </a>
   </div>
   <div style="padding:0 16px;font-family:var(--mono);font-size:11px;color:var(--dimmer);border-left:1px solid rgba(74,122,155,0.12);white-space:nowrap;letter-spacing:0.4px;">
-    <span style="color:#4A9B6B;">●</span>&nbsp; Sourced from official ABA Standard 509 disclosures &nbsp;·&nbsp; <span style="color:var(--orange);">Last synced May 2026</span> &nbsp;|&nbsp;
+    <span style="color:#4A9B6B;">●</span>&nbsp; Sourced from official ABA Standard 509 disclosures &nbsp;·&nbsp; <span style="color:var(--orange);">Last synced May 31, 2026</span> &nbsp;|&nbsp;
     <a href="methodology.html" style="color:var(--blue);text-decoration:none;">Methodology</a> &nbsp;·&nbsp;
     <a href="https://abarequireddisclosures.org/" target="_blank" rel="noopener" style="color:var(--blue);text-decoration:none;">Source</a> &nbsp;·&nbsp;
     <a href="terms.html" style="color:var(--blue);text-decoration:none;">Terms</a>
@@ -1438,7 +1449,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
     <div class="modal-bd" id="mBd"></div>
     <div class="modal-trend" id="mTrend"></div>
     <div class="modal-ft">
-      <span class="modal-ftn"><span style="color:#4A9B6B;">●</span> Sourced from <a href="https://abarequireddisclosures.org/" target="_blank" style="color:var(--blue);text-decoration:none;">abarequireddisclosures.org</a> · Last synced May 2026 · <a href="methodology.html" style="color:var(--blue);text-decoration:none;">Methodology</a></span>
+      <span class="modal-ftn"><span style="color:#4A9B6B;">●</span> Sourced from <a href="https://abarequireddisclosures.org/" target="_blank" style="color:var(--blue);text-decoration:none;">abarequireddisclosures.org</a> · Last synced May 31, 2026 · <a href="methodology.html" style="color:var(--blue);text-decoration:none;">Methodology</a></span>
       <a href="https://docs.google.com/forms/d/e/1FAIpQLScvkEp7vEwHAtpbMbk06AmtdUqHTy595OiQFcNBanSBXm0qDA/viewform?usp=publish-editor" class="modal-ftcta" target="_blank">Sign up for email updates →</a>
     </div>
   </div>
@@ -2149,7 +2160,7 @@ function findSchools(){
     if(match){ item.m.addTo(mapInst); item.m.setStyle({radius:pinSize(item.s.enr)+2,fillOpacity:1}); }
     else { item.m.remove(); }
   });
-  document.getElementById('mapCount').textContent = 'Showing '+ordered.length+' matches on map';
+  document.getElementById('mapCount').textContent = ordered.length+' schools shown';
 }
 
 function flyToSchool(id){
@@ -2199,7 +2210,7 @@ function initMap(){
     m.addTo(mapInst);
     allMarkers.push({m,s});
   });
-  document.getElementById('mapCount').textContent='Showing '+allMarkers.length+' schools on map';
+  document.getElementById('mapCount').textContent=allMarkers.length+' schools shown';
 }
 
 // ── Map filters ───────────────────────────────────────────────────────────
@@ -2247,7 +2258,7 @@ function filterPins(){
     if(show){ item.m.setStyle({fillOpacity:0.9,radius:pinSize(s.enr)}); item.m.addTo(mapInst); shown++; }
     else { item.m.remove(); }
   });
-  document.getElementById('mapCount').textContent='Showing '+shown+' schools on map';
+  document.getElementById('mapCount').textContent=shown+' schools shown';
 }
 
 // ── BLS overlay ───────────────────────────────────────────────────────────
@@ -3272,7 +3283,7 @@ function schoolDetailHTML(s){
   return '<a class="dp-back" href="#" onclick="exitSchoolPage();return false;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>Back to Exhibit</a>'+
     '<div class="dp-name">'+s.full+'</div>'+
     (s.closed_status?'<div style="font-family:var(--mono);font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:#FFA726;margin:6px 0 12px;border:1px solid rgba(255,167,38,0.4);padding:6px 12px;display:inline-block;">// '+s.closed_status+' — historical data shown</div>':'')+
-    '<div class="dp-loc">'+(s.state||'—')+(s.school_type?' · '+s.school_type:'')+' · ABA 509 · Last synced May 2026 (2025 cycle) · <a href="methodology.html" style="color:var(--blue);text-decoration:none;border-bottom:1px dotted rgba(90,171,203,0.5);">Methodology</a></div>'+
+    '<div class="dp-loc">'+(s.state||'—')+(s.school_type?' · '+s.school_type:'')+' · ABA 509 · Last synced May 31, 2026 (2025 cycle) · <a href="methodology.html" style="color:var(--blue);text-decoration:none;border-bottom:1px dotted rgba(90,171,203,0.5);">Methodology</a></div>'+
     '<div class="dp-grid">'+
       // ── 1. ADMISSIONS — who gets in ─────────────────────────────────────
       '<div class="dp-card"><div class="dp-card-t">// 1 · Admissions 2025</div>'+
@@ -4110,6 +4121,22 @@ function mapShownSchools(){
   }
   return S.filter(s=>s.lat&&s.lng);
 }
+// Human-readable list of the filters currently narrowing the map (#5/#6) so the
+// schools-shown count is never ambiguous about WHY it's what it is.
+const MF_LABELS={all:'All schools',national:'National (T14)',regional:'Regional',local:'Local',
+  bar90:'Bar ≥ 90%',lowcost:'Tuition < $35K',safety:'My Safeties',target:'My Targets',reach:'My Reaches'};
+function activeMapFilters(){
+  const chips=[];
+  if(typeof currentMF!=='undefined' && currentMF && currentMF!=='all') chips.push(MF_LABELS[currentMF]||currentMF);
+  const srch=document.getElementById('mapSrch');
+  if(srch && srch.value.trim()) chips.push('“'+srch.value.trim()+'”');
+  const g=document.getElementById('fwGPA'), l=document.getElementById('fwLSAT');
+  const stats=[]; if(l&&l.value) stats.push('LSAT '+l.value); if(g&&g.value) stats.push('uGPA '+g.value);
+  if(stats.length && ['safety','target','reach'].includes(currentMF)) {/* already implied by MF chip */}
+  else if(stats.length) chips.push(stats.join(' / '));
+  if(typeof blsOn!=='undefined' && blsOn) chips.push('BLS salary overlay');
+  return chips;
+}
 function updateMapStats(){
   const tiersEl=document.getElementById('msTiers'); if(!tiersEl) return;
   const cfg=(typeof MAP_METRIC_TIERS!=='undefined' && MAP_METRIC_TIERS[window.MAP_METRIC])||MAP_METRIC_TIERS.bar;
@@ -4123,8 +4150,16 @@ function updateMapStats(){
     if(idx<0) idx=cfg.tiers.length-1;
     counts[idx]++;
   });
-  const lbl=document.getElementById('msMetricLabel'); if(lbl) lbl.textContent=cfg.label;
+  const lbl=document.getElementById('msMetricLabel'); if(lbl) lbl.textContent='By '+cfg.label;
   ms_animateCount(document.getElementById('msTotal'), list.length);
+  // Active-filter readout — makes clear which filters produced this count (#5/#6).
+  const filtEl=document.getElementById('msFilters');
+  if(filtEl){
+    const chips=activeMapFilters();
+    filtEl.innerHTML = chips.length
+      ? 'Filtered by '+chips.map(c=>'<span class="ms-filt-chip">'+c+'</span>').join('')
+      : '<span class="ms-filt-none">No filters — showing all schools with map coordinates</span>';
+  }
   const max=Math.max(1,...counts,na);
   let rows=cfg.tiers.map((t,i)=>ms_row(t.c,t.l,counts[i],max)).join('');
   if(na>0) rows+=ms_row('#64748B','No data',na,max);
@@ -4136,7 +4171,7 @@ function updateMapStats(){
 }
 // Re-run (with the animated counter) whenever the visible set or active metric changes.
 (function(){
-  ['filterPins','setMapMetric','findSchools','initMap'].forEach(fn=>{
+  ['filterPins','setMapMetric','findSchools','initMap','toggleBLS'].forEach(fn=>{
     const orig=window[fn];
     if(typeof orig==='function'){ window[fn]=function(){ const r=orig.apply(this,arguments); try{updateMapStats();}catch(e){} return r; }; }
   });

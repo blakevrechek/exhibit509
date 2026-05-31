@@ -331,7 +331,7 @@ def render_page(s):
 <div class="wrap">
   <nav class="nav"><a href="/">← All schools</a><a href="/methodology.html">Methodology</a><a href="/about.html">About</a><a href="/contact.html">Contact</a></nav>
   {closed_banner}
-  <div class="eyebrow">// ABA Standard 509 · 2025 cycle · Last synced May 2026</div>
+  <div class="eyebrow">// ABA Standard 509 · 2025 cycle · Last synced May 31, 2026</div>
   <h1>{full}</h1>
   <div class="meta">{state}{f' · {school_type}' if school_type else ''} · School ID: {sid}</div>
   <a class="cta" href="{spa_url}">→ Open interactive map &amp; comparison view</a>
