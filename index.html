@@ -197,6 +197,14 @@
 .theme-light svg text[fill="#FCD34D"],.theme-light svg text[fill="#FFA726"]{
   stroke:#000;stroke-width:0.6px;paint-order:stroke;
 }
+/* #2 Line charts (svg.lc — LSAT median, uGPA, acceptance, applications) draw the
+   series as a STROKED line + dot + label, which the fill/text rules above don't
+   cover. Bright yellow lines are illegible on white, so darken the whole yellow
+   series to a high-contrast amber (~4.5:1 on the light bg) in light mode only. */
+.theme-light svg.lc [stroke="#FCD34D"],.theme-light svg.lc [stroke="#FFA726"],
+.theme-light svg.ov-spark [stroke="#FCD34D"],.theme-light svg.ov-spark [stroke="#FFA726"]{stroke:#8A6A00;}
+.theme-light svg.lc circle[fill="#FCD34D"],.theme-light svg.lc circle[fill="#FFA726"]{fill:#8A6A00;}
+.theme-light svg.lc text[fill="#FCD34D"],.theme-light svg.lc text[fill="#FFA726"]{fill:#6B5200;stroke:#fff;stroke-width:0.7px;paint-order:stroke;}
 /* Yellow HTML fills (stacked-bar segments, tier/legend dots, pills) get a thin dark ring. */
 .theme-light [style*="background:#FCD34D"],.theme-light [style*="background: #FCD34D"],
 .theme-light [style*="background:#FFA726"],.theme-light [style*="background: #FFA726"]{
