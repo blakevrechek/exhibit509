@@ -488,6 +488,12 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .dp-back:hover{background:var(--orange);color:#0C1A2A;border-color:var(--orange);transform:translateY(-1px);box-shadow:0 1px 0 rgba(0,0,0,0.05),0 6px 16px rgba(217,119,87,0.30);}
 .dp-back svg{transition:transform .15s ease;}
 .dp-back:hover svg{transform:translateX(-2px);}
+.dp-topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:24px;}
+.dp-topbar .dp-back{margin-bottom:0;}
+.dp-actions{display:flex;gap:8px;}
+.dp-act{background:rgba(74,122,155,0.12);border:1px solid rgba(74,122,155,0.3);color:var(--dim);font-family:var(--mono);font-size:12px;letter-spacing:0.6px;text-transform:uppercase;padding:9px 14px;border-radius:5px;cursor:pointer;transition:all .15s;font-weight:600;}
+.dp-act:hover{color:var(--white);border-color:var(--white);}
+.theme-light .dp-act{color:#374151!important;border-color:rgba(60,90,120,0.3)!important;}
 .dp-name{font-family:var(--sans);font-size:40px;font-weight:800;color:var(--white);line-height:1.04;letter-spacing:-1.5px;}
 .dp-loc{font-family:var(--mono);font-size:13px;color:var(--dim);letter-spacing:2px;margin:10px 0 28px;text-transform:uppercase;font-weight:500;}
 /* Detail grid: artful 12-col layout that tells a lifecycle story —
@@ -1056,12 +1062,26 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
 .theme-light .cmp-act{color:#374151!important;border-color:rgba(60,90,120,0.3)!important;}
 .theme-light .cmp-bar-track,.theme-light .cmp-emp-track{background:rgba(60,90,120,0.10)!important;}
 @media print{
-  header,#mapFooter,#cookieBar,#compareTray,#mobileTabBar,#mobileBanner,.cmp-toolbar{display:none!important;}
-  #mapRoot,#viewContainer,#schoolPage{display:none!important;}
+  @page{margin:10mm;}
+  header,#mapFooter,#cookieBar,#compareTray,#mobileTabBar,#mobileBanner,.cmp-toolbar,.dp-back,.dp-actions,.ip-toggle{display:none!important;}
+  #mapRoot,#viewContainer{display:none!important;}
+  /* Compare view print */
   #comparePage{position:static!important;display:block!important;height:auto!important;overflow:visible!important;}
   .cmp-wrap{max-width:none!important;padding:0!important;margin:0!important;}
   .cmp-chart,.cmp-table tr,.cmp-emp-row{break-inside:avoid;}
-  body{background:#fff!important;}
+  /* School full-page print — maximize data density: static flow, tighter grid,
+     denser type, no card chrome, avoid breaking inside cards/charts. */
+  #schoolPage{position:static!important;display:block!important;height:auto!important;overflow:visible!important;}
+  .dp-wrap{max-width:none!important;padding:0!important;margin:0!important;}
+  .dp-name{font-size:24px!important;margin:0 0 2px!important;}
+  .dp-loc{font-size:10px!important;margin:0 0 10px!important;}
+  .dp-grid{gap:8px!important;}
+  .dp-card{break-inside:avoid;padding:8px 10px!important;background:#fff!important;border:1px solid #ccc!important;}
+  .dp-card-t,.dp-chart-t{font-size:10px!important;margin-bottom:4px!important;}
+  .dp-row{padding:2px 0!important;font-size:11px!important;}
+  .lc,.ov-spark{break-inside:avoid;}
+  body{background:#fff!important;font-size:11px!important;}
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}
 }
 </style>
 </head>
@@ -3199,6 +3219,22 @@ function copyCompareLink(btn){
     navigator.clipboard.writeText(url).then(done).catch(()=>prompt('Copy this URL:', url));
   } else { prompt('Copy this URL:', url); }
 }
+// Copy a shareable deep-link to a single school's full page.
+function copySchoolLink(btn,id){
+  const url = location.origin + location.pathname + '#school/' + encodeURIComponent(id);
+  const done = () => { const orig = btn.textContent; btn.textContent='Copied'; setTimeout(()=>btn.textContent=orig, 1600); };
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(url).then(done).catch(()=>prompt('Copy this URL:', url));
+  } else { prompt('Copy this URL:', url); }
+}
+// Print / save-as-PDF the school page: switch to light theme for legibility, print, restore.
+function printSchool(){
+  const wasLight=document.documentElement.classList.contains('theme-light');
+  if(!wasLight) document.documentElement.classList.add('theme-light');
+  const restore=()=>{ if(!wasLight) document.documentElement.classList.remove('theme-light'); window.removeEventListener('afterprint',restore); };
+  window.addEventListener('afterprint',restore);
+  setTimeout(()=>{ try{ window.print(); }catch(e){} setTimeout(restore,1500); }, 60);
+}
 // Apply compare state from URL hash (#compare=id1,id2,...) — opens the view automatically.
 function applyCompareHash(){
   const m = (location.hash||'').match(/^#compare=([^&]+)/i);
@@ -3324,9 +3360,13 @@ function schoolDetailHTML(s){
   const enrChart =lineChart({years:yrs,series:[{vals:s.enr_trend,color:'#A78BFA'}],pinIndex:0,fmt:v=>Math.round(v).toLocaleString(),label:'Enrollment'});
   const empBuckets = EMP_BUCKETS;
   const meanV=blsMean(s.state), medV=blsField(s.state,'a_median'), rppV=rppVal(s.state), realMean=realUSD(meanV,s.state), rent1=fmrRent(s.state,'br_1'), rent2=fmrRent(s.state,'br_2');
-  return '<a class="dp-back" href="#" onclick="exitSchoolPage();return false;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>Back to Exhibit</a>'+
+  return '<div class="dp-topbar"><a class="dp-back" href="#" onclick="exitSchoolPage();return false;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>Back to Exhibit</a>'+
+    '<span class="dp-actions">'+
+      '<button class="dp-act" onclick="copySchoolLink(this,\''+s.id+'\')" title="Copy a shareable link to this school">Copy link</button>'+
+      '<button class="dp-act" onclick="printSchool()" title="Print or save this page as PDF">Print / PDF</button>'+
+    '</span></div>'+
     '<div class="dp-name">'+s.full+'</div>'+
-    (s.closed_status?'<div style="font-family:var(--mono);font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:#FFA726;margin:6px 0 12px;border:1px solid rgba(255,167,38,0.4);padding:6px 12px;display:inline-block;">// '+s.closed_status+' — historical data shown</div>':'')+
+    (s.closed_status?'<div style="font-family:var(--mono);font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:#FFA726;margin:6px 0 12px;border:1px solid rgba(255,167,38,0.4);padding:6px 12px;display:inline-block;">'+s.closed_status+' — historical data shown</div>':'')+
     '<div class="dp-loc">'+(s.state||'—')+(s.school_type?' · '+s.school_type:'')+' · ABA 509 · Last synced May 31, 2026 (2025 cycle) · <a href="methodology.html" style="color:var(--blue);text-decoration:none;border-bottom:1px dotted rgba(90,171,203,0.5);">Methodology</a></div>'+
     '<div class="dp-grid">'+
       // ── 1. ADMISSIONS — who gets in ─────────────────────────────────────
