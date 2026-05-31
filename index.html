@@ -197,7 +197,7 @@ body{background:var(--bg);color:var(--white);font-family:var(--sans);font-size:1
 header{position:fixed;top:0;left:0;right:0;z-index:1000;height:52px;display:flex;align-items:center;gap:0;background:rgba(4,13,23,0.97);border-bottom:1px solid rgba(74,122,155,0.3);backdrop-filter:blur(16px);}
 .h-logo{display:flex;align-items:center;gap:10px;padding:0 20px 0 16px;border-right:1px solid rgba(74,122,155,0.2);cursor:pointer;height:100%;text-decoration:none;}
 .h-logo img{width:28px;height:28px;border-radius:3px;}
-.h-logo-text{font-family:var(--sans);font-size:18px;font-weight:800;color:var(--white);letter-spacing:-0.7px;white-space:nowrap;}
+.h-logo-text{font-family:var(--serif);font-size:19px;font-weight:700;color:var(--white);letter-spacing:-0.3px;white-space:nowrap;}
 .h-logo-text em{font-style:normal;color:var(--orange);font-size:12px;font-family:var(--mono);font-weight:600;letter-spacing:1.8px;margin-left:7px;text-transform:uppercase;}
 /* Greek α inside uppercased eyebrow text: keep lowercase + native letterforms so it doesn't read as a Latin A with a leading space. */
 .brand-alpha{text-transform:none;letter-spacing:0;font-family:Georgia,'Times New Roman',serif;font-style:italic;font-weight:700;font-size:1.05em;}
@@ -230,6 +230,7 @@ header{position:fixed;top:0;left:0;right:0;z-index:1000;height:52px;display:flex
 .ip-eyebrow{font-family:var(--mono);font-size:12px;color:var(--orange);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:14px;}
 .ip-title{font-family:var(--sans);font-size:36px;font-weight:800;color:var(--white);line-height:1.02;letter-spacing:-1.5px;margin-bottom:14px;}
 .ip-title em{font-family:var(--serif);font-style:italic;font-weight:700;color:var(--orange);letter-spacing:-0.5px;}
+.ip-law{color:var(--orange);font-weight:800;}
 .ip-sub{font-family:var(--sans);font-size:15.5px;color:#A4C8DD;line-height:1.55;margin-bottom:22px;font-weight:400;}
 .ip-sub strong{color:var(--white);font-weight:600;}
 .ip-stats{display:flex;gap:8px;}
@@ -298,8 +299,8 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
    left Match Me / Compare sidebar (ends at 380px) and the always-open right school
    panel (400px), sitting just under the global header. The left sidebar is now
    reserved exclusively for Match Me + Compare. */
-#mapFilters{position:fixed;top:60px;left:394px;right:414px;z-index:99;display:flex;flex-direction:row;flex-wrap:wrap;gap:7px;align-items:center;}
-#mapFilters::before{content:'Filters';font-family:var(--mono);font-size:10.5px;letter-spacing:1.8px;text-transform:uppercase;color:var(--orange);font-weight:700;margin-right:2px;flex:0 0 auto;}
+#mapFilters{position:fixed;top:60px;left:394px;right:414px;z-index:99;display:flex;flex-direction:row;flex-wrap:wrap;gap:7px;align-items:center;background:rgba(4,13,23,0.72);border:1px solid rgba(217,119,87,0.32);border-left:3px solid var(--orange);border-radius:8px;padding:8px 12px;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 6px 20px rgba(0,0,0,0.35);}
+#mapFilters::before{content:'Map filters';font-family:var(--mono);font-size:10.5px;letter-spacing:1.8px;text-transform:uppercase;color:var(--orange);font-weight:700;margin-right:2px;flex:0 0 auto;}
 #mapFilters .map-search-wrap{width:200px;max-width:200px;margin-bottom:0;flex:0 0 auto;}
 #mapFilters .mfb{font-size:12.5px;padding:5px 9px;text-align:center;}
 #mapFilters.panel-hidden{display:none;}
@@ -1086,7 +1087,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
     </svg>
     <button class="ip-toggle" id="ipToggle" onclick="togglePanel()" title="Hide/show panel">←</button>
     <div class="ip-header">
-      <div class="ip-title">The <em>evidence</em><br>on every school.</div>
+      <div class="ip-title">The <em>evidence</em><br>on every <span class="ip-law">law</span> school.</div>
       <div class="ip-sub">Data sourced primarily from the ABA 509 Reports.</div>
     </div>
     <div class="ip-body">
