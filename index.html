@@ -132,6 +132,7 @@
 .theme-light .calc-summary strong{color:#C95B2C!important;}
 .theme-light .calc-table th{background:#F4F7FB!important;color:#111827!important;border-bottom-color:rgba(60,90,120,0.25)!important;}
 .theme-light .calc-table td{color:#0C1A2A;border-bottom-color:rgba(60,90,120,0.10)!important;}
+.theme-light .calc-table th.calc-total,.theme-light .calc-table td.calc-total,.theme-light .calc-table td.calc-total strong{color:#C95B2C!important;}
 .theme-light .calc-table tbody tr:hover{background:rgba(60,90,120,0.06)!important;}
 .theme-light .calc-best{background:rgba(47,126,79,0.08)!important;}
 .theme-light .calc-note{color:#5A7A99!important;border-top-color:rgba(60,90,120,0.18)!important;}
@@ -165,6 +166,21 @@
 .theme-light .traj-down{background:rgba(196,74,71,0.18)!important;color:#8A2620!important;}
 .theme-light .traj-flat{background:rgba(60,90,120,0.10)!important;color:#111827!important;}
 .theme-light .gl{border-bottom-color:rgba(60,90,120,0.30);}
+/* ── Light-theme contrast fixes for callouts + bimodal blocks ──
+   These wrappers used hardcoded near-white body text (#E6F0F8) and light accent
+   eyebrows that washed out on a light background. Re-anchor every text run to a
+   dark, high-contrast value while keeping the colored left-rail accents. */
+.theme-light .callout-p,.theme-light .bimodal-p{color:#1F2937!important;}
+.theme-light .callout-p strong,.theme-light .bimodal-p strong{color:#000000!important;}
+.theme-light .callout-eye{color:#1E5A88!important;}
+.theme-light .callout.note .callout-eye{color:#C95B2C!important;}
+.theme-light .callout.warn .callout-eye{color:#B45309!important;}
+.theme-light .callout.insight .callout-eye{color:#6D28D9!important;}
+.theme-light .callout.warn{border-left-color:#D88822!important;}
+.theme-light .callout.insight{border-left-color:#7C3AED!important;}
+.theme-light .bimodal-h{color:#C95B2C!important;}
+.theme-light .callout-foot,.theme-light .bimodal-foot{color:#5A7A99!important;}
+.theme-light .cmp-cta-desc,.theme-light .mm-tip{color:#1F2937!important;}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html,body{height:100%;overflow:hidden;}
 body{background:var(--bg);color:var(--white);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
@@ -270,13 +286,14 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .pb-counsel-header{border-top:3px solid var(--counsel);}
 
 /* Map filters bar */
-/* Map filters relocated v1.23 — now docked at the BOTTOM of the left infoPanel
-   (under the Compare CTA) instead of as a top-of-map bar. Vertical stacked
-   layout with the "Map filters" eyebrow label as a heading. */
-#mapFilters{position:fixed;top:auto;bottom:60px;left:14px;width:352px;z-index:101;display:flex;flex-direction:column;gap:6px;align-items:stretch;flex-wrap:wrap;max-height:calc(50vh);overflow-y:auto;padding-top:14px;border-top:1px solid rgba(74,122,155,0.18);}
-#mapFilters::before{content:'Map filters';display:block;font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--orange);font-weight:700;padding-bottom:8px;width:100%;}
-#mapFilters .map-search-wrap{width:100%;max-width:100%;margin-bottom:4px;}
-#mapFilters .mfb{font-size:13px;padding:6px 10px;text-align:left;}
+/* Map filters relocated v1.24 — top-of-map horizontal toolbar, docked between the
+   left Match Me / Compare sidebar (ends at 380px) and the always-open right school
+   panel (400px), sitting just under the global header. The left sidebar is now
+   reserved exclusively for Match Me + Compare. */
+#mapFilters{position:fixed;top:60px;left:394px;right:414px;z-index:99;display:flex;flex-direction:row;flex-wrap:wrap;gap:7px;align-items:center;}
+#mapFilters::before{content:'Filters';font-family:var(--mono);font-size:10.5px;letter-spacing:1.8px;text-transform:uppercase;color:var(--orange);font-weight:700;margin-right:2px;flex:0 0 auto;}
+#mapFilters .map-search-wrap{width:200px;max-width:200px;margin-bottom:0;flex:0 0 auto;}
+#mapFilters .mfb{font-size:12.5px;padding:5px 9px;text-align:center;}
 #mapFilters.panel-hidden{display:none;}
 .mfb{font-family:var(--sans);font-size:14.5px;font-weight:500;letter-spacing:-0.1px;text-transform:none;padding:7px 14px;border:1px solid rgba(74,122,155,0.22);background:rgba(8,14,22,0.85);color:#A4C8DD;cursor:pointer;white-space:nowrap;transition:all .15s ease;backdrop-filter:blur(10px);border-radius:3px;}
 .mfb:hover{border-color:rgba(217,119,87,0.45);color:var(--white);}
@@ -486,7 +503,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .tr-note{font-family:var(--mono);font-size:12px;color:var(--dimmer);margin-top:16px;line-height:1.6;border-top:1px solid rgba(74,122,155,0.1);padding-top:10px;}
 
 /* ── Net-Price / Loan calculator view ── */
-.calc-inputs{position:sticky;top:0;background:var(--dark);z-index:5;padding:14px 0 18px;border-bottom:1px solid rgba(74,122,155,0.18);margin-bottom:16px;}
+.calc-inputs{background:var(--dark);padding:14px 0 18px;border-bottom:1px solid rgba(74,122,155,0.18);margin-bottom:16px;}
 .calc-fieldsets{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;}
 .calc-fs{background:linear-gradient(180deg,rgba(255,255,255,0.025) 0%,rgba(255,255,255,0.005) 100%);border:1px solid rgba(74,122,155,0.18);border-radius:5px;padding:18px 20px;position:relative;overflow:hidden;}
 .calc-fs::before{content:'';position:absolute;top:0;left:0;width:36px;height:2px;background:var(--orange);border-radius:0 0 2px 2px;}
@@ -545,6 +562,9 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
 .calc-table th{position:sticky;top:0;z-index:10;background:#0B1826;font-family:var(--mono);font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);padding:14px 10px 12px;text-align:right;border-bottom:2px solid rgba(217,119,87,0.45);font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,0.35);}
 .calc-table th.calc-school{text-align:left;}
 .calc-table td{padding:12px 10px;text-align:right;border-bottom:1px solid rgba(74,122,155,0.08);color:var(--white);font-variant-numeric:tabular-nums;}
+/* Last column = the all-in "Net price" total — orange in both themes to read as the headline number. */
+.calc-table th.calc-total{color:var(--orange);border-bottom-color:rgba(217,119,87,0.75);}
+.calc-table td.calc-total,.calc-table td.calc-total strong{color:var(--orange);font-weight:800;}
 .calc-table td.calc-school{text-align:left;font-family:var(--serif);font-size:15.5px;}
 .calc-table tbody tr{cursor:pointer;transition:background .15s;}
 .calc-table tbody tr:hover{background:rgba(74,122,155,0.06);}
@@ -716,7 +736,8 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
   /* ── MAP CONTROLS ──────────────────────────────────────────────────────── */
   .map-count{bottom:90px;left:8px;}
   #mapLegend{right:8px;bottom:90px;max-width:calc(100vw - 16px);}
-  #mapFilters{left:8px;right:8px;flex-wrap:wrap;}
+  #mapFilters{top:auto;bottom:64px;left:8px;right:8px;flex-wrap:wrap;}
+  #mapFilters .map-search-wrap{width:100%;max-width:100%;}
   .mfb{padding:7px 10px;font-size:11px;}
   /* ── TABLES: horizontal scroll wrappers ───────────────────────────────── */
   .cmp-table-wrap,.calc-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
@@ -990,7 +1011,6 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
       <span id="themeIcon" aria-hidden="true"></span>
     </button>
     <button id="tourBtn" onclick="relaunchTour()" title="Replay the guided tour" aria-label="Take the tour" style="background:rgba(90,171,203,0.10);border:1px solid rgba(90,171,203,0.40);color:var(--blue);cursor:pointer;font-family:var(--mono);font-size:11px;letter-spacing:1.2px;text-transform:uppercase;padding:5px 12px;border-radius:3px;font-weight:700;">▸ Tour</button>
-    <div class="h-concept">Beta</div>
     <a href="https://docs.google.com/forms/d/e/1FAIpQLScvkEp7vEwHAtpbMbk06AmtdUqHTy595OiQFcNBanSBXm0qDA/viewform?usp=publish-editor" target="_blank" class="h-skool" style="gap:8px;background:var(--orange);color:#06111E;font-weight:700;">
       → Sign up for email updates
     </a>
@@ -1055,8 +1075,8 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
     </svg>
     <button class="ip-toggle" id="ipToggle" onclick="togglePanel()" title="Hide/show panel">←</button>
     <div class="ip-header">
-      <div class="ip-eyebrow">ABA 509 · 2011 → 2025</div>
       <div class="ip-title">The <em>evidence</em><br>on every school.</div>
+      <div class="ip-sub">Data sourced primarily from the ABA 509 Reports.</div>
     </div>
     <div class="ip-body">
 
@@ -3540,6 +3560,11 @@ function renderCalc(){
   vi.innerHTML = bimodalInfographic()
     +'<div class="view-title">Net price</div>'
     +'<p class="view-sub">Your stats, your home state, what you\'d borrow. We estimate the scholarship you\'d likely get at each school, build a 3-yr cost-of-attendance, and add the real cost of your loans after interest. <strong>Concept tool — verify before deciding.</strong></p>'
+    +'<div class="callout note">'
+    +'  <div class="callout-eye">New federal loan limits · Effective July 1, 2026</div>'
+    +'  <p class="callout-p">The <strong>One Big Beautiful Bill Act</strong> eliminates the federal <strong>Grad PLUS</strong> program for new borrowers and caps how much you can borrow from the government. Starting <strong>July 1, 2026</strong>, professional students — including <strong>JD / law</strong> — can borrow up to <strong>$50,000 per year</strong> with a <strong>$200,000</strong> lifetime cap. Other graduate students (e.g. LLM, SJD) are capped at <strong>$20,500 per year</strong> ($100,000 lifetime). If you already hold a Grad PLUS loan before <strong>June 30, 2026</strong>, you may keep borrowing until your program ends (or three academic years, whichever comes first).</p>'
+    +'  <p class="callout-p">Previously, Grad PLUS let you borrow up to the full cost of attendance with <em>no annual or aggregate cap</em>. Under the new caps, any cost above these federal limits has to come from <strong>private loans</strong> (typically at higher rates) — so the &ldquo;Loan 2 · Private&rdquo; line below matters more than it used to. Full federal summary: <a href="https://www.ed.gov/about/news/press-release/fact-sheet-trump-administration-making-college-more-affordable" target="_blank" rel="noopener" style="color:var(--orange);text-decoration:underline;">U.S. Department of Education fact sheet &rarr;</a></p>'
+    +'</div>'
     +'<div class="calc-inputs">'
     +' <div class="calc-fieldsets">'
     +'  <div class="calc-fs"><div class="calc-fs-l">// Your stats</div>'
@@ -3570,7 +3595,7 @@ function renderCalc(){
     +' </div>'
     +' <div class="calc-summary" id="calcSummary"></div>'
     +'</div>'
-    +'<div style="overflow-x:auto;"><table class="calc-table"><thead><tr>'
+    +'<div class="calc-table-wrap"><table class="calc-table"><thead><tr>'
     +' <th class="calc-school">School</th>'
     +' <th>Sticker / yr</th>'
     +' <th>'+gl('Est. grant','Net annual')+'</th>'
@@ -3579,11 +3604,11 @@ function renderCalc(){
     +' <th>'+gl('3-yr living')+'</th>'
     +' <th>Loan interest</th>'
     +' <th>Monthly payment</th>'
-    +' <th>Total to pay (tuition + living + interest)</th>'
+    +' <th class="calc-total">Net price</th>'
     +'</tr></thead><tbody id="calcRows"></tbody></table></div>'
     +'<div class="calc-note">'
     +' <strong>How "Est. grant" is estimated:</strong> if your LSAT and uGPA are both ≥ the school\'s 75th percentile (Safety), we use grant_p75. If both are ≥ 25th (Target), we use the median grant. Otherwise (Reach) we use grant_p25. Rough — actual offers vary hugely by cycle, essays, demographics, and yield.<br>'
-    +' <strong>"3-yr net" = 3 × (sticker − est. grant)</strong>, ignoring fees and cost of living. <strong>"Loan interest"</strong> assumes the per-year borrow amount × 3 funds the program; payment uses standard fixed amortization at your stated rate over your stated term. <strong>"Total to pay"</strong> = 3-yr net (the price of the degree) + total interest (the price of financing it).<br>'
+    +' <strong>"3-yr net" = 3 × (sticker − est. grant)</strong>, ignoring fees and cost of living. <strong>"Loan interest"</strong> assumes the per-year borrow amount × 3 funds the program; payment uses standard fixed amortization at your stated rate over your stated term. <strong>"Net price"</strong> = 3-yr net tuition + 3-yr living + total loan interest — your all-in cost: the price of the degree, the cost of living while you earn it, and the cost of financing it.<br>'
     +' Sticker is <strong>resident</strong> when your home state matches the school\'s state, otherwise non-resident (if reported).<br>'
     +' Loan math is illustrative — confirm current Grad PLUS and private rates before deciding. School figures sourced from ABA 509, last synced May 2026.'
     +'</div>';
@@ -3661,7 +3686,7 @@ function renderCalcResults(){
       +'<td>'+fmt$(living3)+'</td>'
       +'<td>'+fmt$(totalInterest)+'</td>'
       +'<td>'+fmt$(totalMonthly)+'</td>'
-      +'<td><strong>'+fmt$(r.total)+'</strong></td>'
+      +'<td class="calc-total"><strong>'+fmt$(r.total)+'</strong></td>'
       +'</tr>';
   }).join('');
   document.getElementById('calcRows').innerHTML = html || '<tr><td colspan="9" style="padding:24px;text-align:center;color:var(--dimmer);">No schools to score — enter your stats above.</td></tr>';
