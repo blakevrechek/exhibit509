@@ -68,8 +68,16 @@
 .theme-light #cookieBar a,.theme-light #cookieBar strong{color:#C95B2C!important;}
 .theme-light #mapFooter{background:#FFFFFFF2!important;border-top:1px solid rgba(60,90,120,0.22)!important;}
 .theme-light #mapFooter,.theme-light #mapFooter span{color:#111827!important;}
-.theme-light #mapFooter a{color:#C95B2C!important;}
+.theme-light #mapFooter a{color:#374151!important;}
+.theme-light #mapFooter a:hover{color:#000000!important;}
+.theme-light #mapFooter a.mf-accent{color:#C95B2C!important;}
 .theme-light #mapFooter .h-logo-text{color:#000000!important;}
+/* Footer link polish — unify the rainbow of inline colors into one muted toolbar
+   tone with an orange accent for the two primary CTAs. Same 36px form factor. */
+#mapFooter a{color:#A4C8DD!important;transition:color .15s ease;}
+#mapFooter a:hover{color:var(--white)!important;}
+#mapFooter a.mf-accent{color:var(--orange)!important;font-weight:600;}
+#mapFooter a.mf-accent:hover{color:#E68660!important;}
 .theme-light #infoPanel,.theme-light #schoolPanel{background:#FFFFFFE6!important;border-color:rgba(60,90,120,0.22)!important;color:#000000!important;}
 .theme-light .ip-title,.theme-light .ip-stat-n,.theme-light .sp-name,.theme-light .sp-metric-val,.theme-light .sp-row-v,.theme-light .dp-row-v,.theme-light .cmp-val,.theme-light .funnel-l,.theme-light .plc-st,.theme-light .tr-name,.theme-light .cmp-sch-name{color:#000000!important;}
 .theme-light .ip-sub,.theme-light .ip-stat-l,.theme-light .sp-loc,.theme-light .sp-sec-label,.theme-light .sp-row-k,.theme-light .sp-metric-label,.theme-light .sp-metric-sub{color:#111827!important;}
@@ -730,6 +738,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
   .dp-grid{grid-template-columns:1fr;}
   .dp-wrap{padding:18px 14px 90px;}
   .cmp-wrap{padding:18px 14px 90px;}
+  #viewContainer{bottom:0;}
   .view-inner{padding:18px 14px;}
   .view-title{font-size:26px;letter-spacing:-0.8px;}
   .view-sub{font-size:14px;}
@@ -808,7 +817,9 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
 .bls-v{font-family:var(--mono);font-size:12px;color:var(--green);font-weight:600;}
 
 /* View tabs (for non-map views) */
-#viewContainer{position:fixed;top:calc(76px + var(--banner-h, 8px));left:0;right:0;bottom:0;z-index:200;display:none;background:var(--dark);overflow-y:auto;}
+/* bottom:36px leaves the global footer bar visible on every in-app view (Schools,
+   States, Transfers, Net price) — not just the map. Detail overlays already do this. */
+#viewContainer{position:fixed;top:calc(76px + var(--banner-h, 8px));left:0;right:0;bottom:36px;z-index:200;display:none;background:var(--dark);overflow-y:auto;}
 .view-inner{padding:32px 56px;max-width:1720px;margin:0 auto;}
 .view-title{font-family:var(--sans);font-size:38px;font-weight:800;color:var(--white);letter-spacing:-1.5px;margin-bottom:10px;line-height:1.05;}
 .view-sub{font-family:var(--sans);font-size:16px;color:#A4C8DD;margin-bottom:32px;line-height:1.5;font-weight:400;max-width:780px;}
@@ -1317,7 +1328,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
     <span style="font-family:var(--serif);font-size:15px;font-weight:700;color:var(--white);">Exhibit <em style="font-style:normal;color:var(--orange);font-size:11px;font-family:var(--mono);font-weight:400;margin-left:3px;">by 509α</em></span>
   </div>
   <div style="display:flex;align-items:center;height:100%;flex:1;overflow:hidden;">
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLScvkEp7vEwHAtpbMbk06AmtdUqHTy595OiQFcNBanSBXm0qDA/viewform?usp=publish-editor" target="_blank" style="display:flex;align-items:center;gap:6px;padding:0 14px;height:100%;border-right:1px solid rgba(74,122,155,0.12);text-decoration:none;font-family:var(--mono);font-size:12px;color:var(--orange);letter-spacing:0.5px;white-space:nowrap;font-weight:600;">→ Sign up for email updates</a>
+    <a class="mf-accent" href="https://docs.google.com/forms/d/e/1FAIpQLScvkEp7vEwHAtpbMbk06AmtdUqHTy595OiQFcNBanSBXm0qDA/viewform?usp=publish-editor" target="_blank" style="display:flex;align-items:center;gap:6px;padding:0 14px;height:100%;border-right:1px solid rgba(74,122,155,0.12);text-decoration:none;font-family:var(--mono);font-size:12px;color:var(--orange);letter-spacing:0.5px;white-space:nowrap;font-weight:600;">→ Sign up for email updates</a>
     <a href="https://docs.google.com/forms/d/e/1FAIpQLScvkEp7vEwHAtpbMbk06AmtdUqHTy595OiQFcNBanSBXm0qDA/viewform?usp=publish-editor" target="_blank" style="display:flex;align-items:center;gap:5px;padding:0 14px;height:100%;border-right:1px solid rgba(74,122,155,0.12);text-decoration:none;font-family:var(--mono);font-size:12px;color:#A78BFA;letter-spacing:0.5px;white-space:nowrap;"><svg width="14" height="14" viewBox="0 0 48 48" fill="none"><path d="M30 2H10C7.8 2 6 3.8 6 6v36c0 2.2 1.8 4 4 4h28c2.2 0 4-1.8 4-4V14L30 2z" fill="#7B4FD4"/><path d="M30 2v12h12L30 2z" fill="#5E35B1"/><path d="M20 22h-4v2h4v-2zm12 0H24v2h8v-2zm-12 6h-4v2h4v-2zm12 0H24v2h8v-2zm-12 6h-4v2h4v-2zm12 0H24v2h8v-2z" fill="white"/></svg> Feedback</a>
     <a href="methodology.html" style="display:flex;align-items:center;gap:6px;padding:0 14px;height:100%;border-right:1px solid rgba(74,122,155,0.12);text-decoration:none;font-family:var(--mono);font-size:12px;color:#A4C8DD;letter-spacing:0.5px;white-space:nowrap;">Methodology</a>
     <a href="about.html" style="display:flex;align-items:center;gap:6px;padding:0 14px;height:100%;border-right:1px solid rgba(74,122,155,0.12);text-decoration:none;font-family:var(--mono);font-size:12px;color:var(--white);letter-spacing:0.5px;white-space:nowrap;">About</a>
@@ -1325,7 +1336,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
     <a href="terms.html" style="display:flex;align-items:center;gap:6px;padding:0 14px;height:100%;border-right:1px solid rgba(74,122,155,0.12);text-decoration:none;font-family:var(--mono);font-size:12px;color:#FDE68A;letter-spacing:0.5px;white-space:nowrap;">Terms · Privacy</a>
     <a href="#" onclick="relaunchTour();return false;" style="display:flex;align-items:center;gap:6px;padding:0 14px;height:100%;border-right:1px solid rgba(74,122,155,0.12);text-decoration:none;font-family:var(--mono);font-size:12px;color:#5AABCB;letter-spacing:0.5px;white-space:nowrap;">▸ Take the tour</a>
     <span id="shareWidget" style="display:flex;align-items:center;gap:6px;padding:0 12px;height:100%;border-right:1px solid rgba(74,122,155,0.12);"></span>
-    <a href="https://skool.com/509alpha" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:6px;padding:0 14px;height:100%;border-right:1px solid rgba(74,122,155,0.12);text-decoration:none;font-family:var(--mono);font-size:12px;color:var(--orange);letter-spacing:0.5px;white-space:nowrap;font-weight:600;">
+    <a class="mf-accent" href="https://skool.com/509alpha" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:6px;padding:0 14px;height:100%;border-right:1px solid rgba(74,122,155,0.12);text-decoration:none;font-family:var(--mono);font-size:12px;color:var(--orange);letter-spacing:0.5px;white-space:nowrap;font-weight:600;">
       <img data-img="webp" alt="Skool" style="height:11px;width:auto;"> Join 509α on Skool
     </a>
   </div>
@@ -1941,10 +1952,8 @@ function showView(v){
 function togglePanel(){
   panelOpen = !panelOpen;
   const p = document.getElementById('infoPanel');
-  const f = document.getElementById('mapFilters');
   const t = document.getElementById('ipToggle');
   p.classList.toggle('hidden', !panelOpen);
-  f.classList.toggle('panel-hidden', !panelOpen);
   t.textContent = panelOpen ? '←' : '→';
 }
 
@@ -3299,6 +3308,15 @@ function schoolRouter(){
   if(m){ renderSchoolPage(decodeURIComponent(m[1])); return; }
   if(/^#compare=/i.test(h)){ applyCompareHash(); return; }
   if(/^#match=/i.test(h)){ applyMatchHash(); return; }
+  // #view=<name> — lets the standalone pages (about/contact/etc.) deep-link into
+  // an in-app view via the shared global header.
+  const vm = h.match(/^#view=([a-z]+)$/i);
+  if(vm){
+    const v = vm[1].toLowerCase();
+    const p0=document.getElementById('schoolPage'); if(p0) p0.style.display='none';
+    if(v==='map'){ if(typeof showMap==='function') showMap(); return; }
+    if(['profiles','states','transfers','calc'].includes(v)){ if(typeof showView==='function') showView(v); return; }
+  }
   const p=document.getElementById('schoolPage'); if(p) p.style.display='none';
 }
 window.addEventListener('hashchange', schoolRouter);
