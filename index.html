@@ -29,8 +29,8 @@
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="icon" id="favicon" type="image/png">
 <link href="/fonts/fonts.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<link rel="stylesheet" href="/vendor/leaflet/leaflet.css" integrity="sha512-Zcn6bjR/8RZbLEpLIeOwNtzREBAJnUKESxces60Mpoj+2okopSAcSUIUOseddDm0cxnGQzxIR7vJgsLZbdLE3w==" crossorigin="anonymous"/>
+<script src="/vendor/leaflet/leaflet.js" integrity="sha512-BwHfrr4c9kmRkLw6iXFdzcdWV/PGkVgiIyIWLLlTSXzWQzxuSg4DiQUCpauz/EWjgk5TYQqX/kvn9pG1NpYfqg==" crossorigin="anonymous"></script>
 <style>
 :root{
   --bg:#06111E;--dark:#040D17;--panel:#070F1C;
@@ -1418,7 +1418,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
 
 <div id="cookieBar" style="position:fixed;bottom:0;left:0;right:0;z-index:1000;background:#0B1826;border-top:1px solid rgba(217,119,87,0.4);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;box-shadow:0 -2px 12px rgba(0,0,0,0.5);">
   <div style="font-family:var(--mono);font-size:12px;color:#A9C2D4;letter-spacing:0.3px;line-height:1.5;">
-    🍪 Exhibit sets <strong>no tracking, analytics, or advertising cookies</strong>. Hosting is provided by <strong>Cloudflare Pages</strong>, which may log standard request data (IP, user-agent, URL) and set technical cookies to operate its security + performance layer. Fonts are self-hosted (no Google Fonts request). The Site loads Leaflet (cdnjs) and OpenStreetMap basemap tiles — those providers log basic request data under their own policies. A Service Worker caches the app shell on your device for offline use. Full breakdown: <a href="terms.html" style="color:#D97757;text-decoration:underline;">Cookie &amp; Cache Notice</a>.
+    🍪 Exhibit sets <strong>no tracking, analytics, or advertising cookies</strong>. Hosting is provided by <strong>Cloudflare Pages</strong>, which may log standard request data (IP, user-agent, URL) and set technical cookies to operate its security + performance layer. Fonts and the Leaflet mapping library are self-hosted (no Google Fonts or cdnjs request). The Site loads OpenStreetMap/Carto basemap tiles — that provider logs basic request data under its own policy. A Service Worker caches the app shell on your device for offline use. Full breakdown: <a href="terms.html" style="color:#D97757;text-decoration:underline;">Cookie &amp; Cache Notice</a>.
   </div>
   <button onclick="dismissCookieBar()" style="background:#D97757;border:none;color:#06111E;cursor:pointer;font-size:13px;flex-shrink:0;padding:6px 16px;border-radius:4px;font-family:var(--mono);font-weight:700;letter-spacing:1px;">GOT IT ✕</button>
 </div>
@@ -2450,7 +2450,7 @@ function flyToSchool(id){
 // ── Map init ──────────────────────────────────────────────────────────────
 function initMap(){
   if(typeof L==='undefined'){
-    document.getElementById('theMap').innerHTML='<div style="display:flex;align-items:center;justify-content:center;height:100%;flex-direction:column;gap:14px;color:#4A7A9B;font-family:Share Tech Mono,monospace;font-size:13px;letter-spacing:1px;"><div style="font-size:36px;">&#127757;</div><div>MAP REQUIRES INTERNET</div><div style="font-size:11px;color:#2A4A6A;">Tiles + Leaflet load over HTTPS from cdnjs / Carto</div></div>';
+    document.getElementById('theMap').innerHTML='<div style="display:flex;align-items:center;justify-content:center;height:100%;flex-direction:column;gap:14px;color:#4A7A9B;font-family:Share Tech Mono,monospace;font-size:13px;letter-spacing:1px;"><div style="font-size:36px;">&#127757;</div><div>MAP REQUIRES INTERNET</div><div style="font-size:11px;color:#2A4A6A;">Map tiles load over HTTPS from Carto</div></div>';
     return;
   }
   mapInst = L.map('theMap',{center:[38.5,-96],zoom:4,zoomControl:false});
