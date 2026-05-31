@@ -231,6 +231,35 @@ header{position:fixed;top:0;left:0;right:0;z-index:1000;height:52px;display:flex
 .ip-title{font-family:var(--sans);font-size:36px;font-weight:800;color:var(--white);line-height:1.02;letter-spacing:-1.5px;margin-bottom:14px;}
 .ip-title em{font-family:var(--serif);font-style:italic;font-weight:700;color:var(--orange);letter-spacing:-0.5px;}
 .ip-law{color:var(--orange);font-weight:800;}
+/* Map stats tile — total schools shown + per-color-tier breakdown for the active map metric. */
+.map-stats{background:linear-gradient(180deg,rgba(217,119,87,0.07) 0%,rgba(217,119,87,0.02) 100%);border:1px solid rgba(217,119,87,0.22);border-left:3px solid var(--orange);border-radius:6px;padding:13px 15px 11px;margin-bottom:18px;}
+.ms-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:11px;gap:8px;}
+.ms-eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:1.6px;text-transform:uppercase;color:var(--orange);font-weight:700;}
+.ms-total{font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:0.4px;white-space:nowrap;}
+.ms-total-n{font-family:var(--sans);font-size:20px;font-weight:800;color:var(--white);letter-spacing:-0.5px;font-variant-numeric:tabular-nums;}
+.ms-row{display:flex;align-items:center;gap:8px;padding:3px 0;}
+.ms-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.ms-label{font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:0.3px;flex:1;white-space:nowrap;}
+.ms-bar-wrap{height:4px;background:rgba(255,255,255,0.07);border-radius:2px;overflow:hidden;flex:0 0 56px;}
+.ms-bar{display:block;height:100%;width:0;border-radius:2px;transition:width .5s cubic-bezier(.2,.7,.3,1);}
+.ms-count{font-family:var(--sans);font-size:14px;font-weight:700;color:var(--white);font-variant-numeric:tabular-nums;min-width:26px;text-align:right;}
+.theme-light .ms-total-n,.theme-light .ms-count{color:#000000!important;}
+.theme-light .ms-label,.theme-light .ms-total{color:#1F2937!important;}
+.theme-light .map-stats{background:rgba(217,119,87,0.06);}
+/* Compare hint ("Did you know?") injected at the top of the school detail page. */
+.cmp-hint{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:14px 0 4px;padding:12px 36px 12px 16px;background:linear-gradient(90deg,rgba(217,119,87,0.14),rgba(217,119,87,0.04));border:1px solid rgba(217,119,87,0.32);border-left:3px solid var(--orange);border-radius:6px;position:relative;}
+.cmp-hint-ico{font-size:18px;flex:0 0 auto;}
+.cmp-hint-body{flex:1 1 260px;font-family:var(--sans);font-size:13.5px;color:var(--white);line-height:1.5;}
+.cmp-hint-body strong{color:var(--orange);}
+.cmp-hint-body em{font-style:normal;font-weight:700;}
+.cmp-hint-btn,.cmp-hint-open{font-family:var(--mono);font-size:11px;letter-spacing:0.5px;text-transform:uppercase;font-weight:700;padding:7px 12px;border-radius:4px;cursor:pointer;border:1px solid var(--orange);white-space:nowrap;}
+.cmp-hint-btn{background:transparent;color:var(--orange);}
+.cmp-hint-btn.on{background:rgba(217,119,87,0.18);}
+.cmp-hint-open{background:var(--orange);color:#06111E;border-color:var(--orange);}
+.cmp-hint-x{position:absolute;top:6px;right:8px;background:transparent;border:none;color:var(--dim);font-size:14px;cursor:pointer;line-height:1;padding:2px 4px;}
+.cmp-hint-x:hover{color:var(--white);}
+.theme-light .cmp-hint-body{color:#1F2937!important;}
+.theme-light .cmp-hint-body strong{color:#C95B2C!important;}
 .ip-sub{font-family:var(--sans);font-size:15.5px;color:#A4C8DD;line-height:1.55;margin-bottom:22px;font-weight:400;}
 .ip-sub strong{color:var(--white);font-weight:600;}
 .ip-stats{display:flex;gap:8px;}
@@ -1091,6 +1120,12 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
       <div class="ip-sub">Data sourced primarily from the ABA 509 Reports.</div>
     </div>
     <div class="ip-body">
+
+      <!-- Map stats tile: total shown + per-color-tier counts, animated on filter change -->
+      <div class="map-stats" id="mapStats">
+        <div class="ms-head"><span class="ms-eyebrow" id="msMetricLabel">First-Time Bar</span><span class="ms-total"><span class="ms-total-n" id="msTotal">0</span>&nbsp;on map</span></div>
+        <div id="msTiers"></div>
+      </div>
 
       <!-- Find Schools widget -->
       <div class="find-widget">
@@ -3898,6 +3933,101 @@ function toggleSP(){
 }
 
 // ── Init ──────────────────────────────────────────────────────────────────
+// ── Map stats tile: total shown + per-color-tier counts, animated on filter/metric change ──
+function ms_animateCount(el,target){
+  if(!el) return;
+  const start=parseInt((el.textContent||'').replace(/[^0-9]/g,''))||0;
+  if(start===target){ el.textContent=target; return; }
+  const dur=420, t0=performance.now();
+  (function step(now){
+    const p=Math.min(1,(now-t0)/dur), eased=1-Math.pow(1-p,3);
+    el.textContent=Math.round(start+(target-start)*eased);
+    if(p<1) requestAnimationFrame(step);
+  })(performance.now());
+}
+function ms_row(color,label,count,max){
+  const pct=max>0?Math.round((count/max)*100):0;
+  return '<div class="ms-row"><span class="ms-dot" style="background:'+color+';"></span>'
+    +'<span class="ms-label">'+label+'</span>'
+    +'<span class="ms-bar-wrap"><span class="ms-bar" data-pct="'+pct+'" style="background:'+color+';"></span></span>'
+    +'<span class="ms-count" data-v="'+count+'">0</span></div>';
+}
+// Schools currently visible on the map. Prefer real marker state (covers every
+// filter path incl. Match Me); fall back to a logical filter before map init.
+function mapShownSchools(){
+  if(typeof mapInst!=='undefined' && mapInst && typeof allMarkers!=='undefined' && allMarkers.length){
+    return allMarkers.filter(it=>mapInst.hasLayer(it.m)).map(it=>it.s);
+  }
+  return S.filter(s=>s.lat&&s.lng);
+}
+function updateMapStats(){
+  const tiersEl=document.getElementById('msTiers'); if(!tiersEl) return;
+  const cfg=(typeof MAP_METRIC_TIERS!=='undefined' && MAP_METRIC_TIERS[window.MAP_METRIC])||MAP_METRIC_TIERS.bar;
+  const list=mapShownSchools();
+  const counts=cfg.tiers.map(()=>0); let na=0;
+  list.forEach(s=>{
+    const v=cfg.valOf(s);
+    if(v==null||isNaN(v)){ na++; return; }
+    let idx=-1;
+    for(let i=0;i<cfg.tiers.length;i++){ if(v>=cfg.tiers[i].min){ idx=i; break; } }
+    if(idx<0) idx=cfg.tiers.length-1;
+    counts[idx]++;
+  });
+  const lbl=document.getElementById('msMetricLabel'); if(lbl) lbl.textContent=cfg.label;
+  ms_animateCount(document.getElementById('msTotal'), list.length);
+  const max=Math.max(1,...counts,na);
+  let rows=cfg.tiers.map((t,i)=>ms_row(t.c,t.l,counts[i],max)).join('');
+  if(na>0) rows+=ms_row('#64748B','No data',na,max);
+  tiersEl.innerHTML=rows;
+  requestAnimationFrame(()=>{
+    tiersEl.querySelectorAll('.ms-bar').forEach(b=>{ b.style.width=(b.dataset.pct||0)+'%'; });
+    tiersEl.querySelectorAll('.ms-count').forEach(el=>ms_animateCount(el, +el.dataset.v||0));
+  });
+}
+// Re-run (with the animated counter) whenever the visible set or active metric changes.
+(function(){
+  ['filterPins','setMapMetric','findSchools','initMap'].forEach(fn=>{
+    const orig=window[fn];
+    if(typeof orig==='function'){ window[fn]=function(){ const r=orig.apply(this,arguments); try{updateMapStats();}catch(e){} return r; }; }
+  });
+})();
+try{ updateMapStats(); }catch(e){}
+
+// ── Compare hint on the school detail page (#7) — injected at runtime so we don't
+//    depend on renderSchoolPage internals. Placed right after the back link. ──
+function cmpHintAdd(btn){
+  const id=btn.dataset.id;
+  if(typeof toggleCompare==='function') toggleCompare(id);
+  const on=(typeof inCompare==='function')&&inCompare(id);
+  btn.textContent=on?'✓ Added':'+ Add this school'; btn.classList.toggle('on',on);
+}
+function cmpHintDismiss(btn){ try{localStorage.setItem('exhibit_cmp_hint','off');}catch(e){} const h=btn.closest('.cmp-hint'); if(h) h.remove(); }
+function cmpHintInject(){
+  let off=false; try{ off=localStorage.getItem('exhibit_cmp_hint')==='off'; }catch(e){}
+  if(off) return;
+  const page=document.getElementById('schoolPage');
+  if(!page || page.style.display==='none' || !page.innerHTML) return;
+  if(page.querySelector('.cmp-hint')) return;
+  const m=(location.hash||'').match(/^#school\/(.+)$/);
+  const id=m?decodeURIComponent(m[1]):null;
+  const inCmp=(typeof inCompare==='function' && id && inCompare(id));
+  const addBtn=id?'<button class="cmp-hint-btn'+(inCmp?' on':'')+'" data-id="'+id+'" onclick="cmpHintAdd(this)">'+(inCmp?'✓ Added':'+ Add this school')+'</button>':'';
+  const html='<div class="cmp-hint"><span class="cmp-hint-ico">💡</span>'
+    +'<div class="cmp-hint-body"><strong>Did you know?</strong> You can line schools up side-by-side. Pin up to 4 — from any map pin, school card, or right here — then open <em>Compare</em> for charts, trends, and a metric-by-metric readout.</div>'
+    +addBtn
+    +'<button class="cmp-hint-open" onclick="openCompareFirstClass()">Open Compare →</button>'
+    +'<button class="cmp-hint-x" aria-label="Dismiss tip" onclick="cmpHintDismiss(this)">✕</button></div>';
+  const back=page.querySelector('.dp-back');
+  const wrap=page.querySelector('.dp-wrap')||page;
+  if(back) back.insertAdjacentHTML('afterend', html);
+  else wrap.insertAdjacentHTML('afterbegin', html);
+}
+(function(){
+  const page=document.getElementById('schoolPage'); if(!page || !window.MutationObserver) return;
+  new MutationObserver(()=>{ try{ cmpHintInject(); }catch(e){} })
+    .observe(page,{childList:true,attributes:true,attributeFilter:['style']});
+})();
+
 populateHeaderStats();
 renderCompareTray();
 renderLegendRows();
