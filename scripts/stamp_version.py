@@ -24,7 +24,13 @@ VERSION_FILE = os.path.join(ROOT, "VERSION")
 
 # A version token: v + 1-3 dotted numeric components. Deliberately requires a
 # DIGIT after the dot so prose like "as of v1.x" (literal x) is never touched.
-VTOKEN = re.compile(r"v\d+\.\d+(?:\.\d+)?")
+#
+# The leading negative lookbehind keeps this off SVG path data. An SVG vertical
+# lineto command (e.g. `h3v1.7c…`, `2.24.2v2.47h…`) also reads as `v<num>.<num>`,
+# but its `v` always follows a coordinate digit (or letter/dot), whereas a real
+# version token follows a space, `-`, `(`, `>`, etc. Without this guard the
+# stamper rewrote the LinkedIn/Facebook share-icon coordinates every bump.
+VTOKEN = re.compile(r"(?<![A-Za-z0-9.])v\d+\.\d+(?:\.\d+)?")
 
 HTML_FILES = [
     "index.html",
