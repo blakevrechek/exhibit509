@@ -337,11 +337,12 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
    left Match Me / Compare sidebar (ends at 380px) and the always-open right school
    panel (400px), sitting just under the global header. The left sidebar is now
    reserved exclusively for Match Me + Compare. */
-#mapFilters{position:fixed;top:60px;left:394px;right:414px;z-index:99;display:flex;flex-direction:row;flex-wrap:wrap;gap:7px;align-items:center;background:rgba(4,13,23,0.72);border:1px solid rgba(217,119,87,0.32);border-left:3px solid var(--orange);border-radius:8px;padding:8px 12px;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 6px 20px rgba(0,0,0,0.35);}
-#mapFilters::before{content:'Map filters';font-family:var(--mono);font-size:10.5px;letter-spacing:1.8px;text-transform:uppercase;color:var(--orange);font-weight:700;margin-right:2px;flex:0 0 auto;}
-#mapFilters .map-search-wrap{width:200px;max-width:200px;margin-bottom:0;flex:0 0 auto;}
-#mapFilters .mfb{font-size:12.5px;padding:5px 9px;text-align:center;}
+#mapFilters{position:fixed;top:60px;left:394px;z-index:99;display:flex;flex-direction:row;flex-wrap:wrap;gap:7px;align-items:center;background:rgba(4,13,23,0.72);border:1px solid rgba(217,119,87,0.32);border-left:3px solid var(--orange);border-radius:8px;padding:8px 12px;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 6px 20px rgba(0,0,0,0.35);}
+#mapFilters .map-search-wrap{width:220px;max-width:220px;margin-bottom:0;flex:0 0 auto;}
 #mapFilters.panel-hidden{display:none;}
+/* Category filter buttons, now docked in the left sidebar above the stats breakdown. */
+.ms-filt-bar{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:11px;}
+.ms-filt-bar .mfb{font-size:11.5px;padding:4px 8px;border-radius:3px;}
 .mfb{font-family:var(--sans);font-size:14.5px;font-weight:500;letter-spacing:-0.1px;text-transform:none;padding:7px 14px;border:1px solid rgba(74,122,155,0.22);background:rgba(8,14,22,0.85);color:#A4C8DD;cursor:pointer;white-space:nowrap;transition:all .15s ease;backdrop-filter:blur(10px);border-radius:3px;}
 .mfb:hover{border-color:rgba(217,119,87,0.45);color:var(--white);}
 .mfb.on{border-color:var(--orange);color:#0C1A2A;background:var(--orange);font-weight:600;box-shadow:0 1px 0 rgba(0,0,0,0.04),0 4px 10px rgba(217,119,87,0.18);}
@@ -1190,6 +1191,17 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
           <span class="ms-count-big"><span class="ms-total-n" id="msTotal">0</span> <span class="ms-count-unit">schools<br>on map</span></span>
           <span class="ms-eyebrow" id="msMetricLabel">By First-Time Bar</span>
         </div>
+        <div class="ms-filt-bar">
+          <button class="mfb on" onclick="setMF('all',this)">All</button>
+          <button class="mfb" onclick="setMF('national',this)" title="National schools — top 14 by LSAT median">National</button>
+          <button class="mfb" onclick="setMF('regional',this)" title="Regional schools — LSAT-median rank 15–50">Regional</button>
+          <button class="mfb" onclick="setMF('local',this)" title="Local schools — LSAT-median rank 51+">Local</button>
+          <button class="mfb" onclick="setMF('bar90',this)">Bar ≥ 90%</button>
+          <button class="mfb" onclick="setMF('lowcost',this)">Under $35K</button>
+          <button class="mfb" onclick="setMF('safety',this)">My Safeties</button>
+          <button class="mfb" onclick="setMF('target',this)">My Targets</button>
+          <button class="mfb" onclick="setMF('reach',this)">My Reaches</button>
+        </div>
         <div class="ms-filters" id="msFilters"></div>
         <div id="msTiers"></div>
       </div>
@@ -1318,22 +1330,13 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
     </div>
   </div>
 
-  <!-- Map filter bar -->
+  <!-- Map top bar: search + overlay toggles (category filters now live in the left sidebar) -->
   <div id="mapFilters">
     <div class="map-search-wrap">
       <span class="msi">&#128269;</span>
       <input class="map-search-inp" id="mapSrch" type="text" placeholder="Search schools..." autocomplete="off" oninput="searchTypeahead()" onfocus="searchTypeahead()" onblur="setTimeout(closeTypeahead,180)" onkeydown="searchTypeaheadKey(event)">
       <div class="map-search-dd" id="mapSrchDD"></div>
     </div>
-    <button class="mfb on" onclick="setMF('all',this)">All</button>
-    <button class="mfb" onclick="setMF('national',this)" title="National schools — top 14 by LSAT median">National</button>
-    <button class="mfb" onclick="setMF('regional',this)" title="Regional schools — LSAT-median rank 15–50">Regional</button>
-    <button class="mfb" onclick="setMF('local',this)" title="Local schools — LSAT-median rank 51+">Local</button>
-    <button class="mfb" onclick="setMF('bar90',this)">Bar at least 90%</button>
-    <button class="mfb" onclick="setMF('lowcost',this)">Under $35K</button>
-    <button class="mfb" onclick="setMF('safety',this)">My Safeties</button>
-    <button class="mfb" onclick="setMF('target',this)">My Targets</button>
-    <button class="mfb" onclick="setMF('reach',this)">My Reaches</button>
     <button class="bls-toggle" id="blsToggle" onclick="toggleBLS()">BLS Salaries</button>
     <button class="bls-toggle" id="spToggleBtn" onclick="toggleSP()" style="border-color:rgba(217,119,87,0.3);color:var(--orange);">School Info &#9654;</button>
   </div>
