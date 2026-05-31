@@ -8,7 +8,7 @@
   Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=()
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   X-Frame-Options: DENY
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https://*.basemaps.cartocdn.com https://cdnjs.cloudflare.com; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://docs.google.com; object-src 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self'; img-src 'self' data: blob: https://*.basemaps.cartocdn.com https://cdnjs.cloudflare.com; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://docs.google.com; object-src 'none'; upgrade-insecure-requests
 
 # HTML files: short cache so updates ship fast.
 /*.html
@@ -29,9 +29,20 @@
 /llms.txt
   Cache-Control: public, max-age=3600
 
+# Dataset JS (non-hashed filename, changes on data refresh): revalidate often so
+# updates ship without a stale app. Must precede the immutable /data/* rule.
+/data/exhibit-data.js
+  Cache-Control: public, max-age=600, must-revalidate
+
 # Static data files: long cache + immutable hint.
 /data/*
   Cache-Control: public, max-age=31536000, immutable
+
+# Self-hosted fonts: content-hashed filenames -> safe to cache immutably.
+/fonts/*.woff2
+  Cache-Control: public, max-age=31536000, immutable
+/fonts/fonts.css
+  Cache-Control: public, max-age=86400
 
 # Icons / images: long cache.
 /*.png

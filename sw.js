@@ -2,12 +2,12 @@
 // Strategy: stale-while-revalidate for the static shell (index.html, methodology.html,
 // about.html, terms.html, manifest, sitemap), network-first for everything else
 // (CDN tiles, Leaflet, fonts) so map data + scripts stay fresh.
-const CACHE = 'exhibit-v1.16.2';
+const CACHE = 'exhibit-v1.17.0';
 // Relative URLs resolve against the SW script location (the deploy root, e.g.
 // /Exhibit/sw.js → entries cache as /Exhibit/index.html etc.). Hardcoding absolute
 // paths like '/index.html' would resolve to the host root and fail on GH Pages
 // project deploys (/Exhibit/...). Relative-from-scope is the portable form.
-const SHELL = ['./', './index.html', './methodology.html', './about.html', './terms.html', './contact.html', './manifest.json', './sitemap.xml', './404.html'];
+const SHELL = ['./', './index.html', './data/exhibit-data.js', './fonts/fonts.css', './methodology.html', './about.html', './terms.html', './contact.html', './manifest.json', './sitemap.xml', './404.html'];
 
 self.addEventListener('install', e => {
   // Pre-cache the app shell, but don't fail install if one resource 404s

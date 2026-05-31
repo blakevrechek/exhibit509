@@ -27,6 +27,7 @@ import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 INDEX_PATH = os.path.join(ROOT, "index.html")
+DATA_PATH = os.path.join(ROOT, "data", "exhibit-data.js")
 OUT_DIR = os.path.join(ROOT, "school")
 SITEMAP_PATH = os.path.join(ROOT, "sitemap.xml")
 SITE_URL = "https://exhibit509.com"
@@ -438,9 +439,11 @@ def update_index_directory(schools):
 def main():
     if not os.path.exists(INDEX_PATH):
         sys.exit(f"index.html not found at {INDEX_PATH}")
-    html = open(INDEX_PATH).read()
-    S = extract_S(html)
-    print(f"Extracted {len(S)} schools from inline S array.")
+    # Dataset now lives in data/exhibit-data.js (split out of the HTML). Read S from
+    # there; fall back to index.html for older checkouts.
+    data_src = DATA_PATH if os.path.exists(DATA_PATH) else INDEX_PATH
+    S = extract_S(open(data_src).read())
+    print(f"Extracted {len(S)} schools from {os.path.basename(data_src)}.")
 
     os.makedirs(OUT_DIR, exist_ok=True)
     written = 0
