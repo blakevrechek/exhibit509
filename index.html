@@ -337,7 +337,8 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
    left Match Me / Compare sidebar (ends at 380px) and the always-open right school
    panel (400px), sitting just under the global header. The left sidebar is now
    reserved exclusively for Match Me + Compare. */
-#mapFilters{position:fixed;top:60px;left:394px;z-index:99;display:flex;flex-direction:row;flex-wrap:wrap;gap:7px;align-items:center;background:rgba(4,13,23,0.72);border:1px solid rgba(217,119,87,0.32);border-left:3px solid var(--orange);border-radius:8px;padding:8px 12px;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 6px 20px rgba(0,0,0,0.35);}
+#mapFilters{position:fixed;top:60px;left:394px;z-index:99;max-width:calc(100vw - 394px - 410px);display:flex;flex-direction:row;flex-wrap:wrap;gap:7px;align-items:center;background:rgba(4,13,23,0.72);border:1px solid rgba(217,119,87,0.32);border-left:3px solid var(--orange);border-radius:8px;padding:8px 12px;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 6px 20px rgba(0,0,0,0.35);}
+#mapFilters::before{content:'Search & overlays';font-family:var(--mono);font-size:10.5px;letter-spacing:1.6px;text-transform:uppercase;color:var(--orange);font-weight:700;margin-right:4px;flex:0 0 auto;width:100%;}
 #mapFilters .map-search-wrap{width:220px;max-width:220px;margin-bottom:0;flex:0 0 auto;}
 #mapFilters.panel-hidden{display:none;}
 /* Category filter buttons, now docked in the left sidebar above the stats breakdown. */
@@ -4181,7 +4182,7 @@ function activeMapFilters(){
   const chips=[];
   if(typeof currentMF!=='undefined' && currentMF && currentMF!=='all') chips.push(MF_LABELS[currentMF]||currentMF);
   const srch=document.getElementById('mapSrch');
-  if(srch && srch.value.trim()) chips.push('“'+srch.value.trim()+'”');
+  if(srch && srch.value.trim()) chips.push('“'+escHtml(srch.value.trim())+'”');
   const g=document.getElementById('fwGPA'), l=document.getElementById('fwLSAT');
   const stats=[]; if(l&&l.value) stats.push('LSAT '+l.value); if(g&&g.value) stats.push('uGPA '+g.value);
   if(stats.length && ['safety','target','reach'].includes(currentMF)) {/* already implied by MF chip */}
