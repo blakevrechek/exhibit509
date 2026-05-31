@@ -443,6 +443,16 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .sp-full-btn{display:block;width:100%;margin-top:18px;background:var(--orange);color:#0C1A2A;padding:13px;font-family:var(--sans);font-size:15.5px;letter-spacing:-0.1px;text-transform:none;border:none;border-radius:3px;cursor:pointer;text-align:center;text-decoration:none;transition:all .15s ease;font-weight:700;box-shadow:0 1px 0 rgba(0,0,0,0.05),0 4px 14px rgba(217,119,87,0.18);}
 .sp-full-btn:hover{background:#E68660;transform:translateY(-1px);box-shadow:0 1px 0 rgba(0,0,0,0.05),0 8px 20px rgba(217,119,87,0.26);}
 .sp-full-btn:active{transform:translateY(0);}
+/* Side-panel top action row (#7): View full page + Compare, side by side, color-differentiated */
+.sp-actions{display:flex;gap:8px;margin-bottom:14px;}
+.sp-act{flex:1;padding:11px 10px;font-family:var(--sans);font-size:14px;font-weight:700;letter-spacing:-0.1px;border-radius:4px;cursor:pointer;text-align:center;transition:all .15s ease;border:1px solid transparent;white-space:nowrap;}
+.sp-act-full{background:var(--orange);color:#0C1A2A;box-shadow:0 1px 0 rgba(0,0,0,0.05),0 4px 12px rgba(217,119,87,0.18);}
+.sp-act-full:hover{background:#E68660;transform:translateY(-1px);}
+.sp-act-cmp{background:transparent;color:var(--blue);border-color:rgba(90,171,203,0.5);}
+.sp-act-cmp:hover{background:rgba(90,171,203,0.12);border-color:var(--blue);}
+.sp-act-cmp.on{background:rgba(90,171,203,0.18);color:#bfe3f0;border-color:rgba(90,171,203,0.8);}
+.theme-light .sp-act-cmp{color:#1E5A88;border-color:rgba(30,90,136,0.45);}
+.theme-light .sp-act-cmp.on{background:rgba(30,90,136,0.12);color:#1E5A88;}
 .sp-barcorner{display:flex;align-items:baseline;justify-content:flex-end;gap:8px;margin-top:14px;padding-top:8px;border-top:1px solid rgba(74,122,155,0.15);}
 .sp-barcorner-l{font-family:var(--mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--dimmer);}
 .sp-barcorner-v{font-family:var(--serif);font-size:18px;font-weight:700;line-height:1;}
@@ -2404,7 +2414,11 @@ function spTab(tab, btn){
     }
 
     body.innerHTML=
-      '<div class="sp-intro">A quick read-out of <strong>'+s.full+'</strong>. Scroll for cost, scholarships, bar pass, employment, and state market context. For the full data + 15-year trajectory and comparison view, open the <strong>Full Page</strong> link at the bottom.</div>'+
+      '<div class="sp-actions">'
+        +'<button class="sp-act sp-act-full" onclick="navSchool(\''+s.id+'\')">View full page →</button>'
+        +cmpBtnHTML(s.id, 'sp-act sp-act-cmp')
+      +'</div>'+
+      '<div class="sp-intro">A quick read-out of <strong>'+s.full+'</strong>. Scroll for cost, scholarships, bar pass, employment, and state market context.</div>'+
       '<div class="sp-section"><div class="sp-sec-label">// Admissions 2025</div><div class="sp-grid">'+
         '<div class="sp-metric"><span class="sp-metric-val" style="color:'+colorFor('lsat50',s.lsat50)+';">'+(s.lsat50||'—')+'</span><span class="sp-metric-label">LSAT Median</span><span class="sp-metric-sub">'+pctTriple(s.lsat25,s.lsat50,s.lsat75)+'</span>'+miniSpark(s.lsat_trend)+'</div>'+
         '<div class="sp-metric"><span class="sp-metric-val" style="color:'+colorFor('gpa50',s.gpa50)+';">'+(s.gpa50||'—')+'</span><span class="sp-metric-label">uGPA Median</span><span class="sp-metric-sub">'+pctTriple(s.gpa25,s.gpa50,s.gpa75)+'</span>'+miniSpark(s.gpa_trend)+'</div>'+
@@ -2474,9 +2488,7 @@ function spTab(tab, btn){
         '</div></div>'+
         (stateAvgTui!=null && s.tui ? '<div class="sp-row"><span class="sp-row-k">vs state avg tuition</span><span class="sp-row-v" style="color:'+(s.tui<=stateAvgTui?'#4A9B6B':'#EF5350')+';">'+(s.tui>stateAvgTui?'+':'')+'$'+Math.round((s.tui-stateAvgTui)/1000)+'K</span></div>':'')+
       '</div>'+
-      '<div class="sp-barcorner"><span class="sp-barcorner-l">// First-Time Bar</span><span class="sp-barcorner-v" style="color:'+colorFor('bar',s.bar)+';">'+(s.bar?s.bar+'%':'—')+'</span></div>'+
-      '<button class="sp-full-btn" onclick="navSchool(\'' + s.id + '\')">View Full Page →</button>'+
-      cmpBtnHTML(s.id);
+      '<div class="sp-barcorner"><span class="sp-barcorner-l">// First-Time Bar</span><span class="sp-barcorner-v" style="color:'+colorFor('bar',s.bar)+';">'+(s.bar?s.bar+'%':'—')+'</span></div>';
   }
 }
 
@@ -2937,11 +2949,11 @@ function refreshCmpButtons(){
   document.querySelectorAll('[data-cmp]').forEach(b=>{
     const id=b.getAttribute('data-cmp'), on=inCompare(id);
     b.classList.toggle('on',on);
-    if(b.classList.contains('cmp-btn')) b.textContent=on?'✓ Comparing':'+ Compare';
+    if(b.classList.contains('cmp-btn')||b.classList.contains('sp-act-cmp')) b.textContent=on?'✓ Comparing':'+ Compare';
     else b.textContent=on?'✓':'+';
   });
 }
-function cmpBtnHTML(id){ return '<button class="cmp-btn'+(inCompare(id)?' on':'')+'" data-cmp="'+id+'" onclick="event.stopPropagation();toggleCompare(\''+id+'\')">'+(inCompare(id)?'✓ Comparing':'+ Compare')+'</button>'; }
+function cmpBtnHTML(id, cls){ const base=cls||'cmp-btn'; return '<button class="'+base+(inCompare(id)?' on':'')+'" data-cmp="'+id+'" onclick="event.stopPropagation();toggleCompare(\''+id+'\')">'+(inCompare(id)?'✓ Comparing':'+ Compare')+'</button>'; }
 function renderCompareTray(){
   // Update the nav badge in lockstep with the tray (Compare is first-class — visible from every view).
   const navN = document.getElementById('navCompareN');
