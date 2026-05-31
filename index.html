@@ -408,6 +408,8 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 
 /* Map count + legend */
 .map-count{position:fixed;bottom:50px;left:8px;z-index:100;background:rgba(8,14,22,0.82);border:1px solid rgba(74,122,155,0.16);border-radius:3px;padding:4px 9px;font-family:var(--mono);font-size:9.5px;color:var(--dimmer);letter-spacing:1.2px;backdrop-filter:blur(8px);font-weight:500;opacity:0.8;}
+.mc-info{border-bottom:none!important;opacity:0.65;cursor:help;}
+.mc-info:hover,.mc-info:focus{opacity:1;}
 #mapLegend{position:fixed;bottom:24px;right:360px;z-index:100;background:rgba(4,13,23,0.9);border:1px solid rgba(74,122,155,0.18);padding:10px 14px;}
 .leg-title{font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:2px;text-transform:uppercase;margin-bottom:7px;}
 .leg-row{display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;color:#5A8AAA;margin-bottom:3px;}
@@ -1640,7 +1642,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
   </div>
 
   <!-- Map count -->
-  <div class="map-count" id="mapCount">194 schools shown</div>
+  <div class="map-count"><span id="mapCount">194 schools shown</span> <span class="gl mc-info" tabindex="0" role="img" aria-label="What these counts mean" data-tip="Counts differ by subset: 194 are currently plotted on the map · 197 are currently ABA-accredited and reporting · 208 are tracked in total, including 11 closed or transitioning schools kept for their full historical record.">ⓘ</span></div>
 
   <!-- Legend -->
   <div id="mapLegend">
