@@ -550,12 +550,14 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 /* Big Sora-display headers per owner directive (view-title size) */
 .tr-col-t{font-family:var(--sans);font-size:30px;font-weight:800;letter-spacing:-1px;text-transform:none;color:var(--white);margin-bottom:14px;line-height:1.05;}
 .tr-col-t em{font-style:normal;color:var(--orange);font-family:var(--mono);font-size:12px;letter-spacing:2.5px;font-weight:700;display:block;margin-bottom:6px;text-transform:uppercase;}
-.tr-row{display:grid;grid-template-columns:1fr 96px 56px auto;gap:10px;align-items:baseline;padding:6px 10px;border-bottom:1px solid rgba(74,122,155,0.08);cursor:pointer;transition:background .15s;}
+.tr-row{display:grid;grid-template-columns:1fr 88px 48px 72px auto;gap:10px;align-items:center;padding:6px 10px;border-bottom:1px solid rgba(74,122,155,0.08);cursor:pointer;transition:background .15s;}
 .tr-row:hover,.tr-row:focus-visible{background:rgba(74,122,155,0.07);outline:none;}
 .tr-name{font-family:var(--sans);font-size:16px;color:var(--white);font-weight:600;letter-spacing:-0.2px;}
 .tr-state{font-family:var(--mono);font-size:12px;color:var(--dim);letter-spacing:0.5px;}
 .tr-n{font-family:var(--mono);font-size:15px;color:var(--orange);font-weight:600;text-align:right;}
 .tr-gpa{font-family:var(--mono);font-size:12px;color:var(--blue);letter-spacing:0.5px;}
+.tr-spark{width:72px;height:18px;display:block;opacity:0.85;}
+.tr-spark-empty{display:inline-block;width:72px;height:18px;}
 .tr-empty{padding:24px;text-align:center;font-family:var(--mono);font-size:13px;color:var(--dimmer);}
 .tr-note{font-family:var(--mono);font-size:12px;color:var(--dimmer);margin-top:16px;line-height:1.6;border-top:1px solid rgba(74,122,155,0.1);padding-top:10px;}
 
@@ -4046,12 +4048,36 @@ function renderTransfers(){
     +'  <div class="tr-col"><div class="tr-col-t"><em>// Inflow</em>Transfers IN</div><div id="trIn"></div></div>'
     +'</div>'
     +'<div class="tr-note">'
+    +'〜 The mini line on each row is that school\'s <strong>full-history transfer trend</strong> (earliest reported year → latest); a dashed segment marks years the school didn\'t report.<br>'
     +'★ Schools accepting <strong>twelve or more transfers</strong> show the <em>median GPA of incoming transfers</em> (from the ABA 509 disclosure).<br>'
     +'⚠ <strong>School-to-school flow is NOT disclosed by the ABA</strong> — the 509 reports only publish each school\'s aggregate count of transfers in and out, not which school each transfer came from or went to. We cannot show "where they went / came from" without that data.'
     +'</div>';
   renderTransfersList();
 }
 
+// Compact historic sparkline for a transfer in/out trend (gap-aware, no labels).
+function transSpark(td, color){
+  if(!td) return '<span class="tr-spark-empty" title="No multi-year history"></span>';
+  const yrsAll=Object.keys(td).filter(k=>/^\d{4}$/.test(k) && td[k]!=null).map(Number).sort((a,b)=>a-b);
+  if(yrsAll.length<2) return '<span class="tr-spark-empty" title="Not enough history"></span>';
+  const y0=yrsAll[0], y1=yrsAll[yrsAll.length-1];
+  const yr=[]; for(let y=y0;y<=y1;y++) yr.push(y);
+  const vals=yr.map(y=>{ const v=td[String(y)]; return v==null?null:v; });
+  const known=vals.filter(v=>v!=null);
+  const mn=Math.min.apply(null,known), mx=Math.max.apply(null,known), rng=(mx-mn)||1;
+  const W=72,H=18,P=2;
+  const X=i=>yr.length>1?P+(i/(yr.length-1))*(W-2*P):W/2;
+  const Y=v=>P+(H-2*P)-((v-mn)/rng)*(H-2*P);
+  let svg='', cur=[];
+  vals.forEach((v,i)=>{ if(v==null){ if(cur.length>1) svg+='<polyline points="'+cur.join(' ')+'" fill="none" stroke="'+color+'" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>'; cur=[]; return; } cur.push(X(i).toFixed(1)+','+Y(v).toFixed(1)); });
+  if(cur.length>1) svg+='<polyline points="'+cur.join(' ')+'" fill="none" stroke="'+color+'" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>';
+  const idx=[]; vals.forEach((v,i)=>{ if(v!=null) idx.push(i); });
+  for(let k=0;k<idx.length-1;k++){ const a=idx[k],b=idx[k+1]; if(b-a>1) svg+='<line x1="'+X(a).toFixed(1)+'" y1="'+Y(vals[a]).toFixed(1)+'" x2="'+X(b).toFixed(1)+'" y2="'+Y(vals[b]).toFixed(1)+'" stroke="'+color+'" stroke-width="1.1" stroke-dasharray="2,2" opacity="0.5"/>'; }
+  // Endpoint dot to anchor the latest value
+  let li=-1; for(let i=vals.length-1;i>=0;i--){ if(vals[i]!=null){ li=i; break; } }
+  if(li>=0) svg+='<circle cx="'+X(li).toFixed(1)+'" cy="'+Y(vals[li]).toFixed(1)+'" r="1.9" fill="'+color+'"/>';
+  return '<svg class="tr-spark" viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none" role="img" aria-label="Transfer trend '+y0+'–'+y1+'"><title>'+y0+'–'+y1+(idx.length<yr.length?' (dashed = not reported)':'')+'</title>'+svg+'</svg>';
+}
 function renderTransfersList(){
   const yrSel=document.getElementById('trYear'); if(!yrSel) return;
   const yr=yrSel.value;
@@ -4091,10 +4117,12 @@ function renderTransfersList(){
       }
     }
     const nDisp = isCum ? Math.round(it.n).toLocaleString() : it.n;
+    const spark = transSpark(type==='out'?s.trans_out_trend:s.trans_in_trend, type==='out'?'#FFA726':'#5AABCB');
     return '<div class="tr-row" onclick="navSchool(\''+s.id+'\')" role="button" tabindex="0" onkeydown="cardKey(event,()=>navSchool(\''+s.id+'\'))" title="Open '+s.full+'">'
       + '<span class="tr-name">'+s.full+'</span>'
       + '<span class="tr-state">'+(s.state||'')+'</span>'
       + '<span class="tr-n">'+nDisp+'</span>'
+      + spark
       + gpaTag
       + '</div>';
   }
