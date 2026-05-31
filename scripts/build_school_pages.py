@@ -412,6 +412,29 @@ def update_sitemap(schools):
         f.write(head + body + tail)
 
 
+def update_index_directory(schools):
+    """Inject a crawlable A–Z <ul> of every school page into index.html's noscript
+    block (between SCHOOL_INDEX markers) so the 208 static pages have an internal
+    HTML link path, not just the sitemap."""
+    html = open(INDEX_PATH).read()
+    start = "<!-- SCHOOL_INDEX_START -->"
+    end = "<!-- SCHOOL_INDEX_END -->"
+    i, j = html.find(start), html.find(end)
+    if i < 0 or j < 0:
+        print("  ! SCHOOL_INDEX markers not found; skipping directory injection")
+        return
+    items = []
+    for s in sorted(schools, key=lambda x: (x.get("full") or x.get("name") or "").lower()):
+        slug = slugify(s["id"])
+        full = (s.get("full") or s.get("name") or s["id"]).replace("&", "&amp;").replace("<", "&lt;")
+        state = (s.get("state") or "").replace("&", "&amp;").replace("<", "&lt;")
+        items.append(f'<li><a href="school/{slug}.html">{full}</a>{(" — " + state) if state else ""}</li>')
+    block = start + '\n<ul class="ns-schools">\n' + "\n".join(items) + "\n</ul>\n" + end
+    html = html[:i] + block + html[j + len(end):]
+    open(INDEX_PATH, "w").write(html)
+    print(f"Injected {len(items)}-school crawlable directory into index.html noscript.")
+
+
 def main():
     if not os.path.exists(INDEX_PATH):
         sys.exit(f"index.html not found at {INDEX_PATH}")
@@ -435,6 +458,7 @@ def main():
     print(f"Wrote {written} static school pages to {OUT_DIR}/")
     update_sitemap(S)
     print(f"Updated sitemap.xml with {len(S)} school URLs (plus 4 site pages).")
+    update_index_directory(S)
 
 
 if __name__ == "__main__":
