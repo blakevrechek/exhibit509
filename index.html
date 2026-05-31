@@ -975,6 +975,48 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
 .cmp-val{font-family:var(--sans);font-size:18px;color:var(--white);font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-0.4px;}
 .cmp-val.best{font-weight:700;}
 .cmp-val.best::after{content:' ★';color:var(--orange);font-size:13px;}
+/* ── Compare view: sticky toolbar, school legend, charts, employment mix ── */
+.cmp-toolbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:14px;background:rgba(4,13,23,0.97);border-bottom:1px solid rgba(217,119,87,0.3);padding:12px 48px;margin:-28px -48px 18px;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);flex-wrap:wrap;}
+.cmp-toolbar-title{font-family:var(--sans);font-size:17px;font-weight:800;color:var(--white);letter-spacing:-0.4px;}
+.cmp-toolbar-actions{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap;}
+.cmp-exit{display:inline-flex;align-items:center;gap:6px;background:var(--orange);color:#06111E;border:none;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;padding:9px 16px;border-radius:4px;cursor:pointer;transition:background .15s;}
+.cmp-exit:hover{background:#E68660;}
+.cmp-act{background:rgba(74,122,155,0.12);border:1px solid rgba(74,122,155,0.3);color:var(--dim);font-family:var(--mono);font-size:12px;letter-spacing:0.6px;text-transform:uppercase;padding:8px 13px;border-radius:4px;cursor:pointer;transition:all .15s;}
+.cmp-act:hover{color:var(--white);border-color:var(--white);}
+.cmp-legend{display:flex;flex-wrap:wrap;gap:16px;margin:4px 0 8px;}
+.cmp-leg{display:inline-flex;align-items:center;gap:7px;font-family:var(--sans);font-size:14px;font-weight:600;color:var(--white);}
+.cmp-leg-dot{width:12px;height:12px;border-radius:3px;flex-shrink:0;}
+.cmp-section-t{font-family:var(--mono);font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--orange);font-weight:700;margin:30px 0 14px;padding-bottom:8px;border-bottom:1px solid rgba(217,119,87,0.2);}
+.cmp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:18px;}
+.cmp-chart{background:rgba(255,255,255,0.02);border:1px solid rgba(74,122,155,0.16);border-radius:7px;padding:16px 18px;}
+.cmp-chart-t{font-family:var(--sans);font-size:15px;font-weight:700;color:var(--white);margin-bottom:13px;letter-spacing:-0.2px;}
+.cmp-lower{font-family:var(--mono);font-size:9.5px;color:var(--dimmer);letter-spacing:0.5px;text-transform:uppercase;font-weight:600;margin-left:6px;}
+.cmp-bar-row{display:flex;align-items:center;gap:10px;margin:7px 0;}
+.cmp-bar-name{flex:0 0 110px;font-family:var(--sans);font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.cmp-bar-track{flex:1;height:14px;background:rgba(255,255,255,0.05);border-radius:7px;overflow:hidden;}
+.cmp-bar-fill{display:block;height:100%;border-radius:7px;transition:width .6s cubic-bezier(.2,.7,.3,1);}
+.cmp-bar-v{flex:0 0 100px;text-align:right;font-family:var(--sans);font-size:13.5px;font-weight:700;color:var(--white);font-variant-numeric:tabular-nums;}
+.cmp-star{color:var(--orange);}
+.cmp-emp-row{display:flex;align-items:center;gap:10px;margin:9px 0;}
+.cmp-emp-track{flex:1;height:20px;border-radius:4px;overflow:hidden;display:flex;background:rgba(255,255,255,0.05);}
+.cmp-emp-seg{height:100%;}
+.cmp-emp-legend{margin-top:14px;display:flex;flex-wrap:wrap;gap:11px;}
+.cmp-emp-leg{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:10.5px;color:var(--dim);}
+.cmp-emp-dot{width:9px;height:9px;border-radius:2px;}
+.cmp-foot{font-family:var(--mono);font-size:11px;color:var(--dimmer);margin-top:18px;line-height:1.6;}
+.theme-light .cmp-toolbar{background:#FFFFFFF2!important;border-bottom-color:rgba(60,90,120,0.25)!important;}
+.theme-light .cmp-toolbar-title,.theme-light .cmp-chart-t,.theme-light .cmp-bar-v,.theme-light .cmp-leg{color:#000!important;}
+.theme-light .cmp-chart{background:#FFFFFF!important;border-color:rgba(60,90,120,0.18)!important;}
+.theme-light .cmp-act{color:#374151!important;border-color:rgba(60,90,120,0.3)!important;}
+.theme-light .cmp-bar-track,.theme-light .cmp-emp-track{background:rgba(60,90,120,0.10)!important;}
+@media print{
+  header,#mapFooter,#cookieBar,#compareTray,#mobileTabBar,#mobileBanner,.cmp-toolbar{display:none!important;}
+  #mapRoot,#viewContainer,#schoolPage{display:none!important;}
+  #comparePage{position:static!important;display:block!important;height:auto!important;overflow:visible!important;}
+  .cmp-wrap{max-width:none!important;padding:0!important;margin:0!important;}
+  .cmp-chart,.cmp-table tr,.cmp-emp-row{break-inside:avoid;}
+  body{background:#fff!important;}
+}
 </style>
 </head>
 <body>
@@ -2946,6 +2988,95 @@ const CMP_METRICS=[
   {k:'enr',   l:'Total enrollment',  hi:0,  fmt:v=>v!=null?v.toLocaleString():'—'},
   {k:'bls_mean',l:'State atty mean wage',hi:1,fmt:v=>v?'$'+v.toLocaleString():'—'}
 ];
+// ── Compare view chart helpers ──────────────────────────────────────────────
+// One distinct brand-aligned color per pinned school (compare caps at 4).
+const CMP_COLORS=['#D97757','#5AABCB','#4A9B6B','#A78BFA','#FCD34D','#EC4899'];
+function cmpColor(i){ return CMP_COLORS[i%CMP_COLORS.length]; }
+
+// Horizontal "at a glance" bar charts — one bar per school per metric.
+// lo/hi give a fixed scale for bounded metrics; otherwise scale to the max among
+// the compared schools. lowerBetter flips which value earns the star.
+const CMP_BARS=[
+  {l:'LSAT (median)',        v:s=>s.lsat50,   fmt:v=>v!=null?v:'—',                                   lo:140, hi:180},
+  {l:'uGPA (median)',        v:s=>s.gpa50,    fmt:v=>v!=null?(+v).toFixed(2):'—',                     lo:2.5, hi:4.0},
+  {l:'First-Time Bar',       v:s=>s.bar,      fmt:v=>v!=null?v+'%':'—',                               lo:0,   hi:100},
+  {l:'FTLT Employment',      v:s=>s.ftlt_pct, fmt:v=>v!=null?v+'%':'—',                               lo:0,   hi:100},
+  {l:'Acceptance rate',      v:s=>s.acc,      fmt:v=>v!=null?v+'%':'—',                               lo:0,   hi:100, lowerBetter:true},
+  {l:'3-yr net tuition',     v:net3yr,        fmt:v=>v!=null?'$'+Math.round(v).toLocaleString():'—',  lowerBetter:true},
+  {l:'Median grant',         v:s=>s.grant_med,fmt:v=>v!=null?'$'+Math.round(v).toLocaleString():'—'},
+  {l:'State atty mean wage', v:s=>s.bls_mean, fmt:v=>v!=null?'$'+Math.round(v).toLocaleString():'—'}
+];
+function cmpBarGroup(schools){
+  return CMP_BARS.map(m=>{
+    const vals=schools.map(s=>m.v(s));
+    const present=vals.filter(v=>v!=null&&!isNaN(v));
+    if(!present.length) return '';
+    const maxV=Math.max.apply(null,present);
+    const best=m.lowerBetter?Math.min.apply(null,present):Math.max.apply(null,present);
+    const rows=schools.map((s,i)=>{
+      const v=vals[i]; let w=0;
+      if(v!=null&&!isNaN(v)){
+        if(m.lo!=null&&m.hi!=null) w=Math.max(2,Math.min(100,((v-m.lo)/(m.hi-m.lo))*100));
+        else if(maxV>0) w=Math.max(2,(v/maxV)*100);
+      }
+      const isBest=present.length>1&&v===best;
+      return '<div class="cmp-bar-row"><span class="cmp-bar-name" style="color:'+cmpColor(i)+'">'+s.name+'</span>'
+        +'<span class="cmp-bar-track"><span class="cmp-bar-fill" style="width:'+w.toFixed(1)+'%;background:'+cmpColor(i)+'"></span></span>'
+        +'<span class="cmp-bar-v">'+m.fmt(v)+(isBest?' <span class="cmp-star">★</span>':'')+'</span></div>';
+    }).join('');
+    return '<div class="cmp-chart"><div class="cmp-chart-t">'+m.l+(m.lowerBetter?'<span class="cmp-lower">lower=better</span>':'')+'</div>'+rows+'</div>';
+  }).join('');
+}
+
+// Overlaid multi-year trend lines (one colored line per school) via lineChart().
+function cmpTrendChart(schools, trendKey, title, yfmt){
+  const yearsSet=new Set();
+  schools.forEach(s=>{ const t=s[trendKey]; if(t) Object.keys(t).forEach(y=>{ if(/^\d{4}$/.test(y)&&t[y]!=null) yearsSet.add(y); }); });
+  const years=[...yearsSet].sort();
+  if(years.length<2) return '';
+  const series=schools.map((s,i)=>({vals:s[trendKey]||{}, color:cmpColor(i)})).filter(se=>years.some(y=>se.vals[y]!=null));
+  if(!series.length) return '';
+  return '<div class="cmp-chart"><div class="cmp-chart-t">'+title+'</div>'+lineChart({years:years, series:series, yfmt:yfmt, fmt:yfmt, pinIndex:0, label:title, w:340, h:200})+'</div>';
+}
+function cmpTrends(schools){
+  return [
+    cmpTrendChart(schools,'bar_trend','First-time bar pass · %',v=>Math.round(v)+'%'),
+    cmpTrendChart(schools,'lsat_trend','LSAT median',v=>Math.round(v)),
+    cmpTrendChart(schools,'gpa_trend','uGPA median',v=>(+v).toFixed(2)),
+    cmpTrendChart(schools,'tui_trend','Tuition / yr',v=>'$'+Math.round(v/1000)+'K')
+  ].filter(Boolean).join('');
+}
+
+// Employment-mix: a 100%-stacked bar of job categories per school.
+const CMP_EMP_CATS=[
+  {k:'emp_megalaw_pct',l:'MegaLaw',c:'#1D4ED8'},
+  {k:'emp_biglaw_pct', l:'BigLaw', c:'#3B82F6'},
+  {k:'emp_mid_pct',    l:'Mid',    c:'#0891B2'},
+  {k:'emp_small_pct',  l:'Small',  c:'#15803D'},
+  {k:'emp_solo_pct',   l:'Solo',   c:'#65A30D'},
+  {k:'emp_gov_pct',    l:'Gov',    c:'#CA8A04'},
+  {k:'emp_pi_pct',     l:'Public Interest',c:'#EA580C'},
+  {k:'emp_clk_pct',    l:'Clerk',  c:'#9333EA'},
+  {k:'emp_biz_pct',    l:'Business',c:'#DB2777'},
+  {k:'emp_edu_pct',    l:'Academia',c:'#64748B'}
+];
+function cmpEmpMix(schools){
+  const legend=CMP_EMP_CATS.map(c=>'<span class="cmp-emp-leg"><span class="cmp-emp-dot" style="background:'+c.c+'"></span>'+c.l+'</span>').join('');
+  const rows=schools.map((s,i)=>{
+    const seg=CMP_EMP_CATS.map(c=>{ const v=s[c.k]||0; return v>0?'<span class="cmp-emp-seg" style="width:'+v+'%;background:'+c.c+'" title="'+c.l+': '+v+'%"></span>':''; }).join('');
+    return '<div class="cmp-emp-row"><span class="cmp-bar-name" style="color:'+cmpColor(i)+'">'+s.name+'</span><span class="cmp-emp-track">'+seg+'</span></div>';
+  }).join('');
+  return '<div class="cmp-chart" style="grid-column:1/-1;"><div class="cmp-chart-t">Employment mix · % of employed graduates</div>'+rows+'<div class="cmp-emp-legend">'+legend+'</div></div>';
+}
+// Print / save-as-PDF: switch to the light theme for legibility, print, then restore.
+function printCompare(){
+  const wasLight=document.documentElement.classList.contains('theme-light');
+  if(!wasLight) document.documentElement.classList.add('theme-light');
+  const restore=()=>{ if(!wasLight) document.documentElement.classList.remove('theme-light'); window.removeEventListener('afterprint',restore); };
+  window.addEventListener('afterprint',restore);
+  setTimeout(()=>{ try{ window.print(); }catch(e){} setTimeout(restore,1500); }, 60);
+}
+
 function compareHTML(schools){
   const head='<th></th>'+schools.map(s=>'<th><a class="cmp-sch-name" href="#school/'+encodeURIComponent(s.id)+'" onclick="event.preventDefault();navSchool(\''+s.id+'\')">'+s.full+'</a><div class="cmp-sch-loc">'+(s.state||'—')+'</div><button class="cmp-sch-rm" onclick="toggleCompare(\''+s.id+'\');openCompare();">remove</button></th>').join('');
   const rows=CMP_METRICS.map(m=>{
@@ -2962,11 +3093,26 @@ function compareHTML(schools){
     const label=m.gl?gl(m.l,m.gl):m.l;
     return '<tr><td class="cmp-mk">'+label+'</td>'+cells+'</tr>';
   }).join('');
-  return '<div class="cmp-wrap"><button class="cmp-back" onclick="exitCompare()">← Back to map</button>'
-    + '<button class="cmp-back" style="margin-left:10px;" onclick="copyCompareLink(this)" title="Copy shareable link to this comparison">🔗 Copy share link</button>'
-    +'<h1 class="cmp-h">Comparing '+schools.length+' schools</h1>'
-    +'<div style="overflow-x:auto;"><table class="cmp-table"><thead><tr>'+head+'</tr></thead><tbody>'+rows+'</tbody></table></div>'
-    +'<div style="font-family:var(--mono);font-size:11px;color:var(--dimmer);margin-top:14px;line-height:1.6;">★ = best in row among compared schools. Acceptance, tuition and living cost treat lower as better; all figures are current-cycle ABA 509 / BLS. First-Time Bar reflects 2024 graduates.</div></div>';
+  const table='<div class="cmp-table-wrap" style="overflow-x:auto;"><table class="cmp-table"><thead><tr>'+head+'</tr></thead><tbody>'+rows+'</tbody></table></div>';
+  const legend=schools.map((s,i)=>'<span class="cmp-leg"><span class="cmp-leg-dot" style="background:'+cmpColor(i)+'"></span>'+s.full+'</span>').join('');
+  const trends=cmpTrends(schools);
+  return '<div class="cmp-wrap">'
+    +'<div class="cmp-toolbar">'
+      +'<button class="cmp-exit" onclick="exitCompare()" title="Keep your pinned schools and return to the map">✓ Save &amp; exit</button>'
+      +'<span class="cmp-toolbar-title">Comparing '+schools.length+' schools</span>'
+      +'<span class="cmp-toolbar-actions">'
+        +'<button class="cmp-act" onclick="copyCompareLink(this)" title="Copy a shareable link to this comparison">🔗 Copy link</button>'
+        +'<button class="cmp-act" onclick="printCompare()" title="Print or save as PDF">🖨 Print / PDF</button>'
+        +'<button class="cmp-act" onclick="clearCompare();exitCompare();" title="Remove all pinned schools and exit">🗑 Clear all</button>'
+      +'</span>'
+    +'</div>'
+    +'<div class="cmp-legend">'+legend+'</div>'
+    +'<div class="cmp-section-t">At a glance</div><div class="cmp-grid">'+cmpBarGroup(schools)+'</div>'
+    +'<div class="cmp-section-t">Trends over time</div>'+(trends?'<div class="cmp-grid">'+trends+'</div>':'<div class="cmp-foot">Not enough multi-year data to chart trends for these schools.</div>')
+    +'<div class="cmp-section-t">Where graduates work</div><div class="cmp-grid">'+cmpEmpMix(schools)+'</div>'
+    +'<div class="cmp-section-t">Full metric table</div>'+table
+    +'<div class="cmp-foot">★ = best among compared schools. Acceptance, tuition and living cost treat lower as better; all figures are current-cycle ABA 509 / BLS. First-Time Bar reflects 2024 graduates.</div>'
+    +'</div>';
 }
 function openCompare(){
   if(compareSet.length<2){ alert('Pick at least 2 schools to compare.'); return; }
