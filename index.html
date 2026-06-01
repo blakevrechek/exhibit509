@@ -115,7 +115,6 @@
 .theme-light .lc line[stroke="rgba(122,170,200,0.10)"]{stroke:rgba(60,90,120,0.18)!important;}
 .theme-light .lc-empty{background:rgba(60,90,120,0.05)!important;border-color:rgba(60,90,120,0.18)!important;color:#5A7A99!important;}
 .theme-light .leaflet-control-zoom a{background:#FFFFFFE6!important;color:#000000!important;border-bottom-color:rgba(60,90,120,0.18)!important;}
-.theme-light #mapLegend{background:#FFFFFFE6!important;border-color:rgba(60,90,120,0.20)!important;}
 .theme-light .leg-title{color:#111827!important;}
 .theme-light .leg-row{color:#111827!important;}
 .theme-light .mfb{background:#FFFFFFE6!important;color:#111827!important;border-color:rgba(60,90,120,0.25)!important;}
@@ -367,7 +366,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .pb-counsel-header{border-top:3px solid var(--counsel);}
 
 /* Map filters bar */
-/* Map filters relocated v1.18.4 — top-of-map horizontal toolbar, docked between the
+/* Map filters relocated v1.19.0 — top-of-map horizontal toolbar, docked between the
    left Match Me / Compare sidebar (ends at 380px) and the always-open right school
    panel (400px), sitting just under the global header. The left sidebar is now
    reserved exclusively for Match Me + Compare. */
@@ -406,24 +405,44 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .bls-toggle{font-family:var(--mono);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;padding:6px 14px;border:1px solid rgba(74,155,107,0.3);background:rgba(4,13,23,0.88);color:#4A9B6B;cursor:pointer;white-space:nowrap;transition:all .2s;backdrop-filter:blur(8px);}
 .bls-toggle.on{background:rgba(74,155,107,0.15);border-color:#4A9B6B;}
 
-/* Map count + legend */
-/* right:410px = 10px to the left of the Overview panel (width:400px, right:0) so
-   the metric/legend control is never tucked under it. */
-/* Legend docks at the right edge by default. When the Overview panel is open
-   (body.sp-open), shift left so it clears the 400px panel + a 16px gap — never
-   covering or covered. transition keeps it in sync with the panel's slide. */
-#mapLegend{position:fixed;bottom:24px;right:16px;z-index:100;background:rgba(4,13,23,0.9);border:1px solid rgba(74,122,155,0.18);padding:10px 14px;transition:right .3s;}
-body.sp-open #mapLegend{right:416px;}
+/* Map legend (now in the left panel) */
 .leg-title{font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:2px;text-transform:uppercase;margin-bottom:7px;}
 .leg-row{display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;color:#5A8AAA;margin-bottom:3px;}
 .leg-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+
+/* ── Map layers ("Color the map by") — left-panel multi-select, up to 3 ── */
+#mlSection{margin-top:11px;}
+.ml-head{font-family:var(--mono);font-size:10.5px;letter-spacing:1.4px;text-transform:uppercase;color:var(--orange);font-weight:700;margin-bottom:8px;}
+.ml-hint{display:block;font-size:9px;letter-spacing:0.4px;text-transform:none;color:var(--dimmer);font-weight:500;margin-top:2px;}
+.ml-group{margin-bottom:7px;}
+.ml-group-l{font-family:var(--mono);font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--dimmer);margin-bottom:4px;}
+.ml-group-chips{display:flex;flex-wrap:wrap;gap:4px;}
+.ml-chip{position:relative;font-family:var(--sans);font-size:11.5px;font-weight:500;padding:3px 8px;border:1px solid rgba(74,122,155,0.25);background:rgba(8,14,22,0.7);color:#A4C8DD;border-radius:3px;cursor:pointer;display:inline-flex;align-items:center;gap:4px;transition:all .15s ease;}
+.ml-chip:hover{border-color:rgba(217,119,87,0.5);color:var(--white);}
+.ml-chip.on{border-color:rgba(217,119,87,0.55);color:var(--orange);background:rgba(217,119,87,0.1);}
+.ml-chip.primary{border-color:var(--orange);background:var(--orange);color:#0C1A2A;font-weight:700;}
+.ml-badge{font-family:var(--mono);font-size:9px;font-weight:700;opacity:0.85;}
+.ml-x{font-weight:700;opacity:0.7;padding-left:2px;cursor:pointer;}
+.ml-x:hover{opacity:1;}
+#mlLegends{margin-top:8px;display:flex;flex-direction:column;gap:5px;}
+.ml-legend{display:flex;align-items:center;gap:8px;}
+.ml-legend-h{font-family:var(--mono);font-size:10px;letter-spacing:0.5px;color:var(--dim);min-width:96px;}
+.ml-leg-ramp{display:inline-flex;gap:2px;}
+.ml-leg-swatch{width:13px;height:9px;border-radius:1px;display:inline-block;}
+.ml-note{font-family:var(--mono);font-size:9.5px;color:var(--dimmer);letter-spacing:0.3px;line-height:1.45;margin-top:9px;}
+/* Overview panel "active map layers" read-out */
+.alr-block .alr-row{display:flex;align-items:center;gap:8px;padding:2px 0;}
+.alr-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.alr-label{flex:1;font-family:var(--mono);font-size:11px;color:var(--dim);}
+.alr-primary{font-size:8.5px;letter-spacing:0.5px;text-transform:uppercase;color:var(--orange);margin-left:6px;border:1px solid rgba(217,119,87,0.4);border-radius:2px;padding:0 4px;}
+.alr-val{font-family:var(--sans);font-weight:800;font-size:14px;font-variant-numeric:tabular-nums;}
 
 /* School side panel (right) */
 /* schoolPanel sits BELOW the map-filter bar (which ends around y=128px) so its
    header (school name + bar pass chip) isn't hidden by filter chips or the BLS
    tooltip card. Was top:76px causing the upper ~50px to be eaten. */
 /* schoolPanel sits at the natural top now that map-filter bar moved into the left
-   panel (v1.18.4) — frees ~50px of vertical space at the top of the right column. */
+   panel (v1.19.0) — frees ~50px of vertical space at the top of the right column. */
 #schoolPanel{position:fixed;top:76px;right:0;bottom:36px;width:400px;z-index:100;background:rgba(4,13,23,0.97);border-left:1px solid rgba(74,122,155,0.22);overflow-y:auto;transform:translateX(0);transition:transform .3s;}#schoolPanel.hidden{transform:translateX(100%);}
 #schoolPanel.open{transform:translateX(0);}
 .sp-close{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(4,13,23,0.98);border-bottom:1px solid rgba(74,122,155,0.15);}
@@ -433,7 +452,7 @@ body.sp-open #mapLegend{right:416px;}
 .sp-tab{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border:1px solid rgba(74,122,155,0.2);background:transparent;color:var(--dim);cursor:pointer;transition:all .2s;}
 .sp-tab+.sp-tab{border-left:none;}
 .sp-tab.on{background:rgba(217,119,87,0.1);color:var(--orange);border-color:rgba(217,119,87,0.35);}
-/* School-panel (right side) typography tightened v1.18.4 — was visibly scaled-too-big
+/* School-panel (right side) typography tightened v1.19.0 — was visibly scaled-too-big
    per owner. Reduced metric/value sizes by ~15%, tighter section padding, smaller
    section labels, more breathable line-height. */
 .sp-header{padding:14px 16px 10px;border-bottom:1px solid rgba(74,122,155,0.12);}
@@ -841,7 +860,6 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
   .view-title{font-size:26px;letter-spacing:-0.8px;}
   .view-sub{font-size:14px;}
   /* ── MAP CONTROLS ──────────────────────────────────────────────────────── */
-  #mapLegend,body.sp-open #mapLegend{right:8px;bottom:90px;max-width:calc(100vw - 16px);}
   #mapFilters{top:auto;bottom:64px;left:8px;right:8px;flex-wrap:wrap;}
   #mapFilters .map-search-wrap{width:100%;max-width:100%;}
   .mfb{padding:7px 10px;font-size:11px;}
@@ -859,7 +877,6 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
   #mobileTabBar .mtb-btn:active{background:rgba(217,119,87,0.10);}
   #mobileTabBar .mtb-badge{position:absolute;top:6px;right:calc(50% - 18px);background:var(--orange);color:#06111E;font-family:var(--mono);font-size:9px;font-weight:800;padding:1px 5px;border-radius:8px;min-width:14px;text-align:center;letter-spacing:0;line-height:1.2;display:none;}
   /* Lift map controls, compare tray, school bottom-sheet so they sit above the tab bar */
-  #mapLegend{bottom:72px!important;}
   #compareTray{bottom:66px;max-width:calc(100vw - 16px);padding:6px 10px;font-size:12px;}
   #schoolPanel{bottom:58px!important;}
   /* ── MODALS ────────────────────────────────────────────────────────────── */
@@ -1424,7 +1441,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
     More
   </button>
 </nav>
-<!-- Disclaimer bar removed v1.18.4 — provenance now lives in the footer. -->
+<!-- Disclaimer bar removed v1.19.0 — provenance now lives in the footer. -->
 <style>:root{--banner-h:0px;}</style>
 
 <div id="cookieBar" style="position:fixed;bottom:0;left:0;right:0;z-index:1000;background:#0B1826;border-top:1px solid rgba(217,119,87,0.4);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;box-shadow:0 -2px 12px rgba(0,0,0,0.5);">
@@ -1474,7 +1491,20 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
           <button class="mfb" onclick="setMF('reach',this)">My Reaches</button>
         </div>
         <div class="ms-filters" id="msFilters"></div>
-        <div id="msTiers"></div>
+        <div id="mlSection">
+          <div class="ml-head">Color the map by <span class="ml-hint">up to 3 · click an active layer to make it primary</span></div>
+          <div id="mlChips"></div>
+          <div id="msTiers"></div>
+          <div id="mlLegends"></div>
+          <div class="ml-note">Pin ring repeats the tier (solid→dotted) for colorblind clarity · size = enrollment. Pins are colored by the primary layer; others show on hover &amp; in the school panel.</div>
+        </div>
+        <div id="blsLegend" style="display:none;margin-top:10px;border-top:1px solid rgba(74,122,155,0.15);padding-top:9px;">
+          <div class="leg-title" style="color:var(--green);">BLS Salary (state mean)</div>
+          <div class="leg-row"><div class="leg-dot" style="background:#006400;"></div>&gt;$200K</div>
+          <div class="leg-row"><div class="leg-dot" style="background:#228B22;"></div>$160–200K</div>
+          <div class="leg-row"><div class="leg-dot" style="background:#4A9B6B;"></div>$130–160K</div>
+          <div class="leg-row"><div class="leg-dot" style="background:#8FBC8F;"></div>&lt;$130K</div>
+        </div>
       </div>
 
       <!-- Compare CTA — lead with the outcomes/cost comparison (is-it-worth-it),
@@ -1645,40 +1675,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
   <!-- Map count removed per design — counts live in the methodology/tooltip instead. -->
 
   <!-- Legend -->
-  <div id="mapLegend">
-    <select id="legSelect" class="p-filt" style="width:100%;margin-bottom:8px;padding:5px 22px 5px 8px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--orange);background-image:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2210%22 height=%226%22 viewBox=%220 0 10 6%22><path d=%22M0 0l5 6 5-6z%22 fill=%22%23D97757%22/></svg>');background-repeat:no-repeat;background-position:right 6px center;-webkit-appearance:none;appearance:none;border-color:rgba(217,119,87,0.40);" onchange="setMapMetric(this.value)">
-      <optgroup label="Outcomes">
-        <option value="bar">First-Time Bar</option>
-        <option value="ftlt">FTLT Employment</option>
-        <option value="emp_bar">Jobs requiring bar</option>
-      </optgroup>
-      <optgroup label="By firm size">
-        <option value="megalaw">MegaLaw 500+</option>
-        <option value="biglaw">BigLaw 251–500</option>
-        <option value="biglawall">BigLaw + MegaLaw</option>
-        <option value="mid">Mid 101–250</option>
-        <option value="small">Small 2–100</option>
-        <option value="solo">Solo practice</option>
-      </optgroup>
-      <optgroup label="By sector">
-        <option value="gov">Government</option>
-        <option value="pi">Public Interest</option>
-        <option value="clerk">Clerkships (all)</option>
-        <option value="clerk_fed">Federal clerkships</option>
-        <option value="biz">Business / Industry</option>
-        <option value="edu">Academia</option>
-      </optgroup>
-    </select>
-    <div id="legRows"></div>
-    <div style="font-family:var(--mono);font-size:10px;color:var(--dimmer);letter-spacing:0.5px;line-height:1.4;margin-top:5px;max-width:128px;">Pin ring repeats the tier (soliddotted) for colorblind clarity. Size = enrollment.</div>
-    <div id="blsLegend" style="display:none;margin-top:8px;border-top:1px solid rgba(74,122,155,0.15);padding-top:8px;">
-      <div class="leg-title" style="color:var(--green);">BLS Salary</div>
-      <div class="leg-row"><div class="leg-dot" style="background:#006400;"></div>&gt;$200K</div>
-      <div class="leg-row"><div class="leg-dot" style="background:#228B22;"></div>$160–200K</div>
-      <div class="leg-row"><div class="leg-dot" style="background:#4A9B6B;"></div>$130–160K</div>
-      <div class="leg-row"><div class="leg-dot" style="background:#8FBC8F;"></div>&lt;$130K</div>
-    </div>
-  </div>
+  <!-- Map color legend now lives in the left panel (#mlSection). -->
 
   <!-- BLS state hover card -->
   <div id="blsCard" class="bls-state-info"></div>
@@ -1772,8 +1769,8 @@ function fmtUSD(v){ return v==null?"—":"$"+v.toLocaleString(); }
 // ═══════════════════════════════════════════════════════════════════════════
 const DATA_INVARIANTS = {
   total_schools: 208,         // 197 active/newly + 11 closed/transitioning (now included as historical entries)
-  schools_inline: 208,        // all inline as of v1.18.4 — closed entries surface their pre-closure history
-  year_count: 15              // 2011–2025 inclusive (15-year span; pre-2018 added in v1.18.4 from Historic + v2 sheets)
+  schools_inline: 208,        // all inline as of v1.19.0 — closed entries surface their pre-closure history
+  year_count: 15              // 2011–2025 inclusive (15-year span; pre-2018 added in v1.19.0 from Historic + v2 sheets)
 };
 // Verifiable count of the data cells actually shipped inline on this page:
 // every non-null scalar field, plus every per-year trend entry, across S.
@@ -1842,7 +1839,7 @@ function populateHeaderStats(){
 // ── Lazy-load full dataset (deferred until first deep-dive interaction) ──
 // Callers: `const ext = await loadFullDataset();` parsed JSON, or null on fail.
 // Subsequent calls return the cached object. Concurrent calls share one fetch.
-// Wired in v1.18.4 — schoolDetailHTML calls getSchoolHistory(id) which awaits
+// Wired in v1.19.0 — schoolDetailHTML calls getSchoolHistory(id) which awaits
 // this loader, then renders deep-history charts (employment evolution etc.) into
 // late-paint slots once data is available.
 window.EXT = window.EXT || { data: null, loading: null, byId: null };
@@ -2043,7 +2040,7 @@ function searchTypeaheadKey(e){
   }
 }
 
-// Disclaimer banner is now persistent (per v1.18.4 owner directive) — no dismiss; always visible.
+// Disclaimer banner is now persistent (per v1.19.0 owner directive) — no dismiss; always visible.
 // ── COOKIE notice dismiss (persists via localStorage) ──
 // ── Light/Dark theme toggle (persists via localStorage). Note: many inline styles
 // use literal rgba(4,13,23,...) and won't fully invert — full theming would require
@@ -2206,8 +2203,8 @@ let panelOpen = true, blsOn = false, blsLayers = [];
 let currentSchool = null, spCurrentTab = 'overview';
 
 // ── Color helpers ─────────────────────────────────────────────────────────
-// Map color metric (owner-selectable dropdown above the legend). Changeable via setMapMetric().
-window.MAP_METRIC = window.MAP_METRIC || 'bar';
+// Map color metric. window.MAP_METRIC is defined below as a getter aliasing the
+// primary active layer (MAP_LAYERS[0]); see the "Active map layers" section.
 // Threshold tables per metric 4 tiers with the colorblind-safe ramp.
 // All job-type categories in the 509 dataset, each available as a map color metric.
 // Tier thresholds tuned per metric (low-share metrics like Solo or Academia use
@@ -2231,48 +2228,146 @@ const MAP_METRIC_TIERS = {
   biz:        { label:'Business / Industry',     valOf:s=>s.emp_biz_pct,                                  tiers:[ {min:15,c:'#4A9B6B',l:'at least 15%'}, {min:8, c:'#5AABCB',l:'8–14%'},  {min:3, c:'#FFA726',l:'3–7%'},  {min:-1,c:'#EF5350',l:'under 3%'} ] },
   edu:        { label:'Academia',                valOf:s=>s.emp_edu_pct,                                  tiers:[ {min:3, c:'#4A9B6B',l:'at least 3%'},  {min:1.5,c:'#5AABCB',l:'1.5–2.9%'},{min:0.5,c:'#FFA726',l:'0.5–1.4%'},{min:-1,c:'#EF5350',l:'under 0.5%'} ] }
 };
-function pinColor(input){
-  // Backward-compatible: if a numeric value is passed, treat it as the "bar" metric value (legacy callers).
-  // Otherwise compute from the school object using the current MAP_METRIC.
-  let val, tiers;
-  if(typeof input === 'number' || input == null){
-    val = input;
-    tiers = MAP_METRIC_TIERS.bar.tiers;
-  } else {
-    const cfg = MAP_METRIC_TIERS[window.MAP_METRIC] || MAP_METRIC_TIERS.bar;
-    val = cfg.valOf(input);
-    tiers = cfg.tiers;
-  }
+// ── Active map layers ──────────────────────────────────────────────────────
+// Up to 3 layers can be active at once; MAP_LAYERS[0] is the PRIMARY and colors
+// the pins. The others show only as legends + per-school values (tooltip/Overview).
+// window.MAP_METRIC is kept as an alias of the primary for backward compatibility.
+const MAX_LAYERS = 3;
+window.MAP_LAYERS = window.MAP_LAYERS || ['bar'];
+Object.defineProperty(window, 'MAP_METRIC', {
+  get(){ return window.MAP_LAYERS[0] || 'bar'; },
+  configurable:true
+});
+// Ordered metric groups for rendering the layer chips.
+const MAP_METRIC_GROUPS = [
+  { label:'Outcomes',     keys:['bar','ftlt','emp_bar'] },
+  { label:'By firm size', keys:['megalaw','biglaw','biglawall','mid','small','solo'] },
+  { label:'By sector',    keys:['gov','pi','clerk','clerk_fed','biz','edu'] }
+];
+
+function tierColorFor(metric, s){
+  const cfg = MAP_METRIC_TIERS[metric] || MAP_METRIC_TIERS.bar;
+  const val = cfg.valOf(s);
   if(val==null || isNaN(val)) return '#4A5A6A';
-  for(const t of tiers){ if(val >= t.min) return t.c; }
+  for(const t of cfg.tiers){ if(val >= t.min) return t.c; }
   return '#EF5350';
 }
+function pinColor(input){
+  // Backward-compatible: a bare number is treated as a legacy "bar" value.
+  if(typeof input === 'number' || input == null){
+    const tiers = MAP_METRIC_TIERS.bar.tiers;
+    if(input==null || isNaN(input)) return '#4A5A6A';
+    for(const t of tiers){ if(input >= t.min) return t.c; }
+    return '#EF5350';
+  }
+  // Otherwise color by the PRIMARY active layer.
+  return tierColorFor(window.MAP_LAYERS[0] || 'bar', input);
+}
+// Per-school tooltip string listing every active layer's value (primary first).
+function layerTipExtra(s){
+  return window.MAP_LAYERS.map(m=>{
+    const cfg = MAP_METRIC_TIERS[m]; if(!cfg) return '';
+    const v = cfg.valOf(s);
+    return ' · '+(v!=null?(Math.round(v*10)/10)+'%':'—')+' '+cfg.label;
+  }).join('');
+}
+function refreshMarkers(){
+  if(!(allMarkers && allMarkers.length)) return;
+  allMarkers.forEach(item=>{
+    const s = item.s;
+    if(s.closed_status) return; // closed pins keep their fixed grey style + closure tip
+    item.m.setStyle({ fillColor: pinColor(s) });
+    item.m.unbindTooltip();
+    item.m.bindTooltip(s.name+layerTipExtra(s), {className:'mtt',direction:'top'});
+  });
+}
+// Toggle a layer on/off, or promote it to primary if already active.
+function toggleLayer(m){
+  if(!MAP_METRIC_TIERS[m]) return;
+  const layers = window.MAP_LAYERS;
+  const idx = layers.indexOf(m);
+  if(idx === 0){
+    // Clicking the primary again is a no-op (can't drop the last colorer).
+  } else if(idx > 0){
+    // Already active but not primary → promote to primary.
+    layers.splice(idx,1); layers.unshift(m);
+  } else {
+    // Not active → add. If at cap, drop the oldest non-primary (last in list).
+    if(layers.length >= MAX_LAYERS) layers.pop();
+    layers.push(m);
+  }
+  renderLayerUI();
+  refreshMarkers();
+  try{ updateMapStats(); }catch(e){}
+}
+// Remove a layer (the × on a chip). Never removes the last remaining layer.
+function removeLayer(m){
+  const layers = window.MAP_LAYERS;
+  const idx = layers.indexOf(m);
+  if(idx < 0 || layers.length <= 1) return;
+  layers.splice(idx,1);
+  renderLayerUI();
+  refreshMarkers();
+  try{ updateMapStats(); }catch(e){}
+}
+// Back-compat shim: some callers (and the stats hook) still call setMapMetric.
 function setMapMetric(m){
   if(!MAP_METRIC_TIERS[m]) return;
-  window.MAP_METRIC = m;
-  renderLegendRows();
-  // Re-color all existing markers using the new metric
-  if(allMarkers && allMarkers.length){
-    allMarkers.forEach(item=>{
-      const s = item.s;
-      const val = MAP_METRIC_TIERS[m].valOf(s);
-      item.m.setStyle({ fillColor: pinColor(s) });
-      // Tooltip: rebuild to show the new metric value
-      const cfg = MAP_METRIC_TIERS[m];
-      const valStr = val!=null ? (Math.round(val*10)/10)+'%' : '—';
-      item.m.unbindTooltip();
-      item.m.bindTooltip(s.name+' · '+valStr+' '+cfg.label, {className:'mtt',direction:'top'});
-    });
-  }
+  const layers = window.MAP_LAYERS;
+  const idx = layers.indexOf(m);
+  if(idx>0){ layers.splice(idx,1); }
+  if(idx!==0) layers.unshift(m);
+  if(layers.length>MAX_LAYERS) layers.length=MAX_LAYERS;
+  renderLayerUI();
+  refreshMarkers();
 }
+// Render the clickable layer chips + the stacked per-layer legends.
+function renderLayerUI(){
+  const chipsEl = document.getElementById('mlChips');
+  if(chipsEl){
+    chipsEl.innerHTML = MAP_METRIC_GROUPS.map(g=>{
+      const chips = g.keys.map(k=>{
+        const pos = window.MAP_LAYERS.indexOf(k);
+        const on = pos>=0, primary = pos===0;
+        const cls = 'ml-chip'+(primary?' primary':on?' on':'');
+        const badge = primary ? '<span class="ml-badge">1°</span>' : (on?'<span class="ml-badge">'+(pos+1)+'</span>':'');
+        const x = on && !primary ? '<span class="ml-x" onclick="event.stopPropagation();removeLayer(\''+k+'\')">×</span>' : '';
+        return '<button class="'+cls+'" onclick="toggleLayer(\''+k+'\')" title="'+MAP_METRIC_TIERS[k].label+'">'+badge+MAP_METRIC_TIERS[k].label+x+'</button>';
+      }).join('');
+      return '<div class="ml-group"><div class="ml-group-l">'+g.label+'</div><div class="ml-group-chips">'+chips+'</div></div>';
+    }).join('');
+  }
+  renderLegendRows();
+}
+// Secondary-layer legends. The PRIMARY layer's tier breakdown is shown as the
+// animated count-bars in #msTiers (updateMapStats); here we render compact tier
+// ramps for the 2nd/3rd active layers so all active colors are documented.
 function renderLegendRows(){
-  const el = document.getElementById('legRows');
+  const el = document.getElementById('mlLegends');
   if(!el) return;
-  const cfg = MAP_METRIC_TIERS[window.MAP_METRIC] || MAP_METRIC_TIERS.bar;
-  // Ring style per tier mirrors pinStroke encoding for colorblind redundancy.
-  const ringStyles = ['border:2px solid rgba(255,255,255,0.85);','border:1px solid rgba(255,255,255,0.5);','border:1px dashed rgba(255,255,255,0.8);','border:1px dotted rgba(255,255,255,0.95);'];
-  el.innerHTML = cfg.tiers.map((t,i)=>'<div class="leg-row"><div class="leg-dot" style="background:'+t.c+';'+ringStyles[i]+'"></div>'+t.l+'</div>').join('')
-               + '<div class="leg-row"><div class="leg-dot" style="background:#4A5A6A;"></div>No data</div>';
+  const secondary = window.MAP_LAYERS.slice(1);
+  if(!secondary.length){ el.innerHTML=''; return; }
+  el.innerHTML = secondary.map(m=>{
+    const cfg = MAP_METRIC_TIERS[m]; if(!cfg) return '';
+    const rows = cfg.tiers.map(t=>'<span class="ml-leg-swatch" style="background:'+t.c+';" title="'+t.l+'"></span>').join('')
+               + '<span class="ml-leg-swatch" style="background:#4A5A6A;" title="No data"></span>';
+    return '<div class="ml-legend"><span class="ml-legend-h">'+cfg.label+'</span><span class="ml-leg-ramp">'+rows+'</span></div>';
+  }).join('');
+}
+// Compact "active map layers" read-out for the school Overview panel: shows the
+// value + tier swatch for each currently-active layer (primary marked).
+function activeLayerReadout(s){
+  if(!s || s.closed_status) return '';
+  const rows = window.MAP_LAYERS.map((m,i)=>{
+    const cfg = MAP_METRIC_TIERS[m]; if(!cfg) return '';
+    const v = cfg.valOf(s);
+    const c = tierColorFor(m,s);
+    const vs = v!=null ? (Math.round(v*10)/10)+'%' : '—';
+    const tag = i===0 ? '<span class="alr-primary">colors pin</span>' : '';
+    return '<div class="alr-row"><span class="alr-dot" style="background:'+c+';"></span>'
+      +'<span class="alr-label">'+cfg.label+tag+'</span><span class="alr-val" style="color:'+c+';">'+vs+'</span></div>';
+  }).join('');
+  return '<div class="sp-section alr-block"><div class="sp-sec-label">Active map layers</div>'+rows+'</div>';
 }
 function pinSize(e){ return !e?5:e>1200?11:e>600?8:e>200?6:5; }
 // Redundant, colorblind-safe ring cue (independent of fill hue + the dark basemap):
@@ -2488,11 +2583,9 @@ function initMap(){
     const stroke = isClosed
       ? {color:'rgba(255,255,255,0.55)', weight:1.2, dashArray:'2,3'}
       : pinStroke(s.bar);
-    const cfg = MAP_METRIC_TIERS[window.MAP_METRIC] || MAP_METRIC_TIERS.bar;
-    const mapVal = cfg.valOf(s);
     const tipExtra = isClosed
       ? ' · '+s.closed_status
-      : (mapVal!=null?' · '+(Math.round(mapVal*10)/10)+'% '+cfg.label:'');
+      : layerTipExtra(s);
     const m = L.circleMarker([s.lat,s.lng],{
       radius: isClosed ? Math.max(4, (pinSize(s.enr)||5)-1) : pinSize(s.enr),
       fillColor: isClosed ? '#6B7280' : pinColor(s),
@@ -2559,14 +2652,12 @@ function toggleBLS(){
   blsOn=!blsOn;
   const btn=document.getElementById('blsToggle');
   const leg=document.getElementById('blsLegend');
-  const legRows=document.getElementById('legRows');
-  const legSelect=document.getElementById('legSelect');
+  const mlSection=document.getElementById('mlSection');
   btn.classList.toggle('on',blsOn);
   if(leg) leg.style.display=blsOn?'block':'none';
-  // While the BLS salary overlay is on, hide the per-metric pin legend + its
-  // selector (they describe pin colors, which the overlay temporarily replaces).
-  if(legRows) legRows.style.display=blsOn?'none':'block';
-  if(legSelect) legSelect.style.display=blsOn?'none':'block';
+  // While the BLS salary overlay is on, hide the per-layer pin controls/legends
+  // (they describe pin colors, which the overlay temporarily replaces).
+  if(mlSection) mlSection.style.display=blsOn?'none':'block';
   if(blsOn) drawBLSLayer();
   else{ blsLayers.forEach(l=>l.remove()); blsLayers=[]; }
 }
@@ -2623,7 +2714,6 @@ function openSP(s){
   // Make sure panel is visible
   document.getElementById('schoolPanel').classList.remove('hidden');
   spPanelOpen = true;
-  document.body.classList.add('sp-open');
   document.getElementById('spToggleBtn').textContent='School Info «';
   spTab('overview',document.querySelector('.sp-tab'));
 }
@@ -2702,6 +2792,7 @@ function spTab(tab, btn){
         +cmpBtnHTML(s.id, 'sp-act sp-act-cmp')
       +'</div>'+
       '<div class="sp-intro">A quick read-out of <strong>'+s.full+'</strong>. Scroll for cost, scholarships, bar pass, employment, and state market context.</div>'+
+      activeLayerReadout(s)+
       '<div class="sp-section"><div class="sp-sec-label">Admissions 2025</div><div class="sp-grid">'+
         '<div class="sp-metric"><span class="sp-metric-val" style="color:'+colorFor('lsat50',s.lsat50)+';">'+(s.lsat50||'—')+'</span><span class="sp-metric-label">LSAT Median</span><span class="sp-metric-sub">'+pctTriple(s.lsat25,s.lsat50,s.lsat75)+'</span>'+miniSpark(s.lsat_trend)+'</div>'+
         '<div class="sp-metric"><span class="sp-metric-val" style="color:'+colorFor('gpa50',s.gpa50)+';">'+(s.gpa50||'—')+'</span><span class="sp-metric-label">uGPA Median</span><span class="sp-metric-sub">'+pctTriple(s.gpa25,s.gpa50,s.gpa75)+'</span>'+miniSpark(s.gpa_trend)+'</div>'+
@@ -2861,7 +2952,7 @@ function lineChart(opts){
     const pv=years.map(y=>pin.vals?pin.vals[y]:null);
     let li=-1; for(let i=pv.length-1;i>=0;i--){ if(pv[i]!=null){ li=i; break; } }
     if(li>=0){ const v=pv[li], x=X(li), yy=Y(v), last=(li===years.length-1);
-      // Endpoint label placement rule (v1.18.4): if the line is RISING into the
+      // Endpoint label placement rule (v1.19.0): if the line is RISING into the
       // endpoint, drop the label BELOW the marker (clears the ascending line and
       // the top edge it would otherwise clip); if FALLING, lift it ABOVE. Clamp
       // to the chart box so it can never get cut off. The --chart-halo var gives a
@@ -2908,7 +2999,7 @@ function lineChart(opts){
 
 // ── Full school detail page (items 5 & 9): opens in a new tab via #school/<id> ─
 // ── Scholarship distribution ────────────────────────────────────────────────
-// Canonical buckets per owner directive (v1.18.4): student-favorability gradient.
+// Canonical buckets per owner directive (v1.19.0): student-favorability gradient.
 // "No grant" is DERIVED = 100 - (lt + mt + full + gt) — the source's none count is
 // known to be unreliable (negatives, mis-reports); the derivation guarantees the
 // stack sums to 100% and avoids fabricated bad data.
@@ -3205,7 +3296,7 @@ function outcomeFunnel(s){
 
 function navSchool(id){
   // HASH ROUTES — safest, work anywhere, no 404.html or server-side rewrites needed.
-  // Reverted from clean /school/<slug> paths in v1.18.4 because GH Pages without a
+  // Reverted from clean /school/<slug> paths in v1.19.0 because GH Pages without a
   // deployed 404.html serves real 404s for any unknown path. When the project moves
   // to a custom domain with rewrites (Netlify _redirects, Vercel rewrites, Cloudflare),
   // flip CLEAN_URLS to true and the deep-link helpers below will re-engage.
@@ -4459,8 +4550,6 @@ function toggleSP(){
   const panel = document.getElementById('schoolPanel');
   const btn = document.getElementById('spToggleBtn');
   panel.classList.toggle('hidden', !spPanelOpen);
-  // Mirror the open state onto <body> so #mapLegend can shift clear of the panel.
-  document.body.classList.toggle('sp-open', spPanelOpen);
   btn.textContent = spPanelOpen ? 'School Info «' : 'School Info »';
   if(mapInst) setTimeout(()=>mapInst.invalidateSize(),350);
 }
@@ -4587,7 +4676,7 @@ function cmpHintInject(){
 
 populateHeaderStats();
 renderCompareTray();
-renderLegendRows();
+renderLayerUI();
 renderShareWidget();
 // ── Onboarding tour — guided spotlight showcase, dismissable, never auto-fires again ──
 function startTour(){
@@ -4602,9 +4691,9 @@ function startTour(){
       pos:'center'
     },
     {
-      title:'Switch the map\'s lens',
-      body:'The legend in the bottom-right is a dropdown. Color the map by FTLT employment, BigLaw %, public interest, clerkships, government — 14 metrics in all. Pick what matters to you and the country re-paints.',
-      target:'#mapLegend', pos:'left'
+      title:'Color the map by what matters',
+      body:'In the left panel, pick up to 3 layers — FTLT employment, BigLaw %, public interest, clerkships, government, 14 in all. The first colors the pins; click any active layer to promote it. Hover a pin to see all three.',
+      target:'#mlSection', pos:'right'
     },
     {
       title:'Filter by tier',
@@ -4851,11 +4940,9 @@ function openShareModal(){
   document.body.appendChild(m);
 }
 
-// Disclaimer bar removed v1.18.4 — --banner-h is hardcoded to 0 in the inline
+// Disclaimer bar removed v1.19.0 — --banner-h is hardcoded to 0 in the inline
 // <style> after the header; the dynamic syncBannerHeight observer is no longer
 // needed. Provenance lives in the footer.
-// The school Overview panel starts open — reflect that so #mapLegend docks clear of it.
-document.body.classList.toggle('sp-open', spPanelOpen);
 // Honor #school/X or #compare=… in URL on first load
 schoolRouter();
 showMap();
