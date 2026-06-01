@@ -366,7 +366,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .pb-counsel-header{border-top:3px solid var(--counsel);}
 
 /* Map filters bar */
-/* Map filters relocated v1.25.0 — top-of-map horizontal toolbar, docked between the
+/* Map filters relocated v1.26.0 — top-of-map horizontal toolbar, docked between the
    left Match Me / Compare sidebar (ends at 380px) and the always-open right school
    panel (400px), sitting just under the global header. The left sidebar is now
    reserved exclusively for Match Me + Compare. */
@@ -444,7 +444,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
    header (school name + bar pass chip) isn't hidden by filter chips or the BLS
    tooltip card. Was top:76px causing the upper ~50px to be eaten. */
 /* schoolPanel sits at the natural top now that map-filter bar moved into the left
-   panel (v1.25.0) — frees ~50px of vertical space at the top of the right column. */
+   panel (v1.26.0) — frees ~50px of vertical space at the top of the right column. */
 #schoolPanel{position:fixed;top:76px;right:0;bottom:36px;width:400px;z-index:100;background:rgba(4,13,23,0.97);border-left:1px solid rgba(74,122,155,0.22);overflow-y:auto;transform:translateX(0);transition:transform .3s;}#schoolPanel.hidden{transform:translateX(100%);}
 #schoolPanel.open{transform:translateX(0);}
 .sp-close{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(4,13,23,0.98);border-bottom:1px solid rgba(74,122,155,0.15);}
@@ -454,7 +454,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .sp-tab{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border:1px solid rgba(74,122,155,0.2);background:transparent;color:var(--dim);cursor:pointer;transition:all .2s;}
 .sp-tab+.sp-tab{border-left:none;}
 .sp-tab.on{background:rgba(217,119,87,0.1);color:var(--orange);border-color:rgba(217,119,87,0.35);}
-/* School-panel (right side) typography tightened v1.25.0 — was visibly scaled-too-big
+/* School-panel (right side) typography tightened v1.26.0 — was visibly scaled-too-big
    per owner. Reduced metric/value sizes by ~15%, tighter section padding, smaller
    section labels, more breathable line-height. */
 .sp-header{padding:14px 16px 10px;border-bottom:1px solid rgba(74,122,155,0.12);}
@@ -1440,7 +1440,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
     More
   </button>
 </nav>
-<!-- Disclaimer bar removed v1.25.0 — provenance now lives in the footer. -->
+<!-- Disclaimer bar removed v1.26.0 — provenance now lives in the footer. -->
 <style>:root{--banner-h:0px;}</style>
 
 <div id="cookieBar" style="position:fixed;bottom:0;left:0;right:0;z-index:1000;background:#0B1826;border-top:1px solid rgba(217,119,87,0.4);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;box-shadow:0 -2px 12px rgba(0,0,0,0.5);">
@@ -1763,8 +1763,8 @@ function fmtUSD(v){ return v==null?"—":"$"+v.toLocaleString(); }
 // ═══════════════════════════════════════════════════════════════════════════
 const DATA_INVARIANTS = {
   total_schools: 208,         // 197 active/newly + 11 closed/transitioning (now included as historical entries)
-  schools_inline: 208,        // all inline as of v1.25.0 — closed entries surface their pre-closure history
-  year_count: 15              // 2011–2025 inclusive (15-year span; pre-2018 added in v1.25.0 from Historic + v2 sheets)
+  schools_inline: 208,        // all inline as of v1.26.0 — closed entries surface their pre-closure history
+  year_count: 15              // 2011–2025 inclusive (15-year span; pre-2018 added in v1.26.0 from Historic + v2 sheets)
 };
 // Verifiable count of the data cells actually shipped inline on this page:
 // every non-null scalar field, plus every per-year trend entry, across S.
@@ -1833,7 +1833,7 @@ function populateHeaderStats(){
 // ── Lazy-load full dataset (deferred until first deep-dive interaction) ──
 // Callers: `const ext = await loadFullDataset();` parsed JSON, or null on fail.
 // Subsequent calls return the cached object. Concurrent calls share one fetch.
-// Wired in v1.25.0 — schoolDetailHTML calls getSchoolHistory(id) which awaits
+// Wired in v1.26.0 — schoolDetailHTML calls getSchoolHistory(id) which awaits
 // this loader, then renders deep-history charts (employment evolution etc.) into
 // late-paint slots once data is available.
 window.EXT = window.EXT || { data: null, loading: null, byId: null };
@@ -2034,7 +2034,7 @@ function searchTypeaheadKey(e){
   }
 }
 
-// Disclaimer banner is now persistent (per v1.25.0 owner directive) — no dismiss; always visible.
+// Disclaimer banner is now persistent (per v1.26.0 owner directive) — no dismiss; always visible.
 // ── COOKIE notice dismiss (persists via localStorage) ──
 // ── Light/Dark theme toggle (persists via localStorage). Note: many inline styles
 // use literal rgba(4,13,23,...) and won't fully invert — full theming would require
@@ -2988,7 +2988,7 @@ function lineChart(opts){
     const pv=years.map(y=>pin.vals?pin.vals[y]:null);
     let li=-1; for(let i=pv.length-1;i>=0;i--){ if(pv[i]!=null){ li=i; break; } }
     if(li>=0){ const v=pv[li], x=X(li), yy=Y(v), last=(li===years.length-1);
-      // Endpoint label placement rule (v1.25.0): if the line is RISING into the
+      // Endpoint label placement rule (v1.26.0): if the line is RISING into the
       // endpoint, drop the label BELOW the marker (clears the ascending line and
       // the top edge it would otherwise clip); if FALLING, lift it ABOVE. Clamp
       // to the chart box so it can never get cut off. The --chart-halo var gives a
@@ -3035,7 +3035,7 @@ function lineChart(opts){
 
 // ── Full school detail page (items 5 & 9): opens in a new tab via #school/<id> ─
 // ── Scholarship distribution ────────────────────────────────────────────────
-// Canonical buckets per owner directive (v1.25.0): student-favorability gradient.
+// Canonical buckets per owner directive (v1.26.0): student-favorability gradient.
 // "No grant" is DERIVED = 100 - (lt + mt + full + gt) — the source's none count is
 // known to be unreliable (negatives, mis-reports); the derivation guarantees the
 // stack sums to 100% and avoids fabricated bad data.
@@ -3343,7 +3343,7 @@ function outcomeFunnel(s){
 
 function navSchool(id){
   // HASH ROUTES — safest, work anywhere, no 404.html or server-side rewrites needed.
-  // Reverted from clean /school/<slug> paths in v1.25.0 because GH Pages without a
+  // Reverted from clean /school/<slug> paths in v1.26.0 because GH Pages without a
   // deployed 404.html serves real 404s for any unknown path. When the project moves
   // to a custom domain with rewrites (Netlify _redirects, Vercel rewrites, Cloudflare),
   // flip CLEAN_URLS to true and the deep-link helpers below will re-engage.
@@ -3822,7 +3822,7 @@ function schoolDetailHTML(s){
         ((s.cond!=null && s.cond > 5) ? '<div class="callout warn" style="margin-top:14px;"><div class="callout-eye">Conditional scholarship risk</div><p class="callout-p"><strong>'+s.cond+'%</strong> of conditional-scholarship recipients had their scholarship reduced or eliminated after Year 1. If your offer is contingent on a GPA threshold (e.g. top 50%), assume there\'s a <strong>'+s.cond+'% chance</strong> you lose it — and budget for the full sticker tuition in years 2 and 3.</p></div>' : '')+
       '</div>'+
       // ── 3. DEMOGRAPHICS — who's there ───────────────────────────────────
-      '<div class="dp-card"><div class="dp-card-t">3 · Demographics 2025</div>'+dpDemo(s)+'</div>'+
+      '<div class="dp-card"><div class="dp-card-t">3 · Demographics 2025</div>'+dpDemo(s)+'<div id="demo-evo-slot"></div></div>'+
       // ── 4. CURRICULUM — what you'd actually study ───────────────────────
       '<div class="dp-card"><div class="dp-card-t">4 · Curriculum 2025</div>'+
         row('Courses offered',num(s.cur_courses))+
@@ -3913,7 +3913,7 @@ function renderSchoolPage(id){
   // Lazy-paint the 15-year employment-evolution chart from the gz dataset.
   // Falls back silently if the gz is missing or this school isn't in it
   // (e.g. 4 closed schools without gz records).
-  if(s){ paintEmpEvolution(s); }
+  if(s){ paintEmpEvolution(s); paintDemoEvolution(s); }
 }
 async function paintEmpEvolution(s){
   const slot = document.getElementById('emp-evo-slot');
@@ -3982,7 +3982,73 @@ function empEvolutionChart(history){
     '</svg>'+
     '<div style="margin-top:6px;line-height:1.4;">'+legend+'</div>';
 }
-// ── SPA path handoff: if 404.html stashed a path in sessionStorage, restore it
+// Stacked-area chart of entering-class race/ethnicity composition over the gz year
+// span. Mirrors empEvolutionChart; each band is one group as % of the year's known
+// total. Late-painted from the gz; gracefully no-ops when <2 years have demographics.
+const DEMO_BUCKETS=[
+  {l:'White',       c:'#5AABCB', f:y=>+y.race_white||0},
+  {l:'Black',       c:'#4A9B6B', f:y=>+y.race_black||0},
+  {l:'Hispanic',    c:'#FFA726', f:y=>+y.race_hisp||0},
+  {l:'Asian',       c:'#A78BFA', f:y=>+y.race_asian||0},
+  {l:'Multiracial', c:'#C084FC', f:y=>+y.race_multi||0},
+  {l:'Native / other / unknown', c:'#9CA3AF', f:y=>(+y.race_native||0)+(+y.race_indian||0)+(+y.race_unknown||0)+(+y.race_nr||0)}
+];
+function demoEvolutionChart(history){
+  const years = Object.keys(history).filter(y=>/^\d{4}$/.test(y)).sort();
+  if(years.length < 2) return '';
+  const W=720, H=240, PL=44, PR=18, PT=18, PB=28;
+  const innerW = W-PL-PR, innerH = H-PT-PB;
+  const buckets = DEMO_BUCKETS;
+  const series = years.map(y => {
+    const yr = history[y] || {};
+    const vals = buckets.map(b => b.f(yr));
+    const sum = vals.reduce((a,b)=>a+b,0);
+    return { y, vals: sum>0 ? vals.map(v=>v/sum*100) : null };
+  }).filter(p => p.vals);
+  if(series.length < 2) return '';
+  const N = series.length;
+  const xStep = innerW / (N-1);
+  const X = i => PL + i*xStep;
+  const Y = pct => PT + innerH - (pct/100)*innerH;
+  const cum = series.map(()=>0);
+  const polys = buckets.map((b, bi) => {
+    const top = [], bottom = [];
+    for(let i=0; i<N; i++){
+      const v = series[i].vals[bi];
+      bottom.push({ x:X(i), y:Y(cum[i]) });
+      cum[i] += v;
+      top.push({ x:X(i), y:Y(cum[i]) });
+    }
+    const pts = [...top, ...bottom.slice().reverse()].map(p => p.x.toFixed(1)+','+p.y.toFixed(1)).join(' ');
+    return '<polygon points="'+pts+'" fill="'+b.c+'" opacity="0.85"><title>'+b.l+'</title></polygon>';
+  }).join('');
+  const ticks = series.map((p,i) =>
+    '<text x="'+X(i).toFixed(1)+'" y="'+(H-8)+'" text-anchor="middle" fill="#7AAAC8" font-family="Geist Mono,monospace" font-size="10">'+p.y+'</text>'
+  ).join('');
+  const yTicks = [0,25,50,75,100].map(p =>
+    '<g><line x1="'+PL+'" y1="'+Y(p).toFixed(1)+'" x2="'+(PL+innerW)+'" y2="'+Y(p).toFixed(1)+'" stroke="rgba(74,122,155,0.18)" stroke-width="0.5"/>'+
+    '<text x="'+(PL-8)+'" y="'+(Y(p)+3).toFixed(1)+'" text-anchor="end" fill="#7AAAC8" font-family="Geist Mono,monospace" font-size="10">'+p+'%</text></g>'
+  ).join('');
+  const legend = buckets.map(b =>
+    '<span style="display:inline-flex;align-items:center;gap:5px;margin-right:11px;margin-bottom:4px;font-family:var(--mono);font-size:10.5px;color:var(--dim);"><span style="width:9px;height:9px;background:'+b.c+';display:inline-block;border-radius:1px;"></span>'+b.l+'</span>'
+  ).join('');
+  return '<div class="dp-card-t" style="margin-top:18px;">Class composition over time · '+series[0].y+'–'+series[series.length-1].y+'</div>'+
+    '<div style="font-family:var(--mono);font-size:11px;color:var(--dimmer);margin-bottom:6px;">Entering-class race / ethnicity as % of the year\'s reported total. Bands stack to 100. From the live ABA 509 dataset.</div>'+
+    '<svg class="lc" viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Race/ethnicity composition over time stacked area chart">'+
+    yTicks + polys + ticks +
+    '</svg>'+
+    '<div style="margin-top:6px;line-height:1.4;">'+legend+'</div>';
+}
+async function paintDemoEvolution(s){
+  const slot = document.getElementById('demo-evo-slot');
+  if(!slot) return;
+  try {
+    const rec = await getSchoolHistory(s.id);
+    if(!rec || !rec.history){ slot.remove(); return; }
+    const html = demoEvolutionChart(rec.history);
+    if(html) slot.innerHTML = html; else slot.remove();
+  } catch(e){ slot.remove(); }
+}
 //    via history.replaceState before we route. Lets /school/harvard-law load
 //    directly without the user ever seeing the 404 intermediary. ──────────────
 (function spaRestore(){
@@ -5016,7 +5082,7 @@ function openShareModal(){
   document.body.appendChild(m);
 }
 
-// Disclaimer bar removed v1.25.0 — --banner-h is hardcoded to 0 in the inline
+// Disclaimer bar removed v1.26.0 — --banner-h is hardcoded to 0 in the inline
 // <style> after the header; the dynamic syncBannerHeight observer is no longer
 // needed. Provenance lives in the footer.
 // Honor #school/X or #compare=… in URL on first load
