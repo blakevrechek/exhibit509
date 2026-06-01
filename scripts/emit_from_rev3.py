@@ -145,6 +145,23 @@ def emit(db_path, data_js_path, out_path, report_path):
                     diffs.setdefault(tf, []).append((wid + '@' + y, merged.get(y), v))
                 merged[y] = v
             rec[tf] = merged
+        # fac_trend = total faculty (fac_ft + fac_pt) per year. The live fac_trend is
+        # internally broken (FT-only in old years, garbage in recent), and the row it
+        # annotates is "Total Faculty" -> rebuild as the FT+PT total. Overlay (keep
+        # current years rev3 lacks).
+        facyrs = {}
+        for y, m, v in cur.execute("SELECT year,metric,value FROM fact_school_year WHERE school_id=? "
+                                   "AND metric IN ('fac_ft','fac_pt') AND value IS NOT NULL", (rid,)):
+            facyrs.setdefault(y, {})[m] = v
+        if facyrs:
+            merged = dict(rec.get('fac_trend') or {})
+            for y, mm in facyrs.items():
+                if 'fac_ft' in mm:  # need FT present to form a meaningful total
+                    nv = float(mm.get('fac_ft', 0) + mm.get('fac_pt', 0))
+                    if merged.get(str(y)) != nv:
+                        diffs.setdefault('fac_trend', []).append((wid + '@' + str(y), merged.get(str(y)), nv))
+                    merged[str(y)] = nv
+            rec['fac_trend'] = merged
         # schol_trend = {year:{none,lt,mt,full,gt}} derived from counts/students_total; overlay
         sch = {}
         for y, m, v in cur.execute("SELECT year,metric,value FROM fact_school_year WHERE school_id=? "

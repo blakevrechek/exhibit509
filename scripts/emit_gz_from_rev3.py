@@ -16,6 +16,19 @@ MANUAL = {'la-verne-university-of': 184, 'hamline-university': 218}
 
 def slug(n): return re.sub(r'[^a-z0-9]+', '-', n.lower()).strip('-')
 
+def parse_S(path='data/exhibit-data.js'):
+    src = open(path, encoding='utf-8').read()
+    st = src.index('const S = ') + len('const S = ')
+    d = 0; i = st
+    while i < len(src):
+        c = src[i]
+        if c == '[': d += 1
+        elif c == ']':
+            d -= 1
+            if d == 0: end = i + 1; break
+        i += 1
+    return json.loads(src[st:end])
+
 def build_crosswalk(ids, cur):
     dim = {r[0]: r[1] for r in cur.execute("SELECT school_id,canonical_name FROM dim_school")}
     has = set(r[0] for r in cur.execute("SELECT DISTINCT school_id FROM fact_school_year"))
@@ -99,6 +112,17 @@ def rev3_year_fields(f, grads, stot, sttype):
 def main(db_path, gz_path):
     cur = sqlite3.connect(db_path).cursor()
     with gzip.open(gz_path) as fh: H = json.load(fh)
+    S = parse_S()
+    Sby = {s['id']: s for s in S}
+    gz_ids = set(s['id'] for s in H['schools'])
+    # Add any website school missing from the gz (the 4 inline-only closed schools) so
+    # their deep-dive history + employment-mix evolution chart work too.
+    for s in S:
+        if s['id'] in gz_ids: continue
+        H['schools'].append({'id': s['id'], 'name': s.get('full') or s.get('name'),
+            'aba_name': s.get('full') or s.get('name'), 'state': s.get('state'),
+            'lat': s.get('lat'), 'lng': s.get('lng'), 'bls_mean': s.get('bls_mean'),
+            'status': 'closed' if s.get('closed_status') else 'active', 'current': {}, 'history': {}})
     ids = [s['id'] for s in H['schools']]
     xw = build_crosswalk(ids, cur)
     # also map S ids that may be missing from gz (the 4 inline-only closed) - add them below
@@ -131,8 +155,8 @@ def main(db_path, gz_path):
                  'refreshed, demographics/curriculum preserved from v2 where present, 2026 untouched.')
     notes = H['meta'].get('notes', '')
     if isinstance(notes, list):
-        H['meta']['notes'] = notes + [rev3_note]
-    else:
+        H['meta']['notes'] = notes + ([rev3_note] if rev3_note not in notes else [])
+    elif rev3_note not in str(notes):
         H['meta']['notes'] = (str(notes) + ' | ' + rev3_note).strip(' |')
     out = json.dumps(H, ensure_ascii=False, separators=(',', ':')).encode('utf-8')
     with gzip.open(gz_path, 'wb', compresslevel=9) as fh: fh.write(out)
