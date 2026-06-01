@@ -366,7 +366,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .pb-counsel-header{border-top:3px solid var(--counsel);}
 
 /* Map filters bar */
-/* Map filters relocated v1.19.3 — top-of-map horizontal toolbar, docked between the
+/* Map filters relocated v1.19.4 — top-of-map horizontal toolbar, docked between the
    left Match Me / Compare sidebar (ends at 380px) and the always-open right school
    panel (400px), sitting just under the global header. The left sidebar is now
    reserved exclusively for Match Me + Compare. */
@@ -430,6 +430,8 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .ml-leg-ramp{display:inline-flex;gap:2px;}
 .ml-leg-swatch{width:13px;height:9px;border-radius:1px;display:inline-block;}
 .ml-note{font-family:var(--mono);font-size:9.5px;color:var(--dimmer);letter-spacing:0.3px;line-height:1.45;margin-top:9px;}
+.ml-more{display:inline-block;margin-top:4px;background:none;border:none;color:var(--blue);font-family:var(--mono);font-size:10.5px;letter-spacing:0.4px;cursor:pointer;padding:2px 0;text-decoration:underline;text-underline-offset:2px;}
+.ml-more:hover{color:var(--white);}
 /* Overview panel "active map layers" read-out */
 .alr-block .alr-row{display:flex;align-items:center;gap:8px;padding:2px 0;}
 .alr-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
@@ -442,7 +444,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
    header (school name + bar pass chip) isn't hidden by filter chips or the BLS
    tooltip card. Was top:76px causing the upper ~50px to be eaten. */
 /* schoolPanel sits at the natural top now that map-filter bar moved into the left
-   panel (v1.19.3) — frees ~50px of vertical space at the top of the right column. */
+   panel (v1.19.4) — frees ~50px of vertical space at the top of the right column. */
 #schoolPanel{position:fixed;top:76px;right:0;bottom:36px;width:400px;z-index:100;background:rgba(4,13,23,0.97);border-left:1px solid rgba(74,122,155,0.22);overflow-y:auto;transform:translateX(0);transition:transform .3s;}#schoolPanel.hidden{transform:translateX(100%);}
 #schoolPanel.open{transform:translateX(0);}
 .sp-close{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(4,13,23,0.98);border-bottom:1px solid rgba(74,122,155,0.15);}
@@ -452,7 +454,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .sp-tab{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border:1px solid rgba(74,122,155,0.2);background:transparent;color:var(--dim);cursor:pointer;transition:all .2s;}
 .sp-tab+.sp-tab{border-left:none;}
 .sp-tab.on{background:rgba(217,119,87,0.1);color:var(--orange);border-color:rgba(217,119,87,0.35);}
-/* School-panel (right side) typography tightened v1.19.3 — was visibly scaled-too-big
+/* School-panel (right side) typography tightened v1.19.4 — was visibly scaled-too-big
    per owner. Reduced metric/value sizes by ~15%, tighter section padding, smaller
    section labels, more breathable line-height. */
 .sp-header{padding:14px 16px 10px;border-bottom:1px solid rgba(74,122,155,0.12);}
@@ -1438,7 +1440,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
     More
   </button>
 </nav>
-<!-- Disclaimer bar removed v1.19.3 — provenance now lives in the footer. -->
+<!-- Disclaimer bar removed v1.19.4 — provenance now lives in the footer. -->
 <style>:root{--banner-h:0px;}</style>
 
 <div id="cookieBar" style="position:fixed;bottom:0;left:0;right:0;z-index:1000;background:#0B1826;border-top:1px solid rgba(217,119,87,0.4);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;box-shadow:0 -2px 12px rgba(0,0,0,0.5);">
@@ -1489,7 +1491,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
         </div>
         <div class="ms-filters" id="msFilters"></div>
         <div id="mlSection">
-          <div class="ml-head">Color the map by <span class="ml-hint">up to 3 · click an active layer to make it primary</span></div>
+          <div class="ml-head">Color the map by <span class="ml-hint">pick up to 3 · the first colors the pins</span></div>
           <div id="mlChips"></div>
           <div id="msTiers"></div>
           <div id="mlLegends"></div>
@@ -1761,8 +1763,8 @@ function fmtUSD(v){ return v==null?"—":"$"+v.toLocaleString(); }
 // ═══════════════════════════════════════════════════════════════════════════
 const DATA_INVARIANTS = {
   total_schools: 208,         // 197 active/newly + 11 closed/transitioning (now included as historical entries)
-  schools_inline: 208,        // all inline as of v1.19.3 — closed entries surface their pre-closure history
-  year_count: 15              // 2011–2025 inclusive (15-year span; pre-2018 added in v1.19.3 from Historic + v2 sheets)
+  schools_inline: 208,        // all inline as of v1.19.4 — closed entries surface their pre-closure history
+  year_count: 15              // 2011–2025 inclusive (15-year span; pre-2018 added in v1.19.4 from Historic + v2 sheets)
 };
 // Verifiable count of the data cells actually shipped inline on this page:
 // every non-null scalar field, plus every per-year trend entry, across S.
@@ -1831,7 +1833,7 @@ function populateHeaderStats(){
 // ── Lazy-load full dataset (deferred until first deep-dive interaction) ──
 // Callers: `const ext = await loadFullDataset();` parsed JSON, or null on fail.
 // Subsequent calls return the cached object. Concurrent calls share one fetch.
-// Wired in v1.19.3 — schoolDetailHTML calls getSchoolHistory(id) which awaits
+// Wired in v1.19.4 — schoolDetailHTML calls getSchoolHistory(id) which awaits
 // this loader, then renders deep-history charts (employment evolution etc.) into
 // late-paint slots once data is available.
 window.EXT = window.EXT || { data: null, loading: null, byId: null };
@@ -2032,7 +2034,7 @@ function searchTypeaheadKey(e){
   }
 }
 
-// Disclaimer banner is now persistent (per v1.19.3 owner directive) — no dismiss; always visible.
+// Disclaimer banner is now persistent (per v1.19.4 owner directive) — no dismiss; always visible.
 // ── COOKIE notice dismiss (persists via localStorage) ──
 // ── Light/Dark theme toggle (persists via localStorage). Note: many inline styles
 // use literal rgba(4,13,23,...) and won't fully invert — full theming would require
@@ -2313,21 +2315,35 @@ function setMapMetric(m){
   renderLayerUI();
   refreshMarkers();
 }
+// "More metrics" expander: only the first group (Outcomes) shows by default; the
+// firm-size / sector groups stay collapsed to keep the panel calm. Auto-expands
+// if an advanced metric is already active so it never hides a selected layer.
+let mlExpanded = false;
+function toggleMlExpand(){ mlExpanded=!mlExpanded; renderLayerUI(); }
 // Render the clickable layer chips + the stacked per-layer legends.
 function renderLayerUI(){
   const chipsEl = document.getElementById('mlChips');
   if(chipsEl){
-    chipsEl.innerHTML = MAP_METRIC_GROUPS.map(g=>{
-      const chips = g.keys.map(k=>{
-        const pos = window.MAP_LAYERS.indexOf(k);
-        const on = pos>=0, primary = pos===0;
-        const cls = 'ml-chip'+(primary?' primary':on?' on':'');
-        const badge = primary ? '<span class="ml-badge">1°</span>' : (on?'<span class="ml-badge">'+(pos+1)+'</span>':'');
-        const x = on && !primary ? '<span class="ml-x" onclick="event.stopPropagation();removeLayer(\''+k+'\')">×</span>' : '';
-        return '<button class="'+cls+'" onclick="toggleLayer(\''+k+'\')" title="'+MAP_METRIC_TIERS[k].label+'">'+badge+MAP_METRIC_TIERS[k].label+x+'</button>';
-      }).join('');
-      return '<div class="ml-group"><div class="ml-group-l">'+g.label+'</div><div class="ml-group-chips">'+chips+'</div></div>';
-    }).join('');
+    // Keep advanced groups visible if any of their metrics is currently active.
+    const advancedActive = MAP_METRIC_GROUPS.slice(1).some(g=>g.keys.some(k=>window.MAP_LAYERS.includes(k)));
+    const showAdvanced = mlExpanded || advancedActive;
+    function chip(k){
+      const pos = window.MAP_LAYERS.indexOf(k);
+      const on = pos>=0, primary = pos===0;
+      const cls = 'ml-chip'+(primary?' primary':on?' on':'');
+      const badge = primary ? '<span class="ml-badge">1°</span>' : (on?'<span class="ml-badge">'+(pos+1)+'</span>':'');
+      const x = on && !primary ? '<span class="ml-x" onclick="event.stopPropagation();removeLayer(\''+k+'\')">×</span>' : '';
+      return '<button class="'+cls+'" onclick="toggleLayer(\''+k+'\')" title="'+MAP_METRIC_TIERS[k].label+'">'+badge+MAP_METRIC_TIERS[k].label+x+'</button>';
+    }
+    const groupsToShow = showAdvanced ? MAP_METRIC_GROUPS : MAP_METRIC_GROUPS.slice(0,1);
+    let html = groupsToShow.map(g=>
+      '<div class="ml-group"><div class="ml-group-l">'+g.label+'</div><div class="ml-group-chips">'+g.keys.map(chip).join('')+'</div></div>'
+    ).join('');
+    // Expander toggle (hidden when an advanced metric forces the groups open).
+    if(!advancedActive){
+      html += '<button class="ml-more" onclick="toggleMlExpand()">'+(showAdvanced?'– Fewer metrics':'+ More metrics (firm size · sector)')+'</button>';
+    }
+    chipsEl.innerHTML = html;
   }
   renderLegendRows();
 }
@@ -2603,38 +2619,19 @@ function initMap(){
   { const mc=document.getElementById('mapCount'); if(mc) mc.textContent=allMarkers.length+' schools shown'; }
 }
 
-// ── Map filters (multi-select, AND across groups) ──────────────────────────
-// activeMF holds every selected subset filter. They NARROW the map (hide/show
-// pins); pin COLOR is independent (driven by the active map layers). Filters in
-// different groups combine with AND; the tier group (national/regional/local)
-// and fit group (safety/target/reach) are mutually exclusive, so picking a
-// second within a group replaces the first (AND of those would empty the map).
-const activeMF = new Set();
-const MF_TIER = ['national','regional','local'];
-const MF_FIT  = ['safety','target','reach'];
+// ── Map filters (single-select) ────────────────────────────────────────────
+// One subset filter at a time NARROWS the map (hide/show pins). Pin COLOR is
+// independent (driven by the active map layers). 'all' clears the filter.
+let currentMF = 'all';
 function setMF(f,btn){
-  if(!f){
-    // No-op selection change (callers that just want a re-filter, e.g. findSchools).
-    syncMFButtons(); filterPins(); return;
-  }
-  if(f==='all'){
-    activeMF.clear();
-  } else if(activeMF.has(f)){
-    activeMF.delete(f);
-  } else {
-    // Within a mutually-exclusive group, swap out the prior pick.
-    if(MF_TIER.includes(f)) MF_TIER.forEach(x=>activeMF.delete(x));
-    if(MF_FIT.includes(f))  MF_FIT.forEach(x=>activeMF.delete(x));
-    activeMF.add(f);
-  }
+  // null/undefined = just re-filter without changing the selection (e.g. findSchools).
+  if(f) currentMF = f;
   syncMFButtons();
   filterPins();
 }
 function syncMFButtons(){
   document.querySelectorAll('.mfb').forEach(b=>{
-    const k=b.dataset.mf;
-    if(k==='all') b.classList.toggle('on', activeMF.size===0);
-    else b.classList.toggle('on', activeMF.has(k));
+    b.classList.toggle('on', b.dataset.mf===currentMF);
   });
 }
 
@@ -2660,16 +2657,13 @@ function filterPins(){
   const lsat=parseFloat(document.getElementById('fwLSAT').value);
   const tiers = _ensureSchoolTiers();
   let shown=0;
-  // Active tier/fit selection (at most one of each — enforced in setMF).
-  const tierSel = MF_TIER.find(x=>activeMF.has(x));
-  const fitSel  = MF_FIT.find(x=>activeMF.has(x));
   allMarkers.forEach(item=>{
     const s=item.s; let show=true;
     if(q&&!s.name.toLowerCase().includes(q)&&!s.full.toLowerCase().includes(q)) show=false;
-    if(show&&activeMF.has('bar90')&&!(s.bar>=90)) show=false;
-    if(show&&activeMF.has('lowcost')&&!(s.tui<=35000)) show=false;
-    if(show&&tierSel && tiers[s.id]!==tierSel) show=false;
-    if(show&&fitSel && fitClass(s,lsat,gpa)!==fitSel) show=false;
+    if(show&&currentMF==='bar90'&&!(s.bar>=90)) show=false;
+    if(show&&currentMF==='lowcost'&&!(s.tui<=35000)) show=false;
+    if(show&&['national','regional','local'].includes(currentMF) && tiers[s.id]!==currentMF) show=false;
+    if(show&&['safety','target','reach'].includes(currentMF) && fitClass(s,lsat,gpa)!==currentMF) show=false;
     if(show){ item.m.setStyle({fillOpacity:0.9,radius:pinSize(s.enr)}); item.m.addTo(mapInst); shown++; }
     else { item.m.remove(); }
   });
@@ -2981,7 +2975,7 @@ function lineChart(opts){
     const pv=years.map(y=>pin.vals?pin.vals[y]:null);
     let li=-1; for(let i=pv.length-1;i>=0;i--){ if(pv[i]!=null){ li=i; break; } }
     if(li>=0){ const v=pv[li], x=X(li), yy=Y(v), last=(li===years.length-1);
-      // Endpoint label placement rule (v1.19.3): if the line is RISING into the
+      // Endpoint label placement rule (v1.19.4): if the line is RISING into the
       // endpoint, drop the label BELOW the marker (clears the ascending line and
       // the top edge it would otherwise clip); if FALLING, lift it ABOVE. Clamp
       // to the chart box so it can never get cut off. The --chart-halo var gives a
@@ -3028,7 +3022,7 @@ function lineChart(opts){
 
 // ── Full school detail page (items 5 & 9): opens in a new tab via #school/<id> ─
 // ── Scholarship distribution ────────────────────────────────────────────────
-// Canonical buckets per owner directive (v1.19.3): student-favorability gradient.
+// Canonical buckets per owner directive (v1.19.4): student-favorability gradient.
 // "No grant" is DERIVED = 100 - (lt + mt + full + gt) — the source's none count is
 // known to be unreliable (negatives, mis-reports); the derivation guarantees the
 // stack sums to 100% and avoids fabricated bad data.
@@ -3325,7 +3319,7 @@ function outcomeFunnel(s){
 
 function navSchool(id){
   // HASH ROUTES — safest, work anywhere, no 404.html or server-side rewrites needed.
-  // Reverted from clean /school/<slug> paths in v1.19.3 because GH Pages without a
+  // Reverted from clean /school/<slug> paths in v1.19.4 because GH Pages without a
   // deployed 404.html serves real 404s for any unknown path. When the project moves
   // to a custom domain with rewrites (Netlify _redirects, Vercel rewrites, Cloudflare),
   // flip CLEAN_URLS to true and the deep-link helpers below will re-engage.
@@ -4617,14 +4611,12 @@ const MF_LABELS={all:'All schools',national:'National (T14)',regional:'Regional'
   bar90:'Bar ≥ 90%',lowcost:'Tuition < $35K',safety:'My Safeties',target:'My Targets',reach:'My Reaches'};
 function activeMapFilters(){
   const chips=[];
-  const sel = (typeof activeMF!=='undefined') ? [...activeMF] : [];
-  sel.forEach(f=>chips.push(MF_LABELS[f]||f));
+  if(typeof currentMF!=='undefined' && currentMF && currentMF!=='all') chips.push(MF_LABELS[currentMF]||currentMF);
   const srch=document.getElementById('mapSrch');
   if(srch && srch.value.trim()) chips.push('“'+escHtml(srch.value.trim())+'”');
   const g=document.getElementById('fwGPA'), l=document.getElementById('fwLSAT');
   const stats=[]; if(l&&l.value) stats.push('LSAT '+l.value); if(g&&g.value) stats.push('uGPA '+g.value);
-  const fitActive = sel.some(f=>['safety','target','reach'].includes(f));
-  if(stats.length && fitActive) {/* already implied by the fit chip */}
+  if(stats.length && ['safety','target','reach'].includes(currentMF)) {/* already implied by fit chip */}
   else if(stats.length) chips.push(stats.join(' / '));
   if(typeof blsOn!=='undefined' && blsOn) chips.push('BLS salary overlay');
   return chips;
@@ -4971,7 +4963,7 @@ function openShareModal(){
   document.body.appendChild(m);
 }
 
-// Disclaimer bar removed v1.19.3 — --banner-h is hardcoded to 0 in the inline
+// Disclaimer bar removed v1.19.4 — --banner-h is hardcoded to 0 in the inline
 // <style> after the header; the dynamic syncBannerHeight observer is no longer
 // needed. Provenance lives in the footer.
 // Honor #school/X or #compare=… in URL on first load
