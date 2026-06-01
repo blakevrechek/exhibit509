@@ -118,7 +118,6 @@
 .theme-light #mapLegend{background:#FFFFFFE6!important;border-color:rgba(60,90,120,0.20)!important;}
 .theme-light .leg-title{color:#111827!important;}
 .theme-light .leg-row{color:#111827!important;}
-.theme-light .map-count{background:#FFFFFFE6!important;color:#000000!important;border-color:rgba(60,90,120,0.20)!important;}
 .theme-light .mfb{background:#FFFFFFE6!important;color:#111827!important;border-color:rgba(60,90,120,0.25)!important;}
 .theme-light .mfb.on,.theme-light .mfb:hover{color:#C95B2C!important;border-color:#C95B2C!important;background:rgba(201,91,44,0.08)!important;}
 .theme-light .bls-toggle{background:#FFFFFFE6!important;color:#111827!important;border-color:rgba(60,90,120,0.25)!important;}
@@ -320,7 +319,8 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 }
 .ip-stat-n.counting{color:var(--orange);}
 .sp-metric-sub{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spacing:.5px;margin-top:2px;display:block;}
-.ip-body{flex:1;overflow-y:auto;padding:16px 20px;}
+.ip-body{flex:1;overflow-y:auto;padding:16px 20px;scrollbar-width:none;-ms-overflow-style:none;}
+.ip-body::-webkit-scrollbar{width:0;height:0;display:none;}
 
 /* Find Schools widget */
 .find-widget{background:linear-gradient(180deg,rgba(217,119,87,0.06) 0%,rgba(217,119,87,0.02) 100%);border:1px solid rgba(217,119,87,0.22);border-radius:4px;padding:18px 18px 20px;margin-bottom:18px;position:relative;}
@@ -367,7 +367,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .pb-counsel-header{border-top:3px solid var(--counsel);}
 
 /* Map filters bar */
-/* Map filters relocated v1.18.3 — top-of-map horizontal toolbar, docked between the
+/* Map filters relocated v1.18.4 — top-of-map horizontal toolbar, docked between the
    left Match Me / Compare sidebar (ends at 380px) and the always-open right school
    panel (400px), sitting just under the global header. The left sidebar is now
    reserved exclusively for Match Me + Compare. */
@@ -407,12 +407,13 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .bls-toggle.on{background:rgba(74,155,107,0.15);border-color:#4A9B6B;}
 
 /* Map count + legend */
-.map-count{position:fixed;bottom:42px;left:8px;z-index:100;background:rgba(8,14,22,0.82);border:1px solid rgba(74,122,155,0.16);border-radius:3px;padding:4px 9px;font-family:var(--mono);font-size:9.5px;color:var(--dimmer);letter-spacing:1.2px;backdrop-filter:blur(8px);font-weight:500;opacity:0.8;}
-.mc-info{border-bottom:none!important;opacity:0.65;cursor:help;}
-.mc-info:hover,.mc-info:focus{opacity:1;}
 /* right:410px = 10px to the left of the Overview panel (width:400px, right:0) so
    the metric/legend control is never tucked under it. */
-#mapLegend{position:fixed;bottom:24px;right:410px;z-index:100;background:rgba(4,13,23,0.9);border:1px solid rgba(74,122,155,0.18);padding:10px 14px;}
+/* Legend docks at the right edge by default. When the Overview panel is open
+   (body.sp-open), shift left so it clears the 400px panel + a 16px gap — never
+   covering or covered. transition keeps it in sync with the panel's slide. */
+#mapLegend{position:fixed;bottom:24px;right:16px;z-index:100;background:rgba(4,13,23,0.9);border:1px solid rgba(74,122,155,0.18);padding:10px 14px;transition:right .3s;}
+body.sp-open #mapLegend{right:416px;}
 .leg-title{font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:2px;text-transform:uppercase;margin-bottom:7px;}
 .leg-row{display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;color:#5A8AAA;margin-bottom:3px;}
 .leg-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
@@ -422,7 +423,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
    header (school name + bar pass chip) isn't hidden by filter chips or the BLS
    tooltip card. Was top:76px causing the upper ~50px to be eaten. */
 /* schoolPanel sits at the natural top now that map-filter bar moved into the left
-   panel (v1.18.3) — frees ~50px of vertical space at the top of the right column. */
+   panel (v1.18.4) — frees ~50px of vertical space at the top of the right column. */
 #schoolPanel{position:fixed;top:76px;right:0;bottom:36px;width:400px;z-index:100;background:rgba(4,13,23,0.97);border-left:1px solid rgba(74,122,155,0.22);overflow-y:auto;transform:translateX(0);transition:transform .3s;}#schoolPanel.hidden{transform:translateX(100%);}
 #schoolPanel.open{transform:translateX(0);}
 .sp-close{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(4,13,23,0.98);border-bottom:1px solid rgba(74,122,155,0.15);}
@@ -432,7 +433,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .sp-tab{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border:1px solid rgba(74,122,155,0.2);background:transparent;color:var(--dim);cursor:pointer;transition:all .2s;}
 .sp-tab+.sp-tab{border-left:none;}
 .sp-tab.on{background:rgba(217,119,87,0.1);color:var(--orange);border-color:rgba(217,119,87,0.35);}
-/* School-panel (right side) typography tightened v1.18.3 — was visibly scaled-too-big
+/* School-panel (right side) typography tightened v1.18.4 — was visibly scaled-too-big
    per owner. Reduced metric/value sizes by ~15%, tighter section padding, smaller
    section labels, more breathable line-height. */
 .sp-header{padding:14px 16px 10px;border-bottom:1px solid rgba(74,122,155,0.12);}
@@ -840,8 +841,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
   .view-title{font-size:26px;letter-spacing:-0.8px;}
   .view-sub{font-size:14px;}
   /* ── MAP CONTROLS ──────────────────────────────────────────────────────── */
-  .map-count{bottom:90px;left:8px;}
-  #mapLegend{right:8px;bottom:90px;max-width:calc(100vw - 16px);}
+  #mapLegend,body.sp-open #mapLegend{right:8px;bottom:90px;max-width:calc(100vw - 16px);}
   #mapFilters{top:auto;bottom:64px;left:8px;right:8px;flex-wrap:wrap;}
   #mapFilters .map-search-wrap{width:100%;max-width:100%;}
   .mfb{padding:7px 10px;font-size:11px;}
@@ -859,7 +859,6 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
   #mobileTabBar .mtb-btn:active{background:rgba(217,119,87,0.10);}
   #mobileTabBar .mtb-badge{position:absolute;top:6px;right:calc(50% - 18px);background:var(--orange);color:#06111E;font-family:var(--mono);font-size:9px;font-weight:800;padding:1px 5px;border-radius:8px;min-width:14px;text-align:center;letter-spacing:0;line-height:1.2;display:none;}
   /* Lift map controls, compare tray, school bottom-sheet so they sit above the tab bar */
-  .map-count{bottom:72px!important;}
   #mapLegend{bottom:72px!important;}
   #compareTray{bottom:66px;max-width:calc(100vw - 16px);padding:6px 10px;font-size:12px;}
   #schoolPanel{bottom:58px!important;}
@@ -1425,7 +1424,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
     More
   </button>
 </nav>
-<!-- Disclaimer bar removed v1.18.3 — provenance now lives in the footer. -->
+<!-- Disclaimer bar removed v1.18.4 — provenance now lives in the footer. -->
 <style>:root{--banner-h:0px;}</style>
 
 <div id="cookieBar" style="position:fixed;bottom:0;left:0;right:0;z-index:1000;background:#0B1826;border-top:1px solid rgba(217,119,87,0.4);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;box-shadow:0 -2px 12px rgba(0,0,0,0.5);">
@@ -1453,7 +1452,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
     <button class="ip-toggle" id="ipToggle" onclick="togglePanel()" title="Hide/show panel">«</button>
     <div class="ip-header">
       <div class="ip-title">Is it <em>worth</em> it?<br>The evidence on every <span class="ip-law">law</span> school.</div>
-      <div class="ip-sub">Outcomes, cost, and 15-year trajectory for every ABA-accredited law school — so you can see what a degree actually returns, not just whether you can get in. Sourced from the ABA Standard 509 disclosures.</div>
+      <div class="ip-sub">Outcomes, cost, and 15-year trajectory for every ABA-accredited law school. From the official ABA Standard 509 disclosures.</div>
     </div>
     <div class="ip-body">
 
@@ -1643,8 +1642,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
     <div class="sp-body" id="spBody" style="display:none;"></div>
   </div>
 
-  <!-- Map count -->
-  <div class="map-count"><span id="mapCount">194 schools shown</span> <span class="gl mc-info" tabindex="0" role="img" aria-label="What these counts mean" data-tip="Counts differ by subset: 194 are currently plotted on the map · 197 are currently ABA-accredited and reporting · 208 are tracked in total, including 11 closed or transitioning schools kept for their full historical record.">ⓘ</span></div>
+  <!-- Map count removed per design — counts live in the methodology/tooltip instead. -->
 
   <!-- Legend -->
   <div id="mapLegend">
@@ -1774,8 +1772,8 @@ function fmtUSD(v){ return v==null?"—":"$"+v.toLocaleString(); }
 // ═══════════════════════════════════════════════════════════════════════════
 const DATA_INVARIANTS = {
   total_schools: 208,         // 197 active/newly + 11 closed/transitioning (now included as historical entries)
-  schools_inline: 208,        // all inline as of v1.18.3 — closed entries surface their pre-closure history
-  year_count: 15              // 2011–2025 inclusive (15-year span; pre-2018 added in v1.18.3 from Historic + v2 sheets)
+  schools_inline: 208,        // all inline as of v1.18.4 — closed entries surface their pre-closure history
+  year_count: 15              // 2011–2025 inclusive (15-year span; pre-2018 added in v1.18.4 from Historic + v2 sheets)
 };
 // Verifiable count of the data cells actually shipped inline on this page:
 // every non-null scalar field, plus every per-year trend entry, across S.
@@ -1844,7 +1842,7 @@ function populateHeaderStats(){
 // ── Lazy-load full dataset (deferred until first deep-dive interaction) ──
 // Callers: `const ext = await loadFullDataset();` parsed JSON, or null on fail.
 // Subsequent calls return the cached object. Concurrent calls share one fetch.
-// Wired in v1.18.3 — schoolDetailHTML calls getSchoolHistory(id) which awaits
+// Wired in v1.18.4 — schoolDetailHTML calls getSchoolHistory(id) which awaits
 // this loader, then renders deep-history charts (employment evolution etc.) into
 // late-paint slots once data is available.
 window.EXT = window.EXT || { data: null, loading: null, byId: null };
@@ -2045,7 +2043,7 @@ function searchTypeaheadKey(e){
   }
 }
 
-// Disclaimer banner is now persistent (per v1.18.3 owner directive) — no dismiss; always visible.
+// Disclaimer banner is now persistent (per v1.18.4 owner directive) — no dismiss; always visible.
 // ── COOKIE notice dismiss (persists via localStorage) ──
 // ── Light/Dark theme toggle (persists via localStorage). Note: many inline styles
 // use literal rgba(4,13,23,...) and won't fully invert — full theming would require
@@ -2455,7 +2453,7 @@ function findSchools(){
     if(match){ item.m.addTo(mapInst); item.m.setStyle({radius:pinSize(item.s.enr)+2,fillOpacity:1}); }
     else { item.m.remove(); }
   });
-  document.getElementById('mapCount').textContent = ordered.length+' schools shown';
+  { const mc=document.getElementById('mapCount'); if(mc) mc.textContent = ordered.length+' schools shown'; }
 }
 
 function flyToSchool(id){
@@ -2505,7 +2503,7 @@ function initMap(){
     m.addTo(mapInst);
     allMarkers.push({m,s});
   });
-  document.getElementById('mapCount').textContent=allMarkers.length+' schools shown';
+  { const mc=document.getElementById('mapCount'); if(mc) mc.textContent=allMarkers.length+' schools shown'; }
 }
 
 // ── Map filters ───────────────────────────────────────────────────────────
@@ -2553,7 +2551,7 @@ function filterPins(){
     if(show){ item.m.setStyle({fillOpacity:0.9,radius:pinSize(s.enr)}); item.m.addTo(mapInst); shown++; }
     else { item.m.remove(); }
   });
-  document.getElementById('mapCount').textContent=shown+' schools shown';
+  { const mc=document.getElementById('mapCount'); if(mc) mc.textContent=shown+' schools shown'; }
 }
 
 // ── BLS overlay ───────────────────────────────────────────────────────────
@@ -2624,6 +2622,8 @@ function openSP(s){
   document.getElementById('spBody').style.display='block';
   // Make sure panel is visible
   document.getElementById('schoolPanel').classList.remove('hidden');
+  spPanelOpen = true;
+  document.body.classList.add('sp-open');
   document.getElementById('spToggleBtn').textContent='School Info «';
   spTab('overview',document.querySelector('.sp-tab'));
 }
@@ -2861,7 +2861,7 @@ function lineChart(opts){
     const pv=years.map(y=>pin.vals?pin.vals[y]:null);
     let li=-1; for(let i=pv.length-1;i>=0;i--){ if(pv[i]!=null){ li=i; break; } }
     if(li>=0){ const v=pv[li], x=X(li), yy=Y(v), last=(li===years.length-1);
-      // Endpoint label placement rule (v1.18.3): if the line is RISING into the
+      // Endpoint label placement rule (v1.18.4): if the line is RISING into the
       // endpoint, drop the label BELOW the marker (clears the ascending line and
       // the top edge it would otherwise clip); if FALLING, lift it ABOVE. Clamp
       // to the chart box so it can never get cut off. The --chart-halo var gives a
@@ -2908,7 +2908,7 @@ function lineChart(opts){
 
 // ── Full school detail page (items 5 & 9): opens in a new tab via #school/<id> ─
 // ── Scholarship distribution ────────────────────────────────────────────────
-// Canonical buckets per owner directive (v1.18.3): student-favorability gradient.
+// Canonical buckets per owner directive (v1.18.4): student-favorability gradient.
 // "No grant" is DERIVED = 100 - (lt + mt + full + gt) — the source's none count is
 // known to be unreliable (negatives, mis-reports); the derivation guarantees the
 // stack sums to 100% and avoids fabricated bad data.
@@ -3205,7 +3205,7 @@ function outcomeFunnel(s){
 
 function navSchool(id){
   // HASH ROUTES — safest, work anywhere, no 404.html or server-side rewrites needed.
-  // Reverted from clean /school/<slug> paths in v1.18.3 because GH Pages without a
+  // Reverted from clean /school/<slug> paths in v1.18.4 because GH Pages without a
   // deployed 404.html serves real 404s for any unknown path. When the project moves
   // to a custom domain with rewrites (Netlify _redirects, Vercel rewrites, Cloudflare),
   // flip CLEAN_URLS to true and the deep-link helpers below will re-engage.
@@ -4459,6 +4459,8 @@ function toggleSP(){
   const panel = document.getElementById('schoolPanel');
   const btn = document.getElementById('spToggleBtn');
   panel.classList.toggle('hidden', !spPanelOpen);
+  // Mirror the open state onto <body> so #mapLegend can shift clear of the panel.
+  document.body.classList.toggle('sp-open', spPanelOpen);
   btn.textContent = spPanelOpen ? 'School Info «' : 'School Info »';
   if(mapInst) setTimeout(()=>mapInst.invalidateSize(),350);
 }
@@ -4849,9 +4851,11 @@ function openShareModal(){
   document.body.appendChild(m);
 }
 
-// Disclaimer bar removed v1.18.3 — --banner-h is hardcoded to 0 in the inline
+// Disclaimer bar removed v1.18.4 — --banner-h is hardcoded to 0 in the inline
 // <style> after the header; the dynamic syncBannerHeight observer is no longer
 // needed. Provenance lives in the footer.
+// The school Overview panel starts open — reflect that so #mapLegend docks clear of it.
+document.body.classList.toggle('sp-open', spPanelOpen);
 // Honor #school/X or #compare=… in URL on first load
 schoolRouter();
 showMap();
