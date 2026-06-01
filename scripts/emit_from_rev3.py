@@ -21,9 +21,9 @@ FORKS = {
     # built from an all-employment-types numerator rev3 cannot reproduce. Carry over
     # to avoid silently lowering every school's sector mix. Set True to adopt rev3 FTLT.
     'sector_types_from_rev3': False,
-    # trends (*_trend): rebuilding from rev3's 15-yr history is richer but changes
-    # every sparkline. Carry over for now (default); flip to rebuild the simple 1:1 ones.
-    'rebuild_trends': False,
+    # trends (*_trend): overlay rev3's full 2011-2025 series onto the current trends -
+    # fills missing years + adopts bulletproof values, never drops a year rev3 lacks.
+    'rebuild_trends': True,
 }
 
 MANUAL = {'la-verne-university-of': 184, 'hamline-university': 218}
@@ -84,6 +84,26 @@ DIRECT_FLOAT = {  # 1-decimal fields
 # gpa kept at 2 decimals
 GPA = {'gpa25': 'gpa25', 'gpa50': 'gpa50', 'gpa75': 'gpa75'}
 
+# Trend overlay: trend field -> (rev3 metric, value formatter). rev3 fills new years and
+# updates overlapping years; years rev3 lacks are preserved from the current trend (no drop).
+def _f_int(v): return int(round(v))
+def _f_float(v): return float(v)
+def _f_2dp(v): return round(v, 2)
+TREND_MAP = {
+    'apps_trend': ('apps', _f_float), 'offers_trend': ('offers', _f_float),
+    'acc_trend': ('acc_rate', _f_2dp),
+    # NOTE: enr_trend is total-JD enrollment; rev3 enroll_total is the entering class only -> carry over.
+    # NOTE: fac_trend basis is ambiguous (FT-only in live data, but internally inconsistent) -> carry over.
+    'lsat_trend': ('lsat50', _f_float), 'lsat25_trend': ('lsat25', _f_float), 'lsat75_trend': ('lsat75', _f_float),
+    'gpa_trend': ('gpa50', _f_2dp), 'gpa25_trend': ('gpa25', _f_2dp), 'gpa75_trend': ('gpa75', _f_2dp),
+    'tui_trend': ('res_tui', _f_int), 'nrt_trend': ('nr_tui', _f_int),
+    'bar_trend': ('bar_pct', _f_2dp), 'bar_2yr_trend': ('bar2yr_pct', _f_2dp),
+    'bar_takers_trend': ('bar_takers', _f_float), 'bar_passers_trend': ('bar_passers', _f_float),
+    'trans_in_trend': ('transfer_in', _f_float), 'trans_out_trend': ('transfer_out', _f_float),
+}
+# fac_trend (fac_ft+fac_pt per year) and schol_trend (derived buckets per year) handled separately.
+# cond_enter_trend / cond_elim_trend: rev3 lacks conditional scholarships -> left as-is.
+
 def emit(db_path, data_js_path, out_path, report_path):
     cur = sqlite3.connect(db_path).cursor()
     src = open(data_js_path).read()
@@ -109,12 +129,53 @@ def emit(db_path, data_js_path, out_path, report_path):
             diffs.setdefault(field, []).append((wid, old, newv))
         rec[field] = newv
 
+    def overlay_trends(rec, wid, rid):
+        """rev3 fills new years + updates overlaps; never drops a year the current trend already has."""
+        def rev_series(metric, fmt):
+            return {str(y): fmt(v) for y, v in cur.execute(
+                "SELECT year,value FROM fact_school_year WHERE school_id=? AND metric=? "
+                "AND value IS NOT NULL ORDER BY year", (rid, metric))}
+        for tf, (metric, fmt) in TREND_MAP.items():
+            rev = rev_series(metric, fmt)
+            if not rev:
+                continue
+            merged = dict(rec.get(tf) or {})   # preserve current (incl. years rev3 lacks)
+            for y, v in rev.items():
+                if merged.get(y) != v:
+                    diffs.setdefault(tf, []).append((wid + '@' + y, merged.get(y), v))
+                merged[y] = v
+            rec[tf] = merged
+        # schol_trend = {year:{none,lt,mt,full,gt}} derived from counts/students_total; overlay
+        sch = {}
+        for y, m, v in cur.execute("SELECT year,metric,value FROM fact_school_year WHERE school_id=? "
+            "AND metric IN ('students_total','schol_none','schol_lt_half','schol_half_full','schol_full','schol_gt_full') "
+            "AND value IS NOT NULL", (rid,)):
+            sch.setdefault(y, {})[m] = v
+        if sch:
+            before = rec.get('schol_trend') or {}
+            merged = dict(before)
+            for y, mm in sch.items():
+                tot = mm.get('students_total')
+                if not tot:
+                    continue
+                merged[str(y)] = {
+                    'none': r1(100 * mm.get('schol_none', 0) / tot), 'lt': r1(100 * mm.get('schol_lt_half', 0) / tot),
+                    'mt': r1(100 * mm.get('schol_half_full', 0) / tot), 'full': r1(100 * mm.get('schol_full', 0) / tot),
+                    'gt': r1(100 * mm.get('schol_gt_full', 0) / tot),
+                }
+            if merged != before:
+                diffs.setdefault('schol_trend', []).append((wid, 'updated', len(merged)))
+            rec['schol_trend'] = merged
+
     skipped_closed = []
     newS = []
     for s in S:
         rec = dict(s)               # start from current -> all carry-over fields preserved
         wid = s['id']; rid = xw[wid]; yr = latest.get(rid)
-        # closed / inline-only schools stay as the intentional stubs they are today
+        # trend overlay runs for ALL schools (incl. closed) -> historical trajectory is additive
+        if FORKS['rebuild_trends'] and yr is not None:
+            overlay_trends(rec, wid, rid)
+        # closed / inline-only schools keep their stub current-cycle scalars (trends only, above)
         if s.get('closed_status'):
             skipped_closed.append(wid); newS.append(rec); continue
         if yr is None:
