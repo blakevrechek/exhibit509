@@ -115,10 +115,8 @@
 .theme-light .lc line[stroke="rgba(122,170,200,0.10)"]{stroke:rgba(60,90,120,0.18)!important;}
 .theme-light .lc-empty{background:rgba(60,90,120,0.05)!important;border-color:rgba(60,90,120,0.18)!important;color:#5A7A99!important;}
 .theme-light .leaflet-control-zoom a{background:#FFFFFFE6!important;color:#000000!important;border-bottom-color:rgba(60,90,120,0.18)!important;}
-.theme-light #mapLegend{background:#FFFFFFE6!important;border-color:rgba(60,90,120,0.20)!important;}
 .theme-light .leg-title{color:#111827!important;}
 .theme-light .leg-row{color:#111827!important;}
-.theme-light .map-count{background:#FFFFFFE6!important;color:#000000!important;border-color:rgba(60,90,120,0.20)!important;}
 .theme-light .mfb{background:#FFFFFFE6!important;color:#111827!important;border-color:rgba(60,90,120,0.25)!important;}
 .theme-light .mfb.on,.theme-light .mfb:hover{color:#C95B2C!important;border-color:#C95B2C!important;background:rgba(201,91,44,0.08)!important;}
 .theme-light .bls-toggle{background:#FFFFFFE6!important;color:#111827!important;border-color:rgba(60,90,120,0.25)!important;}
@@ -320,7 +318,8 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 }
 .ip-stat-n.counting{color:var(--orange);}
 .sp-metric-sub{font-family:var(--mono);font-size:10px;color:var(--dim);letter-spacing:.5px;margin-top:2px;display:block;}
-.ip-body{flex:1;overflow-y:auto;padding:16px 20px;}
+.ip-body{flex:1;overflow-y:auto;padding:16px 20px;scrollbar-width:none;-ms-overflow-style:none;}
+.ip-body::-webkit-scrollbar{width:0;height:0;display:none;}
 
 /* Find Schools widget */
 .find-widget{background:linear-gradient(180deg,rgba(217,119,87,0.06) 0%,rgba(217,119,87,0.02) 100%);border:1px solid rgba(217,119,87,0.22);border-radius:4px;padding:18px 18px 20px;margin-bottom:18px;position:relative;}
@@ -367,7 +366,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .pb-counsel-header{border-top:3px solid var(--counsel);}
 
 /* Map filters bar */
-/* Map filters relocated v1.18.2 — top-of-map horizontal toolbar, docked between the
+/* Map filters relocated v1.19.2 — top-of-map horizontal toolbar, docked between the
    left Match Me / Compare sidebar (ends at 380px) and the always-open right school
    panel (400px), sitting just under the global header. The left sidebar is now
    reserved exclusively for Match Me + Compare. */
@@ -406,21 +405,44 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .bls-toggle{font-family:var(--mono);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;padding:6px 14px;border:1px solid rgba(74,155,107,0.3);background:rgba(4,13,23,0.88);color:#4A9B6B;cursor:pointer;white-space:nowrap;transition:all .2s;backdrop-filter:blur(8px);}
 .bls-toggle.on{background:rgba(74,155,107,0.15);border-color:#4A9B6B;}
 
-/* Map count + legend */
-.map-count{position:fixed;bottom:50px;left:8px;z-index:100;background:rgba(8,14,22,0.82);border:1px solid rgba(74,122,155,0.16);border-radius:3px;padding:4px 9px;font-family:var(--mono);font-size:9.5px;color:var(--dimmer);letter-spacing:1.2px;backdrop-filter:blur(8px);font-weight:500;opacity:0.8;}
-.mc-info{border-bottom:none!important;opacity:0.65;cursor:help;}
-.mc-info:hover,.mc-info:focus{opacity:1;}
-#mapLegend{position:fixed;bottom:24px;right:360px;z-index:100;background:rgba(4,13,23,0.9);border:1px solid rgba(74,122,155,0.18);padding:10px 14px;}
+/* Map legend (now in the left panel) */
 .leg-title{font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:2px;text-transform:uppercase;margin-bottom:7px;}
 .leg-row{display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;color:#5A8AAA;margin-bottom:3px;}
 .leg-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+
+/* ── Map layers ("Color the map by") — left-panel multi-select, up to 3 ── */
+#mlSection{margin-top:11px;}
+.ml-head{font-family:var(--mono);font-size:10.5px;letter-spacing:1.4px;text-transform:uppercase;color:var(--orange);font-weight:700;margin-bottom:8px;}
+.ml-hint{display:block;font-size:9px;letter-spacing:0.4px;text-transform:none;color:var(--dimmer);font-weight:500;margin-top:2px;}
+.ml-group{margin-bottom:7px;}
+.ml-group-l{font-family:var(--mono);font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--dimmer);margin-bottom:4px;}
+.ml-group-chips{display:flex;flex-wrap:wrap;gap:4px;}
+.ml-chip{position:relative;font-family:var(--sans);font-size:11.5px;font-weight:500;padding:3px 8px;border:1px solid rgba(74,122,155,0.25);background:rgba(8,14,22,0.7);color:#A4C8DD;border-radius:3px;cursor:pointer;display:inline-flex;align-items:center;gap:4px;transition:all .15s ease;}
+.ml-chip:hover{border-color:rgba(217,119,87,0.5);color:var(--white);}
+.ml-chip.on{border-color:rgba(217,119,87,0.55);color:var(--orange);background:rgba(217,119,87,0.1);}
+.ml-chip.primary{border-color:var(--orange);background:var(--orange);color:#0C1A2A;font-weight:700;}
+.ml-badge{font-family:var(--mono);font-size:9px;font-weight:700;opacity:0.85;}
+.ml-x{font-weight:700;opacity:0.7;padding-left:2px;cursor:pointer;}
+.ml-x:hover{opacity:1;}
+#mlLegends{margin-top:8px;display:flex;flex-direction:column;gap:5px;}
+.ml-legend{display:flex;align-items:center;gap:8px;}
+.ml-legend-h{font-family:var(--mono);font-size:10px;letter-spacing:0.5px;color:var(--dim);min-width:96px;}
+.ml-leg-ramp{display:inline-flex;gap:2px;}
+.ml-leg-swatch{width:13px;height:9px;border-radius:1px;display:inline-block;}
+.ml-note{font-family:var(--mono);font-size:9.5px;color:var(--dimmer);letter-spacing:0.3px;line-height:1.45;margin-top:9px;}
+/* Overview panel "active map layers" read-out */
+.alr-block .alr-row{display:flex;align-items:center;gap:8px;padding:2px 0;}
+.alr-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.alr-label{flex:1;font-family:var(--mono);font-size:11px;color:var(--dim);}
+.alr-primary{font-size:8.5px;letter-spacing:0.5px;text-transform:uppercase;color:var(--orange);margin-left:6px;border:1px solid rgba(217,119,87,0.4);border-radius:2px;padding:0 4px;}
+.alr-val{font-family:var(--sans);font-weight:800;font-size:14px;font-variant-numeric:tabular-nums;}
 
 /* School side panel (right) */
 /* schoolPanel sits BELOW the map-filter bar (which ends around y=128px) so its
    header (school name + bar pass chip) isn't hidden by filter chips or the BLS
    tooltip card. Was top:76px causing the upper ~50px to be eaten. */
 /* schoolPanel sits at the natural top now that map-filter bar moved into the left
-   panel (v1.18.2) — frees ~50px of vertical space at the top of the right column. */
+   panel (v1.19.2) — frees ~50px of vertical space at the top of the right column. */
 #schoolPanel{position:fixed;top:76px;right:0;bottom:36px;width:400px;z-index:100;background:rgba(4,13,23,0.97);border-left:1px solid rgba(74,122,155,0.22);overflow-y:auto;transform:translateX(0);transition:transform .3s;}#schoolPanel.hidden{transform:translateX(100%);}
 #schoolPanel.open{transform:translateX(0);}
 .sp-close{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(4,13,23,0.98);border-bottom:1px solid rgba(74,122,155,0.15);}
@@ -430,7 +452,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .sp-tab{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border:1px solid rgba(74,122,155,0.2);background:transparent;color:var(--dim);cursor:pointer;transition:all .2s;}
 .sp-tab+.sp-tab{border-left:none;}
 .sp-tab.on{background:rgba(217,119,87,0.1);color:var(--orange);border-color:rgba(217,119,87,0.35);}
-/* School-panel (right side) typography tightened v1.18.2 — was visibly scaled-too-big
+/* School-panel (right side) typography tightened v1.19.2 — was visibly scaled-too-big
    per owner. Reduced metric/value sizes by ~15%, tighter section padding, smaller
    section labels, more breathable line-height. */
 .sp-header{padding:14px 16px 10px;border-bottom:1px solid rgba(74,122,155,0.12);}
@@ -838,8 +860,6 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
   .view-title{font-size:26px;letter-spacing:-0.8px;}
   .view-sub{font-size:14px;}
   /* ── MAP CONTROLS ──────────────────────────────────────────────────────── */
-  .map-count{bottom:90px;left:8px;}
-  #mapLegend{right:8px;bottom:90px;max-width:calc(100vw - 16px);}
   #mapFilters{top:auto;bottom:64px;left:8px;right:8px;flex-wrap:wrap;}
   #mapFilters .map-search-wrap{width:100%;max-width:100%;}
   .mfb{padding:7px 10px;font-size:11px;}
@@ -857,8 +877,6 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
   #mobileTabBar .mtb-btn:active{background:rgba(217,119,87,0.10);}
   #mobileTabBar .mtb-badge{position:absolute;top:6px;right:calc(50% - 18px);background:var(--orange);color:#06111E;font-family:var(--mono);font-size:9px;font-weight:800;padding:1px 5px;border-radius:8px;min-width:14px;text-align:center;letter-spacing:0;line-height:1.2;display:none;}
   /* Lift map controls, compare tray, school bottom-sheet so they sit above the tab bar */
-  .map-count{bottom:72px!important;}
-  #mapLegend{bottom:72px!important;}
   #compareTray{bottom:66px;max-width:calc(100vw - 16px);padding:6px 10px;font-size:12px;}
   #schoolPanel{bottom:58px!important;}
   /* ── MODALS ────────────────────────────────────────────────────────────── */
@@ -1386,9 +1404,6 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
       <span id="themeIcon" aria-hidden="true"></span>
     </button>
     <button id="tourBtn" onclick="relaunchTour()" title="Replay the guided tour" aria-label="Take the tour" style="background:rgba(90,171,203,0.10);border:1px solid rgba(90,171,203,0.40);color:var(--blue);cursor:pointer;font-family:var(--mono);font-size:11px;letter-spacing:1.2px;text-transform:uppercase;padding:5px 12px;border-radius:3px;font-weight:700;">Tour</button>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLScvkEp7vEwHAtpbMbk06AmtdUqHTy595OiQFcNBanSBXm0qDA/viewform?usp=publish-editor" target="_blank" class="h-skool" style="gap:8px;background:var(--orange);color:#06111E;font-weight:700;">
-      Sign up for email updates
-    </a>
   </div>
 </header>
 
@@ -1423,7 +1438,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
     More
   </button>
 </nav>
-<!-- Disclaimer bar removed v1.18.2 — provenance now lives in the footer. -->
+<!-- Disclaimer bar removed v1.19.2 — provenance now lives in the footer. -->
 <style>:root{--banner-h:0px;}</style>
 
 <div id="cookieBar" style="position:fixed;bottom:0;left:0;right:0;z-index:1000;background:#0B1826;border-top:1px solid rgba(217,119,87,0.4);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;box-shadow:0 -2px 12px rgba(0,0,0,0.5);">
@@ -1451,7 +1466,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
     <button class="ip-toggle" id="ipToggle" onclick="togglePanel()" title="Hide/show panel">«</button>
     <div class="ip-header">
       <div class="ip-title">Is it <em>worth</em> it?<br>The evidence on every <span class="ip-law">law</span> school.</div>
-      <div class="ip-sub">Outcomes, cost, and 15-year trajectory for every ABA-accredited law school — so you can see what a degree actually returns, not just whether you can get in. Sourced from the ABA Standard 509 disclosures.</div>
+      <div class="ip-sub">Outcomes, cost, and 15-year trajectory for every ABA-accredited law school. From the official ABA Standard 509 disclosures.</div>
     </div>
     <div class="ip-body">
 
@@ -1462,18 +1477,31 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
           <span class="ms-eyebrow" id="msMetricLabel">By First-Time Bar</span>
         </div>
         <div class="ms-filt-bar">
-          <button class="mfb on" onclick="setMF('all',this)">All</button>
-          <button class="mfb" onclick="setMF('national',this)" title="National schools — top 14 by LSAT median">National</button>
-          <button class="mfb" onclick="setMF('regional',this)" title="Regional schools — LSAT-median rank 15–50">Regional</button>
-          <button class="mfb" onclick="setMF('local',this)" title="Local schools — LSAT-median rank 51+">Local</button>
-          <button class="mfb" onclick="setMF('bar90',this)">Bar ≥ 90%</button>
-          <button class="mfb" onclick="setMF('lowcost',this)">Under $35K</button>
-          <button class="mfb" onclick="setMF('safety',this)">My Safeties</button>
-          <button class="mfb" onclick="setMF('target',this)">My Targets</button>
-          <button class="mfb" onclick="setMF('reach',this)">My Reaches</button>
+          <button class="mfb on" data-mf="all" onclick="setMF('all',this)">All</button>
+          <button class="mfb" data-mf="national" onclick="setMF('national',this)" title="National schools — top 14 by LSAT median">National</button>
+          <button class="mfb" data-mf="regional" onclick="setMF('regional',this)" title="Regional schools — LSAT-median rank 15–50">Regional</button>
+          <button class="mfb" data-mf="local" onclick="setMF('local',this)" title="Local schools — LSAT-median rank 51+">Local</button>
+          <button class="mfb" data-mf="bar90" onclick="setMF('bar90',this)">Bar ≥ 90%</button>
+          <button class="mfb" data-mf="lowcost" onclick="setMF('lowcost',this)">Under $35K</button>
+          <button class="mfb" data-mf="safety" onclick="setMF('safety',this)">My Safeties</button>
+          <button class="mfb" data-mf="target" onclick="setMF('target',this)">My Targets</button>
+          <button class="mfb" data-mf="reach" onclick="setMF('reach',this)">My Reaches</button>
         </div>
         <div class="ms-filters" id="msFilters"></div>
-        <div id="msTiers"></div>
+        <div id="mlSection">
+          <div class="ml-head">Color the map by <span class="ml-hint">up to 3 · click an active layer to make it primary</span></div>
+          <div id="mlChips"></div>
+          <div id="msTiers"></div>
+          <div id="mlLegends"></div>
+          <div class="ml-note">Pin ring repeats the tier (solid→dotted) for colorblind clarity · size = enrollment. Pins are colored by the primary layer; others show on hover &amp; in the school panel.</div>
+        </div>
+        <div id="blsLegend" style="display:none;margin-top:10px;border-top:1px solid rgba(74,122,155,0.15);padding-top:9px;">
+          <div class="leg-title" style="color:var(--green);">BLS Salary (state mean)</div>
+          <div class="leg-row"><div class="leg-dot" style="background:#006400;"></div>&gt;$200K</div>
+          <div class="leg-row"><div class="leg-dot" style="background:#228B22;"></div>$160–200K</div>
+          <div class="leg-row"><div class="leg-dot" style="background:#4A9B6B;"></div>$130–160K</div>
+          <div class="leg-row"><div class="leg-dot" style="background:#8FBC8F;"></div>&lt;$130K</div>
+        </div>
       </div>
 
       <!-- Compare CTA — lead with the outcomes/cost comparison (is-it-worth-it),
@@ -1641,44 +1669,10 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
     <div class="sp-body" id="spBody" style="display:none;"></div>
   </div>
 
-  <!-- Map count -->
-  <div class="map-count"><span id="mapCount">194 schools shown</span> <span class="gl mc-info" tabindex="0" role="img" aria-label="What these counts mean" data-tip="Counts differ by subset: 194 are currently plotted on the map · 197 are currently ABA-accredited and reporting · 208 are tracked in total, including 11 closed or transitioning schools kept for their full historical record.">ⓘ</span></div>
+  <!-- Map count removed per design — counts live in the methodology/tooltip instead. -->
 
   <!-- Legend -->
-  <div id="mapLegend">
-    <select id="legSelect" class="p-filt" style="width:100%;margin-bottom:8px;padding:5px 22px 5px 8px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--orange);background-image:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2210%22 height=%226%22 viewBox=%220 0 10 6%22><path d=%22M0 0l5 6 5-6z%22 fill=%22%23D97757%22/></svg>');background-repeat:no-repeat;background-position:right 6px center;-webkit-appearance:none;appearance:none;border-color:rgba(217,119,87,0.40);" onchange="setMapMetric(this.value)">
-      <optgroup label="Outcomes">
-        <option value="bar">First-Time Bar</option>
-        <option value="ftlt">FTLT Employment</option>
-        <option value="emp_bar">Jobs requiring bar</option>
-      </optgroup>
-      <optgroup label="By firm size">
-        <option value="megalaw">MegaLaw 500+</option>
-        <option value="biglaw">BigLaw 251–500</option>
-        <option value="biglawall">BigLaw + MegaLaw</option>
-        <option value="mid">Mid 101–250</option>
-        <option value="small">Small 2–100</option>
-        <option value="solo">Solo practice</option>
-      </optgroup>
-      <optgroup label="By sector">
-        <option value="gov">Government</option>
-        <option value="pi">Public Interest</option>
-        <option value="clerk">Clerkships (all)</option>
-        <option value="clerk_fed">Federal clerkships</option>
-        <option value="biz">Business / Industry</option>
-        <option value="edu">Academia</option>
-      </optgroup>
-    </select>
-    <div id="legRows"></div>
-    <div style="font-family:var(--mono);font-size:10px;color:var(--dimmer);letter-spacing:0.5px;line-height:1.4;margin-top:5px;max-width:128px;">Pin ring repeats the tier (soliddotted) for colorblind clarity. Size = enrollment.</div>
-    <div id="blsLegend" style="display:none;margin-top:8px;border-top:1px solid rgba(74,122,155,0.15);padding-top:8px;">
-      <div class="leg-title" style="color:var(--green);">BLS Salary</div>
-      <div class="leg-row"><div class="leg-dot" style="background:#006400;"></div>&gt;$200K</div>
-      <div class="leg-row"><div class="leg-dot" style="background:#228B22;"></div>$160–200K</div>
-      <div class="leg-row"><div class="leg-dot" style="background:#4A9B6B;"></div>$130–160K</div>
-      <div class="leg-row"><div class="leg-dot" style="background:#8FBC8F;"></div>&lt;$130K</div>
-    </div>
-  </div>
+  <!-- Map color legend now lives in the left panel (#mlSection). -->
 
   <!-- BLS state hover card -->
   <div id="blsCard" class="bls-state-info"></div>
@@ -1700,13 +1694,8 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
 
 <!-- MAP FOOTER BAR -->
 <div id="mapFooter" style="position:fixed;bottom:0;left:0;right:0;z-index:98;background:rgba(4,13,23,0.97);border-top:1px solid rgba(74,122,155,0.2);display:flex;align-items:center;gap:0;height:36px;overflow:hidden;">
-  <div style="display:flex;align-items:center;gap:8px;padding:0 14px;border-right:1px solid rgba(74,122,155,0.15);height:100%;">
-    <img data-img="png" style="width:18px;height:18px;border-radius:2px;" alt="Exhibit">
-    <span style="font-family:var(--serif);font-size:15px;font-weight:700;color:var(--white);">Exhibit <em style="font-style:normal;color:var(--orange);font-size:11px;font-family:var(--mono);font-weight:400;margin-left:3px;">by 509α</em></span>
-  </div>
   <div style="display:flex;align-items:center;height:100%;flex:1;overflow:hidden;">
-    <a class="mf-accent" href="https://docs.google.com/forms/d/e/1FAIpQLScvkEp7vEwHAtpbMbk06AmtdUqHTy595OiQFcNBanSBXm0qDA/viewform?usp=publish-editor" target="_blank" style="display:flex;align-items:center;gap:6px;padding:0 14px;height:100%;border-right:1px solid rgba(74,122,155,0.12);text-decoration:none;font-family:var(--mono);font-size:12px;color:var(--orange);letter-spacing:0.5px;white-space:nowrap;font-weight:600;">Sign up for email updates</a>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLScvkEp7vEwHAtpbMbk06AmtdUqHTy595OiQFcNBanSBXm0qDA/viewform?usp=publish-editor" target="_blank" style="display:flex;align-items:center;gap:5px;padding:0 14px;height:100%;border-right:1px solid rgba(74,122,155,0.12);text-decoration:none;font-family:var(--mono);font-size:12px;color:#A78BFA;letter-spacing:0.5px;white-space:nowrap;"><svg width="14" height="14" viewBox="0 0 48 48" fill="none"><path d="M30 2H10C7.8 2 6 3.8 6 6v36c0 2.2 1.8 4 4 4h28c2.2 0 4-1.8 4-4V14L30 2z" fill="#7B4FD4"/><path d="M30 2v12h12L30 2z" fill="#5E35B1"/><path d="M20 22h-4v2h4v-2zm12 0H24v2h8v-2zm-12 6h-4v2h4v-2zm12 0H24v2h8v-2zm-12 6h-4v2h4v-2zm12 0H24v2h8v-2z" fill="white"/></svg> Feedback</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLScvkEp7vEwHAtpbMbk06AmtdUqHTy595OiQFcNBanSBXm0qDA/viewform?usp=publish-editor" target="_blank" style="display:flex;align-items:center;gap:5px;padding:0 14px;height:100%;border-right:1px solid rgba(74,122,155,0.12);text-decoration:none;font-family:var(--mono);font-size:12px;color:#A78BFA;letter-spacing:0.5px;white-space:nowrap;"><svg width="14" height="14" viewBox="0 0 48 48" fill="none"><path d="M30 2H10C7.8 2 6 3.8 6 6v36c0 2.2 1.8 4 4 4h28c2.2 0 4-1.8 4-4V14L30 2z" fill="#7B4FD4"/><path d="M30 2v12h12L30 2z" fill="#5E35B1"/><path d="M20 22h-4v2h4v-2zm12 0H24v2h8v-2zm-12 6h-4v2h4v-2zm12 0H24v2h8v-2zm-12 6h-4v2h4v-2zm12 0H24v2h8v-2z" fill="white"/></svg> Email list</a>
     <a href="terms.html" style="display:flex;align-items:center;gap:6px;padding:0 14px;height:100%;border-right:1px solid rgba(74,122,155,0.12);text-decoration:none;font-family:var(--mono);font-size:12px;color:#FDE68A;letter-spacing:0.5px;white-space:nowrap;">Terms · Privacy</a>
     <a href="#" onclick="relaunchTour();return false;" style="display:flex;align-items:center;gap:6px;padding:0 14px;height:100%;border-right:1px solid rgba(74,122,155,0.12);text-decoration:none;font-family:var(--mono);font-size:12px;color:#5AABCB;letter-spacing:0.5px;white-space:nowrap;">Take the tour</a>
     <span id="shareWidget" style="display:flex;align-items:center;gap:6px;padding:0 12px;height:100%;border-right:1px solid rgba(74,122,155,0.12);"></span>
@@ -1732,7 +1721,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
     <div class="modal-trend" id="mTrend"></div>
     <div class="modal-ft">
       <span class="modal-ftn"><span style="color:#4A9B6B;">●</span> Sourced from <a href="https://abarequireddisclosures.org/" target="_blank" style="color:var(--blue);text-decoration:none;">abarequireddisclosures.org</a> · Last synced May 31, 2026 · <a href="methodology.html" style="color:var(--blue);text-decoration:none;">Methodology</a></span>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLScvkEp7vEwHAtpbMbk06AmtdUqHTy595OiQFcNBanSBXm0qDA/viewform?usp=publish-editor" class="modal-ftcta" target="_blank">Sign up for email updates</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScvkEp7vEwHAtpbMbk06AmtdUqHTy595OiQFcNBanSBXm0qDA/viewform?usp=publish-editor" class="modal-ftcta" target="_blank">Email list</a>
     </div>
   </div>
 </div>
@@ -1772,8 +1761,8 @@ function fmtUSD(v){ return v==null?"—":"$"+v.toLocaleString(); }
 // ═══════════════════════════════════════════════════════════════════════════
 const DATA_INVARIANTS = {
   total_schools: 208,         // 197 active/newly + 11 closed/transitioning (now included as historical entries)
-  schools_inline: 208,        // all inline as of v1.18.2 — closed entries surface their pre-closure history
-  year_count: 15              // 2011–2025 inclusive (15-year span; pre-2018 added in v1.18.2 from Historic + v2 sheets)
+  schools_inline: 208,        // all inline as of v1.19.2 — closed entries surface their pre-closure history
+  year_count: 15              // 2011–2025 inclusive (15-year span; pre-2018 added in v1.19.2 from Historic + v2 sheets)
 };
 // Verifiable count of the data cells actually shipped inline on this page:
 // every non-null scalar field, plus every per-year trend entry, across S.
@@ -1842,7 +1831,7 @@ function populateHeaderStats(){
 // ── Lazy-load full dataset (deferred until first deep-dive interaction) ──
 // Callers: `const ext = await loadFullDataset();` parsed JSON, or null on fail.
 // Subsequent calls return the cached object. Concurrent calls share one fetch.
-// Wired in v1.18.2 — schoolDetailHTML calls getSchoolHistory(id) which awaits
+// Wired in v1.19.2 — schoolDetailHTML calls getSchoolHistory(id) which awaits
 // this loader, then renders deep-history charts (employment evolution etc.) into
 // late-paint slots once data is available.
 window.EXT = window.EXT || { data: null, loading: null, byId: null };
@@ -2043,7 +2032,7 @@ function searchTypeaheadKey(e){
   }
 }
 
-// Disclaimer banner is now persistent (per v1.18.2 owner directive) — no dismiss; always visible.
+// Disclaimer banner is now persistent (per v1.19.2 owner directive) — no dismiss; always visible.
 // ── COOKIE notice dismiss (persists via localStorage) ──
 // ── Light/Dark theme toggle (persists via localStorage). Note: many inline styles
 // use literal rgba(4,13,23,...) and won't fully invert — full theming would require
@@ -2159,7 +2148,7 @@ function openMobileMenu(){
     + '<a class="mm-link" href="about.html">About Exhibit</a>'
     + '<a class="mm-link" href="contact.html">Contact<span class="mm-sub">Email, LinkedIn, Skool community</span></a>'
     + '<a class="mm-link" href="terms.html">Terms · Privacy</a>'
-    + '<a class="mm-link" href="https://docs.google.com/forms/d/e/1FAIpQLScvkEp7vEwHAtpbMbk06AmtdUqHTy595OiQFcNBanSBXm0qDA/viewform?usp=publish-editor" target="_blank">Sign up for email updates / Leave feedback</a>'
+    + '<a class="mm-link" href="https://docs.google.com/forms/d/e/1FAIpQLScvkEp7vEwHAtpbMbk06AmtdUqHTy595OiQFcNBanSBXm0qDA/viewform?usp=publish-editor" target="_blank">Email list</a>'
     + '</div>';
   m.classList.add('open');
   document.body.style.overflow='hidden';
@@ -2206,8 +2195,8 @@ let panelOpen = true, blsOn = false, blsLayers = [];
 let currentSchool = null, spCurrentTab = 'overview';
 
 // ── Color helpers ─────────────────────────────────────────────────────────
-// Map color metric (owner-selectable dropdown above the legend). Changeable via setMapMetric().
-window.MAP_METRIC = window.MAP_METRIC || 'bar';
+// Map color metric. window.MAP_METRIC is defined below as a getter aliasing the
+// primary active layer (MAP_LAYERS[0]); see the "Active map layers" section.
 // Threshold tables per metric 4 tiers with the colorblind-safe ramp.
 // All job-type categories in the 509 dataset, each available as a map color metric.
 // Tier thresholds tuned per metric (low-share metrics like Solo or Academia use
@@ -2231,48 +2220,146 @@ const MAP_METRIC_TIERS = {
   biz:        { label:'Business / Industry',     valOf:s=>s.emp_biz_pct,                                  tiers:[ {min:15,c:'#4A9B6B',l:'at least 15%'}, {min:8, c:'#5AABCB',l:'8–14%'},  {min:3, c:'#FFA726',l:'3–7%'},  {min:-1,c:'#EF5350',l:'under 3%'} ] },
   edu:        { label:'Academia',                valOf:s=>s.emp_edu_pct,                                  tiers:[ {min:3, c:'#4A9B6B',l:'at least 3%'},  {min:1.5,c:'#5AABCB',l:'1.5–2.9%'},{min:0.5,c:'#FFA726',l:'0.5–1.4%'},{min:-1,c:'#EF5350',l:'under 0.5%'} ] }
 };
-function pinColor(input){
-  // Backward-compatible: if a numeric value is passed, treat it as the "bar" metric value (legacy callers).
-  // Otherwise compute from the school object using the current MAP_METRIC.
-  let val, tiers;
-  if(typeof input === 'number' || input == null){
-    val = input;
-    tiers = MAP_METRIC_TIERS.bar.tiers;
-  } else {
-    const cfg = MAP_METRIC_TIERS[window.MAP_METRIC] || MAP_METRIC_TIERS.bar;
-    val = cfg.valOf(input);
-    tiers = cfg.tiers;
-  }
+// ── Active map layers ──────────────────────────────────────────────────────
+// Up to 3 layers can be active at once; MAP_LAYERS[0] is the PRIMARY and colors
+// the pins. The others show only as legends + per-school values (tooltip/Overview).
+// window.MAP_METRIC is kept as an alias of the primary for backward compatibility.
+const MAX_LAYERS = 3;
+window.MAP_LAYERS = window.MAP_LAYERS || ['bar'];
+Object.defineProperty(window, 'MAP_METRIC', {
+  get(){ return window.MAP_LAYERS[0] || 'bar'; },
+  configurable:true
+});
+// Ordered metric groups for rendering the layer chips.
+const MAP_METRIC_GROUPS = [
+  { label:'Outcomes',     keys:['bar','ftlt','emp_bar'] },
+  { label:'By firm size', keys:['megalaw','biglaw','biglawall','mid','small','solo'] },
+  { label:'By sector',    keys:['gov','pi','clerk','clerk_fed','biz','edu'] }
+];
+
+function tierColorFor(metric, s){
+  const cfg = MAP_METRIC_TIERS[metric] || MAP_METRIC_TIERS.bar;
+  const val = cfg.valOf(s);
   if(val==null || isNaN(val)) return '#4A5A6A';
-  for(const t of tiers){ if(val >= t.min) return t.c; }
+  for(const t of cfg.tiers){ if(val >= t.min) return t.c; }
   return '#EF5350';
 }
+function pinColor(input){
+  // Backward-compatible: a bare number is treated as a legacy "bar" value.
+  if(typeof input === 'number' || input == null){
+    const tiers = MAP_METRIC_TIERS.bar.tiers;
+    if(input==null || isNaN(input)) return '#4A5A6A';
+    for(const t of tiers){ if(input >= t.min) return t.c; }
+    return '#EF5350';
+  }
+  // Otherwise color by the PRIMARY active layer.
+  return tierColorFor(window.MAP_LAYERS[0] || 'bar', input);
+}
+// Per-school tooltip string listing every active layer's value (primary first).
+function layerTipExtra(s){
+  return window.MAP_LAYERS.map(m=>{
+    const cfg = MAP_METRIC_TIERS[m]; if(!cfg) return '';
+    const v = cfg.valOf(s);
+    return ' · '+(v!=null?(Math.round(v*10)/10)+'%':'—')+' '+cfg.label;
+  }).join('');
+}
+function refreshMarkers(){
+  if(!(allMarkers && allMarkers.length)) return;
+  allMarkers.forEach(item=>{
+    const s = item.s;
+    if(s.closed_status) return; // closed pins keep their fixed grey style + closure tip
+    item.m.setStyle({ fillColor: pinColor(s) });
+    item.m.unbindTooltip();
+    item.m.bindTooltip(s.name+layerTipExtra(s), {className:'mtt',direction:'top'});
+  });
+}
+// Toggle a layer on/off, or promote it to primary if already active.
+function toggleLayer(m){
+  if(!MAP_METRIC_TIERS[m]) return;
+  const layers = window.MAP_LAYERS;
+  const idx = layers.indexOf(m);
+  if(idx === 0){
+    // Clicking the primary again is a no-op (can't drop the last colorer).
+  } else if(idx > 0){
+    // Already active but not primary → promote to primary.
+    layers.splice(idx,1); layers.unshift(m);
+  } else {
+    // Not active → add. If at cap, drop the oldest non-primary (last in list).
+    if(layers.length >= MAX_LAYERS) layers.pop();
+    layers.push(m);
+  }
+  renderLayerUI();
+  refreshMarkers();
+  try{ updateMapStats(); }catch(e){}
+}
+// Remove a layer (the × on a chip). Never removes the last remaining layer.
+function removeLayer(m){
+  const layers = window.MAP_LAYERS;
+  const idx = layers.indexOf(m);
+  if(idx < 0 || layers.length <= 1) return;
+  layers.splice(idx,1);
+  renderLayerUI();
+  refreshMarkers();
+  try{ updateMapStats(); }catch(e){}
+}
+// Back-compat shim: some callers (and the stats hook) still call setMapMetric.
 function setMapMetric(m){
   if(!MAP_METRIC_TIERS[m]) return;
-  window.MAP_METRIC = m;
-  renderLegendRows();
-  // Re-color all existing markers using the new metric
-  if(allMarkers && allMarkers.length){
-    allMarkers.forEach(item=>{
-      const s = item.s;
-      const val = MAP_METRIC_TIERS[m].valOf(s);
-      item.m.setStyle({ fillColor: pinColor(s) });
-      // Tooltip: rebuild to show the new metric value
-      const cfg = MAP_METRIC_TIERS[m];
-      const valStr = val!=null ? (Math.round(val*10)/10)+'%' : '—';
-      item.m.unbindTooltip();
-      item.m.bindTooltip(s.name+' · '+valStr+' '+cfg.label, {className:'mtt',direction:'top'});
-    });
-  }
+  const layers = window.MAP_LAYERS;
+  const idx = layers.indexOf(m);
+  if(idx>0){ layers.splice(idx,1); }
+  if(idx!==0) layers.unshift(m);
+  if(layers.length>MAX_LAYERS) layers.length=MAX_LAYERS;
+  renderLayerUI();
+  refreshMarkers();
 }
+// Render the clickable layer chips + the stacked per-layer legends.
+function renderLayerUI(){
+  const chipsEl = document.getElementById('mlChips');
+  if(chipsEl){
+    chipsEl.innerHTML = MAP_METRIC_GROUPS.map(g=>{
+      const chips = g.keys.map(k=>{
+        const pos = window.MAP_LAYERS.indexOf(k);
+        const on = pos>=0, primary = pos===0;
+        const cls = 'ml-chip'+(primary?' primary':on?' on':'');
+        const badge = primary ? '<span class="ml-badge">1°</span>' : (on?'<span class="ml-badge">'+(pos+1)+'</span>':'');
+        const x = on && !primary ? '<span class="ml-x" onclick="event.stopPropagation();removeLayer(\''+k+'\')">×</span>' : '';
+        return '<button class="'+cls+'" onclick="toggleLayer(\''+k+'\')" title="'+MAP_METRIC_TIERS[k].label+'">'+badge+MAP_METRIC_TIERS[k].label+x+'</button>';
+      }).join('');
+      return '<div class="ml-group"><div class="ml-group-l">'+g.label+'</div><div class="ml-group-chips">'+chips+'</div></div>';
+    }).join('');
+  }
+  renderLegendRows();
+}
+// Secondary-layer legends. The PRIMARY layer's tier breakdown is shown as the
+// animated count-bars in #msTiers (updateMapStats); here we render compact tier
+// ramps for the 2nd/3rd active layers so all active colors are documented.
 function renderLegendRows(){
-  const el = document.getElementById('legRows');
+  const el = document.getElementById('mlLegends');
   if(!el) return;
-  const cfg = MAP_METRIC_TIERS[window.MAP_METRIC] || MAP_METRIC_TIERS.bar;
-  // Ring style per tier mirrors pinStroke encoding for colorblind redundancy.
-  const ringStyles = ['border:2px solid rgba(255,255,255,0.85);','border:1px solid rgba(255,255,255,0.5);','border:1px dashed rgba(255,255,255,0.8);','border:1px dotted rgba(255,255,255,0.95);'];
-  el.innerHTML = cfg.tiers.map((t,i)=>'<div class="leg-row"><div class="leg-dot" style="background:'+t.c+';'+ringStyles[i]+'"></div>'+t.l+'</div>').join('')
-               + '<div class="leg-row"><div class="leg-dot" style="background:#4A5A6A;"></div>No data</div>';
+  const secondary = window.MAP_LAYERS.slice(1);
+  if(!secondary.length){ el.innerHTML=''; return; }
+  el.innerHTML = secondary.map(m=>{
+    const cfg = MAP_METRIC_TIERS[m]; if(!cfg) return '';
+    const rows = cfg.tiers.map(t=>'<span class="ml-leg-swatch" style="background:'+t.c+';" title="'+t.l+'"></span>').join('')
+               + '<span class="ml-leg-swatch" style="background:#4A5A6A;" title="No data"></span>';
+    return '<div class="ml-legend"><span class="ml-legend-h">'+cfg.label+'</span><span class="ml-leg-ramp">'+rows+'</span></div>';
+  }).join('');
+}
+// Compact "active map layers" read-out for the school Overview panel: shows the
+// value + tier swatch for each currently-active layer (primary marked).
+function activeLayerReadout(s){
+  if(!s || s.closed_status) return '';
+  const rows = window.MAP_LAYERS.map((m,i)=>{
+    const cfg = MAP_METRIC_TIERS[m]; if(!cfg) return '';
+    const v = cfg.valOf(s);
+    const c = tierColorFor(m,s);
+    const vs = v!=null ? (Math.round(v*10)/10)+'%' : '—';
+    const tag = i===0 ? '<span class="alr-primary">colors pin</span>' : '';
+    return '<div class="alr-row"><span class="alr-dot" style="background:'+c+';"></span>'
+      +'<span class="alr-label">'+cfg.label+tag+'</span><span class="alr-val" style="color:'+c+';">'+vs+'</span></div>';
+  }).join('');
+  return '<div class="sp-section alr-block"><div class="sp-sec-label">Active map layers</div>'+rows+'</div>';
 }
 function pinSize(e){ return !e?5:e>1200?11:e>600?8:e>200?6:5; }
 // Redundant, colorblind-safe ring cue (independent of fill hue + the dark basemap):
@@ -2453,7 +2540,7 @@ function findSchools(){
     if(match){ item.m.addTo(mapInst); item.m.setStyle({radius:pinSize(item.s.enr)+2,fillOpacity:1}); }
     else { item.m.remove(); }
   });
-  document.getElementById('mapCount').textContent = ordered.length+' schools shown';
+  { const mc=document.getElementById('mapCount'); if(mc) mc.textContent = ordered.length+' schools shown'; }
 }
 
 function flyToSchool(id){
@@ -2488,11 +2575,9 @@ function initMap(){
     const stroke = isClosed
       ? {color:'rgba(255,255,255,0.55)', weight:1.2, dashArray:'2,3'}
       : pinStroke(s.bar);
-    const cfg = MAP_METRIC_TIERS[window.MAP_METRIC] || MAP_METRIC_TIERS.bar;
-    const mapVal = cfg.valOf(s);
     const tipExtra = isClosed
       ? ' · '+s.closed_status
-      : (mapVal!=null?' · '+(Math.round(mapVal*10)/10)+'% '+cfg.label:'');
+      : layerTipExtra(s);
     const m = L.circleMarker([s.lat,s.lng],{
       radius: isClosed ? Math.max(4, (pinSize(s.enr)||5)-1) : pinSize(s.enr),
       fillColor: isClosed ? '#6B7280' : pinColor(s),
@@ -2503,18 +2588,42 @@ function initMap(){
     m.addTo(mapInst);
     allMarkers.push({m,s});
   });
-  document.getElementById('mapCount').textContent=allMarkers.length+' schools shown';
+  { const mc=document.getElementById('mapCount'); if(mc) mc.textContent=allMarkers.length+' schools shown'; }
 }
 
-// ── Map filters ───────────────────────────────────────────────────────────
-let currentMF = 'all';
+// ── Map filters (multi-select, AND across groups) ──────────────────────────
+// activeMF holds every selected subset filter. They NARROW the map (hide/show
+// pins); pin COLOR is independent (driven by the active map layers). Filters in
+// different groups combine with AND; the tier group (national/regional/local)
+// and fit group (safety/target/reach) are mutually exclusive, so picking a
+// second within a group replaces the first (AND of those would empty the map).
+const activeMF = new Set();
+const MF_TIER = ['national','regional','local'];
+const MF_FIT  = ['safety','target','reach'];
 function setMF(f,btn){
-  if(f) currentMF=f;
-  if(btn){
-    document.querySelectorAll('.mfb').forEach(b=>b.classList.remove('on'));
-    btn.classList.add('on');
+  if(!f){
+    // No-op selection change (callers that just want a re-filter, e.g. findSchools).
+    syncMFButtons(); filterPins(); return;
   }
+  if(f==='all'){
+    activeMF.clear();
+  } else if(activeMF.has(f)){
+    activeMF.delete(f);
+  } else {
+    // Within a mutually-exclusive group, swap out the prior pick.
+    if(MF_TIER.includes(f)) MF_TIER.forEach(x=>activeMF.delete(x));
+    if(MF_FIT.includes(f))  MF_FIT.forEach(x=>activeMF.delete(x));
+    activeMF.add(f);
+  }
+  syncMFButtons();
   filterPins();
+}
+function syncMFButtons(){
+  document.querySelectorAll('.mfb').forEach(b=>{
+    const k=b.dataset.mf;
+    if(k==='all') b.classList.toggle('on', activeMF.size===0);
+    else b.classList.toggle('on', activeMF.has(k));
+  });
 }
 
 // National/Regional/Local classification by LSAT-median rank within active inline S.
@@ -2539,19 +2648,20 @@ function filterPins(){
   const lsat=parseFloat(document.getElementById('fwLSAT').value);
   const tiers = _ensureSchoolTiers();
   let shown=0;
+  // Active tier/fit selection (at most one of each — enforced in setMF).
+  const tierSel = MF_TIER.find(x=>activeMF.has(x));
+  const fitSel  = MF_FIT.find(x=>activeMF.has(x));
   allMarkers.forEach(item=>{
     const s=item.s; let show=true;
     if(q&&!s.name.toLowerCase().includes(q)&&!s.full.toLowerCase().includes(q)) show=false;
-    if(show&&currentMF==='bar90'&&s.bar<90) show=false;
-    if(show&&currentMF==='lowcost'&&s.tui>35000) show=false;
-    if(show&&['national','regional','local'].includes(currentMF) && tiers[s.id]!==currentMF) show=false;
-    if(show&&['reach','target','safety'].includes(currentMF)){
-      if(fitClass(s,lsat,gpa)!==currentMF) show=false;
-    }
+    if(show&&activeMF.has('bar90')&&!(s.bar>=90)) show=false;
+    if(show&&activeMF.has('lowcost')&&!(s.tui<=35000)) show=false;
+    if(show&&tierSel && tiers[s.id]!==tierSel) show=false;
+    if(show&&fitSel && fitClass(s,lsat,gpa)!==fitSel) show=false;
     if(show){ item.m.setStyle({fillOpacity:0.9,radius:pinSize(s.enr)}); item.m.addTo(mapInst); shown++; }
     else { item.m.remove(); }
   });
-  document.getElementById('mapCount').textContent=shown+' schools shown';
+  { const mc=document.getElementById('mapCount'); if(mc) mc.textContent=shown+' schools shown'; }
 }
 
 // ── BLS overlay ───────────────────────────────────────────────────────────
@@ -2559,14 +2669,12 @@ function toggleBLS(){
   blsOn=!blsOn;
   const btn=document.getElementById('blsToggle');
   const leg=document.getElementById('blsLegend');
-  const legRows=document.getElementById('legRows');
-  const legSelect=document.getElementById('legSelect');
+  const mlSection=document.getElementById('mlSection');
   btn.classList.toggle('on',blsOn);
   if(leg) leg.style.display=blsOn?'block':'none';
-  // While the BLS salary overlay is on, hide the per-metric pin legend + its
-  // selector (they describe pin colors, which the overlay temporarily replaces).
-  if(legRows) legRows.style.display=blsOn?'none':'block';
-  if(legSelect) legSelect.style.display=blsOn?'none':'block';
+  // While the BLS salary overlay is on, hide the per-layer pin controls/legends
+  // (they describe pin colors, which the overlay temporarily replaces).
+  if(mlSection) mlSection.style.display=blsOn?'none':'block';
   if(blsOn) drawBLSLayer();
   else{ blsLayers.forEach(l=>l.remove()); blsLayers=[]; }
 }
@@ -2622,6 +2730,7 @@ function openSP(s){
   document.getElementById('spBody').style.display='block';
   // Make sure panel is visible
   document.getElementById('schoolPanel').classList.remove('hidden');
+  spPanelOpen = true;
   document.getElementById('spToggleBtn').textContent='School Info «';
   spTab('overview',document.querySelector('.sp-tab'));
 }
@@ -2700,6 +2809,7 @@ function spTab(tab, btn){
         +cmpBtnHTML(s.id, 'sp-act sp-act-cmp')
       +'</div>'+
       '<div class="sp-intro">A quick read-out of <strong>'+s.full+'</strong>. Scroll for cost, scholarships, bar pass, employment, and state market context.</div>'+
+      activeLayerReadout(s)+
       '<div class="sp-section"><div class="sp-sec-label">Admissions 2025</div><div class="sp-grid">'+
         '<div class="sp-metric"><span class="sp-metric-val" style="color:'+colorFor('lsat50',s.lsat50)+';">'+(s.lsat50||'—')+'</span><span class="sp-metric-label">LSAT Median</span><span class="sp-metric-sub">'+pctTriple(s.lsat25,s.lsat50,s.lsat75)+'</span>'+miniSpark(s.lsat_trend)+'</div>'+
         '<div class="sp-metric"><span class="sp-metric-val" style="color:'+colorFor('gpa50',s.gpa50)+';">'+(s.gpa50||'—')+'</span><span class="sp-metric-label">uGPA Median</span><span class="sp-metric-sub">'+pctTriple(s.gpa25,s.gpa50,s.gpa75)+'</span>'+miniSpark(s.gpa_trend)+'</div>'+
@@ -2859,7 +2969,7 @@ function lineChart(opts){
     const pv=years.map(y=>pin.vals?pin.vals[y]:null);
     let li=-1; for(let i=pv.length-1;i>=0;i--){ if(pv[i]!=null){ li=i; break; } }
     if(li>=0){ const v=pv[li], x=X(li), yy=Y(v), last=(li===years.length-1);
-      // Endpoint label placement rule (v1.18.2): if the line is RISING into the
+      // Endpoint label placement rule (v1.19.2): if the line is RISING into the
       // endpoint, drop the label BELOW the marker (clears the ascending line and
       // the top edge it would otherwise clip); if FALLING, lift it ABOVE. Clamp
       // to the chart box so it can never get cut off. The --chart-halo var gives a
@@ -2906,7 +3016,7 @@ function lineChart(opts){
 
 // ── Full school detail page (items 5 & 9): opens in a new tab via #school/<id> ─
 // ── Scholarship distribution ────────────────────────────────────────────────
-// Canonical buckets per owner directive (v1.18.2): student-favorability gradient.
+// Canonical buckets per owner directive (v1.19.2): student-favorability gradient.
 // "No grant" is DERIVED = 100 - (lt + mt + full + gt) — the source's none count is
 // known to be unreliable (negatives, mis-reports); the derivation guarantees the
 // stack sums to 100% and avoids fabricated bad data.
@@ -3203,7 +3313,7 @@ function outcomeFunnel(s){
 
 function navSchool(id){
   // HASH ROUTES — safest, work anywhere, no 404.html or server-side rewrites needed.
-  // Reverted from clean /school/<slug> paths in v1.18.2 because GH Pages without a
+  // Reverted from clean /school/<slug> paths in v1.19.2 because GH Pages without a
   // deployed 404.html serves real 404s for any unknown path. When the project moves
   // to a custom domain with rewrites (Netlify _redirects, Vercel rewrites, Cloudflare),
   // flip CLEAN_URLS to true and the deep-link helpers below will re-engage.
@@ -4495,12 +4605,14 @@ const MF_LABELS={all:'All schools',national:'National (T14)',regional:'Regional'
   bar90:'Bar ≥ 90%',lowcost:'Tuition < $35K',safety:'My Safeties',target:'My Targets',reach:'My Reaches'};
 function activeMapFilters(){
   const chips=[];
-  if(typeof currentMF!=='undefined' && currentMF && currentMF!=='all') chips.push(MF_LABELS[currentMF]||currentMF);
+  const sel = (typeof activeMF!=='undefined') ? [...activeMF] : [];
+  sel.forEach(f=>chips.push(MF_LABELS[f]||f));
   const srch=document.getElementById('mapSrch');
   if(srch && srch.value.trim()) chips.push('“'+escHtml(srch.value.trim())+'”');
   const g=document.getElementById('fwGPA'), l=document.getElementById('fwLSAT');
   const stats=[]; if(l&&l.value) stats.push('LSAT '+l.value); if(g&&g.value) stats.push('uGPA '+g.value);
-  if(stats.length && ['safety','target','reach'].includes(currentMF)) {/* already implied by MF chip */}
+  const fitActive = sel.some(f=>['safety','target','reach'].includes(f));
+  if(stats.length && fitActive) {/* already implied by the fit chip */}
   else if(stats.length) chips.push(stats.join(' / '));
   if(typeof blsOn!=='undefined' && blsOn) chips.push('BLS salary overlay');
   return chips;
@@ -4583,7 +4695,7 @@ function cmpHintInject(){
 
 populateHeaderStats();
 renderCompareTray();
-renderLegendRows();
+renderLayerUI();
 renderShareWidget();
 // ── Onboarding tour — guided spotlight showcase, dismissable, never auto-fires again ──
 function startTour(){
@@ -4598,9 +4710,9 @@ function startTour(){
       pos:'center'
     },
     {
-      title:'Switch the map\'s lens',
-      body:'The legend in the bottom-right is a dropdown. Color the map by FTLT employment, BigLaw %, public interest, clerkships, government — 14 metrics in all. Pick what matters to you and the country re-paints.',
-      target:'#mapLegend', pos:'left'
+      title:'Color the map by what matters',
+      body:'In the left panel, pick up to 3 layers — FTLT employment, BigLaw %, public interest, clerkships, government, 14 in all. The first colors the pins; click any active layer to promote it. Hover a pin to see all three.',
+      target:'#mlSection', pos:'right'
     },
     {
       title:'Filter by tier',
@@ -4847,13 +4959,24 @@ function openShareModal(){
   document.body.appendChild(m);
 }
 
-// Disclaimer bar removed v1.18.2 — --banner-h is hardcoded to 0 in the inline
+// Disclaimer bar removed v1.19.2 — --banner-h is hardcoded to 0 in the inline
 // <style> after the header; the dynamic syncBannerHeight observer is no longer
 // needed. Provenance lives in the footer.
 // Honor #school/X or #compare=… in URL on first load
 schoolRouter();
 showMap();
 schoolRouter();   // if opened via #school/<id> (new tab), render the detail page
+
+// On reload / back-forward-cache restore the map container may be measured before
+// layout settles → Leaflet caches a stale size and paints gray. Re-measure on
+// pageshow (covers both fresh loads and bfcache restores) whenever the map is up.
+window.addEventListener('pageshow', ()=>{
+  const mr=document.getElementById('mapRoot');
+  if(mapInst && mr && mr.style.display!=='none'){
+    requestAnimationFrame(()=>mapInst.invalidateSize());
+    setTimeout(()=>mapInst.invalidateSize(),200);
+  }
+});
 
 // ── PWA: register the service worker. Silently no-op on http (dev) and
 //    browsers without SW support. Errors don't disturb the main app.
