@@ -3,26 +3,45 @@
 **Last updated:** 2026-06-01
 **Repo:** `blakevrechek/exhibit509`
 **Live:** https://exhibit509.com (Cloudflare Pages, auto-deploys from `main`)
-**Current version:** `1.19.5` (see `VERSION`)
-**`main` HEAD:** `b1ef3a3` — *Merge: fix gray map (SW cross-origin) + icon 404s*
-**Working branch:** `claude/vibrant-keller-IdnyW` (currently == `main`'s content)
+**Current version:** `1.26.0` (see `VERSION`)
+**Working branch:** `claude/elegant-sagan-BZ3hC` → **PR #3** (NOT yet merged to `main`)
 
 ---
 
-## Roadmap / sequence (UPDATED — order changed by owner)
+## Roadmap / sequence
 
-1. **Desktop** — ✅ effectively done. Map layers/filters reworked, footer/header
-   cleaned, the gray-map bug is finally root-caused and fixed. Only the optional
-   live-browser audits below remain (axe/Lighthouse), and they're not blocking.
-2. **Data check** ← *NEXT.* Owner is doing an accuracy/integrity pass on the
-   dataset. See **DATA notes** below. (Owner was rebuilding a "bulletproof"
-   dataset in a separate chat — confirm whether that has landed before editing
-   data by hand.)
-3. **Mobile.** Full mobile pass — layout, touch targets, mobile menu/tab bar,
-   the bottom-sheet school panel, charts, perf on a phone. Not started.
+1. **Desktop** — ✅ done.
+2. **Data check + rev3 refresh** — ✅ done. The "bulletproof" rev3 dataset landed
+   (uploaded as `exhibit.7z` → `exhibit.db`; documented in `DATA_HANDOFF.md`). The
+   site dataset is now emitted from it — **rev3 controls 100%**. See **DATA notes**.
+3. **Display all the data** — ✅ done this session (PR #3). Full 15-yr history,
+   expanded profile/compare, demographics-evolution chart, provenance markers.
+4. **Mobile.** Full mobile pass — layout, touch targets, mobile menu/tab bar,
+   bottom-sheet school panel, charts, phone perf. **Not started — likely NEXT.**
 
-> Note: this reorders the old plan (was desktop → mobile → data). Owner now wants
-> **data check before mobile.**
+> ⚠ Everything below the data refresh lives on **PR #3**, not `main`. After merge,
+> **hard-reload once** on live to install the new service worker. No browser was
+> available in the build env, so all validation is structural (JS parses, data
+> integrity, link audit, SVG guard) — visual QA still wanted.
+
+---
+
+## rev3 emit pipeline (this session)
+
+The site data layer is regenerated from `exhibit.db` (rev3, 2011–2025, 203,811
+facts) by two scripts — re-run them if the DB updates:
+
+| Script | Produces |
+|---|---|
+| `scripts/emit_from_rev3.py` | `data/exhibit-data.js` (`S`): current-cycle scalars + derived %s + 15-yr `*_trend` overlay + `_adj` provenance. `FORKS` dict toggles sector basis / closed-school population / trend rebuild (all on). |
+| `scripts/emit_gz_from_rev3.py` | `data/exhibit_data.json.gz`: 2011–2026 history (rev3 core overlaid, v2 demographics/curriculum/raw preserved); also adds the 4 inline-only closed schools. |
+
+Both need the DB path: `--db /path/to/exhibit.db` (the DB is **not** in the repo;
+it ships in `exhibit.7z`). After either, run `build_school_pages.py` →
+`stamp_version.py` and bump `VERSION`.
+
+**Known data caveats:** Ohio Northern `schol_none_pct` 100.0 (bug in rev3 source);
+`enr_trend` (total-JD) and `cond_*_trend` carried over (rev3 lacks them).
 
 ---
 

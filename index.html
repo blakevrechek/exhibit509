@@ -2865,7 +2865,7 @@ function spTab(tab, btn){
       })()+
       (function(){var rt=realUSD(s.tui,s.state);var fr=fmrRent(s.state,'br_1');return ''+
       '<div class="sp-section"><div class="sp-sec-label">Cost &amp; Scholarships</div>'+
-        r('Resident Tuition',s.tui?'$'+s.tui.toLocaleString():'—',colorFor('tui',s.tui))+
+        r('Resident Tuition',(s.tui?'$'+s.tui.toLocaleString():'—')+adjMark(s,'tui'),colorFor('tui',s.tui))+
         r('COL-Adj. Tuition',rt!=null?'$'+rt.toLocaleString():'—',colorFor('tui',rt))+
         r('State 1BR Rent · FMR',fr!=null?'$'+fr.toLocaleString()+'/mo':'—','#7AAAC8')+
         r('Cond. Schol. Elim.',s.cond!==null&&s.cond!==undefined?s.cond+'%':'—',condC);})()+
