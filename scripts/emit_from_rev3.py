@@ -17,10 +17,10 @@ import json, re, sqlite3, argparse, sys
 
 # --- configurable definitional forks (defaults = conservative "no regression") ---
 FORKS = {
-    # employer-type sector %s: rev3 stores FTLT-only counts, but the live data was
-    # built from an all-employment-types numerator rev3 cannot reproduce. Carry over
-    # to avoid silently lowering every school's sector mix. Set True to adopt rev3 FTLT.
-    'sector_types_from_rev3': False,
+    # employer-type sector %s: "new data controls 100%" -> adopt rev3 FTLT-based values.
+    'sector_types_from_rev3': True,
+    # closed/inline-only schools: populate from rev3 final reporting year (gaps -> dashed in UI).
+    'populate_closed': True,
     # trends (*_trend): overlay rev3's full 2011-2025 series onto the current trends -
     # fills missing years + adopts bulletproof values, never drops a year rev3 lacks.
     'rebuild_trends': True,
@@ -175,8 +175,8 @@ def emit(db_path, data_js_path, out_path, report_path):
         # trend overlay runs for ALL schools (incl. closed) -> historical trajectory is additive
         if FORKS['rebuild_trends'] and yr is not None:
             overlay_trends(rec, wid, rid)
-        # closed / inline-only schools keep their stub current-cycle scalars (trends only, above)
-        if s.get('closed_status'):
+        # closed / inline-only schools: populate from rev3 final year too (new data controls 100%)
+        if s.get('closed_status') and not FORKS['populate_closed']:
             skipped_closed.append(wid); newS.append(rec); continue
         if yr is None:
             newS.append(rec); continue
