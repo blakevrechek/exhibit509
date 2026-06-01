@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Exhibit — Is law school worth it? Outcomes, cost & trajectory for every school</title>
-<meta name="description" id="metaDesc" content="Is a law degree worth it? Exhibit shows the outcomes, true cost, and 15-year trajectory of every ABA-accredited U.S. law school — bar passage, employment, salary context, tuition and scholarships — from the official ABA Standard 509 disclosures. Free, by 509α.">
+<title>Exhibit — Law school outcomes, cost &amp; trajectory for every school</title>
+<meta name="description" id="metaDesc" content="Exhibit shows the outcomes, true cost, and 15-year trajectory of every ABA-accredited U.S. law school — bar passage, employment, salary context, tuition and scholarships — from the official ABA Standard 509 disclosures. Free, by 509α.">
 <meta name="keywords" content="law school data, ABA 509, LSAT median, GPA median, bar passage rate, law school employment, law school tuition, law school scholarships, law school admissions, 509 disclosure">
 <meta name="author" content="509α">
 <meta name="robots" content="index,follow">
 <link rel="canonical" id="linkCanonical" href="https://exhibit509.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Exhibit by 509α">
-<meta property="og:title" id="ogTitle" content="Exhibit — Is law school worth it?">
+<meta property="og:title" id="ogTitle" content="Exhibit — Law school data by 509α">
 <meta property="og:description" id="ogDesc" content="Outcomes, true cost, and 15-year trajectory for every ABA-accredited U.S. law school — bar passage, employment, salary context, tuition. From the official ABA 509 disclosures.">
 <meta property="og:url" id="ogUrl" content="https://exhibit509.com/">
 <meta name="twitter:card" content="summary">
@@ -348,8 +348,9 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
    popover. data-tip carries the explanation; pure CSS so no JS hookups
    needed even when terms are injected dynamically. */
 .gl{border-bottom:1px dotted currentColor;cursor:help;position:relative;}
-.gl:hover::after,.gl:focus::after{content:attr(data-tip);position:absolute;left:50%;bottom:calc(100% + 8px);transform:translateX(-50%);max-width:340px;width:max-content;background:#0B1826;color:#F4F8FB;font-family:'Nunito',Manrope,sans-serif;font-size:13px;font-weight:500;line-height:1.5;letter-spacing:0;text-transform:none;padding:10px 14px;border:1px solid rgba(217,119,87,0.50);border-radius:4px;box-shadow:0 12px 32px rgba(0,0,0,0.55),0 0 0 1px rgba(217,119,87,0.18);z-index:9000;pointer-events:none;white-space:normal;}
-.gl:hover::before,.gl:focus::before{content:'';position:absolute;left:50%;bottom:calc(100% + 2px);transform:translateX(-50%);border:6px solid transparent;border-top-color:rgba(217,119,87,0.50);z-index:9000;pointer-events:none;}
+/* Tooltip popover is now rendered by a single body-appended JS element (#globalTip)
+   so it's always on top and clamped into the viewport — see initGlobalTooltip().
+   The old CSS ::after/::before popover is intentionally disabled to avoid doubles. */
 
 /* Skool + Counsel promo */
 .promo-block{border:1px solid rgba(74,122,155,0.18);margin-bottom:10px;overflow:hidden;}
@@ -366,12 +367,11 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .pb-counsel-header{border-top:3px solid var(--counsel);}
 
 /* Map filters bar */
-/* Map filters relocated v1.26.0 — top-of-map horizontal toolbar, docked between the
+/* Map filters relocated v1.27.0 — top-of-map horizontal toolbar, docked between the
    left Match Me / Compare sidebar (ends at 380px) and the always-open right school
    panel (400px), sitting just under the global header. The left sidebar is now
    reserved exclusively for Match Me + Compare. */
-#mapFilters{position:fixed;top:60px;left:394px;z-index:99;max-width:calc(100vw - 394px - 410px);display:flex;flex-direction:row;flex-wrap:wrap;gap:7px;align-items:center;background:rgba(4,13,23,0.72);border:1px solid rgba(217,119,87,0.32);border-left:3px solid var(--orange);border-radius:8px;padding:8px 12px;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 6px 20px rgba(0,0,0,0.35);}
-#mapFilters::before{content:'Search & overlays';font-family:var(--mono);font-size:10.5px;letter-spacing:1.6px;text-transform:uppercase;color:var(--orange);font-weight:700;margin-right:4px;flex:0 0 auto;width:100%;}
+#mapFilters{position:fixed;top:60px;left:394px;z-index:99;max-width:calc(100vw - 394px - 410px);display:flex;flex-direction:row;flex-wrap:wrap;gap:6px;align-items:center;background:rgba(4,13,23,0.72);border:1px solid rgba(217,119,87,0.32);border-left:3px solid var(--orange);border-radius:8px;padding:6px 10px;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 6px 20px rgba(0,0,0,0.35);}
 #mapFilters .map-search-wrap{width:220px;max-width:220px;margin-bottom:0;flex:0 0 auto;}
 #mapFilters.panel-hidden{display:none;}
 /* Category filter buttons, now docked in the left sidebar above the stats breakdown. */
@@ -444,7 +444,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
    header (school name + bar pass chip) isn't hidden by filter chips or the BLS
    tooltip card. Was top:76px causing the upper ~50px to be eaten. */
 /* schoolPanel sits at the natural top now that map-filter bar moved into the left
-   panel (v1.26.0) — frees ~50px of vertical space at the top of the right column. */
+   panel (v1.27.0) — frees ~50px of vertical space at the top of the right column. */
 #schoolPanel{position:fixed;top:76px;right:0;bottom:36px;width:400px;z-index:100;background:rgba(4,13,23,0.97);border-left:1px solid rgba(74,122,155,0.22);overflow-y:auto;transform:translateX(0);transition:transform .3s;}#schoolPanel.hidden{transform:translateX(100%);}
 #schoolPanel.open{transform:translateX(0);}
 .sp-close{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(4,13,23,0.98);border-bottom:1px solid rgba(74,122,155,0.15);}
@@ -454,12 +454,12 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .sp-tab{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border:1px solid rgba(74,122,155,0.2);background:transparent;color:var(--dim);cursor:pointer;transition:all .2s;}
 .sp-tab+.sp-tab{border-left:none;}
 .sp-tab.on{background:rgba(217,119,87,0.1);color:var(--orange);border-color:rgba(217,119,87,0.35);}
-/* School-panel (right side) typography tightened v1.26.0 — was visibly scaled-too-big
+/* School-panel (right side) typography tightened v1.27.0 — was visibly scaled-too-big
    per owner. Reduced metric/value sizes by ~15%, tighter section padding, smaller
    section labels, more breathable line-height. */
 .sp-header{padding:14px 16px 10px;border-bottom:1px solid rgba(74,122,155,0.12);}
-.sp-intro{font-family:var(--serif);font-size:13.5px;color:#A4C8DD;line-height:1.55;padding:10px 16px 14px;border-bottom:1px solid rgba(74,122,155,0.08);background:rgba(217,119,87,0.04);font-style:italic;}
-.sp-intro strong{color:var(--white);font-weight:600;font-style:normal;}
+.sp-intro{font-family:var(--sans);font-size:13px;color:#B8D4E6;line-height:1.55;padding:10px 16px 14px;border-bottom:1px solid rgba(74,122,155,0.08);background:rgba(217,119,87,0.04);}
+.sp-intro strong{color:var(--white);font-weight:700;}
 .sp-eye{font-family:var(--mono);font-size:11.5px;color:var(--orange);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:6px;font-weight:600;}
 .sp-name{font-family:var(--sans);font-size:18px;font-weight:800;color:var(--white);line-height:1.2;letter-spacing:-0.5px;margin-bottom:4px;}
 .sp-loc{font-family:var(--mono);font-size:12.5px;color:var(--dim);letter-spacing:1px;}
@@ -1127,8 +1127,8 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
 <noscript>
 <style>.ns-wrap{max-width:760px;margin:0 auto;padding:40px 22px;font-family:Georgia,serif;color:#F4F8FB;line-height:1.7;}.ns-wrap h1{font-family:'Nunito',sans-serif;font-size:32px;margin-bottom:6px;}.ns-wrap h2{font-family:'JetBrains Mono',monospace;font-size:14px;color:#D97757;text-transform:uppercase;letter-spacing:1.5px;margin-top:32px;}.ns-wrap a{color:#D97757;}.ns-wrap table{width:100%;border-collapse:collapse;margin:14px 0;}.ns-wrap th,.ns-wrap td{text-align:left;padding:6px 8px;border-bottom:1px solid rgba(74,122,155,0.2);font-size:13px;}.ns-wrap th{color:#D97757;font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;}body{background:#06111E;}</style>
 <div class="ns-wrap">
-<h1>Exhibit — Is law school worth it? Outcomes, cost &amp; trajectory by 509α</h1>
-<p>A free, public tool for answering whether a law degree is worth it: the outcomes, true cost, and 15-year trajectory of every ABA-accredited U.S. law school. Built on ABA Standard 509 disclosure data — bar passage, employment, salary context, tuition and scholarships — for 208 schools (197 currently accredited + 11 closed/transitioning with full historical record), every year from 2011 through 2025. This page requires JavaScript to render the interactive map and dashboards.</p>
+<h1>Exhibit — Law school outcomes, cost &amp; trajectory by 509α</h1>
+<p>A free, public tool showing the outcomes, true cost, and 15-year trajectory of every ABA-accredited U.S. law school. Built on ABA Standard 509 disclosure data — bar passage, employment, salary context, tuition and scholarships — for 208 schools (197 currently accredited + 11 closed/transitioning with full historical record), every year from 2011 through 2025. This page requires JavaScript to render the interactive map and dashboards.</p>
 <h2>What it covers</h2>
 <p>For every accredited U.S. law school, the underlying inline dataset contains: LSAT 25/50/75 percentiles, uGPA 25/50/75 percentiles, acceptance rate, applications + offers + enrollment, scholarship distribution across five buckets, sticker tuition (resident + non-resident), first-time bar pass, 2-year ultimate bar pass, full-time long-term employment, employment by firm size and sector (MegaLaw 500+, BigLaw 251–500, Mid 101–250, Small 2–100, Clerkships, Public Interest, Government, Business, Academia, Solo, Seeking), top destination states for graduates, transfers in and out — for every year from 2011 through 2025.</p>
 <h2>Data sources</h2>
@@ -1440,7 +1440,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
     More
   </button>
 </nav>
-<!-- Disclaimer bar removed v1.26.0 — provenance now lives in the footer. -->
+<!-- Disclaimer bar removed v1.27.0 — provenance now lives in the footer. -->
 <style>:root{--banner-h:0px;}</style>
 
 <div id="cookieBar" style="position:fixed;bottom:0;left:0;right:0;z-index:1000;background:#0B1826;border-top:1px solid rgba(217,119,87,0.4);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;box-shadow:0 -2px 12px rgba(0,0,0,0.5);">
@@ -1467,7 +1467,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
     </svg>
     <button class="ip-toggle" id="ipToggle" onclick="togglePanel()" title="Hide/show panel">«</button>
     <div class="ip-header">
-      <div class="ip-title">Is it <em>worth</em> it?<br>The evidence on every <span class="ip-law">law</span> school.</div>
+      <div class="ip-title">The <em>evidence</em><br>on every <span class="ip-law">law</span> school.</div>
       <div class="ip-sub">Outcomes, cost, and 15-year trajectory for every ABA-accredited law school. From the official ABA Standard 509 disclosures.</div>
     </div>
     <div class="ip-body">
@@ -1506,14 +1506,14 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
         </div>
       </div>
 
-      <!-- Compare CTA — lead with the outcomes/cost comparison (is-it-worth-it),
+      <!-- Compare CTA — lead with the outcomes/cost comparison,
            above the admissions-fit Match Me widget. -->
       <div class="cmp-cta-block" style="margin-top:0;border-top:none;padding-top:0;">
         <div class="fw-title" style="margin-top:0;">Compare the payoff</div>
         <p class="cmp-cta-desc">Pin up to 4 schools and line them up side-by-side — bar pass, employment, 3-yr net cost, debt-vs-salary, and 15-year trajectory. See which degree actually returns more.</p>
         <button class="fw-btn" onclick="openCompareFirstClass()">Open Compare</button>
       </div>
-      <!-- Match Me — admissions fit (secondary to the worth-it framing above) -->
+      <!-- Match Me — admissions fit (secondary to the outcomes/cost CTA above) -->
       <div class="find-widget">
         <div class="fw-title">Match Me · Can I get in?</div>
         <div class="fw-inputs">
@@ -1763,8 +1763,8 @@ function fmtUSD(v){ return v==null?"—":"$"+v.toLocaleString(); }
 // ═══════════════════════════════════════════════════════════════════════════
 const DATA_INVARIANTS = {
   total_schools: 208,         // 197 active/newly + 11 closed/transitioning (now included as historical entries)
-  schools_inline: 208,        // all inline as of v1.26.0 — closed entries surface their pre-closure history
-  year_count: 15              // 2011–2025 inclusive (15-year span; pre-2018 added in v1.26.0 from Historic + v2 sheets)
+  schools_inline: 208,        // all inline as of v1.27.0 — closed entries surface their pre-closure history
+  year_count: 15              // 2011–2025 inclusive (15-year span; pre-2018 added in v1.27.0 from Historic + v2 sheets)
 };
 // Verifiable count of the data cells actually shipped inline on this page:
 // every non-null scalar field, plus every per-year trend entry, across S.
@@ -1833,7 +1833,7 @@ function populateHeaderStats(){
 // ── Lazy-load full dataset (deferred until first deep-dive interaction) ──
 // Callers: `const ext = await loadFullDataset();` parsed JSON, or null on fail.
 // Subsequent calls return the cached object. Concurrent calls share one fetch.
-// Wired in v1.26.0 — schoolDetailHTML calls getSchoolHistory(id) which awaits
+// Wired in v1.27.0 — schoolDetailHTML calls getSchoolHistory(id) which awaits
 // this loader, then renders deep-history charts (employment evolution etc.) into
 // late-paint slots once data is available.
 window.EXT = window.EXT || { data: null, loading: null, byId: null };
@@ -2034,7 +2034,7 @@ function searchTypeaheadKey(e){
   }
 }
 
-// Disclaimer banner is now persistent (per v1.26.0 owner directive) — no dismiss; always visible.
+// Disclaimer banner is now persistent (per v1.27.0 owner directive) — no dismiss; always visible.
 // ── COOKIE notice dismiss (persists via localStorage) ──
 // ── Light/Dark theme toggle (persists via localStorage). Note: many inline styles
 // use literal rgba(4,13,23,...) and won't fully invert — full theming would require
@@ -2988,7 +2988,7 @@ function lineChart(opts){
     const pv=years.map(y=>pin.vals?pin.vals[y]:null);
     let li=-1; for(let i=pv.length-1;i>=0;i--){ if(pv[i]!=null){ li=i; break; } }
     if(li>=0){ const v=pv[li], x=X(li), yy=Y(v), last=(li===years.length-1);
-      // Endpoint label placement rule (v1.26.0): if the line is RISING into the
+      // Endpoint label placement rule (v1.27.0): if the line is RISING into the
       // endpoint, drop the label BELOW the marker (clears the ascending line and
       // the top edge it would otherwise clip); if FALLING, lift it ABOVE. Clamp
       // to the chart box so it can never get cut off. The --chart-halo var gives a
@@ -3035,7 +3035,7 @@ function lineChart(opts){
 
 // ── Full school detail page (items 5 & 9): opens in a new tab via #school/<id> ─
 // ── Scholarship distribution ────────────────────────────────────────────────
-// Canonical buckets per owner directive (v1.26.0): student-favorability gradient.
+// Canonical buckets per owner directive (v1.27.0): student-favorability gradient.
 // "No grant" is DERIVED = 100 - (lt + mt + full + gt) — the source's none count is
 // known to be unreliable (negatives, mis-reports); the derivation guarantees the
 // stack sums to 100% and avoids fabricated bad data.
@@ -3343,7 +3343,7 @@ function outcomeFunnel(s){
 
 function navSchool(id){
   // HASH ROUTES — safest, work anywhere, no 404.html or server-side rewrites needed.
-  // Reverted from clean /school/<slug> paths in v1.26.0 because GH Pages without a
+  // Reverted from clean /school/<slug> paths in v1.27.0 because GH Pages without a
   // deployed 404.html serves real 404s for any unknown path. When the project moves
   // to a custom domain with rewrites (Netlify _redirects, Vercel rewrites, Cloudflare),
   // flip CLEAN_URLS to true and the deep-link helpers below will re-engage.
@@ -4049,6 +4049,47 @@ async function paintDemoEvolution(s){
     if(html) slot.innerHTML = html; else slot.remove();
   } catch(e){ slot.remove(); }
 }
+// ── Global tooltip ──────────────────────────────────────────────────────────
+// One body-appended popover for every [data-tip] element (the .gl glossary terms,
+// adjusted/provenance flags, etc.). Body-level so no ancestor overflow/transform can
+// clip it; fixed-positioned and clamped to the viewport so it's never off-screen;
+// max z-index so it's always on top. Replaces the old CSS ::after popover.
+(function initGlobalTooltip(){
+  let tip=null, cur=null;
+  function el(){
+    if(tip) return tip;
+    tip=document.createElement('div');
+    tip.id='globalTip'; tip.setAttribute('role','tooltip');
+    tip.style.cssText='position:fixed;z-index:2147483000;max-width:min(340px,92vw);'
+      +'background:#0B1826;color:#F4F8FB;font-family:Nunito,Manrope,sans-serif;font-size:13px;'
+      +'font-weight:500;line-height:1.5;padding:10px 14px;border:1px solid rgba(217,119,87,0.55);'
+      +'border-radius:4px;box-shadow:0 12px 34px rgba(0,0,0,0.6);pointer-events:none;'
+      +'white-space:normal;display:none;opacity:0;transition:opacity .12s;';
+    document.body.appendChild(tip);
+    return tip;
+  }
+  function show(t){
+    const txt=t.getAttribute('data-tip'); if(!txt) return;
+    const d=el(); d.textContent=txt; d.style.display='block';
+    const r=t.getBoundingClientRect(), m=8, vw=innerWidth, vh=innerHeight;
+    const tw=d.offsetWidth, th=d.offsetHeight;
+    let left=r.left + r.width/2 - tw/2;
+    left=Math.max(m, Math.min(left, vw-tw-m));
+    let top=r.top - th - 10;                 // prefer above the element
+    if(top < m) top=r.bottom + 10;           // flip below if no room above
+    top=Math.max(m, Math.min(top, vh-th-m)); // clamp into the viewport
+    d.style.left=Math.round(left)+'px'; d.style.top=Math.round(top)+'px';
+    d.style.opacity='1'; cur=t;
+  }
+  function hide(){ if(tip){ tip.style.opacity='0'; tip.style.display='none'; } cur=null; }
+  document.addEventListener('mouseover',e=>{ const t=e.target.closest&&e.target.closest('[data-tip]'); if(t&&t!==cur) show(t); });
+  document.addEventListener('mouseout', e=>{ const t=e.target.closest&&e.target.closest('[data-tip]'); if(t&&t===cur) hide(); });
+  document.addEventListener('focusin', e=>{ const t=e.target.closest&&e.target.closest('[data-tip]'); if(t) show(t); });
+  document.addEventListener('focusout', hide);
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') hide(); });
+  window.addEventListener('scroll', hide, true);
+  window.addEventListener('resize', hide);
+})();
 //    via history.replaceState before we route. Lets /school/harvard-law load
 //    directly without the user ever seeing the 404 intermediary. ──────────────
 (function spaRestore(){
@@ -4402,7 +4443,8 @@ function renderCalc(){
     +' <strong>How "Est. grant" is estimated:</strong> if your LSAT and uGPA are both ≥ the school\'s 75th percentile (Safety), we use grant_p75. If both are ≥ 25th (Target), we use the median grant. Otherwise (Reach) we use grant_p25. Rough — actual offers vary hugely by cycle, essays, demographics, and yield.<br>'
     +' <strong>"3-yr net" = 3 × (sticker − est. grant)</strong>, ignoring fees and cost of living. <strong>"Loan interest"</strong> assumes the per-year borrow amount × 3 funds the program; payment uses standard fixed amortization at your stated rate over your stated term. <strong>"Net price"</strong> = 3-yr net tuition + 3-yr living + total loan interest — your all-in cost: the price of the degree, the cost of living while you earn it, and the cost of financing it.<br>'
     +' Sticker is <strong>resident</strong> when your home state matches the school\'s state, otherwise non-resident (if reported).<br>'
-    +' Loan math is illustrative — confirm current Grad PLUS and private rates before deciding. School figures sourced from ABA 509, last synced May 2026.'
+    +' Loan math is illustrative — confirm current Grad PLUS and private rates before deciding. School figures sourced from ABA 509, last synced May 2026.<br>'
+    +' Federal aid eligibility &amp; the One Big Beautiful Bill Act loan changes: <a href="https://fsapartners.ed.gov/knowledge-center/library/electronic-announcements/2026-04-24/one-big-beautiful-bill-act-nslds-eligibility-processing-updates-updated-may-7-2026" target="_blank" rel="noopener" style="color:var(--orange);text-decoration:underline;">Federal Student Aid — NSLDS eligibility &amp; OBBBA updates &rarr;</a>'
     +'</div>';
   renderCalcResults();
 }
@@ -4598,8 +4640,8 @@ function renderTransfers(){
     + allYears.map(y=>'<option value="'+y+'"'+(y===defaultYear?' selected':'')+'>'+y+'</option>').join('')
     +'</select></div>'
     +'<div class="tr-grid">'
-    +'  <div class="tr-col"><div class="tr-col-t"><em>Outflow</em>Transfers OUT</div><div id="trOut"></div></div>'
-    +'  <div class="tr-col"><div class="tr-col-t"><em>Inflow</em>Transfers IN</div><div id="trIn"></div></div>'
+    +'  <div class="tr-col"><div class="tr-col-t"><em>Outflow</em>Transfers <span style="color:var(--orange)">OUT</span></div><div id="trOut"></div></div>'
+    +'  <div class="tr-col"><div class="tr-col-t"><em>Inflow</em>Transfers <span style="color:var(--orange)">IN</span></div><div id="trIn"></div></div>'
     +'</div>'
     +'<div class="tr-note">'
     +'〜 The mini line on each row is that school\'s <strong>full-history transfer trend</strong> (earliest reported year latest); a dashed segment marks years the school didn\'t report.<br>'
@@ -5082,7 +5124,7 @@ function openShareModal(){
   document.body.appendChild(m);
 }
 
-// Disclaimer bar removed v1.26.0 — --banner-h is hardcoded to 0 in the inline
+// Disclaimer bar removed v1.27.0 — --banner-h is hardcoded to 0 in the inline
 // <style> after the header; the dynamic syncBannerHeight observer is no longer
 // needed. Provenance lives in the footer.
 // Honor #school/X or #compare=… in URL on first load

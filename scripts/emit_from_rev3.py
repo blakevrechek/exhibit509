@@ -183,6 +183,19 @@ def emit(db_path, data_js_path, out_path, report_path):
             if merged != before:
                 diffs.setdefault('schol_trend', []).append((wid, 'updated', len(merged)))
             rec['schol_trend'] = merged
+        # sanitize enr_trend (carried-over v2 total-JD enrollment): drop implausibly
+        # tiny points (a real JD program can't have ~0-3 total students) so the chart
+        # shows a dashed gap instead of a corrupt spike (e.g. Montana 2021=3, Howard 0).
+        et = rec.get('enr_trend')
+        if et:
+            yvals = [v for k, v in et.items() if re.match(r'\d{4}', k) and isinstance(v, (int, float)) and v > 0]
+            if len(yvals) >= 4:
+                med = sorted(yvals)[len(yvals) // 2]
+                for k in [k for k in et if re.match(r'\d{4}', k)]:
+                    v = et.get(k)
+                    if isinstance(v, (int, float)) and v < 0.4 * med and v < 60:
+                        diffs.setdefault('enr_trend_sanitized', []).append((wid + '@' + k, v, None))
+                        del et[k]
 
     skipped_closed = []
     newS = []
