@@ -11,6 +11,7 @@ The site is a re-organization of public data — we do not survey schools, gener
 - [About](https://exhibit509.com/about.html): Project background, data sources at a glance, what we don't do (no paid rankings, no tracking, no gated access, no recommendations).
 - [Terms & Privacy](https://exhibit509.com/terms.html): Terms of use + privacy policy + cookie disclosure.
 - Per-school pages (static, crawlable, one per school): `https://exhibit509.com/school/<slug>.html` — each carries the full 2011–2025 trajectory table, a FAQ, and JSON-LD (CollegeOrUniversity + Dataset + FAQPage). Example: https://exhibit509.com/school/harvard-university.html
+- Markdown twin of every school page (cleanest input for LLMs): `https://exhibit509.com/school/<slug>.md`. Example: https://exhibit509.com/school/harvard-university.md
 - Ranked answer pages: [Highest bar passage](https://exhibit509.com/rankings/highest-bar-passage.html), [Best value](https://exhibit509.com/rankings/best-value-law-schools.html), [Cheapest](https://exhibit509.com/rankings/cheapest-law-schools.html), [Most BigLaw](https://exhibit509.com/rankings/highest-biglaw-placement.html).
 - Per-state hubs (one per state): `https://exhibit509.com/state/<state>.html` — every school in a state ranked, with a prose lede. Example: https://exhibit509.com/state/texas.html
 - [Bulk open dataset (JSON, all schools)](https://exhibit509.com/exhibit-dataset.json): one canonical file for retrieval/training. License: https://exhibit509.com/terms.html

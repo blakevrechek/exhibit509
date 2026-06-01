@@ -19,6 +19,17 @@
 /sw.js
   Cache-Control: public, max-age=0, must-revalidate
 
+# Markdown twins of school pages: serve inline as UTF-8 markdown (not a download)
+# so AI crawlers read them directly. Short cache so data refreshes propagate.
+/school/*.md
+  Content-Type: text/markdown; charset=utf-8
+  Cache-Control: public, max-age=600, must-revalidate
+
+# Bulk open dataset: readable JSON, short cache (changes on each data refresh).
+/exhibit-dataset.json
+  Content-Type: application/json; charset=utf-8
+  Cache-Control: public, max-age=600, must-revalidate
+
 # Manifest, robots, sitemap, llms.txt: short cache.
 /manifest.json
   Cache-Control: public, max-age=3600

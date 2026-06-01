@@ -239,6 +239,96 @@ def build_faq(s, full):
     return qa
 
 
+def seo_title(s, full):
+    """Bake the standout stat(s) into <title> for higher search CTR + cleaner LLM
+    extraction. Falls back gracefully when the headline numbers are missing."""
+    bits = []
+    if s.get("bar") is not None:
+        bits.append(f"{s['bar']}% bar pass")
+    if s.get("ftlt_pct") is not None:
+        bits.append(f"{s['ftlt_pct']}% employed")
+    if not bits and s.get("lsat50") is not None:
+        bits.append(f"LSAT {s['lsat50']}")
+    if bits:
+        return f"{full}: {', '.join(bits[:2])} — ABA 509 data"
+    return f"{full} — ABA 509 data (2011–2025) · Exhibit"
+
+
+def md_table_traj(sid, full):
+    yrs = HISTORY.get(sid)
+    if not yrs:
+        return ""
+    years = sorted(yrs.keys())
+    hdr = "| Year | " + " | ".join(h for _, h, _ in TRAJ_COLS) + " |"
+    sep = "|---" * (len(TRAJ_COLS) + 1) + "|"
+    rows = []
+    for y in years:
+        obj = yrs[y]
+        cells = " | ".join(fmt(obj.get(k)) for k, _, fmt in TRAJ_COLS)
+        rows.append(f"| {y} | {cells} |")
+    return "## 15-year trajectory (2011–2025)\n\n" + hdr + "\n" + sep + "\n" + "\n".join(rows) + "\n"
+
+
+def render_markdown(s):
+    """A clean Markdown twin of each school page — the cleanest possible LLM input,
+    generated from the same data. Served at /school/<slug>.md."""
+    sid = s["id"]
+    slug = slugify(sid)
+    full = s.get("full") or s.get("name") or "Unknown"
+    state = s.get("state") or ""
+    canonical = f"{SITE_URL}/school/{slug}.html"
+
+    def g(k):
+        return s.get(k)
+
+    def line(label, val):
+        return f"- **{label}:** {val}"
+
+    lines = [f"# {full} — ABA Standard 509 data", ""]
+    if s.get("closed_status"):
+        lines.append(f"> Status: {s['closed_status']}. Final reported disclosures + full historical record below.\n")
+    lines.append(
+        f"{full}{f' ({state})' if state else ''} — ABA 509 disclosure data, 2011–2025. "
+        f"Synced {SYNCED}. Source: ABA Required Disclosures (abarequireddisclosures.org). "
+        f"Canonical: {canonical}\n"
+    )
+    lines.append("## Admissions (most recent cycle)\n")
+    lines += [
+        line("LSAT (25/50/75)", f"{g('lsat25') or '—'} / {g('lsat50') or '—'} / {g('lsat75') or '—'}"),
+        line("uGPA (25/50/75)", f"{fmt_gpa(g('gpa25'))} / {fmt_gpa(g('gpa50'))} / {fmt_gpa(g('gpa75'))}"),
+        line("Acceptance rate", fmt_pct(g("acc"))),
+        line("Applications / offers", f"{fmt_int(g('apps'))} / {fmt_int(g('offers'))}"),
+        line("1L / total JD enrollment", f"{fmt_int(g('enr_1l'))} / {fmt_int(g('enr'))}"),
+    ]
+    lines.append("\n## Cost & scholarships\n")
+    lines += [
+        line("Resident / non-resident tuition", f"{fmt_usd(g('tui'))} / {fmt_usd(g('nrt'))}"),
+        line("Median grant", fmt_usd(g("grant_med"))),
+        line("No-grant share", fmt_pct(g("schol_none_pct"))),
+    ]
+    lines.append("\n## Bar passage & employment\n")
+    lines += [
+        line("First-time bar (most recent cohort)", fmt_pct(g("bar"))),
+        line("Two-year ultimate bar", fmt_pct(g("bar_2yr"))),
+        line("State average (same exam)", fmt_pct(g("bar_state_avg"))),
+        line("FTLT employment", fmt_pct(g("ftlt_pct"))),
+        line("BigLaw + MegaLaw (251+ attys)", fmt_pct((g("emp_biglaw_pct") or 0) + (g("emp_megalaw_pct") or 0)) if (g("emp_biglaw_pct") is not None or g("emp_megalaw_pct") is not None) else "—"),
+    ]
+    lines.append("\n> Note: bar passage / employment describe graduates who entered ~3 years before the admissions figures above — different cohorts.\n")
+    traj = md_table_traj(sid, full)
+    if traj:
+        lines.append("\n" + traj)
+    faq = build_faq(s, full)
+    if faq:
+        lines.append("\n## Common questions\n")
+        for q, a in faq:
+            lines.append(f"**{q}**\n\n{a}\n")
+    lines.append(f"\n---\nSource: ABA Standard 509 Required Disclosure for {full}. "
+                 f"Methodology: {SITE_URL}/methodology.html. Cite: Exhibit, \"ABA 509 data for {full},\" "
+                 f"exhibit509.com, synced {SYNCED}.\n")
+    return "\n".join(lines)
+
+
 def render_page(s):
     sid = s["id"]
     slug = slugify(sid)
@@ -266,7 +356,7 @@ def render_page(s):
         f"tuition {fmt_usd(tui)}." if tui else "",
     ]
     desc = " ".join(x for x in desc_parts if x).strip()
-    title = f"{full} — ABA 509 data · Exhibit"
+    title = seo_title(s, full)
 
     # ── Schema.org JSON-LD (CollegeOrUniversity) ────────────────
     ld = {
@@ -941,18 +1031,20 @@ def main():
 
     os.makedirs(OUT_DIR, exist_ok=True)
     written = 0
+    md_written = 0
     for s in S:
         try:
-            page = render_page(s)
             slug = slugify(s["id"])
-            path = os.path.join(OUT_DIR, f"{slug}.html")
-            with open(path, "w") as f:
-                f.write(page)
+            with open(os.path.join(OUT_DIR, f"{slug}.html"), "w") as f:
+                f.write(render_page(s))
             written += 1
+            with open(os.path.join(OUT_DIR, f"{slug}.md"), "w") as f:
+                f.write(render_markdown(s))
+            md_written += 1
         except Exception as e:
             print(f"  ! Failed {s.get('id')}: {e}")
 
-    print(f"Wrote {written} static school pages to {OUT_DIR}/")
+    print(f"Wrote {written} static school pages + {md_written} Markdown twins to {OUT_DIR}/")
     rank_slugs = build_ranking_pages(S)
     print(f"Wrote {len(rank_slugs)} ranked answer pages to {RANK_DIR}/")
     state_slugs = build_state_pages(S)
