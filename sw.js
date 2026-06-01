@@ -6,7 +6,7 @@
 //   • Other same-origin assets (data.js, fonts, self-hosted Leaflet, manifest) →
 //     stale-while-revalidate; they're versioned/stable so instant-from-cache is fine.
 //   • Cross-origin (Carto tiles, fonts) → network-first, cache as offline fallback.
-const CACHE = 'exhibit-v1.19.4';
+const CACHE = 'exhibit-v1.19.5';
 // Relative URLs resolve against the SW script location (the deploy root, e.g.
 // /Exhibit/sw.js → entries cache as /Exhibit/index.html etc.). Hardcoding absolute
 // paths like '/index.html' would resolve to the host root and fail on GH Pages
@@ -35,11 +35,16 @@ self.addEventListener('fetch', e => {
   const req = e.request;
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
+  // CROSS-ORIGIN (Carto map tiles, any CDN): do NOT intercept. Leaflet fetches
+  // tiles no-cors → opaque responses; routing them through the SW broke with
+  // NS_ERROR_INTERCEPTION_FAILED in Firefox and left the basemap gray. Let the
+  // browser fetch them natively.
+  if (url.origin !== location.origin) return;
   // HTML navigations: NETWORK-FIRST so a refresh always gets the live page.
   // (mode==='navigate' covers reloads/links; also catch explicit .html requests.)
   const isHTML = req.mode === 'navigate'
-    || (url.origin === location.origin && /\.html?$/.test(url.pathname))
-    || (url.origin === location.origin && url.pathname.endsWith('/'));
+    || /\.html?$/.test(url.pathname)
+    || url.pathname.endsWith('/');
   if (isHTML) {
     e.respondWith(
       fetch(req).then(resp => {
@@ -53,29 +58,16 @@ self.addEventListener('fetch', e => {
     return;
   }
   // Other same-origin assets: stale-while-revalidate.
-  if (url.origin === location.origin) {
-    e.respondWith(
-      caches.match(req).then(hit => {
-        const fetchAndUpdate = fetch(req).then(resp => {
-          if (resp && resp.status === 200) {
-            const clone = resp.clone();
-            caches.open(CACHE).then(c => c.put(req, clone));
-          }
-          return resp;
-        }).catch(() => hit);
-        return hit || fetchAndUpdate;
-      })
-    );
-    return;
-  }
-  // Cross-origin (CDN tiles, fonts, Leaflet): network-first, cache as fallback.
   e.respondWith(
-    fetch(req).then(resp => {
-      if (resp && resp.status === 200 && (url.host.includes('basemaps.cartocdn') || url.host.includes('cdnjs') || url.host.includes('fonts.googleapis') || url.host.includes('fonts.gstatic'))) {
-        const clone = resp.clone();
-        caches.open(CACHE).then(c => c.put(req, clone));
-      }
-      return resp;
-    }).catch(() => caches.match(req))
+    caches.match(req).then(hit => {
+      const fetchAndUpdate = fetch(req).then(resp => {
+        if (resp && resp.status === 200) {
+          const clone = resp.clone();
+          caches.open(CACHE).then(c => c.put(req, clone));
+        }
+        return resp;
+      }).catch(() => hit);
+      return hit || fetchAndUpdate;
+    })
   );
 });
