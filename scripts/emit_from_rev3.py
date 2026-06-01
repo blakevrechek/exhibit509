@@ -234,6 +234,17 @@ def emit(db_path, data_js_path, out_path, report_path):
         # --- derived: bar_state_diff ---
         if f.get('bar_pct') is not None and f.get('bar_state_avg') is not None:
             setf(rec, wid, 'bar_state_diff', r1(f['bar_pct'] - f['bar_state_avg']))
+        # --- provenance: which current-cycle fields rev3 sanitized (adjusted=1) ---
+        adj = {}
+        for wf, rm in (('tui', 'res_tui'), ('nrt', 'nr_tui')):
+            row = cur.execute("SELECT adjust_rule FROM fact_school_year WHERE school_id=? AND year=? "
+                              "AND metric=? AND adjusted=1", (rid, yr, rm)).fetchone()
+            if row and row[0]:
+                adj[wf] = row[0]
+        if adj:
+            rec['_adj'] = adj
+        elif '_adj' in rec:
+            del rec['_adj']
         newS.append(rec)
 
     # write candidate: splice new S back into the original file (preserve BLS/RPP/FMR + header)

@@ -366,7 +366,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .pb-counsel-header{border-top:3px solid var(--counsel);}
 
 /* Map filters bar */
-/* Map filters relocated v1.23.0 — top-of-map horizontal toolbar, docked between the
+/* Map filters relocated v1.24.0 — top-of-map horizontal toolbar, docked between the
    left Match Me / Compare sidebar (ends at 380px) and the always-open right school
    panel (400px), sitting just under the global header. The left sidebar is now
    reserved exclusively for Match Me + Compare. */
@@ -444,7 +444,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
    header (school name + bar pass chip) isn't hidden by filter chips or the BLS
    tooltip card. Was top:76px causing the upper ~50px to be eaten. */
 /* schoolPanel sits at the natural top now that map-filter bar moved into the left
-   panel (v1.23.0) — frees ~50px of vertical space at the top of the right column. */
+   panel (v1.24.0) — frees ~50px of vertical space at the top of the right column. */
 #schoolPanel{position:fixed;top:76px;right:0;bottom:36px;width:400px;z-index:100;background:rgba(4,13,23,0.97);border-left:1px solid rgba(74,122,155,0.22);overflow-y:auto;transform:translateX(0);transition:transform .3s;}#schoolPanel.hidden{transform:translateX(100%);}
 #schoolPanel.open{transform:translateX(0);}
 .sp-close{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(4,13,23,0.98);border-bottom:1px solid rgba(74,122,155,0.15);}
@@ -454,7 +454,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .sp-tab{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border:1px solid rgba(74,122,155,0.2);background:transparent;color:var(--dim);cursor:pointer;transition:all .2s;}
 .sp-tab+.sp-tab{border-left:none;}
 .sp-tab.on{background:rgba(217,119,87,0.1);color:var(--orange);border-color:rgba(217,119,87,0.35);}
-/* School-panel (right side) typography tightened v1.23.0 — was visibly scaled-too-big
+/* School-panel (right side) typography tightened v1.24.0 — was visibly scaled-too-big
    per owner. Reduced metric/value sizes by ~15%, tighter section padding, smaller
    section labels, more breathable line-height. */
 .sp-header{padding:14px 16px 10px;border-bottom:1px solid rgba(74,122,155,0.12);}
@@ -1440,7 +1440,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
     More
   </button>
 </nav>
-<!-- Disclaimer bar removed v1.23.0 — provenance now lives in the footer. -->
+<!-- Disclaimer bar removed v1.24.0 — provenance now lives in the footer. -->
 <style>:root{--banner-h:0px;}</style>
 
 <div id="cookieBar" style="position:fixed;bottom:0;left:0;right:0;z-index:1000;background:#0B1826;border-top:1px solid rgba(217,119,87,0.4);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;box-shadow:0 -2px 12px rgba(0,0,0,0.5);">
@@ -1763,8 +1763,8 @@ function fmtUSD(v){ return v==null?"—":"$"+v.toLocaleString(); }
 // ═══════════════════════════════════════════════════════════════════════════
 const DATA_INVARIANTS = {
   total_schools: 208,         // 197 active/newly + 11 closed/transitioning (now included as historical entries)
-  schools_inline: 208,        // all inline as of v1.23.0 — closed entries surface their pre-closure history
-  year_count: 15              // 2011–2025 inclusive (15-year span; pre-2018 added in v1.23.0 from Historic + v2 sheets)
+  schools_inline: 208,        // all inline as of v1.24.0 — closed entries surface their pre-closure history
+  year_count: 15              // 2011–2025 inclusive (15-year span; pre-2018 added in v1.24.0 from Historic + v2 sheets)
 };
 // Verifiable count of the data cells actually shipped inline on this page:
 // every non-null scalar field, plus every per-year trend entry, across S.
@@ -1833,7 +1833,7 @@ function populateHeaderStats(){
 // ── Lazy-load full dataset (deferred until first deep-dive interaction) ──
 // Callers: `const ext = await loadFullDataset();` parsed JSON, or null on fail.
 // Subsequent calls return the cached object. Concurrent calls share one fetch.
-// Wired in v1.23.0 — schoolDetailHTML calls getSchoolHistory(id) which awaits
+// Wired in v1.24.0 — schoolDetailHTML calls getSchoolHistory(id) which awaits
 // this loader, then renders deep-history charts (employment evolution etc.) into
 // late-paint slots once data is available.
 window.EXT = window.EXT || { data: null, loading: null, byId: null };
@@ -2034,7 +2034,7 @@ function searchTypeaheadKey(e){
   }
 }
 
-// Disclaimer banner is now persistent (per v1.23.0 owner directive) — no dismiss; always visible.
+// Disclaimer banner is now persistent (per v1.24.0 owner directive) — no dismiss; always visible.
 // ── COOKIE notice dismiss (persists via localStorage) ──
 // ── Light/Dark theme toggle (persists via localStorage). Note: many inline styles
 // use literal rgba(4,13,23,...) and won't fully invert — full theming would require
@@ -2220,7 +2220,12 @@ const MAP_METRIC_TIERS = {
   clerk:      { label:'Clerkships (all)',     valOf:s=>s.emp_clk_pct,                                  tiers:[ {min:20,c:'#4A9B6B',l:'at least 20%'}, {min:10,c:'#5AABCB',l:'10–19%'}, {min:5, c:'#FFA726',l:'5–9%'},  {min:-1,c:'#EF5350',l:'under 5%'} ] },
   clerk_fed:  { label:'Federal clerkships',   valOf:s=>s.emp_clk_fed_pct,                              tiers:[ {min:10,c:'#4A9B6B',l:'at least 10%'}, {min:5, c:'#5AABCB',l:'5–9%'},   {min:2, c:'#FFA726',l:'2–4%'},  {min:-1,c:'#EF5350',l:'under 2%'} ] },
   biz:        { label:'Business / Industry',     valOf:s=>s.emp_biz_pct,                                  tiers:[ {min:15,c:'#4A9B6B',l:'at least 15%'}, {min:8, c:'#5AABCB',l:'8–14%'},  {min:3, c:'#FFA726',l:'3–7%'},  {min:-1,c:'#EF5350',l:'under 3%'} ] },
-  edu:        { label:'Academia',                valOf:s=>s.emp_edu_pct,                                  tiers:[ {min:3, c:'#4A9B6B',l:'at least 3%'},  {min:1.5,c:'#5AABCB',l:'1.5–2.9%'},{min:0.5,c:'#FFA726',l:'0.5–1.4%'},{min:-1,c:'#EF5350',l:'under 0.5%'} ] }
+  edu:        { label:'Academia',                valOf:s=>s.emp_edu_pct,                                  tiers:[ {min:3, c:'#4A9B6B',l:'at least 3%'},  {min:1.5,c:'#5AABCB',l:'1.5–2.9%'},{min:0.5,c:'#FFA726',l:'0.5–1.4%'},{min:-1,c:'#EF5350',l:'under 0.5%'} ] },
+  // Cost & admissions (tuition + acceptance are "lower = better" — ramp inverted)
+  tuition:    { label:'Resident tuition',        valOf:s=>s.tui,                                          tiers:[ {min:60000,c:'#EF5350',l:'$60K+'}, {min:45000,c:'#FFA726',l:'$45–60K'}, {min:30000,c:'#5AABCB',l:'$30–45K'}, {min:-1,c:'#4A9B6B',l:'under $30K'} ] },
+  lsat:       { label:'LSAT median',             valOf:s=>s.lsat50,                                       tiers:[ {min:165,c:'#4A9B6B',l:'at least 165'}, {min:158,c:'#5AABCB',l:'158–164'}, {min:151,c:'#FFA726',l:'151–157'}, {min:-1,c:'#EF5350',l:'under 151'} ] },
+  accept:     { label:'Acceptance (selectivity)',valOf:s=>s.acc,                                          tiers:[ {min:50,c:'#EF5350',l:'50%+ admit'}, {min:35,c:'#FFA726',l:'35–49%'}, {min:20,c:'#5AABCB',l:'20–34%'}, {min:-1,c:'#4A9B6B',l:'under 20%'} ] },
+  bar2yr:     { label:'2-yr ultimate bar',       valOf:s=>s.bar_2yr,                                      tiers:[ {min:90,c:'#4A9B6B',l:'at least 90%'}, {min:80,c:'#5AABCB',l:'80–89%'}, {min:70,c:'#FFA726',l:'70–79%'}, {min:-1,c:'#EF5350',l:'under 70%'} ] }
 };
 // ── Active map layers ──────────────────────────────────────────────────────
 // Up to 3 layers can be active at once; MAP_LAYERS[0] is the PRIMARY and colors
@@ -2236,9 +2241,17 @@ Object.defineProperty(window, 'MAP_METRIC', {
 const MAP_METRIC_GROUPS = [
   { label:'Outcomes',     keys:['bar','ftlt','emp_bar'] },
   { label:'By firm size', keys:['megalaw','biglaw','biglawall','mid','small','solo'] },
-  { label:'By sector',    keys:['gov','pi','clerk','clerk_fed','biz','edu'] }
+  { label:'By sector',    keys:['gov','pi','clerk','clerk_fed','biz','edu'] },
+  { label:'Cost & admissions', keys:['tuition','lsat','accept','bar2yr'] }
 ];
 
+// Unit-aware formatting for a map-layer value (most are %, but tuition is $ and LSAT is a score).
+function layerFmt(metric, v){
+  if(v==null || isNaN(v)) return '—';
+  if(metric==='tuition') return '$'+Math.round(v).toLocaleString();
+  if(metric==='lsat') return String(Math.round(v));
+  return (Math.round(v*10)/10)+'%';
+}
 function tierColorFor(metric, s){
   const cfg = MAP_METRIC_TIERS[metric] || MAP_METRIC_TIERS.bar;
   const val = cfg.valOf(s);
@@ -2262,7 +2275,7 @@ function layerTipExtra(s){
   return window.MAP_LAYERS.map(m=>{
     const cfg = MAP_METRIC_TIERS[m]; if(!cfg) return '';
     const v = cfg.valOf(s);
-    return ' · '+(v!=null?(Math.round(v*10)/10)+'%':'—')+' '+cfg.label;
+    return ' · '+layerFmt(m,v)+' '+cfg.label;
   }).join('');
 }
 function refreshMarkers(){
@@ -2370,7 +2383,7 @@ function activeLayerReadout(s){
     const cfg = MAP_METRIC_TIERS[m]; if(!cfg) return '';
     const v = cfg.valOf(s);
     const c = tierColorFor(m,s);
-    const vs = v!=null ? (Math.round(v*10)/10)+'%' : '—';
+    const vs = layerFmt(m,v);
     const tag = i===0 ? '<span class="alr-primary">colors pin</span>' : '';
     return '<div class="alr-row"><span class="alr-dot" style="background:'+c+';"></span>'
       +'<span class="alr-label">'+cfg.label+tag+'</span><span class="alr-val" style="color:'+c+';">'+vs+'</span></div>';
@@ -2975,7 +2988,7 @@ function lineChart(opts){
     const pv=years.map(y=>pin.vals?pin.vals[y]:null);
     let li=-1; for(let i=pv.length-1;i>=0;i--){ if(pv[i]!=null){ li=i; break; } }
     if(li>=0){ const v=pv[li], x=X(li), yy=Y(v), last=(li===years.length-1);
-      // Endpoint label placement rule (v1.23.0): if the line is RISING into the
+      // Endpoint label placement rule (v1.24.0): if the line is RISING into the
       // endpoint, drop the label BELOW the marker (clears the ascending line and
       // the top edge it would otherwise clip); if FALLING, lift it ABOVE. Clamp
       // to the chart box so it can never get cut off. The --chart-halo var gives a
@@ -3022,7 +3035,7 @@ function lineChart(opts){
 
 // ── Full school detail page (items 5 & 9): opens in a new tab via #school/<id> ─
 // ── Scholarship distribution ────────────────────────────────────────────────
-// Canonical buckets per owner directive (v1.23.0): student-favorability gradient.
+// Canonical buckets per owner directive (v1.24.0): student-favorability gradient.
 // "No grant" is DERIVED = 100 - (lt + mt + full + gt) — the source's none count is
 // known to be unreliable (negatives, mis-reports); the derivation guarantees the
 // stack sums to 100% and avoids fabricated bad data.
@@ -3097,6 +3110,17 @@ function adjFlag(adj, what){
   const tip=(what||'Value')+' re-derived from the grant buckets: source reported '
     +adj.src+'%, shown as '+adj.derived+'% (100 − Σ grant buckets). The ABA 509 "no-grant" count is frequently mis-reported.';
   return '<span class="adj-flag gl" data-tip="'+tip.replace(/"/g,'&quot;')+'" tabindex="0">adjusted</span>';
+}
+// Provenance marker for fields the rev3 pipeline sanitized (currently tuition).
+// s._adj is {field: rule}. Renders a small dagger with an explanatory tooltip so a
+// number like a per-credit school's annualized tuition isn't mistaken for an error.
+function adjMark(s, field){
+  const rule = s && s._adj && s._adj[field];
+  if(!rule) return '';
+  let tip = 'Adjusted: '+rule+'.';
+  if(/per-credit/i.test(rule)) tip = 'Annualized from the school’s per-credit tuition (≈29 credits/year) — the school does not file a flat annual figure. Reversible to the original 509 cell.';
+  else if(/semester/i.test(rule)) tip = 'Doubled from a per-semester figure to an annual amount. Reversible to the original 509 cell.';
+  return '<sup class="adj-flag gl" data-tip="'+tip.replace(/"/g,'&quot;')+'" tabindex="0" style="cursor:help;color:var(--orange);font-size:0.7em;margin-left:2px;">†</sup>';
 }
 // 100%-stacked scholarship distribution by year. X-axis starts at the OLDEST year
 // with data and runs to the present; interior years lacking data are marked missing.
@@ -3319,7 +3343,7 @@ function outcomeFunnel(s){
 
 function navSchool(id){
   // HASH ROUTES — safest, work anywhere, no 404.html or server-side rewrites needed.
-  // Reverted from clean /school/<slug> paths in v1.23.0 because GH Pages without a
+  // Reverted from clean /school/<slug> paths in v1.24.0 because GH Pages without a
   // deployed 404.html serves real 404s for any unknown path. When the project moves
   // to a custom domain with rewrites (Netlify _redirects, Vercel rewrites, Cloudflare),
   // flip CLEAN_URLS to true and the deep-link helpers below will re-engage.
@@ -3776,8 +3800,8 @@ function schoolDetailHTML(s){
       '</div>'+
       // ── 2. COST & SCHOLARSHIPS — what it costs ──────────────────────────
       '<div class="dp-card"><div class="dp-card-t">2 · Cost &amp; Scholarships 2025</div>'+
-        row('Resident Tuition',usd(s.tui) + trajBadge(s.tui_trend,{dir:'desc',fmt:v=>'$'+Math.round(Math.abs(v)/1000)+'K'}),colorFor('tui',s.tui))+
-        row('Non-Resident',s.nrt&&s.nrt!==s.tui?usd(s.nrt):'Same as resident')+
+        row('Resident Tuition',usd(s.tui) + adjMark(s,'tui') + trajBadge(s.tui_trend,{dir:'desc',fmt:v=>'$'+Math.round(Math.abs(v)/1000)+'K'}),colorFor('tui',s.tui))+
+        row('Non-Resident',s.nrt&&s.nrt!==s.tui?usd(s.nrt)+adjMark(s,'nrt'):'Same as resident')+
         row('COL-Adj. Tuition',usd(realUSD(s.tui,s.state)))+
         row('Fees',usd(s.ft_fee))+row('Living (est.)',usd(s.living))+
         row('Median Grant',usd(s.grant_med))+
@@ -4992,7 +5016,7 @@ function openShareModal(){
   document.body.appendChild(m);
 }
 
-// Disclaimer bar removed v1.23.0 — --banner-h is hardcoded to 0 in the inline
+// Disclaimer bar removed v1.24.0 — --banner-h is hardcoded to 0 in the inline
 // <style> after the header; the dynamic syncBannerHeight observer is no longer
 // needed. Provenance lives in the footer.
 // Honor #school/X or #compare=… in URL on first load
