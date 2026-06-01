@@ -73,7 +73,7 @@ body{padding-top:52px;padding-bottom:42px;}
 <header class="gh"><a class="gh-logo" href="index.html"><b>Exhibit <em>by 509α</em></b></a><nav class="gh-nav"><a href="index.html">Map</a><a href="index.html#view=profiles">Schools</a><a href="index.html#view=states">States</a><a href="index.html#view=transfers">Transfers</a><a href="index.html#view=calc">Net price</a><a href="methodology.html" class="on">Methodology</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav><a class="gh-cta" href="https://docs.google.com/forms/d/e/1FAIpQLScvkEp7vEwHAtpbMbk06AmtdUqHTy595OiQFcNBanSBXm0qDA/viewform?usp=publish-editor" target="_blank" rel="noopener">Email updates</a></header>
 <div class="wrap">
   <a class="back" href="index.html">Back to Exhibit</a>
-  <div class="eyebrow">Methodology · v1.22.0</div>
+  <div class="eyebrow">Methodology · v1.23.0</div>
   <h1>How Exhibit works</h1>
   <div class="sub">Where each number comes from · how we classify schools · how we refresh · how we handle data anomalies.</div>
 
@@ -113,23 +113,24 @@ body{padding-top:52px;padding-bottom:42px;}
 
   <h2>Employment outcomes</h2>
   <p>FTLT Employment = "Full-Time, Long-Term, JD-Required or JD-Advantage" employment 10 months after graduation, per the school's ABA 509 outcome report. We display it as both a percent of the graduating class and an estimated graduate count (<code>graduates × pct / 100</code>).</p>
-  <p>The 10-category employment breakdown (MegaLaw 500+ / BigLaw 251-500 / Mid 101-250 / Small 2-100 / Clerkships / Public Interest / Government / Business / Academia / Solo / Seeking) is reported by the school in the same disclosure. We rank rows by applicant-mental-model desirability rather than alphabetically. The "vs national average" delta on each row compares the school's percent against the unweighted average across all 197 reporting schools.</p>
+  <p>The 10-category employment breakdown (MegaLaw 500+ / BigLaw 251-500 / Mid 101-250 / Small 2-100 / Clerkships / Public Interest / Government / Business / Academia / Solo / Seeking) is reported by the school in the same disclosure. We rank rows by applicant-mental-model desirability rather than alphabetically. The "vs national average" delta on each row compares the school's percent against the unweighted average across all currently reporting schools.</p>
 
   <h2>Trend charts + the 15-year history</h2>
   <p>Every line chart on the site is built from year-by-year ABA 509 disclosures back to 2011. Where a metric was not collected in a given year (most notably the bar pass cadence change 2012-2017), the chart renders a <strong>dashed bridge</strong> through the missing years with hollow markers labeled <em>"YYYY not reported (interpolated)"</em>. The interpolation is for visual continuity only — we never replace null values with synthetic numbers anywhere a real cell exists.</p>
 
   <h2>Data quality + outlier handling</h2>
-  <p>Two source files are reconciled — a hand-maintained <a href="https://docs.google.com/spreadsheets/d/1iFHIkqiZ1_VdMkpblE4yvuOe0Q5PJuu6BZHXMDDtlqo/edit?usp=sharing" target="_blank" rel="noopener">"Historic" spreadsheet</a> (treated as primary because it has been spot-checked against PDFs since 2011) and a machine-generated <a href="https://docs.google.com/spreadsheets/d/1PUvqEXyQp02Has5t2ko2cQWVoWtoB0DiQQuWHxiarXQ/edit?usp=sharing" target="_blank" rel="noopener">"v2" spreadsheet</a> (used to fill gaps the Historic file does not cover). The two files agree on 91.8% of overlapping cells; remaining disagreements are documented in a separate file shared with the maintainers.</p>
-  <!-- TODO: replace https://docs.google.com/spreadsheets/d/1iFHIkqiZ1_VdMkpblE4yvuOe0Q5PJuu6BZHXMDDtlqo/edit?usp=sharing and https://docs.google.com/spreadsheets/d/1PUvqEXyQp02Has5t2ko2cQWVoWtoB0DiQQuWHxiarXQ/edit?usp=sharing with the actual Google Sheets URLs once published. -->
+  <p>Every figure is rebuilt directly from the primary ABA Standard 509 disclosure workbooks for each reporting year, 2011 – 2025, into a single normalized store: <strong>203,811 individual facts</strong> across 77 metrics, plus roughly <strong>2.2 million raw cells</strong> retained verbatim so the original demographic and per-category detail is never lost. The build is deterministic and idempotent and passes with <strong>zero unresolved validation exceptions across all fifteen years</strong>; every transformation is reversible to the original public cell.</p>
+  <p>The hard part is that the ABA renamed and re-shaped its files repeatedly over fifteen years — the 2016 wholesale file renames, the 2023 employment relabeling, the pre-2017 long-format bar files that report pass rates per jurisdiction rather than per school. Exhibit resolves every column by <em>semantic</em> meaning (cross-year, label-independent) rather than by trusting a header, because the same label often points at different things in different years and the same number hides under different labels.</p>
 
-  <h3>Sanitization rules applied at inline time</h3>
+  <h3>Sanitization rules (deterministic, reproducible every build)</h3>
   <ul>
-    <li><strong>Negative scholarship counts</strong> in Historic (a known reporting artifact in 2015 and 2024 for ~10 schools) are nulled, not interpolated.</li>
-    <li><strong>Bar pass rates</strong> reported as fractions instead of percents are auto-normalized to %.</li>
-    <li><strong>Tuition values</strong> within a school's history that are 1.8× – 3.5× that school's whole-trend median are flagged as semester-misreports and halved; values above 3.5× the median are nulled. (This catches the small set of schools that briefly reported a per-academic-year credit-cost rather than an annual figure.)</li>
-    <li><strong>Per-credit-only schools</strong> (≈33 in 2025) are converted to annual using ≈ 29 credits per full-time academic year, the standard JD pacing.</li>
+    <li><strong>Scholarship "no-grant" share is re-derived</strong> as 100 − Σ(the four grant-size buckets), because the source's own none-count is unreliable (it produces negatives and over-100 totals). Cells where the source and derived values diverge by ≥ 0.6 pp are flagged as adjusted.</li>
+    <li><strong>Bar pass rates</strong> reported as fractions rather than percents are normalized to %; the authoritative figure is the ABA-published composite school pass rate.</li>
+    <li><strong>First-time bar takers &lt; passers</strong> (impossible) — the corrupt takers cell is nulled while the published pass-rate and passer count are kept.</li>
+    <li><strong>LSAT / uGPA 25th &gt; 75th</strong> — a source 25↔75 column transposition; swapped back to monotonic (the median sits correctly between).</li>
+    <li><strong>Tuition:</strong> a <code>0</code> in a tuition / LSAT / uGPA field (a teach-out year or a per-credit-only school) is nulled rather than shown as a real zero. True per-credit rates (&lt; $8,000/credit) are annualized at ≈ 29 credits per full-time year; semester figures (2018 – 2020, ≈ 0.5× the first confirmed-annual year) are doubled.</li>
   </ul>
-  <p>Every transformation is reversible from the original public disclosure. The methodology is public; the input files are public; the transformations are documented above.</p>
+  <p>Where a metric was genuinely not reported for a school-year, the cell stays empty — the UI renders it as <code>—</code> or a dashed gap in charts, never a fabricated number.</p>
 
   <h2>Refresh cadence</h2>
   <p>The ABA publishes Standard 509 disclosures once per year, typically in the December–February window for the prior calendar year's data. We re-sync within the month following each ABA release. The "Last synced" date at the top of this page and in the disclaimer bar always reflects the most recent inline pull.</p>
