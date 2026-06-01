@@ -3439,6 +3439,21 @@ const CMP_METRICS=[
   {k:'_cpb',  l:'$ per BigLaw seat', hi:-1, fmt:v=>v!=null?'$'+Math.round(v/1000)+'K':'—', valFn:costPerBigLaw},
   {k:'_cpp',  l:'$ per bar passer',  hi:-1, fmt:v=>v!=null?'$'+Math.round(v/1000)+'K':'—', valFn:costPerBarPass},
   {k:'enr',   l:'Total enrollment',  hi:0,  fmt:v=>v!=null?v.toLocaleString():'—'},
+  {k:'enr_1l',l:'1L enrolled',       hi:0,  fmt:v=>v!=null?v.toLocaleString():'—'},
+  {k:'acc',   l:'Offers made',       hi:0,  fmt:v=>v!=null?v.toLocaleString():'—', valFn:s=>s.offers},
+  // Outcome detail — uses the rev3 employment breakdown.
+  {k:'bar_state_diff',l:'Bar vs state', hi:1, fmt:v=>v!=null?(v>0?'+':'')+v+'pt':'—'},
+  {k:'_blplus',l:'BigLaw+ (251+ atty)', hi:1, fmt:v=>v!=null?v.toFixed(1)+'%':'—', valFn:s=>(s.emp_megalaw_pct!=null||s.emp_biglaw_pct!=null)?(s.emp_megalaw_pct||0)+(s.emp_biglaw_pct||0):null},
+  {k:'emp_clk_pct',l:'Clerkships',   hi:1,  fmt:v=>v!=null?v+'%':'—'},
+  {k:'emp_gov_pct',l:'Government',    hi:0,  fmt:v=>v!=null?v+'%':'—'},
+  {k:'emp_pi_pct', l:'Public interest',hi:0, fmt:v=>v!=null?v+'%':'—'},
+  {k:'emp_seek_pct',l:'Still seeking',hi:-1, fmt:v=>v!=null?v+'%':'—'},
+  {k:'fac_total',l:'Faculty (FT+PT)', hi:0,  fmt:v=>v!=null?v.toLocaleString():'—'},
+  {k:'_sfr', l:'Students / faculty',  hi:-1, fmt:v=>v!=null?v.toFixed(1):'—', valFn:s=>(s.enr&&s.fac_total)?s.enr/s.fac_total:null},
+  {k:'atr_1l',l:'1L attrition',       hi:-1, fmt:v=>v!=null?Math.round(v).toLocaleString():'—'},
+  {k:'trans_in',l:'Transfers in',     hi:0,  fmt:v=>v!=null?v.toLocaleString():'—'},
+  {k:'cond',  l:'Cond. schol. elim.', hi:-1, fmt:v=>v!=null?v+'%':'—'},
+  {k:'nrt',   l:'Non-resident tuition',hi:-1, fmt:v=>v?'$'+v.toLocaleString():'—'},
   {k:'bls_mean',l:'State atty mean wage',hi:1,fmt:v=>v?'$'+v.toLocaleString():'—'}
 ];
 // ── Compare view chart helpers ──────────────────────────────────────────────
@@ -3494,9 +3509,13 @@ function cmpTrendChart(schools, trendKey, title, yfmt){
 function cmpTrends(schools){
   return [
     cmpTrendChart(schools,'bar_trend','First-time bar pass · %',v=>Math.round(v)+'%'),
+    cmpTrendChart(schools,'bar_2yr_trend','2-yr ultimate bar · %',v=>Math.round(v)+'%'),
     cmpTrendChart(schools,'lsat_trend','LSAT median',v=>Math.round(v)),
     cmpTrendChart(schools,'gpa_trend','uGPA median',v=>(+v).toFixed(2)),
-    cmpTrendChart(schools,'tui_trend','Tuition / yr',v=>'$'+Math.round(v/1000)+'K')
+    cmpTrendChart(schools,'acc_trend','Acceptance rate · %',v=>(+v).toFixed(1)+'%'),
+    cmpTrendChart(schools,'tui_trend','Tuition / yr',v=>'$'+Math.round(v/1000)+'K'),
+    cmpTrendChart(schools,'apps_trend','Applications',v=>Math.round(v).toLocaleString()),
+    cmpTrendChart(schools,'enr_trend','Total enrollment',v=>Math.round(v).toLocaleString())
   ].filter(Boolean).join('');
 }
 
@@ -3793,11 +3812,21 @@ function schoolDetailHTML(s){
         row('1L credit load',num(s.cur_fy_credits))+
         row('1L section size',num(s.cur_jd1_sec))+
       '</div>'+
-      // ── 5. FACULTY & TRANSFERS — who teaches, who moves ─────────────────
-      '<div class="dp-card"><div class="dp-card-t">5 · Faculty &amp; Transfers</div>'+
-        row('Total Faculty',num(s.fac_total))+row('Full-Time',num(s.fac_ft))+
+      // ── 5. FACULTY, ATTRITION & TRANSFERS — who teaches, who leaves, who moves ─
+      '<div class="dp-card"><div class="dp-card-t">5 · Faculty, Attrition &amp; Transfers</div>'+
+        row('Total Faculty',num(s.fac_total) + trajBadge(s.fac_trend,{dir:'asc',fmt:v=>Math.round(Math.abs(v)).toLocaleString()}))+row('Full-Time',num(s.fac_ft))+
         row('Faculty of Color',num(s.fac_poc))+
-        row('Transfers In',num(s.trans_in))+row('Transfers Out',num(s.trans_out))+
+        row('1L Attrition (acad.+other)',(s.atr_1l!=null?Math.round(s.atr_1l).toLocaleString():'—'))+
+        row('Transfers In',num(s.trans_in) + trajBadge(s.trans_in_trend,{dir:'asc',fmt:v=>Math.round(Math.abs(v)).toLocaleString()}))+
+        row('Transfers Out',num(s.trans_out) + trajBadge(s.trans_out_trend,{dir:'desc',fmt:v=>Math.round(Math.abs(v)).toLocaleString()}))+
+        (function(){
+          // trans_gpa{25,50,75} are per-year dicts (historical, ~2014–2023). Show the
+          // most recent reported year (skipping 0.0 placeholders -> a gap).
+          const lv=t=>{ if(!t||typeof t!=='object') return null; const ys=Object.keys(t).filter(y=>/^\d{4}$/.test(y)&&t[y]>0).sort(); return ys.length?{y:ys[ys.length-1],v:t[ys[ys.length-1]]}:null; };
+          const m=lv(s.trans_gpa50); if(!m) return '';
+          const lo=lv(s.trans_gpa25), hi=lv(s.trans_gpa75);
+          return row('Transfer-In uGPA ('+m.y+')',pctTriple(lo&&lo.v,m.v,hi&&hi.v, v=>v==null||v===''?'—':Number(v).toFixed(2)));
+        })()+
       '</div>'+
       // ── 6. BAR PASSAGE — can grads pass the test ────────────────────────
       '<div class="dp-card"><div class="dp-card-t">6 · Bar passage</div>'+
@@ -3822,7 +3851,7 @@ function schoolDetailHTML(s){
         jobOutcomeDetail(s)+
         // (e) Employment-mix stacked bar (visual summary of the same data)
         '<div class="dp-chart-t">Employment mix at a glance</div>'+dpStackBar(s,empBuckets)+
-        // (e.5) Late-painted 8-year evolution chart from the gz dataset.
+        // (e.5) Late-painted 15-year evolution chart from the gz dataset.
         // The slot stays empty until paintEmpEvolution() resolves; if the
         // gz is unavailable the slot removes itself silently.
         '<div id="emp-evo-slot"></div>'+
@@ -3845,7 +3874,7 @@ function schoolDetailHTML(s){
         row('Breakeven · BigLaw $225K',s.tui?Math.round(((s.tui*3)*1.07)/225000*2)+' yrs':'—')+
       '</div>'+
     '</div>'+
-    '<p style="font-family:var(--mono);font-size:12px;color:var(--dimmer);margin-top:24px;line-height:1.6;">Sourced from ABA Standard 509 disclosures (2025), BLS OEWS (2024), BEA RPP (2024), HUD SAFMR (2025). Concept site — verify all figures before use. Full 15-year history available at 509α.</p>';
+    '<p style="font-family:var(--mono);font-size:12px;color:var(--dimmer);margin-top:24px;line-height:1.6;">Sourced from ABA Standard 509 disclosures (15-year span, 2011–2025), BLS OEWS (2024), BEA RPP (2024), HUD SAFMR (2025). Trends and the employment-mix evolution above draw on the full 2011–2025 record. Concept site — verify all figures before use.</p>';
 }
 function renderSchoolPage(id){
   const s=S.find(x=>x.id===id);
@@ -3865,7 +3894,7 @@ function renderSchoolPage(id){
 async function paintEmpEvolution(s){
   const slot = document.getElementById('emp-evo-slot');
   if(!slot) return;
-  slot.innerHTML = '<div class="dp-chart-loading">Loading 8-year evolution…</div>';
+  slot.innerHTML = '<div class="dp-chart-loading">Loading 15-year evolution…</div>';
   try {
     const rec = await getSchoolHistory(s.id);
     if(!rec || !rec.history){ slot.remove(); return; }
