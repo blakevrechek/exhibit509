@@ -48,3 +48,6 @@ Sitemap: https://exhibit509.com/sitemap.xml
 
 # Canonical bulk open dataset (all schools, current cycle) for retrieval/training:
 # https://exhibit509.com/exhibit-dataset.json
+
+# Blog RSS feed (freshness signal):
+# https://exhibit509.com/feed.xml

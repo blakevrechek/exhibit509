@@ -873,6 +873,257 @@ def build_state_pages(S):
     return pages
 
 
+# ─────────────────────────────────────────────────────────────────
+# Blog: a static, data-driven changelog + evergreen analyses generated
+# from the same dataset, so it refreshes each build instead of going stale.
+# Article JSON-LD + an RSS feed make it a freshness/citation signal.
+# ─────────────────────────────────────────────────────────────────
+BLOG_DIR = os.path.join(ROOT, "blog")
+FEED_PATH = os.path.join(ROOT, "feed.xml")
+PUB_DATE = "2026-06-01"
+PUB_RFC822 = "Mon, 01 Jun 2026 00:00:00 GMT"
+
+
+def _hv(sid, year, field):
+    yrs = HISTORY.get(sid) or {}
+    obj = yrs.get(year) or {}
+    return obj.get(field)
+
+
+def _span_years():
+    ys = set()
+    for yrs in HISTORY.values():
+        ys |= set(yrs.keys())
+    # Cap at 2025 — 2026 is a partial cycle and would skew "now" values / the stated range.
+    return (min(ys), min(max(ys), 2025)) if ys else (2011, 2025)
+
+
+def post_changelog(S):
+    active = [s for s in S if not s.get("closed_status")]
+    lede = ("The full 2011–2025 ABA Standard 509 record is now live on every school page — not just the latest "
+            "cycle. Here's what shipped, and why it matters if you're weighing a law degree.")
+    body = (
+        "<p>Exhibit started as an interactive map. The data underneath always went back to 2011, but only the "
+        "current cycle was visible to people (and search engines) who don't run the app. That's fixed.</p>"
+        "<h2>What's new</h2><ul>"
+        "<li><strong>15-year trajectory on every school page.</strong> Each <a href=\"/school/harvard-university.html\">school page</a> "
+        "now shows a year-by-year table (LSAT, acceptance, bar passage, employment, tuition, grants) for 2011–2025 — the longitudinal view "
+        "no other free source exposes.</li>"
+        "<li><strong>Ranked answer pages.</strong> <a href=\"/rankings/highest-bar-passage.html\">Highest bar passage</a>, "
+        "<a href=\"/rankings/best-value-law-schools.html\">best value</a>, <a href=\"/rankings/cheapest-law-schools.html\">cheapest</a>, "
+        "and <a href=\"/rankings/highest-biglaw-placement.html\">most BigLaw</a> — each ranked straight from the disclosures.</li>"
+        "<li><strong>A hub for all 50 states.</strong> Every state now has a page ranking its schools, e.g. "
+        "<a href=\"/state/california.html\">California</a> and <a href=\"/state/texas.html\">Texas</a>.</li>"
+        "<li><strong>One open dataset.</strong> The whole corpus is downloadable as <a href=\"/exhibit-dataset.json\">exhibit-dataset.json</a>, "
+        "free, with a clear license.</li></ul>"
+        f"<p>Across the {len(active)} currently-accredited schools, the median first-time bar pass rate is "
+        f"<strong>{_median([s.get('bar') for s in active]):.0f}%</strong> and median resident tuition is "
+        f"<strong>${int(_median([s.get('tui') for s in active])):,}</strong> a year — but the spread is enormous, which is the "
+        "whole point of looking school by school.</p>"
+    )
+    return lede, body
+
+
+def post_bar_trends(S):
+    y0, y1 = _span_years()
+    years = list(range(y0, y1 + 1))
+    med_by_year = []
+    for y in years:
+        vals = [_hv(s["id"], y, "bar") for s in S]
+        m = _median([v for v in vals if isinstance(v, (int, float))])
+        med_by_year.append((y, m))
+    pts = [(y, m) for y, m in med_by_year if m is not None]
+    first, last = pts[0], pts[-1]
+    # biggest improvers: latest - earliest available per school
+    movers = []
+    for s in S:
+        if s.get("closed_status"):
+            continue
+        yrs = HISTORY.get(s["id"]) or {}
+        bars = sorted((y, o.get("bar")) for y, o in yrs.items() if y <= 2025 and isinstance(o.get("bar"), (int, float)))
+        if len(bars) >= 2 and (bars[-1][0] - bars[0][0]) >= 6:
+            movers.append((s, bars[0], bars[-1], bars[-1][1] - bars[0][1]))
+    movers.sort(key=lambda x: -x[3])
+    rows = "".join(
+        f'<tr><td><a href="/school/{slugify(s["id"])}.html">{s.get("full")}</a></td>'
+        f'<td>{lo[1]:.0f}% ({lo[0]})</td><td>{hi[1]:.0f}% ({hi[0]})</td><td>+{d:.0f} pts</td></tr>'
+        for s, lo, hi, d in movers[:10])
+    yr_rows = "".join(f'<tr><td>{y}</td><td>{m:.0f}%</td></tr>' for y, m in pts)
+    lede = (f"The median first-time bar passage rate across reporting ABA law schools moved from "
+            f"<strong>{first[1]:.0f}% in {first[0]}</strong> to <strong>{last[1]:.0f}% in {last[0]}</strong>. "
+            "But the national median hides big school-level swings — here's the 15-year picture, and the schools that improved most.")
+    body = (
+        "<h2>National median first-time bar passage, by year</h2>"
+        '<table class="rank"><thead><tr><th>Year</th><th>Median first-time bar</th></tr></thead><tbody>'
+        + yr_rows + "</tbody></table>"
+        "<h2>Biggest improvers (earliest → latest reported)</h2>"
+        '<table class="rank"><thead><tr><th>School</th><th>Then</th><th>Now</th><th>Change</th></tr></thead><tbody>'
+        + rows + "</tbody></table>"
+        "<p>See any school's full trajectory on its page, or compare states via the "
+        "<a href=\"/rankings/highest-bar-passage.html\">bar-passage ranking</a>.</p>"
+    )
+    return lede, body
+
+
+def post_tuition(S):
+    risers = []
+    for s in S:
+        if s.get("closed_status"):
+            continue
+        yrs = HISTORY.get(s["id"]) or {}
+        tu = sorted((y, o.get("tui_ft_res")) for y, o in yrs.items() if y <= 2025 and isinstance(o.get("tui_ft_res"), (int, float)) and o.get("tui_ft_res") > 0)
+        if len(tu) >= 2 and (tu[-1][0] - tu[0][0]) >= 6:
+            lo, hi = tu[0], tu[-1]
+            pct = (hi[1] - lo[1]) / lo[1] * 100 if lo[1] else 0
+            risers.append((s, lo, hi, pct))
+    risers.sort(key=lambda x: -x[3])
+    rows = "".join(
+        f'<tr><td><a href="/school/{slugify(s["id"])}.html">{s.get("full")}</a></td>'
+        f'<td>${int(lo[1]):,} ({lo[0]})</td><td>${int(hi[1]):,} ({hi[0]})</td><td>+{pct:.0f}%</td></tr>'
+        for s, lo, hi, pct in risers[:12])
+    lede = ("Sticker tuition has climbed almost everywhere since 2011 — but how fast varies wildly by school. "
+            "Using each school's first and most-recent reported resident tuition, here are the steepest increases.")
+    body = (
+        '<table class="rank"><thead><tr><th>School</th><th>Then</th><th>Now</th><th>Increase</th></tr></thead><tbody>'
+        + rows + "</tbody></table>"
+        "<p>Sticker is before scholarships — what most students actually pay is lower. Each school page shows median "
+        "grant and net cost, and the <a href=\"/rankings/cheapest-law-schools.html\">cheapest-schools list</a> ranks current sticker.</p>"
+    )
+    return lede, body
+
+
+BLOG_POSTS = [
+    {"slug": "2025-aba-509-data-live", "date": PUB_DATE,
+     "title": "The full 2011–2025 ABA 509 record is now live on every school page",
+     "eyebrow": "Changelog", "build": post_changelog},
+    {"slug": "law-school-bar-passage-trends-2011-2025", "date": PUB_DATE,
+     "title": "Bar passage across U.S. law schools, 2011–2025: the 15-year picture",
+     "eyebrow": "Data analysis", "build": post_bar_trends},
+    {"slug": "law-school-tuition-rose-fastest-2011-2025", "date": PUB_DATE,
+     "title": "Where law school tuition rose fastest, 2011–2025",
+     "eyebrow": "Data analysis", "build": post_tuition},
+]
+
+
+def _blog_chrome(title, canonical, desc, ld_blocks, eyebrow, h1, dateline, body, crumb):
+    ld = "\n".join(f'<script type="application/ld+json">{json.dumps(b, ensure_ascii=False)}</script>' for b in ld_blocks)
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{title}</title>
+<meta name="description" content="{desc}">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="{canonical}">
+<link rel="alternate" type="application/rss+xml" title="Exhibit blog" href="{SITE_URL}/feed.xml">
+<meta property="og:type" content="article">
+<meta property="og:title" content="{h1}">
+<meta property="og:description" content="{desc}">
+<meta property="og:url" content="{canonical}">
+<meta property="og:site_name" content="Exhibit by 509α">
+{ld}
+<link rel="icon" type="image/png" href="{FAVICON}">
+<style>
+  :root{{--navy:#06111E;--orange:#D97757;--white:#F4F8FB;--dim:#A4C8DD;--dimmer:#7AAAC8;--blue:#5AABCB;--mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;--serif:Georgia,'Times New Roman',serif;}}
+  *{{box-sizing:border-box;}} body{{margin:0;background:var(--navy);color:var(--white);font-family:var(--serif);line-height:1.75;}}
+  .wrap{{max-width:760px;margin:0 auto;padding:40px 22px 80px;}}
+  .nav{{font-family:var(--mono);font-size:12px;letter-spacing:1px;margin-bottom:18px;}} .nav a{{color:var(--dim);text-decoration:none;margin-right:14px;}} .nav a:hover{{color:var(--orange);}}
+  .crumb{{font-family:var(--mono);font-size:11.5px;color:var(--dimmer);margin-bottom:14px;}} .crumb a{{color:var(--dim);text-decoration:none;}} .crumb a:hover{{color:var(--orange);}}
+  .eyebrow{{font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--orange);}}
+  h1{{font-family:'Nunito',var(--serif);font-size:33px;line-height:1.12;letter-spacing:-0.8px;margin:8px 0 6px;font-weight:800;}}
+  .dateline{{font-family:var(--mono);font-size:11px;color:var(--dimmer);letter-spacing:1px;text-transform:uppercase;margin-bottom:22px;}}
+  h2{{font-family:var(--mono);font-size:14px;letter-spacing:1.5px;color:var(--orange);text-transform:uppercase;margin:30px 0 8px;}}
+  p,li{{font-size:17px;color:#D6E5F0;}} a{{color:var(--orange);}}
+  .lede{{font-size:19px;color:var(--dim);line-height:1.65;margin:0 0 22px;}} .lede strong{{color:var(--white);}}
+  table.rank{{width:100%;border-collapse:collapse;margin:8px 0 22px;}}
+  table.rank th,table.rank td{{text-align:left;padding:8px 10px;border-bottom:1px solid rgba(74,122,155,0.16);font-size:14px;font-family:var(--mono);}}
+  table.rank thead th{{color:var(--orange);font-size:11px;letter-spacing:1px;text-transform:uppercase;}}
+  table.rank td{{color:var(--white);font-variant-numeric:tabular-nums;}} table.rank td a{{font-family:var(--serif);color:var(--blue);text-decoration:none;}} table.rank td a:hover{{color:var(--orange);}}
+  .src{{font-family:var(--mono);font-size:11px;color:var(--dimmer);margin-top:30px;padding-top:16px;border-top:1px solid rgba(74,122,155,0.2);line-height:1.7;}} .src a{{color:var(--blue);}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="nav"><a href="/">Map</a><a href="/blog/">Blog</a><a href="/methodology.html">Methodology</a><a href="/about.html">About</a></nav>
+  {crumb}
+  <div class="eyebrow">{eyebrow}</div>
+  <h1>{h1}</h1>
+  <div class="dateline">{dateline}</div>
+  {body}
+  <div class="src">Built from ABA Standard 509 Required Disclosures (2011–2025) via <a href="https://abarequireddisclosures.org/" rel="noopener">abarequireddisclosures.org</a>. Underlying data: <a href="/exhibit-dataset.json">exhibit-dataset.json</a>. Methodology: <a href="/methodology.html">/methodology.html</a>. By Exhibit / 509α.</div>
+</div>
+</body>
+</html>
+"""
+
+
+def build_blog(S):
+    os.makedirs(BLOG_DIR, exist_ok=True)
+    rendered = []
+    for p in BLOG_POSTS:
+        lede, body = p["build"](S)
+        canonical = f"{SITE_URL}/blog/{p['slug']}.html"
+        desc = re.sub("<[^>]+>", "", lede)[:300]
+        article_ld = {
+            "@context": "https://schema.org", "@type": "BlogPosting", "@id": canonical + "#post",
+            "headline": p["title"], "description": desc, "url": canonical,
+            "datePublished": p["date"], "dateModified": LASTMOD,
+            "author": {"@type": "Organization", "name": "509α"},
+            "publisher": {"@type": "Organization", "name": "Exhibit by 509α", "url": SITE_URL + "/"},
+            "isAccessibleForFree": True, "mainEntityOfPage": canonical,
+        }
+        crumb_ld = {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Blog", "item": SITE_URL + "/blog/"},
+            {"@type": "ListItem", "position": 2, "name": p["title"], "item": canonical}]}
+        crumb = '<nav class="crumb" aria-label="Breadcrumb"><a href="/blog/">Blog</a> › <span>' + p["eyebrow"] + "</span></nav>"
+        dateline = f"{p['eyebrow']} · June 1, 2026"
+        html = _blog_chrome(p["title"] + " · Exhibit", canonical, desc, [article_ld, crumb_ld],
+                            p["eyebrow"], p["title"], dateline, f'<p class="lede">{lede}</p>' + body, crumb)
+        open(os.path.join(BLOG_DIR, f"{p['slug']}.html"), "w").write(html)
+        rendered.append((p, lede, desc))
+    # Blog index
+    cards = "".join(
+        f'<li><div class="bx-eyebrow">{p["eyebrow"]} · June 1, 2026</div>'
+        f'<a class="bx-title" href="/blog/{p["slug"]}.html">{p["title"]}</a>'
+        f'<p class="bx-desc">{desc}</p></li>'
+        for p, lede, desc in rendered)
+    idx_ld = {"@context": "https://schema.org", "@type": "Blog", "@id": SITE_URL + "/blog/#blog",
+              "name": "Exhibit blog", "url": SITE_URL + "/blog/",
+              "publisher": {"@type": "Organization", "name": "Exhibit by 509α"}}
+    idx_body = ('<ul class="bx-list">' + cards + "</ul>"
+                '<style>.bx-list{list-style:none;padding:0;} .bx-list li{padding:18px 0;border-bottom:1px solid rgba(74,122,155,0.16);} '
+                '.bx-eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--dimmer);} '
+                '.bx-title{display:block;font-family:"Nunito",var(--serif);font-weight:800;font-size:22px;color:var(--white);text-decoration:none;margin:4px 0;} '
+                '.bx-title:hover{color:var(--orange);} .bx-desc{color:var(--dim);font-size:15px;margin:4px 0 0;}</style>')
+    idx_html = _blog_chrome("Exhibit blog — law school data, analyzed", SITE_URL + "/blog/",
+                            "Data-driven analysis and changelog from Exhibit: bar passage trends, tuition, employment, and what 15 years of ABA 509 data show.",
+                            [idx_ld], "Blog", "The Exhibit blog",
+                            "Data analysis + changelog from the ABA 509 dataset",
+                            idx_body, '<nav class="crumb" aria-label="Breadcrumb"><a href="/">Home</a> › <span>Blog</span></nav>')
+    open(os.path.join(BLOG_DIR, "index.html"), "w").write(idx_html)
+    # RSS feed
+    items = "".join(
+        f"<item><title>{p['title']}</title>"
+        f"<link>{SITE_URL}/blog/{p['slug']}.html</link>"
+        f"<guid>{SITE_URL}/blog/{p['slug']}.html</guid>"
+        f"<pubDate>{PUB_RFC822}</pubDate>"
+        f"<description>{_xml_escape(desc)}</description></item>"
+        for p, lede, desc in rendered)
+    rss = (f'<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0"><channel>'
+           f"<title>Exhibit blog</title><link>{SITE_URL}/blog/</link>"
+           f"<description>Data-driven analysis and changelog from Exhibit — ABA 509 law school data.</description>"
+           f"<language>en-us</language><lastBuildDate>{PUB_RFC822}</lastBuildDate>"
+           f"<atom:link xmlns:atom=\"http://www.w3.org/2005/Atom\" href=\"{SITE_URL}/feed.xml\" rel=\"self\" type=\"application/rss+xml\"/>"
+           + items + "</channel></rss>\n")
+    open(FEED_PATH, "w").write(rss)
+    return [p["slug"] for p in BLOG_POSTS]
+
+
+def _xml_escape(t):
+    return (t.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;"))
+
+
 def write_bulk_dataset(S):
     """One canonical open-data file for LLM retrieval/training pipelines (P1).
     Current-cycle record per school; the full 2011–2025 series ships in the gz and
@@ -894,7 +1145,7 @@ def write_bulk_dataset(S):
     print(f"Wrote bulk open dataset: exhibit-dataset.json ({len(S)} schools).")
 
 
-def update_sitemap(schools, rank_slugs=None, state_slugs=None):
+def update_sitemap(schools, rank_slugs=None, state_slugs=None, blog_slugs=None):
     """Inject one <url> entry per school into sitemap.xml."""
     head = """<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -940,6 +1191,12 @@ def update_sitemap(schools, rank_slugs=None, state_slugs=None):
         body_lines.append(
             f'  <url>\n    <loc>https://exhibit509.com/state/{slug}.html</loc>\n    <changefreq>monthly</changefreq>\n    <priority>0.7</priority>\n    <lastmod>2026-05-31</lastmod>\n  </url>'
         )
+    if blog_slugs is not None:
+        body_lines.append('  <url>\n    <loc>https://exhibit509.com/blog/</loc>\n    <changefreq>weekly</changefreq>\n    <priority>0.7</priority>\n    <lastmod>2026-06-01</lastmod>\n  </url>')
+        for slug in blog_slugs:
+            body_lines.append(
+                f'  <url>\n    <loc>https://exhibit509.com/blog/{slug}.html</loc>\n    <changefreq>monthly</changefreq>\n    <priority>0.6</priority>\n    <lastmod>2026-06-01</lastmod>\n  </url>'
+            )
     body = "\n".join(body_lines)
     tail = "\n</urlset>\n"
     with open(SITEMAP_PATH, "w") as f:
@@ -986,6 +1243,9 @@ def update_aggregates(schools, state_slugs):
         + '<li><a href="rankings/highest-biglaw-placement.html">Law schools with the most BigLaw placement</a></li>'
         + '</ul>'
         + f'<h2>Browse by state</h2><p>{state_links}</p>'
+        + '<h2>Analysis</h2><p>The <a href="blog/">Exhibit blog</a> tracks what 15 years of data show — '
+        + '<a href="blog/law-school-bar-passage-trends-2011-2025.html">bar-passage trends</a> and '
+        + '<a href="blog/law-school-tuition-rose-fastest-2011-2025.html">where tuition rose fastest</a>.</p>'
         + end
     )
     html = html[:i] + block + html[j + len(end):]
@@ -1050,8 +1310,10 @@ def main():
     state_slugs = build_state_pages(S)
     print(f"Wrote {len(state_slugs)} per-state hub pages to {STATE_DIR}/")
     write_bulk_dataset(S)
-    update_sitemap(S, rank_slugs, state_slugs)
-    print(f"Updated sitemap.xml with {len(S)} school + {len(rank_slugs)} ranking + {len(state_slugs)} state URLs.")
+    blog_slugs = build_blog(S)
+    print(f"Wrote blog index + {len(blog_slugs)} posts + feed.xml.")
+    update_sitemap(S, rank_slugs, state_slugs, blog_slugs)
+    print(f"Updated sitemap.xml with {len(S)} school + {len(rank_slugs)} ranking + {len(state_slugs)} state + blog URLs.")
     update_aggregates(S, state_slugs)
     update_index_directory(S)
 
