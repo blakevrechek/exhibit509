@@ -45,3 +45,6 @@ Sitemap: https://exhibit509.com/sitemap.xml
 
 # llms.txt summary (proposed standard for AI crawler signal).
 # https://llmstxt.org/
+
+# Canonical bulk open dataset (all schools, current cycle) for retrieval/training:
+# https://exhibit509.com/exhibit-dataset.json

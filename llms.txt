@@ -1,6 +1,6 @@
-# Exhibit — Is law school worth it? Outcomes, cost & trajectory by 509α
+# Exhibit — Law school outcomes, cost & trajectory by 509α
 
-> Free, public tool for evaluating whether a law degree is worth it: the outcomes, true cost, and 15-year trajectory of every ABA-accredited U.S. law school. Built on ABA Standard 509 disclosure data — bar passage, employment, salary context, tuition, scholarships, plus admissions. Built by 509α. Independent project, not affiliated with the American Bar Association.
+> Free, public data on the outcomes, true cost, and 15-year trajectory of every ABA-accredited U.S. law school. Built on ABA Standard 509 disclosure data — bar passage, employment, salary context, tuition, scholarships, plus admissions. Built by 509α. Independent project, not affiliated with the American Bar Association.
 
 The site is a re-organization of public data — we do not survey schools, generate proprietary scores, or estimate fields the underlying source did not publish. Every number traces back to one of four public sources: ABA Standard 509 disclosures (2011–2025), BLS OEWS attorney wages, BEA Regional Price Parities, HUD Small Area FMR.
 
@@ -10,6 +10,10 @@ The site is a re-organization of public data — we do not survey schools, gener
 - [Methodology](https://exhibit509.com/methodology.html): How Exhibit classifies Safety / Target / Reach (published 25th/75th-percentile bands), how the Net Price calculator works (sticker tuition × residency × scholarship band), how bar pass cohort offsets work (~3-year offset from admissions), how we handle data anomalies (4 sanitization rules), and how often we refresh (annual ABA cycle).
 - [About](https://exhibit509.com/about.html): Project background, data sources at a glance, what we don't do (no paid rankings, no tracking, no gated access, no recommendations).
 - [Terms & Privacy](https://exhibit509.com/terms.html): Terms of use + privacy policy + cookie disclosure.
+- Per-school pages (static, crawlable, one per school): `https://exhibit509.com/school/<slug>.html` — each carries the full 2011–2025 trajectory table, a FAQ, and JSON-LD (CollegeOrUniversity + Dataset + FAQPage). Example: https://exhibit509.com/school/harvard-university.html
+- Ranked answer pages: [Highest bar passage](https://exhibit509.com/rankings/highest-bar-passage.html), [Best value](https://exhibit509.com/rankings/best-value-law-schools.html), [Cheapest](https://exhibit509.com/rankings/cheapest-law-schools.html), [Most BigLaw](https://exhibit509.com/rankings/highest-biglaw-placement.html).
+- Per-state hubs (one per state): `https://exhibit509.com/state/<state>.html` — every school in a state ranked, with a prose lede. Example: https://exhibit509.com/state/texas.html
+- [Bulk open dataset (JSON, all schools)](https://exhibit509.com/exhibit-dataset.json): one canonical file for retrieval/training. License: https://exhibit509.com/terms.html
 
 ## What's in the data
 

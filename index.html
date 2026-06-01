@@ -370,7 +370,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .pb-counsel-header{border-top:3px solid var(--counsel);}
 
 /* Map filters bar */
-/* Map filters relocated v1.30.0 — top-of-map horizontal toolbar, docked between the
+/* Map filters relocated v1.31.0 — top-of-map horizontal toolbar, docked between the
    left Match Me / Compare sidebar (ends at 380px) and the always-open right school
    panel (400px), sitting just under the global header. The left sidebar is now
    reserved exclusively for Match Me + Compare. */
@@ -447,7 +447,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
    header (school name + bar pass chip) isn't hidden by filter chips or the BLS
    tooltip card. Was top:76px causing the upper ~50px to be eaten. */
 /* schoolPanel sits at the natural top now that map-filter bar moved into the left
-   panel (v1.30.0) — frees ~50px of vertical space at the top of the right column. */
+   panel (v1.31.0) — frees ~50px of vertical space at the top of the right column. */
 #schoolPanel{position:fixed;top:76px;right:0;bottom:36px;width:400px;z-index:100;background:rgba(4,13,23,0.97);border-left:1px solid rgba(74,122,155,0.22);overflow-y:auto;transform:translateX(0);transition:transform .3s;}#schoolPanel.hidden{transform:translateX(100%);}
 #schoolPanel.open{transform:translateX(0);}
 .sp-close{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(4,13,23,0.98);border-bottom:1px solid rgba(74,122,155,0.15);}
@@ -457,7 +457,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .sp-tab{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border:1px solid rgba(74,122,155,0.2);background:transparent;color:var(--dim);cursor:pointer;transition:all .2s;}
 .sp-tab+.sp-tab{border-left:none;}
 .sp-tab.on{background:rgba(217,119,87,0.1);color:var(--orange);border-color:rgba(217,119,87,0.35);}
-/* School-panel (right side) typography tightened v1.30.0 — was visibly scaled-too-big
+/* School-panel (right side) typography tightened v1.31.0 — was visibly scaled-too-big
    per owner. Reduced metric/value sizes by ~15%, tighter section padding, smaller
    section labels, more breathable line-height. */
 .sp-header{padding:14px 16px 10px;border-bottom:1px solid rgba(74,122,155,0.12);}
@@ -1150,6 +1150,8 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
 <div class="ns-wrap">
 <h1>Exhibit — Law school outcomes, cost &amp; trajectory by 509α</h1>
 <p>A free, public tool showing the outcomes, true cost, and 15-year trajectory of every ABA-accredited U.S. law school. Built on ABA Standard 509 disclosure data — bar passage, employment, salary context, tuition and scholarships — for 208 schools (197 currently accredited + 11 closed/transitioning with full historical record), every year from 2011 through 2025. This page requires JavaScript to render the interactive map and dashboards.</p>
+<!-- NS_AGG_START -->
+<h2>Is law school worth it? The data</h2><p>Across the 197 currently-accredited ABA law schools, the median first-time bar passage rate is <strong>83%</strong>, median full-time long-term JD employment is <strong>91%</strong>, and median resident tuition is <strong>$45,199/year</strong> (median entering LSAT <strong>159</strong>). Whether a degree is "worth it" depends on the gap between a specific school's cost and its outcomes — which is exactly what Exhibit breaks out, per school, with 15 years of history. Start with the ranked lists or your state below.</p><h2>Ranked lists</h2><ul><li><a href="rankings/highest-bar-passage.html">Law schools with the highest bar passage</a></li><li><a href="rankings/best-value-law-schools.html">Best-value law schools (outcomes per dollar)</a></li><li><a href="rankings/cheapest-law-schools.html">Cheapest law schools by tuition</a></li><li><a href="rankings/highest-biglaw-placement.html">Law schools with the most BigLaw placement</a></li></ul><h2>Browse by state</h2><p><a href="state/alabama.html">Alabama</a> · <a href="state/arizona.html">Arizona</a> · <a href="state/arkansas.html">Arkansas</a> · <a href="state/california.html">California</a> · <a href="state/colorado.html">Colorado</a> · <a href="state/connecticut.html">Connecticut</a> · <a href="state/delaware.html">Delaware</a> · <a href="state/district-of-columbia.html">District of Columbia</a> · <a href="state/florida.html">Florida</a> · <a href="state/georgia.html">Georgia</a> · <a href="state/hawaii.html">Hawaii</a> · <a href="state/idaho.html">Idaho</a> · <a href="state/illinois.html">Illinois</a> · <a href="state/indiana.html">Indiana</a> · <a href="state/iowa.html">Iowa</a> · <a href="state/kansas.html">Kansas</a> · <a href="state/kentucky.html">Kentucky</a> · <a href="state/louisiana.html">Louisiana</a> · <a href="state/maine.html">Maine</a> · <a href="state/maryland.html">Maryland</a> · <a href="state/massachusetts.html">Massachusetts</a> · <a href="state/michigan.html">Michigan</a> · <a href="state/minnesota.html">Minnesota</a> · <a href="state/mississippi.html">Mississippi</a> · <a href="state/missouri.html">Missouri</a> · <a href="state/montana.html">Montana</a> · <a href="state/nebraska.html">Nebraska</a> · <a href="state/nevada.html">Nevada</a> · <a href="state/new-hampshire.html">New Hampshire</a> · <a href="state/new-jersey.html">New Jersey</a> · <a href="state/new-mexico.html">New Mexico</a> · <a href="state/new-york.html">New York</a> · <a href="state/north-carolina.html">North Carolina</a> · <a href="state/north-dakota.html">North Dakota</a> · <a href="state/ohio.html">Ohio</a> · <a href="state/oklahoma.html">Oklahoma</a> · <a href="state/oregon.html">Oregon</a> · <a href="state/pennsylvania.html">Pennsylvania</a> · <a href="state/puerto-rico.html">Puerto Rico</a> · <a href="state/rhode-island.html">Rhode Island</a> · <a href="state/south-carolina.html">South Carolina</a> · <a href="state/south-dakota.html">South Dakota</a> · <a href="state/tennessee.html">Tennessee</a> · <a href="state/texas.html">Texas</a> · <a href="state/utah.html">Utah</a> · <a href="state/vermont.html">Vermont</a> · <a href="state/virginia.html">Virginia</a> · <a href="state/washington.html">Washington</a> · <a href="state/west-virginia.html">West Virginia</a> · <a href="state/wisconsin.html">Wisconsin</a> · <a href="state/wyoming.html">Wyoming</a></p><!-- NS_AGG_END -->
 <h2>What it covers</h2>
 <p>For every accredited U.S. law school, the underlying inline dataset contains: LSAT 25/50/75 percentiles, uGPA 25/50/75 percentiles, acceptance rate, applications + offers + enrollment, scholarship distribution across five buckets, sticker tuition (resident + non-resident), first-time bar pass, 2-year ultimate bar pass, full-time long-term employment, employment by firm size and sector (MegaLaw 500+, BigLaw 251–500, Mid 101–250, Small 2–100, Clerkships, Public Interest, Government, Business, Academia, Solo, Seeking), top destination states for graduates, transfers in and out — for every year from 2011 through 2025.</p>
 <h2>Data sources</h2>
@@ -1461,7 +1463,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
     More
   </button>
 </nav>
-<!-- Disclaimer bar removed v1.30.0 — provenance now lives in the footer. -->
+<!-- Disclaimer bar removed v1.31.0 — provenance now lives in the footer. -->
 <style>:root{--banner-h:0px;}</style>
 
 <div id="cookieBar" style="position:fixed;bottom:0;left:0;right:0;z-index:1000;background:#0B1826;border-top:1px solid rgba(217,119,87,0.4);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;box-shadow:0 -2px 12px rgba(0,0,0,0.5);">
@@ -1784,8 +1786,8 @@ function fmtUSD(v){ return v==null?"—":"$"+v.toLocaleString(); }
 // ═══════════════════════════════════════════════════════════════════════════
 const DATA_INVARIANTS = {
   total_schools: 208,         // 197 active/newly + 11 closed/transitioning (now included as historical entries)
-  schools_inline: 208,        // all inline as of v1.30.0 — closed entries surface their pre-closure history
-  year_count: 15              // 2011–2025 inclusive (15-year span; pre-2018 added in v1.30.0 from Historic + v2 sheets)
+  schools_inline: 208,        // all inline as of v1.31.0 — closed entries surface their pre-closure history
+  year_count: 15              // 2011–2025 inclusive (15-year span; pre-2018 added in v1.31.0 from Historic + v2 sheets)
 };
 // Verifiable count of the data cells actually shipped inline on this page:
 // every non-null scalar field, plus every per-year trend entry, across S.
@@ -1854,7 +1856,7 @@ function populateHeaderStats(){
 // ── Lazy-load full dataset (deferred until first deep-dive interaction) ──
 // Callers: `const ext = await loadFullDataset();` parsed JSON, or null on fail.
 // Subsequent calls return the cached object. Concurrent calls share one fetch.
-// Wired in v1.30.0 — schoolDetailHTML calls getSchoolHistory(id) which awaits
+// Wired in v1.31.0 — schoolDetailHTML calls getSchoolHistory(id) which awaits
 // this loader, then renders deep-history charts (employment evolution etc.) into
 // late-paint slots once data is available.
 window.EXT = window.EXT || { data: null, loading: null, byId: null };
@@ -2055,7 +2057,7 @@ function searchTypeaheadKey(e){
   }
 }
 
-// Disclaimer banner is now persistent (per v1.30.0 owner directive) — no dismiss; always visible.
+// Disclaimer banner is now persistent (per v1.31.0 owner directive) — no dismiss; always visible.
 // ── COOKIE notice dismiss (persists via localStorage) ──
 // ── Light/Dark theme toggle (persists via localStorage). Note: many inline styles
 // use literal rgba(4,13,23,...) and won't fully invert — full theming would require
@@ -3006,7 +3008,7 @@ function lineChart(opts){
     const pv=years.map(y=>pin.vals?pin.vals[y]:null);
     let li=-1; for(let i=pv.length-1;i>=0;i--){ if(pv[i]!=null){ li=i; break; } }
     if(li>=0){ const v=pv[li], x=X(li), yy=Y(v), last=(li===years.length-1);
-      // Endpoint label placement rule (v1.30.0): if the line is RISING into the
+      // Endpoint label placement rule (v1.31.0): if the line is RISING into the
       // endpoint, drop the label BELOW the marker (clears the ascending line and
       // the top edge it would otherwise clip); if FALLING, lift it ABOVE. Clamp
       // to the chart box so it can never get cut off. The --chart-halo var gives a
@@ -3053,7 +3055,7 @@ function lineChart(opts){
 
 // ── Full school detail page (items 5 & 9): opens in a new tab via #school/<id> ─
 // ── Scholarship distribution ────────────────────────────────────────────────
-// Canonical buckets per owner directive (v1.30.0): student-favorability gradient.
+// Canonical buckets per owner directive (v1.31.0): student-favorability gradient.
 // "No grant" is DERIVED = 100 - (lt + mt + full + gt) — the source's none count is
 // known to be unreliable (negatives, mis-reports); the derivation guarantees the
 // stack sums to 100% and avoids fabricated bad data.
@@ -3361,7 +3363,7 @@ function outcomeFunnel(s){
 
 function navSchool(id){
   // HASH ROUTES — safest, work anywhere, no 404.html or server-side rewrites needed.
-  // Reverted from clean /school/<slug> paths in v1.30.0 because GH Pages without a
+  // Reverted from clean /school/<slug> paths in v1.31.0 because GH Pages without a
   // deployed 404.html serves real 404s for any unknown path. When the project moves
   // to a custom domain with rewrites (Netlify _redirects, Vercel rewrites, Cloudflare),
   // flip CLEAN_URLS to true and the deep-link helpers below will re-engage.
@@ -5171,7 +5173,7 @@ function openShareModal(){
   document.body.appendChild(m);
 }
 
-// Disclaimer bar removed v1.30.0 — --banner-h is hardcoded to 0 in the inline
+// Disclaimer bar removed v1.31.0 — --banner-h is hardcoded to 0 in the inline
 // <style> after the header; the dynamic syncBannerHeight observer is no longer
 // needed. Provenance lives in the footer.
 // Honor #school/X or #compare=… in URL on first load
