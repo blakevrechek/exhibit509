@@ -6,7 +6,7 @@
 //   • Other same-origin assets (data.js, fonts, self-hosted Leaflet, manifest) →
 //     stale-while-revalidate; they're versioned/stable so instant-from-cache is fine.
 //   • Cross-origin (Carto tiles, fonts) → network-first, cache as offline fallback.
-const CACHE = 'exhibit-v1.19.6';
+const CACHE = 'exhibit-v1.20.0';
 // Relative URLs resolve against the SW script location (the deploy root, e.g.
 // /Exhibit/sw.js → entries cache as /Exhibit/index.html etc.). Hardcoding absolute
 // paths like '/index.html' would resolve to the host root and fail on GH Pages
