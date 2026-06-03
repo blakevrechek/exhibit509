@@ -371,7 +371,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .pb-counsel-header{border-top:3px solid var(--counsel);}
 
 /* Map filters bar */
-/* Map filters relocated v1.22.0 — top-of-map horizontal toolbar, docked between the
+/* Map filters relocated v1.23.0 — top-of-map horizontal toolbar, docked between the
    left Match Me / Compare sidebar (ends at 380px) and the always-open right school
    panel (400px), sitting just under the global header. The left sidebar is now
    reserved exclusively for Match Me + Compare. */
@@ -448,7 +448,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
    header (school name + bar pass chip) isn't hidden by filter chips or the BLS
    tooltip card. Was top:76px causing the upper ~50px to be eaten. */
 /* schoolPanel sits at the natural top now that map-filter bar moved into the left
-   panel (v1.22.0) — frees ~50px of vertical space at the top of the right column. */
+   panel (v1.23.0) — frees ~50px of vertical space at the top of the right column. */
 #schoolPanel{position:fixed;top:76px;right:0;bottom:36px;width:400px;z-index:100;background:rgba(4,13,23,0.97);border-left:1px solid rgba(74,122,155,0.22);overflow-y:auto;transform:translateX(0);transition:transform .3s;}#schoolPanel.hidden{transform:translateX(100%);}
 #schoolPanel.open{transform:translateX(0);}
 .sp-close{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(4,13,23,0.98);border-bottom:1px solid rgba(74,122,155,0.15);}
@@ -458,7 +458,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .sp-tab{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border:1px solid rgba(74,122,155,0.2);background:transparent;color:var(--dim);cursor:pointer;transition:all .2s;}
 .sp-tab+.sp-tab{border-left:none;}
 .sp-tab.on{background:rgba(217,119,87,0.1);color:var(--orange);border-color:rgba(217,119,87,0.35);}
-/* School-panel (right side) typography tightened v1.22.0 — was visibly scaled-too-big
+/* School-panel (right side) typography tightened v1.23.0 — was visibly scaled-too-big
    per owner. Reduced metric/value sizes by ~15%, tighter section padding, smaller
    section labels, more breathable line-height. */
 .sp-header{padding:14px 16px 10px;border-bottom:1px solid rgba(74,122,155,0.12);}
@@ -662,6 +662,10 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .traj-up{color:#4A9B6B;background:rgba(74,155,107,0.12);}
 .traj-down{color:#EF5350;background:rgba(239,83,80,0.12);}
 .traj-flat{color:#7AAAC8;background:rgba(122,170,200,0.08);}
+/* Inline 5-yr-change anchors inside outcome labels/chips (filled async from gz). */
+.jo-trend{display:inline;}
+.jo-trend .traj{font-size:10px;padding:0 4px;margin-left:5px;}
+.jo-chip-l .traj{margin-left:5px;}
 
 /* ── Outcome funnel (Graduated Sat for bar Passed FTLT JD job) ── */
 .funnel{display:flex;flex-direction:column;gap:6px;margin:8px 0 6px;}
@@ -1542,7 +1546,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
     More
   </button>
 </nav>
-<!-- Disclaimer bar removed v1.22.0 — provenance now lives in the footer. -->
+<!-- Disclaimer bar removed v1.23.0 — provenance now lives in the footer. -->
 <style>:root{--banner-h:0px;}</style>
 
 <div id="cookieBar" style="position:fixed;bottom:0;left:0;right:0;z-index:1000;background:#0B1826;border-top:1px solid rgba(217,119,87,0.4);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;box-shadow:0 -2px 12px rgba(0,0,0,0.5);">
@@ -1865,8 +1869,8 @@ function fmtUSD(v){ return v==null?"—":"$"+v.toLocaleString(); }
 // ═══════════════════════════════════════════════════════════════════════════
 const DATA_INVARIANTS = {
   total_schools: 208,         // 197 active/newly + 11 closed/transitioning (now included as historical entries)
-  schools_inline: 208,        // all inline as of v1.22.0 — closed entries surface their pre-closure history
-  year_count: 15              // 2011–2025 inclusive (15-year span; pre-2018 added in v1.22.0 from Historic + v2 sheets)
+  schools_inline: 208,        // all inline as of v1.23.0 — closed entries surface their pre-closure history
+  year_count: 15              // 2011–2025 inclusive (15-year span; pre-2018 added in v1.23.0 from Historic + v2 sheets)
 };
 // Verifiable count of the data cells actually shipped inline on this page:
 // every non-null scalar field, plus every per-year trend entry, across S.
@@ -1935,7 +1939,7 @@ function populateHeaderStats(){
 // ── Lazy-load full dataset (deferred until first deep-dive interaction) ──
 // Callers: `const ext = await loadFullDataset();` parsed JSON, or null on fail.
 // Subsequent calls return the cached object. Concurrent calls share one fetch.
-// Wired in v1.22.0 — schoolDetailHTML calls getSchoolHistory(id) which awaits
+// Wired in v1.23.0 — schoolDetailHTML calls getSchoolHistory(id) which awaits
 // this loader, then renders deep-history charts (employment evolution etc.) into
 // late-paint slots once data is available.
 window.EXT = window.EXT || { data: null, loading: null, byId: null };
@@ -2136,7 +2140,7 @@ function searchTypeaheadKey(e){
   }
 }
 
-// Disclaimer banner is now persistent (per v1.22.0 owner directive) — no dismiss; always visible.
+// Disclaimer banner is now persistent (per v1.23.0 owner directive) — no dismiss; always visible.
 // ── COOKIE notice dismiss (persists via localStorage) ──
 // ── Light/Dark theme toggle (persists via localStorage). Note: many inline styles
 // use literal rgba(4,13,23,...) and won't fully invert — full theming would require
@@ -3084,7 +3088,7 @@ function lineChart(opts){
     const pv=years.map(y=>pin.vals?pin.vals[y]:null);
     let li=-1; for(let i=pv.length-1;i>=0;i--){ if(pv[i]!=null){ li=i; break; } }
     if(li>=0){ const v=pv[li], x=X(li), yy=Y(v), last=(li===years.length-1);
-      // Endpoint label placement rule (v1.22.0): if the line is RISING into the
+      // Endpoint label placement rule (v1.23.0): if the line is RISING into the
       // endpoint, drop the label BELOW the marker (clears the ascending line and
       // the top edge it would otherwise clip); if FALLING, lift it ABOVE. Clamp
       // to the chart box so it can never get cut off. The --chart-halo var gives a
@@ -3131,7 +3135,7 @@ function lineChart(opts){
 
 // ── Full school detail page (items 5 & 9): opens in a new tab via #school/<id> ─
 // ── Scholarship distribution ────────────────────────────────────────────────
-// Canonical buckets per owner directive (v1.22.0): student-favorability gradient.
+// Canonical buckets per owner directive (v1.23.0): student-favorability gradient.
 // "No grant" is DERIVED = 100 - (lt + mt + full + gt) — the source's none count is
 // known to be unreliable (negatives, mis-reports); the derivation guarantees the
 // stack sums to 100% and avoids fabricated bad data.
@@ -3254,6 +3258,70 @@ function scholBreakdown(s){
   return '<div class="sb-head">'+enrLabel+'</div>'+rows+'<div class="sb-foot"><strong>'+recv.toFixed(1)+'%</strong> received any grant '+recvCnt+'</div>';
 }
 
+// ── Generic historic 100%-stacked columns (same visual as grants/scholStackTime)
+//    from the gz per-year `history`. Each year's buckets are normalised to 100%
+//    so the column shows COMPOSITION over time. Null/empty years render a gap. ──
+function histStackCols(history, buckets, opts){
+  opts=opts||{};
+  if(!history) return '';
+  const ys=Object.keys(history).filter(y=>/^\d{4}$/.test(y)).map(Number);
+  const valid=ys.filter(y=>{const d=history[String(y)]; return d && buckets.some(b=>+d[b.k]>0);}).sort((a,b)=>a-b);
+  if(valid.length<1) return '';
+  const start=valid[0], end=valid[valid.length-1];
+  let cols='', axis='';
+  for(let y=start;y<=end;y++){
+    const d=history[String(y)];
+    axis+='<div class="st-yr">’'+String(y).slice(2)+'</div>';
+    const has = d && buckets.some(b=>+d[b.k]>0);
+    if(has){
+      const raw=buckets.map(b=>+d[b.k]||0);
+      const sum=raw.reduce((a,b)=>a+b,0)||1;
+      cols+='<div class="st-col">'+buckets.map((b,i)=>{const v=raw[i]/sum*100; return v>0?'<div class="st-seg" style="height:'+v.toFixed(2)+'%;background:'+b.c+'" title="'+b.l+' '+v.toFixed(1)+'%"></div>':'';}).join('')+'</div>';
+    } else {
+      cols+='<div class="st-col-miss" title="Not reported '+y+'">–</div>';
+    }
+  }
+  const leg=buckets.map(b=>'<span class="dp-leg-i"><span class="dp-leg-dot" style="background:'+b.c+'"></span>'+b.l+'</span>').join('');
+  return '<div class="st-wrap" role="img" aria-label="'+(opts.aria||'Composition by year')+'">'+cols+'</div><div class="st-axis">'+axis+'</div><div class="dp-leg">'+leg+'</div>';
+}
+// Trailing-N-year delta for a single history field (default 5yr, nearest year ≤target).
+function histDelta(history, key, lookback){
+  lookback=lookback||5;
+  if(!history) return null;
+  const ys=Object.keys(history).filter(y=>/^\d{4}$/.test(y)).map(Number)
+    .filter(y=>{const d=history[String(y)]; return d && d[key]!=null && !isNaN(+d[key]);}).sort((a,b)=>a-b);
+  if(ys.length<2) return null;
+  const latest=ys[ys.length-1], target=latest-lookback;
+  let earlier=ys[0]; for(const y of ys){ if(y<=target) earlier=y; }
+  if(earlier===latest) return null;
+  const cur=+history[String(latest)][key], prev=+history[String(earlier)][key];
+  return {cur,prev,delta:cur-prev,fromY:earlier,toY:latest,span:latest-earlier};
+}
+// Render a histDelta as a .traj badge (percentage-point change). dir='desc' → down is better.
+function deltaBadge(dObj, opts){
+  if(!dObj) return '';
+  opts=opts||{};
+  const {delta,fromY,toY,prev,cur,span}=dObj;
+  const fmt=v=>(opts.fmt?opts.fmt(v):Math.abs(v).toFixed(1)+(opts.suf||'pt'));
+  const vfmt=v=>(opts.fmt?opts.fmt(v):v.toFixed(1)+'%');
+  if(Math.abs(delta) < (opts.flat||0.15))
+    return '<span class="traj traj-flat" title="'+fromY+'→'+toY+': ~no change">~ '+span+'yr</span>';
+  const up=delta>0, dir=opts.dir||'asc', better=(dir==='desc')?!up:up;
+  return '<span class="traj traj-'+(better?'up':'down')+'" title="'+fromY+' → '+toY+': '+vfmt(prev)+' → '+vfmt(cur)+'">'+(up?'↑':'↓')+' '+fmt(delta)+' · '+span+'yr</span>';
+}
+// Demographic (race/ethnicity) buckets for the historic composition columns.
+const RACE_BUCKETS=[
+  {k:'race_white',  l:'White',          c:'#5AABCB'},
+  {k:'race_black',  l:'Black',          c:'#4A9B6B'},
+  {k:'race_hisp',   l:'Hispanic',       c:'#FFA726'},
+  {k:'race_asian',  l:'Asian',          c:'#FCD34D'},
+  {k:'race_multi',  l:'Two or more',    c:'#C084FC'},
+  {k:'race_native', l:'Nat. Haw./PI',   c:'#A78BFA'},
+  {k:'race_indian', l:'Nat. American',  c:'#F97316'},
+  {k:'race_unknown',l:'Unknown',        c:'#9CA3AF'},
+  {k:'race_nr',     l:'Nonresident',    c:'#7AAAC8'}
+];
+
 // ── Trajectory badge: latest value vs N years ago (default 5). ──────────────
 // dir='asc' higher=better (LSAT, bar pct, FTLT %). dir='desc' lower=better (acceptance, tuition).
 function trajBadge(trend, opts){
@@ -3334,9 +3402,11 @@ function jobOutcomeDetail(s){
     const dCls = delta==null ? '' : (isSeek ? (delta < 0 ? 'jo-delta-up' : delta > 0 ? 'jo-delta-down' : 'jo-delta-flat')
                                             : (delta > 0 ? 'jo-delta-up' : delta < 0 ? 'jo-delta-down' : 'jo-delta-flat'));
     const dTxt = delta==null ? '' : (delta>0?'+':'')+delta.toFixed(1)+' vs natl';
+    // Trailing-5-yr change anchor — filled async once the gz history loads.
+    const hk = isSeek ? 'emp_seeking_pct' : cat.k;
     return '<div class="jo-row">'
       + '<div class="jo-dot" style="background:'+cat.c+'"></div>'
-      + '<div class="jo-l">'+cat.l+'</div>'
+      + '<div class="jo-l">'+cat.l+'<span class="jo-trend" data-emp-delta="'+hk+'"'+(isSeek?' data-dir="desc"':'')+'></span></div>'
       + '<div class="jo-bar-wrap"><div class="jo-bar" style="width:'+w.toFixed(1)+'%;background:'+cat.c+'"></div></div>'
       + '<div class="jo-pct">'+(v!=null?v.toFixed(1)+'%':'—')+'</div>'
       + '<div class="jo-n">'+(n!=null?'≈'+n+' grads':'—')+'</div>'
@@ -3353,14 +3423,15 @@ function jobOutcomeHero(s){
   const ftlt = s.ftlt || (s.ftlt_pct ? Math.round(s.grads * s.ftlt_pct / 100) : null);
   const barReq = empCount(s, 'emp_bar_pct');
   const seeking = empCount(s, 'emp_seek_pct');
-  function chip(big, sub, color){
-    return '<div class="jo-chip"><div class="jo-chip-v" style="color:'+color+'">'+big+'</div><div class="jo-chip-l">'+sub+'</div></div>';
+  function chip(big, sub, color, deltaKey, dir){
+    const anchor = deltaKey ? '<span class="jo-trend" data-emp-delta="'+deltaKey+'"'+(dir?' data-dir="'+dir+'"':'')+'></span>' : '';
+    return '<div class="jo-chip"><div class="jo-chip-v" style="color:'+color+'">'+big+'</div><div class="jo-chip-l">'+sub+anchor+'</div></div>';
   }
   return '<div class="jo-hero">'
     + chip(s.grads.toLocaleString(), 'Graduates', '#A4C8DD')
-    + chip((ftlt!=null?ftlt:'—'), 'FTLT employed · '+(s.ftlt_pct!=null?s.ftlt_pct.toFixed(1)+'%':'—'), '#4A9B6B')
-    + chip((barReq!=null?barReq:'—'), 'Bar-required · '+(s.emp_bar_pct!=null?s.emp_bar_pct.toFixed(1)+'%':'—'), '#5AABCB')
-    + chip((seeking!=null?seeking:'—'), 'Seeking · '+(s.emp_seek_pct!=null?s.emp_seek_pct.toFixed(1)+'%':'—'), '#EF5350')
+    + chip((ftlt!=null?ftlt:'—'), 'FTLT employed · '+(s.ftlt_pct!=null?s.ftlt_pct.toFixed(1)+'%':'—'), '#4A9B6B', 'ftlt_pct')
+    + chip((barReq!=null?barReq:'—'), 'Bar-required · '+(s.emp_bar_pct!=null?s.emp_bar_pct.toFixed(1)+'%':'—'), '#5AABCB', 'emp_bar_pct')
+    + chip((seeking!=null?seeking:'—'), 'Seeking · '+(s.emp_seek_pct!=null?s.emp_seek_pct.toFixed(1)+'%':'—'), '#EF5350', 'emp_seeking_pct', 'desc')
     + '</div>';
 }
 
@@ -3428,7 +3499,7 @@ function outcomeFunnel(s){
 
 function navSchool(id){
   // HASH ROUTES — safest, work anywhere, no 404.html or server-side rewrites needed.
-  // Reverted from clean /school/<slug> paths in v1.22.0 because GH Pages without a
+  // Reverted from clean /school/<slug> paths in v1.23.0 because GH Pages without a
   // deployed 404.html serves real 404s for any unknown path. When the project moves
   // to a custom domain with rewrites (Netlify _redirects, Vercel rewrites, Cloudflare),
   // flip CLEAN_URLS to true and the deep-link helpers below will re-engage.
@@ -4042,7 +4113,7 @@ function schoolDetailHTML(s){
       )+
       sec('cohort','5','The class','The class &amp; the program', ledeCohort,
         mods(
-          tm('Demographics',dpDemo(s))+
+          tm('Demographics',dpDemo(s)+'<div id="demo-evo-slot"></div>')+
           tm('Curriculum',
             row('Courses offered',num(s.cur_courses))+
             row('Seminars (offered · filled)',(s.cur_seminars!=null?Math.round(s.cur_seminars):'—')+' · '+(s.cur_sem_filled!=null?Math.round(s.cur_sem_filled):'—'))+
@@ -4082,13 +4153,36 @@ function renderSchoolPage(id){
 }
 async function paintEmpEvolution(s){
   const slot = document.getElementById('emp-evo-slot');
-  if(!slot) return;
-  slot.innerHTML = '<div class="dp-chart-loading">Loading 8-year evolution…</div>';
-  try {
-    const rec = await getSchoolHistory(s.id);
-    if(!rec || !rec.history){ slot.remove(); return; }
-    slot.innerHTML = empEvolutionChart(rec.history);
-  } catch(e){ slot.remove(); }
+  const dslot = document.getElementById('demo-evo-slot');
+  if(slot) slot.innerHTML = '<div class="dp-chart-loading">Loading historic mix…</div>';
+  let hist=null;
+  try { const rec = await getSchoolHistory(s.id); hist = rec && rec.history; } catch(e){ hist=null; }
+  // (1) Employment mix — historic 100%-stacked columns (same visual as grants).
+  if(slot){
+    const cols = histStackCols(hist, EMP_BUCKETS, {aria:'Employment mix composition by year'});
+    if(cols){
+      slot.innerHTML = '<div class="dp-chart-t">Employment mix · historic share by year</div>'
+        + '<div style="font-family:var(--mono);font-size:11px;color:var(--dimmer);margin-bottom:6px;">% of reported sector employment by year — columns normalise to 100%. Live ABA 509 history.</div>'
+        + cols;
+    } else { slot.remove(); }
+  }
+  // (2) Trailing-5-yr change badges on the employment rows + hero chips.
+  if(hist){
+    document.querySelectorAll('[data-emp-delta]').forEach(el=>{
+      const key = el.getAttribute('data-emp-delta');
+      const dir = el.getAttribute('data-dir') || 'asc';
+      el.innerHTML = deltaBadge(histDelta(hist, key), {dir});
+    });
+  } else {
+    document.querySelectorAll('[data-emp-delta]').forEach(el=>el.remove());
+  }
+  // (3) Demographics — historic race/ethnicity composition columns.
+  if(dslot){
+    const dcols = histStackCols(hist, RACE_BUCKETS, {aria:'Demographic composition by year'});
+    if(dcols){
+      dslot.innerHTML = '<div class="dp-chart-t" style="margin-top:12px;">Composition · by year</div>' + dcols;
+    } else { dslot.remove(); }
+  }
 }
 // Stacked-area chart of employment-mix percentages over the gz year span
 // (20182026). Each band is one EMP_BUCKETS category as % of total reported
@@ -5185,7 +5279,7 @@ function openShareModal(){
   document.body.appendChild(m);
 }
 
-// Disclaimer bar removed v1.22.0 — --banner-h is hardcoded to 0 in the inline
+// Disclaimer bar removed v1.23.0 — --banner-h is hardcoded to 0 in the inline
 // <style> after the header; the dynamic syncBannerHeight observer is no longer
 // needed. Provenance lives in the footer.
 // Honor #school/X or #compare=… in URL on first load
