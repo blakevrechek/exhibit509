@@ -10,6 +10,7 @@ The site is a re-organization of public data — we do not survey schools, gener
 - [Methodology](https://exhibit509.com/methodology.html): How Exhibit classifies Safety / Target / Reach (published 25th/75th-percentile bands), how the Net Price calculator works (sticker tuition × residency × scholarship band), how bar pass cohort offsets work (~3-year offset from admissions), how we handle data anomalies (4 sanitization rules), and how often we refresh (annual ABA cycle).
 - [About](https://exhibit509.com/about.html): Project background, data sources at a glance, what we don't do (no paid rankings, no tracking, no gated access, no recommendations).
 - [Terms & Privacy](https://exhibit509.com/terms.html): Terms of use + privacy policy + cookie disclosure.
+- [All law schools by state](https://exhibit509.com/schools.html): Directory of every ABA-accredited school grouped by state. Each state name links to a standalone "[State] law schools" page (e.g. https://exhibit509.com/california-law-schools.html) ranking that state's schools by first-time bar passage, with employment and tuition. Each school links to a full per-school profile under /school/.
 
 ## What's in the data
 

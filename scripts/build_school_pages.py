@@ -300,7 +300,7 @@ def render_page(s, all_schools=None):
     # ── Breadcrumb (visible + schema) ──
     crumbs = [("Home", f"{SITE_URL}/")]
     if state:
-        crumbs.append((f"{state} law schools", f"{SITE_URL}/schools.html#{state_slug(state)}"))
+        crumbs.append((f"{state} law schools", f"{SITE_URL}/{state_slug(state)}-law-schools.html"))
     crumbs.append((lname, canonical))
     crumb_html = '<nav class="crumbs" aria-label="Breadcrumb">' + " › ".join(
         (f'<a href="{u}">{esc(t)}</a>' if i < len(crumbs) - 1 else f"<span>{esc(t)}</span>")
@@ -317,7 +317,9 @@ def render_page(s, all_schools=None):
                       key=lambda x: law_name(x).lower())
         if sibs:
             lis = "".join(f'<li><a href="/school/{slugify(x["id"])}.html">{esc(law_name(x))}</a></li>' for x in sibs)
-            siblings_html = f'<h2>Other law schools in {esc(state)}</h2><ul class="sibs">{lis}</ul>'
+            state_url = f"/{state_slug(state)}-law-schools.html"
+            siblings_html = (f'<h2>Other law schools in <a href="{state_url}">{esc(state)}</a></h2>'
+                             f'<ul class="sibs">{lis}</ul>')
 
     # ── Body sections ───────────────────────────────────────────
     closed_banner = (
@@ -621,7 +623,8 @@ def build_directory_page(schools):
         sl = state_slug(st)
         sibs = sorted(by_state[st], key=lambda x: law_name(x).lower())
         lis = "".join(f'<li><a href="/school/{slugify(x["id"])}.html">{esc(law_name(x))}</a></li>' for x in sibs)
-        body.append(f'<div class="dir-state" id="{sl}">{esc(st)} <span style="font-family:var(--mono);font-size:12px;color:var(--dimmer);font-weight:400;">· {len(sibs)}</span></div>'
+        heading = (f'<a href="/{sl}-law-schools.html">{esc(st)}</a>' if st != "Other" else esc(st))
+        body.append(f'<div class="dir-state" id="{sl}">{heading} <span style="font-family:var(--mono);font-size:12px;color:var(--dimmer);font-weight:400;">· {len(sibs)}</span></div>'
                     f'<ul class="dir-list">{lis}</ul>')
     ld = {"@context": "https://schema.org", "@type": "CollectionPage",
           "name": "All ABA-accredited U.S. law schools",
@@ -699,7 +702,102 @@ def build_pillar_pages(schools):
                  key="ftlt_pct", fmt=lambda v: f"{v}%", reverse=True, unit="FTLT employed")
 
 
-def update_sitemap(schools):
+def state_page_fname(state):
+    """Standalone crawlable per-state landing URL: 'california-law-schools.html'."""
+    return f"{state_slug(state)}-law-schools.html"
+
+
+def build_state_pages(schools):
+    """One standalone, indexable landing page per state ('[state] law schools' is
+    high-intent search volume). Sits as a clean internal-linking tier between the
+    homepage and the per-school pages: Home › [State] law schools › [School].
+    Returns the sorted list of states it built, for the sitemap."""
+    by_state = {}
+    for s in schools:
+        if s.get("closed_status"):
+            continue
+        st = s.get("state")
+        if not st:
+            continue
+        by_state.setdefault(st, []).append(s)
+    states = sorted(by_state)
+
+    def bar_sort(x):
+        v = x.get("bar")
+        return (0, -v) if isinstance(v, (int, float)) else (1, 0)
+
+    for st in states:
+        sl = state_slug(st)
+        fname = f"{sl}-law-schools.html"
+        canonical = f"{SITE_URL}/{fname}"
+        sibs = sorted(by_state[st], key=bar_sort)
+        n = len(sibs)
+        bls_mean = next((x.get("bls_mean") for x in sibs if x.get("bls_mean")), None)
+
+        # Ranked table: school → first-time bar, FTLT employment, resident tuition, median LSAT.
+        trs = []
+        for i, x in enumerate(sibs, 1):
+            trs.append(
+                f'<tr><td class="num">{i}</td>'
+                f'<td><a href="/school/{slugify(x["id"])}.html">{esc(law_name(x))}</a></td>'
+                f'<td class="v">{fmt_pct(x.get("bar"))}</td>'
+                f'<td>{fmt_pct(x.get("ftlt_pct"))}</td>'
+                f'<td>{fmt_usd(x.get("tui"))}</td>'
+                f'<td>{x.get("lsat50") or "—"}</td></tr>')
+        table = ('<table class="rank"><tr><th>#</th><th>Law school</th>'
+                 '<th>First-time bar</th><th>FTLT employed</th>'
+                 '<th>Resident tuition</th><th>Median LSAT</th></tr>'
+                 + "".join(trs) + "</table>")
+
+        school_word = "law school" if n == 1 else "law schools"
+        lead = (f"There {'is' if n == 1 else 'are'} <strong>{n}</strong> ABA-accredited {school_word} "
+                f"in {esc(st)}. Each row links to a full profile with first-time and 2-year ultimate bar "
+                f"passage, full-time JD employment, true cost after scholarships, and a 15-year trajectory "
+                f"from the official ABA Standard 509 disclosures.")
+        if bls_mean:
+            lead += (f" The mean attorney salary in {esc(st)} is {fmt_usd(bls_mean)} "
+                     f"(U.S. BLS OEWS 2024), useful context for weighing cost against outcomes.")
+
+        body = [PILLAR_NAV,
+                f'<nav class="crumbs"><a href="/">Home</a> › <a href="/schools.html">All law schools</a> › '
+                f'<span>{esc(st)} law schools</span></nav>',
+                f"<h1>{esc(st)} law schools</h1>",
+                f'<p class="lead">{lead}</p>',
+                table,
+                '<p style="font-family:var(--mono);font-size:12px;color:var(--dimmer);">'
+                'From the most recent ABA Standard 509 cycle. Open any school for full outcomes, cost and '
+                'trajectory, browse <a href="/schools.html">every state</a>, or open the '
+                '<a href="/">interactive map</a>.</p>']
+
+        crumb_ld = {"@context": "https://schema.org", "@type": "BreadcrumbList",
+                    "itemListElement": [
+                        {"@type": "ListItem", "position": 1, "name": "Home", "item": f"{SITE_URL}/"},
+                        {"@type": "ListItem", "position": 2, "name": "All law schools",
+                         "item": f"{SITE_URL}/schools.html"},
+                        {"@type": "ListItem", "position": 3, "name": f"{st} law schools",
+                         "item": canonical}]}
+        coll_ld = {"@context": "https://schema.org", "@type": "CollectionPage",
+                   "name": f"{st} law schools: ABA 509 data", "url": canonical,
+                   "mainEntity": {"@type": "ItemList", "numberOfItems": n,
+                                  "itemListElement": [
+                                      {"@type": "ListItem", "position": i,
+                                       "url": f"{SITE_URL}/school/{slugify(x['id'])}.html",
+                                       "name": law_name(x)} for i, x in enumerate(sibs, 1)]}}
+        ld_block = (json.dumps(coll_ld, ensure_ascii=False)
+                    + '</script>\n<script type="application/ld+json">'
+                    + json.dumps(crumb_ld, ensure_ascii=False))
+
+        title = (f"{st} Law Schools: Bar Passage, Cost & Employment (ABA 509) | Exhibit 509")
+        desc = (f"All {n} ABA-accredited law {('school' if n == 1 else 'schools')} in {st}, ranked with "
+                f"first-time bar passage, full-time JD employment, and resident tuition from official "
+                f"ABA Standard 509 disclosures.")
+        html = page_shell(title, desc, canonical, "\n".join(body), ld_block)
+        open(os.path.join(ROOT, fname), "w").write(html)
+    print(f"Wrote {len(states)} per-state landing pages.")
+    return states
+
+
+def update_sitemap(schools, states=None):
     """Inject one <url> entry per school into sitemap.xml."""
     head = """<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -756,6 +854,12 @@ def update_sitemap(schools):
   </url>
 """
     body_lines = []
+    # Per-state landing pages sit one tier above the school pages — give them a
+    # slightly higher priority and list them first.
+    for st in (states or []):
+        body_lines.append(
+            f'  <url>\n    <loc>https://exhibit509.com/{state_page_fname(st)}</loc>\n    <changefreq>monthly</changefreq>\n    <priority>0.8</priority>\n    <lastmod>2026-05-31</lastmod>\n  </url>'
+        )
     for s in schools:
         slug = slugify(s["id"])
         body_lines.append(
@@ -849,8 +953,10 @@ def main():
     print(f"Wrote {written} static school pages to {OUT_DIR}/")
     build_directory_page(S)
     build_pillar_pages(S)
-    update_sitemap(S)
-    print(f"Updated sitemap.xml with {len(S)} school URLs (plus site + directory + pillar pages).")
+    states = build_state_pages(S)
+    update_sitemap(S, states)
+    print(f"Updated sitemap.xml with {len(S)} school URLs + {len(states)} state pages "
+          f"(plus site + directory + pillar pages).")
     update_index_directory(S)
     stamp_counts(S)
 
