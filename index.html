@@ -371,7 +371,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .pb-counsel-header{border-top:3px solid var(--counsel);}
 
 /* Map filters bar */
-/* Map filters relocated v1.27.3, top-of-map horizontal toolbar, docked between the
+/* Map filters relocated v1.28.0, top-of-map horizontal toolbar, docked between the
    left Match Me / Compare sidebar (ends at 380px) and the always-open right school
    panel (400px), sitting just under the global header. The left sidebar is now
    reserved exclusively for Match Me + Compare. */
@@ -448,7 +448,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
    header (school name + bar pass chip) isn't hidden by filter chips or the BLS
    tooltip card. Was top:76px causing the upper ~50px to be eaten. */
 /* schoolPanel sits at the natural top now that map-filter bar moved into the left
-   panel (v1.27.3) — frees ~50px of vertical space at the top of the right column. */
+   panel (v1.28.0) — frees ~50px of vertical space at the top of the right column. */
 #schoolPanel{position:fixed;top:76px;right:0;bottom:36px;width:400px;z-index:100;background:rgba(4,13,23,0.97);border-left:1px solid rgba(74,122,155,0.22);overflow-y:auto;transform:translateX(0);transition:transform .3s;}#schoolPanel.hidden{transform:translateX(100%);}
 #schoolPanel.open{transform:translateX(0);}
 .sp-close{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(4,13,23,0.98);border-bottom:1px solid rgba(74,122,155,0.15);}
@@ -458,7 +458,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .sp-tab{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border:1px solid rgba(74,122,155,0.2);background:transparent;color:var(--dim);cursor:pointer;transition:all .2s;}
 .sp-tab+.sp-tab{border-left:none;}
 .sp-tab.on{background:rgba(217,119,87,0.1);color:var(--orange);border-color:rgba(217,119,87,0.35);}
-/* School-panel (right side) typography tightened v1.27.3, was visibly scaled-too-big
+/* School-panel (right side) typography tightened v1.28.0, was visibly scaled-too-big
    per owner. Reduced metric/value sizes by ~15%, tighter section padding, smaller
    section labels, more breathable line-height. */
 .sp-header{padding:14px 16px 10px;border-bottom:1px solid rgba(74,122,155,0.12);}
@@ -723,6 +723,8 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
    the consequences of the inputs above. Distinct visual style (subtle orange ring +
    "YOU" eyebrow) to make it OBVIOUS these depend on your inputs. */
 .calc-summary{margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;}
+.calc-capwarn{grid-column:1/-1;font-family:var(--mono);font-size:12.5px;line-height:1.6;color:#FFC08A;background:rgba(217,119,87,0.10);border:1px solid rgba(217,119,87,0.4);border-left:3px solid var(--orange);border-radius:4px;padding:10px 13px;margin-bottom:4px;}
+.calc-capwarn strong{color:#fff;}
 .calc-tile{background:linear-gradient(180deg,rgba(217,119,87,0.10) 0%,rgba(217,119,87,0.03) 100%);border:1px solid rgba(217,119,87,0.32);border-radius:5px;padding:14px 16px 16px;position:relative;}
 .calc-tile-eye{font-family:var(--mono);font-size:11px;letter-spacing:2.5px;color:var(--orange);font-weight:700;text-transform:uppercase;margin-bottom:6px;}
 .calc-tile-v{font-family:var(--sans);font-size:24px;color:var(--white);font-weight:800;line-height:1;letter-spacing:-0.6px;font-variant-numeric:tabular-nums;}
@@ -1577,7 +1579,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
     More
   </button>
 </nav>
-<!-- Disclaimer bar removed v1.27.3, provenance now lives in the footer. -->
+<!-- Disclaimer bar removed v1.28.0, provenance now lives in the footer. -->
 <style>:root{--banner-h:0px;}</style>
 
 <div id="cookieBar" style="position:fixed;bottom:0;left:0;right:0;z-index:1000;background:#0B1826;border-top:1px solid rgba(217,119,87,0.4);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;box-shadow:0 -2px 12px rgba(0,0,0,0.5);">
@@ -1612,7 +1614,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
       <!-- Map stats tile: total shown + per-color-tier counts, animated on filter change -->
       <div class="map-stats" id="mapStats">
         <div class="ms-head">
-          <span class="ms-count-big"><span class="ms-total-n" id="msTotal">0</span> <span class="ms-count-unit">schools<br>on map</span></span>
+          <span class="ms-count-big"><span class="ms-total-n" id="msTotal">207</span> <span class="ms-count-unit">schools<br>on map</span></span>
           <span class="ms-eyebrow" id="msMetricLabel">By First-Time Bar</span>
         </div>
         <div class="ms-filt-bar">
@@ -1900,8 +1902,8 @@ function fmtUSD(v){ return v==null?"—":"$"+v.toLocaleString(); }
 // ═══════════════════════════════════════════════════════════════════════════
 const DATA_INVARIANTS = {
   total_schools: 208,         // 197 active/newly + 11 closed/transitioning (now included as historical entries)
-  schools_inline: 208,        // all inline as of v1.27.3, closed entries surface their pre-closure history
-  year_count: 15              // 2011–2025 inclusive (15-year span; pre-2018 added in v1.27.3 from Historic + v2 sheets)
+  schools_inline: 208,        // all inline as of v1.28.0, closed entries surface their pre-closure history
+  year_count: 15              // 2011–2025 inclusive (15-year span; pre-2018 added in v1.28.0 from Historic + v2 sheets)
 };
 // Verifiable count of the data cells actually shipped inline on this page:
 // every non-null scalar field, plus every per-year trend entry, across S.
@@ -1970,7 +1972,7 @@ function populateHeaderStats(){
 // ── Lazy-load full dataset (deferred until first deep-dive interaction) ──
 // Callers: `const ext = await loadFullDataset();` parsed JSON, or null on fail.
 // Subsequent calls return the cached object. Concurrent calls share one fetch.
-// Wired in v1.27.3 — schoolDetailHTML calls getSchoolHistory(id) which awaits
+// Wired in v1.28.0 — schoolDetailHTML calls getSchoolHistory(id) which awaits
 // this loader, then renders deep-history charts (employment evolution etc.) into
 // late-paint slots once data is available.
 window.EXT = window.EXT || { data: null, loading: null, byId: null };
@@ -2171,7 +2173,7 @@ function searchTypeaheadKey(e){
   }
 }
 
-// Disclaimer banner is now persistent (per v1.27.3 owner directive) — no dismiss; always visible.
+// Disclaimer banner is now persistent (per v1.28.0 owner directive) — no dismiss; always visible.
 // ── COOKIE notice dismiss (persists via localStorage) ──
 // ── Light/Dark theme toggle (persists via localStorage). Note: many inline styles
 // use literal rgba(4,13,23,...) and won't fully invert — full theming would require
@@ -3120,7 +3122,7 @@ function lineChart(opts){
     const pv=years.map(y=>pin.vals?pin.vals[y]:null);
     let li=-1; for(let i=pv.length-1;i>=0;i--){ if(pv[i]!=null){ li=i; break; } }
     if(li>=0){ const v=pv[li], x=X(li), yy=Y(v), last=(li===years.length-1);
-      // Endpoint label placement rule (v1.27.3): if the line is RISING into the
+      // Endpoint label placement rule (v1.28.0): if the line is RISING into the
       // endpoint, drop the label BELOW the marker (clears the ascending line and
       // the top edge it would otherwise clip); if FALLING, lift it ABOVE. Clamp
       // to the chart box so it can never get cut off. The --chart-halo var gives a
@@ -3167,7 +3169,7 @@ function lineChart(opts){
 
 // ── Full school detail page (items 5 & 9): opens in a new tab via #school/<id> ─
 // ── Scholarship distribution ────────────────────────────────────────────────
-// Canonical buckets per owner directive (v1.27.3): student-favorability gradient.
+// Canonical buckets per owner directive (v1.28.0): student-favorability gradient.
 // "No grant" is DERIVED = 100 - (lt + mt + full + gt) — the source's none count is
 // known to be unreliable (negatives, mis-reports); the derivation guarantees the
 // stack sums to 100% and avoids fabricated bad data.
@@ -3594,7 +3596,7 @@ function outcomeFunnel(s){
 
 function navSchool(id){
   // HASH ROUTES — safest, work anywhere, no 404.html or server-side rewrites needed.
-  // Reverted from clean /school/<slug> paths in v1.27.3 because GH Pages without a
+  // Reverted from clean /school/<slug> paths in v1.28.0 because GH Pages without a
   // deployed 404.html serves real 404s for any unknown path. When the project moves
   // to a custom domain with rewrites (Netlify _redirects, Vercel rewrites, Cloudflare),
   // flip CLEAN_URLS to true and the deep-link helpers below will re-engage.
@@ -4815,7 +4817,7 @@ function renderCalc(){
     +' <strong>How "Est. grant" is estimated:</strong> if your LSAT and uGPA are both ≥ the school\'s 75th percentile (Safety), we use grant_p75. If both are ≥ 25th (Target), we use the median grant. Otherwise (Reach) we use grant_p25. Rough, actual offers vary hugely by cycle, essays, demographics, and yield.<br>'
     +' <strong>"3-yr net" = 3 × (sticker − est. grant)</strong>, ignoring fees and cost of living. <strong>"Loan interest"</strong> assumes the per-year borrow amount × 3 funds the program; payment uses standard fixed amortization at your stated rate over your stated term. <strong>"Net price"</strong> = 3-yr net tuition + 3-yr living + total loan interest, your all-in cost: the price of the degree, the cost of living while you earn it, and the cost of financing it.<br>'
     +' Sticker is <strong>resident</strong> when your home state matches the school\'s state, otherwise non-resident (if reported).<br>'
-    +' Loan math is illustrative, confirm current Grad PLUS and private rates before deciding. School figures sourced from ABA 509, last synced May 2026.'
+    +' Loan math is illustrative. For entrants from July 1, 2026, Grad PLUS ends and federal grad borrowing is capped at $50k/yr ($200k lifetime), so costs above that fall to private loans — confirm current federal and private rates before deciding. School figures sourced from ABA 509, last synced May 2026.'
     +'</div>';
   renderCalcResults();
 }
@@ -4840,6 +4842,19 @@ function renderCalcResults(){
   setApplicantProfile({lsat:isNaN(lsat)?null:lsat, gpa:isNaN(gpa)?null:gpa, state:state||null});
   // Loan + living calculations (constant across schools)
   const P1 = l1p*3, P2 = l2p*3;
+  // OBBBA cliff: for entrants from July 1, 2026, Grad PLUS is discontinued and
+  // federal grad borrowing is capped ($50k/yr, $200k lifetime). Flag live when the
+  // "federal" line exceeds the cap so the cost-of-attendance assumption can't hide it.
+  const FED_CAP_YR = 50000, FED_CAP_LIFE = 200000;
+  let capWarn = '';
+  if(l1p > FED_CAP_YR || P1 > FED_CAP_LIFE){
+    const overYr = Math.max(0, l1p - FED_CAP_YR);
+    capWarn = '<div class="calc-capwarn">⚠ <strong>2026 federal loan cliff:</strong> for entrants from July 1, 2026, Grad PLUS ends and federal loans are capped at '+fmt$(FED_CAP_YR)+'/yr ('+fmt$(FED_CAP_LIFE)+' lifetime). '
+      + (overYr>0
+          ? 'About '+fmt$(overYr)+'/yr of your federal line would have to come from <strong>private loans</strong> instead — higher rates, no PSLF or income-driven repayment.'
+          : 'Your federal total exceeds the '+fmt$(FED_CAP_LIFE)+' lifetime cap; the excess must be private.')
+      + '</div>';
+  }
   const m1 = calcMonthly(P1, l1r, yrs), m2 = calcMonthly(P2, l2r, yrs);
   const i1 = calcTotalInterest(P1, l1r, yrs), i2 = calcTotalInterest(P2, l2r, yrs);
   const totalLoanPrinc = P1+P2;
@@ -4854,8 +4869,8 @@ function renderCalcResults(){
   function tile(eye, val, sub){
     return '<div class="calc-tile"><div class="calc-tile-eye">You · '+eye+'</div><div class="calc-tile-v">'+val+'</div><div class="calc-tile-l">'+sub+'</div></div>';
   }
-  sumEl.innerHTML =
-      tile('Borrowing',      fmt$(totalLoanPrinc), fmt$(P1)+' GradPLUS + '+fmt$(P2)+' private')
+  sumEl.innerHTML = capWarn +
+      tile('Borrowing',      fmt$(totalLoanPrinc), fmt$(P1)+' federal + '+fmt$(P2)+' private')
     + tile('Total interest', fmt$(totalInterest),  'Over '+yrs+'-year repayment')
     + tile('Monthly payment',fmt$(totalMonthly),   'After graduation')
     + tile('3-yr living',    fmt$(living3),        fmt$(yearlyLiving)+'/yr × 3');
@@ -5510,7 +5525,7 @@ function openShareModal(){
   document.body.appendChild(m);
 }
 
-// Disclaimer bar removed v1.27.3 — --banner-h is hardcoded to 0 in the inline
+// Disclaimer bar removed v1.28.0 — --banner-h is hardcoded to 0 in the inline
 // <style> after the header; the dynamic syncBannerHeight observer is no longer
 // needed. Provenance lives in the footer.
 // Honor #school/X or #compare=… in URL on first load

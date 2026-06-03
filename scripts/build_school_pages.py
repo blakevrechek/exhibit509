@@ -201,7 +201,7 @@ def render_page(s, all_schools=None):
         f"{ftlt_pct}% in full-time JD jobs," if ftlt_pct is not None else "",
         f"{fmt_usd(tui)} resident tuition," if tui else "",
         f"{lsat50} median LSAT." if lsat50 else "",
-        "Full ABA Standard 509 outcomes, cost & 8-year trajectory.",
+        "Full ABA Standard 509 outcomes, cost & 15-year trajectory.",
     ]
     desc = " ".join(x for x in desc_parts if x).strip()
     title = f"{lname}: Bar Passage, Cost & Employment (ABA 509) | Exhibit"
@@ -470,6 +470,7 @@ def render_page(s, all_schools=None):
   .crumbs a:hover{{color:var(--orange);}}
   .crumbs span{{color:var(--dimmer);}}
   .lead{{font-size:17px;line-height:1.6;color:#D6E4F0;margin:0 0 22px;}}
+  .cohort-note{{font-family:var(--mono);font-size:12px;line-height:1.6;color:#FFB27A;background:rgba(217,119,87,0.08);border-left:2px solid var(--orange);padding:9px 12px;margin:0 0 14px;}}
   .lead strong{{color:var(--white);}}
   .faq-q{{font-family:'Nunito',var(--serif);font-weight:700;font-size:16px;color:var(--white);margin:16px 0 2px;}}
   .faq-a{{margin:0 0 8px;font-size:15px;color:#CFE0EC;}}
@@ -500,6 +501,7 @@ def render_page(s, all_schools=None):
 
   <h2>Bar passage</h2>
   <table>{bar_rows}</table>
+  <p class="cohort-note">Different cohorts: first-time bar passage reflects graduates who <strong>entered law school about three years before</strong> the current admissions class shown above. Read the two as separate snapshots, not a single pipeline.</p>
 
   <h2>Job outcomes (10 months after graduation)</h2>
   <table>{job_rows}</table>
@@ -613,7 +615,7 @@ def build_directory_page(schools):
             '<nav class="crumbs"><a href="/">Home</a> › <span>All law schools</span></nav>',
             "<h1>All ABA-accredited U.S. law schools</h1>",
             f'<p class="lead">Browse every ABA-accredited law school by state, each links to a full profile with '
-            f'bar passage, employment outcomes, true cost, scholarships, and an 8-year trajectory from the official '
+            f'bar passage, employment outcomes, true cost, scholarships, and a 15-year trajectory from the official '
             f'ABA Standard 509 disclosures. {sum(len(v) for v in by_state.values())} schools across {len(states)} states.</p>']
     for st in states:
         sl = state_slug(st)
@@ -626,7 +628,7 @@ def build_directory_page(schools):
           "url": f"{SITE_URL}/schools.html"}
     html = page_shell(
         "All ABA Law Schools by State: Bar Passage, Cost & Employment | Exhibit",
-        "Directory of every ABA-accredited U.S. law school by state. Each profile shows bar passage, employment outcomes, tuition, scholarships and an 8-year trajectory from official ABA 509 disclosures.",
+        "Directory of every ABA-accredited U.S. law school by state. Each profile shows bar passage, employment outcomes, tuition, scholarships and a 15-year trajectory from official ABA 509 disclosures.",
         f"{SITE_URL}/schools.html", "\n".join(body), json.dumps(ld, ensure_ascii=False))
     open(os.path.join(ROOT, "schools.html"), "w").write(html)
     print("Wrote schools.html directory page.")
@@ -788,6 +790,40 @@ def update_index_directory(schools):
     print(f"Injected {len(items)}-school crawlable directory into index.html noscript.")
 
 
+def stamp_counts(schools):
+    """Derive the school counts from the dataset and stamp them everywhere they
+    appear in prose / config, so 208 / 197 / 11 (and the map's default count) can
+    never drift out of agreement. Single source of truth = the dataset itself."""
+    T = len(schools)                                              # total entries
+    C = sum(1 for s in schools if s.get("closed_status"))         # closed/transitioning
+    A = T - C                                                     # currently accredited
+    M = sum(1 for s in schools if s.get("lat") and s.get("lng"))  # default map markers
+
+    idx = open(INDEX_PATH, encoding="utf-8").read()
+    idx_subs = [
+        # Seed the pre-JS / crawl placeholder with the real default map count so
+        # the homepage never snapshots "0 schools on map" before hydration.
+        (r'(id="msTotal">)\d+(<)', rf"\g<1>{M}\g<2>"),
+        (r"(total_schools:\s*)\d+", rf"\g<1>{T}"),
+        (r"(schools_inline:\s*)\d+", rf"\g<1>{T}"),
+        (r"for \d+ schools \(\d+ currently accredited \+ \d+ closed",
+         f"for {T} schools ({A} currently accredited + {C} closed"),
+        (r"(years of data, )\d+( schools)", rf"\g<1>{T}\g<2>"),
+        (r"(2011–2025\) for )\d+( schools)", rf"\g<1>{T}\g<2>"),
+    ]
+    for pat, rep in idx_subs:
+        idx = re.sub(pat, rep, idx)
+    open(INDEX_PATH, "w", encoding="utf-8").write(idx)
+
+    meth = os.path.join(ROOT, "methodology.html")
+    if os.path.exists(meth):
+        m = open(meth, encoding="utf-8").read()
+        m = re.sub(r"all \d+ reporting schools", f"all {A} reporting schools", m)
+        open(meth, "w", encoding="utf-8").write(m)
+
+    print(f"Stamped counts: total={T} accredited={A} closed={C} mapped={M}")
+
+
 def main():
     if not os.path.exists(INDEX_PATH):
         sys.exit(f"index.html not found at {INDEX_PATH}")
@@ -816,6 +852,7 @@ def main():
     update_sitemap(S)
     print(f"Updated sitemap.xml with {len(S)} school URLs (plus site + directory + pillar pages).")
     update_index_directory(S)
+    stamp_counts(S)
 
 
 if __name__ == "__main__":
