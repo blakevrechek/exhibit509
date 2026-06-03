@@ -371,7 +371,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .pb-counsel-header{border-top:3px solid var(--counsel);}
 
 /* Map filters bar */
-/* Map filters relocated v1.26.0 — top-of-map horizontal toolbar, docked between the
+/* Map filters relocated v1.26.1 — top-of-map horizontal toolbar, docked between the
    left Match Me / Compare sidebar (ends at 380px) and the always-open right school
    panel (400px), sitting just under the global header. The left sidebar is now
    reserved exclusively for Match Me + Compare. */
@@ -448,7 +448,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
    header (school name + bar pass chip) isn't hidden by filter chips or the BLS
    tooltip card. Was top:76px causing the upper ~50px to be eaten. */
 /* schoolPanel sits at the natural top now that map-filter bar moved into the left
-   panel (v1.26.0) — frees ~50px of vertical space at the top of the right column. */
+   panel (v1.26.1) — frees ~50px of vertical space at the top of the right column. */
 #schoolPanel{position:fixed;top:76px;right:0;bottom:36px;width:400px;z-index:100;background:rgba(4,13,23,0.97);border-left:1px solid rgba(74,122,155,0.22);overflow-y:auto;transform:translateX(0);transition:transform .3s;}#schoolPanel.hidden{transform:translateX(100%);}
 #schoolPanel.open{transform:translateX(0);}
 .sp-close{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(4,13,23,0.98);border-bottom:1px solid rgba(74,122,155,0.15);}
@@ -458,7 +458,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .sp-tab{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border:1px solid rgba(74,122,155,0.2);background:transparent;color:var(--dim);cursor:pointer;transition:all .2s;}
 .sp-tab+.sp-tab{border-left:none;}
 .sp-tab.on{background:rgba(217,119,87,0.1);color:var(--orange);border-color:rgba(217,119,87,0.35);}
-/* School-panel (right side) typography tightened v1.26.0 — was visibly scaled-too-big
+/* School-panel (right side) typography tightened v1.26.1 — was visibly scaled-too-big
    per owner. Reduced metric/value sizes by ~15%, tighter section padding, smaller
    section labels, more breathable line-height. */
 .sp-header{padding:14px 16px 10px;border-bottom:1px solid rgba(74,122,155,0.12);}
@@ -1052,6 +1052,11 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
 .trend-card{background:rgba(74,122,155,0.05);border:1px solid rgba(74,122,155,0.12);border-radius:6px;padding:12px 14px;min-width:0;}
 .trend-card-h{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px;flex-wrap:wrap;}
 .trend-card-t{font-family:var(--mono);font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--dim);font-weight:700;}
+/* Trends loading skeleton (shimmer) */
+.skel-bar{display:inline-block;height:13px;border-radius:3px;vertical-align:middle;background:linear-gradient(90deg,rgba(74,122,155,0.10),rgba(74,122,155,0.24),rgba(74,122,155,0.10));background-size:200% 100%;animation:skelsh 1.25s ease-in-out infinite;}
+.skel-chart{height:150px;margin-top:10px;border-radius:4px;background:linear-gradient(90deg,rgba(74,122,155,0.06),rgba(74,122,155,0.16),rgba(74,122,155,0.06));background-size:200% 100%;animation:skelsh 1.25s ease-in-out infinite;}
+@keyframes skelsh{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
+@media(prefers-reduced-motion:reduce){.skel-bar,.skel-chart{animation:none;}}
 .view-foot{font-family:var(--mono);font-size:12px;color:var(--dimmer);margin-top:24px;line-height:1.6;max-width:900px;}
 .theme-light .trends-headline{color:#1A2A3A;}
 .theme-light .trend-card{background:#FFFFFFAA;border-color:rgba(60,90,120,0.16);}
@@ -1068,7 +1073,6 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
 .yoy-grp{font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--orange);font-weight:700;margin:13px 0 1px;}
 .yoy-chg{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
 .yoy-chg .traj{margin-left:0;}
-.yoy-natl{font-family:var(--mono);font-size:10.5px;color:var(--dimmer);}
 .theme-light .yoy-row > span:not(.yoy-m):not(.yoy-chg){color:#0C1A2A;}
 @media(max-width:760px){ .yoy-row{grid-template-columns:1.4fr 0.8fr 0.8fr 1.3fr;gap:6px;} .yoy-m{font-size:12px;} .yoy-row > span:not(.yoy-m):not(.yoy-chg){font-size:13px;} }
 
@@ -1573,7 +1577,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
     More
   </button>
 </nav>
-<!-- Disclaimer bar removed v1.26.0 — provenance now lives in the footer. -->
+<!-- Disclaimer bar removed v1.26.1 — provenance now lives in the footer. -->
 <style>:root{--banner-h:0px;}</style>
 
 <div id="cookieBar" style="position:fixed;bottom:0;left:0;right:0;z-index:1000;background:#0B1826;border-top:1px solid rgba(217,119,87,0.4);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;box-shadow:0 -2px 12px rgba(0,0,0,0.5);">
@@ -1896,8 +1900,8 @@ function fmtUSD(v){ return v==null?"—":"$"+v.toLocaleString(); }
 // ═══════════════════════════════════════════════════════════════════════════
 const DATA_INVARIANTS = {
   total_schools: 208,         // 197 active/newly + 11 closed/transitioning (now included as historical entries)
-  schools_inline: 208,        // all inline as of v1.26.0 — closed entries surface their pre-closure history
-  year_count: 15              // 2011–2025 inclusive (15-year span; pre-2018 added in v1.26.0 from Historic + v2 sheets)
+  schools_inline: 208,        // all inline as of v1.26.1 — closed entries surface their pre-closure history
+  year_count: 15              // 2011–2025 inclusive (15-year span; pre-2018 added in v1.26.1 from Historic + v2 sheets)
 };
 // Verifiable count of the data cells actually shipped inline on this page:
 // every non-null scalar field, plus every per-year trend entry, across S.
@@ -1966,7 +1970,7 @@ function populateHeaderStats(){
 // ── Lazy-load full dataset (deferred until first deep-dive interaction) ──
 // Callers: `const ext = await loadFullDataset();` parsed JSON, or null on fail.
 // Subsequent calls return the cached object. Concurrent calls share one fetch.
-// Wired in v1.26.0 — schoolDetailHTML calls getSchoolHistory(id) which awaits
+// Wired in v1.26.1 — schoolDetailHTML calls getSchoolHistory(id) which awaits
 // this loader, then renders deep-history charts (employment evolution etc.) into
 // late-paint slots once data is available.
 window.EXT = window.EXT || { data: null, loading: null, byId: null };
@@ -2167,7 +2171,7 @@ function searchTypeaheadKey(e){
   }
 }
 
-// Disclaimer banner is now persistent (per v1.26.0 owner directive) — no dismiss; always visible.
+// Disclaimer banner is now persistent (per v1.26.1 owner directive) — no dismiss; always visible.
 // ── COOKIE notice dismiss (persists via localStorage) ──
 // ── Light/Dark theme toggle (persists via localStorage). Note: many inline styles
 // use literal rgba(4,13,23,...) and won't fully invert — full theming would require
@@ -3116,7 +3120,7 @@ function lineChart(opts){
     const pv=years.map(y=>pin.vals?pin.vals[y]:null);
     let li=-1; for(let i=pv.length-1;i>=0;i--){ if(pv[i]!=null){ li=i; break; } }
     if(li>=0){ const v=pv[li], x=X(li), yy=Y(v), last=(li===years.length-1);
-      // Endpoint label placement rule (v1.26.0): if the line is RISING into the
+      // Endpoint label placement rule (v1.26.1): if the line is RISING into the
       // endpoint, drop the label BELOW the marker (clears the ascending line and
       // the top edge it would otherwise clip); if FALLING, lift it ABOVE. Clamp
       // to the chart box so it can never get cut off. The --chart-halo var gives a
@@ -3163,7 +3167,7 @@ function lineChart(opts){
 
 // ── Full school detail page (items 5 & 9): opens in a new tab via #school/<id> ─
 // ── Scholarship distribution ────────────────────────────────────────────────
-// Canonical buckets per owner directive (v1.26.0): student-favorability gradient.
+// Canonical buckets per owner directive (v1.26.1): student-favorability gradient.
 // "No grant" is DERIVED = 100 - (lt + mt + full + gt) — the source's none count is
 // known to be unreliable (negatives, mis-reports); the derivation guarantees the
 // stack sums to 100% and avoids fabricated bad data.
@@ -3399,27 +3403,10 @@ function renderYoYTable(){
       if(Math.abs(delta)<1e-9){ dCell='<span class="traj traj-flat">no change</span>'; }
       else { const up=delta>0, better=(m.dir==='desc')?!up:up; dCell='<span class="traj traj-'+(better?'up':'down')+'">'+(up?'↑':'↓')+' '+yoyDelta(m.u,delta)+'</span>'; }
     }
-    // National-median move over the SAME two years — context to "paint the picture".
-    const nA=natlMedian(m.k,yA,m.znull), nB=natlMedian(m.k,yB,m.znull);
-    const natlNote=(nA!=null&&nB!=null)?'<span class="yoy-natl" title="National median '+yoyVal(m.u,nA)+' → '+yoyVal(m.u,nB)+'">natl '+yoyDelta(m.u,nB-nA)+'</span>':'';
-    html+='<div class="yoy-row"><span class="yoy-m">'+m.l+'</span><span>'+yoyVal(m.u,a)+'</span><span>'+yoyVal(m.u,b)+'</span><span class="yoy-chg">'+dCell+natlNote+'</span></div>';
+    // This school vs ITSELF over time only — cross-school comparison lives in the Compare tool.
+    html+='<div class="yoy-row"><span class="yoy-m">'+m.l+'</span><span>'+yoyVal(m.u,a)+'</span><span>'+yoyVal(m.u,b)+'</span><span class="yoy-chg">'+dCell+'</span></div>';
   });
   tEl.innerHTML=html+'</div>';
-}
-// National median of any history field for a given year (cached). Reads the gz
-// (window.EXT.data) already loaded by the detail page. znull drops 0=missing.
-window._NATL_MED_CACHE=window._NATL_MED_CACHE||{};
-function natlMedian(key, year, znull){
-  const ck=key+'@'+year+(znull?'!0':'');
-  const c=window._NATL_MED_CACHE;
-  if(ck in c) return c[ck];
-  const ext=window.EXT && window.EXT.data;
-  if(!ext || !ext.schools) return (c[ck]=null);
-  const vals=[];
-  ext.schools.forEach(s=>{ const r=(s.history||{})[String(year)]; const v=r&&r[key]; if(v!=null && !isNaN(+v) && (!znull || +v>0)) vals.push(+v); });
-  if(!vals.length) return (c[ck]=null);
-  vals.sort((a,b)=>a-b); const mid=Math.floor(vals.length/2);
-  return (c[ck]= vals.length%2 ? vals[mid] : (vals[mid-1]+vals[mid])/2);
 }
 function yoySection(history){
   const panel=yoyPanel(history);
@@ -3607,7 +3594,7 @@ function outcomeFunnel(s){
 
 function navSchool(id){
   // HASH ROUTES — safest, work anywhere, no 404.html or server-side rewrites needed.
-  // Reverted from clean /school/<slug> paths in v1.26.0 because GH Pages without a
+  // Reverted from clean /school/<slug> paths in v1.26.1 because GH Pages without a
   // deployed 404.html serves real 404s for any unknown path. When the project moves
   // to a custom domain with rewrites (Netlify _redirects, Vercel rewrites, Cloudflare),
   // flip CLEAN_URLS to true and the deep-link helpers below will re-engage.
@@ -4618,7 +4605,11 @@ function natlWindowBadge(dict, m, fy, ty){
 }
 async function renderTrends(){
   const vi=document.getElementById('viewInner');
-  vi.innerHTML='<div class="view-title">State of legal education</div><p class="view-sub">Computing national history from 206 schools…</p>';
+  // Shimmer skeleton that mirrors the final layout so the (one-time gz) wait feels intentional.
+  vi.innerHTML='<div class="view-title">State of legal education</div>'
+    + '<p class="view-sub">National medians across every reporting ABA-509 school. Median (not mean) so a few outliers don’t skew the picture.</p>'
+    + '<div class="yoy-ctl"><span class="skel-bar" style="width:88px;height:30px;border-radius:4px;"></span><span class="skel-bar" style="width:88px;height:30px;border-radius:4px;"></span></div>'
+    + '<div class="trends-grid">'+NATL_METRICS.map(()=>'<div class="trend-card"><div class="trend-card-h"><span class="skel-bar" style="width:130px;"></span><span class="skel-bar" style="width:74px;"></span></div><div class="skel-chart"></div></div>').join('')+'</div>';
   const nt=await nationalTrends();
   if(!nt){ vi.innerHTML='<div class="view-title">State of legal education</div><p class="view-sub">The full-history dataset is unavailable in this browser.</p>'; return; }
   const yrs=nt.years;
@@ -5243,6 +5234,17 @@ populateHeaderStats();
 renderCompareTray();
 renderLayerUI();
 renderShareWidget();
+// Pre-warm the full-history gz on idle so the Trends view and school deep-dives
+// feel instant. Idempotent (caches on window.EXT); skipped on data-saver links.
+(function prewarmHistory(){
+  try{
+    const conn=navigator.connection || navigator.webkitConnection;
+    if(conn && (conn.saveData || /(^|-)2g$/.test(conn.effectiveType||''))) return; // respect metered/slow
+    const kick=()=>{ try{ loadFullDataset(); }catch(e){} };
+    if('requestIdleCallback' in window) requestIdleCallback(kick,{timeout:5000});
+    else setTimeout(kick, 3000);
+  }catch(e){}
+})();
 // ── Onboarding tour — guided spotlight showcase, dismissable, never auto-fires again ──
 function startTour(){
   // Steps: each can target an actual element on the page (spotlight) and/or
@@ -5505,7 +5507,7 @@ function openShareModal(){
   document.body.appendChild(m);
 }
 
-// Disclaimer bar removed v1.26.0 — --banner-h is hardcoded to 0 in the inline
+// Disclaimer bar removed v1.26.1 — --banner-h is hardcoded to 0 in the inline
 // <style> after the header; the dynamic syncBannerHeight observer is no longer
 // needed. Provenance lives in the footer.
 // Honor #school/X or #compare=… in URL on first load
