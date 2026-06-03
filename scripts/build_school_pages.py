@@ -204,7 +204,7 @@ def render_page(s, all_schools=None):
         "Full ABA Standard 509 outcomes, cost & 15-year trajectory.",
     ]
     desc = " ".join(x for x in desc_parts if x).strip()
-    title = f"{lname}: Bar Passage, Cost & Employment (ABA 509) | Exhibit"
+    title = f"{lname}: Bar Passage, Cost & Employment (ABA 509) | Exhibit 509"
 
     # ── Schema.org JSON-LD (CollegeOrUniversity) ────────────────
     ld = {
@@ -435,7 +435,7 @@ def render_page(s, all_schools=None):
 <meta property="og:title" content="{lname}: ABA 509 data">
 <meta property="og:description" content="{desc}">
 <meta property="og:url" content="{canonical}">
-<meta property="og:site_name" content="Exhibit by 509α">
+<meta property="og:site_name" content="Exhibit 509">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="{lname}: ABA 509 data">
 <meta name="twitter:description" content="{desc}">
@@ -523,7 +523,7 @@ def render_page(s, all_schools=None):
   <div class="src">
     Source: ABA Standard 509 Required Disclosure for {full}, published by the American Bar Association at <a href="https://abarequireddisclosures.org/" rel="noopener">abarequireddisclosures.org</a>. State attorney salary data from U.S. Bureau of Labor Statistics OEWS 2024 (occupation code 23-1011). Cost-of-living from U.S. BEA Regional Price Parities. Methodology: <a href="/methodology.html">/methodology.html</a>.
   </div>
-  <footer>Exhibit: free law school data, built by 509α. Hosted on Cloudflare Pages. Independent project, not affiliated with the ABA.</footer>
+  <footer>Exhibit 509: free law school data, by 509α. Hosted on Cloudflare Pages. Independent project, not affiliated with the ABA.</footer>
 </div>
 </body>
 </html>
@@ -585,7 +585,7 @@ def page_shell(title, desc, canonical, body, ld_json=""):
 <meta property="og:title" content="{esc(title)}">
 <meta property="og:description" content="{esc(desc)}">
 <meta property="og:url" content="{canonical}">
-<meta property="og:site_name" content="Exhibit by 509α">
+<meta property="og:site_name" content="Exhibit 509">
 <meta name="twitter:card" content="summary">
 {f'<script type="application/ld+json">{ld_json}</script>' if ld_json else ''}
 <link rel="icon" type="image/png" href="{FAVICON}">
@@ -595,7 +595,7 @@ def page_shell(title, desc, canonical, body, ld_json=""):
 <div class="wrap">
 {body}
   <div class="src">Source: ABA Standard 509 Required Disclosures (most recent cycle), via <a href="https://abarequireddisclosures.org/" rel="noopener">abarequireddisclosures.org</a>. State attorney-salary context from U.S. BLS OEWS 2024. Methodology: <a href="/methodology.html">/methodology.html</a>.</div>
-  <footer>Exhibit: free law school data, built by 509α. Independent project, not affiliated with the ABA.</footer>
+  <footer>Exhibit 509: free law school data, by 509α. Independent project, not affiliated with the ABA.</footer>
 </div>
 </body>
 </html>
@@ -627,7 +627,7 @@ def build_directory_page(schools):
           "name": "All ABA-accredited U.S. law schools",
           "url": f"{SITE_URL}/schools.html"}
     html = page_shell(
-        "All ABA Law Schools by State: Bar Passage, Cost & Employment | Exhibit",
+        "All ABA Law Schools by State: Bar Passage, Cost & Employment | Exhibit 509",
         "Directory of every ABA-accredited U.S. law school by state. Each profile shows bar passage, employment outcomes, tuition, scholarships and a 15-year trajectory from official ABA 509 disclosures.",
         f"{SITE_URL}/schools.html", "\n".join(body), json.dumps(ld, ensure_ascii=False))
     open(os.path.join(ROOT, "schools.html"), "w").write(html)
@@ -681,19 +681,19 @@ def build_pillar(schools, *, fname, h1, title, desc, intro, key, fmt, reverse, z
 def build_pillar_pages(schools):
     build_pillar(schools, fname="law-school-bar-passage-rates.html",
                  h1="Law school bar passage rates",
-                 title="Law School Bar Passage Rates, Ranked (2025 ABA 509) | Exhibit",
+                 title="Law School Bar Passage Rates, Ranked (2025 ABA 509) | Exhibit 509",
                  desc="Every ABA-accredited law school ranked by first-time bar passage rate, from the official ABA Standard 509 disclosures. Compare against employment and tuition.",
                  intro="Every ABA-accredited U.S. law school ranked by <strong>first-time bar passage rate</strong> from the latest ABA Standard 509 disclosures. Click any school for the full picture: 2-year ultimate pass rate, employment, cost and trajectory.",
                  key="bar", fmt=lambda v: f"{v}%", reverse=True, unit="First-time bar")
     build_pillar(schools, fname="cheapest-law-schools.html",
                  h1="Cheapest ABA-accredited law schools by tuition",
-                 title="Cheapest Law Schools by Tuition, Ranked (2025 ABA 509) | Exhibit",
+                 title="Cheapest Law Schools by Tuition, Ranked (2025 ABA 509) | Exhibit 509",
                  desc="ABA-accredited law schools ranked from lowest resident tuition, from official ABA Standard 509 data. See cost against bar passage and employment outcomes.",
                  intro="ABA-accredited law schools ranked from the <strong>lowest resident tuition</strong> upward (latest ABA Standard 509 cycle). Remember to weigh sticker price against scholarships, bar passage and employment. Click any school for net cost and outcomes.",
                  key="tui", fmt=lambda v: fmt_usd(v), reverse=False, znull=True, unit="Resident tuition")
     build_pillar(schools, fname="law-school-employment-outcomes.html",
                  h1="Law schools by employment outcomes",
-                 title="Law School Employment Outcomes, Ranked (2025 ABA 509) | Exhibit",
+                 title="Law School Employment Outcomes, Ranked (2025 ABA 509) | Exhibit 509",
                  desc="ABA-accredited law schools ranked by full-time, long-term JD-required/JD-advantage employment (FTLT) from official ABA Standard 509 disclosures.",
                  intro="ABA-accredited law schools ranked by <strong>full-time, long-term JD-required or JD-advantage employment</strong> (FTLT) about ten months after graduation, from the latest ABA Standard 509 disclosures.",
                  key="ftlt_pct", fmt=lambda v: f"{v}%", reverse=True, unit="FTLT employed")
