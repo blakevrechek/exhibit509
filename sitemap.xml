@@ -28,6 +28,30 @@
     <priority>0.3</priority>
   </url>
   <url>
+    <loc>https://exhibit509.com/schools.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <lastmod>2026-05-31</lastmod>
+  </url>
+  <url>
+    <loc>https://exhibit509.com/law-school-bar-passage-rates.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-05-31</lastmod>
+  </url>
+  <url>
+    <loc>https://exhibit509.com/cheapest-law-schools.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-05-31</lastmod>
+  </url>
+  <url>
+    <loc>https://exhibit509.com/law-school-employment-outcomes.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-05-31</lastmod>
+  </url>
+  <url>
     <loc>https://exhibit509.com/school/washington-university-st-louis.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

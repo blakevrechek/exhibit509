@@ -97,6 +97,66 @@ def row(k, v, hint=""):
     return f'<tr{h}><th>{k}</th><td>{v}</td></tr>'
 
 
+def esc(t):
+    return (str(t).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+            if t is not None else "")
+
+
+# Well-known schools whose common search brand differs from the generic
+# "{University} School of Law" construction. Keyed by school id.
+LAW_NAME_OVERRIDES = {
+    "harvard-university": "Harvard Law School",
+    "yale-university": "Yale Law School",
+    "stanford-university": "Stanford Law School",
+    "columbia-university": "Columbia Law School",
+    "cornell-university": "Cornell Law School",
+    "chicago-the-university-of": "University of Chicago Law School",
+    "michigan-university-of": "University of Michigan Law School",
+    "georgetown-university": "Georgetown University Law Center",
+    "northwestern-university": "Northwestern Pritzker School of Law",
+    "vanderbilt-university": "Vanderbilt Law School",
+    "pennsylvania-university-of": "University of Pennsylvania Carey Law School",
+    "california-berkeley-university-of": "UC Berkeley School of Law",
+    "california-los-angeles-university-of": "UCLA School of Law",
+    "ucla": "UCLA School of Law",
+}
+
+
+def law_name(s):
+    """A query-friendly law-school name: 'University of Akron School of Law',
+    'Harvard Law School', etc. Searchers use 'X law school', not the bare
+    parent-university name, so we reconstruct + append 'School of Law'."""
+    if s["id"] in LAW_NAME_OVERRIDES:
+        return LAW_NAME_OVERRIDES[s["id"]]
+    raw = (s.get("full") or s.get("name") or "").strip()
+    aba = (s.get("aba_name") or "").strip()
+    base = raw
+    # The inline dataset stores "Akron, The University of" in `full`; the gz uses
+    # `aba_name`. Reconstruct "University of X" / "University at X" from whichever
+    # candidate carries the comma form.
+    for cand in (aba, raw):
+        if not cand:
+            continue
+        m = re.match(r"^(.*?),\s*(the\s+)?university of\s*$", cand, re.I)
+        if m:
+            base = "University of " + m.group(1).strip()
+            break
+        m2 = re.match(r"^(.*?),\s*(the\s+)?university at\s*$", cand, re.I)
+        if m2:
+            base = "University at " + m2.group(1).strip()
+            break
+    low = base.lower()
+    if "law" in low or "college of law" in low:
+        return base
+    return base + " School of Law"
+
+
+def state_slug(state):
+    s = (state or "").lower()
+    s = re.sub(r"[^a-z0-9]+", "-", s).strip("-")
+    return s
+
+
 # ─────────────────────────────────────────────────────────────────
 # Page template
 # ─────────────────────────────────────────────────────────────────
@@ -116,10 +176,11 @@ def _favicon_data_uri():
 FAVICON = _favicon_data_uri()
 
 
-def render_page(s):
+def render_page(s, all_schools=None):
     sid = s["id"]
     slug = slugify(sid)
     full = s.get("full") or s.get("name") or "Unknown"
+    lname = law_name(s)            # query-friendly "… School of Law" name
     state = s.get("state") or ""
     school_type = s.get("school_type") or ""
     closed = s.get("closed_status")
@@ -127,34 +188,36 @@ def render_page(s):
     canonical = f"{SITE_URL}/school/{slug}.html"
     spa_url = f"{SITE_URL}/#school/{sid}"
 
-    # ── Title + meta description ────────────────────────────────
+    # ── Title + meta description (tuned to real search queries) ──
     bar = s.get("bar")
     ftlt_pct = s.get("ftlt_pct")
     tui = s.get("tui")
     lsat50 = s.get("lsat50")
+    acc = s.get("acc")
+    grant_med = s.get("grant_med")
     desc_parts = [
-        f"{full}",
-        f"({state})" if state else "",
-        "— ABA 509 data:",
-        f"LSAT median {lsat50}," if lsat50 else "",
-        f"acceptance {s.get('acc')}%," if s.get("acc") is not None else "",
-        f"first-time bar {bar}%," if bar is not None else "",
-        f"FTLT employment {ftlt_pct}%," if ftlt_pct is not None else "",
-        f"tuition {fmt_usd(tui)}." if tui else "",
+        f"{lname}:",
+        f"{bar}% first-time bar pass," if bar is not None else "",
+        f"{ftlt_pct}% in full-time JD jobs," if ftlt_pct is not None else "",
+        f"{fmt_usd(tui)} resident tuition," if tui else "",
+        f"{lsat50} median LSAT." if lsat50 else "",
+        "Full ABA Standard 509 outcomes, cost & 8-year trajectory.",
     ]
     desc = " ".join(x for x in desc_parts if x).strip()
-    title = f"{full} — ABA 509 data · Exhibit"
+    title = f"{lname}: Bar Passage, Cost & Employment (ABA 509) | Exhibit"
 
     # ── Schema.org JSON-LD (CollegeOrUniversity) ────────────────
     ld = {
         "@context": "https://schema.org",
         "@type": "CollegeOrUniversity",
-        "name": full,
+        "name": lname,
+        "alternateName": full if full != lname else None,
         "url": canonical,
         "description": desc,
         "isAccessibleForFree": True,
         "sameAs": ["https://abarequireddisclosures.org/"],
     }
+    ld = {k: v for k, v in ld.items() if v is not None}
     if state:
         ld["address"] = {
             "@type": "PostalAddress",
@@ -178,6 +241,83 @@ def render_page(s):
         "url": "https://abarequireddisclosures.org/",
     }
     ld_json = json.dumps(ld, ensure_ascii=False)
+
+    # ── Unique lead paragraph (prose summary; unique body text up top) ──
+    type_phrase = (school_type.lower() + " law school") if school_type else "law school"
+    lead_bits = [f"<strong>{esc(lname)}</strong> is a {esc(type_phrase)}"
+                 + (f" in {esc(state)}" if state else "") + "."]
+    if bar is not None:
+        sa = s.get("bar_state_avg")
+        lead_bits.append(f" In the most recent ABA Standard 509 cycle it reported a <strong>{bar}% first-time bar passage rate</strong>"
+                         + (f" (state average {sa}%)" if sa is not None else "") + ".")
+    if ftlt_pct is not None:
+        bl = (s.get("emp_biglaw_pct") or 0) + (s.get("emp_megalaw_pct") or 0)
+        lead_bits.append(f" <strong>{ftlt_pct}%</strong> of graduates landed full-time, long-term JD-required or JD-advantage jobs"
+                         + (f", and {bl:.1f}% joined large firms of 251+ attorneys" if bl else "") + ".")
+    if tui:
+        net = (tui - grant_med) if (grant_med is not None) else None
+        lead_bits.append(f" Resident tuition is <strong>{fmt_usd(tui)}</strong> per year"
+                         + (f"; a median grant of {fmt_usd(grant_med)} brings median net tuition to about {fmt_usd(net)}" if net is not None else "") + ".")
+    if lsat50 or acc is not None:
+        lead_bits.append(f" The median LSAT is <strong>{lsat50 or '—'}</strong>"
+                         + (f" with a {acc}% acceptance rate" if acc is not None else "") + ".")
+    lead_html = '<p class="lead">' + "".join(lead_bits) + "</p>"
+
+    # ── FAQ (visible + FAQPage schema; question-query targeting) ──
+    faqs = []
+    if bar is not None:
+        sa = s.get("bar_state_avg")
+        faqs.append((f"What is the first-time bar passage rate at {lname}?",
+                     f"{lname} reported a {bar}% first-time bar passage rate in the most recent ABA Standard 509 disclosure"
+                     + (f", versus a {sa}% state average." if sa is not None else ".")))
+    if tui:
+        ans = f"Resident tuition at {lname} is {fmt_usd(tui)} per year (about {fmt_usd(tui * 3)} over three years)."
+        if grant_med is not None:
+            ans += f" The median grant is {fmt_usd(grant_med)}, bringing median net tuition to roughly {fmt_usd(tui - grant_med)} per year."
+        faqs.append((f"How much does {lname} cost?", ans))
+    if lsat50 or acc is not None:
+        faqs.append((f"What LSAT and GPA do you need for {lname}?",
+                     f"The median (50th-percentile) LSAT at {lname} is {lsat50 or 'not reported'} and the median GPA is {fmt_gpa(s.get('gpa50'))}"
+                     + (f"; the acceptance rate is {acc}%." if acc is not None else ".")))
+    if ftlt_pct is not None:
+        seek = s.get("emp_seek_pct")
+        bl = (s.get("emp_biglaw_pct") or 0) + (s.get("emp_megalaw_pct") or 0)
+        ans = f"{ftlt_pct}% of {lname} graduates held full-time, long-term JD-required or JD-advantage jobs about ten months after graduation."
+        if bl:
+            ans += f" {bl:.1f}% joined large firms of 251+ attorneys."
+        if seek is not None:
+            ans += f" {seek}% were still seeking employment."
+        faqs.append((f"What are the job outcomes at {lname}?", ans))
+    faq_html, faq_ld_json = "", ""
+    if faqs:
+        faq_html = "<h2>Frequently asked questions</h2>" + "".join(
+            f'<div class="faq-q">{esc(q)}</div><p class="faq-a">{esc(a)}</p>' for q, a in faqs)
+        faq_ld = {"@context": "https://schema.org", "@type": "FAQPage",
+                  "mainEntity": [{"@type": "Question", "name": q,
+                                  "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in faqs]}
+        faq_ld_json = '<script type="application/ld+json">' + json.dumps(faq_ld, ensure_ascii=False) + "</script>"
+
+    # ── Breadcrumb (visible + schema) ──
+    crumbs = [("Home", f"{SITE_URL}/")]
+    if state:
+        crumbs.append((f"{state} law schools", f"{SITE_URL}/schools.html#{state_slug(state)}"))
+    crumbs.append((lname, canonical))
+    crumb_html = '<nav class="crumbs" aria-label="Breadcrumb">' + " › ".join(
+        (f'<a href="{u}">{esc(t)}</a>' if i < len(crumbs) - 1 else f"<span>{esc(t)}</span>")
+        for i, (t, u) in enumerate(crumbs)) + "</nav>"
+    crumb_ld = {"@context": "https://schema.org", "@type": "BreadcrumbList",
+                "itemListElement": [{"@type": "ListItem", "position": i + 1, "name": t, "item": u}
+                                    for i, (t, u) in enumerate(crumbs)]}
+    crumb_ld_json = '<script type="application/ld+json">' + json.dumps(crumb_ld, ensure_ascii=False) + "</script>"
+
+    # ── Interlinking: other law schools in the same state ──
+    siblings_html = ""
+    if all_schools and state:
+        sibs = sorted((x for x in all_schools if x.get("state") == state and x["id"] != sid and not x.get("closed_status")),
+                      key=lambda x: law_name(x).lower())
+        if sibs:
+            lis = "".join(f'<li><a href="/school/{slugify(x["id"])}.html">{esc(law_name(x))}</a></li>' for x in sibs)
+            siblings_html = f'<h2>Other law schools in {esc(state)}</h2><ul class="sibs">{lis}</ul>'
 
     # ── Body sections ───────────────────────────────────────────
     closed_banner = (
@@ -292,14 +432,16 @@ def render_page(s):
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="{canonical}">
 <meta property="og:type" content="article">
-<meta property="og:title" content="{full} — ABA 509 data">
+<meta property="og:title" content="{lname} — ABA 509 data">
 <meta property="og:description" content="{desc}">
 <meta property="og:url" content="{canonical}">
 <meta property="og:site_name" content="Exhibit by 509α">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="{full} — ABA 509 data">
+<meta name="twitter:title" content="{lname} — ABA 509 data">
 <meta name="twitter:description" content="{desc}">
 <script type="application/ld+json">{ld_json}</script>
+{faq_ld_json}
+{crumb_ld_json}
 <link rel="icon" type="image/png" href="{FAVICON}">
 <link rel="apple-touch-icon" href="{FAVICON}">
 <style>
@@ -323,6 +465,17 @@ def render_page(s):
   .cta{{display:inline-block;background:var(--orange);color:#06111E;padding:12px 22px;font-family:var(--mono);font-size:13px;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;font-weight:700;margin:18px 0 30px;border-radius:3px;}}
   .cta:hover{{background:#E68660;}}
   .closed-banner{{background:rgba(255,167,38,0.12);border:1px solid rgba(255,167,38,0.4);padding:10px 14px;font-family:var(--mono);font-size:12px;letter-spacing:1px;color:#FFA726;margin-bottom:20px;}}
+  .crumbs{{font-family:var(--mono);font-size:11px;letter-spacing:0.5px;color:var(--dimmer);margin-bottom:14px;}}
+  .crumbs a{{color:var(--dim);text-decoration:none;}}
+  .crumbs a:hover{{color:var(--orange);}}
+  .crumbs span{{color:var(--dimmer);}}
+  .lead{{font-size:17px;line-height:1.6;color:#D6E4F0;margin:0 0 22px;}}
+  .lead strong{{color:var(--white);}}
+  .faq-q{{font-family:'Nunito',var(--serif);font-weight:700;font-size:16px;color:var(--white);margin:16px 0 2px;}}
+  .faq-a{{margin:0 0 8px;font-size:15px;color:#CFE0EC;}}
+  .sibs{{columns:2;column-gap:28px;font-family:var(--mono);font-size:13px;}}
+  .sibs li{{margin-bottom:5px;break-inside:avoid;}}
+  @media(max-width:560px){{.sibs{{columns:1;}}}}
   .src{{font-family:var(--mono);font-size:11px;color:var(--dimmer);margin-top:36px;padding-top:16px;border-top:1px solid rgba(74,122,155,0.2);letter-spacing:0.4px;line-height:1.7;}}
   .src a{{color:var(--blue);}}
   footer{{margin-top:30px;font-family:var(--mono);font-size:10.5px;color:var(--dimmer);letter-spacing:0.4px;}}
@@ -330,11 +483,13 @@ def render_page(s):
 </head>
 <body>
 <div class="wrap">
-  <nav class="nav"><a href="/">All schools</a><a href="/methodology.html">Methodology</a><a href="/about.html">About</a><a href="/contact.html">Contact</a></nav>
+  <nav class="nav"><a href="/">Map</a><a href="/schools.html">All schools</a><a href="/law-school-bar-passage-rates.html">Bar passage</a><a href="/cheapest-law-schools.html">Tuition</a><a href="/law-school-employment-outcomes.html">Employment</a><a href="/methodology.html">Methodology</a></nav>
+  {crumb_html}
   {closed_banner}
   <div class="eyebrow">ABA Standard 509 · 2025 cycle · Last synced May 31, 2026</div>
-  <h1>{full}</h1>
+  <h1>{lname}</h1>
   <div class="meta">{state}{f' · {school_type}' if school_type else ''} · School ID: {sid}</div>
+  {lead_html}
   <a class="cta" href="{spa_url}">Open interactive map &amp; comparison view</a>
 
   <h2>Admissions</h2>
@@ -359,6 +514,10 @@ def render_page(s):
 
   {f'<h2>State market context</h2><table>{market_rows}</table>' if market_rows else ''}
 
+  {faq_html}
+
+  {siblings_html}
+
   <div class="src">
     Source: ABA Standard 509 Required Disclosure for {full}, published by the American Bar Association at <a href="https://abarequireddisclosures.org/" rel="noopener">abarequireddisclosures.org</a>. State attorney salary data from U.S. Bureau of Labor Statistics OEWS 2024 (occupation code 23-1011). Cost-of-living from U.S. BEA Regional Price Parities. Methodology: <a href="/methodology.html">/methodology.html</a>.
   </div>
@@ -367,6 +526,175 @@ def render_page(s):
 </body>
 </html>
 """
+
+
+STYLE = """<style>
+  :root{--navy:#06111E;--orange:#D97757;--white:#F4F8FB;--dim:#A4C8DD;--dimmer:#7AAAC8;--blue:#5AABCB;--mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;--serif:Georgia,'Times New Roman',serif;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--navy);color:var(--white);font-family:var(--serif);line-height:1.7;}
+  .wrap{max-width:980px;margin:0 auto;padding:40px 22px 80px;}
+  .nav{font-family:var(--mono);font-size:12px;letter-spacing:1px;margin-bottom:18px;}
+  .nav a{color:var(--dim);text-decoration:none;margin-right:14px;}
+  .nav a:hover{color:var(--orange);}
+  .crumbs{font-family:var(--mono);font-size:11px;letter-spacing:0.5px;color:var(--dimmer);margin-bottom:14px;}
+  .crumbs a{color:var(--dim);text-decoration:none;} .crumbs a:hover{color:var(--orange);} .crumbs span{color:var(--dimmer);}
+  h1{font-family:'Nunito',var(--serif);font-size:36px;line-height:1.05;letter-spacing:-1.2px;margin:6px 0 8px;font-weight:800;}
+  .lead{font-size:17px;line-height:1.6;color:#D6E4F0;margin:0 0 24px;max-width:760px;}
+  .lead strong{color:var(--white);}
+  h2{font-family:var(--mono);font-size:14px;letter-spacing:1.8px;color:var(--orange);text-transform:uppercase;margin:30px 0 10px;font-weight:700;}
+  a{color:var(--orange);}
+  table.rank{width:100%;border-collapse:collapse;margin:8px 0 20px;font-family:var(--mono);}
+  table.rank th,table.rank td{text-align:left;padding:7px 10px;border-bottom:1px solid rgba(74,122,155,0.16);font-size:13px;}
+  table.rank th{color:var(--dim);font-size:11px;letter-spacing:1px;text-transform:uppercase;font-weight:600;}
+  table.rank td{font-variant-numeric:tabular-nums;}
+  table.rank td.num{color:var(--dimmer);width:42px;}
+  table.rank td a{color:var(--white);text-decoration:none;border-bottom:1px solid rgba(217,119,87,0.4);}
+  table.rank td a:hover{color:var(--orange);}
+  table.rank td.v{color:var(--orange);font-weight:700;}
+  .dir-state{font-family:'Nunito',var(--serif);font-size:18px;font-weight:800;color:var(--white);margin:24px 0 4px;border-bottom:1px solid rgba(74,122,155,0.2);padding-bottom:4px;}
+  .dir-list{columns:3;column-gap:30px;font-family:var(--mono);font-size:13px;padding-left:0;list-style:none;}
+  .dir-list li{margin-bottom:6px;break-inside:avoid;}
+  .dir-list a{color:var(--dim);text-decoration:none;} .dir-list a:hover{color:var(--orange);}
+  @media(max-width:760px){.dir-list{columns:2;}}
+  @media(max-width:480px){.dir-list{columns:1;}}
+  .src{font-family:var(--mono);font-size:11px;color:var(--dimmer);margin-top:36px;padding-top:16px;border-top:1px solid rgba(74,122,155,0.2);letter-spacing:0.4px;line-height:1.7;}
+  .src a{color:var(--blue);}
+  footer{margin-top:30px;font-family:var(--mono);font-size:10.5px;color:var(--dimmer);letter-spacing:0.4px;}
+</style>"""
+
+PILLAR_NAV = ('<nav class="nav"><a href="/">Map</a><a href="/schools.html">All schools</a>'
+              '<a href="/law-school-bar-passage-rates.html">Bar passage</a>'
+              '<a href="/cheapest-law-schools.html">Tuition</a>'
+              '<a href="/law-school-employment-outcomes.html">Employment</a>'
+              '<a href="/methodology.html">Methodology</a></nav>')
+
+
+def page_shell(title, desc, canonical, body, ld_json=""):
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{title}</title>
+<meta name="description" content="{esc(desc)}">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="{canonical}">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{esc(title)}">
+<meta property="og:description" content="{esc(desc)}">
+<meta property="og:url" content="{canonical}">
+<meta property="og:site_name" content="Exhibit by 509α">
+<meta name="twitter:card" content="summary">
+{f'<script type="application/ld+json">{ld_json}</script>' if ld_json else ''}
+<link rel="icon" type="image/png" href="{FAVICON}">
+{STYLE}
+</head>
+<body>
+<div class="wrap">
+{body}
+  <div class="src">Source: ABA Standard 509 Required Disclosures (most recent cycle), via <a href="https://abarequireddisclosures.org/" rel="noopener">abarequireddisclosures.org</a>. State attorney-salary context from U.S. BLS OEWS 2024. Methodology: <a href="/methodology.html">/methodology.html</a>.</div>
+  <footer>Exhibit — Free law school data, built by 509α. Independent project, not affiliated with the ABA.</footer>
+</div>
+</body>
+</html>
+"""
+
+
+def build_directory_page(schools):
+    """A crawlable /schools.html: every school grouped by state (anchored by
+    state slug for breadcrumb deep-links). The internal hub that links all pages."""
+    by_state = {}
+    for s in schools:
+        if s.get("closed_status"):
+            continue
+        by_state.setdefault(s.get("state") or "Other", []).append(s)
+    states = sorted(by_state)
+    body = [PILLAR_NAV,
+            '<nav class="crumbs"><a href="/">Home</a> › <span>All law schools</span></nav>',
+            "<h1>All ABA-accredited U.S. law schools</h1>",
+            f'<p class="lead">Browse every ABA-accredited law school by state — each links to a full profile with '
+            f'bar passage, employment outcomes, true cost, scholarships, and an 8-year trajectory from the official '
+            f'ABA Standard 509 disclosures. {sum(len(v) for v in by_state.values())} schools across {len(states)} states.</p>']
+    for st in states:
+        sl = state_slug(st)
+        sibs = sorted(by_state[st], key=lambda x: law_name(x).lower())
+        lis = "".join(f'<li><a href="/school/{slugify(x["id"])}.html">{esc(law_name(x))}</a></li>' for x in sibs)
+        body.append(f'<div class="dir-state" id="{sl}">{esc(st)} <span style="font-family:var(--mono);font-size:12px;color:var(--dimmer);font-weight:400;">· {len(sibs)}</span></div>'
+                    f'<ul class="dir-list">{lis}</ul>')
+    ld = {"@context": "https://schema.org", "@type": "CollectionPage",
+          "name": "All ABA-accredited U.S. law schools",
+          "url": f"{SITE_URL}/schools.html"}
+    html = page_shell(
+        "All ABA Law Schools by State — Bar Passage, Cost & Employment | Exhibit",
+        "Directory of every ABA-accredited U.S. law school by state. Each profile shows bar passage, employment outcomes, tuition, scholarships and an 8-year trajectory from official ABA 509 disclosures.",
+        f"{SITE_URL}/schools.html", "\n".join(body), json.dumps(ld, ensure_ascii=False))
+    open(os.path.join(ROOT, "schools.html"), "w").write(html)
+    print("Wrote schools.html directory page.")
+
+
+def build_pillar(schools, *, fname, h1, title, desc, intro, key, fmt, reverse, znull=False, unit=""):
+    """Generic ranked 'pillar' page targeting a head-term query, linking out to
+    every ranked school page."""
+    rows = []
+    for s in schools:
+        if s.get("closed_status"):
+            continue
+        v = s.get(key)
+        if v is None or not isinstance(v, (int, float)):
+            continue
+        if znull and v <= 0:
+            continue
+        rows.append((v, s))
+    rows.sort(key=lambda t: t[0], reverse=reverse)
+    trs = []
+    for i, (v, s) in enumerate(rows, 1):
+        trs.append(
+            f'<tr><td class="num">{i}</td>'
+            f'<td><a href="/school/{slugify(s["id"])}.html">{esc(law_name(s))}</a></td>'
+            f'<td>{esc(s.get("state") or "—")}</td>'
+            f'<td class="v">{fmt(v)}</td>'
+            f'<td>{fmt_pct(s.get("bar")) if key!="bar" else fmt_pct(s.get("ftlt_pct"))}</td>'
+            f'<td>{fmt_usd(s.get("tui"))}</td></tr>')
+    second_h = "FTLT" if key == "bar" else "Bar"
+    body = [PILLAR_NAV,
+            '<nav class="crumbs"><a href="/">Home</a> › <a href="/schools.html">All law schools</a> › <span>'
+            + esc(h1) + "</span></nav>",
+            f"<h1>{esc(h1)}</h1>",
+            f'<p class="lead">{intro}</p>',
+            f'<table class="rank"><tr><th>#</th><th>Law school</th><th>State</th><th>{esc(unit)}</th><th>{second_h}</th><th>Tuition</th></tr>'
+            + "".join(trs) + "</table>",
+            '<p style="font-family:var(--mono);font-size:12px;color:var(--dimmer);">Ranked from the most recent ABA Standard 509 cycle. '
+            + str(len(rows)) + ' schools shown. Explore any school for full outcomes, cost and trajectory, or open the '
+            '<a href="/">interactive map</a>.</p>']
+    ld = {"@context": "https://schema.org", "@type": "ItemList", "name": h1,
+          "numberOfItems": len(rows),
+          "itemListElement": [{"@type": "ListItem", "position": i,
+                               "url": f"{SITE_URL}/school/{slugify(s['id'])}.html",
+                               "name": law_name(s)} for i, (v, s) in enumerate(rows[:50], 1)]}
+    html = page_shell(title, desc, f"{SITE_URL}/{fname}", "\n".join(body), json.dumps(ld, ensure_ascii=False))
+    open(os.path.join(ROOT, fname), "w").write(html)
+    print(f"Wrote {fname} ({len(rows)} ranked).")
+
+
+def build_pillar_pages(schools):
+    build_pillar(schools, fname="law-school-bar-passage-rates.html",
+                 h1="Law school bar passage rates",
+                 title="Law School Bar Passage Rates (2025 ABA 509) — Ranked | Exhibit",
+                 desc="Every ABA-accredited law school ranked by first-time bar passage rate, from the official ABA Standard 509 disclosures. Compare against employment and tuition.",
+                 intro="Every ABA-accredited U.S. law school ranked by <strong>first-time bar passage rate</strong> from the latest ABA Standard 509 disclosures. Click any school for the full picture — 2-year ultimate pass rate, employment, cost and trajectory.",
+                 key="bar", fmt=lambda v: f"{v}%", reverse=True, unit="First-time bar")
+    build_pillar(schools, fname="cheapest-law-schools.html",
+                 h1="Cheapest ABA-accredited law schools by tuition",
+                 title="Cheapest Law Schools by Tuition (2025 ABA 509) — Ranked | Exhibit",
+                 desc="ABA-accredited law schools ranked from lowest resident tuition, from official ABA Standard 509 data. See cost against bar passage and employment outcomes.",
+                 intro="ABA-accredited law schools ranked from the <strong>lowest resident tuition</strong> upward (latest ABA Standard 509 cycle). Remember to weigh sticker price against scholarships, bar passage and employment — click any school for net cost and outcomes.",
+                 key="tui", fmt=lambda v: fmt_usd(v), reverse=False, znull=True, unit="Resident tuition")
+    build_pillar(schools, fname="law-school-employment-outcomes.html",
+                 h1="Law schools by employment outcomes",
+                 title="Law School Employment Outcomes (2025 ABA 509) — Ranked | Exhibit",
+                 desc="ABA-accredited law schools ranked by full-time, long-term JD-required/JD-advantage employment (FTLT) from official ABA Standard 509 disclosures.",
+                 intro="ABA-accredited law schools ranked by <strong>full-time, long-term JD-required or JD-advantage employment</strong> (FTLT) about ten months after graduation, from the latest ABA Standard 509 disclosures.",
+                 key="ftlt_pct", fmt=lambda v: f"{v}%", reverse=True, unit="FTLT employed")
 
 
 def update_sitemap(schools):
@@ -400,6 +728,30 @@ def update_sitemap(schools):
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
+  <url>
+    <loc>https://exhibit509.com/schools.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <lastmod>2026-05-31</lastmod>
+  </url>
+  <url>
+    <loc>https://exhibit509.com/law-school-bar-passage-rates.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-05-31</lastmod>
+  </url>
+  <url>
+    <loc>https://exhibit509.com/cheapest-law-schools.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-05-31</lastmod>
+  </url>
+  <url>
+    <loc>https://exhibit509.com/law-school-employment-outcomes.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-05-31</lastmod>
+  </url>
 """
     body_lines = []
     for s in schools:
@@ -425,11 +777,11 @@ def update_index_directory(schools):
         print("  ! SCHOOL_INDEX markers not found; skipping directory injection")
         return
     items = []
-    for s in sorted(schools, key=lambda x: (x.get("full") or x.get("name") or "").lower()):
+    for s in sorted(schools, key=lambda x: law_name(x).lower()):
         slug = slugify(s["id"])
-        full = (s.get("full") or s.get("name") or s["id"]).replace("&", "&amp;").replace("<", "&lt;")
-        state = (s.get("state") or "").replace("&", "&amp;").replace("<", "&lt;")
-        items.append(f'<li><a href="school/{slug}.html">{full}</a>{(" — " + state) if state else ""}</li>')
+        nm = esc(law_name(s))
+        state = esc(s.get("state") or "")
+        items.append(f'<li><a href="school/{slug}.html">{nm}</a>{(" — " + state) if state else ""}</li>')
     block = start + '\n<ul class="ns-schools">\n' + "\n".join(items) + "\n</ul>\n" + end
     html = html[:i] + block + html[j + len(end):]
     open(INDEX_PATH, "w").write(html)
@@ -449,7 +801,7 @@ def main():
     written = 0
     for s in S:
         try:
-            page = render_page(s)
+            page = render_page(s, all_schools=S)
             slug = slugify(s["id"])
             path = os.path.join(OUT_DIR, f"{slug}.html")
             with open(path, "w") as f:
@@ -459,8 +811,10 @@ def main():
             print(f"  ! Failed {s.get('id')}: {e}")
 
     print(f"Wrote {written} static school pages to {OUT_DIR}/")
+    build_directory_page(S)
+    build_pillar_pages(S)
     update_sitemap(S)
-    print(f"Updated sitemap.xml with {len(S)} school URLs (plus 4 site pages).")
+    print(f"Updated sitemap.xml with {len(S)} school URLs (plus site + directory + pillar pages).")
     update_index_directory(S)
 
 
