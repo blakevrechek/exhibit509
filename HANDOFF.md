@@ -1,28 +1,33 @@
-# Exhibit — Session Handoff
+# Exhibit 509 — Session Handoff
 
-**Last updated:** 2026-06-01
+**Last updated:** 2026-06-03
 **Repo:** `blakevrechek/exhibit509`
 **Live:** https://exhibit509.com (Cloudflare Pages, auto-deploys from `main`)
-**Current version:** `1.19.5` (see `VERSION`)
-**`main` HEAD:** `b1ef3a3` — *Merge: fix gray map (SW cross-origin) + icon 404s*
-**Working branch:** `claude/vibrant-keller-IdnyW` (currently == `main`'s content)
+**Current version:** `1.29.0` (see `VERSION`)
+**`main` HEAD:** `3cb8579` — *Rebrand to "Exhibit 509", trust/funding line, mobile fix*
+**Working branch:** `claude/elegant-lovelace-0awdY` (fast-forward merged into `main`)
+
+**Brand:** the product is **"Exhibit 509"**; **509α** is the publisher ("by 509α").
+The domain is `exhibit509.com`, so the brand and domain now match.
 
 ---
 
-## Roadmap / sequence (UPDATED — order changed by owner)
+## Roadmap / sequence
 
-1. **Desktop** — ✅ effectively done. Map layers/filters reworked, footer/header
-   cleaned, the gray-map bug is finally root-caused and fixed. Only the optional
-   live-browser audits below remain (axe/Lighthouse), and they're not blocking.
-2. **Data check** ← *NEXT.* Owner is doing an accuracy/integrity pass on the
-   dataset. See **DATA notes** below. (Owner was rebuilding a "bulletproof"
-   dataset in a separate chat — confirm whether that has landed before editing
-   data by hand.)
-3. **Mobile.** Full mobile pass — layout, touch targets, mobile menu/tab bar,
-   the bottom-sheet school panel, charts, perf on a phone. Not started.
+1. **Desktop** — ✅ done. Map layers/filters reworked, header/footer cleaned,
+   gray-map bug root-caused and fixed. Optional live audits below remain (not blocking).
+2. **Data check** — ✅ landed. Counts are now build-generated (208 / 197 / 11) and
+   stamped, so index + methodology can't drift. See **DATA notes**.
+3. **Mobile** — in progress, iterating on real-device reports. Latest: school
+   overview now renders in front of the fixed header so its exit button isn't
+   covered (v1.29.0). Keep an eye out for similar z-index/overlap issues on phones.
+4. **Content / correctness + brand** — review-driven fixes (OBBBA loan cliff,
+   year-span, bar caveat) shipped in v1.28.0; rebrand to "Exhibit 509" + a
+   trust/funding line on About shipped in v1.29.0.
 
-> Note: this reorders the old plan (was desktop → mobile → data). Owner now wants
-> **data check before mobile.**
+> Versions advanced 1.19.5 → 1.28.0 across intervening sessions not detailed in
+> this doc; this session covered **1.28.0** (review items) and **1.29.0**
+> (rebrand + trust line + mobile fix).
 
 ---
 
@@ -33,7 +38,7 @@ ABA-accredited U.S. law school. Single-page app (vanilla JS, Leaflet map) plus
 208 static per-school pages for SEO. Positioned around **"is law school worth
 it?"** — outcomes, true cost, and 15-year trajectory.
 
-Built by **509α**. Independent; not affiliated with the ABA.
+Brand: **Exhibit 509**, published by **509α**. Independent; not affiliated with the ABA.
 
 ---
 
@@ -57,18 +62,33 @@ Built by **509α**. Independent; not affiliated with the ABA.
 
 ### Build commands
 ```bash
-python3 scripts/build_school_pages.py   # after any data change
-python3 scripts/stamp_version.py        # after bumping VERSION
+bash scripts/build.sh                   # one-shot: regen school pages + sitemap,
+                                        # stamp_counts(), stamp_version() — run after
+                                        # ANY data/content/VERSION change
+python3 scripts/indexnow_ping.py        # AFTER the deploy is live (recrawl ping)
+```
+`build.sh` wraps the individual steps; you rarely need them alone:
+```bash
+python3 scripts/build_school_pages.py   # regen school/*.html + sitemap from data
+python3 scripts/stamp_version.py        # stamp v<x.y.z> across HTML + sw.js
+# stamp_counts() (inside build.sh) derives 208/197/11 from the dataset and stamps
+# index.html + methodology.html so the totals can never disagree.
 ```
 
 ---
 
 ## Conventions / guardrails (learned the hard way)
 
-- **Branch + ship:** work on `claude/vibrant-keller-IdnyW`, then merge into `main`
-  (`git merge --no-ff`) and push — Cloudflare deploys `main`. After merging,
-  verify `main`'s tree == branch tip's tree exactly. (PR #2 is merged/closed; new
-  work just goes branch → main directly per owner's "direct fast-forward".)
+- **Branch + ship:** work on the session branch (this session:
+  `claude/elegant-lovelace-0awdY`), then fast-forward merge into `main` and push —
+  Cloudflare deploys `main`. After merging, verify `main`'s tree == branch tip's.
+- **No em dashes** in user-facing prose — use commas/colons. (House style; checked
+  each ship with `grep -c "—"`.)
+- **Brand strings:** product = "Exhibit 509", publisher = "509α". Generated school
+  pages get `| Exhibit 509`; don't hand-edit `school/*.html` — change the template
+  in `build_school_pages.py` and rebuild.
+- **Counts are generated, never hand-typed** — edit the dataset, run `build.sh`,
+  let `stamp_counts()` propagate to index + methodology.
 - **Service worker, cross-origin:** **the SW must NEVER intercept cross-origin
   requests.** It returns early when `url.origin !== location.origin`. Leaflet map
   tiles (`*.basemaps.cartocdn.com`) are `no-cors`/opaque; routing them through the
@@ -102,7 +122,54 @@ python3 scripts/stamp_version.py        # after bumping VERSION
 
 ---
 
-## What shipped THIS session (all on `main`, 1.18.1 → 1.19.5)
+## What shipped THIS session (on `main`, → 1.28.0, → 1.29.0)
+
+**v1.28.0 — review items 1–5 (content / correctness)**
+
+1. **OBBBA federal-loan cliff is now modeled, not just mentioned.** Net Price calc
+   fires a live warning when modeled federal borrowing exceeds the 2026 caps
+   (**$50k/yr, $200k lifetime**), showing the overflow that spills to private loans
+   (no PSLF/IDR on it). Borrow tile relabeled **"federal"**; both stale "confirm
+   Grad PLUS rates" lines refreshed to explain the cap regime.
+2. **"0 schools" cold load — verified NOT a bug** (pins paint from inline `S`;
+   nothing gates first paint). Seeded the static placeholder with the real count
+   (207) so the pre-JS crawl snapshot doesn't read "0".
+3. **15- vs 8-year span mismatch** — school-page template corrected to 15-year
+   (2011–2025), matching the homepage.
+4. **Count drift** — new `stamp_counts()` build step derives 208/197/11 from the
+   dataset and stamps index + methodology; they can't disagree again.
+5. **Bar-passage temporal caveat** — every school page now carries a visible
+   "different cohorts" note under Bar passage.
+
+**v1.29.0 — rebrand + trust + mobile**
+
+6. **Rebrand to "Exhibit 509"** (509α = publisher) across titles, OG/Twitter,
+   JSON-LD, header/footer wordmarks, hero `<h1>`, share text, and all 208 generated
+   school pages + directory + pillars (`| Exhibit 509`).
+7. **Trust / funding line** — new About section *"Why you can trust it, and how it
+   stays free"*: data free + ungated, no money from rankings/ads/sponsorship/data-
+   sales, no first-party tracking, run independently by Blake Vrechek, Skool + email
+   sustain the work but nothing is gated behind them. *Only verifiable facts.*
+8. **Mobile fix** — the full-screen school overview now sits in front of the fixed
+   header on phones (`@media ≤640px`: `top:0`, `z-index:1001`, safe-area top
+   padding), so its "Back to Exhibit" exit button is no longer covered.
+
+Validation: inline JS `node --check` OK; all JSON-LD valid; version drift clean
+(`v1.29.0`); no em dashes reintroduced.
+
+### Open follow-ups from this session
+- **Wordmark redundancy (low priority).** Header reads "Exhibit 509 · by 509α" —
+  `509`/`509α` sit close together. If it looks redundant live, drop the wordmark to
+  just "Exhibit 509" and keep "by 509α" in footer/About only. One-string change.
+- **Trust-line specifics.** The funding paragraph states only what's verifiable;
+  if the real business model has nameable specifics (e.g., whether Skool is paid),
+  add them. I deliberately did not assert what I couldn't confirm.
+- **Deploy + IndexNow.** Confirm deploy is live, then run `indexnow_ping.py` so the
+  rebranded titles/pages get recrawled.
+
+---
+
+## Earlier session (on `main`, 1.18.1 → 1.19.5)
 
 - **Map color layers (left panel).** Replaced the floating bottom-right legend
   (it kept colliding with the Overview panel) with a **"Color the map by"** control
@@ -168,12 +235,14 @@ python3 scripts/stamp_version.py        # after bumping VERSION
 
 ## Quick start for the next chat
 
-1. `git fetch && git checkout main && git pull` — confirm HEAD is `b1ef3a3` (or later),
-   `VERSION` is `1.19.5`.
-2. Confirm the gray-map fix is green on live (hard-reload once, then refresh).
-3. **Step 2: data check** — see DATA notes. Confirm whether the rebuilt dataset
-   has landed before hand-editing. Regenerate both data layers + run
-   `build_school_pages.py`, bump `VERSION`, run `stamp_version.py`.
-4. **Step 3: mobile pass.**
-5. Ship: branch → `git merge --no-ff` into `main` → push. Hard-reload to pick up
-   any new SW.
+1. `git fetch && git checkout main && git pull` — confirm HEAD is `3cb8579` (or later),
+   `VERSION` is `1.29.0`.
+2. Confirm the v1.29.0 deploy is live; if data/titles changed, run
+   `python3 scripts/indexnow_ping.py` to ping for recrawl.
+3. **Mobile pass** continues — sweep for other header/overlay z-index issues on
+   phones; verify the school-overview fix on a real device.
+4. Any data refresh: edit the dataset, run `bash scripts/build.sh` (regen + counts +
+   version), bump `VERSION` first if shipping. Update the "Last synced …" date
+   string (NOT auto-stamped).
+5. Ship: session branch → fast-forward merge into `main` → push. Hard-reload the
+   live site once to install any new SW.
