@@ -371,7 +371,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .pb-counsel-header{border-top:3px solid var(--counsel);}
 
 /* Map filters bar */
-/* Map filters relocated v1.25.0 — top-of-map horizontal toolbar, docked between the
+/* Map filters relocated v1.26.0 — top-of-map horizontal toolbar, docked between the
    left Match Me / Compare sidebar (ends at 380px) and the always-open right school
    panel (400px), sitting just under the global header. The left sidebar is now
    reserved exclusively for Match Me + Compare. */
@@ -448,7 +448,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
    header (school name + bar pass chip) isn't hidden by filter chips or the BLS
    tooltip card. Was top:76px causing the upper ~50px to be eaten. */
 /* schoolPanel sits at the natural top now that map-filter bar moved into the left
-   panel (v1.25.0) — frees ~50px of vertical space at the top of the right column. */
+   panel (v1.26.0) — frees ~50px of vertical space at the top of the right column. */
 #schoolPanel{position:fixed;top:76px;right:0;bottom:36px;width:400px;z-index:100;background:rgba(4,13,23,0.97);border-left:1px solid rgba(74,122,155,0.22);overflow-y:auto;transform:translateX(0);transition:transform .3s;}#schoolPanel.hidden{transform:translateX(100%);}
 #schoolPanel.open{transform:translateX(0);}
 .sp-close{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(4,13,23,0.98);border-bottom:1px solid rgba(74,122,155,0.15);}
@@ -458,7 +458,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .sp-tab{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border:1px solid rgba(74,122,155,0.2);background:transparent;color:var(--dim);cursor:pointer;transition:all .2s;}
 .sp-tab+.sp-tab{border-left:none;}
 .sp-tab.on{background:rgba(217,119,87,0.1);color:var(--orange);border-color:rgba(217,119,87,0.35);}
-/* School-panel (right side) typography tightened v1.25.0 — was visibly scaled-too-big
+/* School-panel (right side) typography tightened v1.26.0 — was visibly scaled-too-big
    per owner. Reduced metric/value sizes by ~15%, tighter section padding, smaller
    section labels, more breathable line-height. */
 .sp-header{padding:14px 16px 10px;border-bottom:1px solid rgba(74,122,155,0.12);}
@@ -1573,7 +1573,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
     More
   </button>
 </nav>
-<!-- Disclaimer bar removed v1.25.0 — provenance now lives in the footer. -->
+<!-- Disclaimer bar removed v1.26.0 — provenance now lives in the footer. -->
 <style>:root{--banner-h:0px;}</style>
 
 <div id="cookieBar" style="position:fixed;bottom:0;left:0;right:0;z-index:1000;background:#0B1826;border-top:1px solid rgba(217,119,87,0.4);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;box-shadow:0 -2px 12px rgba(0,0,0,0.5);">
@@ -1896,8 +1896,8 @@ function fmtUSD(v){ return v==null?"—":"$"+v.toLocaleString(); }
 // ═══════════════════════════════════════════════════════════════════════════
 const DATA_INVARIANTS = {
   total_schools: 208,         // 197 active/newly + 11 closed/transitioning (now included as historical entries)
-  schools_inline: 208,        // all inline as of v1.25.0 — closed entries surface their pre-closure history
-  year_count: 15              // 2011–2025 inclusive (15-year span; pre-2018 added in v1.25.0 from Historic + v2 sheets)
+  schools_inline: 208,        // all inline as of v1.26.0 — closed entries surface their pre-closure history
+  year_count: 15              // 2011–2025 inclusive (15-year span; pre-2018 added in v1.26.0 from Historic + v2 sheets)
 };
 // Verifiable count of the data cells actually shipped inline on this page:
 // every non-null scalar field, plus every per-year trend entry, across S.
@@ -1966,7 +1966,7 @@ function populateHeaderStats(){
 // ── Lazy-load full dataset (deferred until first deep-dive interaction) ──
 // Callers: `const ext = await loadFullDataset();` parsed JSON, or null on fail.
 // Subsequent calls return the cached object. Concurrent calls share one fetch.
-// Wired in v1.25.0 — schoolDetailHTML calls getSchoolHistory(id) which awaits
+// Wired in v1.26.0 — schoolDetailHTML calls getSchoolHistory(id) which awaits
 // this loader, then renders deep-history charts (employment evolution etc.) into
 // late-paint slots once data is available.
 window.EXT = window.EXT || { data: null, loading: null, byId: null };
@@ -2167,7 +2167,7 @@ function searchTypeaheadKey(e){
   }
 }
 
-// Disclaimer banner is now persistent (per v1.25.0 owner directive) — no dismiss; always visible.
+// Disclaimer banner is now persistent (per v1.26.0 owner directive) — no dismiss; always visible.
 // ── COOKIE notice dismiss (persists via localStorage) ──
 // ── Light/Dark theme toggle (persists via localStorage). Note: many inline styles
 // use literal rgba(4,13,23,...) and won't fully invert — full theming would require
@@ -3116,7 +3116,7 @@ function lineChart(opts){
     const pv=years.map(y=>pin.vals?pin.vals[y]:null);
     let li=-1; for(let i=pv.length-1;i>=0;i--){ if(pv[i]!=null){ li=i; break; } }
     if(li>=0){ const v=pv[li], x=X(li), yy=Y(v), last=(li===years.length-1);
-      // Endpoint label placement rule (v1.25.0): if the line is RISING into the
+      // Endpoint label placement rule (v1.26.0): if the line is RISING into the
       // endpoint, drop the label BELOW the marker (clears the ascending line and
       // the top edge it would otherwise clip); if FALLING, lift it ABOVE. Clamp
       // to the chart box so it can never get cut off. The --chart-halo var gives a
@@ -3163,7 +3163,7 @@ function lineChart(opts){
 
 // ── Full school detail page (items 5 & 9): opens in a new tab via #school/<id> ─
 // ── Scholarship distribution ────────────────────────────────────────────────
-// Canonical buckets per owner directive (v1.25.0): student-favorability gradient.
+// Canonical buckets per owner directive (v1.26.0): student-favorability gradient.
 // "No grant" is DERIVED = 100 - (lt + mt + full + gt) — the source's none count is
 // known to be unreliable (negatives, mis-reports); the derivation guarantees the
 // stack sums to 100% and avoids fabricated bad data.
@@ -3607,7 +3607,7 @@ function outcomeFunnel(s){
 
 function navSchool(id){
   // HASH ROUTES — safest, work anywhere, no 404.html or server-side rewrites needed.
-  // Reverted from clean /school/<slug> paths in v1.25.0 because GH Pages without a
+  // Reverted from clean /school/<slug> paths in v1.26.0 because GH Pages without a
   // deployed 404.html serves real 404s for any unknown path. When the project moves
   // to a custom domain with rewrites (Netlify _redirects, Vercel rewrites, Cloudflare),
   // flip CLEAN_URLS to true and the deep-link helpers below will re-engage.
@@ -4608,34 +4608,66 @@ function natlBadge(dict, m){
   const cls = Math.abs(last-first)<1e-9 ? 'traj-flat' : (better?'traj-up':'traj-down');
   return '<span class="traj '+cls+'" title="'+ys[0]+' → '+ys[ys.length-1]+'">'+(up?'↑':'↓')+' '+m.fmt(first)+' → '+m.fmt(last)+'</span>';
 }
+// Windowed net-change badge for a national series between two chosen years.
+function natlWindowBadge(dict, m, fy, ty){
+  const a=dict[fy], b=dict[ty];
+  if(a==null||b==null) return '';
+  const up=b>a, better=(m.dir==='desc')?!up:up;
+  const cls = Math.abs(b-a)<1e-9 ? 'traj-flat' : (better?'traj-up':'traj-down');
+  return '<span class="traj '+cls+'" title="'+fy+' → '+ty+'">'+(up?'↑':'↓')+' '+m.fmt(a)+' → '+m.fmt(b)+'</span>';
+}
 async function renderTrends(){
   const vi=document.getElementById('viewInner');
   vi.innerHTML='<div class="view-title">State of legal education</div><p class="view-sub">Computing national history from 206 schools…</p>';
   const nt=await nationalTrends();
   if(!nt){ vi.innerHTML='<div class="view-title">State of legal education</div><p class="view-sub">The full-history dataset is unavailable in this browser.</p>'; return; }
   const yrs=nt.years;
-  // Headline sentence built from the biggest, most decision-relevant moves.
-  const sv=(k)=>{ const d=nt.metrics[k]||{}; const ys=Object.keys(d).map(Number).sort((a,b)=>a-b); return ys.length?{first:d[ys[0]],last:d[ys[ys.length-1]],fy:ys[0],ly:ys[ys.length-1]}:null; };
+  // Phase 3 — benchmark window: From/To year selects re-pin every chart + badge.
+  const optF=yrs.slice(0,-1).map(y=>'<option value="'+y+'"'+(y===yrs[0]?' selected':'')+'>'+y+'</option>').join('');
+  const optT=yrs.slice(1).map(y=>'<option value="'+y+'"'+(y===yrs[yrs.length-1]?' selected':'')+'>'+y+'</option>').join('');
+  vi.innerHTML='<div class="view-title">State of legal education</div>'
+    + '<p class="view-sub">National medians across every reporting ABA-509 school. Median (not mean) so a few outliers don’t skew the picture. Pick a window to re-pin every chart.</p>'
+    + '<div class="yoy-ctl">Benchmark <select class="p-filt yoy-sel" id="ntFrom" onchange="paintTrendCards()">'+optF+'</select>'
+    + '<span class="yoy-arrow">to</span><select class="p-filt yoy-sel" id="ntTo" onchange="paintTrendCards()">'+optT+'</select></div>'
+    + '<div id="trends-head"></div>'
+    + '<div class="trends-grid" id="trends-cards"></div>'
+    + '<p class="view-foot">Source: ABA Standard 509 disclosures, full per-year history. Each point is the median of all schools reporting that metric that year (counts vary by metric/year). Market joins (BLS/BEA/HUD) are current-cycle and not time-traveled here.</p>';
+  paintTrendCards();
+}
+// Re-render the trend cards + headline for the currently selected From→To window.
+function paintTrendCards(){
+  const nt=window._NATL_TRENDS; if(!nt) return;
+  const yrs=nt.years;
+  let fy=(document.getElementById('ntFrom')||{}).value || yrs[0];
+  let ty=(document.getElementById('ntTo')||{}).value || yrs[yrs.length-1];
+  let fi=yrs.indexOf(fy), ti=yrs.indexOf(ty);
+  if(fi<0) fi=0; if(ti<0) ti=yrs.length-1;
+  if(fi>ti){ const t=fi; fi=ti; ti=t; }   // tolerate inverted selection
+  if(fi===ti) fi=Math.max(0, ti-1);       // keep at least a 2-year window for the line
+  const win=yrs.slice(fi, ti+1);
+  fy=win[0]; ty=win[win.length-1];
+  // Window-aware headline.
+  const sv=(k)=>{ const d=nt.metrics[k]||{}; return (d[fy]!=null && d[ty]!=null)?{first:d[fy],last:d[ty]}:null; };
   const f=sv('ftlt_pct'), b=sv('emp_biglaw_pct'), sk=sv('emp_seeking_pct'), l=sv('lsat50'), t=sv('tui_ft_res');
   let headline='';
   if(f&&l&&t){
-    headline = 'Since '+f.fy+', the median school sent <strong>'+f.first.toFixed(0)+'% → '+f.last.toFixed(0)+'%</strong> of grads into full-time, long-term jobs'
-      + (sk?' and seeking-employment fell to <strong>'+sk.last.toFixed(1)+'%</strong>':'')
-      + '. Selectivity rose (median LSAT <strong>'+Math.round(l.first)+' → '+Math.round(l.last)+'</strong>) and resident tuition climbed to <strong>$'+Math.round(t.last/1000)+'K</strong>'
-      + (b?'. BigLaw’s share of placements roughly '+(b.last>b.first*1.4?'doubled':'rose')+' (<strong>'+b.first.toFixed(1)+'% → '+b.last.toFixed(1)+'%</strong>)':'')
+    headline = 'From '+fy+' to '+ty+', the median school sent <strong>'+f.first.toFixed(0)+'% → '+f.last.toFixed(0)+'%</strong> of grads into full-time, long-term jobs'
+      + (sk?' and seeking-employment moved to <strong>'+sk.last.toFixed(1)+'%</strong>':'')
+      + '. Median LSAT went <strong>'+Math.round(l.first)+' → '+Math.round(l.last)+'</strong> and resident tuition <strong>$'+Math.round(t.first/1000)+'K → $'+Math.round(t.last/1000)+'K</strong>'
+      + (b?'. BigLaw’s placement share <strong>'+b.first.toFixed(1)+'% → '+b.last.toFixed(1)+'%</strong>':'')
       + '.';
   }
+  const headEl=document.getElementById('trends-head');
+  if(headEl) headEl.innerHTML = headline ? '<p class="trends-headline">'+headline+'</p>' : '';
   const cards=NATL_METRICS.map(m=>{
     const dict=nt.metrics[m.k]||{};
-    if(!Object.keys(dict).length) return '';
-    const chart=lineChart({years:yrs,series:[{vals:dict,color:m.color}],pinIndex:0,fmt:m.fmt,label:m.l});
-    return '<div class="trend-card"><div class="trend-card-h"><span class="trend-card-t">'+m.l+'</span>'+natlBadge(dict,m)+'</div>'+chart+'</div>';
+    const wdict={}; win.forEach(y=>{ if(dict[y]!=null) wdict[y]=dict[y]; });
+    if(!Object.keys(wdict).length) return '';
+    const chart=lineChart({years:win,series:[{vals:wdict,color:m.color}],pinIndex:0,fmt:m.fmt,label:m.l});
+    return '<div class="trend-card"><div class="trend-card-h"><span class="trend-card-t">'+m.l+'</span>'+natlWindowBadge(dict,m,fy,ty)+'</div>'+chart+'</div>';
   }).join('');
-  vi.innerHTML='<div class="view-title">State of legal education</div>'
-    + '<p class="view-sub">National medians across every reporting ABA-509 school, '+yrs[0]+'–'+yrs[yrs.length-1]+'. Median (not mean) so a few outliers don’t skew the picture.</p>'
-    + (headline?'<p class="trends-headline">'+headline+'</p>':'')
-    + '<div class="trends-grid">'+cards+'</div>'
-    + '<p class="view-foot">Source: ABA Standard 509 disclosures, full per-year history. Each point is the median of all schools reporting that metric that year (counts vary by metric/year). Market joins (BLS/BEA/HUD) are current-cycle and not time-traveled here.</p>';
+  const cardsEl=document.getElementById('trends-cards');
+  if(cardsEl) cardsEl.innerHTML=cards;
 }
 
 function renderStates(){
@@ -5473,7 +5505,7 @@ function openShareModal(){
   document.body.appendChild(m);
 }
 
-// Disclaimer bar removed v1.25.0 — --banner-h is hardcoded to 0 in the inline
+// Disclaimer bar removed v1.26.0 — --banner-h is hardcoded to 0 in the inline
 // <style> after the header; the dynamic syncBannerHeight observer is no longer
 // needed. Provenance lives in the footer.
 // Honor #school/X or #compare=… in URL on first load
