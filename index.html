@@ -3,22 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Exhibit — Is law school worth it? Outcomes, cost & trajectory for every school</title>
-<meta name="description" id="metaDesc" content="Is a law degree worth it? Exhibit shows the outcomes, true cost, and 15-year trajectory of every ABA-accredited U.S. law school — bar passage, employment, salary context, tuition and scholarships — from the official ABA Standard 509 disclosures. Free, by 509α.">
+<title>Exhibit: Is law school worth it? Outcomes, cost & trajectory for every school</title>
+<meta name="description" id="metaDesc" content="Is a law degree worth it? Exhibit shows the outcomes, true cost, and 15-year trajectory of every ABA-accredited U.S. law school, bar passage, employment, salary context, tuition and scholarships, from the official ABA Standard 509 disclosures. Free, by 509α.">
 <meta name="keywords" content="law school data, ABA 509, LSAT median, GPA median, bar passage rate, law school employment, law school tuition, law school scholarships, law school admissions, 509 disclosure">
 <meta name="author" content="509α">
 <meta name="robots" content="index,follow">
 <link rel="canonical" id="linkCanonical" href="https://exhibit509.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Exhibit by 509α">
-<meta property="og:title" id="ogTitle" content="Exhibit — Is law school worth it?">
-<meta property="og:description" id="ogDesc" content="Outcomes, true cost, and 15-year trajectory for every ABA-accredited U.S. law school — bar passage, employment, salary context, tuition. From the official ABA 509 disclosures.">
+<meta property="og:title" id="ogTitle" content="Exhibit: Is law school worth it?">
+<meta property="og:description" id="ogDesc" content="Outcomes, true cost, and 15-year trajectory for every ABA-accredited U.S. law school, bar passage, employment, salary context, tuition. From the official ABA 509 disclosures.">
 <meta property="og:url" id="ogUrl" content="https://exhibit509.com/">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Exhibit — Law School Data by 509α">
+<meta name="twitter:title" content="Exhibit: Law School Data by 509α">
 <meta name="twitter:description" content="Free, organized ABA 509 data for every U.S. law school.">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Exhibit","alternateName":"Exhibit by 509α","url":"https://exhibit509.com/","description":"Free, organized ABA Standard 509 data for every U.S. law school.","publisher":{"@type":"Organization","name":"509α","url":"https://skool.com/509alpha"}}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"Exhibit — ABA 509 Law School Data","description":"Admissions, bar passage, employment, tuition, scholarships, and demographic data for ABA-accredited U.S. law schools, sourced from ABA Standard 509 disclosures and contextualized with BLS, BEA, and HUD data.","creator":{"@type":"Organization","name":"509α"},"isAccessibleForFree":true,"license":"https://exhibit509.com/terms.html","keywords":["ABA 509","law school","LSAT","bar passage","employment outcomes","tuition"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"Exhibit: ABA 509 Law School Data","description":"Admissions, bar passage, employment, tuition, scholarships, and demographic data for ABA-accredited U.S. law schools, sourced from ABA Standard 509 disclosures and contextualized with BLS, BEA, and HUD data.","creator":{"@type":"Organization","name":"509α"},"isAccessibleForFree":true,"license":"https://exhibit509.com/terms.html","keywords":["ABA 509","law school","LSAT","bar passage","employment outcomes","tuition"]}</script>
 <script type="application/ld+json" id="ldSchool"></script>
 <!-- PWA: installable, themable, offline-capable via service worker (sw.js). -->
 <link rel="manifest" href="manifest.json">
@@ -78,7 +78,7 @@
 .theme-light #mapFooter a:hover{color:#000000!important;}
 .theme-light #mapFooter a.mf-accent{color:#C95B2C!important;}
 .theme-light #mapFooter .h-logo-text{color:#000000!important;}
-/* Footer link polish — unify the rainbow of inline colors into one muted toolbar
+/* Footer link polish, unify the rainbow of inline colors into one muted toolbar
    tone with an orange accent for the two primary CTAs. Same 36px form factor. */
 #mapFooter a{color:#A4C8DD!important;transition:color .15s ease;}
 #mapFooter a:hover{color:var(--white)!important;}
@@ -195,7 +195,7 @@
 .theme-light svg text[fill="#FCD34D"],.theme-light svg text[fill="#FFA726"]{
   stroke:#000;stroke-width:0.6px;paint-order:stroke;
 }
-/* #2 Line charts (svg.lc — LSAT median, uGPA, acceptance, applications) draw the
+/* #2 Line charts (svg.lc, LSAT median, uGPA, acceptance, applications) draw the
    series as a STROKED line + dot + label, which the fill/text rules above don't
    cover. Bright yellow lines are illegible on white, so darken the whole yellow
    series to a high-contrast amber (~4.5:1 on the light bg) in light mode only. */
@@ -252,8 +252,8 @@ header{position:fixed;top:0;left:0;right:0;z-index:1000;height:52px;display:flex
 #mapRoot{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:1;overflow:hidden;}
 #theMap{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;}
 
-/* ── SLIDING INFO PANEL (left) — floats over map ── */
-/* 50% opacity per owner directive — map shows through behind Match Me + Compare. */
+/* ── SLIDING INFO PANEL (left), floats over map ── */
+/* 50% opacity per owner directive, map shows through behind Match Me + Compare. */
 #infoPanel{position:fixed;top:calc(76px + var(--banner-h, 8px));left:0;bottom:36px;width:380px;z-index:100;background:rgba(4,13,23,0.50);border-right:1px solid rgba(74,122,155,0.25);backdrop-filter:blur(14px);display:flex;flex-direction:column;transition:transform .35s cubic-bezier(.4,0,.2,1);}
 .cmp-cta-block{margin-top:24px;padding-top:18px;border-top:1px solid rgba(74,122,155,0.18);}
 .cmp-cta-desc{font-family:var(--sans);font-size:13px;color:#D6E5F0;line-height:1.5;margin:0 0 12px;}
@@ -265,7 +265,7 @@ header{position:fixed;top:0;left:0;right:0;z-index:1000;height:52px;display:flex
 .ip-title{font-family:var(--sans);font-size:30px;font-weight:800;color:var(--white);line-height:1.06;letter-spacing:-1.2px;margin-bottom:12px;}
 .ip-title em{font-family:var(--serif);font-style:italic;font-weight:700;color:var(--orange);letter-spacing:-0.5px;}
 .ip-law{color:var(--orange);font-weight:800;}
-/* Map stats tile — total schools shown + per-color-tier breakdown for the active map metric. */
+/* Map stats tile, total schools shown + per-color-tier breakdown for the active map metric. */
 .map-stats{background:linear-gradient(180deg,rgba(217,119,87,0.07) 0%,rgba(217,119,87,0.02) 100%);border:1px solid rgba(217,119,87,0.22);border-left:3px solid var(--orange);border-radius:6px;padding:13px 15px 11px;margin-bottom:18px;}
 .ms-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:10px;}
 .ms-eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:1.6px;text-transform:uppercase;color:var(--orange);font-weight:700;text-align:right;line-height:1.3;}
@@ -349,7 +349,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .fw-safety{background:rgba(74,155,107,0.15);color:#6FCF97;border:1px solid rgba(74,155,107,0.35);}
 .fw-target{background:rgba(74,122,155,0.12);color:var(--blue);border:1px solid rgba(74,122,155,0.3);}
 .fw-reach{background:rgba(255,167,38,0.1);color:#FFA726;border:1px solid rgba(255,167,38,0.3);}
-/* Glossary hover tooltip — replaces the native title with a brand-styled
+/* Glossary hover tooltip, replaces the native title with a brand-styled
    popover. data-tip carries the explanation; pure CSS so no JS hookups
    needed even when terms are injected dynamically. */
 .gl{border-bottom:1px dotted currentColor;cursor:help;position:relative;}
@@ -371,7 +371,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .pb-counsel-header{border-top:3px solid var(--counsel);}
 
 /* Map filters bar */
-/* Map filters relocated v1.27.2 — top-of-map horizontal toolbar, docked between the
+/* Map filters relocated v1.27.3, top-of-map horizontal toolbar, docked between the
    left Match Me / Compare sidebar (ends at 380px) and the always-open right school
    panel (400px), sitting just under the global header. The left sidebar is now
    reserved exclusively for Match Me + Compare. */
@@ -414,7 +414,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .leg-row{display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;color:#5A8AAA;margin-bottom:3px;}
 .leg-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
 
-/* ── Map layers ("Color the map by") — left-panel multi-select, up to 3 ── */
+/* ── Map layers ("Color the map by"), left-panel multi-select, up to 3 ── */
 #mlSection{margin-top:11px;}
 .ml-head{font-family:var(--mono);font-size:10.5px;letter-spacing:1.4px;text-transform:uppercase;color:var(--orange);font-weight:700;margin-bottom:8px;}
 .ml-hint{display:block;font-size:9px;letter-spacing:0.4px;text-transform:none;color:var(--dimmer);font-weight:500;margin-top:2px;}
@@ -448,7 +448,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
    header (school name + bar pass chip) isn't hidden by filter chips or the BLS
    tooltip card. Was top:76px causing the upper ~50px to be eaten. */
 /* schoolPanel sits at the natural top now that map-filter bar moved into the left
-   panel (v1.27.2) — frees ~50px of vertical space at the top of the right column. */
+   panel (v1.27.3) — frees ~50px of vertical space at the top of the right column. */
 #schoolPanel{position:fixed;top:76px;right:0;bottom:36px;width:400px;z-index:100;background:rgba(4,13,23,0.97);border-left:1px solid rgba(74,122,155,0.22);overflow-y:auto;transform:translateX(0);transition:transform .3s;}#schoolPanel.hidden{transform:translateX(100%);}
 #schoolPanel.open{transform:translateX(0);}
 .sp-close{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(4,13,23,0.98);border-bottom:1px solid rgba(74,122,155,0.15);}
@@ -458,7 +458,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .sp-tab{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border:1px solid rgba(74,122,155,0.2);background:transparent;color:var(--dim);cursor:pointer;transition:all .2s;}
 .sp-tab+.sp-tab{border-left:none;}
 .sp-tab.on{background:rgba(217,119,87,0.1);color:var(--orange);border-color:rgba(217,119,87,0.35);}
-/* School-panel (right side) typography tightened v1.27.2 — was visibly scaled-too-big
+/* School-panel (right side) typography tightened v1.27.3, was visibly scaled-too-big
    per owner. Reduced metric/value sizes by ~15%, tighter section padding, smaller
    section labels, more breathable line-height. */
 .sp-header{padding:14px 16px 10px;border-bottom:1px solid rgba(74,122,155,0.12);}
@@ -478,13 +478,13 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .sp-row:last-child{border-bottom:none;}
 .sp-row-k{font-size:15px;color:#8ABCCC;font-weight:400;}
 .sp-row-v{font-family:var(--mono);font-size:15px;font-weight:600;}
-/* Stacked variant — for rows where the value is multi-token (e.g. "174 · 162 · 156")
+/* Stacked variant, for rows where the value is multi-token (e.g. "174 · 162 · 156")
    and the inline layout cramps both label and value. Label sits above, value below
    at a larger size for readability. */
 .sp-row.sp-row-stack{flex-direction:column;align-items:flex-start;gap:4px;padding:8px 0;}
 .sp-row.sp-row-stack .sp-row-k{font-size:13px;color:var(--orange);letter-spacing:1.2px;text-transform:uppercase;font-family:var(--mono);font-weight:600;}
 .sp-row.sp-row-stack .sp-row-v{font-size:17px;}
-/* Triple-comparison row — big serif italic title on top, then a 3-column grid of
+/* Triple-comparison row, big serif italic title on top, then a 3-column grid of
    (sub-label / value). Used for LSAT and First-Time Bar in the Outcomes section
    so the comparison reads "title above the data" with clear hierarchy instead of
    cramming everything inline. */
@@ -719,7 +719,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 /* Match site dropdown style (.p-filt) for the state <select> */
 select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;background:var(--bg);color:#A4C8DD;padding:9px 30px 9px 13px;cursor:pointer;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M0 0l5 6 5-6z' fill='%23A4C8DD'/></svg>");background-repeat:no-repeat;background-position:right 10px center;}
 .calc-inp.wide,select.calc-inp.wide{width:240px;}
-/* User-specific tiles for borrowing, interest, monthly payment, living — these show
+/* User-specific tiles for borrowing, interest, monthly payment, living, these show
    the consequences of the inputs above. Distinct visual style (subtle orange ring +
    "YOU" eyebrow) to make it OBVIOUS these depend on your inputs. */
 .calc-summary{margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;}
@@ -748,20 +748,20 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
 .callout.warn .callout-eye{color:#FCD34D;} .callout.warn .callout-eye::before{background:rgba(252,211,77,0.22);border-color:#FCD34D;}
 .callout.insight{background:linear-gradient(180deg,rgba(167,139,250,0.08) 0%,rgba(167,139,250,0.02) 100%);border-color:rgba(167,139,250,0.30);border-left-color:#A78BFA;}
 .callout.insight .callout-eye{color:#A78BFA;} .callout.insight .callout-eye::before{background:rgba(167,139,250,0.22);border-color:#A78BFA;}
-/* Legacy compatibility — old .bimodal-* selectors map onto the new callout system */
+/* Legacy compatibility, old .bimodal-* selectors map onto the new callout system */
 .bimodal-wrap{margin:24px 0;padding:18px 22px 16px;border-radius:6px;background:linear-gradient(180deg,rgba(217,119,87,0.08) 0%,rgba(217,119,87,0.02) 100%);border:1px solid rgba(217,119,87,0.25);border-left:4px solid var(--orange);}
 .bimodal-h{font-family:var(--mono);font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--orange);font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
 .bimodal-h::before{content:'';display:inline-block;width:14px;height:14px;border-radius:50%;background:rgba(217,119,87,0.22);border:1.5px solid var(--orange);box-shadow:inset 0 0 0 2px var(--bg);}
 .bimodal-p{font-family:var(--sans);font-size:15.5px;color:#E6F0F8;line-height:1.6;margin:0 0 12px;font-weight:400;}
 .bimodal-svg{width:100%;max-width:640px;height:140px;display:block;margin:6px auto;}
 .bimodal-foot{font-family:var(--mono);font-size:12px;color:var(--dimmer);letter-spacing:0.5px;text-align:center;margin-top:6px;}
-/* Sticky thead — z-index to float above rows, solid bg + drop-shadow to make the
+/* Sticky thead, z-index to float above rows, solid bg + drop-shadow to make the
    pin moment obvious when scrolling. */
 .calc-table thead{position:sticky;top:0;z-index:10;}
 .calc-table th{position:sticky;top:0;z-index:10;background:#0B1826;font-family:var(--mono);font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);padding:14px 10px 12px;text-align:right;border-bottom:2px solid rgba(217,119,87,0.45);font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,0.35);}
 .calc-table th.calc-school{text-align:left;}
 .calc-table td{padding:12px 10px;text-align:right;border-bottom:1px solid rgba(74,122,155,0.08);color:var(--white);font-variant-numeric:tabular-nums;}
-/* Last column = the all-in "Net price" total — orange in both themes to read as the headline number. */
+/* Last column = the all-in "Net price" total, orange in both themes to read as the headline number. */
 .calc-table th.calc-total{color:var(--orange);border-bottom-color:rgba(217,119,87,0.75);}
 .calc-table td.calc-total,.calc-table td.calc-total strong{color:var(--orange);font-weight:800;}
 .calc-table td.calc-school{text-align:left;font-family:var(--serif);font-size:15.5px;}
@@ -817,7 +817,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
 .spk-val{font-family:var(--mono);font-size:13px;color:var(--white);font-weight:600;}
 .spk-svg{width:100%;height:28px;display:block;}
 .spk-empty{font-family:var(--mono);font-size:11px;color:var(--dimmer);padding:6px 0;}
-/* Trends tab — multi-line toggleable chart */
+/* Trends tab, multi-line toggleable chart */
 .trend-toggles{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px;}
 .trend-tog{display:inline-flex;align-items:center;gap:5px;padding:4px 7px;background:transparent;border:1px solid rgba(74,122,155,0.18);color:var(--dim);font-family:var(--mono);font-size:11px;letter-spacing:0.5px;cursor:pointer;transition:all .15s;text-transform:uppercase;}
 .trend-tog:hover{border-color:rgba(217,119,87,0.45);}
@@ -952,9 +952,9 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
   /* Bottom-sheet drag grip: the header doubles as the resize handle. */
   .sp-close{touch-action:none;cursor:grab;}
   #schoolPanel.sp-expanded{max-height:calc(100vh - 60px);}
-  /* ── FOOTER: hide on mobile — the bottom tab bar replaces it ─────────── */
+  /* ── FOOTER: hide on mobile, the bottom tab bar replaces it ─────────── */
   #mapFooter{display:none!important;}
-  /* ── BOTTOM TAB BAR (mobile-only) — iOS/Android-native IA ────────────── */
+  /* ── BOTTOM TAB BAR (mobile-only), iOS/Android-native IA ────────────── */
   #mobileTabBar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:996;background:rgba(4,13,23,0.98);border-top:1px solid rgba(74,122,155,0.30);height:58px;backdrop-filter:blur(12px);box-shadow:0 -2px 12px rgba(0,0,0,0.4);padding-bottom:env(safe-area-inset-bottom);}
   #mobileTabBar .mtb-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;background:transparent;border:none;color:var(--dim);font-family:var(--mono);font-size:9.5px;letter-spacing:0.5px;text-transform:uppercase;font-weight:600;cursor:pointer;-webkit-tap-highlight-color:transparent;padding:0;position:relative;}
   #mobileTabBar .mtb-btn svg{width:22px;height:22px;stroke-width:2;}
@@ -969,7 +969,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
   .modal-box{max-height:92vh;overflow-y:auto;}
   /* ── HEADER STACK ─────────────────────────────────────────────────────── */
   header{gap:0;}
-  /* Hide the hamburger — the bottom tab bar's "More" tab supersedes it for primary navigation */
+  /* Hide the hamburger, the bottom tab bar's "More" tab supersedes it for primary navigation */
   #mobileMenuBtn{display:none!important;}
 }
 
@@ -1090,7 +1090,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
 .sc-triple-l{font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--dimmer);text-transform:uppercase;}
 .sc-triple-v{font-family:var(--mono);font-size:13px;font-weight:700;font-variant-numeric:tabular-nums;}
 
-/* State abbreviation badge — visual state indicator on Schools + States views */
+/* State abbreviation badge, visual state indicator on Schools + States views */
 .state-badge{display:inline-flex;align-items:center;justify-content:center;width:30px;height:22px;border:1.5px solid rgba(217,119,87,0.55);border-radius:3px;background:rgba(217,119,87,0.08);font-family:var(--mono);font-size:11px;font-weight:700;color:var(--orange);letter-spacing:0.5px;flex-shrink:0;}
 .state-badge.lg{width:42px;height:30px;font-size:14px;border-width:2px;}
 .theme-light .state-badge{background:rgba(217,119,87,0.10)!important;border-color:rgba(201,91,44,0.55)!important;color:#C95B2C!important;}
@@ -1238,7 +1238,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
   #comparePage{position:static!important;display:block!important;height:auto!important;overflow:visible!important;}
   .cmp-wrap{max-width:none!important;padding:0!important;margin:0!important;}
   .cmp-chart,.cmp-table tr,.cmp-emp-row{break-inside:avoid;}
-  /* School full-page print — maximize data density: static flow, tighter grid,
+  /* School full-page print, maximize data density: static flow, tighter grid,
      denser type, no card chrome, avoid breaking inside cards/charts. */
   #schoolPage{position:static!important;display:block!important;height:auto!important;overflow:visible!important;}
   .dp-wrap{max-width:none!important;padding:0!important;margin:0!important;}
@@ -1263,10 +1263,10 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
 <noscript>
 <style>.ns-wrap{max-width:760px;margin:0 auto;padding:40px 22px;font-family:Georgia,serif;color:#F4F8FB;line-height:1.7;}.ns-wrap h1{font-family:'Nunito',sans-serif;font-size:32px;margin-bottom:6px;}.ns-wrap h2{font-family:'JetBrains Mono',monospace;font-size:14px;color:#D97757;text-transform:uppercase;letter-spacing:1.5px;margin-top:32px;}.ns-wrap a{color:#D97757;}.ns-wrap table{width:100%;border-collapse:collapse;margin:14px 0;}.ns-wrap th,.ns-wrap td{text-align:left;padding:6px 8px;border-bottom:1px solid rgba(74,122,155,0.2);font-size:13px;}.ns-wrap th{color:#D97757;font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;}body{background:#06111E;}</style>
 <div class="ns-wrap">
-<h1>Exhibit — Is law school worth it? Outcomes, cost &amp; trajectory by 509α</h1>
-<p>A free, public tool for answering whether a law degree is worth it: the outcomes, true cost, and 15-year trajectory of every ABA-accredited U.S. law school. Built on ABA Standard 509 disclosure data — bar passage, employment, salary context, tuition and scholarships — for 208 schools (197 currently accredited + 11 closed/transitioning with full historical record), every year from 2011 through 2025. This page requires JavaScript to render the interactive map and dashboards.</p>
+<h1>Exhibit: Is law school worth it? Outcomes, cost &amp; trajectory by 509α</h1>
+<p>A free, public tool for answering whether a law degree is worth it: the outcomes, true cost, and 15-year trajectory of every ABA-accredited U.S. law school. Built on ABA Standard 509 disclosure data, bar passage, employment, salary context, tuition and scholarships, for 208 schools (197 currently accredited + 11 closed/transitioning with full historical record), every year from 2011 through 2025. This page requires JavaScript to render the interactive map and dashboards.</p>
 <h2>What it covers</h2>
-<p>For every accredited U.S. law school, the underlying inline dataset contains: LSAT 25/50/75 percentiles, uGPA 25/50/75 percentiles, acceptance rate, applications + offers + enrollment, scholarship distribution across five buckets, sticker tuition (resident + non-resident), first-time bar pass, 2-year ultimate bar pass, full-time long-term employment, employment by firm size and sector (MegaLaw 500+, BigLaw 251–500, Mid 101–250, Small 2–100, Clerkships, Public Interest, Government, Business, Academia, Solo, Seeking), top destination states for graduates, transfers in and out — for every year from 2011 through 2025.</p>
+<p>For every accredited U.S. law school, the underlying inline dataset contains: LSAT 25/50/75 percentiles, uGPA 25/50/75 percentiles, acceptance rate, applications + offers + enrollment, scholarship distribution across five buckets, sticker tuition (resident + non-resident), first-time bar pass, 2-year ultimate bar pass, full-time long-term employment, employment by firm size and sector (MegaLaw 500+, BigLaw 251–500, Mid 101–250, Small 2–100, Clerkships, Public Interest, Government, Business, Academia, Solo, Seeking), top destination states for graduates, transfers in and out, for every year from 2011 through 2025.</p>
 <h2>Data sources</h2>
 <table>
 <thead><tr><th>Field family</th><th>Source</th><th>Vintage</th></tr></thead>
@@ -1278,245 +1278,245 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
 </tbody>
 </table>
 <h2>Safety / Target / Reach</h2>
-<p>For each school we use its published 2025 LSAT and uGPA 25th and 75th percentile bands (the middle 50% of last year's entering class). When a user enters their stats: Safety = stats at or above the school's 75th percentile on both metrics; Target = stats within the school's middle 50% on both; Reach = stats below the school's 25th percentile on at least one metric. There is no second weighting and no proprietary score — the band rule is the entire rule.</p>
+<p>For each school we use its published 2025 LSAT and uGPA 25th and 75th percentile bands (the middle 50% of last year's entering class). When a user enters their stats: Safety = stats at or above the school's 75th percentile on both metrics; Target = stats within the school's middle 50% on both; Reach = stats below the school's 25th percentile on at least one metric. There is no second weighting and no proprietary score, the band rule is the entire rule.</p>
 <h2>What Exhibit doesn't do</h2>
 <p>Exhibit does not survey students or schools, does not rank or score schools, does not estimate fields the source did not publish, and is not affiliated with the American Bar Association or any law school. Source data is public at <a href="https://abarequireddisclosures.org/">abarequireddisclosures.org</a>.</p>
 <h2>More</h2>
 <ul>
-<li><a href="methodology.html">Methodology</a> — full rules for every classification, formula, and sanitization step</li>
-<li><a href="about.html">About</a> — what Exhibit is, why we built it, who built it</li>
+<li><a href="methodology.html">Methodology</a>, full rules for every classification, formula, and sanitization step</li>
+<li><a href="about.html">About</a>, what Exhibit is, why we built it, who built it</li>
 <li><a href="terms.html">Terms & Privacy</a></li>
-<li><a href="llms.txt">llms.txt</a> — machine-readable summary for AI crawlers</li>
+<li><a href="llms.txt">llms.txt</a>, machine-readable summary for AI crawlers</li>
 </ul>
 <h2>All schools (A–Z)</h2>
 <!-- SCHOOL_INDEX_START -->
 <ul class="ns-schools">
-<li><a href="school/albany-law-school.html">Albany Law School</a> — New York</li>
-<li><a href="school/american-university.html">American University School of Law</a> — District of Columbia</li>
-<li><a href="school/appalachian-school-of-law.html">Appalachian School of Law</a> — Virginia</li>
-<li><a href="school/arizona-state-university.html">Arizona State University School of Law</a> — Arizona</li>
+<li><a href="school/albany-law-school.html">Albany Law School</a>, New York</li>
+<li><a href="school/american-university.html">American University School of Law</a>, District of Columbia</li>
+<li><a href="school/appalachian-school-of-law.html">Appalachian School of Law</a>, Virginia</li>
+<li><a href="school/arizona-state-university.html">Arizona State University School of Law</a>, Arizona</li>
 <li><a href="school/arizona-summit-law-school.html">ARIZONA SUMMIT LAW SCHOOL</a></li>
-<li><a href="school/atlanta-s-john-marshall-law-school.html">Atlanta's John Marshall Law School</a> — Georgia</li>
-<li><a href="school/ave-maria-school-of-law.html">Ave Maria School of Law</a> — Florida</li>
-<li><a href="school/barry-university.html">Barry University School of Law</a> — Florida</li>
-<li><a href="school/baylor-university.html">Baylor University School of Law</a> — Texas</li>
-<li><a href="school/belmont-university.html">Belmont University School of Law</a> — Tennessee</li>
-<li><a href="school/boston-college.html">Boston College School of Law</a> — Massachusetts</li>
-<li><a href="school/boston-university.html">Boston University School of Law</a> — Massachusetts</li>
-<li><a href="school/brigham-young-university.html">Brigham Young University School of Law</a> — Utah</li>
-<li><a href="school/brooklyn-law-school.html">Brooklyn Law School</a> — New York</li>
-<li><a href="school/california-western-school-of-law.html">California Western School of Law</a> — California</li>
-<li><a href="school/campbell-university.html">Campbell University School of Law</a> — North Carolina</li>
-<li><a href="school/capital-university-law-school.html">Capital University Law School</a> — Ohio</li>
-<li><a href="school/cardozo-yeshiva-university.html">Cardozo, Yeshiva University School of Law</a> — New York</li>
-<li><a href="school/case-western-reserve-university.html">Case Western Reserve University School of Law</a> — Ohio</li>
-<li><a href="school/catholic-university-of-america-the.html">Catholic University of America, The School of Law</a> — District of Columbia</li>
-<li><a href="school/chapman-university.html">Chapman University School of Law</a> — California</li>
-<li><a href="school/charleston-school-of-law.html">Charleston School of Law</a> — South Carolina</li>
+<li><a href="school/atlanta-s-john-marshall-law-school.html">Atlanta's John Marshall Law School</a>, Georgia</li>
+<li><a href="school/ave-maria-school-of-law.html">Ave Maria School of Law</a>, Florida</li>
+<li><a href="school/barry-university.html">Barry University School of Law</a>, Florida</li>
+<li><a href="school/baylor-university.html">Baylor University School of Law</a>, Texas</li>
+<li><a href="school/belmont-university.html">Belmont University School of Law</a>, Tennessee</li>
+<li><a href="school/boston-college.html">Boston College School of Law</a>, Massachusetts</li>
+<li><a href="school/boston-university.html">Boston University School of Law</a>, Massachusetts</li>
+<li><a href="school/brigham-young-university.html">Brigham Young University School of Law</a>, Utah</li>
+<li><a href="school/brooklyn-law-school.html">Brooklyn Law School</a>, New York</li>
+<li><a href="school/california-western-school-of-law.html">California Western School of Law</a>, California</li>
+<li><a href="school/campbell-university.html">Campbell University School of Law</a>, North Carolina</li>
+<li><a href="school/capital-university-law-school.html">Capital University Law School</a>, Ohio</li>
+<li><a href="school/cardozo-yeshiva-university.html">Cardozo, Yeshiva University School of Law</a>, New York</li>
+<li><a href="school/case-western-reserve-university.html">Case Western Reserve University School of Law</a>, Ohio</li>
+<li><a href="school/catholic-university-of-america-the.html">Catholic University of America, The School of Law</a>, District of Columbia</li>
+<li><a href="school/chapman-university.html">Chapman University School of Law</a>, California</li>
+<li><a href="school/charleston-school-of-law.html">Charleston School of Law</a>, South Carolina</li>
 <li><a href="school/charlotte-school-of-law.html">CHARLOTTE SCHOOL OF LAW</a></li>
-<li><a href="school/chicago-kent-illinois-institute-of-techn.html">Chicago-Kent, Illinois Institute of Technology School of Law</a> — Illinois</li>
-<li><a href="school/cleveland-state-university.html">Cleveland State University School of Law</a> — Ohio</li>
-<li><a href="school/columbia-university.html">Columbia Law School</a> — New York</li>
+<li><a href="school/chicago-kent-illinois-institute-of-techn.html">Chicago-Kent, Illinois Institute of Technology School of Law</a>, Illinois</li>
+<li><a href="school/cleveland-state-university.html">Cleveland State University School of Law</a>, Ohio</li>
+<li><a href="school/columbia-university.html">Columbia Law School</a>, New York</li>
 <li><a href="school/concordia-law-school.html">CONCORDIA LAW SCHOOL</a></li>
-<li><a href="school/cooley-law-school.html">Cooley Law School</a> — Michigan</li>
-<li><a href="school/cornell-university.html">Cornell Law School</a> — New York</li>
-<li><a href="school/creighton-university.html">Creighton University School of Law</a> — Nebraska</li>
-<li><a href="school/depaul-university.html">DePaul University School of Law</a> — Illinois</li>
-<li><a href="school/drake-university.html">Drake University School of Law</a> — Iowa</li>
-<li><a href="school/drexel-university.html">Drexel University School of Law</a> — Pennsylvania</li>
-<li><a href="school/duke-university.html">Duke University School of Law</a> — North Carolina</li>
-<li><a href="school/duquesne-university.html">Duquesne University School of Law</a> — Pennsylvania</li>
-<li><a href="school/elon-university.html">Elon University School of Law</a> — North Carolina</li>
-<li><a href="school/emory-university.html">Emory University School of Law</a> — Georgia</li>
-<li><a href="school/faulkner-university.html">Faulkner University School of Law</a> — Alabama</li>
-<li><a href="school/florida-a-m-university.html">Florida A&amp;M University School of Law</a> — Florida</li>
+<li><a href="school/cooley-law-school.html">Cooley Law School</a>, Michigan</li>
+<li><a href="school/cornell-university.html">Cornell Law School</a>, New York</li>
+<li><a href="school/creighton-university.html">Creighton University School of Law</a>, Nebraska</li>
+<li><a href="school/depaul-university.html">DePaul University School of Law</a>, Illinois</li>
+<li><a href="school/drake-university.html">Drake University School of Law</a>, Iowa</li>
+<li><a href="school/drexel-university.html">Drexel University School of Law</a>, Pennsylvania</li>
+<li><a href="school/duke-university.html">Duke University School of Law</a>, North Carolina</li>
+<li><a href="school/duquesne-university.html">Duquesne University School of Law</a>, Pennsylvania</li>
+<li><a href="school/elon-university.html">Elon University School of Law</a>, North Carolina</li>
+<li><a href="school/emory-university.html">Emory University School of Law</a>, Georgia</li>
+<li><a href="school/faulkner-university.html">Faulkner University School of Law</a>, Alabama</li>
+<li><a href="school/florida-a-m-university.html">Florida A&amp;M University School of Law</a>, Florida</li>
 <li><a href="school/florida-coastal-school-of-law.html">FLORIDA COASTAL SCHOOL OF LAW</a></li>
-<li><a href="school/florida-international-university.html">Florida International University School of Law</a> — Florida</li>
-<li><a href="school/florida-state-university.html">Florida State University School of Law</a> — Florida</li>
-<li><a href="school/fordham-university.html">Fordham University School of Law</a> — New York</li>
-<li><a href="school/george-mason-university.html">George Mason University School of Law</a> — Virginia</li>
-<li><a href="school/george-washington-university-the.html">George Washington University, The School of Law</a> — District of Columbia</li>
-<li><a href="school/georgetown-university.html">Georgetown University Law Center</a> — District of Columbia</li>
-<li><a href="school/georgia-state-university.html">Georgia State University School of Law</a> — Georgia</li>
-<li><a href="school/gonzaga-university.html">Gonzaga University School of Law</a> — Washington</li>
+<li><a href="school/florida-international-university.html">Florida International University School of Law</a>, Florida</li>
+<li><a href="school/florida-state-university.html">Florida State University School of Law</a>, Florida</li>
+<li><a href="school/fordham-university.html">Fordham University School of Law</a>, New York</li>
+<li><a href="school/george-mason-university.html">George Mason University School of Law</a>, Virginia</li>
+<li><a href="school/george-washington-university-the.html">George Washington University, The School of Law</a>, District of Columbia</li>
+<li><a href="school/georgetown-university.html">Georgetown University Law Center</a>, District of Columbia</li>
+<li><a href="school/georgia-state-university.html">Georgia State University School of Law</a>, Georgia</li>
+<li><a href="school/gonzaga-university.html">Gonzaga University School of Law</a>, Washington</li>
 <li><a href="school/hamline-university.html">HAMLINE UNIVERSITY School of Law</a></li>
-<li><a href="school/harvard-university.html">Harvard Law School</a> — Massachusetts</li>
-<li><a href="school/high-point-university.html">High Point University School of Law</a> — North Carolina</li>
-<li><a href="school/hofstra-university.html">Hofstra University School of Law</a> — New York</li>
-<li><a href="school/howard-university.html">Howard University School of Law</a> — District of Columbia</li>
+<li><a href="school/harvard-university.html">Harvard Law School</a>, Massachusetts</li>
+<li><a href="school/high-point-university.html">High Point University School of Law</a>, North Carolina</li>
+<li><a href="school/hofstra-university.html">Hofstra University School of Law</a>, New York</li>
+<li><a href="school/howard-university.html">Howard University School of Law</a>, District of Columbia</li>
 <li><a href="school/indiana-tech.html">INDIANA TECH School of Law</a></li>
-<li><a href="school/indiana-university-bloomington.html">Indiana University-Bloomington School of Law</a> — Indiana</li>
-<li><a href="school/indiana-university-indianapolis.html">Indiana University-Indianapolis School of Law</a> — Indiana</li>
-<li><a href="school/inter-american-university-of-puerto-rico.html">Inter American University of Puerto Rico School of Law</a> — Puerto Rico</li>
-<li><a href="school/jacksonville-university.html">Jacksonville University School of Law</a> — Florida</li>
+<li><a href="school/indiana-university-bloomington.html">Indiana University-Bloomington School of Law</a>, Indiana</li>
+<li><a href="school/indiana-university-indianapolis.html">Indiana University-Indianapolis School of Law</a>, Indiana</li>
+<li><a href="school/inter-american-university-of-puerto-rico.html">Inter American University of Puerto Rico School of Law</a>, Puerto Rico</li>
+<li><a href="school/jacksonville-university.html">Jacksonville University School of Law</a>, Florida</li>
 <li><a href="school/la-verne-university-of.html">La Verne University Of School of Law</a></li>
-<li><a href="school/lewis-clark-law-school.html">Lewis &amp; Clark Law School</a> — Oregon</li>
-<li><a href="school/liberty-university.html">Liberty University School of Law</a> — Virginia</li>
-<li><a href="school/lincoln-memorial-university.html">Lincoln Memorial University School of Law</a> — Tennessee</li>
-<li><a href="school/louisiana-state-university.html">Louisiana State University School of Law</a> — Louisiana</li>
-<li><a href="school/loyola-marymount-university-los-angeles.html">Loyola Marymount University-Los Angeles School of Law</a> — California</li>
-<li><a href="school/loyola-university-chicago.html">Loyola University-Chicago School of Law</a> — Illinois</li>
-<li><a href="school/loyola-university-new-orleans.html">Loyola University-New Orleans School of Law</a> — Louisiana</li>
-<li><a href="school/marquette-university.html">Marquette University School of Law</a> — Wisconsin</li>
-<li><a href="school/mercer-university.html">Mercer University School of Law</a> — Georgia</li>
-<li><a href="school/michigan-state-university.html">Michigan State University School of Law</a> — Michigan</li>
-<li><a href="school/mississippi-college.html">Mississippi College School of Law</a> — Mississippi</li>
-<li><a href="school/mitchell-hamline-school-of-law.html">Mitchell/Hamline School of Law</a> — Minnesota</li>
-<li><a href="school/new-england-law-boston.html">New England Law/Boston</a> — Massachusetts</li>
-<li><a href="school/new-york-law-school.html">New York Law School</a> — New York</li>
-<li><a href="school/new-york-university.html">New York University School of Law</a> — New York</li>
-<li><a href="school/north-carolina-central-university.html">North Carolina Central University School of Law</a> — North Carolina</li>
-<li><a href="school/northeastern-university.html">Northeastern University School of Law</a> — Massachusetts</li>
-<li><a href="school/northern-illinois-university.html">Northern Illinois University School of Law</a> — Illinois</li>
-<li><a href="school/northern-kentucky-university.html">Northern Kentucky University School of Law</a> — Kentucky</li>
-<li><a href="school/northwestern-university.html">Northwestern Pritzker School of Law</a> — Illinois</li>
-<li><a href="school/nova-southeastern-university.html">Nova Southeastern University School of Law</a> — Florida</li>
-<li><a href="school/ohio-northern-university.html">Ohio Northern University School of Law</a> — Ohio</li>
-<li><a href="school/oklahoma-city-university.html">Oklahoma City University School of Law</a> — Oklahoma</li>
-<li><a href="school/pace-university.html">Pace University School of Law</a> — New York</li>
-<li><a href="school/pacific-university-of-the.html">Pacific, University of the School of Law</a> — California</li>
-<li><a href="school/penn-state-dickinson-law.html">Penn State Dickinson Law</a> — Pennsylvania</li>
-<li><a href="school/pepperdine-university.html">Pepperdine University School of Law</a> — California</li>
-<li><a href="school/pontifical-catholic-university-of-puerto.html">Pontifical Catholic University of Puerto Rico School of Law</a> — Puerto Rico</li>
-<li><a href="school/quinnipiac-university.html">Quinnipiac University School of Law</a> — Connecticut</li>
-<li><a href="school/regent-university.html">Regent University School of Law</a> — Virginia</li>
-<li><a href="school/roger-williams-university.html">Roger Williams University School of Law</a> — Rhode Island</li>
-<li><a href="school/rutgers-university.html">Rutgers University School of Law</a> — New Jersey</li>
-<li><a href="school/saint-louis-university.html">Saint Louis University School of Law</a> — Missouri</li>
-<li><a href="school/samford-university.html">Samford University School of Law</a> — Alabama</li>
-<li><a href="school/santa-clara-university.html">Santa Clara University School of Law</a> — California</li>
-<li><a href="school/seattle-university.html">Seattle University School of Law</a> — Washington</li>
-<li><a href="school/seton-hall-university.html">Seton Hall University School of Law</a> — New Jersey</li>
-<li><a href="school/south-texas-college-of-law-houston.html">South Texas College of Law Houston</a> — Texas</li>
-<li><a href="school/southern-illinois-university.html">Southern Illinois University School of Law</a> — Illinois</li>
-<li><a href="school/southern-methodist-university.html">Southern Methodist University School of Law</a> — Texas</li>
-<li><a href="school/southern-university.html">Southern University School of Law</a> — Louisiana</li>
-<li><a href="school/southwestern-law-school.html">Southwestern Law School</a> — California</li>
-<li><a href="school/st-john-s-university.html">St. John's University School of Law</a> — New York</li>
-<li><a href="school/st-mary-s-university.html">St. Mary's University School of Law</a> — Texas</li>
-<li><a href="school/st-thomas-university-miami.html">St. Thomas University (Miami) School of Law</a> — Florida</li>
-<li><a href="school/st-thomas-minneapolis-university-of.html">St. Thomas, (Minneapolis) University of School of Law</a> — Minnesota</li>
-<li><a href="school/stanford-university.html">Stanford Law School</a> — California</li>
-<li><a href="school/stetson-university.html">Stetson University School of Law</a> — Florida</li>
-<li><a href="school/suffolk-university.html">Suffolk University School of Law</a> — Massachusetts</li>
-<li><a href="school/syracuse-university.html">Syracuse University School of Law</a> — New York</li>
-<li><a href="school/temple-university.html">Temple University School of Law</a> — Pennsylvania</li>
-<li><a href="school/texas-a-m-university.html">Texas A&amp;M University School of Law</a> — Texas</li>
-<li><a href="school/texas-southern-university.html">Texas Southern University School of Law</a> — Texas</li>
-<li><a href="school/texas-tech-university.html">Texas Tech University School of Law</a> — Texas</li>
-<li><a href="school/the-ohio-state-university.html">The Ohio State University School of Law</a> — Ohio</li>
+<li><a href="school/lewis-clark-law-school.html">Lewis &amp; Clark Law School</a>, Oregon</li>
+<li><a href="school/liberty-university.html">Liberty University School of Law</a>, Virginia</li>
+<li><a href="school/lincoln-memorial-university.html">Lincoln Memorial University School of Law</a>, Tennessee</li>
+<li><a href="school/louisiana-state-university.html">Louisiana State University School of Law</a>, Louisiana</li>
+<li><a href="school/loyola-marymount-university-los-angeles.html">Loyola Marymount University-Los Angeles School of Law</a>, California</li>
+<li><a href="school/loyola-university-chicago.html">Loyola University-Chicago School of Law</a>, Illinois</li>
+<li><a href="school/loyola-university-new-orleans.html">Loyola University-New Orleans School of Law</a>, Louisiana</li>
+<li><a href="school/marquette-university.html">Marquette University School of Law</a>, Wisconsin</li>
+<li><a href="school/mercer-university.html">Mercer University School of Law</a>, Georgia</li>
+<li><a href="school/michigan-state-university.html">Michigan State University School of Law</a>, Michigan</li>
+<li><a href="school/mississippi-college.html">Mississippi College School of Law</a>, Mississippi</li>
+<li><a href="school/mitchell-hamline-school-of-law.html">Mitchell/Hamline School of Law</a>, Minnesota</li>
+<li><a href="school/new-england-law-boston.html">New England Law/Boston</a>, Massachusetts</li>
+<li><a href="school/new-york-law-school.html">New York Law School</a>, New York</li>
+<li><a href="school/new-york-university.html">New York University School of Law</a>, New York</li>
+<li><a href="school/north-carolina-central-university.html">North Carolina Central University School of Law</a>, North Carolina</li>
+<li><a href="school/northeastern-university.html">Northeastern University School of Law</a>, Massachusetts</li>
+<li><a href="school/northern-illinois-university.html">Northern Illinois University School of Law</a>, Illinois</li>
+<li><a href="school/northern-kentucky-university.html">Northern Kentucky University School of Law</a>, Kentucky</li>
+<li><a href="school/northwestern-university.html">Northwestern Pritzker School of Law</a>, Illinois</li>
+<li><a href="school/nova-southeastern-university.html">Nova Southeastern University School of Law</a>, Florida</li>
+<li><a href="school/ohio-northern-university.html">Ohio Northern University School of Law</a>, Ohio</li>
+<li><a href="school/oklahoma-city-university.html">Oklahoma City University School of Law</a>, Oklahoma</li>
+<li><a href="school/pace-university.html">Pace University School of Law</a>, New York</li>
+<li><a href="school/pacific-university-of-the.html">Pacific, University of the School of Law</a>, California</li>
+<li><a href="school/penn-state-dickinson-law.html">Penn State Dickinson Law</a>, Pennsylvania</li>
+<li><a href="school/pepperdine-university.html">Pepperdine University School of Law</a>, California</li>
+<li><a href="school/pontifical-catholic-university-of-puerto.html">Pontifical Catholic University of Puerto Rico School of Law</a>, Puerto Rico</li>
+<li><a href="school/quinnipiac-university.html">Quinnipiac University School of Law</a>, Connecticut</li>
+<li><a href="school/regent-university.html">Regent University School of Law</a>, Virginia</li>
+<li><a href="school/roger-williams-university.html">Roger Williams University School of Law</a>, Rhode Island</li>
+<li><a href="school/rutgers-university.html">Rutgers University School of Law</a>, New Jersey</li>
+<li><a href="school/saint-louis-university.html">Saint Louis University School of Law</a>, Missouri</li>
+<li><a href="school/samford-university.html">Samford University School of Law</a>, Alabama</li>
+<li><a href="school/santa-clara-university.html">Santa Clara University School of Law</a>, California</li>
+<li><a href="school/seattle-university.html">Seattle University School of Law</a>, Washington</li>
+<li><a href="school/seton-hall-university.html">Seton Hall University School of Law</a>, New Jersey</li>
+<li><a href="school/south-texas-college-of-law-houston.html">South Texas College of Law Houston</a>, Texas</li>
+<li><a href="school/southern-illinois-university.html">Southern Illinois University School of Law</a>, Illinois</li>
+<li><a href="school/southern-methodist-university.html">Southern Methodist University School of Law</a>, Texas</li>
+<li><a href="school/southern-university.html">Southern University School of Law</a>, Louisiana</li>
+<li><a href="school/southwestern-law-school.html">Southwestern Law School</a>, California</li>
+<li><a href="school/st-john-s-university.html">St. John's University School of Law</a>, New York</li>
+<li><a href="school/st-mary-s-university.html">St. Mary's University School of Law</a>, Texas</li>
+<li><a href="school/st-thomas-university-miami.html">St. Thomas University (Miami) School of Law</a>, Florida</li>
+<li><a href="school/st-thomas-minneapolis-university-of.html">St. Thomas, (Minneapolis) University of School of Law</a>, Minnesota</li>
+<li><a href="school/stanford-university.html">Stanford Law School</a>, California</li>
+<li><a href="school/stetson-university.html">Stetson University School of Law</a>, Florida</li>
+<li><a href="school/suffolk-university.html">Suffolk University School of Law</a>, Massachusetts</li>
+<li><a href="school/syracuse-university.html">Syracuse University School of Law</a>, New York</li>
+<li><a href="school/temple-university.html">Temple University School of Law</a>, Pennsylvania</li>
+<li><a href="school/texas-a-m-university.html">Texas A&amp;M University School of Law</a>, Texas</li>
+<li><a href="school/texas-southern-university.html">Texas Southern University School of Law</a>, Texas</li>
+<li><a href="school/texas-tech-university.html">Texas Tech University School of Law</a>, Texas</li>
+<li><a href="school/the-ohio-state-university.html">The Ohio State University School of Law</a>, Ohio</li>
 <li><a href="school/thomas-jefferson-school-of-law.html">THOMAS JEFFERSON SCHOOL OF LAW</a></li>
-<li><a href="school/touro-university.html">Touro University School of Law</a> — New York</li>
-<li><a href="school/tulane-university.html">Tulane University School of Law</a> — Louisiana</li>
-<li><a href="school/california-berkeley-university-of.html">UC Berkeley School of Law</a> — California</li>
-<li><a href="school/california-los-angeles-university-of.html">UCLA School of Law</a> — California</li>
-<li><a href="school/buffalo-university-at.html">University at Buffalo School of Law</a> — New York</li>
-<li><a href="school/akron-the-university-of.html">University of Akron School of Law</a> — Ohio</li>
-<li><a href="school/alabama-the-university-of.html">University of Alabama School of Law</a> — Alabama</li>
-<li><a href="school/arizona-the-university-of.html">University of Arizona School of Law</a> — Arizona</li>
-<li><a href="school/arkansas-at-little-rock-university-of.html">University of Arkansas at Little Rock School of Law</a> — Arkansas</li>
-<li><a href="school/arkansas-university-of.html">University of Arkansas School of Law</a> — Arkansas</li>
-<li><a href="school/baltimore-university-of.html">University of Baltimore School of Law</a> — Maryland</li>
-<li><a href="school/california-davis-university-of.html">University of California-Davis School of Law</a> — California</li>
-<li><a href="school/california-irvine-university-of.html">University of California-Irvine School of Law</a> — California</li>
-<li><a href="school/california-san-francisco-university-of.html">University of California-San Francisco School of Law</a> — California</li>
-<li><a href="school/chicago-the-university-of.html">University of Chicago Law School</a> — Illinois</li>
-<li><a href="school/cincinnati-university-of.html">University of Cincinnati School of Law</a> — Ohio</li>
-<li><a href="school/city-university-of-new-york-university-o.html">University of City University of New York School of Law</a> — New York</li>
-<li><a href="school/colorado-university-of.html">University of Colorado School of Law</a> — Colorado</li>
-<li><a href="school/connecticut-university-of.html">University of Connecticut School of Law</a> — Connecticut</li>
-<li><a href="school/dayton-university-of.html">University of Dayton School of Law</a> — Ohio</li>
-<li><a href="school/denver-university-of.html">University of Denver School of Law</a> — Colorado</li>
-<li><a href="school/detroit-mercy-university-of.html">University of Detroit Mercy School of Law</a> — Michigan</li>
-<li><a href="school/district-of-columbia-university-of.html">University of District of Columbia School of Law</a> — District of Columbia</li>
-<li><a href="school/florida-university-of.html">University of Florida School of Law</a> — Florida</li>
-<li><a href="school/georgia-university-of.html">University of Georgia School of Law</a> — Georgia</li>
-<li><a href="school/hawaii-university-of.html">University of Hawaii School of Law</a> — Hawaii</li>
-<li><a href="school/houston-university-of.html">University of Houston School of Law</a> — Texas</li>
-<li><a href="school/idaho-university-of.html">University of Idaho School of Law</a> — Idaho</li>
-<li><a href="school/illinois-university-of.html">University of Illinois School of Law</a> — Illinois</li>
-<li><a href="school/illinois-chicago-university-of.html">University of Illinois-Chicago School of Law</a> — Illinois</li>
-<li><a href="school/iowa-university-of.html">University of Iowa School of Law</a> — Iowa</li>
-<li><a href="school/kansas-the-university-of.html">University of Kansas School of Law</a> — Kansas</li>
-<li><a href="school/kentucky-university-of.html">University of Kentucky School of Law</a> — Kentucky</li>
-<li><a href="school/louisville-university-of.html">University of Louisville School of Law</a> — Kentucky</li>
-<li><a href="school/maine-university-of.html">University of Maine School of Law</a> — Maine</li>
-<li><a href="school/maryland-university-of.html">University of Maryland School of Law</a> — Maryland</li>
-<li><a href="school/massachusetts-dartmouth-university-of.html">University of Massachusetts/Dartmouth School of Law</a> — Massachusetts</li>
-<li><a href="school/memphis-the-university-of.html">University of Memphis School of Law</a> — Tennessee</li>
-<li><a href="school/miami-university-of.html">University of Miami School of Law</a> — Florida</li>
-<li><a href="school/michigan-university-of.html">University of Michigan Law School</a> — Michigan</li>
-<li><a href="school/minnesota-university-of.html">University of Minnesota School of Law</a> — Minnesota</li>
-<li><a href="school/mississippi-the-university-of.html">University of Mississippi School of Law</a> — Mississippi</li>
-<li><a href="school/missouri-university-of.html">University of Missouri School of Law</a> — Missouri</li>
-<li><a href="school/missouri-kansas-city-university-of.html">University of Missouri-Kansas City School of Law</a> — Missouri</li>
-<li><a href="school/montana-university-of.html">University of Montana School of Law</a> — Montana</li>
-<li><a href="school/nebraska-university-of.html">University of Nebraska School of Law</a> — Nebraska</li>
-<li><a href="school/nevada-las-vegas-university-of.html">University of Nevada-Las Vegas School of Law</a> — Nevada</li>
-<li><a href="school/new-hampshire-university-of.html">University of New Hampshire School of Law</a> — New Hampshire</li>
-<li><a href="school/new-mexico-the-university-of.html">University of New Mexico School of Law</a> — New Mexico</li>
-<li><a href="school/north-carolina-university-of.html">University of North Carolina School of Law</a> — North Carolina</li>
-<li><a href="school/north-dakota-university-of.html">University of North Dakota School of Law</a> — North Dakota</li>
-<li><a href="school/north-texas-at-dallas-university-of.html">University of North Texas at Dallas School of Law</a> — Texas</li>
-<li><a href="school/notre-dame-university-of.html">University of Notre Dame School of Law</a> — Indiana</li>
-<li><a href="school/oklahoma-university-of.html">University of Oklahoma School of Law</a> — Oklahoma</li>
-<li><a href="school/oregon-university-of.html">University of Oregon School of Law</a> — Oregon</li>
-<li><a href="school/pennsylvania-university-of.html">University of Pennsylvania Carey Law School</a> — Pennsylvania</li>
-<li><a href="school/pittsburgh-university-of.html">University of Pittsburgh School of Law</a> — Pennsylvania</li>
-<li><a href="school/puerto-rico-university-of.html">University of Puerto Rico School of Law</a> — Puerto Rico</li>
-<li><a href="school/richmond-university-of.html">University of Richmond School of Law</a> — Virginia</li>
-<li><a href="school/san-diego-university-of.html">University of San Diego School of Law</a> — California</li>
-<li><a href="school/san-francisco-university-of.html">University of San Francisco School of Law</a> — California</li>
-<li><a href="school/south-carolina-university-of.html">University of South Carolina School of Law</a> — South Carolina</li>
-<li><a href="school/south-dakota-university-of.html">University of South Dakota School of Law</a> — South Dakota</li>
-<li><a href="school/southern-california-university-of.html">University of Southern California School of Law</a> — California</li>
-<li><a href="school/tennessee-university-of.html">University of Tennessee School of Law</a> — Tennessee</li>
-<li><a href="school/texas-university-of.html">University of Texas School of Law</a> — Texas</li>
-<li><a href="school/toledo-the-university-of.html">University of Toledo School of Law</a> — Ohio</li>
-<li><a href="school/tulsa-the-university-of.html">University of Tulsa School of Law</a> — Oklahoma</li>
-<li><a href="school/utah-the-university-of.html">University of Utah School of Law</a> — Utah</li>
-<li><a href="school/virginia-university-of.html">University of Virginia School of Law</a> — Virginia</li>
-<li><a href="school/washington-university-of.html">University of Washington School of Law</a> — Washington</li>
-<li><a href="school/wisconsin-university-of.html">University of Wisconsin School of Law</a> — Wisconsin</li>
-<li><a href="school/wyoming-university-of.html">University of Wyoming School of Law</a> — Wyoming</li>
+<li><a href="school/touro-university.html">Touro University School of Law</a>, New York</li>
+<li><a href="school/tulane-university.html">Tulane University School of Law</a>, Louisiana</li>
+<li><a href="school/california-berkeley-university-of.html">UC Berkeley School of Law</a>, California</li>
+<li><a href="school/california-los-angeles-university-of.html">UCLA School of Law</a>, California</li>
+<li><a href="school/buffalo-university-at.html">University at Buffalo School of Law</a>, New York</li>
+<li><a href="school/akron-the-university-of.html">University of Akron School of Law</a>, Ohio</li>
+<li><a href="school/alabama-the-university-of.html">University of Alabama School of Law</a>, Alabama</li>
+<li><a href="school/arizona-the-university-of.html">University of Arizona School of Law</a>, Arizona</li>
+<li><a href="school/arkansas-at-little-rock-university-of.html">University of Arkansas at Little Rock School of Law</a>, Arkansas</li>
+<li><a href="school/arkansas-university-of.html">University of Arkansas School of Law</a>, Arkansas</li>
+<li><a href="school/baltimore-university-of.html">University of Baltimore School of Law</a>, Maryland</li>
+<li><a href="school/california-davis-university-of.html">University of California-Davis School of Law</a>, California</li>
+<li><a href="school/california-irvine-university-of.html">University of California-Irvine School of Law</a>, California</li>
+<li><a href="school/california-san-francisco-university-of.html">University of California-San Francisco School of Law</a>, California</li>
+<li><a href="school/chicago-the-university-of.html">University of Chicago Law School</a>, Illinois</li>
+<li><a href="school/cincinnati-university-of.html">University of Cincinnati School of Law</a>, Ohio</li>
+<li><a href="school/city-university-of-new-york-university-o.html">University of City University of New York School of Law</a>, New York</li>
+<li><a href="school/colorado-university-of.html">University of Colorado School of Law</a>, Colorado</li>
+<li><a href="school/connecticut-university-of.html">University of Connecticut School of Law</a>, Connecticut</li>
+<li><a href="school/dayton-university-of.html">University of Dayton School of Law</a>, Ohio</li>
+<li><a href="school/denver-university-of.html">University of Denver School of Law</a>, Colorado</li>
+<li><a href="school/detroit-mercy-university-of.html">University of Detroit Mercy School of Law</a>, Michigan</li>
+<li><a href="school/district-of-columbia-university-of.html">University of District of Columbia School of Law</a>, District of Columbia</li>
+<li><a href="school/florida-university-of.html">University of Florida School of Law</a>, Florida</li>
+<li><a href="school/georgia-university-of.html">University of Georgia School of Law</a>, Georgia</li>
+<li><a href="school/hawaii-university-of.html">University of Hawaii School of Law</a>, Hawaii</li>
+<li><a href="school/houston-university-of.html">University of Houston School of Law</a>, Texas</li>
+<li><a href="school/idaho-university-of.html">University of Idaho School of Law</a>, Idaho</li>
+<li><a href="school/illinois-university-of.html">University of Illinois School of Law</a>, Illinois</li>
+<li><a href="school/illinois-chicago-university-of.html">University of Illinois-Chicago School of Law</a>, Illinois</li>
+<li><a href="school/iowa-university-of.html">University of Iowa School of Law</a>, Iowa</li>
+<li><a href="school/kansas-the-university-of.html">University of Kansas School of Law</a>, Kansas</li>
+<li><a href="school/kentucky-university-of.html">University of Kentucky School of Law</a>, Kentucky</li>
+<li><a href="school/louisville-university-of.html">University of Louisville School of Law</a>, Kentucky</li>
+<li><a href="school/maine-university-of.html">University of Maine School of Law</a>, Maine</li>
+<li><a href="school/maryland-university-of.html">University of Maryland School of Law</a>, Maryland</li>
+<li><a href="school/massachusetts-dartmouth-university-of.html">University of Massachusetts/Dartmouth School of Law</a>, Massachusetts</li>
+<li><a href="school/memphis-the-university-of.html">University of Memphis School of Law</a>, Tennessee</li>
+<li><a href="school/miami-university-of.html">University of Miami School of Law</a>, Florida</li>
+<li><a href="school/michigan-university-of.html">University of Michigan Law School</a>, Michigan</li>
+<li><a href="school/minnesota-university-of.html">University of Minnesota School of Law</a>, Minnesota</li>
+<li><a href="school/mississippi-the-university-of.html">University of Mississippi School of Law</a>, Mississippi</li>
+<li><a href="school/missouri-university-of.html">University of Missouri School of Law</a>, Missouri</li>
+<li><a href="school/missouri-kansas-city-university-of.html">University of Missouri-Kansas City School of Law</a>, Missouri</li>
+<li><a href="school/montana-university-of.html">University of Montana School of Law</a>, Montana</li>
+<li><a href="school/nebraska-university-of.html">University of Nebraska School of Law</a>, Nebraska</li>
+<li><a href="school/nevada-las-vegas-university-of.html">University of Nevada-Las Vegas School of Law</a>, Nevada</li>
+<li><a href="school/new-hampshire-university-of.html">University of New Hampshire School of Law</a>, New Hampshire</li>
+<li><a href="school/new-mexico-the-university-of.html">University of New Mexico School of Law</a>, New Mexico</li>
+<li><a href="school/north-carolina-university-of.html">University of North Carolina School of Law</a>, North Carolina</li>
+<li><a href="school/north-dakota-university-of.html">University of North Dakota School of Law</a>, North Dakota</li>
+<li><a href="school/north-texas-at-dallas-university-of.html">University of North Texas at Dallas School of Law</a>, Texas</li>
+<li><a href="school/notre-dame-university-of.html">University of Notre Dame School of Law</a>, Indiana</li>
+<li><a href="school/oklahoma-university-of.html">University of Oklahoma School of Law</a>, Oklahoma</li>
+<li><a href="school/oregon-university-of.html">University of Oregon School of Law</a>, Oregon</li>
+<li><a href="school/pennsylvania-university-of.html">University of Pennsylvania Carey Law School</a>, Pennsylvania</li>
+<li><a href="school/pittsburgh-university-of.html">University of Pittsburgh School of Law</a>, Pennsylvania</li>
+<li><a href="school/puerto-rico-university-of.html">University of Puerto Rico School of Law</a>, Puerto Rico</li>
+<li><a href="school/richmond-university-of.html">University of Richmond School of Law</a>, Virginia</li>
+<li><a href="school/san-diego-university-of.html">University of San Diego School of Law</a>, California</li>
+<li><a href="school/san-francisco-university-of.html">University of San Francisco School of Law</a>, California</li>
+<li><a href="school/south-carolina-university-of.html">University of South Carolina School of Law</a>, South Carolina</li>
+<li><a href="school/south-dakota-university-of.html">University of South Dakota School of Law</a>, South Dakota</li>
+<li><a href="school/southern-california-university-of.html">University of Southern California School of Law</a>, California</li>
+<li><a href="school/tennessee-university-of.html">University of Tennessee School of Law</a>, Tennessee</li>
+<li><a href="school/texas-university-of.html">University of Texas School of Law</a>, Texas</li>
+<li><a href="school/toledo-the-university-of.html">University of Toledo School of Law</a>, Ohio</li>
+<li><a href="school/tulsa-the-university-of.html">University of Tulsa School of Law</a>, Oklahoma</li>
+<li><a href="school/utah-the-university-of.html">University of Utah School of Law</a>, Utah</li>
+<li><a href="school/virginia-university-of.html">University of Virginia School of Law</a>, Virginia</li>
+<li><a href="school/washington-university-of.html">University of Washington School of Law</a>, Washington</li>
+<li><a href="school/wisconsin-university-of.html">University of Wisconsin School of Law</a>, Wisconsin</li>
+<li><a href="school/wyoming-university-of.html">University of Wyoming School of Law</a>, Wyoming</li>
 <li><a href="school/valparaiso-university.html">VALPARAISO UNIVERSITY School of Law</a></li>
-<li><a href="school/vanderbilt-university.html">Vanderbilt Law School</a> — Tennessee</li>
-<li><a href="school/vermont-law-school.html">Vermont Law School</a> — Vermont</li>
-<li><a href="school/villanova-university.html">Villanova University School of Law</a> — Pennsylvania</li>
-<li><a href="school/wake-forest-university.html">Wake Forest University School of Law</a> — North Carolina</li>
-<li><a href="school/washburn-university.html">Washburn University School of Law</a> — Kansas</li>
-<li><a href="school/washington-and-lee-university.html">Washington and Lee University School of Law</a> — Virginia</li>
-<li><a href="school/washington-university-st-louis.html">Washington University (St. Louis) School of Law</a> — Missouri</li>
-<li><a href="school/wayne-state-university.html">Wayne State University School of Law</a> — Michigan</li>
-<li><a href="school/west-virginia-university.html">West Virginia University School of Law</a> — West Virginia</li>
-<li><a href="school/western-new-england-university.html">Western New England University School of Law</a> — Massachusetts</li>
-<li><a href="school/western-state-westcliff-university.html">Western State, Westcliff University School of Law</a> — California</li>
+<li><a href="school/vanderbilt-university.html">Vanderbilt Law School</a>, Tennessee</li>
+<li><a href="school/vermont-law-school.html">Vermont Law School</a>, Vermont</li>
+<li><a href="school/villanova-university.html">Villanova University School of Law</a>, Pennsylvania</li>
+<li><a href="school/wake-forest-university.html">Wake Forest University School of Law</a>, North Carolina</li>
+<li><a href="school/washburn-university.html">Washburn University School of Law</a>, Kansas</li>
+<li><a href="school/washington-and-lee-university.html">Washington and Lee University School of Law</a>, Virginia</li>
+<li><a href="school/washington-university-st-louis.html">Washington University (St. Louis) School of Law</a>, Missouri</li>
+<li><a href="school/wayne-state-university.html">Wayne State University School of Law</a>, Michigan</li>
+<li><a href="school/west-virginia-university.html">West Virginia University School of Law</a>, West Virginia</li>
+<li><a href="school/western-new-england-university.html">Western New England University School of Law</a>, Massachusetts</li>
+<li><a href="school/western-state-westcliff-university.html">Western State, Westcliff University School of Law</a>, California</li>
 <li><a href="school/whittier-law-school.html">WHITTIER LAW SCHOOL</a></li>
-<li><a href="school/widener-university-commonwealth-law-scho.html">Widener University Commonwealth Law School</a> — Pennsylvania</li>
-<li><a href="school/widener-university-delaware-law-school.html">Widener University Delaware Law School</a> — Pennsylvania</li>
-<li><a href="school/willamette-university.html">Willamette University School of Law</a> — Oregon</li>
-<li><a href="school/william-mary.html">William &amp; Mary School of Law</a> — Virginia</li>
+<li><a href="school/widener-university-commonwealth-law-scho.html">Widener University Commonwealth Law School</a>, Pennsylvania</li>
+<li><a href="school/widener-university-delaware-law-school.html">Widener University Delaware Law School</a>, Pennsylvania</li>
+<li><a href="school/willamette-university.html">Willamette University School of Law</a>, Oregon</li>
+<li><a href="school/william-mary.html">William &amp; Mary School of Law</a>, Virginia</li>
 <li><a href="school/william-mitchell-college-of-law.html">WILLIAM MITCHELL COLLEGE OF LAW</a></li>
-<li><a href="school/wilmington-university.html">Wilmington University School of Law</a> — Delaware</li>
-<li><a href="school/yale-university.html">Yale Law School</a> — Connecticut</li>
+<li><a href="school/wilmington-university.html">Wilmington University School of Law</a>, Delaware</li>
+<li><a href="school/yale-university.html">Yale Law School</a>, Connecticut</li>
 </ul>
 <!-- SCHOOL_INDEX_END -->
 <p style="margin-top:36px;color:#7AAAC8;font-family:'JetBrains Mono',monospace;font-size:12px;">Built by 509α. Last synced May 31, 2026.</p>
 </div>
 </noscript>
 
-<!-- Organization JSON-LD — declares 509α as the publisher of the dataset. -->
+<!-- Organization JSON-LD, declares 509α as the publisher of the dataset. -->
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Organization","name":"509α","alternateName":"509 alpha","url":"https://exhibit509.com/","logo":"https://exhibit509.com/icon512.png","description":"Independent project that organizes public ABA Standard 509 disclosure data for every U.S. law school into a free, browsable viewer.","founder":{"@type":"Person","name":"Blake Vrechek"},"sameAs":["https://skool.com/509alpha"]}
 </script>
-<!-- FAQ JSON-LD — common questions about methodology. Lifts AI/search answer quality. -->
+<!-- FAQ JSON-LD, common questions about methodology. Lifts AI/search answer quality. -->
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
 {"@type":"Question","name":"How does Exhibit classify Safety / Target / Reach?","acceptedAnswer":{"@type":"Answer","text":"Each school's published 25th and 75th LSAT and uGPA percentiles (the middle 50% of its most recent entering class) form the band. Safety = applicant's stats at or above the 75th on both metrics. Target = inside the middle 50% on both. Reach = below the 25th on at least one. No second weighting, no proprietary score, no soft-factor adjustment."}},
 {"@type":"Question","name":"Where does the data come from?","acceptedAnswer":{"@type":"Answer","text":"Every cell traces back to one of four public sources: ABA Standard 509 Required Disclosures (2011–2025), U.S. BLS OEWS attorney wages (occupation code 23-1011), U.S. BEA Regional Price Parities, and U.S. HUD Small Area FMR. Exhibit is a presentation layer; the authoritative source is the underlying disclosure or government release."}},
-{"@type":"Question","name":"Is Exhibit affiliated with the ABA?","acceptedAnswer":{"@type":"Answer","text":"No. Exhibit is an independent project. It is not affiliated with, associated with, or endorsed by the American Bar Association or any law school. The ABA publishes the source data at abarequireddisclosures.org — Exhibit re-organizes it for easier comparison."}},
+{"@type":"Question","name":"Is Exhibit affiliated with the ABA?","acceptedAnswer":{"@type":"Answer","text":"No. Exhibit is an independent project. It is not affiliated with, associated with, or endorsed by the American Bar Association or any law school. The ABA publishes the source data at abarequireddisclosures.org, Exhibit re-organizes it for easier comparison."}},
 {"@type":"Question","name":"How often is the data refreshed?","acceptedAnswer":{"@type":"Answer","text":"The ABA publishes Standard 509 disclosures once per year, typically between December and February for the prior calendar year. Exhibit re-syncs within the month following each release. The 'Last synced' date in the disclaimer bar always reflects the most recent inline pull."}},
-{"@type":"Question","name":"What does first-time bar pass measure, and why is it offset from the entering class?","acceptedAnswer":{"@type":"Answer","text":"First-time bar pass is the percent of a school's graduates who passed a U.S. state bar exam on their first attempt. Because law school is three years, a school's most recent first-time bar number describes graduates who entered roughly three years earlier — not the most recent entering class shown elsewhere on the same school's page."}}
+{"@type":"Question","name":"What does first-time bar pass measure, and why is it offset from the entering class?","acceptedAnswer":{"@type":"Answer","text":"First-time bar pass is the percent of a school's graduates who passed a U.S. state bar exam on their first attempt. Because law school is three years, a school's most recent first-time bar number describes graduates who entered roughly three years earlier, not the most recent entering class shown elsewhere on the same school's page."}}
 ]}
 </script>
 
@@ -1553,7 +1553,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
 </div>
 <!-- Mobile menu drawer + guide -->
 <div id="mobileMenu" role="dialog" aria-label="Mobile menu"></div>
-<!-- Mobile bottom tab bar — primary IA on phones. Hidden by default; @media(max-width:640px) shows it. -->
+<!-- Mobile bottom tab bar, primary IA on phones. Hidden by default; @media(max-width:640px) shows it. -->
 <nav id="mobileTabBar" role="navigation" aria-label="Mobile primary navigation">
   <button class="mtb-btn on" id="mtbMap" onclick="mtbGo('map')" aria-label="Map">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21 3 6"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg>
@@ -1577,12 +1577,12 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
     More
   </button>
 </nav>
-<!-- Disclaimer bar removed v1.27.2 — provenance now lives in the footer. -->
+<!-- Disclaimer bar removed v1.27.3, provenance now lives in the footer. -->
 <style>:root{--banner-h:0px;}</style>
 
 <div id="cookieBar" style="position:fixed;bottom:0;left:0;right:0;z-index:1000;background:#0B1826;border-top:1px solid rgba(217,119,87,0.4);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;box-shadow:0 -2px 12px rgba(0,0,0,0.5);">
   <div style="font-family:var(--mono);font-size:12px;color:#A9C2D4;letter-spacing:0.3px;line-height:1.5;">
-    🍪 Exhibit sets <strong>no tracking, analytics, or advertising cookies</strong>. Hosting is provided by <strong>Cloudflare Pages</strong>, which may log standard request data (IP, user-agent, URL) and set technical cookies to operate its security + performance layer. Fonts and the Leaflet mapping library are self-hosted (no Google Fonts or cdnjs request). The Site loads OpenStreetMap/Carto basemap tiles — that provider logs basic request data under its own policy. A Service Worker caches the app shell on your device for offline use. Full breakdown: <a href="terms.html" style="color:#D97757;text-decoration:underline;">Cookie &amp; Cache Notice</a>.
+    🍪 Exhibit sets <strong>no tracking, analytics, or advertising cookies</strong>. Hosting is provided by <strong>Cloudflare Pages</strong>, which may log standard request data (IP, user-agent, URL) and set technical cookies to operate its security + performance layer. Fonts and the Leaflet mapping library are self-hosted (no Google Fonts or cdnjs request). The Site loads OpenStreetMap/Carto basemap tiles, that provider logs basic request data under its own policy. A Service Worker caches the app shell on your device for offline use. Full breakdown: <a href="terms.html" style="color:#D97757;text-decoration:underline;">Cookie &amp; Cache Notice</a>.
   </div>
   <button onclick="dismissCookieBar()" style="background:#D97757;border:none;color:#06111E;cursor:pointer;font-size:13px;flex-shrink:0;padding:6px 16px;border-radius:4px;font-family:var(--mono);font-weight:700;letter-spacing:1px;">GOT IT ✕</button>
 </div>
@@ -1617,9 +1617,9 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
         </div>
         <div class="ms-filt-bar">
           <button class="mfb on" data-mf="all" onclick="setMF('all',this)">All</button>
-          <button class="mfb" data-mf="national" onclick="setMF('national',this)" title="National schools — top 14 by LSAT median">National</button>
-          <button class="mfb" data-mf="regional" onclick="setMF('regional',this)" title="Regional schools — LSAT-median rank 15–50">Regional</button>
-          <button class="mfb" data-mf="local" onclick="setMF('local',this)" title="Local schools — LSAT-median rank 51+">Local</button>
+          <button class="mfb" data-mf="national" onclick="setMF('national',this)" title="National schools, top 14 by LSAT median">National</button>
+          <button class="mfb" data-mf="regional" onclick="setMF('regional',this)" title="Regional schools, LSAT-median rank 15–50">Regional</button>
+          <button class="mfb" data-mf="local" onclick="setMF('local',this)" title="Local schools, LSAT-median rank 51+">Local</button>
           <button class="mfb" data-mf="bar90" onclick="setMF('bar90',this)">Bar ≥ 90%</button>
           <button class="mfb" data-mf="lowcost" onclick="setMF('lowcost',this)">Under $35K</button>
           <button class="mfb" data-mf="safety" onclick="setMF('safety',this)">My Safeties</button>
@@ -1643,14 +1643,14 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
         </div>
       </div>
 
-      <!-- Compare CTA — lead with the outcomes/cost comparison (is-it-worth-it),
+      <!-- Compare CTA, lead with the outcomes/cost comparison (is-it-worth-it),
            above the admissions-fit Match Me widget. -->
       <div class="cmp-cta-block" style="margin-top:0;border-top:none;padding-top:0;">
         <div class="fw-title" style="margin-top:0;">Compare the payoff</div>
-        <p class="cmp-cta-desc">Pin up to 4 schools and line them up side-by-side — bar pass, employment, 3-yr net cost, debt-vs-salary, and 15-year trajectory. See which degree actually returns more.</p>
+        <p class="cmp-cta-desc">Pin up to 4 schools and line them up side-by-side, bar pass, employment, 3-yr net cost, debt-vs-salary, and 15-year trajectory. See which degree actually returns more.</p>
         <button class="fw-btn" onclick="openCompareFirstClass()">Open Compare</button>
       </div>
-      <!-- Match Me — admissions fit (secondary to the worth-it framing above) -->
+      <!-- Match Me, admissions fit (secondary to the worth-it framing above) -->
       <div class="find-widget">
         <div class="fw-title">Match Me · Can I get in?</div>
         <div class="fw-inputs">
@@ -1790,14 +1790,14 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
     <div id="spEmpty" style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:calc(100% - 48px);padding:32px 24px;text-align:center;">
       <div style="font-size:32px;margin-bottom:16px;opacity:0.4;">&#128205;</div>
       <div style="font-family:var(--mono);font-size:12px;color:var(--orange);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;">No school selected</div>
-      <div style="font-size:15.5px;color:#94B8CC;font-weight:400;line-height:1.7;margin-bottom:20px;">Click any pin on the map to view that school's data — admissions, tuition, bar passage, employment, and BLS market salary.</div>
+      <div style="font-size:15.5px;color:#94B8CC;font-weight:400;line-height:1.7;margin-bottom:20px;">Click any pin on the map to view that school's data, admissions, tuition, bar passage, employment, and BLS market salary.</div>
       <div style="font-family:var(--mono);font-size:11px;color:var(--dimmer);letter-spacing:1.5px;line-height:1.8;border-top:1px solid rgba(74,122,155,0.15);padding-top:16px;width:100%;text-align:left;">
         <div style="color:var(--dim);margin-bottom:6px;">Quick filters</div>
-        <div style="margin-bottom:4px;">● Green pins — first-time bar at least 90%</div>
-        <div style="margin-bottom:4px;">● Blue pins — first-time bar 75–89%</div>
-        <div style="margin-bottom:4px;">● Amber pins — first-time bar 60–74%</div>
-        <div style="margin-bottom:4px;">● Red pins — first-time bar &lt;60%</div>
-        <div style="margin-bottom:4px;">● Pin size — school enrollment</div>
+        <div style="margin-bottom:4px;">● Green pins, first-time bar at least 90%</div>
+        <div style="margin-bottom:4px;">● Blue pins, first-time bar 75–89%</div>
+        <div style="margin-bottom:4px;">● Amber pins, first-time bar 60–74%</div>
+        <div style="margin-bottom:4px;">● Red pins, first-time bar &lt;60%</div>
+        <div style="margin-bottom:4px;">● Pin size, school enrollment</div>
       </div>
     </div>
     <div class="sp-header" id="spHeader" style="display:none;">
@@ -1808,7 +1808,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
     <div class="sp-body" id="spBody" style="display:none;"></div>
   </div>
 
-  <!-- Map count removed per design — counts live in the methodology/tooltip instead. -->
+  <!-- Map count removed per design, counts live in the methodology/tooltip instead. -->
 
   <!-- Legend -->
   <!-- Map color legend now lives in the left panel (#mlSection). -->
@@ -1900,8 +1900,8 @@ function fmtUSD(v){ return v==null?"—":"$"+v.toLocaleString(); }
 // ═══════════════════════════════════════════════════════════════════════════
 const DATA_INVARIANTS = {
   total_schools: 208,         // 197 active/newly + 11 closed/transitioning (now included as historical entries)
-  schools_inline: 208,        // all inline as of v1.27.2 — closed entries surface their pre-closure history
-  year_count: 15              // 2011–2025 inclusive (15-year span; pre-2018 added in v1.27.2 from Historic + v2 sheets)
+  schools_inline: 208,        // all inline as of v1.27.3, closed entries surface their pre-closure history
+  year_count: 15              // 2011–2025 inclusive (15-year span; pre-2018 added in v1.27.3 from Historic + v2 sheets)
 };
 // Verifiable count of the data cells actually shipped inline on this page:
 // every non-null scalar field, plus every per-year trend entry, across S.
@@ -1970,7 +1970,7 @@ function populateHeaderStats(){
 // ── Lazy-load full dataset (deferred until first deep-dive interaction) ──
 // Callers: `const ext = await loadFullDataset();` parsed JSON, or null on fail.
 // Subsequent calls return the cached object. Concurrent calls share one fetch.
-// Wired in v1.27.2 — schoolDetailHTML calls getSchoolHistory(id) which awaits
+// Wired in v1.27.3 — schoolDetailHTML calls getSchoolHistory(id) which awaits
 // this loader, then renders deep-history charts (employment evolution etc.) into
 // late-paint slots once data is available.
 window.EXT = window.EXT || { data: null, loading: null, byId: null };
@@ -2171,7 +2171,7 @@ function searchTypeaheadKey(e){
   }
 }
 
-// Disclaimer banner is now persistent (per v1.27.2 owner directive) — no dismiss; always visible.
+// Disclaimer banner is now persistent (per v1.27.3 owner directive) — no dismiss; always visible.
 // ── COOKIE notice dismiss (persists via localStorage) ──
 // ── Light/Dark theme toggle (persists via localStorage). Note: many inline styles
 // use literal rgba(4,13,23,...) and won't fully invert — full theming would require
@@ -2275,10 +2275,10 @@ function openMobileMenu(){
     + '</div>'
     + '<div class="mm-section">'
     + '<div class="mm-section-l">Mobile tips</div>'
-    + '<p class="mm-tip"><strong>Tap any pin</strong>Opens the school read-out from the bottom of the screen — pull down or tap outside to close.</p>'
+    + '<p class="mm-tip"><strong>Tap any pin</strong>Opens the school read-out from the bottom of the screen, pull down or tap outside to close.</p>'
     + '<p class="mm-tip"><strong>Compare on the go</strong>Hit "+ Compare" in any school panel. When you have 2–4, return here and tap "My comparison" for the side-by-side table.</p>'
-    + '<p class="mm-tip"><strong>Map color = anything</strong>The legend (bottom-right) is a dropdown — color by FTLT employment, BigLaw %, government, public interest, clerkships, and more.</p>'
-    + '<p class="mm-tip"><strong>Tables scroll sideways</strong>The comparison and net-price tables are full-width on mobile — swipe left/right to see all columns.</p>'
+    + '<p class="mm-tip"><strong>Map color = anything</strong>The legend (bottom-right) is a dropdown, color by FTLT employment, BigLaw %, government, public interest, clerkships, and more.</p>'
+    + '<p class="mm-tip"><strong>Tables scroll sideways</strong>The comparison and net-price tables are full-width on mobile, swipe left/right to see all columns.</p>'
     + '<p class="mm-tip"><strong>Best on a tablet or desktop</strong>The full split layout (map + side panel + comparison + tour) is built for ≥760px screens. Phones get the streamlined version you\'re using now.</p>'
     + '</div>'
     + '<div class="mm-section">'
@@ -2602,7 +2602,7 @@ const FIT_NAME ={safety:'Safety',  target:'Target',   reach:'Reach'};
 const GLOSSARY={
   // Bar
   'First-Time Bar':"Share of this graduating class's first-time bar-exam takers who passed (ABA 509, 2024 grads).",
-  '2-Yr Ultimate':"Share of graduates who passed the bar within two years of graduating (ultimate pass rate) — a separate ABA report.",
+  '2-Yr Ultimate':"Share of graduates who passed the bar within two years of graduating (ultimate pass rate), a separate ABA report.",
   'State Avg Bar':"Average first-time pass rate for all takers in the school's primary jurisdiction.",
   'vs State':"The school's first-time pass rate minus its state average (positive = above state).",
   // Employment
@@ -2610,9 +2610,9 @@ const GLOSSARY={
   'FTLT':"Full-Time, Long-Term. Jobs that last ≥1 year + ≥35 hours/week, measured 10 months after graduation.",
   'MegaLaw 500+':"Law firms with 500+ attorneys. The Vault 100 + AmLaw 100 range. Highest entry salaries.",
   'BigLaw 251–500':"Law firms with 251–500 attorneys. Often regional powerhouses + smaller national firms.",
-  'Mid 101–250':"Mid-market firms — 101–250 attorneys. Strong markets in big cities + state capitals.",
-  'Small 2–100':"Small firms — 2–100 attorneys. The bulk of private practice; widely varied work.",
-  'Solo':"Solo practice — one attorney working alone. Common in family law, criminal defense, immigration, small civil.",
+  'Mid 101–250':"Mid-market firms, 101–250 attorneys. Strong markets in big cities + state capitals.",
+  'Small 2–100':"Small firms, 2–100 attorneys. The bulk of private practice; widely varied work.",
+  'Solo':"Solo practice, one attorney working alone. Common in family law, criminal defense, immigration, small civil.",
   'Federal clerkships':"Clerkships in federal courts (U.S. Supreme Court, Courts of Appeals, District Courts, specialized). Extremely competitive; major prestige + résumé signal.",
   'Clerkships (all)':"Federal + state + administrative-judge clerkships combined.",
   // Cost
@@ -2627,8 +2627,8 @@ const GLOSSARY={
   'Target':"Your stats fall inside the school's middle 50% band on both LSAT and uGPA.",
   'Reach':"Your LSAT or uGPA falls below the school's 25th percentile on at least one metric.",
   // Geo/wages
-  'RPP':"Regional Price Parity (BEA) — how far a dollar goes in that state vs the national average. RPP 100 = U.S. average, 110 = 10% more expensive, 90 = 10% cheaper.",
-  'FMR':"Fair-Market Rent (HUD Small Area FMR) — the rent figure HUD uses for housing-voucher calculations in that state.",
+  'RPP':"Regional Price Parity (BEA), how far a dollar goes in that state vs the national average. RPP 100 = U.S. average, 110 = 10% more expensive, 90 = 10% cheaper.",
+  'FMR':"Fair-Market Rent (HUD Small Area FMR), the rent figure HUD uses for housing-voucher calculations in that state.",
   'BLS mean':"Mean annual wage for attorneys in that state (BLS OEWS 2024, occupation code 23-1011)."
 };
 function gl(label,key){
@@ -2979,7 +2979,7 @@ function spTab(tab, btn){
         const span=yrsAA.length ? yrsAA[0]+'–'+yrsAA[yrsAA.length-1] : '—';
         const appsLine = s.apps_trend
           ? lineChart({years:yrsAA,series:[{vals:s.apps_trend,color:'#FCD34D'}],pinIndex:0,fmt:function(v){return Math.round(v).toLocaleString();},w:300,h:96,label:'Applications'})
-          : '<div class="lc-empty" title="Per-year application history not in the dataset — current cycle only">Applications history not in dataset</div>';
+          : '<div class="lc-empty" title="Per-year application history not in the dataset, current cycle only">Applications history not in dataset</div>';
         return '<div class="sp-section"><div class="sp-sec-label">Applications · Acceptance · Enrollment · '+span+'</div>'+
           '<div class="sp-metric-sub" style="margin:0 0 4px;">Applications received ('+(yrsAA[yrsAA.length-1]||'')+'): <strong style="color:var(--white);">'+(s.apps?s.apps.toLocaleString():'—')+'</strong></div>'+
           appsLine+
@@ -3096,7 +3096,7 @@ function lineChart(opts){
       const a=knownIdx[k], b=knownIdx[k+1];
       if(b-a>1){  // gap of ≥1 missing year between two known
         const va=vals[a], vb=vals[b];
-        svg+='<line x1="'+X(a).toFixed(1)+'" y1="'+Y(va).toFixed(1)+'" x2="'+X(b).toFixed(1)+'" y2="'+Y(vb).toFixed(1)+'" stroke="'+ser.color+'" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="3,3" opacity="0.55"><title>Bridged across missing year(s) — not reported</title></line>';
+        svg+='<line x1="'+X(a).toFixed(1)+'" y1="'+Y(va).toFixed(1)+'" x2="'+X(b).toFixed(1)+'" y2="'+Y(vb).toFixed(1)+'" stroke="'+ser.color+'" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="3,3" opacity="0.55"><title>Bridged across missing year(s), not reported</title></line>';
       }
     }
     // Isolated single points (no connecting segment) dot
@@ -3120,7 +3120,7 @@ function lineChart(opts){
     const pv=years.map(y=>pin.vals?pin.vals[y]:null);
     let li=-1; for(let i=pv.length-1;i>=0;i--){ if(pv[i]!=null){ li=i; break; } }
     if(li>=0){ const v=pv[li], x=X(li), yy=Y(v), last=(li===years.length-1);
-      // Endpoint label placement rule (v1.27.2): if the line is RISING into the
+      // Endpoint label placement rule (v1.27.3): if the line is RISING into the
       // endpoint, drop the label BELOW the marker (clears the ascending line and
       // the top edge it would otherwise clip); if FALLING, lift it ABOVE. Clamp
       // to the chart box so it can never get cut off. The --chart-halo var gives a
@@ -3167,7 +3167,7 @@ function lineChart(opts){
 
 // ── Full school detail page (items 5 & 9): opens in a new tab via #school/<id> ─
 // ── Scholarship distribution ────────────────────────────────────────────────
-// Canonical buckets per owner directive (v1.27.2): student-favorability gradient.
+// Canonical buckets per owner directive (v1.27.3): student-favorability gradient.
 // "No grant" is DERIVED = 100 - (lt + mt + full + gt) — the source's none count is
 // known to be unreliable (negatives, mis-reports); the derivation guarantees the
 // stack sums to 100% and avoids fabricated bad data.
@@ -3187,7 +3187,7 @@ const EMP_BUCKETS=[
 ];
 
 const SCHOL_BUCKETS=[
-  {k:'schol_none_pct', l:'No grant',          c:'#EF5350'}, // RED — derived
+  {k:'schol_none_pct', l:'No grant',          c:'#EF5350'}, // RED, derived
   {k:'schol_lt_pct',   l:'Less than half',    c:'#FFA726'}, // ORANGE
   {k:'schol_mt_pct',   l:'More than half',    c:'#FCD34D'}, // YELLOW (was "Half to full")
   {k:'schol_full_pct', l:'Full tuition',      c:'#4A9B6B'}, // GREEN
@@ -3233,7 +3233,7 @@ function scholAdjusted(s){
   const sumGrants=(s.schol_lt_pct||0)+(s.schol_mt_pct||0)+(s.schol_full_pct||0)+(s.schol_gt_pct||0);
   const derived=Math.max(0, +(100 - sumGrants).toFixed(1));
   const src=+s.schol_none_pct;
-  if(Math.abs(derived - src) < 0.6) return null; // within rounding — not adjusted
+  if(Math.abs(derived - src) < 0.6) return null; // within rounding, not adjusted
   return {src, derived};
 }
 // Small inline "adjusted" badge with the before→after in its tooltip.
@@ -3261,7 +3261,7 @@ function scholStackTime(s){
     }
   }
   const leg=SCHOL_SHORT.map(b=>'<span class="dp-leg-i"><span class="dp-leg-dot" style="background:'+b.c+'"></span>'+b.l+'</span>').join('');
-  const note = ys.length<2 ? '<div class="st-note">Year-over-year history not yet in the dataset — showing '+ys[0]+' only. Full 2018–present distribution pending the per-year grants data (no 2011–2017 exists in the source).</div>' : '';
+  const note = ys.length<2 ? '<div class="st-note">Year-over-year history not yet in the dataset, showing '+ys[0]+' only. Full 2018–present distribution pending the per-year grants data (no 2011–2017 exists in the source).</div>' : '';
   return '<div class="st-wrap" role="img" aria-label="Scholarship distribution by year, % of students by grant size">'+cols+'</div><div class="st-axis">'+axis+'</div><div class="dp-leg">'+leg+'</div>'+note;
 }
 
@@ -3413,7 +3413,7 @@ function yoySection(history){
   if(!panel) return '';
   return '<section class="story-sec"><div class="story-eyebrow"><span class="sx-num">Δ</span>How it changed</div>'
     + '<h2 class="story-title">This school, then &amp; now</h2>'
-    + '<p class="story-lede">Pick any two reporting years to see how every headline metric moved — green is the direction that helps an applicant.</p>'
+    + '<p class="story-lede">Pick any two reporting years to see how every headline metric moved, green is the direction that helps an applicant.</p>'
     + panel + '</section>';
 }
 
@@ -3594,7 +3594,7 @@ function outcomeFunnel(s){
 
 function navSchool(id){
   // HASH ROUTES — safest, work anywhere, no 404.html or server-side rewrites needed.
-  // Reverted from clean /school/<slug> paths in v1.27.2 because GH Pages without a
+  // Reverted from clean /school/<slug> paths in v1.27.3 because GH Pages without a
   // deployed 404.html serves real 404s for any unknown path. When the project moves
   // to a custom domain with rewrites (Netlify _redirects, Vercel rewrites, Cloudflare),
   // flip CLEAN_URLS to true and the deep-link helpers below will re-engage.
@@ -3912,7 +3912,7 @@ function setSchoolSEO(s){
   // the in-app navigation path and continues to work for users.
   const slug = (s.id || '').toLowerCase().replace(/[^a-z0-9-]+/g,'-').replace(/-+/g,'-').replace(/^-+|-+$/g,'');
   const url = SITE_URL + 'school/' + slug + '.html';
-  const desc=s.full+(s.state?' ('+s.state+')':'')+' — ABA 509 data: LSAT median '+(s.lsat50||'n/a')+', acceptance '+(s.acc!=null?s.acc+'%':'n/a')+', first-time bar '+(s.bar!=null?s.bar+'%':'n/a')+', employment '+(s.ftlt_pct!=null?s.ftlt_pct+'%':'n/a')+', tuition '+(s.tui?'$'+s.tui.toLocaleString():'n/a')+'.';
+  const desc=s.full+(s.state?' ('+s.state+')':'')+', ABA 509 data: LSAT median '+(s.lsat50||'n/a')+', acceptance '+(s.acc!=null?s.acc+'%':'n/a')+', first-time bar '+(s.bar!=null?s.bar+'%':'n/a')+', employment '+(s.ftlt_pct!=null?s.ftlt_pct+'%':'n/a')+', tuition '+(s.tui?'$'+s.tui.toLocaleString():'n/a')+'.';
   document.title='Exhibit · '+s.full;
   const set=(id,attr,val)=>{ const el=document.getElementById(id); if(el) el.setAttribute(attr,val); };
   set('metaDesc','content',desc); set('ogDesc','content',desc);
@@ -3935,11 +3935,11 @@ function setSchoolSEO(s){
   });
 }
 function resetSEO(){
-  document.title='Exhibit — Law School Data · by 509α';
+  document.title='Exhibit: Law School Data · by 509α';
   const home=SITE_URL, baseDesc='Free, organized ABA 509 data for every U.S. law school: admissions, bar passage, employment, cost, and local salary context.';
   const set=(id,attr,val)=>{ const el=document.getElementById(id); if(el) el.setAttribute(attr,val); };
   set('linkCanonical','href',home); set('ogUrl','content',home);
-  set('ogTitle','content','Exhibit — Law School Data by 509α');
+  set('ogTitle','content','Exhibit: Law School Data by 509α');
   set('metaDesc','content',baseDesc); set('ogDesc','content',baseDesc);
   const ld=document.getElementById('ldSchool'); if(ld) ld.textContent='';
 }
@@ -4096,7 +4096,7 @@ function schoolDetailHTML(s){
   const accYrs=(()=>{ const out=[]; const lastY=yrs.length?+yrs[yrs.length-1]:2025; for(let y=2016;y<=lastY;y++) out.push(String(y)); return out; })();
   const accChart =lineChart({years:accYrs,series:[{vals:s.acc_trend,color:'#EF5350'}],pinIndex:0,fmt:v=>v.toFixed(1)+'%',label:'Acceptance rate'});
   const tuiChart =lineChart({years:yrs,series:[{vals:s.tui_trend,color:'#FFA726'}],pinIndex:0,fmt:v=>'$'+Math.round(v/1000)+'K',label:'Tuition'});
-  const barChart =lineChart({years:yrs,series:[{vals:s.bar_trend,color:'#4A9B6B'},{vals:s.bar_2yr_trend,color:'#5AABCB'}],pinIndex:0,fmt:v=>v.toFixed(1)+'%',label:'Bar passage — first-time & 2-yr ultimate'});
+  const barChart =lineChart({years:yrs,series:[{vals:s.bar_trend,color:'#4A9B6B'},{vals:s.bar_2yr_trend,color:'#5AABCB'}],pinIndex:0,fmt:v=>v.toFixed(1)+'%',label:'Bar passage, first-time & 2-yr ultimate'});
   const enrChart =lineChart({years:yrs,series:[{vals:s.enr_trend,color:'#A78BFA'}],pinIndex:0,fmt:v=>Math.round(v).toLocaleString(),label:'Enrollment'});
   const gpaChart =lineChart({years:yrs,series:[{vals:s.gpa_trend,color:'#9BD1E8'}],pinIndex:0,fmt:v=>Number(v).toFixed(2),label:'uGPA median'});
   const appsChart=lineChart({years:yrs,series:[{vals:s.apps_trend,color:'#A4C8DD'},{vals:s.offers_trend,color:'#5AABCB'}],pinIndex:0,fmt:v=>Math.round(v).toLocaleString(),label:'Applications & offers'});
@@ -4113,9 +4113,9 @@ function schoolDetailHTML(s){
   const _mult=(s.tui!=null&&s.grant_med!=null&&s.bls_mean)?(((s.tui-s.grant_med)*3)/s.bls_mean).toFixed(2):null;
   const _beG=s.tui?Math.round(((s.tui*3)*1.07)/72000*2):null;
   const _beB=s.tui?Math.round(((s.tui*3)*1.07)/225000*2):null;
-  const ledeCost = s.tui ? ('Three years of sticker tuition come to <strong>'+usd(s.tui*3)+'</strong>.'+(s.grant_med!=null?' After the median grant the net is about <strong>'+usd(_net)+'/yr</strong> — <strong>'+usd(_net*3)+'</strong> across the JD.':'')) : 'Current-cycle cost figures are limited for this school.';
+  const ledeCost = s.tui ? ('Three years of sticker tuition come to <strong>'+usd(s.tui*3)+'</strong>.'+(s.grant_med!=null?' After the median grant the net is about <strong>'+usd(_net)+'/yr</strong>, <strong>'+usd(_net*3)+'</strong> across the JD.':'')) : 'Current-cycle cost figures are limited for this school.';
   const ledeOut = (s.bar!=null||s.ftlt_pct!=null) ? ('<strong>'+(s.bar!=null?s.bar+'%':'—')+'</strong> pass the bar first-time'+(s.ftlt_pct!=null?(' and <strong>'+s.ftlt_pct.toFixed(1)+'%</strong> land full-time, long-term JD-required jobs'):'')+'.') : 'Outcome reporting is limited for this school.';
-  const ledeMath = _mult ? ('That net debt is about <strong>'+_mult+'×</strong> a typical '+(meanV?usd(meanV):'')+' attorney wage in '+(s.state||'this state')+(_beB&&_beG?' — roughly <strong>'+_beB+'–'+_beG+' years</strong> to break even depending on the job you land':'')+'.') : 'Weigh the net cost against the local legal market below.';
+  const ledeMath = _mult ? ('That net debt is about <strong>'+_mult+'×</strong> a typical '+(meanV?usd(meanV):'')+' attorney wage in '+(s.state||'this state')+(_beB&&_beG?', roughly <strong>'+_beB+'–'+_beG+' years</strong> to break even depending on the job you land':'')+'.') : 'Weigh the net cost against the local legal market below.';
   const ledeAdm = 'The middle-50% admit posts an LSAT of <strong>'+(s.lsat25!=null?s.lsat25:'—')+'–'+(s.lsat75!=null?s.lsat75:'—')+'</strong> and a GPA of <strong>'+(s.gpa25!=null?Number(s.gpa25).toFixed(2):'—')+'–'+(s.gpa75!=null?Number(s.gpa75).toFixed(2):'—')+'</strong>'+(s.acc!=null?', and <strong>'+s.acc+'%</strong> of applicants get an offer':'')+'.';
   const ledeCohort = 'A class of <strong>'+num(s.enr)+'</strong> students'+(s.fac_total!=null?', taught by <strong>'+num(s.fac_total)+'</strong> faculty members':'')+'.';
   return '<div class="dp-topbar"><a class="dp-back" href="#" onclick="exitSchoolPage();return false;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>Back to Exhibit</a>'+
@@ -4124,7 +4124,7 @@ function schoolDetailHTML(s){
       '<button class="dp-act" onclick="printSchool()" title="Print or save this page as PDF">Print / PDF</button>'+
     '</span></div>'+
     '<div class="dp-name">'+s.full+'</div>'+
-    (s.closed_status?'<div style="font-family:var(--mono);font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:#FFA726;margin:6px 0 12px;border:1px solid rgba(255,167,38,0.4);padding:6px 12px;display:inline-block;">'+s.closed_status+' — historical data shown</div>':'')+
+    (s.closed_status?'<div style="font-family:var(--mono);font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:#FFA726;margin:6px 0 12px;border:1px solid rgba(255,167,38,0.4);padding:6px 12px;display:inline-block;">'+s.closed_status+', historical data shown</div>':'')+
     '<div class="dp-loc">'+(s.state||'—')+(s.school_type?' · '+s.school_type:'')+' · ABA 509 · Last synced May 31, 2026 (2025 cycle) · <a href="methodology.html" style="color:var(--blue);text-decoration:none;border-bottom:1px dotted rgba(90,171,203,0.5);">Methodology</a></div>'+
     // Dense at-a-glance snapshot: every section's headline metric, its 5-yr
     // trajectory, and a full-history sparkline. Tiles jump to the detail below.
@@ -4169,8 +4169,8 @@ function schoolDetailHTML(s){
           '<div class="dp-chart-t">Employment mix at a glance</div>'+dpStackBar(s,empBuckets)+
           '<div id="emp-evo-slot"></div>'+
           (s.place_top3?'<div class="dp-chart-t">Top destination states</div>'+placementGeo(s):'')+
-          '<div class="callout" style="margin-top:14px;"><div class="callout-eye">How to read this</div><p class="callout-p"><strong>Counts</strong> are estimated from each % times graduates. The <strong>vs natl</strong> badge compares this school to the all-school average — green = better for the applicant (more BigLaw and clerkships, less seeking; the seeking row inverts).</p></div>'+
-          '<div style="font-family:var(--mono);font-size:11px;color:var(--dimmer);line-height:1.5;margin:8px 0 2px;">First-time bar reflects 2024 graduates (entered ~2021); the admissions section describes the fall-2024 entering class — a different cohort.</div>'+
+          '<div class="callout" style="margin-top:14px;"><div class="callout-eye">How to read this</div><p class="callout-p"><strong>Counts</strong> are estimated from each % times graduates. The <strong>vs natl</strong> badge compares this school to the all-school average, green = better for the applicant (more BigLaw and clerkships, less seeking; the seeking row inverts).</p></div>'+
+          '<div style="font-family:var(--mono);font-size:11px;color:var(--dimmer);line-height:1.5;margin:8px 0 2px;">First-time bar reflects 2024 graduates (entered ~2021); the admissions section describes the fall-2024 entering class, a different cohort.</div>'+
         '</div>'
       )+
       sec('math','3','The math','Does the investment pay off?', ledeMath,
@@ -4234,7 +4234,7 @@ function schoolDetailHTML(s){
         )
       )+
     '</div>'+
-    '<p style="font-family:var(--mono);font-size:12px;color:var(--dimmer);margin-top:24px;line-height:1.6;">Sourced from ABA Standard 509 disclosures (2025), BLS OEWS (2024), BEA RPP (2024), HUD SAFMR (2025). Concept site — verify all figures before use. Full 15-year history available at 509α.</p>';
+    '<p style="font-family:var(--mono);font-size:12px;color:var(--dimmer);margin-top:24px;line-height:1.6;">Sourced from ABA Standard 509 disclosures (2025), BLS OEWS (2024), BEA RPP (2024), HUD SAFMR (2025). Concept site, verify all figures before use. Full 15-year history available at 509α.</p>';
 }
 function renderSchoolPage(id){
   const s=S.find(x=>x.id===id);
@@ -4268,7 +4268,7 @@ async function paintEmpEvolution(s){
     const cols = histStackCols(hist, EMP_BUCKETS, {aria:'Employment mix composition by year'});
     if(cols){
       slot.innerHTML = '<div class="dp-chart-t">Employment mix · historic share by year</div>'
-        + '<div style="font-family:var(--mono);font-size:11px;color:var(--dimmer);margin-bottom:6px;">% of reported sector employment by year — columns normalise to 100%. Live ABA 509 history.</div>'
+        + '<div style="font-family:var(--mono);font-size:11px;color:var(--dimmer);margin-bottom:6px;">% of reported sector employment by year, columns normalise to 100%. Live ABA 509 history.</div>'
         + cols;
     } else { slot.remove(); }
   }
@@ -4419,7 +4419,7 @@ function applyMatchHash(){
 function copyMatchLink(){
   const url = location.origin + location.pathname + (location.hash || '');
   if(navigator.clipboard && navigator.clipboard.writeText){
-    navigator.clipboard.writeText(url).then(()=>toast('Match link copied — your safety/target/reach travels with it'));
+    navigator.clipboard.writeText(url).then(()=>toast('Match link copied, your safety/target/reach travels with it'));
   } else { prompt('Copy this link:', url); }
 }
 function shareMatchTo(platform){
@@ -4428,12 +4428,12 @@ function shareMatchTo(platform){
   const safN = r.filter(s=>s.fit==='safety').length;
   const tarN = r.filter(s=>s.fit==='target').length;
   const reaN = r.filter(s=>s.fit==='reach').length;
-  const text = 'My law school shortlist by the numbers: '+safN+' safety, '+tarN+' target, '+reaN+' reach — generated free at Exhibit (ABA 509 data, every school).';
+  const text = 'My law school shortlist by the numbers: '+safN+' safety, '+tarN+' target, '+reaN+' reach, generated free at Exhibit (ABA 509 data, every school).';
   if(platform==='twitter'){ window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(text)+'&url='+encodeURIComponent(url),'_blank','noopener'); return; }
   if(platform==='linkedin'){
     const synopsis = text+'\n\n'+url+'\n\nEnter your LSAT/uGPA on the left see every accredited US law school bucketed against your stats.';
     if(navigator.clipboard && navigator.clipboard.writeText){
-      navigator.clipboard.writeText(synopsis).then(()=>{ toast('Synopsis copied — paste into LinkedIn (⌘/Ctrl + V)'); window.open('https://www.linkedin.com/feed/?shareActive=true&mini=true','_blank','noopener'); });
+      navigator.clipboard.writeText(synopsis).then(()=>{ toast('Synopsis copied, paste into LinkedIn (⌘/Ctrl + V)'); window.open('https://www.linkedin.com/feed/?shareActive=true&mini=true','_blank','noopener'); });
     } else { prompt('Copy this synopsis:', synopsis); window.open('https://www.linkedin.com/feed/?shareActive=true&mini=true','_blank','noopener'); }
     return;
   }
@@ -4482,7 +4482,7 @@ function openModal(id){
     '</div>';})();
   document.getElementById('mTrend').innerHTML=
     '<div class="mt-title">Historical Data · Available at 509α · 2011–2025</div>'+
-    '<div style="font-size:14px;color:#4A7A9B;font-weight:300;line-height:1.6;">The full 15-year trend dataset — LSAT medians, tuition, bar passage, enrollment, and employment for every year — is available free inside the 509α community. This concept site shows the most recent year.</div>'+
+    '<div style="font-size:14px;color:#4A7A9B;font-weight:300;line-height:1.6;">The full 15-year trend dataset, LSAT medians, tuition, bar passage, enrollment, and employment for every year, is available free inside the 509α community. This concept site shows the most recent year.</div>'+
     '<a href="https://skool.com/509alpha" target="_blank" style="display:inline-block;margin-top:12px;background:var(--od);color:var(--white);padding:9px 20px;font-family:var(--mono);font-size:12px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;">Get Full Dataset at 509<span class="brand-alpha">α</span></a>';
   document.getElementById('modalOverlay').classList.add('open');
 }
@@ -4764,11 +4764,11 @@ function renderCalc(){
   // Bimodal infographic FIRST — sets context for what the numbers mean before the title.
   vi.innerHTML = bimodalInfographic()
     +'<div class="view-title">Net price</div>'
-    +'<p class="view-sub">Your stats, your home state, what you\'d borrow. We estimate the scholarship you\'d likely get at each school, build a 3-yr cost-of-attendance, and add the real cost of your loans after interest. <strong>Concept tool — verify before deciding.</strong></p>'
+    +'<p class="view-sub">Your stats, your home state, what you\'d borrow. We estimate the scholarship you\'d likely get at each school, build a 3-yr cost-of-attendance, and add the real cost of your loans after interest. <strong>Concept tool, verify before deciding.</strong></p>'
     +'<div class="callout note">'
     +'  <div class="callout-eye">New federal loan limits · Effective July 1, 2026</div>'
-    +'  <p class="callout-p">The <strong>One Big Beautiful Bill Act</strong> eliminates the federal <strong>Grad PLUS</strong> program for new borrowers and caps how much you can borrow from the government. Starting <strong>July 1, 2026</strong>, professional students — including <strong>JD / law</strong> — can borrow up to <strong>$50,000 per year</strong> with a <strong>$200,000</strong> lifetime cap. Other graduate students (e.g. LLM, SJD) are capped at <strong>$20,500 per year</strong> ($100,000 lifetime). If you already hold a Grad PLUS loan before <strong>June 30, 2026</strong>, you may keep borrowing until your program ends (or three academic years, whichever comes first).</p>'
-    +'  <p class="callout-p">Previously, Grad PLUS let you borrow up to the full cost of attendance with <em>no annual or aggregate cap</em>. Under the new caps, any cost above these federal limits has to come from <strong>private loans</strong> (typically at higher rates) — so the &ldquo;Loan 2 · Private&rdquo; line below matters more than it used to. Full federal summary: <a href="https://www.ed.gov/about/news/press-release/fact-sheet-trump-administration-making-college-more-affordable" target="_blank" rel="noopener" style="color:var(--orange);text-decoration:underline;">U.S. Department of Education fact sheet &rarr;</a></p>'
+    +'  <p class="callout-p">The <strong>One Big Beautiful Bill Act</strong> eliminates the federal <strong>Grad PLUS</strong> program for new borrowers and caps how much you can borrow from the government. Starting <strong>July 1, 2026</strong>, professional students, including <strong>JD / law</strong>, can borrow up to <strong>$50,000 per year</strong> with a <strong>$200,000</strong> lifetime cap. Other graduate students (e.g. LLM, SJD) are capped at <strong>$20,500 per year</strong> ($100,000 lifetime). If you already hold a Grad PLUS loan before <strong>June 30, 2026</strong>, you may keep borrowing until your program ends (or three academic years, whichever comes first).</p>'
+    +'  <p class="callout-p">Previously, Grad PLUS let you borrow up to the full cost of attendance with <em>no annual or aggregate cap</em>. Under the new caps, any cost above these federal limits has to come from <strong>private loans</strong> (typically at higher rates), so the &ldquo;Loan 2 · Private&rdquo; line below matters more than it used to. Full federal summary: <a href="https://www.ed.gov/about/news/press-release/fact-sheet-trump-administration-making-college-more-affordable" target="_blank" rel="noopener" style="color:var(--orange);text-decoration:underline;">U.S. Department of Education fact sheet &rarr;</a></p>'
     +'</div>'
     +'<div class="calc-inputs">'
     +' <div class="calc-fieldsets">'
@@ -4776,7 +4776,7 @@ function renderCalc(){
     +'    <div class="calc-row"><label for="calcLSAT">LSAT</label><input class="calc-inp" id="calcLSAT" type="number" placeholder="155" value="'+prev.lsat+'" oninput="renderCalcResults()" onwheel="this.blur()"></div>'
     +'    <div class="calc-row"><label for="calcGPA">uGPA</label><input class="calc-inp" id="calcGPA" type="number" step="0.01" placeholder="3.40" value="'+prev.gpa+'" oninput="renderCalcResults()" onwheel="this.blur()"></div>'
     +'    <div class="calc-row"><label for="calcState">In-state</label><select class="p-filt" style="font-size:15px;padding:9px 30px 9px 13px;width:100%;" id="calcState" onchange="renderCalcResults()">'
-    +     '<option value="">— Out-of-state everywhere —</option>'
+    +     '<option value="">Out-of-state everywhere</option>'
     +     states.map(st=>'<option value="'+st+'"'+(st===prev.state?' selected':'')+'>'+st+'</option>').join('')
     +    '</select></div>'
     +'  </div>'
@@ -4812,10 +4812,10 @@ function renderCalc(){
     +' <th class="calc-total">Net price</th>'
     +'</tr></thead><tbody id="calcRows"></tbody></table></div>'
     +'<div class="calc-note">'
-    +' <strong>How "Est. grant" is estimated:</strong> if your LSAT and uGPA are both ≥ the school\'s 75th percentile (Safety), we use grant_p75. If both are ≥ 25th (Target), we use the median grant. Otherwise (Reach) we use grant_p25. Rough — actual offers vary hugely by cycle, essays, demographics, and yield.<br>'
-    +' <strong>"3-yr net" = 3 × (sticker − est. grant)</strong>, ignoring fees and cost of living. <strong>"Loan interest"</strong> assumes the per-year borrow amount × 3 funds the program; payment uses standard fixed amortization at your stated rate over your stated term. <strong>"Net price"</strong> = 3-yr net tuition + 3-yr living + total loan interest — your all-in cost: the price of the degree, the cost of living while you earn it, and the cost of financing it.<br>'
+    +' <strong>How "Est. grant" is estimated:</strong> if your LSAT and uGPA are both ≥ the school\'s 75th percentile (Safety), we use grant_p75. If both are ≥ 25th (Target), we use the median grant. Otherwise (Reach) we use grant_p25. Rough, actual offers vary hugely by cycle, essays, demographics, and yield.<br>'
+    +' <strong>"3-yr net" = 3 × (sticker − est. grant)</strong>, ignoring fees and cost of living. <strong>"Loan interest"</strong> assumes the per-year borrow amount × 3 funds the program; payment uses standard fixed amortization at your stated rate over your stated term. <strong>"Net price"</strong> = 3-yr net tuition + 3-yr living + total loan interest, your all-in cost: the price of the degree, the cost of living while you earn it, and the cost of financing it.<br>'
     +' Sticker is <strong>resident</strong> when your home state matches the school\'s state, otherwise non-resident (if reported).<br>'
-    +' Loan math is illustrative — confirm current Grad PLUS and private rates before deciding. School figures sourced from ABA 509, last synced May 2026.'
+    +' Loan math is illustrative, confirm current Grad PLUS and private rates before deciding. School figures sourced from ABA 509, last synced May 2026.'
     +'</div>';
   renderCalcResults();
 }
@@ -4894,7 +4894,7 @@ function renderCalcResults(){
       +'<td class="calc-total"><strong>'+fmt$(r.total)+'</strong></td>'
       +'</tr>';
   }).join('');
-  document.getElementById('calcRows').innerHTML = html || '<tr><td colspan="9" style="padding:24px;text-align:center;color:var(--dimmer);">No schools to score — enter your stats above.</td></tr>';
+  document.getElementById('calcRows').innerHTML = html || '<tr><td colspan="9" style="padding:24px;text-align:center;color:var(--dimmer);">No schools to score, enter your stats above.</td></tr>';
 }
 
 // ── Bimodal salary infographic (NALP-style new-lawyer salary distribution) ──
@@ -4976,7 +4976,7 @@ function bimodalInfographic(){
        + annot;
   return '<div class="bimodal-wrap">'
     + '<div class="bimodal-h">The bimodal lawyer salary curve</div>'
-    + '<p class="bimodal-p">Starting salaries for new lawyers are <strong>bimodal</strong>: there are two peaks, with very few jobs between them. Most new lawyers land in the <strong style="color:#FCD34D">small-firm / government / public-interest peak around $70K</strong>, OR in the <strong style="color:#4A9B6B">BigLaw lockstep peak around $215K</strong>. Almost no one earns $100K–$180K right out of school. This is why <em>your monthly loan payment matters so much more than total debt</em> — your odds of being able to service it depend on which peak you land on, not on the average.</p>'
+    + '<p class="bimodal-p">Starting salaries for new lawyers are <strong>bimodal</strong>: there are two peaks, with very few jobs between them. Most new lawyers land in the <strong style="color:#FCD34D">small-firm / government / public-interest peak around $70K</strong>, OR in the <strong style="color:#4A9B6B">BigLaw lockstep peak around $215K</strong>. Almost no one earns $100K–$180K right out of school. This is why <em>your monthly loan payment matters so much more than total debt</em>, your odds of being able to service it depend on which peak you land on, not on the average.</p>'
     + '<svg class="bimodal-svg" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Bimodal distribution of new-lawyer salaries with peaks at ~$70K and ~$215K and a trough in between">'+bars+'</svg>'
     + '<div class="bimodal-foot">Illustrative shape, based on NALP "Class of …" curves. Look up the current-year report for exact numbers.</div>'
     + '</div>';
@@ -5001,9 +5001,9 @@ function renderTransfers(){
     +'<p class="view-sub">Where 1L transfers go (left) and arrive (right). <strong>six or more</strong> to appear; <strong>twelve or more</strong> surfaces median incoming GPA.</p>'
     +'<div class="callout insight">'
     +'  <div class="callout-eye">Strategy · How transfers work</div>'
-    +'  <p class="callout-p">The 1L transfer market is a one-shot rerank — you finish your first year somewhere, and if you crush it, you can move up the prestige ladder for years 2 and 3. <strong>The strategy:</strong> enroll where you can graduate top of class (think top 10% at minimum, top 5% at peer schools), then transfer up.</p>'
+    +'  <p class="callout-p">The 1L transfer market is a one-shot rerank, you finish your first year somewhere, and if you crush it, you can move up the prestige ladder for years 2 and 3. <strong>The strategy:</strong> enroll where you can graduate top of class (think top 10% at minimum, top 5% at peer schools), then transfer up.</p>'
     +'  <p class="callout-p"><strong>The trade-offs:</strong> you lose your 1L scholarship, you arrive without 1L friendships or summer-job leverage, and most BigLaw recruiting is keyed to the original 1L school.</p>'
-    +'  <p class="callout-p"><strong>The data below</strong> shows which schools systematically feed (left) vs absorb (right) — useful for both spotting underrated 1L launchpads and seeing which top schools are actually accessible via transfer. ABA 509 publishes only the aggregates; school-to-school flow is not disclosed.</p>'
+    +'  <p class="callout-p"><strong>The data below</strong> shows which schools systematically feed (left) vs absorb (right), useful for both spotting underrated 1L launchpads and seeing which top schools are actually accessible via transfer. ABA 509 publishes only the aggregates; school-to-school flow is not disclosed.</p>'
     +'</div>'
     +'<div class="tr-controls"><span class="tr-yr-label">Year:</span>'
     +'<select class="p-filt" id="trYear" onchange="renderTransfersList()">'
@@ -5017,7 +5017,7 @@ function renderTransfers(){
     +'<div class="tr-note">'
     +'〜 The mini line on each row is that school\'s <strong>full-history transfer trend</strong> (earliest reported year latest); a dashed segment marks years the school didn\'t report.<br>'
     +'★ Schools accepting <strong>twelve or more transfers</strong> show the <em>median GPA of incoming transfers</em> (from the ABA 509 disclosure).<br>'
-    +'⚠ <strong>School-to-school flow is NOT disclosed by the ABA</strong> — the 509 reports only publish each school\'s aggregate count of transfers in and out, not which school each transfer came from or went to. We cannot show "where they went / came from" without that data.'
+    +'⚠ <strong>School-to-school flow is NOT disclosed by the ABA</strong>, the 509 reports only publish each school\'s aggregate count of transfers in and out, not which school each transfer came from or went to. We cannot show "where they went / came from" without that data.'
     +'</div>';
   renderTransfersList();
 }
@@ -5178,7 +5178,7 @@ function updateMapStats(){
     const chips=activeMapFilters();
     filtEl.innerHTML = chips.length
       ? 'Filtered by '+chips.map(c=>'<span class="ms-filt-chip">'+c+'</span>').join('')
-      : '<span class="ms-filt-none">No filters — showing all schools with map coordinates</span>';
+      : '<span class="ms-filt-none">No filters, showing all schools with map coordinates</span>';
   }
   const max=Math.max(1,...counts,na);
   let rows=cfg.tiers.map((t,i)=>ms_row(t.c,t.l,counts[i],max)).join('');
@@ -5218,7 +5218,7 @@ function cmpHintInject(){
   const inCmp=(typeof inCompare==='function' && id && inCompare(id));
   const addBtn=id?'<button class="cmp-hint-btn'+(inCmp?' on':'')+'" data-id="'+id+'" onclick="cmpHintAdd(this)">'+(inCmp?'✓ Added':'+ Add this school')+'</button>':'';
   const html='<div class="cmp-hint"><span class="cmp-hint-ico">💡</span>'
-    +'<div class="cmp-hint-body"><strong>Did you know?</strong> You can line schools up side-by-side. Pin up to 4 — from any map pin, school card, or right here — then open <em>Compare</em> for charts, trends, and a metric-by-metric readout.</div>'
+    +'<div class="cmp-hint-body"><strong>Did you know?</strong> You can line schools up side-by-side. Pin up to 4, from any map pin, school card, or right here, then open <em>Compare</em> for charts, trends, and a metric-by-metric readout.</div>'
     +addBtn
     +'<button class="cmp-hint-open" onclick="openCompareFirstClass()">Open Compare</button>'
     +'<button class="cmp-hint-x" aria-label="Dismiss tip" onclick="cmpHintDismiss(this)">✕</button></div>';
@@ -5257,12 +5257,12 @@ function startTour(){
   const steps = [
     {
       title:'Welcome to Exhibit',
-      body:'A free, honest dashboard for every ABA-accredited US law school — 15 years of data, 208 schools, no account, no rankings. Let us show you around in 60 seconds.',
+      body:'A free, honest dashboard for every ABA-accredited US law school, 15 years of data, 208 schools, no account, no rankings. Let us show you around in 60 seconds.',
       pos:'center'
     },
     {
       title:'Color the map by what matters',
-      body:'In the left panel, pick up to 3 layers — FTLT employment, BigLaw %, public interest, clerkships, government, 14 in all. The first colors the pins; click any active layer to promote it. Hover a pin to see all three.',
+      body:'In the left panel, pick up to 3 layers, FTLT employment, BigLaw %, public interest, clerkships, government, 14 in all. The first colors the pins; click any active layer to promote it. Hover a pin to see all three.',
       target:'#mlSection', pos:'right'
     },
     {
@@ -5272,7 +5272,7 @@ function startTour(){
     },
     {
       title:'The school read-out',
-      body:'Click any pin to open this panel — admissions distributions, scholarship mix, bar pass, employment outcomes, and a 15-year trajectory for each. The "+ Compare" button adds a school to your shortlist.',
+      body:'Click any pin to open this panel, admissions distributions, scholarship mix, bar pass, employment outcomes, and a 15-year trajectory for each. The "+ Compare" button adds a school to your shortlist.',
       target:'#schoolPanel', pos:'left',
       before:()=>{ if(sampleSchool && typeof openSP==='function'){ try{ openSP(sampleSchool); }catch(e){} } }
     },
@@ -5289,17 +5289,17 @@ function startTour(){
     },
     {
       title:'Compare up to 4',
-      body:'Add 2–4 schools (the + Compare button in any side panel or profile card). When this tray is full, click "Compare N" for a side-by-side metric table — with a copyable share link.',
+      body:'Add 2–4 schools (the + Compare button in any side panel or profile card). When this tray is full, click "Compare N" for a side-by-side metric table, with a copyable share link.',
       target:'#compareTray', pos:'top', mustExist:true
     },
     {
       title:'Share the project',
-      body:'Found it useful? The share button posts to Twitter/X, Reddit, LinkedIn, Facebook, WhatsApp, Telegram, Bluesky, email — or just copies the link.',
+      body:'Found it useful? The share button posts to Twitter/X, Reddit, LinkedIn, Facebook, WhatsApp, Telegram, Bluesky, email, or just copies the link.',
       target:'#shareWidget', pos:'top'
     },
     {
       title:'Light / dark mode',
-      body:'Top-right corner — toggle the theme any time. Your preference is remembered.',
+      body:'Top-right corner, toggle the theme any time. Your preference is remembered.',
       target:'#themeToggle', pos:'bottom'
     },
     {
@@ -5412,10 +5412,10 @@ function relaunchTour(){
 })();
 // ── Share widget — major social platforms + Reddit + email + copy link ──
 const SHARE_URL = 'https://exhibit509.com/';
-const SHARE_TITLE = 'Exhibit — free ABA 509 law school data, 15 years, every accredited school. The evidence on every school.';
+const SHARE_TITLE = 'Exhibit: free ABA 509 law school data, 15 years, every accredited school. The evidence on every school.';
 // Ready-to-post LinkedIn synopsis. URL is embedded so the post still links out
 // even when LinkedIn's preview-card scraper fails (data-URI og:image issue).
-const SHARE_SYNOPSIS_LINKEDIN = "Just found Exhibit by 509α — a free, public dashboard of every ABA-accredited US law school.\n\n15 years of ABA Standard 509 disclosure data (2011–2025) for 208 schools, organized so the answers prospective students actually need are one click away:\n\n• Admissions distributions — LSAT/uGPA 25/50/75, acceptance rates, Safety / Target / Reach bucketing\n• Cost — sticker tuition, scholarship distribution, 3-yr net total, a real loan calculator\n• Outcomes — first-time bar pass, FTLT employment, BigLaw share, public interest, clerkships, top destination states\n• Side-by-side comparison of up to 4 schools\n• 15-year trajectory on every metric — because a school whose bar pass dropped 10 pts in 5 years is telling you something\n\nThe data has always been public. Exhibit just makes it browsable instead of trapped in hundreds of one-school-one-year PDFs.\n\nNo account, no rankings sold, no tracking. " + SHARE_URL;
+const SHARE_SYNOPSIS_LINKEDIN = "Just found Exhibit by 509α, a free, public dashboard of every ABA-accredited US law school.\n\n15 years of ABA Standard 509 disclosure data (2011–2025) for 208 schools, organized so the answers prospective students actually need are one click away:\n\n• Admissions distributions, LSAT/uGPA 25/50/75, acceptance rates, Safety / Target / Reach bucketing\n• Cost, sticker tuition, scholarship distribution, 3-yr net total, a real loan calculator\n• Outcomes, first-time bar pass, FTLT employment, BigLaw share, public interest, clerkships, top destination states\n• Side-by-side comparison of up to 4 schools\n• 15-year trajectory on every metric, because a school whose bar pass dropped 10 pts in 5 years is telling you something\n\nThe data has always been public. Exhibit just makes it browsable instead of trapped in hundreds of one-school-one-year PDFs.\n\nNo account, no rankings sold, no tracking. " + SHARE_URL;
 function shareTo(platform){
   const u = encodeURIComponent(SHARE_URL);
   const t = encodeURIComponent(SHARE_TITLE);
@@ -5443,7 +5443,7 @@ function shareTo(platform){
     const open = () => window.open('https://www.linkedin.com/feed/?shareActive=true&mini=true', '_blank', 'noopener');
     if(navigator.clipboard && navigator.clipboard.writeText){
       navigator.clipboard.writeText(SHARE_SYNOPSIS_LINKEDIN).then(()=>{
-        toast('Synopsis copied — paste into LinkedIn (⌘/Ctrl + V)');
+        toast('Synopsis copied, paste into LinkedIn (⌘/Ctrl + V)');
         open();
       }).catch(()=>{ prompt('Copy this synopsis, then paste into LinkedIn:', SHARE_SYNOPSIS_LINKEDIN); open(); });
     } else {
@@ -5504,13 +5504,13 @@ function openShareModal(){
         + '</button>'
       ).join('')
     + '</div>'
-    + '<div style="font-family:var(--mono);font-size:10.5px;color:var(--dimmer);margin-top:14px;letter-spacing:0.5px;line-height:1.6;"><span style="color:var(--orange);">LinkedIn ✎</span> copies a ready-to-post synopsis + link to your clipboard, then opens the LinkedIn composer — paste with ⌘/Ctrl + V.</div>'
+    + '<div style="font-family:var(--mono);font-size:10.5px;color:var(--dimmer);margin-top:14px;letter-spacing:0.5px;line-height:1.6;"><span style="color:var(--orange);">LinkedIn ✎</span> copies a ready-to-post synopsis + link to your clipboard, then opens the LinkedIn composer, paste with ⌘/Ctrl + V.</div>'
     + '<div style="font-family:var(--mono);font-size:11px;color:var(--dimmer);margin-top:10px;letter-spacing:0.5px;line-height:1.6;text-align:center;">'+SHARE_URL+'</div>';
   m.appendChild(card);
   document.body.appendChild(m);
 }
 
-// Disclaimer bar removed v1.27.2 — --banner-h is hardcoded to 0 in the inline
+// Disclaimer bar removed v1.27.3 — --banner-h is hardcoded to 0 in the inline
 // <style> after the header; the dynamic syncBannerHeight observer is no longer
 // needed. Provenance lives in the footer.
 // Honor #school/X or #compare=… in URL on first load

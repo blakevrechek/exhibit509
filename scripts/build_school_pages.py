@@ -321,7 +321,7 @@ def render_page(s, all_schools=None):
 
     # ── Body sections ───────────────────────────────────────────
     closed_banner = (
-        f'<div class="closed-banner">{closed} — historical data shown below</div>'
+        f'<div class="closed-banner">{closed}, historical data shown below</div>'
         if closed else ""
     )
 
@@ -416,7 +416,7 @@ def render_page(s, all_schools=None):
         items = []
         for p in s["place_top3"]:
             if isinstance(p, dict) and p.get("st") and p.get("n"):
-                items.append(f"<li><strong>{p['st']}</strong> — {p['n']} graduates</li>")
+                items.append(f"<li><strong>{p['st']}</strong>, {p['n']} graduates</li>")
         if items:
             yr = s.get("place_top3_year") or ""
             place_html = f"<h2>Top destination states{f' ({yr})' if yr else ''}</h2><ul>{''.join(items)}</ul>"
@@ -432,12 +432,12 @@ def render_page(s, all_schools=None):
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="{canonical}">
 <meta property="og:type" content="article">
-<meta property="og:title" content="{lname} — ABA 509 data">
+<meta property="og:title" content="{lname}: ABA 509 data">
 <meta property="og:description" content="{desc}">
 <meta property="og:url" content="{canonical}">
 <meta property="og:site_name" content="Exhibit by 509α">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="{lname} — ABA 509 data">
+<meta name="twitter:title" content="{lname}: ABA 509 data">
 <meta name="twitter:description" content="{desc}">
 <script type="application/ld+json">{ld_json}</script>
 {faq_ld_json}
@@ -521,7 +521,7 @@ def render_page(s, all_schools=None):
   <div class="src">
     Source: ABA Standard 509 Required Disclosure for {full}, published by the American Bar Association at <a href="https://abarequireddisclosures.org/" rel="noopener">abarequireddisclosures.org</a>. State attorney salary data from U.S. Bureau of Labor Statistics OEWS 2024 (occupation code 23-1011). Cost-of-living from U.S. BEA Regional Price Parities. Methodology: <a href="/methodology.html">/methodology.html</a>.
   </div>
-  <footer>Exhibit — Free law school data, built by 509α. Hosted on Cloudflare Pages. Independent project, not affiliated with the ABA.</footer>
+  <footer>Exhibit: free law school data, built by 509α. Hosted on Cloudflare Pages. Independent project, not affiliated with the ABA.</footer>
 </div>
 </body>
 </html>
@@ -593,7 +593,7 @@ def page_shell(title, desc, canonical, body, ld_json=""):
 <div class="wrap">
 {body}
   <div class="src">Source: ABA Standard 509 Required Disclosures (most recent cycle), via <a href="https://abarequireddisclosures.org/" rel="noopener">abarequireddisclosures.org</a>. State attorney-salary context from U.S. BLS OEWS 2024. Methodology: <a href="/methodology.html">/methodology.html</a>.</div>
-  <footer>Exhibit — Free law school data, built by 509α. Independent project, not affiliated with the ABA.</footer>
+  <footer>Exhibit: free law school data, built by 509α. Independent project, not affiliated with the ABA.</footer>
 </div>
 </body>
 </html>
@@ -612,7 +612,7 @@ def build_directory_page(schools):
     body = [PILLAR_NAV,
             '<nav class="crumbs"><a href="/">Home</a> › <span>All law schools</span></nav>',
             "<h1>All ABA-accredited U.S. law schools</h1>",
-            f'<p class="lead">Browse every ABA-accredited law school by state — each links to a full profile with '
+            f'<p class="lead">Browse every ABA-accredited law school by state, each links to a full profile with '
             f'bar passage, employment outcomes, true cost, scholarships, and an 8-year trajectory from the official '
             f'ABA Standard 509 disclosures. {sum(len(v) for v in by_state.values())} schools across {len(states)} states.</p>']
     for st in states:
@@ -625,7 +625,7 @@ def build_directory_page(schools):
           "name": "All ABA-accredited U.S. law schools",
           "url": f"{SITE_URL}/schools.html"}
     html = page_shell(
-        "All ABA Law Schools by State — Bar Passage, Cost & Employment | Exhibit",
+        "All ABA Law Schools by State: Bar Passage, Cost & Employment | Exhibit",
         "Directory of every ABA-accredited U.S. law school by state. Each profile shows bar passage, employment outcomes, tuition, scholarships and an 8-year trajectory from official ABA 509 disclosures.",
         f"{SITE_URL}/schools.html", "\n".join(body), json.dumps(ld, ensure_ascii=False))
     open(os.path.join(ROOT, "schools.html"), "w").write(html)
@@ -679,19 +679,19 @@ def build_pillar(schools, *, fname, h1, title, desc, intro, key, fmt, reverse, z
 def build_pillar_pages(schools):
     build_pillar(schools, fname="law-school-bar-passage-rates.html",
                  h1="Law school bar passage rates",
-                 title="Law School Bar Passage Rates (2025 ABA 509) — Ranked | Exhibit",
+                 title="Law School Bar Passage Rates, Ranked (2025 ABA 509) | Exhibit",
                  desc="Every ABA-accredited law school ranked by first-time bar passage rate, from the official ABA Standard 509 disclosures. Compare against employment and tuition.",
-                 intro="Every ABA-accredited U.S. law school ranked by <strong>first-time bar passage rate</strong> from the latest ABA Standard 509 disclosures. Click any school for the full picture — 2-year ultimate pass rate, employment, cost and trajectory.",
+                 intro="Every ABA-accredited U.S. law school ranked by <strong>first-time bar passage rate</strong> from the latest ABA Standard 509 disclosures. Click any school for the full picture: 2-year ultimate pass rate, employment, cost and trajectory.",
                  key="bar", fmt=lambda v: f"{v}%", reverse=True, unit="First-time bar")
     build_pillar(schools, fname="cheapest-law-schools.html",
                  h1="Cheapest ABA-accredited law schools by tuition",
-                 title="Cheapest Law Schools by Tuition (2025 ABA 509) — Ranked | Exhibit",
+                 title="Cheapest Law Schools by Tuition, Ranked (2025 ABA 509) | Exhibit",
                  desc="ABA-accredited law schools ranked from lowest resident tuition, from official ABA Standard 509 data. See cost against bar passage and employment outcomes.",
-                 intro="ABA-accredited law schools ranked from the <strong>lowest resident tuition</strong> upward (latest ABA Standard 509 cycle). Remember to weigh sticker price against scholarships, bar passage and employment — click any school for net cost and outcomes.",
+                 intro="ABA-accredited law schools ranked from the <strong>lowest resident tuition</strong> upward (latest ABA Standard 509 cycle). Remember to weigh sticker price against scholarships, bar passage and employment. Click any school for net cost and outcomes.",
                  key="tui", fmt=lambda v: fmt_usd(v), reverse=False, znull=True, unit="Resident tuition")
     build_pillar(schools, fname="law-school-employment-outcomes.html",
                  h1="Law schools by employment outcomes",
-                 title="Law School Employment Outcomes (2025 ABA 509) — Ranked | Exhibit",
+                 title="Law School Employment Outcomes, Ranked (2025 ABA 509) | Exhibit",
                  desc="ABA-accredited law schools ranked by full-time, long-term JD-required/JD-advantage employment (FTLT) from official ABA Standard 509 disclosures.",
                  intro="ABA-accredited law schools ranked by <strong>full-time, long-term JD-required or JD-advantage employment</strong> (FTLT) about ten months after graduation, from the latest ABA Standard 509 disclosures.",
                  key="ftlt_pct", fmt=lambda v: f"{v}%", reverse=True, unit="FTLT employed")
@@ -781,7 +781,7 @@ def update_index_directory(schools):
         slug = slugify(s["id"])
         nm = esc(law_name(s))
         state = esc(s.get("state") or "")
-        items.append(f'<li><a href="school/{slug}.html">{nm}</a>{(" — " + state) if state else ""}</li>')
+        items.append(f'<li><a href="school/{slug}.html">{nm}</a>{(", " + state) if state else ""}</li>')
     block = start + '\n<ul class="ns-schools">\n' + "\n".join(items) + "\n</ul>\n" + end
     html = html[:i] + block + html[j + len(end):]
     open(INDEX_PATH, "w").write(html)

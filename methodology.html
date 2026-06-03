@@ -73,7 +73,7 @@ body{padding-top:52px;padding-bottom:42px;}
 <header class="gh"><a class="gh-logo" href="index.html"><b>Exhibit <em>by 509α</em></b></a><nav class="gh-nav"><a href="index.html">Map</a><a href="index.html#view=profiles">Schools</a><a href="index.html#view=states">States</a><a href="index.html#view=transfers">Transfers</a><a href="index.html#view=calc">Net price</a><a href="methodology.html" class="on">Methodology</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav><a class="gh-cta" href="https://docs.google.com/forms/d/e/1FAIpQLScvkEp7vEwHAtpbMbk06AmtdUqHTy595OiQFcNBanSBXm0qDA/viewform?usp=publish-editor" target="_blank" rel="noopener">Email updates</a></header>
 <div class="wrap">
   <a class="back" href="index.html">Back to Exhibit</a>
-  <div class="eyebrow">Methodology · v1.27.2</div>
+  <div class="eyebrow">Methodology · v1.27.3</div>
   <h1>How Exhibit works</h1>
   <div class="sub">Where each number comes from · how we classify schools · how we refresh · how we handle data anomalies.</div>
 
@@ -91,24 +91,24 @@ body{padding-top:52px;padding-bottom:42px;}
       <tr><td>State fair-market rent</td><td>U.S. HUD Small Area FMR</td><td>2019 – 2025</td></tr>
     </tbody>
   </table>
-  <p>Every cell in Exhibit traces back to one of these four sources. The site is a re-organization of public data — we do not survey schools, we do not generate proprietary scores, and we do not estimate fields that the underlying source did not publish.</p>
+  <p>Every cell in Exhibit traces back to one of these four sources. The site is a re-organization of public data, we do not survey schools, we do not generate proprietary scores, and we do not estimate fields that the underlying source did not publish.</p>
 
   <h2>Safety · Target · Reach classification</h2>
   <p>For each school we use its published 2025 LSAT and uGPA <strong>25th and 75th percentile</strong> bands (the "middle 50%" of last year's entering class). When you enter your stats:</p>
   <ul>
-    <li><strong style="color:#4A9B6B;">Safety</strong> — your LSAT <em>and</em> uGPA are at or above that school's 75th percentile.</li>
-    <li><strong style="color:#5AABCB;">Target</strong> — your stats fall <em>inside</em> the school's middle 50% on both metrics.</li>
-    <li><strong style="color:#FFA726;">Reach</strong> — your LSAT or uGPA falls <em>below</em> the school's 25th percentile.</li>
+    <li><strong style="color:#4A9B6B;">Safety</strong>, your LSAT <em>and</em> uGPA are at or above that school's 75th percentile.</li>
+    <li><strong style="color:#5AABCB;">Target</strong>, your stats fall <em>inside</em> the school's middle 50% on both metrics.</li>
+    <li><strong style="color:#FFA726;">Reach</strong>, your LSAT or uGPA falls <em>below</em> the school's 25th percentile.</li>
   </ul>
-  <p>The single helper is <code>fitClass(school, lsat, gpa)</code>. There is no second weighting, no adjustment for "soft factors," and no proprietary score — the rule above is the entire rule. If you enter only one stat we apply the rule to that one stat alone.</p>
-  <p>If a school has not published a 25/75 (rare — happens on new accreditations), it's excluded from your Safety/Target/Reach results until the next disclosure cycle.</p>
+  <p>The single helper is <code>fitClass(school, lsat, gpa)</code>. There is no second weighting, no adjustment for "soft factors," and no proprietary score, the rule above is the entire rule. If you enter only one stat we apply the rule to that one stat alone.</p>
+  <p>If a school has not published a 25/75 (rare, happens on new accreditations), it's excluded from your Safety/Target/Reach results until the next disclosure cycle.</p>
 
   <h2>Cost-of-attendance + loan math</h2>
   <p>The Net Price calculator uses each school's <strong>resident</strong> sticker tuition if your selected home state matches the school's state; otherwise the <strong>non-resident</strong> figure. We subtract the school's <em>median</em> grant amount (from the same 509 disclosure) when no fitClass-based estimate is available; with fitClass we use the band: Safety → school's 75th-pct grant, Target → median grant, Reach → 25th-pct grant.</p>
-  <p>Loan amortization uses the standard fixed-rate formula <code>P · r · (1+r)<sup>n</sup> / ((1+r)<sup>n</sup> – 1)</code> over your selected term. The 3-year living cost is <code>(housing + other) × 9 academic months × 3 years</code>. These are illustrative — confirm current Grad PLUS and private loan rates with your lender before relying on the total cost number.</p>
+  <p>Loan amortization uses the standard fixed-rate formula <code>P · r · (1+r)<sup>n</sup> / ((1+r)<sup>n</sup> – 1)</code> over your selected term. The 3-year living cost is <code>(housing + other) × 9 academic months × 3 years</code>. These are illustrative, confirm current Grad PLUS and private loan rates with your lender before relying on the total cost number.</p>
 
   <h2>Bar passage</h2>
-  <p>The headline <strong>First-Time Bar</strong> figure is the ABA-published first-time pass rate for the most recent reporting year (currently 2025, describing the 2024 graduating cohort). The <strong>2-Yr Ultimate</strong> figure is a separate ABA disclosure with a longer measurement window — it captures graduates who passed within two years of graduation. The two figures are not directly comparable across cohorts.</p>
+  <p>The headline <strong>First-Time Bar</strong> figure is the ABA-published first-time pass rate for the most recent reporting year (currently 2025, describing the 2024 graduating cohort). The <strong>2-Yr Ultimate</strong> figure is a separate ABA disclosure with a longer measurement window, it captures graduates who passed within two years of graduation. The two figures are not directly comparable across cohorts.</p>
   <p>Importantly: a school's <code>bar</code> on any given row describes <em>graduates who entered roughly three years earlier</em>, while the <code>apps</code>/<code>offers</code>/<code>acceptance</code> figures on the same row describe the most recent <em>entering</em> class. Treat the bar number as evidence about the school three years ago.</p>
 
   <h2>Employment outcomes</h2>
@@ -116,10 +116,10 @@ body{padding-top:52px;padding-bottom:42px;}
   <p>The 10-category employment breakdown (MegaLaw 500+ / BigLaw 251-500 / Mid 101-250 / Small 2-100 / Clerkships / Public Interest / Government / Business / Academia / Solo / Seeking) is reported by the school in the same disclosure. We rank rows by applicant-mental-model desirability rather than alphabetically. The "vs national average" delta on each row compares the school's percent against the unweighted average across all 197 reporting schools.</p>
 
   <h2>Trend charts + the 15-year history</h2>
-  <p>Every line chart on the site is built from year-by-year ABA 509 disclosures back to 2011. Where a metric was not collected in a given year (most notably the bar pass cadence change 2012-2017), the chart renders a <strong>dashed bridge</strong> through the missing years with hollow markers labeled <em>"YYYY not reported (interpolated)"</em>. The interpolation is for visual continuity only — we never replace null values with synthetic numbers anywhere a real cell exists.</p>
+  <p>Every line chart on the site is built from year-by-year ABA 509 disclosures back to 2011. Where a metric was not collected in a given year (most notably the bar pass cadence change 2012-2017), the chart renders a <strong>dashed bridge</strong> through the missing years with hollow markers labeled <em>"YYYY not reported (interpolated)"</em>. The interpolation is for visual continuity only, we never replace null values with synthetic numbers anywhere a real cell exists.</p>
 
   <h2>Data quality + outlier handling</h2>
-  <p>Two source files are reconciled — a hand-maintained <a href="https://docs.google.com/spreadsheets/d/1iFHIkqiZ1_VdMkpblE4yvuOe0Q5PJuu6BZHXMDDtlqo/edit?usp=sharing" target="_blank" rel="noopener">"Historic" spreadsheet</a> (treated as primary because it has been spot-checked against PDFs since 2011) and a machine-generated <a href="https://docs.google.com/spreadsheets/d/1PUvqEXyQp02Has5t2ko2cQWVoWtoB0DiQQuWHxiarXQ/edit?usp=sharing" target="_blank" rel="noopener">"v2" spreadsheet</a> (used to fill gaps the Historic file does not cover). The two files agree on 91.8% of overlapping cells; remaining disagreements are documented in a separate file shared with the maintainers.</p>
+  <p>Two source files are reconciled, a hand-maintained <a href="https://docs.google.com/spreadsheets/d/1iFHIkqiZ1_VdMkpblE4yvuOe0Q5PJuu6BZHXMDDtlqo/edit?usp=sharing" target="_blank" rel="noopener">"Historic" spreadsheet</a> (treated as primary because it has been spot-checked against PDFs since 2011) and a machine-generated <a href="https://docs.google.com/spreadsheets/d/1PUvqEXyQp02Has5t2ko2cQWVoWtoB0DiQQuWHxiarXQ/edit?usp=sharing" target="_blank" rel="noopener">"v2" spreadsheet</a> (used to fill gaps the Historic file does not cover). The two files agree on 91.8% of overlapping cells; remaining disagreements are documented in a separate file shared with the maintainers.</p>
   <!-- TODO: replace https://docs.google.com/spreadsheets/d/1iFHIkqiZ1_VdMkpblE4yvuOe0Q5PJuu6BZHXMDDtlqo/edit?usp=sharing and https://docs.google.com/spreadsheets/d/1PUvqEXyQp02Has5t2ko2cQWVoWtoB0DiQQuWHxiarXQ/edit?usp=sharing with the actual Google Sheets URLs once published. -->
 
   <h3>Sanitization rules applied at inline time</h3>
@@ -133,7 +133,7 @@ body{padding-top:52px;padding-bottom:42px;}
 
   <h2>Refresh cadence</h2>
   <p>The ABA publishes Standard 509 disclosures once per year, typically in the December–February window for the prior calendar year's data. We re-sync within the month following each ABA release. The "Last synced" date at the top of this page and in the disclaimer bar always reflects the most recent inline pull.</p>
-  <p>Wage (BLS), cost-of-living (BEA), and rent (HUD) feeds follow their own annual cadences — we re-pull each within a month of the respective agency's release.</p>
+  <p>Wage (BLS), cost-of-living (BEA), and rent (HUD) feeds follow their own annual cadences, we re-pull each within a month of the respective agency's release.</p>
 
   <h2>What Exhibit does NOT do</h2>
   <ul>
@@ -148,7 +148,7 @@ body{padding-top:52px;padding-bottom:42px;}
 
   <p style="margin-top:36px;"><a href="index.html" style="font-family:var(--mono);font-size:13px;letter-spacing:1px;background:var(--orange);color:#06111E;padding:10px 18px;text-decoration:none;font-weight:700;">Back to Exhibit</a> &nbsp; <a href="about.html" style="font-family:var(--mono);font-size:12px;color:var(--dim);">About</a> &nbsp; <a href="terms.html" style="font-family:var(--mono);font-size:12px;color:var(--dim);">Terms · Privacy</a></p>
 
-  <footer>Exhibit — Free law school data, built by 509α. Sourced from official ABA Standard 509 disclosures. Last synced May 31, 2026.</footer>
+  <footer>Exhibit: Free law school data, built by 509α. Sourced from official ABA Standard 509 disclosures. Last synced May 31, 2026.</footer>
 </div>
 <a id="floatBack" href="index.html" aria-label="Back to Exhibit map" title="Back to Exhibit map">
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
