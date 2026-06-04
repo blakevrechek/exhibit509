@@ -370,7 +370,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .pb-counsel-header{border-top:3px solid var(--counsel);}
 
 /* Map filters bar */
-/* Map filters relocated v1.42.0, top-of-map horizontal toolbar, docked between the
+/* Map filters relocated v1.43.0, top-of-map horizontal toolbar, docked between the
    left Match Me / Compare sidebar (ends at 380px) and the always-open right school
    panel (400px), sitting just under the global header. The left sidebar is now
    reserved exclusively for Match Me + Compare. */
@@ -447,7 +447,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
    header (school name + bar pass chip) isn't hidden by filter chips or the BLS
    tooltip card. Was top:76px causing the upper ~50px to be eaten. */
 /* schoolPanel sits at the natural top now that map-filter bar moved into the left
-   panel (v1.42.0) — frees ~50px of vertical space at the top of the right column. */
+   panel (v1.43.0) — frees ~50px of vertical space at the top of the right column. */
 #schoolPanel{position:fixed;top:76px;right:0;bottom:36px;width:400px;z-index:100;background:rgba(4,13,23,0.97);border-left:1px solid rgba(74,122,155,0.22);overflow-y:auto;transform:translateX(0);transition:transform .3s;}#schoolPanel.hidden{transform:translateX(100%);}
 #schoolPanel.open{transform:translateX(0);}
 .sp-close{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(4,13,23,0.98);border-bottom:1px solid rgba(74,122,155,0.15);}
@@ -457,7 +457,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .sp-tab{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border:1px solid rgba(74,122,155,0.2);background:transparent;color:var(--dim);cursor:pointer;transition:all .2s;}
 .sp-tab+.sp-tab{border-left:none;}
 .sp-tab.on{background:rgba(217,119,87,0.1);color:var(--orange);border-color:rgba(217,119,87,0.35);}
-/* School-panel (right side) typography tightened v1.42.0, was visibly scaled-too-big
+/* School-panel (right side) typography tightened v1.43.0, was visibly scaled-too-big
    per owner. Reduced metric/value sizes by ~15%, tighter section padding, smaller
    section labels, more breathable line-height. */
 .sp-header{padding:14px 16px 10px;border-bottom:1px solid rgba(74,122,155,0.12);}
@@ -567,7 +567,24 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .dp-chart-t{font-family:var(--mono);font-size:12px;letter-spacing:1.8px;color:var(--dim);margin:14px 0 4px;text-transform:uppercase;font-weight:600;}
 .dp-chart-loading{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;color:var(--dimmer);padding:24px 14px;text-align:center;border:1px dashed rgba(74,122,155,0.18);margin-top:14px;}
 .dp-card::before{content:'';position:absolute;top:0;left:0;width:36px;height:2px;background:var(--orange);border-radius:0 0 2px 2px;}
-.lc{width:100%;height:auto;display:block;background:rgba(74,122,155,0.04);border:1px solid rgba(74,122,155,0.1);}
+.lc{width:100%;height:auto;display:block;background:rgba(74,122,155,0.04);border:1px solid rgba(74,122,155,0.1);cursor:zoom-in;}
+.st-wrap{cursor:zoom-in;}
+/* #7 Click-to-zoom chart modal (full-screen, branded, cited; opens to its own tab) */
+.chart-modal{display:none;position:fixed;inset:0;z-index:2000;background:rgba(4,13,23,0.86);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:24px;}
+.cmx-box{background:linear-gradient(180deg,#0B1826,#06111E);border:1px solid rgba(74,122,155,0.3);border-radius:10px;max-width:1040px;width:100%;padding:18px 22px 16px;box-shadow:0 24px 70px rgba(0,0,0,0.6);}
+.cmx-head{display:flex;align-items:center;gap:12px;margin-bottom:8px;}
+.cmx-brand{font-family:var(--sans);font-weight:800;color:#fff;font-size:16px;}
+.cmx-brand em{font-style:normal;color:var(--orange);font-size:11px;font-family:var(--mono);letter-spacing:1.4px;text-transform:uppercase;margin-left:5px;}
+.cmx-url{font-family:var(--mono);font-size:12px;color:#5AABCB;}
+.cmx-act{margin-left:auto;display:flex;gap:8px;}
+.cmx-act button{background:rgba(74,122,155,0.14);border:1px solid rgba(74,122,155,0.3);color:var(--dim);font-family:var(--mono);font-size:11px;letter-spacing:0.6px;text-transform:uppercase;padding:6px 11px;border-radius:4px;cursor:pointer;}
+.cmx-act button:hover{color:#fff;border-color:#fff;}
+.cmx-title{font-family:var(--sans);font-size:18px;font-weight:700;color:#fff;margin:4px 0 10px;}
+.cmx-body{background:rgba(255,255,255,0.02);border-radius:6px;padding:12px;}
+.cmx-body svg{width:100%;height:auto;max-height:68vh;cursor:default;}
+.cmx-src{font-family:var(--mono);font-size:11px;color:var(--dimmer);margin-top:10px;line-height:1.5;}
+.theme-light .cmx-box{background:#fff;border-color:rgba(60,90,120,0.2);}
+.theme-light .cmx-brand,.theme-light .cmx-title{color:#0C1A2A;}
 .lc-empty{font-family:var(--mono);font-size:12px;color:var(--dimmer);padding:14px;text-align:center;background:rgba(74,122,155,0.04);border:1px solid rgba(74,122,155,0.1);}
 .dp-bar{display:flex;height:18px;border-radius:3px;overflow:hidden;margin:6px 0;}
 .dp-bar-seg{height:100%;}
@@ -1628,7 +1645,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
     More
   </button>
 </nav>
-<!-- Disclaimer bar removed v1.42.0, provenance now lives in the footer. -->
+<!-- Disclaimer bar removed v1.43.0, provenance now lives in the footer. -->
 <style>:root{--banner-h:0px;}</style>
 
 <div id="cookieBar" style="position:fixed;bottom:0;left:0;right:0;z-index:1000;background:#0B1826;border-top:1px solid rgba(217,119,87,0.4);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;box-shadow:0 -2px 12px rgba(0,0,0,0.5);">
@@ -1893,7 +1910,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
     </a>
   </div>
   <div style="padding:0 16px;font-family:var(--mono);font-size:11px;color:var(--dimmer);border-left:1px solid rgba(74,122,155,0.12);white-space:nowrap;letter-spacing:0.4px;">
-    <span style="color:#4A9B6B;">●</span>&nbsp; Sourced from official ABA Standard 509 disclosures &nbsp;·&nbsp; <span style="color:var(--orange);">Last synced May 31, 2026</span> &nbsp;·&nbsp; <span style="color:#7AAAC8;">v1.42.0</span>
+    <span style="color:#4A9B6B;">●</span>&nbsp; Sourced from official ABA Standard 509 disclosures &nbsp;·&nbsp; <span style="color:var(--orange);">Last synced May 31, 2026</span> &nbsp;·&nbsp; <span style="color:#7AAAC8;">v1.43.0</span>
   </div>
 </div>
 
@@ -1964,8 +1981,8 @@ function fmtUSD(v){ return v==null?"—":"$"+v.toLocaleString(); }
 // ═══════════════════════════════════════════════════════════════════════════
 const DATA_INVARIANTS = {
   total_schools: 208,         // 197 active/newly + 11 closed/transitioning (now included as historical entries)
-  schools_inline: 208,        // all inline as of v1.42.0, closed entries surface their pre-closure history
-  year_count: 15              // 2011–2025 inclusive (15-year span; pre-2018 added in v1.42.0 from Historic + v2 sheets)
+  schools_inline: 208,        // all inline as of v1.43.0, closed entries surface their pre-closure history
+  year_count: 15              // 2011–2025 inclusive (15-year span; pre-2018 added in v1.43.0 from Historic + v2 sheets)
 };
 // Verifiable count of the data cells actually shipped inline on this page:
 // every non-null scalar field, plus every per-year trend entry, across S.
@@ -2034,7 +2051,7 @@ function populateHeaderStats(){
 // ── Lazy-load full dataset (deferred until first deep-dive interaction) ──
 // Callers: `const ext = await loadFullDataset();` parsed JSON, or null on fail.
 // Subsequent calls return the cached object. Concurrent calls share one fetch.
-// Wired in v1.42.0 — schoolDetailHTML calls getSchoolHistory(id) which awaits
+// Wired in v1.43.0 — schoolDetailHTML calls getSchoolHistory(id) which awaits
 // this loader, then renders deep-history charts (employment evolution etc.) into
 // late-paint slots once data is available.
 window.EXT = window.EXT || { data: null, loading: null, byId: null };
@@ -2235,7 +2252,7 @@ function searchTypeaheadKey(e){
   }
 }
 
-// Disclaimer banner is now persistent (per v1.42.0 owner directive) — no dismiss; always visible.
+// Disclaimer banner is now persistent (per v1.43.0 owner directive) — no dismiss; always visible.
 // ── COOKIE notice dismiss (persists via localStorage) ──
 // ── Light/Dark theme toggle (persists via localStorage). Note: many inline styles
 // use literal rgba(4,13,23,...) and won't fully invert — full theming would require
@@ -3116,7 +3133,7 @@ function niceTicks(min, max){
   for(let v=lo; v<=hi+1e-9; v+=step) out.push(+v.toFixed(10));
   return {min:lo, max:hi, ticks:out, step};
 }
-// ── 4-year statistical projection (v1.42.0) ──────────────────────────────────
+// ── 4-year statistical projection (v1.43.0) ──────────────────────────────────
 // Fit the school's own per-year history and extend it. Per-metric model:
 //   'rate'  (0–100% bounded) → logit-linear (stays inside 0–100, eases at bounds)
 //   'mult'  ($/counts, compounding) → log-linear (i.e. a CAGR)
@@ -3175,7 +3192,7 @@ function lineChart(opts){
   if(!allv.length) return '<div class="lc-empty">No trend data</div>';
   if(projData) projData.forEach(pd=>{ if(pd) futureXs.forEach(x=>{ allv.push(pd.mid[x],pd.lo[x],pd.hi[x]); }); });
   const dataMin=Math.min(...allv), dataMax=Math.max(...allv);
-  // Headroom (v1.42.0): pad the data range BEFORE snapping to nice ticks, so the
+  // Headroom (v1.43.0): pad the data range BEFORE snapping to nice ticks, so the
   // highest/lowest points never land flush on the top/bottom gridline (where their
   // marker dot + endpoint label would clip past the plot edge). Padding the input
   // also bumps the rounded bound up a step when a value sits exactly on a boundary
@@ -3257,7 +3274,7 @@ function lineChart(opts){
     const pv=years.map(y=>pin.vals?pin.vals[y]:null);
     let li=-1; for(let i=pv.length-1;i>=0;i--){ if(pv[i]!=null){ li=i; break; } }
     if(li>=0){ const v=pv[li], x=X(li), yy=Y(v), last=(li===years.length-1);
-      // Endpoint label placement rule (v1.42.0): if the line is RISING into the
+      // Endpoint label placement rule (v1.43.0): if the line is RISING into the
       // endpoint, drop the label BELOW the marker (clears the ascending line and
       // the top edge it would otherwise clip); if FALLING, lift it ABOVE. Clamp
       // to the chart box so it can never get cut off. The --chart-halo var gives a
@@ -3391,7 +3408,7 @@ function bandChart(opts){
 
 // ── Full school detail page (items 5 & 9): opens in a new tab via #school/<id> ─
 // ── Scholarship distribution ────────────────────────────────────────────────
-// Canonical buckets per owner directive (v1.42.0): student-favorability gradient.
+// Canonical buckets per owner directive (v1.43.0): student-favorability gradient.
 // "No grant" is DERIVED = 100 - (lt + mt + full + gt) — the source's none count is
 // known to be unreliable (negatives, mis-reports); the derivation guarantees the
 // stack sums to 100% and avoids fabricated bad data.
@@ -3831,7 +3848,7 @@ function outcomeFunnel(s){
 
 function navSchool(id){
   // HASH ROUTES — safest, work anywhere, no 404.html or server-side rewrites needed.
-  // Reverted from clean /school/<slug> paths in v1.42.0 because GH Pages without a
+  // Reverted from clean /school/<slug> paths in v1.43.0 because GH Pages without a
   // deployed 404.html serves real 404s for any unknown path. When the project moves
   // to a custom domain with rewrites (Netlify _redirects, Vercel rewrites, Cloudflare),
   // flip CLEAN_URLS to true and the deep-link helpers below will re-engage.
@@ -4420,6 +4437,59 @@ const TUI_IRREGULAR = {
   'arizona-the-university-of':'a 2013 dip',
   'north-texas-at-dallas-university-of':'a 2025 dip in a short series'
 };
+// ── #7 Click any chart → full-screen branded modal (+ open as its own tab) ──
+// Event-delegated so EVERY chart (line/band/stacked, school + compare) is clickable
+// with no per-chart wiring. The modal is screenshot-ready; "open in new tab"
+// serializes the chart into a standalone branded HTML page with the data source.
+function closeChartModal(){ const m=document.getElementById('chartModal'); if(m) m.style.display='none'; }
+function chartSource(title){ const t=(title||'').toLowerCase();
+  if(/wage|salary|pay/.test(t)) return 'U.S. BLS OEWS (2024)';
+  if(/rent/.test(t)) return 'HUD SAFMR (2025)';
+  if(/parity|col-adj/.test(t)) return 'BEA RPP (2024)';
+  return 'ABA Standard 509 disclosures (2011–2025)';
+}
+function chartZoom(ev){
+  const t=ev.target; if(!t||!t.closest) return;
+  if(t.closest('#chartModal')) return;
+  const g=t.closest('svg.lc, .st-wrap'); if(!g) return;
+  let title='Trend';
+  const mod=t.closest('.story-mod,.cmp-chart,.emp-cat')||g.closest('[id$="-slot"]')||g.parentElement;
+  const tEl=mod&&mod.querySelector('.dp-chart-t,.cmp-chart-t,.story-mod-t');
+  if(tEl) title=tEl.textContent.replace(/\s+/g,' ').trim();
+  const src=chartSource(title);
+  let m=document.getElementById('chartModal');
+  if(!m){ m=document.createElement('div'); m.id='chartModal'; m.className='chart-modal';
+    m.innerHTML='<div class="cmx-box"><div class="cmx-head"><span class="cmx-brand">Exhibit 509 <em>by 509α</em></span><span class="cmx-url">exhibit509.com</span><span class="cmx-act"><button onclick="openChartTab()">↗ New tab</button><button onclick="closeChartModal()">✕ Close</button></span></div><div class="cmx-title" id="cmxTitle"></div><div class="cmx-body" id="cmxBody"></div><div class="cmx-src" id="cmxSrc"></div></div>';
+    m.addEventListener('click',function(e){ if(e.target===m) closeChartModal(); });
+    document.body.appendChild(m);
+  }
+  document.getElementById('cmxTitle').textContent=title;
+  document.getElementById('cmxSrc').textContent='Source: '+src+'. Dashed = 4-yr model projection, not a forecast of fact. · exhibit509.com';
+  const body=document.getElementById('cmxBody'); body.innerHTML='';
+  const c=g.cloneNode(true);
+  if(c.querySelectorAll) c.querySelectorAll('.lc-hits,.lc-tip').forEach(n=>n.remove());
+  if(c.removeAttribute) c.removeAttribute('style');
+  body.appendChild(c);
+  m.style.display='flex';
+}
+function openChartTab(){
+  const body=document.getElementById('cmxBody'); if(!body) return;
+  const chart=body.innerHTML;
+  const title=(document.getElementById('cmxTitle')||{}).textContent||'Exhibit 509 chart';
+  const src=(document.getElementById('cmxSrc')||{}).textContent||'';
+  const html='<!doctype html><html><head><meta charset="utf-8"><title>'+title+' · Exhibit 509</title>'
+    +'<style>body{margin:0;background:#06111E;color:#F4F8FB;font-family:system-ui,sans-serif;padding:28px;}'
+    +'.h{display:flex;align-items:baseline;gap:12px;}.b{font-weight:800;font-size:20px;}.b em{font-style:normal;color:#D97757;font-size:12px;letter-spacing:1.4px;text-transform:uppercase;margin-left:6px;}'
+    +'.u{color:#5AABCB;font-family:monospace;font-size:13px;}h1{font-size:22px;margin:14px 0 14px;}'
+    +'.card{background:rgba(255,255,255,0.03);border:1px solid rgba(74,122,155,0.25);border-radius:8px;padding:16px;max-width:1000px;}'
+    +'svg{width:100%;height:auto;}.s{color:#7AAAC8;font-family:monospace;font-size:12px;margin-top:14px;max-width:1000px;line-height:1.5;}</style></head>'
+    +'<body><div class="h"><span class="b">Exhibit 509 <em>by 509α</em></span><span class="u">exhibit509.com</span></div>'
+    +'<h1>'+title+'</h1><div class="card">'+chart+'</div><div class="s">'+src+'</div></body></html>';
+  const url=URL.createObjectURL(new Blob([html],{type:'text/html'}));
+  window.open(url,'_blank','noopener');
+  setTimeout(()=>URL.revokeObjectURL(url),4000);
+}
+document.addEventListener('click',chartZoom);
 // Interactive loan-payoff calculator: two sliders (amount borrowed, monthly
 // payment) + an interest-rate slider → time to pay off, with interest. Prefilled
 // with the school's 3-yr net cost. One instance per school view, so fixed ids.
@@ -5976,7 +6046,7 @@ function openShareModal(){
   document.body.appendChild(m);
 }
 
-// Disclaimer bar removed v1.42.0 — --banner-h is hardcoded to 0 in the inline
+// Disclaimer bar removed v1.43.0 — --banner-h is hardcoded to 0 in the inline
 // <style> after the header; the dynamic syncBannerHeight observer is no longer
 // needed. Provenance lives in the footer.
 // Honor #school/X or #compare=… in URL on first load
