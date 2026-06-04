@@ -1,33 +1,32 @@
 # Exhibit 509 — Session Handoff
 
-**Last updated:** 2026-06-03
+**Last updated:** 2026-06-04
 **Repo:** `blakevrechek/exhibit509`
 **Live:** https://exhibit509.com (Cloudflare Pages, auto-deploys from `main`)
-**Current version:** `1.29.0` (see `VERSION`)
-**`main` HEAD:** `3cb8579` — *Rebrand to "Exhibit 509", trust/funding line, mobile fix*
+**Current version:** `1.44.0` (see `VERSION`)
+**`main` HEAD:** `bf57056` — *data sections: sex-over-time, curriculum/faculty charts, transfers, JD-jobs trend*
 **Working branch:** `claude/elegant-lovelace-0awdY` (fast-forward merged into `main`)
 
 **Brand:** the product is **"Exhibit 509"**; **509α** is the publisher ("by 509α").
-The domain is `exhibit509.com`, so the brand and domain now match.
+The domain is `exhibit509.com`, so brand and domain match.
+
+> ⚠️ **Heads-up for next session — main auto-regenerates.** A CI job commits
+> `chore: regenerate SEO static pages + sitemap [skip ci]` onto `main` after pushes.
+> So `main` will be **ahead of your branch** when you go to merge. Workflow that
+> worked: push branch → `git fetch origin main` → `git checkout main && git reset
+> --hard origin/main` → `git merge --ff-only <branch>`; if ff fails, `git checkout
+> <branch> && git rebase origin/main && git push --force-with-lease`, then ff main.
 
 ---
 
 ## Roadmap / sequence
 
-1. **Desktop** — ✅ done. Map layers/filters reworked, header/footer cleaned,
-   gray-map bug root-caused and fixed. Optional live audits below remain (not blocking).
-2. **Data check** — ✅ landed. Counts are now build-generated (208 / 197 / 11) and
-   stamped, so index + methodology can't drift. See **DATA notes**.
-3. **Mobile** — in progress, iterating on real-device reports. Latest: school
-   overview now renders in front of the fixed header so its exit button isn't
-   covered (v1.29.0). Keep an eye out for similar z-index/overlap issues on phones.
-4. **Content / correctness + brand** — review-driven fixes (OBBBA loan cliff,
-   year-span, bar caveat) shipped in v1.28.0; rebrand to "Exhibit 509" + a
-   trust/funding line on About shipped in v1.29.0.
+Desktop, data check, mobile, brand all ✅. The product is now feature-rich; recent
+work has been the **school full-page experience** (charts, projections, calculators,
+glossary) and **polish**. The map/desktop foundations are stable.
 
-> Versions advanced 1.19.5 → 1.28.0 across intervening sessions not detailed in
-> this doc; this session covered **1.28.0** (review items) and **1.29.0**
-> (rebrand + trust line + mobile fix).
+> This doc tracks 1.28.0 → **1.44.0**. The detailed per-version log is under
+> **"What shipped"** below; earlier sessions (≤1.27.x) are summarized at the bottom.
 
 ### Backlog / future ideas (not started)
 
@@ -67,7 +66,8 @@ Brand: **Exhibit 509**, published by **509α**. Independent; not affiliated with
 | `data/exhibit-data.js` | **Inline dataset** (`const S`, `BLS`, `RPP`, `FMR`). Loaded as a classic `<script src>` *before* the app script, so the globals are synchronously available. Current-cycle (2025) values + trends. 208 schools. |
 | `data/exhibit_data.json.gz` | **Full 15-yr history**, lazy-loaded on first deep-dive (`loadFullDataset()` → `fetch` → `DecompressionStream('gzip')` → JSON, client-side). ~6 MB. |
 | `vendor/leaflet/` | **Self-hosted Leaflet 1.9.4** (js, css, 5 marker images). Referenced with **SRI** + `crossorigin`. No cdnjs. |
-| `fonts/` | **Self-hosted** Nunito / Playfair Display / Geist Mono (latin woff2, content-hashed) + `fonts.css`. No Google Fonts. |
+| `fonts/` | **Self-hosted** Nunito / Geist Mono (latin woff2) + `fonts.css`. No Google Fonts. **Playfair Display was PURGED (v1.30.6)** — `--serif` now points at the Nunito stack; don't reintroduce Playfair (owner disliked it). |
+| `glossary.html` | Standalone crawlable glossary (43 terms, 5 sections). Generated once from the methodology chrome; hand-edit directly now. Linked in nav + sitemap. |
 | `school/*.html` | 208 generated static pages (title/desc/canonical/OG/JSON-LD, indexable). |
 | `scripts/build_school_pages.py` | Regenerates `school/*.html`, `sitemap.xml`, injects the A–Z crawlable directory into `index.html`'s `<noscript>`. Reads `S` from `data/exhibit-data.js`. |
 | `scripts/stamp_version.py` | **Single-source version stamper.** Reads `VERSION`, stamps `v<x.y.z>` into all HTML + the `sw.js` CACHE const. Run after bumping `VERSION`. |
@@ -106,6 +106,15 @@ python3 scripts/stamp_version.py        # stamp v<x.y.z> across HTML + sw.js
   in `build_school_pages.py` and rebuild.
 - **Counts are generated, never hand-typed** — edit the dataset, run `build.sh`,
   let `stamp_counts()` propagate to index + methodology.
+- **Data integrity over completeness.** We do NOT fabricate values: impossible 0s
+  are nulled (Belmont fix), ambiguous tuition is flagged not invented, projections
+  are clearly labeled model output (logit/CAGR/OLS), not forecasts. Keep that bar.
+- **No Playfair Display** — purged in 1.30.6; `--serif` = Nunito stack. Owner
+  dislikes the decorative serif. Don't reintroduce it.
+- **Charts are click-delegated.** A single document-level `chartZoom` opens any
+  `svg.lc`/`.st-wrap` in a branded modal. New trend charts get zoom + projection
+  for free via `lineChart`/`bandChart` (pass `project:{n:4,mode:'rate'|'mult'|
+  'linear'}`); they're touch-aware via `lcTip`.
 - **Service worker, cross-origin:** **the SW must NEVER intercept cross-origin
   requests.** It returns early when `url.origin !== location.origin`. Leaflet map
   tiles (`*.basemaps.cartocdn.com`) are `no-cors`/opaque; routing them through the
@@ -139,50 +148,78 @@ python3 scripts/stamp_version.py        # stamp v<x.y.z> across HTML + sw.js
 
 ---
 
-## What shipped THIS session (on `main`, → 1.28.0, → 1.29.0)
+## What shipped (1.28.0 → 1.44.0)
 
-**v1.28.0 — review items 1–5 (content / correctness)**
+**1.28.0** — review fixes: OBBBA federal-loan cliff modeled in Net Price (live
+warning at 2026 caps $50k/yr·$200k lifetime); "0 schools" verified not-a-bug;
+school pages corrected to 15-yr; `stamp_counts()` (208/197/11) so counts can't
+drift; bar-passage "different cohorts" caveat on every school page.
+**1.29.0** — rebrand to **Exhibit 509** (509α = publisher) everywhere; About
+trust/funding section; mobile fix (school overview above the fixed header).
+**1.29.1–.3** — removed the orange accent bar atop "Match Me"; map color-metric
+caption (`.ms-eyebrow`) → readable sans (was mono-caps); `.sp-intro` de-italicized.
+**1.29.2** — chart Y-axis headroom (`niceTicks` padded ~7%) so peak points/labels
+never clip.
+**1.30.0** — **dense grouped compare mega-table** (`CMP_GROUPS`, ~58 rows × 6
+sections) + the **LSAT/uGPA 0-sentinel fix** (impossible 0s nulled at load AND in
+the generator: Belmont 2012, Arizona Summit, Whittier, Florida Coastal, Valparaiso).
+**1.30.1–.8** — desktop-density on the school view; tiles fill width (`auto-fill`→
+`auto-fit`); graph crosshair tooltip (hover **+ touch** via `lcTip`, all series);
+**Playfair purged → Nunito** (1.30.6, `@font-face` removed too); dotted-grid bg on
+standalone pages; **orange "Back to Exhibit" buttons**; sticky school-view top bar.
+**1.31.0** — **tuition corrections**: 4 unambiguous semester/annual errors fixed in
+data (Chicago 2018, Indiana–Indianapolis 2017, Detroit Mercy 2025, Montana 2023);
+15 schools flagged `TUI_IRREGULAR` ("under review" callout) instead of fabricating;
+documented in `methodology.html#data-corrections`. (Audit: `tuition-audit.md`.)
+**1.32.0 / 1.33.0** — **band charts** (`bandChart`): LSAT/uGPA 25–75 percentile
+bands; bar-passage first-time→ultimate band; tuition resident→non-resident band.
+"At a glance" compressed.
+**1.34.0** — **employment over time**: big stacked composition (gz history) + a
+**dropdown** to chart any single category (`empCatPaint`, defaults FTLT).
+**1.35.0** — compare gets an **employment-over-time** dropdown (`paintCompareEmpEvo`/
+`cmpEmpCatPaint`); single-school **demographics dropdown**; **print padding** fix
+(16/14mm + reflow so nothing clips).
+**1.36.0** — **state legal-market** pulled into its own section (`sec('market',…)`):
+BLS salary band + RPP + rent.
+**1.37.0** — **4-year projections on all trend charts** (`projectFit` + `project`
+hook on lineChart/bandChart): logit-linear for rates, CAGR for money, OLS else;
+dashed line + uncertainty cone + "projected →" divider; caveat + `methodology.html
+#projections`. Framed as model output, NOT fact.
+**1.38.0** — **loan-payoff calculator** (`loanCalcWidget`/`loanPayoffUpdate`):
+borrowed + monthly + rate sliders → payoff time, total paid, interest.
+**1.39.0** — **bimodal salary** explainer (`salaryDist`): BLS percentile bar +
+NALP two-hump context.
+**1.40.0** — **glossary.html** (43 terms) + nav/sitemap.
+**1.41.0** — chart sizes up; LSAT yellow → goldenrod `#D6A520` (legible both
+themes) + adj-flag border removed; school column centered (`.dp-wrap` 1720→1360);
+**version string in footers** (auto-stamped after "Last synced").
+**1.42.0** — branded **"509α" no-school hero** (the empty overview state) + "At a
+glance" cut to a single 7-tile row.
+**1.43.0** — **#7 click-to-zoom charts**: event-delegated `chartZoom` → full-screen
+branded modal with cited source; **"New tab"** (`openChartTab`) serializes the
+chart to a standalone branded HTML page (blob URL).
+**1.44.0** — gender composition over time (`SEX_BUCKETS`); curriculum bars
+(`curriculumBars`) + faculty-total trend; **transfers own module** (in/out + net +
+transfer-GPA band + trend); always-on **"JD jobs over time"** line under the
+employment bars.
 
-1. **OBBBA federal-loan cliff is now modeled, not just mentioned.** Net Price calc
-   fires a live warning when modeled federal borrowing exceeds the 2026 caps
-   (**$50k/yr, $200k lifetime**), showing the overflow that spills to private loans
-   (no PSLF/IDR on it). Borrow tile relabeled **"federal"**; both stale "confirm
-   Grad PLUS rates" lines refreshed to explain the cap regime.
-2. **"0 schools" cold load — verified NOT a bug** (pins paint from inline `S`;
-   nothing gates first paint). Seeded the static placeholder with the real count
-   (207) so the pre-JS crawl snapshot doesn't read "0".
-3. **15- vs 8-year span mismatch** — school-page template corrected to 15-year
-   (2011–2025), matching the homepage.
-4. **Count drift** — new `stamp_counts()` build step derives 208/197/11 from the
-   dataset and stamps index + methodology; they can't disagree again.
-5. **Bar-passage temporal caveat** — every school page now carries a visible
-   "different cohorts" note under Bar passage.
+### Key functions added (all in `index.html` inline JS)
+`bandChart` · `projectFit` + `projDrawSeries` (projection engine) · `lcTip`
+(chart touch) · `chartZoom`/`openChartTab` (chart modal, delegated on document
+click) · `empCatPaint` + `paintEmpEvolution` · `demoCatPaint` · `cmpEmpCatPaint`/
+`paintCompareEmpEvo` · `loanCalcWidget`/`loanPayoffUpdate` · `salaryDist` ·
+`curriculumBars` · `schoolSnapshot` (now one concise row). Buckets: `EMP_BUCKETS`,
+`EMP_CAT_LIST`, `RACE_BUCKETS`, `DEMO_CAT_LIST`, `SEX_BUCKETS`. `TUI_IRREGULAR` map.
 
-**v1.29.0 — rebrand + trust + mobile**
-
-6. **Rebrand to "Exhibit 509"** (509α = publisher) across titles, OG/Twitter,
-   JSON-LD, header/footer wordmarks, hero `<h1>`, share text, and all 208 generated
-   school pages + directory + pillars (`| Exhibit 509`).
-7. **Trust / funding line** — new About section *"Why you can trust it, and how it
-   stays free"*: data free + ungated, no money from rankings/ads/sponsorship/data-
-   sales, no first-party tracking, run independently by Blake Vrechek, Skool + email
-   sustain the work but nothing is gated behind them. *Only verifiable facts.*
-8. **Mobile fix** — the full-screen school overview now sits in front of the fixed
-   header on phones (`@media ≤640px`: `top:0`, `z-index:1001`, safe-area top
-   padding), so its "Back to Exhibit" exit button is no longer covered.
-
-Validation: inline JS `node --check` OK; all JSON-LD valid; version drift clean
-(`v1.29.0`); no em dashes reintroduced.
-
-### Open follow-ups from this session
-- **Wordmark redundancy (low priority).** Header reads "Exhibit 509 · by 509α" —
-  `509`/`509α` sit close together. If it looks redundant live, drop the wordmark to
-  just "Exhibit 509" and keep "by 509α" in footer/About only. One-string change.
-- **Trust-line specifics.** The funding paragraph states only what's verifiable;
-  if the real business model has nameable specifics (e.g., whether Skool is paid),
-  add them. I deliberately did not assert what I couldn't confirm.
-- **Deploy + IndexNow.** Confirm deploy is live, then run `indexnow_ping.py` so the
-  rebranded titles/pages get recrawled.
+### Open follow-ups
+- **`tuition-audit.md`** lists 15 flagged schools (multi-year level shifts, likely
+  real 2014–15 resets) the owner is researching. When verified, correct in
+  `data/exhibit-data.js` (object-scoped string replace; mind `"YYYY": N` spacing &
+  private-school `nrt` mirrors) and drop from `TUI_IRREGULAR`.
+- **Projections** are linear/CAGR/logistic on each school's own history — clearly
+  labeled non-forecasts. If asked to harden, that's the place.
+- **Backlog: S/A/B/C/D/F tier ranking** (see Backlog section) — still not started.
+- Run `indexnow_ping.py` after deploys with new/changed pages (glossary etc.).
 
 ---
 
@@ -230,8 +267,16 @@ Validation: inline JS `node --check` OK; all JSON-LD valid; version drift clean
 ## DATA notes (for step 2, the data check — NEXT)
 
 - **Two data layers must stay in sync:** inline `data/exhibit-data.js` (current
-  year) and `data/exhibit_data.json.gz` (full history). A rebuilt dataset should
-  regenerate **both**, then run `build_school_pages.py`.
+  year + the `*_trend` series, **2011–2025**) and `data/exhibit_data.json.gz`
+  (`getSchoolHistory(id)` → `rec.history`, per-year, **~2018–2026**). Rebuild
+  regenerates **both**, then `build_school_pages.py`.
+- **gz `history` is RICH (corrected note):** earlier handoffs wrongly said it was
+  "bar only" — that was from sampling the latest year (2026), which only has bar
+  data (employment reporting lags ~1yr). Across all years it carries **employment
+  mix, race, sex, grants $, resident/non-res tuition, faculty, transfers, etc. per
+  year**. The employment/demographics/sex over-time charts read from it. It parses
+  with `NaN`→null. The 15-yr `*_trend` series (LSAT/GPA/bar/tuition/acc/apps/enr/
+  fac/trans) live inline; richer composition history is gz-only (≈2018+).
 - **Known seam:** ~4 inline-only **closed** schools (Charlotte, Hamline, Indiana
   Tech, William Mitchell-era) exist in `S` but **not** in the gz history —
   `getSchoolHistory(id)` returns null for them by design. Verify the new dataset
@@ -252,14 +297,18 @@ Validation: inline JS `node --check` OK; all JSON-LD valid; version drift clean
 
 ## Quick start for the next chat
 
-1. `git fetch && git checkout main && git pull` — confirm HEAD is `3cb8579` (or later),
-   `VERSION` is `1.29.0`.
-2. Confirm the v1.29.0 deploy is live; if data/titles changed, run
-   `python3 scripts/indexnow_ping.py` to ping for recrawl.
-3. **Mobile pass** continues — sweep for other header/overlay z-index issues on
-   phones; verify the school-overview fix on a real device.
-4. Any data refresh: edit the dataset, run `bash scripts/build.sh` (regen + counts +
-   version), bump `VERSION` first if shipping. Update the "Last synced …" date
-   string (NOT auto-stamped).
-5. Ship: session branch → fast-forward merge into `main` → push. Hard-reload the
-   live site once to install any new SW.
+1. `git fetch && git checkout main && git reset --hard origin/main` — confirm HEAD
+   is `bf57056` (or later, incl. the CI auto-regen commit), `VERSION` is `1.44.0`.
+2. **Edit `index.html` inline JS → `node --check` it** (extract largest `<script>`
+   without `src`). Bump `VERSION`, run `bash scripts/build.sh` (regen + counts +
+   stamp). Validate JSON-LD if you touched it. No em dashes.
+3. **Ship + reconcile main** (it auto-regenerates — see the heads-up box at top):
+   push branch; `git checkout main && git reset --hard origin/main`; `git merge
+   --ff-only <branch>`; if ff fails, rebase branch on origin/main, force-with-lease,
+   then ff main. Hard-reload live once to install the new SW.
+4. After deploys with new/changed pages: `python3 scripts/indexnow_ping.py`.
+5. **Real-device pass recommended** on a rich school (e.g. Michigan): projection
+   cones, click-to-zoom charts (+ New tab), loan sliders, bimodal bar, employment/
+   demographics dropdowns, the 509α no-school hero.
+6. Owner to verify the **15 flagged tuition schools** (`tuition-audit.md`) against
+   the 509 source, then patch + de-flag.
