@@ -370,7 +370,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .pb-counsel-header{border-top:3px solid var(--counsel);}
 
 /* Map filters bar */
-/* Map filters relocated v1.32.0, top-of-map horizontal toolbar, docked between the
+/* Map filters relocated v1.33.0, top-of-map horizontal toolbar, docked between the
    left Match Me / Compare sidebar (ends at 380px) and the always-open right school
    panel (400px), sitting just under the global header. The left sidebar is now
    reserved exclusively for Match Me + Compare. */
@@ -447,7 +447,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
    header (school name + bar pass chip) isn't hidden by filter chips or the BLS
    tooltip card. Was top:76px causing the upper ~50px to be eaten. */
 /* schoolPanel sits at the natural top now that map-filter bar moved into the left
-   panel (v1.32.0) — frees ~50px of vertical space at the top of the right column. */
+   panel (v1.33.0) — frees ~50px of vertical space at the top of the right column. */
 #schoolPanel{position:fixed;top:76px;right:0;bottom:36px;width:400px;z-index:100;background:rgba(4,13,23,0.97);border-left:1px solid rgba(74,122,155,0.22);overflow-y:auto;transform:translateX(0);transition:transform .3s;}#schoolPanel.hidden{transform:translateX(100%);}
 #schoolPanel.open{transform:translateX(0);}
 .sp-close{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(4,13,23,0.98);border-bottom:1px solid rgba(74,122,155,0.15);}
@@ -457,7 +457,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .sp-tab{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border:1px solid rgba(74,122,155,0.2);background:transparent;color:var(--dim);cursor:pointer;transition:all .2s;}
 .sp-tab+.sp-tab{border-left:none;}
 .sp-tab.on{background:rgba(217,119,87,0.1);color:var(--orange);border-color:rgba(217,119,87,0.35);}
-/* School-panel (right side) typography tightened v1.32.0, was visibly scaled-too-big
+/* School-panel (right side) typography tightened v1.33.0, was visibly scaled-too-big
    per owner. Reduced metric/value sizes by ~15%, tighter section padding, smaller
    section labels, more breathable line-height. */
 .sp-header{padding:14px 16px 10px;border-bottom:1px solid rgba(74,122,155,0.12);}
@@ -605,11 +605,18 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
   .dp-row{padding:2px 0;}
   .dp-row-v{font-size:15px;}
   .dp-chart-t{margin:9px 0 3px;font-size:11px;}
-  .snap{margin:12px 0 16px;}
-  .snap-grp{margin-bottom:9px;}
-  .snap-grid{grid-template-columns:repeat(auto-fit,minmax(122px,1fr));gap:6px;}
-  .snap-tile{padding:6px 9px 7px;}
-  .snap-v{font-size:18px;}
+  /* "At a glance" is just a teaser — keep it compact: smaller tiles, more per row,
+     tighter groups, so it takes minimal vertical real estate above the detail. */
+  .snap{margin:8px 0 10px;}
+  .snap-h{margin-bottom:7px;font-size:12px;}
+  .snap-grp{margin-bottom:5px;}
+  .snap-grp-t{font-size:10px;margin:0 0 3px;letter-spacing:1.4px;}
+  .snap-grid{grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:5px;}
+  .snap-tile{padding:5px 8px;gap:1px;}
+  .snap-k{font-size:9px;letter-spacing:0.6px;}
+  .snap-v{font-size:15px;}
+  .snap-meta{min-height:0;gap:5px;}
+  .snap-spark{width:42px;height:12px;}
   /* Maximize info on the full view: reclaim page margins, compress the story
      spine, and (the big lever) narrow the module columns so MORE fact/chart
      modules pack side-by-side on a wide screen. Desktop-only; phone keeps air. */
@@ -1596,7 +1603,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
     More
   </button>
 </nav>
-<!-- Disclaimer bar removed v1.32.0, provenance now lives in the footer. -->
+<!-- Disclaimer bar removed v1.33.0, provenance now lives in the footer. -->
 <style>:root{--banner-h:0px;}</style>
 
 <div id="cookieBar" style="position:fixed;bottom:0;left:0;right:0;z-index:1000;background:#0B1826;border-top:1px solid rgba(217,119,87,0.4);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;box-shadow:0 -2px 12px rgba(0,0,0,0.5);">
@@ -1933,8 +1940,8 @@ function fmtUSD(v){ return v==null?"—":"$"+v.toLocaleString(); }
 // ═══════════════════════════════════════════════════════════════════════════
 const DATA_INVARIANTS = {
   total_schools: 208,         // 197 active/newly + 11 closed/transitioning (now included as historical entries)
-  schools_inline: 208,        // all inline as of v1.32.0, closed entries surface their pre-closure history
-  year_count: 15              // 2011–2025 inclusive (15-year span; pre-2018 added in v1.32.0 from Historic + v2 sheets)
+  schools_inline: 208,        // all inline as of v1.33.0, closed entries surface their pre-closure history
+  year_count: 15              // 2011–2025 inclusive (15-year span; pre-2018 added in v1.33.0 from Historic + v2 sheets)
 };
 // Verifiable count of the data cells actually shipped inline on this page:
 // every non-null scalar field, plus every per-year trend entry, across S.
@@ -2003,7 +2010,7 @@ function populateHeaderStats(){
 // ── Lazy-load full dataset (deferred until first deep-dive interaction) ──
 // Callers: `const ext = await loadFullDataset();` parsed JSON, or null on fail.
 // Subsequent calls return the cached object. Concurrent calls share one fetch.
-// Wired in v1.32.0 — schoolDetailHTML calls getSchoolHistory(id) which awaits
+// Wired in v1.33.0 — schoolDetailHTML calls getSchoolHistory(id) which awaits
 // this loader, then renders deep-history charts (employment evolution etc.) into
 // late-paint slots once data is available.
 window.EXT = window.EXT || { data: null, loading: null, byId: null };
@@ -2204,7 +2211,7 @@ function searchTypeaheadKey(e){
   }
 }
 
-// Disclaimer banner is now persistent (per v1.32.0 owner directive) — no dismiss; always visible.
+// Disclaimer banner is now persistent (per v1.33.0 owner directive) — no dismiss; always visible.
 // ── COOKIE notice dismiss (persists via localStorage) ──
 // ── Light/Dark theme toggle (persists via localStorage). Note: many inline styles
 // use literal rgba(4,13,23,...) and won't fully invert — full theming would require
@@ -3091,7 +3098,7 @@ function lineChart(opts){
   opts.series.forEach(s=>years.forEach(y=>{ const v=s.vals?s.vals[y]:null; if(v!=null) allv.push(v); }));
   if(!allv.length) return '<div class="lc-empty">No trend data</div>';
   const dataMin=Math.min(...allv), dataMax=Math.max(...allv);
-  // Headroom (v1.32.0): pad the data range BEFORE snapping to nice ticks, so the
+  // Headroom (v1.33.0): pad the data range BEFORE snapping to nice ticks, so the
   // highest/lowest points never land flush on the top/bottom gridline (where their
   // marker dot + endpoint label would clip past the plot edge). Padding the input
   // also bumps the rounded bound up a step when a value sits exactly on a boundary
@@ -3163,7 +3170,7 @@ function lineChart(opts){
     const pv=years.map(y=>pin.vals?pin.vals[y]:null);
     let li=-1; for(let i=pv.length-1;i>=0;i--){ if(pv[i]!=null){ li=i; break; } }
     if(li>=0){ const v=pv[li], x=X(li), yy=Y(v), last=(li===years.length-1);
-      // Endpoint label placement rule (v1.32.0): if the line is RISING into the
+      // Endpoint label placement rule (v1.33.0): if the line is RISING into the
       // endpoint, drop the label BELOW the marker (clears the ascending line and
       // the top edge it would otherwise clip); if FALLING, lift it ABOVE. Clamp
       // to the chart box so it can never get cut off. The --chart-halo var gives a
@@ -3283,7 +3290,7 @@ function bandChart(opts){
 
 // ── Full school detail page (items 5 & 9): opens in a new tab via #school/<id> ─
 // ── Scholarship distribution ────────────────────────────────────────────────
-// Canonical buckets per owner directive (v1.32.0): student-favorability gradient.
+// Canonical buckets per owner directive (v1.33.0): student-favorability gradient.
 // "No grant" is DERIVED = 100 - (lt + mt + full + gt) — the source's none count is
 // known to be unreliable (negatives, mis-reports); the derivation guarantees the
 // stack sums to 100% and avoids fabricated bad data.
@@ -3710,7 +3717,7 @@ function outcomeFunnel(s){
 
 function navSchool(id){
   // HASH ROUTES — safest, work anywhere, no 404.html or server-side rewrites needed.
-  // Reverted from clean /school/<slug> paths in v1.32.0 because GH Pages without a
+  // Reverted from clean /school/<slug> paths in v1.33.0 because GH Pages without a
   // deployed 404.html serves real 404s for any unknown path. When the project moves
   // to a custom domain with rewrites (Netlify _redirects, Vercel rewrites, Cloudflare),
   // flip CLEAN_URLS to true and the deep-link helpers below will re-engage.
@@ -4307,8 +4314,8 @@ function schoolDetailHTML(s){
   // Acceptance rate x-axis clamped to 2016+ (owner directive).
   const accYrs=(()=>{ const out=[]; const lastY=yrs.length?+yrs[yrs.length-1]:2025; for(let y=2016;y<=lastY;y++) out.push(String(y)); return out; })();
   const accChart =lineChart({years:accYrs,series:[{vals:s.acc_trend,color:'#EF5350'}],pinIndex:0,fmt:v=>v.toFixed(1)+'%',label:'Acceptance rate'});
-  const tuiChart =lineChart({years:yrs,series:[{vals:s.tui_trend,color:'#FFA726'}],pinIndex:0,fmt:v=>'$'+Math.round(v/1000)+'K',label:'Tuition'});
-  const barChart =lineChart({years:yrs,series:[{vals:s.bar_trend,color:'#4A9B6B'},{vals:s.bar_2yr_trend,color:'#5AABCB'}],pinIndex:0,fmt:v=>v.toFixed(1)+'%',label:'Bar passage, first-time & 2-yr ultimate'});
+  const tuiChart =bandChart({years:yrs,p25:s.tui_trend,p50:s.tui_trend,p75:s.nrt_trend,color:'#FFA726',fmt:v=>'$'+Math.round(v/1000)+'K',label:'Tuition resident to non-resident'});
+  const barChart =bandChart({years:yrs,p25:s.bar_trend,p50:s.bar_trend,p75:s.bar_2yr_trend,color:'#4A9B6B',fmt:v=>Math.round(v)+'%',label:'Bar passage first-time to 2-yr ultimate'});
   const enrChart =lineChart({years:yrs,series:[{vals:s.enr_trend,color:'#A78BFA'}],pinIndex:0,fmt:v=>Math.round(v).toLocaleString(),label:'Enrollment'});
   const gpaChart =bandChart({years:yrs,p25:s.gpa25_trend,p50:s.gpa_trend,p75:s.gpa75_trend,color:'#9BD1E8',fmt:v=>Number(v).toFixed(2),label:'uGPA 25–75 band'});
   const appsChart=lineChart({years:yrs,series:[{vals:s.apps_trend,color:'#A4C8DD'},{vals:s.offers_trend,color:'#5AABCB'}],pinIndex:0,fmt:v=>Math.round(v).toLocaleString(),label:'Applications & offers'});
@@ -4358,7 +4365,7 @@ function schoolDetailHTML(s){
             (s.tui?'<div class="dp-row dp-row-net"><span class="dp-row-k">3-yr sticker total</span><span class="dp-row-v">'+usd(s.tui*3)+'</span></div>':'')+
             (s.tui&&s.grant_med!=null?'<div class="dp-row dp-row-net"><span class="dp-row-k"><strong>3-yr net total</strong></span><span class="dp-row-v" style="color:var(--orange);"><strong>'+usd((s.tui-s.grant_med)*3)+'</strong></span></div>':'')
           )+
-          cm('Tuition · '+yrsLabel, tuiChart)+
+          cm('Tuition · resident → non-resident · '+yrsLabel, tuiChart+'<div class="dp-leg" style="margin-top:4px;"><span class="dp-leg-i"><span class="dp-leg-dot" style="background:#FFA726"></span>resident (line)</span><span class="dp-leg-i"><span class="dp-leg-dot" style="background:rgba(255,167,38,0.32)"></span>up to non-resident (band)</span></div>')+
           cm('% by grant size · over time '+adjFlag(scholAdjusted(s),'No-grant share'), scholStackTime(s))+
           fm(scholBreakdown(s))
         )+
@@ -4373,7 +4380,7 @@ function schoolDetailHTML(s){
             row(gl('State avg bar'),pct(s.bar_state_avg))+
             row(gl('vs state'),s.bar_state_diff!=null?(s.bar_state_diff>0?'+':'')+s.bar_state_diff+'pt':'—',s.bar_state_diff>=0?'#4A9B6B':'#EF5350')
           )+
-          cm('Bar passage · first-time &amp; 2-yr ultimate · '+yrsLabel, barChart+leg2('First-time','#4A9B6B','2-yr ultimate','#5AABCB'))
+          cm('Bar passage · first-time → 2-yr ultimate · '+yrsLabel, barChart+'<div class="dp-leg" style="margin-top:4px;"><span class="dp-leg-i"><span class="dp-leg-dot" style="background:#4A9B6B"></span>first-time (line)</span><span class="dp-leg-i"><span class="dp-leg-dot" style="background:rgba(74,155,107,0.32)"></span>second-chance gap, up to 2-yr ultimate (band)</span></div>')
         )+
         '<div class="story-full">'+
           jobOutcomeHero(s)+
@@ -5736,7 +5743,7 @@ function openShareModal(){
   document.body.appendChild(m);
 }
 
-// Disclaimer bar removed v1.32.0 — --banner-h is hardcoded to 0 in the inline
+// Disclaimer bar removed v1.33.0 — --banner-h is hardcoded to 0 in the inline
 // <style> after the header; the dynamic syncBannerHeight observer is no longer
 // needed. Provenance lives in the footer.
 // Honor #school/X or #compare=… in URL on first load
