@@ -375,7 +375,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .pb-counsel-header{border-top:3px solid var(--counsel);}
 
 /* Map filters bar */
-/* Map filters relocated v1.45.0, top-of-map horizontal toolbar, docked between the
+/* Map filters relocated v1.45.1, top-of-map horizontal toolbar, docked between the
    left Match Me / Compare sidebar (ends at 380px) and the always-open right school
    panel (400px), sitting just under the global header. The left sidebar is now
    reserved exclusively for Match Me + Compare. */
@@ -452,7 +452,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
    header (school name + bar pass chip) isn't hidden by filter chips or the BLS
    tooltip card. Was top:76px causing the upper ~50px to be eaten. */
 /* schoolPanel sits at the natural top now that map-filter bar moved into the left
-   panel (v1.45.0) — frees ~50px of vertical space at the top of the right column. */
+   panel (v1.45.1) — frees ~50px of vertical space at the top of the right column. */
 #schoolPanel{position:fixed;top:76px;right:0;bottom:36px;width:400px;z-index:100;background:rgba(4,13,23,0.97);border-left:1px solid rgba(74,122,155,0.22);overflow-y:auto;transform:translateX(0);transition:transform .3s;}#schoolPanel.hidden{transform:translateX(100%);}
 #schoolPanel.open{transform:translateX(0);}
 .sp-close{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(4,13,23,0.98);border-bottom:1px solid rgba(74,122,155,0.15);}
@@ -462,7 +462,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .sp-tab{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border:1px solid rgba(74,122,155,0.2);background:transparent;color:var(--dim);cursor:pointer;transition:all .2s;}
 .sp-tab+.sp-tab{border-left:none;}
 .sp-tab.on{background:rgba(217,119,87,0.1);color:var(--orange);border-color:rgba(217,119,87,0.35);}
-/* School-panel (right side) typography tightened v1.45.0, was visibly scaled-too-big
+/* School-panel (right side) typography tightened v1.45.1, was visibly scaled-too-big
    per owner. Reduced metric/value sizes by ~15%, tighter section padding, smaller
    section labels, more breathable line-height. */
 .sp-header{padding:14px 16px 10px;border-bottom:1px solid rgba(74,122,155,0.12);}
@@ -1312,7 +1312,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
 .theme-light .cmp-act{color:#374151!important;border-color:rgba(60,90,120,0.3)!important;}
 .theme-light .cmp-bar-track,.theme-light .cmp-emp-track{background:rgba(60,90,120,0.10)!important;}
 /* ──────────────────────────────────────────────────────────────────────────
-   PRINT / SAVE-AS-PDF  (rebuilt v1.45.0)
+   PRINT / SAVE-AS-PDF  (rebuilt v1.45.1)
    The school page is now a sectioned narrative (story-sec / story-mod) with
    historic stacked charts, projections, an interactive loan calculator and
    click-to-zoom widgets. This stylesheet turns that live view into a clean,
@@ -1701,7 +1701,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
     More
   </button>
 </nav>
-<!-- Disclaimer bar removed v1.45.0, provenance now lives in the footer. -->
+<!-- Disclaimer bar removed v1.45.1, provenance now lives in the footer. -->
 <style>:root{--banner-h:0px;}</style>
 
 <div id="cookieBar" style="position:fixed;bottom:0;left:0;right:0;z-index:1000;background:#0B1826;border-top:1px solid rgba(217,119,87,0.4);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;box-shadow:0 -2px 12px rgba(0,0,0,0.5);">
@@ -1966,7 +1966,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
     </a>
   </div>
   <div style="padding:0 16px;font-family:var(--mono);font-size:11px;color:var(--dimmer);border-left:1px solid rgba(74,122,155,0.12);white-space:nowrap;letter-spacing:0.4px;">
-    <span style="color:#4A9B6B;">●</span>&nbsp; Sourced from official ABA Standard 509 disclosures &nbsp;·&nbsp; <span style="color:var(--orange);">Last synced May 31, 2026</span> &nbsp;·&nbsp; <span style="color:#7AAAC8;">v1.45.0</span>
+    <span style="color:#4A9B6B;">●</span>&nbsp; Sourced from official ABA Standard 509 disclosures &nbsp;·&nbsp; <span style="color:var(--orange);">Last synced May 31, 2026</span> &nbsp;·&nbsp; <span style="color:#7AAAC8;">v1.45.1</span>
   </div>
 </div>
 
@@ -2037,8 +2037,8 @@ function fmtUSD(v){ return v==null?"—":"$"+v.toLocaleString(); }
 // ═══════════════════════════════════════════════════════════════════════════
 const DATA_INVARIANTS = {
   total_schools: 208,         // 197 active/newly + 11 closed/transitioning (now included as historical entries)
-  schools_inline: 208,        // all inline as of v1.45.0, closed entries surface their pre-closure history
-  year_count: 15              // 2011–2025 inclusive (15-year span; pre-2018 added in v1.45.0 from Historic + v2 sheets)
+  schools_inline: 208,        // all inline as of v1.45.1, closed entries surface their pre-closure history
+  year_count: 15              // 2011–2025 inclusive (15-year span; pre-2018 added in v1.45.1 from Historic + v2 sheets)
 };
 // Verifiable count of the data cells actually shipped inline on this page:
 // every non-null scalar field, plus every per-year trend entry, across S.
@@ -2107,7 +2107,7 @@ function populateHeaderStats(){
 // ── Lazy-load full dataset (deferred until first deep-dive interaction) ──
 // Callers: `const ext = await loadFullDataset();` parsed JSON, or null on fail.
 // Subsequent calls return the cached object. Concurrent calls share one fetch.
-// Wired in v1.45.0 — schoolDetailHTML calls getSchoolHistory(id) which awaits
+// Wired in v1.45.1 — schoolDetailHTML calls getSchoolHistory(id) which awaits
 // this loader, then renders deep-history charts (employment evolution etc.) into
 // late-paint slots once data is available.
 window.EXT = window.EXT || { data: null, loading: null, byId: null };
@@ -2118,11 +2118,24 @@ async function loadFullDataset(){
     try {
       const resp = await fetch('data/exhibit_data.json.gz');
       if(!resp.ok) throw new Error('HTTP '+resp.status);
-      if(typeof DecompressionStream === 'undefined'){
-        throw new Error('DecompressionStream unsupported in this browser');
+      const buf = await resp.arrayBuffer();
+      const bytes = new Uint8Array(buf);
+      let text;
+      // Robust to however the host serves the .gz: if the bytes still carry the
+      // gzip magic (0x1F 0x8B) we got the raw archive and inflate it ourselves;
+      // otherwise a CDN/browser already transparently decompressed it (it sent
+      // Content-Encoding: gzip) and the body is plain JSON, so parse it directly.
+      // Cloudflare Pages does the latter for *.gz, which used to throw inside
+      // DecompressionStream and left Trends/history "unavailable in this browser".
+      if(bytes.length >= 2 && bytes[0] === 0x1f && bytes[1] === 0x8b){
+        if(typeof DecompressionStream === 'undefined'){
+          throw new Error('DecompressionStream unsupported and payload is gzip-encoded');
+        }
+        const stream = new Response(buf).body.pipeThrough(new DecompressionStream('gzip'));
+        text = await new Response(stream).text();
+      } else {
+        text = new TextDecoder('utf-8').decode(buf);
       }
-      const decompressed = resp.body.pipeThrough(new DecompressionStream('gzip'));
-      const text = await new Response(decompressed).text();
       const parsed = JSON.parse(text);
       window.EXT.data = parsed;
       // Build O(1) id index once — used by getSchoolHistory.
@@ -2308,7 +2321,7 @@ function searchTypeaheadKey(e){
   }
 }
 
-// Disclaimer banner is now persistent (per v1.45.0 owner directive) — no dismiss; always visible.
+// Disclaimer banner is now persistent (per v1.45.1 owner directive) — no dismiss; always visible.
 // ── COOKIE notice dismiss (persists via localStorage) ──
 // ── Light/Dark theme toggle (persists via localStorage). Note: many inline styles
 // use literal rgba(4,13,23,...) and won't fully invert — full theming would require
@@ -3190,7 +3203,7 @@ function niceTicks(min, max){
   for(let v=lo; v<=hi+1e-9; v+=step) out.push(+v.toFixed(10));
   return {min:lo, max:hi, ticks:out, step};
 }
-// ── 4-year statistical projection (v1.45.0) ──────────────────────────────────
+// ── 4-year statistical projection (v1.45.1) ──────────────────────────────────
 // Fit the school's own per-year history and extend it. Per-metric model:
 //   'rate'  (0–100% bounded) → logit-linear (stays inside 0–100, eases at bounds)
 //   'mult'  ($/counts, compounding) → log-linear (i.e. a CAGR)
@@ -3249,7 +3262,7 @@ function lineChart(opts){
   if(!allv.length) return '<div class="lc-empty">No trend data</div>';
   if(projData) projData.forEach(pd=>{ if(pd) futureXs.forEach(x=>{ allv.push(pd.mid[x],pd.lo[x],pd.hi[x]); }); });
   const dataMin=Math.min(...allv), dataMax=Math.max(...allv);
-  // Headroom (v1.45.0): pad the data range BEFORE snapping to nice ticks, so the
+  // Headroom (v1.45.1): pad the data range BEFORE snapping to nice ticks, so the
   // highest/lowest points never land flush on the top/bottom gridline (where their
   // marker dot + endpoint label would clip past the plot edge). Padding the input
   // also bumps the rounded bound up a step when a value sits exactly on a boundary
@@ -3331,7 +3344,7 @@ function lineChart(opts){
     const pv=years.map(y=>pin.vals?pin.vals[y]:null);
     let li=-1; for(let i=pv.length-1;i>=0;i--){ if(pv[i]!=null){ li=i; break; } }
     if(li>=0){ const v=pv[li], x=X(li), yy=Y(v), last=(li===years.length-1);
-      // Endpoint label placement rule (v1.45.0): if the line is RISING into the
+      // Endpoint label placement rule (v1.45.1): if the line is RISING into the
       // endpoint, drop the label BELOW the marker (clears the ascending line and
       // the top edge it would otherwise clip); if FALLING, lift it ABOVE. Clamp
       // to the chart box so it can never get cut off. The --chart-halo var gives a
@@ -3465,7 +3478,7 @@ function bandChart(opts){
 
 // ── Full school detail page (items 5 & 9): opens in a new tab via #school/<id> ─
 // ── Scholarship distribution ────────────────────────────────────────────────
-// Canonical buckets per owner directive (v1.45.0): student-favorability gradient.
+// Canonical buckets per owner directive (v1.45.1): student-favorability gradient.
 // "No grant" is DERIVED = 100 - (lt + mt + full + gt) — the source's none count is
 // known to be unreliable (negatives, mis-reports); the derivation guarantees the
 // stack sums to 100% and avoids fabricated bad data.
@@ -3940,7 +3953,7 @@ function outcomeFunnel(s){
 
 function navSchool(id){
   // HASH ROUTES — safest, work anywhere, no 404.html or server-side rewrites needed.
-  // Reverted from clean /school/<slug> paths in v1.45.0 because GH Pages without a
+  // Reverted from clean /school/<slug> paths in v1.45.1 because GH Pages without a
   // deployed 404.html serves real 404s for any unknown path. When the project moves
   // to a custom domain with rewrites (Netlify _redirects, Vercel rewrites, Cloudflare),
   // flip CLEAN_URLS to true and the deep-link helpers below will re-engage.
@@ -6168,7 +6181,7 @@ function openShareModal(){
   document.body.appendChild(m);
 }
 
-// Disclaimer bar removed v1.45.0 — --banner-h is hardcoded to 0 in the inline
+// Disclaimer bar removed v1.45.1 — --banner-h is hardcoded to 0 in the inline
 // <style> after the header; the dynamic syncBannerHeight observer is no longer
 // needed. Provenance lives in the footer.
 // Honor #school/X or #compare=… in URL on first load

@@ -2,37 +2,85 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Exhibit — Loading</title>
-<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404: No Such Exhibit · Exhibit 509</title>
+<meta name="robots" content="noindex,follow">
 <style>
-  body{margin:0;background:#06111E;color:#A4C8DD;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;font-size:13px;letter-spacing:1px;}
-  .o{color:#D97757;font-size:24px;font-weight:800;letter-spacing:-0.5px;}
-  .d{opacity:0.6;font-size:11px;}
+  :root{--navy:#06111E;--orange:#D97757;--white:#F4F8FB;--dim:#A4C8DD;--dimmer:#7AAAC8;--blue:#5AABCB;
+    --mono:ui-monospace,'Geist Mono',Menlo,monospace;--serif:Georgia,'Times New Roman',serif;}
+  *{box-sizing:border-box;}
+  html,body{margin:0;min-height:100vh;}
+  body{background:var(--navy);color:var(--white);font-family:var(--serif);line-height:1.65;
+    display:flex;align-items:center;justify-content:center;padding:40px 20px;position:relative;overflow-x:hidden;
+    /* faint blueprint grid, same motif as the school pages */
+    background-image:
+      linear-gradient(rgba(90,171,203,0.05) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(90,171,203,0.05) 1px,transparent 1px),
+      linear-gradient(rgba(90,171,203,0.022) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(90,171,203,0.022) 1px,transparent 1px);
+    background-size:120px 120px,120px 120px,24px 24px,24px 24px;background-position:-1px -1px;}
+  /* giant ghosted 404 watermark behind the card */
+  .ghost{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:0;}
+  .ghost span{font-family:var(--serif);font-weight:800;font-size:46vw;line-height:1;color:rgba(90,171,203,0.05);letter-spacing:-2vw;}
+  .wrap{position:relative;z-index:1;max-width:620px;width:100%;}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--orange);margin-bottom:6px;}
+  h1{font-family:var(--white);font-size:54px;font-weight:800;letter-spacing:-1.5px;margin:0 0 6px;font-family:'Nunito','Manrope',system-ui,sans-serif;}
+  .obj{color:var(--orange);}
+  .lede{font-size:17px;color:#D6E5F0;margin:0 0 24px;}
+  /* mock court caption */
+  .caption{font-family:var(--mono);font-size:13px;color:var(--dim);border:1px solid rgba(74,122,155,0.3);
+    border-radius:6px;background:rgba(74,122,155,0.05);padding:18px 20px;margin:0 0 22px;line-height:1.9;}
+  .caption .cap-head{text-align:center;color:var(--white);letter-spacing:1px;border-bottom:1px solid rgba(74,122,155,0.25);
+    padding-bottom:8px;margin-bottom:10px;font-size:12px;}
+  .caption table{width:100%;border-collapse:collapse;}
+  .caption td{vertical-align:top;padding:0;}
+  .caption .r{text-align:right;color:var(--dimmer);white-space:nowrap;padding-left:10px;}
+  .caption .br{border-right:1px solid rgba(74,122,155,0.3);}
+  .ruling{font-size:15px;color:#D6E5F0;margin:0 0 8px;}
+  .ruling strong{color:var(--white);}
+  .ruling .lbl{font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--orange);display:block;margin:16px 0 2px;}
+  .sig{font-family:var(--mono);font-size:12px;color:var(--dimmer);margin-top:18px;letter-spacing:0.5px;}
+  .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px;}
+  .btn{display:inline-flex;align-items:center;gap:7px;background:var(--orange);color:#0C1A2A;border-radius:6px;
+    padding:11px 18px;font-family:var(--mono);font-size:12px;letter-spacing:1px;font-weight:700;text-transform:uppercase;
+    text-decoration:none;transition:transform .15s,background .15s;}
+  .btn:hover{background:#E68660;transform:translateY(-1px);}
+  .btn.ghostbtn{background:transparent;color:var(--dim);border:1px solid rgba(74,122,155,0.4);}
+  .btn.ghostbtn:hover{color:var(--white);border-color:var(--white);background:rgba(74,122,155,0.08);}
+  @media(max-width:540px){h1{font-size:40px;}.caption{font-size:12px;}}
 </style>
-<script>
-  // SPA-on-GitHub-Pages redirect.
-  // We catch any path the static host can't find (/school/<slug>, /compare/X,Y, etc.),
-  // stash it in sessionStorage, and bounce to /. index.html reads the stash on load
-  // and restores the original path via history.replaceState before routing.
-  // (Standard spa-github-pages pattern by rafgraph — works without server rewrites.)
-  (function(){
-    var base = '/';
-    try {
-      var p = window.location.pathname + window.location.search + window.location.hash;
-      // Strip the GH Pages project subpath (case-insensitive), but PRESERVE the
-      // actual deployed case (capture group m[1]) when bouncing back to /. The
-      // repo is deployed at /Exhibit/ — a hardcoded lowercase redirect would 404.
-      var m = p.match(/^(\/[Ee]xhibit)(\/.*)?$/);
-      if(m){ p = m[2] || '/'; base = m[1] + '/'; }
-      sessionStorage.setItem('exhibit_spa_path', p);
-    } catch(e){}
-    window.location.replace(base);
-  })();
-</script>
 </head>
 <body>
-  <div class="o">Exhibit</div>
-  <div>Loading…</div>
-  <div class="d">If you aren't redirected, <a href="/" style="color:#D97757;">click here</a>.</div>
+  <div class="ghost" aria-hidden="true"><span>404</span></div>
+  <div class="wrap">
+    <div class="eyebrow">Exhibit 509 · Docket No. 404</div>
+    <h1><span class="obj">Objection.</span> Page not in evidence.</h1>
+    <p class="lede">The URL you requested could not be entered into the record. It may have been stricken, renamed, or it simply never took the stand.</p>
+
+    <div class="caption" role="img" aria-label="Mock legal case caption for a 404 not found error">
+      <div class="cap-head">IN THE COURT OF MISSING PAGES</div>
+      <table>
+        <tr><td class="br">THE VISITOR,</td><td class="r">)</td></tr>
+        <tr><td class="br">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Plaintiff,</td><td class="r">)&nbsp;&nbsp;Case No. 404</td></tr>
+        <tr><td class="br">&nbsp;&nbsp;v.</td><td class="r">)&nbsp;&nbsp;ORDER GRANTING</td></tr>
+        <tr><td class="br">THIS URL,</td><td class="r">)&nbsp;&nbsp;MOTION TO DISMISS</td></tr>
+        <tr><td class="br">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Defendant.</td><td class="r">)</td></tr>
+      </table>
+    </div>
+
+    <div class="ruling">
+      <span class="lbl">Findings of fact</span>
+      After exhaustive discovery, the requested page appears <strong>nowhere in the record</strong>. The Court finds no evidence it ever existed and, consistent with house policy, <strong>declines to fabricate one</strong> (we don't invent data, even URLs).
+      <span class="lbl">Order</span>
+      The visitor is hereby <strong>remanded to the homepage</strong>, where 208 ABA-accredited law schools await cross-examination. So ordered.
+      <div class="sig">/s/ <strong style="color:var(--dim);">509α</strong>, J. &nbsp;·&nbsp; Entered today, on the record.</div>
+    </div>
+
+    <div class="actions">
+      <a class="btn" href="/">Return to the Exhibit</a>
+      <a class="btn ghostbtn" href="/schools.html">Browse all schools</a>
+      <a class="btn ghostbtn" href="/methodology.html">Methodology</a>
+    </div>
+  </div>
 </body>
 </html>
