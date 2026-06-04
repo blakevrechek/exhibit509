@@ -29,6 +29,23 @@ The domain is `exhibit509.com`, so the brand and domain now match.
 > this doc; this session covered **1.28.0** (review items) and **1.29.0**
 > (rebrand + trust line + mobile fix).
 
+### Backlog / future ideas (not started)
+
+- **Our own school ranking — S/A/B/C/D/F tier list** (owner idea, publicity hook;
+  "everyone wants to rank everything," à la US News + tiermaker). Intended as a
+  *later* project, likely a **blog post / shareable artifact** rather than a core
+  app feature. Notes for whoever picks it up:
+  - We already have every input to do it transparently: bar pass + vs-state, FTLT
+    employment, BigLaw/clerkship mix, 3-yr net cost, $/outcome ratios, selectivity,
+    trajectory. A composite tier score is very doable from `S`.
+  - **Positioning tension to resolve first:** the site is explicitly *anti-opaque-
+    rankings* (About: "We don't sell rankings… trajectory is information"). Any
+    Exhibit 509 ranking must be the opposite of US News — **fully transparent
+    methodology, free, reproducible, no paid placement** — or it undercuts the
+    trust pitch. Frame as "here's the math, change the weights yourself" (an
+    interactive weighted tiermaker) rather than a handed-down authority list.
+  - Natural home: a `/rankings` or blog page + a shareable S–F tier graphic.
+
 ---
 
 ## What this project is
