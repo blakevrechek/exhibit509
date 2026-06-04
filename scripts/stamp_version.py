@@ -38,6 +38,8 @@ HTML_FILES = [
     "terms.html",
     "about.html",
     "contact.html",
+    "glossary.html",
+    "blog.html",
 ]
 
 

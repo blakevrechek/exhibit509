@@ -731,6 +731,17 @@ def update_sitemap(schools):
     <priority>0.3</priority>
   </url>
   <url>
+    <loc>https://exhibit509.com/glossary.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://exhibit509.com/blog.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+    <lastmod>2026-06-04</lastmod>
+  </url>
+  <url>
     <loc>https://exhibit509.com/schools.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>

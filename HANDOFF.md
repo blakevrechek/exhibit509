@@ -3,7 +3,7 @@
 **Last updated:** 2026-06-04
 **Repo:** `blakevrechek/exhibit509`
 **Live:** https://exhibit509.com (Cloudflare Pages, auto-deploys from `main`)
-**Current version:** `1.44.0` (see `VERSION`)
+**Current version:** `1.45.0` (see `VERSION`)
 **`main` HEAD:** `bf57056` — *data sections: sex-over-time, curriculum/faculty charts, transfers, JD-jobs trend*
 **Working branch:** `claude/elegant-lovelace-0awdY` (fast-forward merged into `main`)
 
@@ -198,6 +198,23 @@ glance" cut to a single 7-tile row.
 **1.43.0** — **#7 click-to-zoom charts**: event-delegated `chartZoom` → full-screen
 branded modal with cited source; **"New tab"** (`openChartTab`) serializes the
 chart to a standalone branded HTML page (blob URL).
+**1.45.0** — **faculty-trend data fix**: every school's `fac_trend["2025"]` was a
+corrupted constant `25` (the series is *full-time* faculty = gz `fac_ft`, not
+total); repaired all 186 wrong values from the authoritative gz `fac_ft`, relabeled
+the chart "Total faculty" → "Full-time faculty" (the 9 remaining 25s are genuinely
+small schools). **Curriculum & program mix over time** (`CURRIC_BUCKETS` +
+`curricYear`/`curricNormHistory`, painted into `#curric-evo-slot`; normalizes the
+shifting ABA `raw_curric` schemas → clinics/field/simulation/seminars/co-curricular
+stacked per year). **Blog** (`blog.html`, writings placeholder with 3 starter posts;
+in sitemap + version stamper). **Global header split** — interactive *features* on
+the left, the *writings* (Blog/Methodology/Glossary/About/Contact) pushed right
+behind a hairline (`.h-nav-grp`/`.h-nav-writ`; mirrored on standalone pages'
+`.gh-nav`). **Subtle blueprint grid** background on the school full page
+(`#schoolPage`, 24px minor + 120px major, both themes). **Print readout rebuilt**
+to match the story-sec/story-mod layout: collapses masonry to one column, keeps
+charts whole, hides every interactive-only control (dropdowns, loan sliders, zoom),
+and prints a branded `.dp-print-head`. (Sex/race historic stacks + per-year
+employment stack + outcome funnel already shipped in 1.44.0.)
 **1.44.0** — gender composition over time (`SEX_BUCKETS`); curriculum bars
 (`curriculumBars`) + faculty-total trend; **transfers own module** (in/out + net +
 transfer-GPA band + trend); always-on **"JD jobs over time"** line under the
