@@ -25,8 +25,8 @@
   p,li{font-size:15px;color:#C9DCEA;}
   a{color:var(--orange);}
   code{font-family:var(--mono);font-size:13px;color:var(--orange);background:rgba(217,119,87,0.08);padding:1px 6px;border-radius:2px;}
-  .back{display:inline-block;margin-bottom:28px;font-family:var(--mono);font-size:12px;letter-spacing:1px;text-decoration:none;color:var(--dim);}
-  .back:hover{color:var(--orange);}
+  .back{display:inline-flex;align-items:center;gap:7px;margin-bottom:28px;background:var(--orange);color:#0C1A2A;border-radius:5px;padding:9px 16px;font-family:var(--mono);font-size:12px;letter-spacing:1px;font-weight:700;text-transform:uppercase;text-decoration:none;transition:background .15s,transform .15s;}
+  .back:hover{background:#E68660;color:#0C1A2A;transform:translateY(-1px);}
   .note{border-left:2px solid rgba(217,119,87,0.5);padding:10px 16px;background:rgba(217,119,87,0.06);font-family:var(--mono);font-size:12px;color:var(--dim);line-height:1.6;margin:18px 0;}
   table{width:100%;border-collapse:collapse;margin:14px 0;}
   th,td{text-align:left;padding:8px 10px;border-bottom:1px solid rgba(74,122,155,0.20);font-family:var(--mono);font-size:13px;}
@@ -38,7 +38,7 @@
 <style id="ghfChrome">
 /* ── Global site chrome: fixed header + footer bar, shared with the app shell.
    Self-contained (literal colors) so it does not depend on each page's vars. ── */
-body{padding-top:52px;padding-bottom:42px;}
+body{padding-top:52px;padding-bottom:42px;background-image:radial-gradient(rgba(164,200,221,0.06) 1px,transparent 1px);background-size:22px 22px;background-attachment:fixed;}
 #floatBack{display:none!important;}
 .gh{position:fixed;top:0;left:0;right:0;z-index:1000;height:52px;display:flex;align-items:center;background:rgba(4,13,23,0.97);border-bottom:1px solid rgba(74,122,155,0.3);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);}
 .gh-logo{display:flex;align-items:center;gap:10px;padding:0 18px;height:100%;text-decoration:none;border-right:1px solid rgba(74,122,155,0.2);white-space:nowrap;}
@@ -120,7 +120,7 @@ body{padding-top:52px;padding-bottom:42px;}
   <h3>8.2 Hosting &amp; cache</h3>
   <p>Exhibit is hosted on <strong>Cloudflare Pages</strong>. As the hosting and content-delivery network, Cloudflare receives standard web request data (IP address, user-agent, request URL, timestamp) for every page load, this is what lets the Site serve and lets Cloudflare detect abuse, mitigate denial-of-service attacks, and route requests to the nearest edge location. Cloudflare's data handling is governed by its <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Privacy Policy</a> and <a href="https://www.cloudflare.com/cookie-policy/" target="_blank" rel="noopener">Cookie Policy</a>. Cloudflare may set its own technical cookies under its own privacy practices to operate the security and performance layer; we do not control those and we do not access their contents.</p>
   <p>Static files (HTML, CSS, JS, images, the compressed ABA dataset) are cached on Cloudflare's global edge network so the Site loads quickly. Your browser also caches static assets to avoid re-downloading them on repeat visits. Cache headers are public and conservative, HTML refreshes every 5 minutes; images and the dataset bundle cache for one year with an <code>immutable</code> hint (a content change ships under a new filename, so the cache is safe).</p>
-  <p>The Site also installs a <strong>Service Worker</strong> (<code>sw.js</code>) that caches the app shell locally on your device for offline use and fast repeat loads. The cache is named after the current build (e.g. <code>exhibit-v1.30.2</code>); when a new build deploys, the old cache is purged automatically on your next visit. You can manually clear it via your browser's site-data settings.</p>
+  <p>The Site also installs a <strong>Service Worker</strong> (<code>sw.js</code>) that caches the app shell locally on your device for offline use and fast repeat loads. The cache is named after the current build (e.g. <code>exhibit-v1.30.3</code>); when a new build deploys, the old cache is purged automatically on your next visit. You can manually clear it via your browser's site-data settings.</p>
 
   <h3>8.3 Third-party assets</h3>
   <p>To render the map and typography, the Site loads a small number of assets from third parties. When your browser fetches these, those providers may receive your IP address and user-agent and may log them under their own privacy policies. We do not control that processing and we set no cookies through it. The third parties currently used:</p>
