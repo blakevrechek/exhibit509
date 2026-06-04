@@ -375,7 +375,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .pb-counsel-header{border-top:3px solid var(--counsel);}
 
 /* Map filters bar */
-/* Map filters relocated v1.45.2, top-of-map horizontal toolbar, docked between the
+/* Map filters relocated v1.46.0, top-of-map horizontal toolbar, docked between the
    left Match Me / Compare sidebar (ends at 380px) and the always-open right school
    panel (400px), sitting just under the global header. The left sidebar is now
    reserved exclusively for Match Me + Compare. */
@@ -452,7 +452,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
    header (school name + bar pass chip) isn't hidden by filter chips or the BLS
    tooltip card. Was top:76px causing the upper ~50px to be eaten. */
 /* schoolPanel sits at the natural top now that map-filter bar moved into the left
-   panel (v1.45.2) — frees ~50px of vertical space at the top of the right column. */
+   panel (v1.46.0) — frees ~50px of vertical space at the top of the right column. */
 #schoolPanel{position:fixed;top:76px;right:0;bottom:36px;width:400px;z-index:100;background:rgba(4,13,23,0.97);border-left:1px solid rgba(74,122,155,0.22);overflow-y:auto;transform:translateX(0);transition:transform .3s;}#schoolPanel.hidden{transform:translateX(100%);}
 #schoolPanel.open{transform:translateX(0);}
 .sp-close{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(4,13,23,0.98);border-bottom:1px solid rgba(74,122,155,0.15);}
@@ -462,7 +462,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .sp-tab{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border:1px solid rgba(74,122,155,0.2);background:transparent;color:var(--dim);cursor:pointer;transition:all .2s;}
 .sp-tab+.sp-tab{border-left:none;}
 .sp-tab.on{background:rgba(217,119,87,0.1);color:var(--orange);border-color:rgba(217,119,87,0.35);}
-/* School-panel (right side) typography tightened v1.45.2, was visibly scaled-too-big
+/* School-panel (right side) typography tightened v1.46.0, was visibly scaled-too-big
    per owner. Reduced metric/value sizes by ~15%, tighter section padding, smaller
    section labels, more breathable line-height. */
 .sp-header{padding:14px 16px 10px;border-bottom:1px solid rgba(74,122,155,0.12);}
@@ -527,7 +527,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .sp-barcorner-l{font-family:var(--mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--dimmer);}
 .sp-barcorner-v{font-family:var(--serif);font-size:18px;font-weight:700;line-height:1;}
 /* Full school detail page (hash-routed #school/<id>, opens in a new tab). Container styled by the single #schoolPage rule below. */
-.dp-wrap{max-width:1360px;margin:0 auto;padding:28px 48px 90px;}
+.dp-wrap{max-width:1900px;margin:0 auto;padding:26px 40px 90px;}
 /* Back-to-Exhibit as a clear primary tile (owner directive) */
 .dp-back{display:inline-flex;align-items:center;gap:8px;background:var(--orange);border:1.5px solid var(--orange);border-radius:5px;padding:11px 18px 11px 14px;font-family:var(--mono);font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:#0C1A2A;text-decoration:none;margin-bottom:24px;font-weight:700;cursor:pointer;transition:all .15s ease;}
 .dp-back:hover{background:#E68660;color:#0C1A2A;border-color:#E68660;transform:translateY(-1px);box-shadow:0 1px 0 rgba(0,0,0,0.05),0 6px 16px rgba(217,119,87,0.30);}
@@ -573,8 +573,20 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .dp-chart-t{font-family:var(--mono);font-size:12px;letter-spacing:1.8px;color:var(--dim);margin:14px 0 4px;text-transform:uppercase;font-weight:600;}
 .dp-chart-loading{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;color:var(--dimmer);padding:24px 14px;text-align:center;border:1px dashed rgba(74,122,155,0.18);margin-top:14px;}
 .dp-card::before{content:'';position:absolute;top:0;left:0;width:36px;height:2px;background:var(--orange);border-radius:0 0 2px 2px;}
-.lc{width:100%;height:auto;display:block;background:rgba(74,122,155,0.04);border:1px solid rgba(74,122,155,0.1);cursor:zoom-in;}
+.lc{width:100%;height:auto;display:block;background:rgba(74,122,155,0.04);border:1px solid rgba(74,122,155,0.1);cursor:zoom-in;transition:border-color .15s,box-shadow .15s;}
+.lc:hover{border-color:rgba(90,171,203,0.45);box-shadow:0 0 0 1px rgba(90,171,203,0.18);}
 .st-wrap{cursor:zoom-in;}
+/* "Click any chart to enlarge" affordance: a one-line tip atop the report, plus a
+   small per-chart-title hint so the zoom interaction is discoverable. */
+.chart-tip{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11.5px;letter-spacing:0.4px;color:var(--dimmer);background:rgba(90,171,203,0.07);border:1px solid rgba(90,171,203,0.18);border-radius:20px;padding:5px 13px;margin:2px 0 4px;}
+.chart-tip b{color:var(--blue);font-weight:700;}
+.theme-light .chart-tip{color:#3A6A88;background:rgba(90,171,203,0.10);border-color:rgba(90,171,203,0.28);}
+.zoom-hint{font-family:var(--mono);font-size:9.5px;letter-spacing:1px;color:var(--dimmer);opacity:0.55;font-weight:600;margin-left:8px;text-transform:none;}
+.dp-chart-t:hover .zoom-hint{opacity:0.95;color:var(--blue);}
+/* Multi-window trailing-change badge set (10y / 5y / 3y / 2y). */
+.trail-set{display:inline-flex;flex-wrap:wrap;gap:4px;margin-left:6px;vertical-align:middle;}
+.trail-set .traj{margin-left:0;font-size:9.5px;padding:0 4px;}
+.trail-w{font-weight:700;opacity:0.7;margin-right:2px;}
 /* #7 Click-to-zoom chart modal (full-screen, branded, cited; opens to its own tab) */
 .chart-modal{display:none;position:fixed;inset:0;z-index:2000;background:rgba(4,13,23,0.86);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:24px;}
 .cmx-box{background:linear-gradient(180deg,#0B1826,#06111E);border:1px solid rgba(74,122,155,0.3);border-radius:10px;max-width:1040px;width:100%;padding:18px 22px 16px;box-shadow:0 24px 70px rgba(0,0,0,0.6);}
@@ -658,15 +670,17 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
    "modules" (a facts block + one chart each) that pack vertically to fill the
    wide desktop canvas with almost no wasted space. ≤760px = one column. */
 .story{margin-top:6px;}
-.story-sec{padding:18px 0 4px;border-top:1px solid rgba(74,122,155,0.16);}
-.story-sec:first-of-type{border-top:none;}
+.story-sec{padding:26px 0 6px;margin-top:8px;border-top:1px solid rgba(74,122,155,0.16);}
+.story-sec:first-of-type{border-top:none;margin-top:0;padding-top:14px;}
+.theme-light .story-sec{border-top-color:rgba(60,90,120,0.16);}
 .story-eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:2px;text-transform:uppercase;color:var(--orange);font-weight:700;margin-bottom:5px;display:flex;align-items:center;gap:8px;}
 .sx-num{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border:1px solid rgba(217,119,87,0.5);border-radius:50%;font-size:10.5px;flex:0 0 auto;}
 .story-title{font-family:var(--serif);font-size:23px;font-weight:700;color:var(--white);letter-spacing:-0.4px;line-height:1.1;margin:0 0 5px;}
 .story-lede{font-family:var(--sans);font-size:14.5px;line-height:1.45;color:#C6D8E6;max-width:780px;margin:0 0 13px;}
 .story-lede strong{color:var(--white);font-weight:700;}
-/* Masonry module flow: CSS multi-column packs mixed-height blocks tightly. */
-.story-mods{column-width:288px;column-gap:22px;}
+/* Masonry module flow: CSS multi-column packs mixed-height blocks tightly.
+   Wider columns (was 288) make every chart noticeably larger on big displays. */
+.story-mods{column-width:340px;column-gap:24px;}
 .story-mod{break-inside:avoid;-webkit-column-break-inside:avoid;page-break-inside:avoid;margin:0 0 13px;display:inline-block;width:100%;}
 .story-mod .dp-chart-t{margin-top:0;}
 .story-mod-t{font-family:var(--mono);font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:var(--orange);font-weight:700;margin:0 0 5px;}
@@ -865,6 +879,13 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
 .jo-pct{font-family:var(--sans);font-size:14px;font-weight:700;color:var(--white);text-align:right;font-variant-numeric:tabular-nums;}
 .jo-n{font-family:var(--mono);font-size:11px;color:var(--dim);text-align:right;}
 .jo-d{font-family:var(--mono);font-size:10px;text-align:right;padding:2px 6px;border-radius:2px;letter-spacing:0.4px;}
+/* Trailing 10/5/3/2-yr change lines under each employment row + funnel stage. */
+.jo-trail-line{padding:0 0 5px 16px;margin-top:-2px;}
+.jo-trail-line:empty{display:none;}
+.jo-trail-line .trail-set{margin-left:0;}
+.funnel-trail-line{padding:1px 0 4px 8px;}
+.funnel-trail-line:empty{display:none;}
+.funnel-trail-line .trail-set{margin-left:0;}
 .jo-delta-up{color:#4A9B6B;background:rgba(74,155,107,0.10);}
 .jo-delta-down{color:#EF5350;background:rgba(239,83,80,0.10);}
 .jo-delta-flat{color:var(--dimmer);}
@@ -1312,7 +1333,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
 .theme-light .cmp-act{color:#374151!important;border-color:rgba(60,90,120,0.3)!important;}
 .theme-light .cmp-bar-track,.theme-light .cmp-emp-track{background:rgba(60,90,120,0.10)!important;}
 /* ──────────────────────────────────────────────────────────────────────────
-   PRINT / SAVE-AS-PDF  (rebuilt v1.45.2)
+   PRINT / SAVE-AS-PDF  (rebuilt v1.46.0)
    The school page is now a sectioned narrative (story-sec / story-mod) with
    historic stacked charts, projections, an interactive loan calculator and
    click-to-zoom widgets. This stylesheet turns that live view into a clean,
@@ -1701,7 +1722,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
     More
   </button>
 </nav>
-<!-- Disclaimer bar removed v1.45.2, provenance now lives in the footer. -->
+<!-- Disclaimer bar removed v1.46.0, provenance now lives in the footer. -->
 <style>:root{--banner-h:0px;}</style>
 
 <div id="cookieBar" style="position:fixed;bottom:0;left:0;right:0;z-index:1000;background:#0B1826;border-top:1px solid rgba(217,119,87,0.4);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;box-shadow:0 -2px 12px rgba(0,0,0,0.5);">
@@ -1966,7 +1987,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
     </a>
   </div>
   <div style="padding:0 16px;font-family:var(--mono);font-size:11px;color:var(--dimmer);border-left:1px solid rgba(74,122,155,0.12);white-space:nowrap;letter-spacing:0.4px;">
-    <span style="color:#4A9B6B;">●</span>&nbsp; Sourced from official ABA Standard 509 disclosures &nbsp;·&nbsp; <span style="color:var(--orange);">Last synced May 31, 2026</span> &nbsp;·&nbsp; <span style="color:#7AAAC8;">v1.45.2</span>
+    <span style="color:#4A9B6B;">●</span>&nbsp; Sourced from official ABA Standard 509 disclosures &nbsp;·&nbsp; <span style="color:var(--orange);">Last synced May 31, 2026</span> &nbsp;·&nbsp; <span style="color:#7AAAC8;">v1.46.0</span>
   </div>
 </div>
 
@@ -2037,8 +2058,8 @@ function fmtUSD(v){ return v==null?"—":"$"+v.toLocaleString(); }
 // ═══════════════════════════════════════════════════════════════════════════
 const DATA_INVARIANTS = {
   total_schools: 208,         // 197 active/newly + 11 closed/transitioning (now included as historical entries)
-  schools_inline: 208,        // all inline as of v1.45.2, closed entries surface their pre-closure history
-  year_count: 15              // 2011–2025 inclusive (15-year span; pre-2018 added in v1.45.2 from Historic + v2 sheets)
+  schools_inline: 208,        // all inline as of v1.46.0, closed entries surface their pre-closure history
+  year_count: 15              // 2011–2025 inclusive (15-year span; pre-2018 added in v1.46.0 from Historic + v2 sheets)
 };
 // Verifiable count of the data cells actually shipped inline on this page:
 // every non-null scalar field, plus every per-year trend entry, across S.
@@ -2107,7 +2128,7 @@ function populateHeaderStats(){
 // ── Lazy-load full dataset (deferred until first deep-dive interaction) ──
 // Callers: `const ext = await loadFullDataset();` parsed JSON, or null on fail.
 // Subsequent calls return the cached object. Concurrent calls share one fetch.
-// Wired in v1.45.2 — schoolDetailHTML calls getSchoolHistory(id) which awaits
+// Wired in v1.46.0 — schoolDetailHTML calls getSchoolHistory(id) which awaits
 // this loader, then renders deep-history charts (employment evolution etc.) into
 // late-paint slots once data is available.
 window.EXT = window.EXT || { data: null, loading: null, byId: null };
@@ -2321,7 +2342,7 @@ function searchTypeaheadKey(e){
   }
 }
 
-// Disclaimer banner is now persistent (per v1.45.2 owner directive) — no dismiss; always visible.
+// Disclaimer banner is now persistent (per v1.46.0 owner directive) — no dismiss; always visible.
 // ── COOKIE notice dismiss (persists via localStorage) ──
 // ── Light/Dark theme toggle (persists via localStorage). Note: many inline styles
 // use literal rgba(4,13,23,...) and won't fully invert — full theming would require
@@ -3203,7 +3224,7 @@ function niceTicks(min, max){
   for(let v=lo; v<=hi+1e-9; v+=step) out.push(+v.toFixed(10));
   return {min:lo, max:hi, ticks:out, step};
 }
-// ── 4-year statistical projection (v1.45.2) ──────────────────────────────────
+// ── 4-year statistical projection (v1.46.0) ──────────────────────────────────
 // Fit the school's own per-year history and extend it. Per-metric model:
 //   'rate'  (0–100% bounded) → logit-linear (stays inside 0–100, eases at bounds)
 //   'mult'  ($/counts, compounding) → log-linear (i.e. a CAGR)
@@ -3247,7 +3268,7 @@ function projDrawSeries(pd, X, Y, baseLen, color, ax, ay){
   return svg;
 }
 function lineChart(opts){
-  const years=opts.years, W=opts.w||320, H=opts.h||145;
+  const years=opts.years, W=opts.w||320, H=opts.h||160;
   const PL=32, PR=40, PT=12, PB=20, innerW=W-PL-PR, innerH=H-PT-PB;
   // Optional 4-year projection: extend the x-axis with future years + fit each series.
   const proj=opts.project; let axisYears=years, futureXs=[], projData=null; const baseLen=years.length;
@@ -3262,7 +3283,7 @@ function lineChart(opts){
   if(!allv.length) return '<div class="lc-empty">No trend data</div>';
   if(projData) projData.forEach(pd=>{ if(pd) futureXs.forEach(x=>{ allv.push(pd.mid[x],pd.lo[x],pd.hi[x]); }); });
   const dataMin=Math.min(...allv), dataMax=Math.max(...allv);
-  // Headroom (v1.45.2): pad the data range BEFORE snapping to nice ticks, so the
+  // Headroom (v1.46.0): pad the data range BEFORE snapping to nice ticks, so the
   // highest/lowest points never land flush on the top/bottom gridline (where their
   // marker dot + endpoint label would clip past the plot edge). Padding the input
   // also bumps the rounded bound up a step when a value sits exactly on a boundary
@@ -3344,7 +3365,7 @@ function lineChart(opts){
     const pv=years.map(y=>pin.vals?pin.vals[y]:null);
     let li=-1; for(let i=pv.length-1;i>=0;i--){ if(pv[i]!=null){ li=i; break; } }
     if(li>=0){ const v=pv[li], x=X(li), yy=Y(v), last=(li===years.length-1);
-      // Endpoint label placement rule (v1.45.2): if the line is RISING into the
+      // Endpoint label placement rule (v1.46.0): if the line is RISING into the
       // endpoint, drop the label BELOW the marker (clears the ascending line and
       // the top edge it would otherwise clip); if FALLING, lift it ABOVE. Clamp
       // to the chart box so it can never get cut off. The --chart-halo var gives a
@@ -3416,7 +3437,7 @@ function lcTip(ev){
 // is tightening across 2011–2025. Same axis-headroom + crosshair (incl. touch) as
 // lineChart. opts:{years, p25, p50, p75 (year→value maps), color, fmt, label, w, h}
 function bandChart(opts){
-  const years=opts.years, W=opts.w||340, H=opts.h||172;
+  const years=opts.years, W=opts.w||340, H=opts.h||188;
   const PL=34,PR=14,PT=12,PB=20, innerW=W-PL-PR, innerH=H-PT-PB;
   const p25=opts.p25||{}, p50=opts.p50||{}, p75=opts.p75||{};
   const color=opts.color||'#5AABCB', fmt=opts.fmt||(v=>Math.round(v));
@@ -3478,7 +3499,7 @@ function bandChart(opts){
 
 // ── Full school detail page (items 5 & 9): opens in a new tab via #school/<id> ─
 // ── Scholarship distribution ────────────────────────────────────────────────
-// Canonical buckets per owner directive (v1.45.2): student-favorability gradient.
+// Canonical buckets per owner directive (v1.46.0): student-favorability gradient.
 // "No grant" is DERIVED = 100 - (lt + mt + full + gt) — the source's none count is
 // known to be unreliable (negatives, mis-reports); the derivation guarantees the
 // stack sums to 100% and avoids fabricated bad data.
@@ -3659,6 +3680,44 @@ function deltaBadge(dObj, opts){
     return '<span class="traj traj-flat" title="'+fromY+'→'+toY+': ~no change">~ '+span+'yr</span>';
   const up=delta>0, dir=opts.dir||'asc', better=(dir==='desc')?!up:up;
   return '<span class="traj traj-'+(better?'up':'down')+'" title="'+fromY+' → '+toY+': '+vfmt(prev)+' → '+vfmt(cur)+'">'+(up?'↑':'↓')+' '+fmt(delta)+' · '+span+'yr</span>';
+}
+// Multi-window trailing-change badges (≈10y / 5y / 3y / 2y) for a {year:value}
+// series. Each window resolves to the latest data year ≤ (latest − window);
+// duplicate anchors (when history is too short) are dropped, and every badge is
+// labeled by its ACTUAL span so the numbers never overstate how far back the data
+// goes. dir='desc' → down is the good direction (e.g. "still seeking").
+function trailingBadges(series, opts){
+  opts=opts||{};
+  const dir=opts.dir||'asc';
+  if(!series) return '';
+  const ys=Object.keys(series).filter(y=>/^\d{4}$/.test(y))
+    .filter(y=>series[y]!=null && !isNaN(+series[y])).map(Number).sort((a,b)=>a-b);
+  if(ys.length<2) return '';
+  const latest=ys[ys.length-1], cur=+series[String(latest)];
+  const out=[]; const seen=new Set();
+  [10,5,3,2].forEach(w=>{
+    const target=latest-w;
+    let anchor=null;
+    for(const y of ys){ if(y<=target && y<latest) anchor=y; }
+    if(anchor==null || seen.has(anchor)) return;
+    seen.add(anchor);
+    const prev=+series[String(anchor)], delta=cur-prev, span=latest-anchor;
+    const up=delta>0, better=(dir==='desc')?!up:up;
+    const cls=Math.abs(delta)<(opts.flat||1e-9)?'traj-flat':(better?'traj-up':'traj-down');
+    const dv=opts.fmt?opts.fmt(Math.abs(delta)):(Math.abs(delta)%1?Math.abs(delta).toFixed(1):String(Math.abs(delta)));
+    const vf=opts.vfmt||(v=>String(v));
+    out.push('<span class="traj '+cls+'" title="'+anchor+' → '+latest+': '+vf(prev)+' → '+vf(cur)+'"><span class="trail-w">'+span+'y</span>'+(delta>0?'↑':delta<0?'↓':'~')+dv+'</span>');
+  });
+  return out.length?'<span class="trail-set">'+out.join('')+'</span>':'';
+}
+// Pull a {year:value} series for one key out of a gz history object.
+function gzSeries(hist, key){
+  if(!hist) return null;
+  const out={};
+  Object.keys(hist).filter(y=>/^\d{4}$/.test(y)).forEach(y=>{
+    const v=hist[y]?hist[y][key]:null; if(v!=null && !isNaN(+v)) out[y]=+v;
+  });
+  return out;
 }
 // Demographic (race/ethnicity) buckets for the historic composition columns.
 const RACE_BUCKETS=[
@@ -3856,19 +3915,20 @@ function jobOutcomeDetail(s){
     const dCls = delta==null ? '' : (isSeek ? (delta < 0 ? 'jo-delta-up' : delta > 0 ? 'jo-delta-down' : 'jo-delta-flat')
                                             : (delta > 0 ? 'jo-delta-up' : delta < 0 ? 'jo-delta-down' : 'jo-delta-flat'));
     const dTxt = delta==null ? '' : (delta>0?'+':'')+delta.toFixed(1)+' vs natl';
-    // Trailing-5-yr change anchor — filled async once the gz history loads.
+    // Trailing 10/5/3/2-yr change line — filled async once the gz history loads.
     const hk = isSeek ? 'emp_seeking_pct' : cat.k;
     return '<div class="jo-row">'
       + '<div class="jo-dot" style="background:'+cat.c+'"></div>'
-      + '<div class="jo-l">'+cat.l+'<span class="jo-trend" data-emp-delta="'+hk+'"'+(isSeek?' data-dir="desc"':'')+'></span></div>'
+      + '<div class="jo-l">'+cat.l+'</div>'
       + '<div class="jo-bar-wrap"><div class="jo-bar" style="width:'+w.toFixed(1)+'%;background:'+cat.c+'"></div></div>'
       + '<div class="jo-pct">'+(v!=null?v.toFixed(1)+'%':'—')+'</div>'
       + '<div class="jo-n">'+(n!=null?'≈'+n+' grads':'—')+'</div>'
       + '<div class="jo-d '+dCls+'" title="National average '+(natAvg!=null?natAvg.toFixed(1)+'%':'—')+'">'+dTxt+'</div>'
-      + '</div>';
+      + '</div>'
+      + '<div class="jo-trail-line" data-emp-multi="'+hk+'"'+(isSeek?' data-dir="desc"':'')+'></div>';
   }).join('');
   return '<div class="jo-wrap">'+rows+'</div>'
-    + '<div class="jo-foot">Counts estimated from % × graduates ('+s.grads+'). "vs natl" = this school\'s % minus the average across all reporting schools (green = better for the applicant).</div>';
+    + '<div class="jo-foot">Counts estimated from % × graduates ('+s.grads+'). "vs natl" = this school\'s % minus the average across all reporting schools (green = better for the applicant). Trailing badges show the share\'s change over the labelled span (point change), from this school\'s reported history.</div>';
 }
 
 // ── Employment headline chips (Grads / FTLT / Bar-required / Seeking) ──
@@ -3930,10 +3990,10 @@ function outcomeFunnel(s){
   const takers = latestY && s.bar_takers_trend ? s.bar_takers_trend[latestY] : null;
   const passers = latestY && s.bar_passers_trend ? s.bar_passers_trend[latestY] : null;
   const stages = [
-    {l:'Graduated',     n: s.grads,   c:'#7AAAC8'},
-    takers!=null  ? {l:'Sat for bar',n: takers,  c:'#5AABCB'} : null,
-    passers!=null ? {l:'Passed 1st',  n: passers, c:'#4A9B6B'} : null,
-    s.ftlt!=null  ? {l:'FTLT JD job', n: s.ftlt,  c:'#FCD34D'} : null
+    {l:'Graduated',     n: s.grads,   c:'#7AAAC8', k:'grads'},
+    takers!=null  ? {l:'Sat for bar',n: takers,  c:'#5AABCB', k:'takers'} : null,
+    passers!=null ? {l:'Passed 1st',  n: passers, c:'#4A9B6B', k:'passers'} : null,
+    s.ftlt!=null  ? {l:'FTLT JD job', n: s.ftlt,  c:'#FCD34D', k:'ftlt'} : null
   ].filter(Boolean);
   if(stages.length<2) return '';
   const max = Math.max.apply(null, stages.map(x=>x.n));
@@ -3945,15 +4005,16 @@ function outcomeFunnel(s){
       + '<div class="funnel-l">'+st.l+'</div>'
       + '<div class="funnel-bar-wrap"><div class="funnel-bar" style="width:'+Math.max(pct,6).toFixed(1)+'%;background:'+st.c+';">'+st.n.toLocaleString()+'</div></div>'
       + '<div class="funnel-conv">'+(conv!=null?conv.toFixed(0)+'% of prev':'')+(startConv!=null?' · '+startConv.toFixed(0)+'% of grads':'')+'</div>'
-      + '</div>';
+      + '</div>'
+      + '<div class="funnel-trail-line" data-funnel-stage="'+st.k+'"></div>';
   }).join('');
   return '<div class="funnel">'+rows+'</div>'
-    + '<div class="funnel-foot">Each step is the share of the prior step that made it through. Bar takers/passers from '+(latestY||'most recent year')+'; FTLT employment from the same disclosure cycle.</div>';
+    + '<div class="funnel-foot">Each step is the share of the prior step that made it through. Bar takers/passers from '+(latestY||'most recent year')+'; FTLT employment from the same disclosure cycle. Trailing badges show each stage\'s head-count change over the labelled span.</div>';
 }
 
 function navSchool(id){
   // HASH ROUTES — safest, work anywhere, no 404.html or server-side rewrites needed.
-  // Reverted from clean /school/<slug> paths in v1.45.2 because GH Pages without a
+  // Reverted from clean /school/<slug> paths in v1.46.0 because GH Pages without a
   // deployed 404.html serves real 404s for any unknown path. When the project moves
   // to a custom domain with rewrites (Netlify _redirects, Vercel rewrites, Cloudflare),
   // flip CLEAN_URLS to true and the deep-link helpers below will re-engage.
@@ -4688,7 +4749,7 @@ function schoolDetailHTML(s){
   // ── Scrollytelling helpers + data-driven ledes (direction A) ──────────────
   const mods=(inner)=>'<div class="story-mods">'+inner+'</div>';       // masonry module flow
   const fm=(inner)=>'<div class="story-mod">'+inner+'</div>';           // facts/data module
-  const cm=(t,svg)=>'<div class="story-mod"><div class="dp-chart-t">'+t+'</div>'+svg+'</div>'; // chart module
+  const cm=(t,svg)=>'<div class="story-mod"><div class="dp-chart-t">'+t+'<span class="zoom-hint">⤢ enlarge</span></div>'+svg+'</div>'; // chart module
   const tm=(t,inner)=>'<div class="story-mod"><div class="story-mod-t">'+t+'</div>'+inner+'</div>'; // titled module
   const sec=(id,n,kicker,headline,lede,body)=>'<section class="story-sec" id="sec-'+id+'"><div class="story-eyebrow"><span class="sx-num">'+n+'</span>'+kicker+'</div><h2 class="story-title">'+headline+'</h2>'+(lede?'<p class="story-lede">'+lede+'</p>':'')+body+'</section>';
   const _net=(s.tui!=null)?(s.grant_med!=null?s.tui-s.grant_med:s.tui):null;
@@ -4715,6 +4776,7 @@ function schoolDetailHTML(s){
     // trajectory, and a full-history sparkline. Tiles jump to the detail below.
     schoolSnapshot(s)+
     '<div class="story">'+
+      '<div class="chart-tip"><b>Tip</b> · click any chart to open it full-screen</div>'+
       // Phase 2 lead beat — "then & now" year-vs-year (painted async from the gz).
       '<div id="yoy-slot"></div>'+
       sec('cost','1','Cost','What three years actually costs', ledeCost,
@@ -4887,16 +4949,34 @@ async function paintEmpEvolution(s){
       empCatPaint('ftlt_pct');
     } else { slot.remove(); }
   }
-  // (2) Trailing-5-yr change badges on the employment rows + hero chips.
+  // (2) Trailing-change badges. Hero chips keep the single 5-yr badge; the
+  //     "where grads went" rows + the outcome funnel get the 10/5/3/2-yr set.
   if(hist){
     document.querySelectorAll('[data-emp-delta]').forEach(el=>{
       const key = el.getAttribute('data-emp-delta');
       const dir = el.getAttribute('data-dir') || 'asc';
       el.innerHTML = deltaBadge(histDelta(hist, key), {dir});
     });
+    // Employment-mix rows: % share, so point-change badges.
+    document.querySelectorAll('[data-emp-multi]').forEach(el=>{
+      const key = el.getAttribute('data-emp-multi');
+      const dir = el.getAttribute('data-dir') || 'asc';
+      el.innerHTML = trailingBadges(gzSeries(hist, key), {dir, fmt:v=>v.toFixed(1)+'pt', vfmt:v=>v.toFixed(1)+'%'});
+    });
   } else {
     document.querySelectorAll('[data-emp-delta]').forEach(el=>el.remove());
   }
+  // (2b) Outcome-funnel head-count trailing change per stage. Bar takers/passers
+  //      use the deep inline trend (back to ~2011); grads/FTLT use the gz counts.
+  document.querySelectorAll('[data-funnel-stage]').forEach(el=>{
+    const stage = el.getAttribute('data-funnel-stage');
+    let series = null;
+    if(stage==='takers') series = s.bar_takers_trend || null;
+    else if(stage==='passers') series = s.bar_passers_trend || null;
+    else if(stage==='grads') series = gzSeries(hist, 'grads');
+    else if(stage==='ftlt') series = gzSeries(hist, 'ftlt');
+    el.innerHTML = trailingBadges(series, {dir:'asc', fmt:v=>Math.round(v).toLocaleString(), vfmt:v=>Math.round(v).toLocaleString()});
+  });
   // (3) Demographics — bigger race composition over time + a per-group dropdown.
   if(dslot){
     const dcols = histStackCols(hist, RACE_BUCKETS, {aria:'Demographic composition by year', tall:true});
@@ -6181,7 +6261,7 @@ function openShareModal(){
   document.body.appendChild(m);
 }
 
-// Disclaimer bar removed v1.45.2 — --banner-h is hardcoded to 0 in the inline
+// Disclaimer bar removed v1.46.0 — --banner-h is hardcoded to 0 in the inline
 // <style> after the header; the dynamic syncBannerHeight observer is no longer
 // needed. Provenance lives in the footer.
 // Honor #school/X or #compare=… in URL on first load
