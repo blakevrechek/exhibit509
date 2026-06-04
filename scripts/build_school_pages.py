@@ -833,6 +833,23 @@ def main():
     S = extract_S(open(data_src).read())
     print(f"Extracted {len(S)} schools from {os.path.basename(data_src)}.")
 
+    # Data hygiene: an LSAT or uGPA of exactly 0 is a missing-data sentinel (never a
+    # real value), carried by a few closed/partial schools for unreported years.
+    # Null them so static pages mirror the app and never render a bogus "0".
+    _adm_trends = ("lsat_trend", "lsat25_trend", "lsat75_trend",
+                   "gpa_trend", "gpa25_trend", "gpa75_trend")
+    _adm_scalars = ("lsat25", "lsat50", "lsat75", "gpa25", "gpa50", "gpa75")
+    for s in S:
+        for tk in _adm_trends:
+            t = s.get(tk)
+            if isinstance(t, dict):
+                for y, v in list(t.items()):
+                    if v == 0:
+                        t[y] = None
+        for k in _adm_scalars:
+            if s.get(k) == 0:
+                s[k] = None
+
     os.makedirs(OUT_DIR, exist_ok=True)
     written = 0
     for s in S:
