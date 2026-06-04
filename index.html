@@ -370,7 +370,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .pb-counsel-header{border-top:3px solid var(--counsel);}
 
 /* Map filters bar */
-/* Map filters relocated v1.31.0, top-of-map horizontal toolbar, docked between the
+/* Map filters relocated v1.32.0, top-of-map horizontal toolbar, docked between the
    left Match Me / Compare sidebar (ends at 380px) and the always-open right school
    panel (400px), sitting just under the global header. The left sidebar is now
    reserved exclusively for Match Me + Compare. */
@@ -447,7 +447,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
    header (school name + bar pass chip) isn't hidden by filter chips or the BLS
    tooltip card. Was top:76px causing the upper ~50px to be eaten. */
 /* schoolPanel sits at the natural top now that map-filter bar moved into the left
-   panel (v1.31.0) — frees ~50px of vertical space at the top of the right column. */
+   panel (v1.32.0) — frees ~50px of vertical space at the top of the right column. */
 #schoolPanel{position:fixed;top:76px;right:0;bottom:36px;width:400px;z-index:100;background:rgba(4,13,23,0.97);border-left:1px solid rgba(74,122,155,0.22);overflow-y:auto;transform:translateX(0);transition:transform .3s;}#schoolPanel.hidden{transform:translateX(100%);}
 #schoolPanel.open{transform:translateX(0);}
 .sp-close{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(4,13,23,0.98);border-bottom:1px solid rgba(74,122,155,0.15);}
@@ -457,7 +457,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .sp-tab{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border:1px solid rgba(74,122,155,0.2);background:transparent;color:var(--dim);cursor:pointer;transition:all .2s;}
 .sp-tab+.sp-tab{border-left:none;}
 .sp-tab.on{background:rgba(217,119,87,0.1);color:var(--orange);border-color:rgba(217,119,87,0.35);}
-/* School-panel (right side) typography tightened v1.31.0, was visibly scaled-too-big
+/* School-panel (right side) typography tightened v1.32.0, was visibly scaled-too-big
    per owner. Reduced metric/value sizes by ~15%, tighter section padding, smaller
    section labels, more breathable line-height. */
 .sp-header{padding:14px 16px 10px;border-bottom:1px solid rgba(74,122,155,0.12);}
@@ -1596,7 +1596,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
     More
   </button>
 </nav>
-<!-- Disclaimer bar removed v1.31.0, provenance now lives in the footer. -->
+<!-- Disclaimer bar removed v1.32.0, provenance now lives in the footer. -->
 <style>:root{--banner-h:0px;}</style>
 
 <div id="cookieBar" style="position:fixed;bottom:0;left:0;right:0;z-index:1000;background:#0B1826;border-top:1px solid rgba(217,119,87,0.4);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;box-shadow:0 -2px 12px rgba(0,0,0,0.5);">
@@ -1933,8 +1933,8 @@ function fmtUSD(v){ return v==null?"—":"$"+v.toLocaleString(); }
 // ═══════════════════════════════════════════════════════════════════════════
 const DATA_INVARIANTS = {
   total_schools: 208,         // 197 active/newly + 11 closed/transitioning (now included as historical entries)
-  schools_inline: 208,        // all inline as of v1.31.0, closed entries surface their pre-closure history
-  year_count: 15              // 2011–2025 inclusive (15-year span; pre-2018 added in v1.31.0 from Historic + v2 sheets)
+  schools_inline: 208,        // all inline as of v1.32.0, closed entries surface their pre-closure history
+  year_count: 15              // 2011–2025 inclusive (15-year span; pre-2018 added in v1.32.0 from Historic + v2 sheets)
 };
 // Verifiable count of the data cells actually shipped inline on this page:
 // every non-null scalar field, plus every per-year trend entry, across S.
@@ -2003,7 +2003,7 @@ function populateHeaderStats(){
 // ── Lazy-load full dataset (deferred until first deep-dive interaction) ──
 // Callers: `const ext = await loadFullDataset();` parsed JSON, or null on fail.
 // Subsequent calls return the cached object. Concurrent calls share one fetch.
-// Wired in v1.31.0 — schoolDetailHTML calls getSchoolHistory(id) which awaits
+// Wired in v1.32.0 — schoolDetailHTML calls getSchoolHistory(id) which awaits
 // this loader, then renders deep-history charts (employment evolution etc.) into
 // late-paint slots once data is available.
 window.EXT = window.EXT || { data: null, loading: null, byId: null };
@@ -2204,7 +2204,7 @@ function searchTypeaheadKey(e){
   }
 }
 
-// Disclaimer banner is now persistent (per v1.31.0 owner directive) — no dismiss; always visible.
+// Disclaimer banner is now persistent (per v1.32.0 owner directive) — no dismiss; always visible.
 // ── COOKIE notice dismiss (persists via localStorage) ──
 // ── Light/Dark theme toggle (persists via localStorage). Note: many inline styles
 // use literal rgba(4,13,23,...) and won't fully invert — full theming would require
@@ -3091,7 +3091,7 @@ function lineChart(opts){
   opts.series.forEach(s=>years.forEach(y=>{ const v=s.vals?s.vals[y]:null; if(v!=null) allv.push(v); }));
   if(!allv.length) return '<div class="lc-empty">No trend data</div>';
   const dataMin=Math.min(...allv), dataMax=Math.max(...allv);
-  // Headroom (v1.31.0): pad the data range BEFORE snapping to nice ticks, so the
+  // Headroom (v1.32.0): pad the data range BEFORE snapping to nice ticks, so the
   // highest/lowest points never land flush on the top/bottom gridline (where their
   // marker dot + endpoint label would clip past the plot edge). Padding the input
   // also bumps the rounded bound up a step when a value sits exactly on a boundary
@@ -3163,7 +3163,7 @@ function lineChart(opts){
     const pv=years.map(y=>pin.vals?pin.vals[y]:null);
     let li=-1; for(let i=pv.length-1;i>=0;i--){ if(pv[i]!=null){ li=i; break; } }
     if(li>=0){ const v=pv[li], x=X(li), yy=Y(v), last=(li===years.length-1);
-      // Endpoint label placement rule (v1.31.0): if the line is RISING into the
+      // Endpoint label placement rule (v1.32.0): if the line is RISING into the
       // endpoint, drop the label BELOW the marker (clears the ascending line and
       // the top edge it would otherwise clip); if FALLING, lift it ABOVE. Clamp
       // to the chart box so it can never get cut off. The --chart-halo var gives a
@@ -3230,9 +3230,60 @@ function lcTip(ev){
   if(best){ const tip=document.getElementById(best.getAttribute('data-tip')); if(tip) tip.style.display=''; }
 }
 
+// Percentile-band chart over time: shades the 25th–75th band and draws the median
+// line inside it, so you see a class strengthening/weakening AND whether the spread
+// is tightening across 2011–2025. Same axis-headroom + crosshair (incl. touch) as
+// lineChart. opts:{years, p25, p50, p75 (year→value maps), color, fmt, label, w, h}
+function bandChart(opts){
+  const years=opts.years, W=opts.w||300, H=opts.h||150;
+  const PL=34,PR=14,PT=12,PB=20, innerW=W-PL-PR, innerH=H-PT-PB;
+  const p25=opts.p25||{}, p50=opts.p50||{}, p75=opts.p75||{};
+  const color=opts.color||'#5AABCB', fmt=opts.fmt||(v=>Math.round(v));
+  let allv=[]; years.forEach(y=>[p25[y],p50[y],p75[y]].forEach(v=>{ if(v!=null&&!isNaN(v)) allv.push(+v); }));
+  if(allv.length<2) return '<div class="lc-empty">No trend data</div>';
+  const dmin=Math.min.apply(null,allv), dmax=Math.max.apply(null,allv);
+  const span=(dmax-dmin)||Math.abs(dmax)||1, pad=span*0.08;
+  let lo=dmin-pad, hi=dmax+pad; if(dmin>=0&&lo<0)lo=0;
+  const t=niceTicks(lo,hi), mn=t.min, mx=t.max, rng=(mx-mn)||1;
+  const X=i=>PL+(years.length>1?i/(years.length-1):0.5)*innerW;
+  const Y=v=>PT+innerH-((v-mn)/rng)*innerH;
+  const id='bc'+Math.random().toString(36).slice(2,9);
+  let svg='';
+  t.ticks.forEach(v=>{ const yy=Y(v); if(yy<PT-1||yy>PT+innerH+1)return;
+    svg+='<line x1="'+PL+'" y1="'+yy.toFixed(1)+'" x2="'+(PL+innerW)+'" y2="'+yy.toFixed(1)+'" stroke="rgba(122,170,200,0.10)" stroke-width="1"/>';
+    svg+='<text x="'+(PL-4)+'" y="'+(yy+3).toFixed(1)+'" font-family="Geist Mono,ui-monospace,monospace" font-size="10" fill="#4A7A9B" text-anchor="end">'+fmt(v)+'</text>'; });
+  years.forEach((y,i)=>{ const x=X(i);
+    svg+='<line x1="'+x.toFixed(1)+'" y1="'+(PT+innerH)+'" x2="'+x.toFixed(1)+'" y2="'+(PT+innerH+4)+'" stroke="#4A7A9B" stroke-width="1"/>';
+    if(years.length<=8||i%2===0||i===years.length-1) svg+='<text x="'+x.toFixed(1)+'" y="'+(H-5)+'" font-family="Geist Mono,ui-monospace,monospace" font-size="10" fill="#4A7A9B" text-anchor="middle">'+String(y).slice(-2)+'</text>'; });
+  const idx=years.map((y,i)=>(p25[y]!=null&&p75[y]!=null)?i:-1).filter(i=>i>=0);
+  if(idx.length>1){
+    const top=idx.map(i=>X(i).toFixed(1)+','+Y(+p75[years[i]]).toFixed(1));
+    const bot=idx.slice().reverse().map(i=>X(i).toFixed(1)+','+Y(+p25[years[i]]).toFixed(1));
+    svg+='<polygon points="'+top.concat(bot).join(' ')+'" fill="'+color+'" fill-opacity="0.16"/>';
+    svg+='<polyline points="'+idx.map(i=>X(i).toFixed(1)+','+Y(+p75[years[i]]).toFixed(1)).join(' ')+'" fill="none" stroke="'+color+'" stroke-opacity="0.45" stroke-width="1"/>';
+    svg+='<polyline points="'+idx.map(i=>X(i).toFixed(1)+','+Y(+p25[years[i]]).toFixed(1)).join(' ')+'" fill="none" stroke="'+color+'" stroke-opacity="0.45" stroke-width="1"/>';
+  }
+  const midIdx=years.map((y,i)=>p50[y]!=null?i:-1).filter(i=>i>=0);
+  if(midIdx.length>1) svg+='<polyline points="'+midIdx.map(i=>X(i).toFixed(1)+','+Y(+p50[years[i]]).toFixed(1)).join(' ')+'" fill="none" stroke="'+color+'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>';
+  if(midIdx.length){ const li=midIdx[midIdx.length-1], v=+p50[years[li]]; svg+='<circle cx="'+X(li).toFixed(1)+'" cy="'+Y(v).toFixed(1)+'" r="3.2" fill="'+color+'" style="stroke:var(--chart-halo)" stroke-width="1.5"/>'; }
+  let hits='<g class="lc-hits" style="pointer-events:all">', tips=''; const segW=innerW/Math.max(1,years.length-1);
+  years.forEach((y,i)=>{ if(p25[y]==null&&p50[y]==null&&p75[y]==null)return; const x=X(i);
+    const lines=["’"+String(y).slice(2)].concat(
+      p75[y]!=null?['75th  '+fmt(+p75[y])]:[], p50[y]!=null?['50th  '+fmt(+p50[y])]:[], p25[y]!=null?['25th  '+fmt(+p25[y])]:[]);
+    const tw=Math.max(58, Math.max.apply(null,lines.map(l=>l.length))*6.6+12), th=7+lines.length*12;
+    let bx=x+9; if(bx+tw>W-2)bx=x-9-tw; if(bx<2)bx=2; let by=PT+2;
+    let txt=''; lines.forEach((l,k)=>{ txt+='<text x="'+(bx+6)+'" y="'+(by+11+k*12)+'" font-family="Geist Mono,ui-monospace,monospace" font-size="'+(k===0?10:11)+'" '+(k===0?'fill="#9FC3DB"':(k===2?'font-weight="700" fill="'+color+'"':'fill="#C6D8E6"'))+'>'+l+'</text>'; });
+    tips+='<g class="lc-tip" id="'+id+'-tip-'+i+'" style="display:none;pointer-events:none"><line x1="'+x.toFixed(1)+'" y1="'+PT+'" x2="'+x.toFixed(1)+'" y2="'+(PT+innerH)+'" stroke="rgba(255,255,255,0.30)" stroke-width="1" stroke-dasharray="2,3"/><rect x="'+bx.toFixed(1)+'" y="'+by+'" width="'+tw.toFixed(1)+'" height="'+th+'" rx="3" fill="rgba(4,13,23,0.94)" stroke="rgba(122,170,200,0.45)"/>'+txt+'</g>';
+    hits+='<rect x="'+(x-segW/2).toFixed(1)+'" y="'+PT+'" width="'+segW.toFixed(1)+'" height="'+innerH+'" fill="transparent" data-tip="'+id+'-tip-'+i+'" data-cx="'+x.toFixed(1)+'" onmouseenter="document.getElementById(\''+id+'-tip-'+i+'\').style.display=\'\'" onmouseleave="document.getElementById(\''+id+'-tip-'+i+'\').style.display=\'none\'"/>';
+  });
+  hits+='</g>'; svg+=tips+hits;
+  const aria=(opts.label||'Percentile band')+', '+years[0]+'–'+years[years.length-1];
+  return '<svg class="lc" id="'+id+'" role="img" aria-label="'+aria+'" viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="xMidYMid meet" ontouchstart="lcTip(event)" ontouchmove="lcTip(event)"><title>'+aria+'</title>'+svg+'</svg>';
+}
+
 // ── Full school detail page (items 5 & 9): opens in a new tab via #school/<id> ─
 // ── Scholarship distribution ────────────────────────────────────────────────
-// Canonical buckets per owner directive (v1.31.0): student-favorability gradient.
+// Canonical buckets per owner directive (v1.32.0): student-favorability gradient.
 // "No grant" is DERIVED = 100 - (lt + mt + full + gt) — the source's none count is
 // known to be unreliable (negatives, mis-reports); the derivation guarantees the
 // stack sums to 100% and avoids fabricated bad data.
@@ -3659,7 +3710,7 @@ function outcomeFunnel(s){
 
 function navSchool(id){
   // HASH ROUTES — safest, work anywhere, no 404.html or server-side rewrites needed.
-  // Reverted from clean /school/<slug> paths in v1.31.0 because GH Pages without a
+  // Reverted from clean /school/<slug> paths in v1.32.0 because GH Pages without a
   // deployed 404.html serves real 404s for any unknown path. When the project moves
   // to a custom domain with rewrites (Netlify _redirects, Vercel rewrites, Cloudflare),
   // flip CLEAN_URLS to true and the deep-link helpers below will re-engage.
@@ -4252,14 +4303,14 @@ function schoolDetailHTML(s){
   const usd=v=>v==null?'—':'$'+Number(v).toLocaleString();
   const pct=v=>v==null?'—':v+'%';
   const row=(k,v,c)=>'<div class="dp-row"><span class="dp-row-k">'+k+'</span><span class="dp-row-v"'+(c?' style="color:'+c+'"':'')+'>'+v+'</span></div>';
-  const lsatChart=lineChart({years:yrs,series:[{vals:s.lsat_trend,color:'#FCD34D'}],pinIndex:0,fmt:v=>Math.round(v),label:'LSAT median'});
+  const lsatChart=bandChart({years:yrs,p25:s.lsat25_trend,p50:s.lsat_trend,p75:s.lsat75_trend,color:'#FCD34D',fmt:v=>Math.round(v),label:'LSAT 25–75 band'});
   // Acceptance rate x-axis clamped to 2016+ (owner directive).
   const accYrs=(()=>{ const out=[]; const lastY=yrs.length?+yrs[yrs.length-1]:2025; for(let y=2016;y<=lastY;y++) out.push(String(y)); return out; })();
   const accChart =lineChart({years:accYrs,series:[{vals:s.acc_trend,color:'#EF5350'}],pinIndex:0,fmt:v=>v.toFixed(1)+'%',label:'Acceptance rate'});
   const tuiChart =lineChart({years:yrs,series:[{vals:s.tui_trend,color:'#FFA726'}],pinIndex:0,fmt:v=>'$'+Math.round(v/1000)+'K',label:'Tuition'});
   const barChart =lineChart({years:yrs,series:[{vals:s.bar_trend,color:'#4A9B6B'},{vals:s.bar_2yr_trend,color:'#5AABCB'}],pinIndex:0,fmt:v=>v.toFixed(1)+'%',label:'Bar passage, first-time & 2-yr ultimate'});
   const enrChart =lineChart({years:yrs,series:[{vals:s.enr_trend,color:'#A78BFA'}],pinIndex:0,fmt:v=>Math.round(v).toLocaleString(),label:'Enrollment'});
-  const gpaChart =lineChart({years:yrs,series:[{vals:s.gpa_trend,color:'#9BD1E8'}],pinIndex:0,fmt:v=>Number(v).toFixed(2),label:'uGPA median'});
+  const gpaChart =bandChart({years:yrs,p25:s.gpa25_trend,p50:s.gpa_trend,p75:s.gpa75_trend,color:'#9BD1E8',fmt:v=>Number(v).toFixed(2),label:'uGPA 25–75 band'});
   const appsChart=lineChart({years:yrs,series:[{vals:s.apps_trend,color:'#A4C8DD'},{vals:s.offers_trend,color:'#5AABCB'}],pinIndex:0,fmt:v=>Math.round(v).toLocaleString(),label:'Applications & offers'});
   const leg2=(a,ac,b,bc)=>'<div class="dp-leg" style="margin-top:4px;"><span class="dp-leg-i"><span class="dp-leg-dot" style="background:'+ac+'"></span>'+a+'</span><span class="dp-leg-i"><span class="dp-leg-dot" style="background:'+bc+'"></span>'+b+'</span></div>';
   const empBuckets = EMP_BUCKETS;
@@ -4366,8 +4417,8 @@ function schoolDetailHTML(s){
             row('1L enrolled',num(s.enr_1l))+row('Total enrollment',num(s.enr)+trajBadge(s.enr_trend,{dir:'asc',fmt:v=>Math.round(Math.abs(v)).toLocaleString()}))+
             row('GRE takers',num(s.gre_takers))
           )+
-          cm('LSAT median · '+yrsLabel, lsatChart)+
-          cm('uGPA median · '+yrsLabel, gpaChart)+
+          cm('LSAT · 25th–50th–75th band · '+yrsLabel, lsatChart+'<div class="dp-leg" style="margin-top:4px;"><span class="dp-leg-i"><span class="dp-leg-dot" style="background:#FCD34D"></span>median</span><span class="dp-leg-i"><span class="dp-leg-dot" style="background:rgba(252,211,77,0.3)"></span>middle 50% (25th–75th)</span></div>')+
+          cm('uGPA · 25th–50th–75th band · '+yrsLabel, gpaChart+'<div class="dp-leg" style="margin-top:4px;"><span class="dp-leg-i"><span class="dp-leg-dot" style="background:#9BD1E8"></span>median</span><span class="dp-leg-i"><span class="dp-leg-dot" style="background:rgba(155,209,232,0.3)"></span>middle 50% (25th–75th)</span></div>')+
           cm('Acceptance rate · '+(accYrs.length?accYrs[0]+'–'+accYrs[accYrs.length-1]:'—'), accChart)+
           cm('Applications &amp; offers · '+yrsLabel, appsChart+leg2('Applications','#A4C8DD','Offers','#5AABCB'))+
           cm('Enrollment · '+yrsLabel, enrChart)
@@ -5685,7 +5736,7 @@ function openShareModal(){
   document.body.appendChild(m);
 }
 
-// Disclaimer bar removed v1.31.0 — --banner-h is hardcoded to 0 in the inline
+// Disclaimer bar removed v1.32.0 — --banner-h is hardcoded to 0 in the inline
 // <style> after the header; the dynamic syncBannerHeight observer is no longer
 // needed. Provenance lives in the footer.
 // Honor #school/X or #compare=… in URL on first load
