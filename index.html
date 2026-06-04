@@ -370,7 +370,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .pb-counsel-header{border-top:3px solid var(--counsel);}
 
 /* Map filters bar */
-/* Map filters relocated v1.33.0, top-of-map horizontal toolbar, docked between the
+/* Map filters relocated v1.34.0, top-of-map horizontal toolbar, docked between the
    left Match Me / Compare sidebar (ends at 380px) and the always-open right school
    panel (400px), sitting just under the global header. The left sidebar is now
    reserved exclusively for Match Me + Compare. */
@@ -447,7 +447,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
    header (school name + bar pass chip) isn't hidden by filter chips or the BLS
    tooltip card. Was top:76px causing the upper ~50px to be eaten. */
 /* schoolPanel sits at the natural top now that map-filter bar moved into the left
-   panel (v1.33.0) — frees ~50px of vertical space at the top of the right column. */
+   panel (v1.34.0) — frees ~50px of vertical space at the top of the right column. */
 #schoolPanel{position:fixed;top:76px;right:0;bottom:36px;width:400px;z-index:100;background:rgba(4,13,23,0.97);border-left:1px solid rgba(74,122,155,0.22);overflow-y:auto;transform:translateX(0);transition:transform .3s;}#schoolPanel.hidden{transform:translateX(100%);}
 #schoolPanel.open{transform:translateX(0);}
 .sp-close{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(4,13,23,0.98);border-bottom:1px solid rgba(74,122,155,0.15);}
@@ -457,7 +457,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .sp-tab{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border:1px solid rgba(74,122,155,0.2);background:transparent;color:var(--dim);cursor:pointer;transition:all .2s;}
 .sp-tab+.sp-tab{border-left:none;}
 .sp-tab.on{background:rgba(217,119,87,0.1);color:var(--orange);border-color:rgba(217,119,87,0.35);}
-/* School-panel (right side) typography tightened v1.33.0, was visibly scaled-too-big
+/* School-panel (right side) typography tightened v1.34.0, was visibly scaled-too-big
    per owner. Reduced metric/value sizes by ~15%, tighter section padding, smaller
    section labels, more breathable line-height. */
 .sp-header{padding:14px 16px 10px;border-bottom:1px solid rgba(74,122,155,0.12);}
@@ -660,6 +660,10 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 
 /* ── Scholarship distribution over time (100% stacked columns) ── */
 .st-wrap{display:flex;align-items:flex-end;gap:5px;height:120px;margin:8px 0 2px;}
+.st-wrap.st-tall{height:220px;gap:6px;}
+.emp-cat-sel{font-family:var(--sans);font-size:13px;font-weight:600;text-transform:none;letter-spacing:0;background:#0B1826;color:var(--white);border:1px solid rgba(217,119,87,0.5);border-radius:4px;padding:5px 10px;cursor:pointer;}
+.emp-cat-sel:focus{outline:none;border-color:var(--orange);}
+.theme-light .emp-cat-sel{background:#FFFFFF;color:#0C1A2A;border-color:rgba(60,90,120,0.35);}
 .st-col{flex:1;min-width:12px;display:flex;flex-direction:column-reverse;height:100%;border-radius:2px;overflow:hidden;background:rgba(74,122,155,0.05);}
 .st-seg{width:100%;}
 .st-col-miss{flex:1;min-width:12px;display:flex;align-items:center;justify-content:center;height:100%;border:1px dashed rgba(74,122,155,0.2);color:var(--dimmer);font-size:13px;}
@@ -1603,7 +1607,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
     More
   </button>
 </nav>
-<!-- Disclaimer bar removed v1.33.0, provenance now lives in the footer. -->
+<!-- Disclaimer bar removed v1.34.0, provenance now lives in the footer. -->
 <style>:root{--banner-h:0px;}</style>
 
 <div id="cookieBar" style="position:fixed;bottom:0;left:0;right:0;z-index:1000;background:#0B1826;border-top:1px solid rgba(217,119,87,0.4);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;box-shadow:0 -2px 12px rgba(0,0,0,0.5);">
@@ -1940,8 +1944,8 @@ function fmtUSD(v){ return v==null?"—":"$"+v.toLocaleString(); }
 // ═══════════════════════════════════════════════════════════════════════════
 const DATA_INVARIANTS = {
   total_schools: 208,         // 197 active/newly + 11 closed/transitioning (now included as historical entries)
-  schools_inline: 208,        // all inline as of v1.33.0, closed entries surface their pre-closure history
-  year_count: 15              // 2011–2025 inclusive (15-year span; pre-2018 added in v1.33.0 from Historic + v2 sheets)
+  schools_inline: 208,        // all inline as of v1.34.0, closed entries surface their pre-closure history
+  year_count: 15              // 2011–2025 inclusive (15-year span; pre-2018 added in v1.34.0 from Historic + v2 sheets)
 };
 // Verifiable count of the data cells actually shipped inline on this page:
 // every non-null scalar field, plus every per-year trend entry, across S.
@@ -2010,7 +2014,7 @@ function populateHeaderStats(){
 // ── Lazy-load full dataset (deferred until first deep-dive interaction) ──
 // Callers: `const ext = await loadFullDataset();` parsed JSON, or null on fail.
 // Subsequent calls return the cached object. Concurrent calls share one fetch.
-// Wired in v1.33.0 — schoolDetailHTML calls getSchoolHistory(id) which awaits
+// Wired in v1.34.0 — schoolDetailHTML calls getSchoolHistory(id) which awaits
 // this loader, then renders deep-history charts (employment evolution etc.) into
 // late-paint slots once data is available.
 window.EXT = window.EXT || { data: null, loading: null, byId: null };
@@ -2211,7 +2215,7 @@ function searchTypeaheadKey(e){
   }
 }
 
-// Disclaimer banner is now persistent (per v1.33.0 owner directive) — no dismiss; always visible.
+// Disclaimer banner is now persistent (per v1.34.0 owner directive) — no dismiss; always visible.
 // ── COOKIE notice dismiss (persists via localStorage) ──
 // ── Light/Dark theme toggle (persists via localStorage). Note: many inline styles
 // use literal rgba(4,13,23,...) and won't fully invert — full theming would require
@@ -3098,7 +3102,7 @@ function lineChart(opts){
   opts.series.forEach(s=>years.forEach(y=>{ const v=s.vals?s.vals[y]:null; if(v!=null) allv.push(v); }));
   if(!allv.length) return '<div class="lc-empty">No trend data</div>';
   const dataMin=Math.min(...allv), dataMax=Math.max(...allv);
-  // Headroom (v1.33.0): pad the data range BEFORE snapping to nice ticks, so the
+  // Headroom (v1.34.0): pad the data range BEFORE snapping to nice ticks, so the
   // highest/lowest points never land flush on the top/bottom gridline (where their
   // marker dot + endpoint label would clip past the plot edge). Padding the input
   // also bumps the rounded bound up a step when a value sits exactly on a boundary
@@ -3170,7 +3174,7 @@ function lineChart(opts){
     const pv=years.map(y=>pin.vals?pin.vals[y]:null);
     let li=-1; for(let i=pv.length-1;i>=0;i--){ if(pv[i]!=null){ li=i; break; } }
     if(li>=0){ const v=pv[li], x=X(li), yy=Y(v), last=(li===years.length-1);
-      // Endpoint label placement rule (v1.33.0): if the line is RISING into the
+      // Endpoint label placement rule (v1.34.0): if the line is RISING into the
       // endpoint, drop the label BELOW the marker (clears the ascending line and
       // the top edge it would otherwise clip); if FALLING, lift it ABOVE. Clamp
       // to the chart box so it can never get cut off. The --chart-halo var gives a
@@ -3290,7 +3294,7 @@ function bandChart(opts){
 
 // ── Full school detail page (items 5 & 9): opens in a new tab via #school/<id> ─
 // ── Scholarship distribution ────────────────────────────────────────────────
-// Canonical buckets per owner directive (v1.33.0): student-favorability gradient.
+// Canonical buckets per owner directive (v1.34.0): student-favorability gradient.
 // "No grant" is DERIVED = 100 - (lt + mt + full + gt) — the source's none count is
 // known to be unreliable (negatives, mis-reports); the derivation guarantees the
 // stack sums to 100% and avoids fabricated bad data.
@@ -3308,6 +3312,14 @@ const EMP_BUCKETS=[
   {k:'emp_biz_pct',    l:'Business',     c:'#C084FC'},
   {k:'emp_edu_pct',    l:'Academia',     c:'#F97316'}
 ];
+// Categories offered in the "one category over time" dropdown on the school view:
+// the firm-size/sector mix above plus the headline employment-quality rates.
+const EMP_CAT_LIST = EMP_BUCKETS.concat([
+  {k:'ftlt_pct',        l:'Full-time, long-term JD jobs', c:'#4A9B6B'},
+  {k:'emp_bar_pct',     l:'Bar-required jobs',            c:'#5AABCB'},
+  {k:'emp_jda_pct',     l:'JD-advantage jobs',            c:'#A78BFA'},
+  {k:'emp_seeking_pct', l:'Still seeking employment',     c:'#EF5350'}
+]);
 
 const SCHOL_BUCKETS=[
   {k:'schol_none_pct', l:'No grant',          c:'#EF5350'}, // RED, derived
@@ -3437,7 +3449,7 @@ function histStackCols(history, buckets, opts){
     }
   }
   const leg=buckets.map(b=>'<span class="dp-leg-i"><span class="dp-leg-dot" style="background:'+b.c+'"></span>'+b.l+'</span>').join('');
-  return '<div class="st-wrap" role="img" aria-label="'+(opts.aria||'Composition by year')+'">'+cols+'</div><div class="st-axis">'+axis+'</div><div class="dp-leg">'+leg+'</div>';
+  return '<div class="st-wrap'+(opts.tall?' st-tall':'')+'" role="img" aria-label="'+(opts.aria||'Composition by year')+'">'+cols+'</div><div class="st-axis">'+axis+'</div><div class="dp-leg">'+leg+'</div>';
 }
 // Trailing-N-year delta for a single history field (default 5yr, nearest year ≤target).
 function histDelta(history, key, lookback){
@@ -3717,7 +3729,7 @@ function outcomeFunnel(s){
 
 function navSchool(id){
   // HASH ROUTES — safest, work anywhere, no 404.html or server-side rewrites needed.
-  // Reverted from clean /school/<slug> paths in v1.33.0 because GH Pages without a
+  // Reverted from clean /school/<slug> paths in v1.34.0 because GH Pages without a
   // deployed 404.html serves real 404s for any unknown path. When the project moves
   // to a custom domain with rewrites (Netlify _redirects, Vercel rewrites, Cloudflare),
   // flip CLEAN_URLS to true and the deep-link helpers below will re-engage.
@@ -4483,13 +4495,23 @@ async function paintEmpEvolution(s){
     if(hist){ window._YOY_HIST = hist; const sec = yoySection(hist); if(sec){ yslot.innerHTML = sec; renderYoYTable(); } else yslot.remove(); }
     else yslot.remove();
   }
-  // (1) Employment mix — historic 100%-stacked columns (same visual as grants).
+  // (1) Employment over time — a big, prominent stacked composition for every
+  //     reporting year, PLUS a dropdown to inspect any single category's trend.
   if(slot){
-    const cols = histStackCols(hist, EMP_BUCKETS, {aria:'Employment mix composition by year'});
+    const cols = histStackCols(hist, EMP_BUCKETS, {aria:'Employment mix composition by year', tall:true});
     if(cols){
-      slot.innerHTML = '<div class="dp-chart-t">Employment mix · historic share by year</div>'
-        + '<div style="font-family:var(--mono);font-size:11px;color:var(--dimmer);margin-bottom:6px;">% of reported sector employment by year, columns normalise to 100%. Live ABA 509 history.</div>'
-        + cols;
+      window._EMP_HIST = hist;
+      const opts = EMP_CAT_LIST.map(c=>'<option value="'+c.k+'"'+(c.k==='ftlt_pct'?' selected':'')+'>'+c.l+'</option>').join('');
+      slot.innerHTML =
+          '<div class="dp-chart-t" style="margin-top:16px;font-size:13px;">Where graduates work · every reporting year</div>'
+        + '<div style="font-family:var(--mono);font-size:11px;color:var(--dimmer);margin-bottom:8px;">Each column is one class year, normalised to 100% of reported sector employment (ABA 509). Hover any segment for its share.</div>'
+        + cols
+        + '<div class="emp-cat" style="margin-top:20px;">'
+          + '<div class="dp-chart-t" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:13px;">One category over time'
+            + '<select id="empCatSel" class="emp-cat-sel" onchange="empCatPaint(this.value)" aria-label="Pick an employment category to chart">'+opts+'</select></div>'
+          + '<div id="empCatChart"></div>'
+        + '</div>';
+      empCatPaint('ftlt_pct');
     } else { slot.remove(); }
   }
   // (2) Trailing-5-yr change badges on the employment rows + hero chips.
@@ -4509,6 +4531,19 @@ async function paintEmpEvolution(s){
       dslot.innerHTML = '<div class="dp-chart-t" style="margin-top:12px;">Composition · by year</div>' + dcols;
     } else { dslot.remove(); }
   }
+}
+// Paint a single employment category's % across all reporting years into #empCatChart
+// (driven by the dropdown). Reads the school history stashed on window._EMP_HIST.
+function empCatPaint(key){
+  const hist=window._EMP_HIST, el=document.getElementById('empCatChart'); if(!hist||!el) return;
+  const ys=Object.keys(hist).filter(y=>/^\d{4}$/.test(y)).map(Number).sort((a,b)=>a-b);
+  if(!ys.length){ el.innerHTML=''; return; }
+  const vals={}; let any=false;
+  for(let y=ys[0];y<=ys[ys.length-1];y++){ const d=hist[String(y)]; const v=d?d[key]:null; if(v!=null&&!isNaN(v)){ vals[y]=+v; any=true; } }
+  if(!any){ el.innerHTML='<div class="lc-empty">No data reported for this category</div>'; return; }
+  const yrs=[]; for(let y=ys[0];y<=ys[ys.length-1];y++) yrs.push(String(y));
+  const meta=EMP_CAT_LIST.find(c=>c.k===key)||{c:'#5AABCB',l:key};
+  el.innerHTML=lineChart({years:yrs,series:[{vals:vals,color:meta.c}],pinIndex:0,fmt:v=>Math.round(v)+'%',label:meta.l+' over time',w:680,h:200});
 }
 // Stacked-area chart of employment-mix percentages over the gz year span
 // (20182026). Each band is one EMP_BUCKETS category as % of total reported
@@ -5743,7 +5778,7 @@ function openShareModal(){
   document.body.appendChild(m);
 }
 
-// Disclaimer bar removed v1.33.0 — --banner-h is hardcoded to 0 in the inline
+// Disclaimer bar removed v1.34.0 — --banner-h is hardcoded to 0 in the inline
 // <style> after the header; the dynamic syncBannerHeight observer is no longer
 // needed. Provenance lives in the footer.
 // Honor #school/X or #compare=… in URL on first load
