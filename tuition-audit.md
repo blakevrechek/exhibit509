@@ -27,6 +27,21 @@ Verify these against the original 509 disclosure before changing.
 
 
 
+## $0-tuition sweep, patched in v1.51.3
+
+Separate from the semester/annual flags below. 239 garbage tuition cells (mostly
+stored `$0`, a few truncated like `$70`/`$120`/`$550`) across 39 schools, almost
+all 2018-2022. `$0` is never valid tuition, so:
+- 205 cells filled from data consistent with the school's neighbors: the ABA
+  workbook where present, and for PRIVATE schools the non-resident figure where
+  only the resident cell was zeroed (Boston College 2019-20 -> $56,940/$59,220,
+  Loyola Marymount 2019-23 -> ~$58-65k, UIC 2019-22 -> $34,800, Kansas ->
+  $21,779, Santa Clara -> ~$54k, Detroit Mercy -> $43,297).
+- 34 cells DELETED (rendered as MISSING, not $0) where no trustworthy source
+  exists: Stanford 2018, the closed schools (Arizona Summit, Whittier,
+  Valparaiso, Florida Coastal), and double-garbage 2018 cells (Washburn $70,
+  Widener $120, UIC $550, Dayton $418, Indiana $1,094).
+
 ## D. Likely SITE error — ABA source has a normal/higher value (best fix candidates)
 
 | School | Year | Site prev → year | Drop | ABA src (prev → year) | Assessment |
