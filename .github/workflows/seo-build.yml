@@ -53,8 +53,10 @@ jobs:
                   law-school-bar-passage-rates.html \
                   cheapest-law-schools.html \
                   law-school-employment-outcomes.html \
+                  '*-law-schools.html' \
                   sitemap.xml index.html sw.js \
-                  methodology.html terms.html about.html contact.html
+                  methodology.html terms.html about.html contact.html \
+                  glossary.html blog.html
           if git diff --cached --quiet; then
             echo "No regeneration diff."
             echo "changed=false" >> "$GITHUB_OUTPUT"
