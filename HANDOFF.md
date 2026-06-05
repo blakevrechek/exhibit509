@@ -1,11 +1,15 @@
 # Exhibit 509 — Session Handoff
 
-**Last updated:** 2026-06-04
+**Last updated:** 2026-06-05
 **Repo:** `blakevrechek/exhibit509`
 **Live:** https://exhibit509.com (Cloudflare Pages, auto-deploys from `main`)
-**Current version:** `1.45.0` (see `VERSION`)
-**`main` HEAD:** `bf57056` — *data sections: sex-over-time, curriculum/faculty charts, transfers, JD-jobs trend*
-**Working branch:** `claude/elegant-lovelace-0awdY` (fast-forward merged into `main`)
+**Current version:** `1.49.0` (see `VERSION`; git tag `v1.49.0`)
+**`main` HEAD:** `ea2c781` — *per-state SEO landing pages* (plus this HANDOFF sync on top)
+**Working branch:** `claude/sharp-maxwell-owNOk` (fast-forward merged into `main`)
+**Version sync:** `VERSION` is the single source of truth; `stamp_version.py` propagates
+it to all chrome HTML + `sw.js` (cache name + `?v=` dataset bust), and each release
+is git-tagged `vX.Y.Z`. Generated SEO pages (school/state/pillar/directory) carry no
+version string by design. Stale branches/PRs were cleaned up through 2026-06-05.
 
 **Brand:** the product is **"Exhibit 509"**; **509α** is the publisher ("by 509α").
 The domain is `exhibit509.com`, so brand and domain match.
@@ -25,7 +29,7 @@ Desktop, data check, mobile, brand all ✅. The product is now feature-rich; rec
 work has been the **school full-page experience** (charts, projections, calculators,
 glossary) and **polish**. The map/desktop foundations are stable.
 
-> This doc tracks 1.28.0 → **1.44.0**. The detailed per-version log is under
+> This doc tracks 1.28.0 → **1.49.0**. The detailed per-version log is under
 > **"What shipped"** below; earlier sessions (≤1.27.x) are summarized at the bottom.
 
 ### Backlog / future ideas (not started)
@@ -98,8 +102,9 @@ python3 scripts/stamp_version.py        # stamp v<x.y.z> across HTML + sw.js
 ## Conventions / guardrails (learned the hard way)
 
 - **Branch + ship:** work on the session branch (this session:
-  `claude/elegant-lovelace-0awdY`), then fast-forward merge into `main` and push —
+  `claude/sharp-maxwell-owNOk`), then fast-forward merge into `main` and push —
   Cloudflare deploys `main`. After merging, verify `main`'s tree == branch tip's.
+  Tag each release `git tag -a vX.Y.Z` so git, `VERSION`, and the stamped files agree.
 - **No em dashes** in user-facing prose — use commas/colons. (House style; checked
   each ship with `grep -c "—"`.)
 - **Brand strings:** product = "Exhibit 509", publisher = "509α". Generated school
@@ -149,7 +154,26 @@ python3 scripts/stamp_version.py        # stamp v<x.y.z> across HTML + sw.js
 
 ---
 
-## What shipped (1.28.0 → 1.44.0)
+## What shipped (1.28.0 → 1.49.0)
+
+**1.49.0** — **per-state SEO landing pages** (`build_state_pages`): 51
+`{state}-law-schools.html`, ranked by first-time bar (FTLT + tuition), current
+chrome + "E" favicon, CollectionPage/ItemList + breadcrumb JSON-LD; linked from the
+`/schools.html` directory + sitemap. Re-implemented cleanly instead of merging the
+stale PR #4. Stale PRs #4/#5 closed; dead branches flagged for deletion.
+**1.48.x** — **data-validation CI gate** (`validate_data.py`, runs first in
+`build.sh` + `validate.yml`: constant-collapse, truncated-trend, impossible-value,
+inline↔trend-drift; it caught + fixed 127 faculty-trend gaps); **projection refine**
+(cone half-width capped 35%, money floored at 0, dashed edges); **global tuition
+Y-scale** (0 → 98th-pct ceiling so all schools compare); **compare composition bars**
+(sex/race/faculty) + **Letter (8.5×11) print/share**; **outcome-funnel + faculty
+100% stacks**; LSAT/uGPA + tuition/scholarship history backfilled from gz.
+**1.46.x** — full-width school page + bigger charts + click-to-enlarge prompt;
+10/5/3/2-yr trailing-change badges; absolute employment head-count stack.
+**1.45.x** — **dataset cache-bust** (`?v=<VERSION>` on `exhibit-data.js`, the fix
+for stale faculty/LSAT persisting via the SW); Trends/history loader hardened
+(handles CDN-decompressed gz); funny 404; **"E" monogram favicon**; global header
+split (features vs writings); blueprint bg; print readout rebuilt; `blog.html`.
 
 **1.28.0** — review fixes: OBBBA federal-loan cliff modeled in Net Price (live
 warning at 2026 caps $50k/yr·$200k lifetime); "0 schools" verified not-a-bug;
