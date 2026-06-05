@@ -8,6 +8,25 @@ patch and I'll edit `tui_trend` (+ `nrt` mirrors) and rebuild.
 
 Last refreshed 2026-06-05 against the uploaded workbook. 51 downward jumps flagged.
 
+## Patched in v1.51.2 (decisive cases only)
+
+Corrected to the ABA source where the evidence was unambiguous (isolated 2x
+spike bracketed by correct years on both sides, scalar-confirmed, or 0-sentinel):
+
+- Cornell 2019 res $135,496 -> $67,748 (isolated spike)
+- Ohio State 2019 res $62,900 -> $31,450 (isolated spike)
+- Campbell 2019 res $85,200 -> $42,600 (isolated spike)
+- Nevada-Las Vegas 2020 res $53,800 -> $26,900, nr $78,600 -> $39,300 (isolated spike)
+- Montana 2023-25 res $12k -> $19,494 / $24,161 / $24,582 (matches the school's own 2025 scalar)
+- Florida State 2020-22 res & nr were 0-sentinels -> ABA ($17,487/$17,487/$17,458; nr $35,902/$35,902/$35,873)
+
+The remaining flags below are LEFT AS-IS: they are genuine semester-vs-annual
+ambiguities where the direction varies by school (for several, the site value
+already fits the trajectory and the ABA cell is the per-semester figure).
+Verify these against the original 509 disclosure before changing.
+
+
+
 ## D. Likely SITE error — ABA source has a normal/higher value (best fix candidates)
 
 | School | Year | Site prev → year | Drop | ABA src (prev → year) | Assessment |
