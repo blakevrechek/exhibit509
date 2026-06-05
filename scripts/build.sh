@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 # One-command rebuild of every generated artifact. Run after editing the dataset
 # (data/exhibit-data.js) or bumping the VERSION file:
+#   0. VALIDATE the dataset — aborts the build on data-integrity errors so a
+#      generation bug (constant fields, truncated trends, impossible values,
+#      inline/trend drift) can never be regenerated into the static pages.
 #   1. regenerate per-school pages, /schools.html directory, pillar pages, sitemap
 #   2. re-stamp the canonical version across the HTML pages + service worker
 #
@@ -9,6 +12,7 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
+python3 scripts/validate_data.py
 python3 scripts/build_school_pages.py
 python3 scripts/stamp_version.py
 

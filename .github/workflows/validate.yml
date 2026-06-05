@@ -1,0 +1,33 @@
+name: Validate data
+
+# Data-integrity gate. Runs scripts/validate_data.py on every push and PR that
+# touches the dataset or the data scripts, so generation bugs (constant fields,
+# truncated trends, impossible values, inline<->trend drift) are caught BEFORE
+# they reach `main` (which Cloudflare Pages auto-deploys). The same check also
+# runs inside scripts/build.sh, so a local build aborts on bad data too.
+
+on:
+  push:
+    paths:
+      - 'data/**'
+      - 'scripts/validate_data.py'
+      - 'scripts/build.sh'
+  pull_request:
+    paths:
+      - 'data/**'
+      - 'scripts/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Validate dataset (fails the build on data errors)
+        run: python3 scripts/validate_data.py

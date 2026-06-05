@@ -69,6 +69,7 @@ Brand: **Exhibit 509**, published by **509α**. Independent; not affiliated with
 | `fonts/` | **Self-hosted** Nunito / Geist Mono (latin woff2) + `fonts.css`. No Google Fonts. **Playfair Display was PURGED (v1.30.6)** — `--serif` now points at the Nunito stack; don't reintroduce Playfair (owner disliked it). |
 | `glossary.html` | Standalone crawlable glossary (43 terms, 5 sections). Generated once from the methodology chrome; hand-edit directly now. Linked in nav + sitemap. |
 | `school/*.html` | 208 generated static pages (title/desc/canonical/OG/JSON-LD, indexable). |
+| `scripts/validate_data.py` | **Data-integrity gate** (v1.48.2). Runs FIRST in `build.sh` + its own CI workflow (`validate.yml`); aborts on data-gen bug classes that have shipped before: constant-collapse (faculty=25), truncated trends vs gz, impossible values, inline↔trend drift. ERRORS fail the build; sentinel-0s / high-tuition are WARNINGS. |
 | `scripts/build_school_pages.py` | Regenerates `school/*.html`, `sitemap.xml`, injects the A–Z crawlable directory into `index.html`'s `<noscript>`. Reads `S` from `data/exhibit-data.js`. |
 | `scripts/stamp_version.py` | **Single-source version stamper.** Reads `VERSION`, stamps `v<x.y.z>` into all HTML + the `sw.js` CACHE const. Run after bumping `VERSION`. |
 | `_headers` | Cloudflare headers: CSP, HSTS, X-Frame-Options, cache rules. |
