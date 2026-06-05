@@ -12,7 +12,8 @@ it to all chrome HTML + `sw.js` (cache name + `?v=` dataset bust). Verified alig
 SEO pages (school/state/pillar/directory) carry no version string by design.
 **Tag pending:** `v1.49.0` is created locally but the CI sandbox can't push tags
 (proxy 403). Owner: `git fetch && git push origin v1.49.0` (or cut a Release) so git
-carries the version too. Stale branches/PRs cleaned up through 2026-06-05.
+carries the version too. PRs #4/#5 closed 2026-06-05; ~12 stale `claude/*` branches
+still need deleting by the owner (see Open follow-ups).
 
 **Brand:** the product is **"Exhibit 509"**; **509α** is the publisher ("by 509α").
 The domain is `exhibit509.com`, so brand and domain match.
@@ -258,6 +259,20 @@ click) · `empCatPaint` + `paintEmpEvolution` · `demoCatPaint` · `cmpEmpCatPai
 `EMP_CAT_LIST`, `RACE_BUCKETS`, `DEMO_CAT_LIST`, `SEX_BUCKETS`. `TUI_IRREGULAR` map.
 
 ### Open follow-ups
+- **Owner actions pending (sandbox can't do these — proxy 403):**
+  (1) **Push tag `v1.49.0`** — created locally, not on origin. `git push origin v1.49.0`
+  or cut a Release. (2) **Delete dead branches** — PRs #4/#5 are CLOSED, but the ~12
+  stale `claude/*` branches still exist; delete from the GitHub Branches page (keep
+  `main` + the active session branch).
+- **3 validation warnings** (non-blocking, surfaced by `validate_data.py`): 54
+  LSAT/uGPA 0-sentinels still stored (nulled at runtime — could null in data);
+  1 high tuition (Cornell 2019 ~$126k historic outlier); 2 schools' current `tui`
+  differ slightly from their `tui_trend` latest (oklahoma, montana). Owner can
+  verify/clean when convenient.
+- **Improvement backlog (proposed, not started):** SW "update available" toast;
+  a small test suite (chart helpers + data invariants) in CI; Lighthouse perf +
+  axe a11y pass; render key figures into static pages for SEO; real blog content;
+  the transparent reweightable S–F tier-ranking.
 - **`tuition-audit.md`** lists 15 flagged schools (multi-year level shifts, likely
   real 2014–15 resets) the owner is researching. When verified, correct in
   `data/exhibit-data.js` (object-scoped string replace; mind `"YYYY": N` spacing &
@@ -344,10 +359,11 @@ click) · `empCatPaint` + `paintEmpEvolution` · `demoCatPaint` · `cmpEmpCatPai
 ## Quick start for the next chat
 
 1. `git fetch && git checkout main && git reset --hard origin/main` — confirm HEAD
-   is `bf57056` (or later, incl. the CI auto-regen commit), `VERSION` is `1.44.0`.
+   is `66ca857` (or later, incl. the CI auto-regen commit), `VERSION` is `1.49.0`.
 2. **Edit `index.html` inline JS → `node --check` it** (extract largest `<script>`
-   without `src`). Bump `VERSION`, run `bash scripts/build.sh` (regen + counts +
-   stamp). Validate JSON-LD if you touched it. No em dashes.
+   without `src`). Bump `VERSION`, run `bash scripts/build.sh` — which now runs
+   `validate_data.py` FIRST (aborts on data errors), then regen + counts + stamp.
+   Validate JSON-LD if you touched it. No em dashes. Tag the release + push it.
 3. **Ship + reconcile main** (it auto-regenerates — see the heads-up box at top):
    push branch; `git checkout main && git reset --hard origin/main`; `git merge
    --ff-only <branch>`; if ff fails, rebase branch on origin/main, force-with-lease,
