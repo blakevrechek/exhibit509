@@ -487,7 +487,7 @@ def render_page(s, all_schools=None):
   <nav class="nav"><a href="/">Map</a><a href="/schools.html">All schools</a><a href="/law-school-bar-passage-rates.html">Bar passage</a><a href="/cheapest-law-schools.html">Tuition</a><a href="/law-school-employment-outcomes.html">Employment</a><a href="/methodology.html">Methodology</a></nav>
   {crumb_html}
   {closed_banner}
-  <div class="eyebrow">ABA Standard 509 · 2025 cycle · Last synced May 31, 2026</div>
+  <div class="eyebrow">ABA Standard 509 · 2025 cycle · Last synced June 5, 2026</div>
   <h1>{lname}</h1>
   <div class="meta">{state}{f' · {school_type}' if school_type else ''} · School ID: {sid}</div>
   {lead_html}
@@ -764,7 +764,7 @@ def update_sitemap(schools, states=None):
     <loc>https://exhibit509.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <lastmod>2026-05-31</lastmod>
+    <lastmod>2026-06-05</lastmod>
   </url>
   <url>
     <loc>https://exhibit509.com/about.html</loc>
@@ -775,7 +775,7 @@ def update_sitemap(schools, states=None):
     <loc>https://exhibit509.com/methodology.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-05-31</lastmod>
+    <lastmod>2026-06-05</lastmod>
   </url>
   <url>
     <loc>https://exhibit509.com/contact.html</loc>
@@ -802,37 +802,37 @@ def update_sitemap(schools, states=None):
     <loc>https://exhibit509.com/schools.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <lastmod>2026-05-31</lastmod>
+    <lastmod>2026-06-05</lastmod>
   </url>
   <url>
     <loc>https://exhibit509.com/law-school-bar-passage-rates.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <lastmod>2026-05-31</lastmod>
+    <lastmod>2026-06-05</lastmod>
   </url>
   <url>
     <loc>https://exhibit509.com/cheapest-law-schools.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <lastmod>2026-05-31</lastmod>
+    <lastmod>2026-06-05</lastmod>
   </url>
   <url>
     <loc>https://exhibit509.com/law-school-employment-outcomes.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <lastmod>2026-05-31</lastmod>
+    <lastmod>2026-06-05</lastmod>
   </url>
 """
     body_lines = []
     for st, _n in (states or []):
         sl = state_slug(st)
         body_lines.append(
-            f'  <url>\n    <loc>https://exhibit509.com/{sl}-law-schools.html</loc>\n    <changefreq>monthly</changefreq>\n    <priority>0.7</priority>\n    <lastmod>2026-05-31</lastmod>\n  </url>'
+            f'  <url>\n    <loc>https://exhibit509.com/{sl}-law-schools.html</loc>\n    <changefreq>monthly</changefreq>\n    <priority>0.7</priority>\n    <lastmod>2026-06-05</lastmod>\n  </url>'
         )
     for s in schools:
         slug = slugify(s["id"])
         body_lines.append(
-            f'  <url>\n    <loc>https://exhibit509.com/school/{slug}.html</loc>\n    <changefreq>monthly</changefreq>\n    <priority>0.8</priority>\n    <lastmod>2026-05-31</lastmod>\n  </url>'
+            f'  <url>\n    <loc>https://exhibit509.com/school/{slug}.html</loc>\n    <changefreq>monthly</changefreq>\n    <priority>0.8</priority>\n    <lastmod>2026-06-05</lastmod>\n  </url>'
         )
     body = "\n".join(body_lines)
     tail = "\n</urlset>\n"
