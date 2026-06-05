@@ -3,13 +3,16 @@
 **Last updated:** 2026-06-05
 **Repo:** `blakevrechek/exhibit509`
 **Live:** https://exhibit509.com (Cloudflare Pages, auto-deploys from `main`)
-**Current version:** `1.49.0` (see `VERSION`; git tag `v1.49.0`)
-**`main` HEAD:** `ea2c781` — *per-state SEO landing pages* (plus this HANDOFF sync on top)
+**Current version:** `1.49.0` (see `VERSION`)
+**`main` HEAD:** `fbd5892` — *HANDOFF + version sync* (on top of `ea2c781`, per-state pages)
 **Working branch:** `claude/sharp-maxwell-owNOk` (fast-forward merged into `main`)
 **Version sync:** `VERSION` is the single source of truth; `stamp_version.py` propagates
-it to all chrome HTML + `sw.js` (cache name + `?v=` dataset bust), and each release
-is git-tagged `vX.Y.Z`. Generated SEO pages (school/state/pillar/directory) carry no
-version string by design. Stale branches/PRs were cleaned up through 2026-06-05.
+it to all chrome HTML + `sw.js` (cache name + `?v=` dataset bust). Verified aligned at
+`1.49.0` across index/methodology/terms/about/contact/glossary/blog + sw.js. Generated
+SEO pages (school/state/pillar/directory) carry no version string by design.
+**Tag pending:** `v1.49.0` is created locally but the CI sandbox can't push tags
+(proxy 403). Owner: `git fetch && git push origin v1.49.0` (or cut a Release) so git
+carries the version too. Stale branches/PRs cleaned up through 2026-06-05.
 
 **Brand:** the product is **"Exhibit 509"**; **509α** is the publisher ("by 509α").
 The domain is `exhibit509.com`, so brand and domain match.
@@ -104,7 +107,8 @@ python3 scripts/stamp_version.py        # stamp v<x.y.z> across HTML + sw.js
 - **Branch + ship:** work on the session branch (this session:
   `claude/sharp-maxwell-owNOk`), then fast-forward merge into `main` and push —
   Cloudflare deploys `main`. After merging, verify `main`'s tree == branch tip's.
-  Tag each release `git tag -a vX.Y.Z` so git, `VERSION`, and the stamped files agree.
+  Tag each release `git tag -a vX.Y.Z` + `git push origin vX.Y.Z` so git, `VERSION`,
+  and the stamped files agree (tag push must run outside the CI sandbox — proxy 403).
 - **No em dashes** in user-facing prose — use commas/colons. (House style; checked
   each ship with `grep -c "—"`.)
 - **Brand strings:** product = "Exhibit 509", publisher = "509α". Generated school
