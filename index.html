@@ -375,7 +375,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .pb-counsel-header{border-top:3px solid var(--counsel);}
 
 /* Map filters bar */
-/* Map filters relocated v1.51.3, top-of-map horizontal toolbar, docked between the
+/* Map filters relocated v1.52.0, top-of-map horizontal toolbar, docked between the
    left Match Me / Compare sidebar (ends at 380px) and the always-open right school
    panel (400px), sitting just under the global header. The left sidebar is now
    reserved exclusively for Match Me + Compare. */
@@ -452,7 +452,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
    header (school name + bar pass chip) isn't hidden by filter chips or the BLS
    tooltip card. Was top:76px causing the upper ~50px to be eaten. */
 /* schoolPanel sits at the natural top now that map-filter bar moved into the left
-   panel (v1.51.3) — frees ~50px of vertical space at the top of the right column. */
+   panel (v1.52.0) — frees ~50px of vertical space at the top of the right column. */
 #schoolPanel{position:fixed;top:76px;right:0;bottom:36px;width:400px;z-index:100;background:rgba(4,13,23,0.97);border-left:1px solid rgba(74,122,155,0.22);overflow-y:auto;transform:translateX(0);transition:transform .3s;}#schoolPanel.hidden{transform:translateX(100%);}
 #schoolPanel.open{transform:translateX(0);}
 .sp-close{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(4,13,23,0.98);border-bottom:1px solid rgba(74,122,155,0.15);}
@@ -462,7 +462,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .sp-tab{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border:1px solid rgba(74,122,155,0.2);background:transparent;color:var(--dim);cursor:pointer;transition:all .2s;}
 .sp-tab+.sp-tab{border-left:none;}
 .sp-tab.on{background:rgba(217,119,87,0.1);color:var(--orange);border-color:rgba(217,119,87,0.35);}
-/* School-panel (right side) typography tightened v1.51.3, was visibly scaled-too-big
+/* School-panel (right side) typography tightened v1.52.0, was visibly scaled-too-big
    per owner. Reduced metric/value sizes by ~15%, tighter section padding, smaller
    section labels, more breathable line-height. */
 .sp-header{padding:14px 16px 10px;border-bottom:1px solid rgba(74,122,155,0.12);}
@@ -1338,7 +1338,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
 .theme-light .cmp-act{color:#374151!important;border-color:rgba(60,90,120,0.3)!important;}
 .theme-light .cmp-bar-track,.theme-light .cmp-emp-track{background:rgba(60,90,120,0.10)!important;}
 /* ──────────────────────────────────────────────────────────────────────────
-   PRINT / SAVE-AS-PDF  (rebuilt v1.51.3)
+   PRINT / SAVE-AS-PDF  (rebuilt v1.52.0)
    The school page is now a sectioned narrative (story-sec / story-mod) with
    historic stacked charts, projections, an interactive loan calculator and
    click-to-zoom widgets. This stylesheet turns that live view into a clean,
@@ -1728,7 +1728,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
     More
   </button>
 </nav>
-<!-- Disclaimer bar removed v1.51.3, provenance now lives in the footer. -->
+<!-- Disclaimer bar removed v1.52.0, provenance now lives in the footer. -->
 <style>:root{--banner-h:0px;}</style>
 
 <div id="cookieBar" style="position:fixed;bottom:0;left:0;right:0;z-index:1000;background:#0B1826;border-top:1px solid rgba(217,119,87,0.4);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;box-shadow:0 -2px 12px rgba(0,0,0,0.5);">
@@ -1993,7 +1993,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
     </a>
   </div>
   <div style="padding:0 16px;font-family:var(--mono);font-size:11px;color:var(--dimmer);border-left:1px solid rgba(74,122,155,0.12);white-space:nowrap;letter-spacing:0.4px;">
-    <span style="color:#4A9B6B;">●</span>&nbsp; Sourced from official ABA Standard 509 disclosures &nbsp;·&nbsp; <span style="color:var(--orange);">Last synced June 5, 2026</span> &nbsp;·&nbsp; <span style="color:#7AAAC8;">v1.51.3</span>
+    <span style="color:#4A9B6B;">●</span>&nbsp; Sourced from official ABA Standard 509 disclosures &nbsp;·&nbsp; <span style="color:var(--orange);">Last synced June 5, 2026</span> &nbsp;·&nbsp; <span style="color:#7AAAC8;">v1.52.0</span>
   </div>
 </div>
 
@@ -2017,7 +2017,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
 <!-- Dataset (S, BLS, RPP, FMR) split out of the HTML for cacheability + lighter
      initial document. Classic script, executes before the app script below, so
      the globals are synchronously available exactly as when inlined. -->
-<script src="data/exhibit-data.js?v=1.51.3"></script>
+<script src="data/exhibit-data.js?v=1.52.0"></script>
 <script>
 const IMG={png:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAB/UlEQVR42u1bvU7DMBBO88dPVdoKCSGEqiwsiAGJAQk2xMLWDogN8QjdWJlZeAQW3oNHYGbiEXiE4LOUSm1DIIrPsXNfpFuaxvb3+Wzfne+CgPnphXEWJlvTaHP4FA/23knS0eF3Op7kS6J+K97Tf+kb+jbw8elF6Wm0PX5Jhgdfa0BrCrVBbVGbjqMOR9HGYG4CdCUZqg/qyy3gSmVL1ZpLVF/UZ+tE0GxYBV5GBGmE/UmPM72ZtQV8RWgs1jbMMO0/tDrrFdpAY2MFH/d3X50DvqoNaoxiwbORkOzsf/gCfnFkqjGLm3njmuAz+MYk6N3ec/CF1D4d6Ex18qhrcETWshNcMnJMGkv/N287Br6Qv81m5Vx0SvVLlkKlA6W9uq6CL7SAvEgbs397fpa/3d8YE2qPVQtMr/359UX++XhnTKg91r3AdCTHZQII61oMz/Rac5kAkqUYIwUdpRFAmNnU3wcCFstAm70Mx81vBDzPrvLL45Pakk2OjI9Rm8d0AWGTANMz2chJUtjZjB8fCNBGEZfj4wMB2kESTwCX89P0FLBCFJnFXI17QYASEAACxBMgfROEHSCdAPGmsHhnSLw7LD4ggpAYgqIIi+NiBFdjuBzF9TgSJJAigyQppMkhURKpskiWRro8CiZQMoOiKZTNoXASpbMonpZTPv8DspZXHnlR2eoAAAAASUVORK5CYII=',webp:'data:image/webp;base64,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'};
 (function(){var f=document.getElementById('favicon');if(f)f.href=IMG.png;document.querySelectorAll('img[data-img]').forEach(function(i){i.src=IMG[i.getAttribute('data-img')];});})();
@@ -2064,8 +2064,8 @@ function fmtUSD(v){ return v==null?"—":"$"+v.toLocaleString(); }
 // ═══════════════════════════════════════════════════════════════════════════
 const DATA_INVARIANTS = {
   total_schools: 208,         // 197 active/newly + 11 closed/transitioning (now included as historical entries)
-  schools_inline: 208,        // all inline as of v1.51.3, closed entries surface their pre-closure history
-  year_count: 15              // 2011–2025 inclusive (15-year span; pre-2018 added in v1.51.3 from Historic + v2 sheets)
+  schools_inline: 208,        // all inline as of v1.52.0, closed entries surface their pre-closure history
+  year_count: 15              // 2011–2025 inclusive (15-year span; pre-2018 added in v1.52.0 from Historic + v2 sheets)
 };
 // Verifiable count of the data cells actually shipped inline on this page:
 // every non-null scalar field, plus every per-year trend entry, across S.
@@ -2134,7 +2134,7 @@ function populateHeaderStats(){
 // ── Lazy-load full dataset (deferred until first deep-dive interaction) ──
 // Callers: `const ext = await loadFullDataset();` parsed JSON, or null on fail.
 // Subsequent calls return the cached object. Concurrent calls share one fetch.
-// Wired in v1.51.3 — schoolDetailHTML calls getSchoolHistory(id) which awaits
+// Wired in v1.52.0 — schoolDetailHTML calls getSchoolHistory(id) which awaits
 // this loader, then renders deep-history charts (employment evolution etc.) into
 // late-paint slots once data is available.
 window.EXT = window.EXT || { data: null, loading: null, byId: null };
@@ -2348,7 +2348,7 @@ function searchTypeaheadKey(e){
   }
 }
 
-// Disclaimer banner is now persistent (per v1.51.3 owner directive) — no dismiss; always visible.
+// Disclaimer banner is now persistent (per v1.52.0 owner directive) — no dismiss; always visible.
 // ── COOKIE notice dismiss (persists via localStorage) ──
 // ── Light/Dark theme toggle (persists via localStorage). Note: many inline styles
 // use literal rgba(4,13,23,...) and won't fully invert — full theming would require
@@ -3230,7 +3230,7 @@ function niceTicks(min, max){
   for(let v=lo; v<=hi+1e-9; v+=step) out.push(+v.toFixed(10));
   return {min:lo, max:hi, ticks:out, step};
 }
-// ── 4-year statistical projection (v1.51.3) ──────────────────────────────────
+// ── 4-year statistical projection (v1.52.0) ──────────────────────────────────
 // Fit the school's own per-year history and extend it. Per-metric model:
 //   'rate'  (0–100% bounded) → logit-linear (stays inside 0–100, eases at bounds)
 //   'mult'  ($/counts, compounding) → log-linear (i.e. a CAGR)
@@ -3258,7 +3258,7 @@ function projectFit(pairs, futureXs, mode){
     const m=inv(a+b*x);
     let l=inv(a+b*x-se), h=inv(a+b*x+se);
     let lo=Math.min(l,h), hi=Math.max(l,h);
-    // Refine (v1.51.3): keep the uncertainty cone honest but bounded. On 'mult'
+    // Refine (v1.52.0): keep the uncertainty cone honest but bounded. On 'mult'
     // (money/counts) the exp() inverse can balloon a few years out, swamping the
     // chart — cap the half-width to 35% of the mid and floor money at 0. Rates are
     // already 0-100 bounded by the logit inverse.
@@ -3305,7 +3305,7 @@ function lineChart(opts){
   if(!allv.length) return '<div class="lc-empty">No trend data</div>';
   if(projData) projData.forEach(pd=>{ if(pd) futureXs.forEach(x=>{ allv.push(pd.mid[x],pd.lo[x],pd.hi[x]); }); });
   const dataMin=Math.min(...allv), dataMax=Math.max(...allv);
-  // Headroom (v1.51.3): pad the data range BEFORE snapping to nice ticks, so the
+  // Headroom (v1.52.0): pad the data range BEFORE snapping to nice ticks, so the
   // highest/lowest points never land flush on the top/bottom gridline (where their
   // marker dot + endpoint label would clip past the plot edge). Padding the input
   // also bumps the rounded bound up a step when a value sits exactly on a boundary
@@ -3387,7 +3387,7 @@ function lineChart(opts){
     const pv=years.map(y=>pin.vals?pin.vals[y]:null);
     let li=-1; for(let i=pv.length-1;i>=0;i--){ if(pv[i]!=null){ li=i; break; } }
     if(li>=0){ const v=pv[li], x=X(li), yy=Y(v), last=(li===years.length-1);
-      // Endpoint label placement rule (v1.51.3): if the line is RISING into the
+      // Endpoint label placement rule (v1.52.0): if the line is RISING into the
       // endpoint, drop the label BELOW the marker (clears the ascending line and
       // the top edge it would otherwise clip); if FALLING, lift it ABOVE. Clamp
       // to the chart box so it can never get cut off. The --chart-halo var gives a
@@ -3457,25 +3457,7 @@ function lcTip(ev){
 // Percentile-band chart over time: shades the 25th–75th band and draws the median
 // line inside it, so you see a class strengthening/weakening AND whether the spread
 // is tightening across 2011–2025. Same axis-headroom + crosshair (incl. touch) as
-// lineChart. opts:{years, p25, p50, p75 (year→value maps), color, fmt, label, w, h}
-// Dataset-wide max tuition (resident + non-resident, current + historic), cached.
-// Used to put every school's tuition chart on one comparable global Y-scale.
-let _TUI_MAX=0;
-function tuiGlobalMax(){
-  if(_TUI_MAX) return _TUI_MAX;
-  const vals=[];
-  (typeof S!=='undefined'?S:[]).forEach(s=>{
-    [s.tui, s.nrt].forEach(v=>{ if(typeof v==='number'&&v>0) vals.push(v); });
-  });
-  vals.sort((a,b)=>a-b);
-  // 98th percentile of current-cycle tuition: the national ceiling without letting
-  // a single bad historic point (e.g. a doubled-semester value) flatten every
-  // chart. A school whose own data exceeds this still expands its own axis
-  // (yFloorMax is a floor for the max, not a cap).
-  const p = vals.length ? vals[Math.min(vals.length-1, Math.floor(vals.length*0.98))] : 80000;
-  _TUI_MAX = Math.max(60000, p);
-  return _TUI_MAX;
-}
+// bandChart. opts:{years, p25, p50, p75 (year→value maps), color, fmt, label, w, h}
 function bandChart(opts){
   const years=opts.years, W=opts.w||340, H=opts.h||188;
   const PL=34,PR=14,PT=12,PB=20, innerW=W-PL-PR, innerH=H-PT-PB;
@@ -3545,7 +3527,7 @@ function bandChart(opts){
 
 // ── Full school detail page (items 5 & 9): opens in a new tab via #school/<id> ─
 // ── Scholarship distribution ────────────────────────────────────────────────
-// Canonical buckets per owner directive (v1.51.3): student-favorability gradient.
+// Canonical buckets per owner directive (v1.52.0): student-favorability gradient.
 // "No grant" is DERIVED = 100 - (lt + mt + full + gt) — the source's none count is
 // known to be unreliable (negatives, mis-reports); the derivation guarantees the
 // stack sums to 100% and avoids fabricated bad data.
@@ -4160,7 +4142,7 @@ function outcomeFunnel(s){
 
 function navSchool(id){
   // HASH ROUTES — safest, work anywhere, no 404.html or server-side rewrites needed.
-  // Reverted from clean /school/<slug> paths in v1.51.3 because GH Pages without a
+  // Reverted from clean /school/<slug> paths in v1.52.0 because GH Pages without a
   // deployed 404.html serves real 404s for any unknown path. When the project moves
   // to a custom domain with rewrites (Netlify _redirects, Vercel rewrites, Cloudflare),
   // flip CLEAN_URLS to true and the deep-link helpers below will re-engage.
@@ -4928,7 +4910,7 @@ function schoolDetailHTML(s){
   // Acceptance rate x-axis clamped to 2016+ (owner directive).
   const accYrs=(()=>{ const out=[]; const lastY=yrs.length?+yrs[yrs.length-1]:2025; for(let y=2016;y<=lastY;y++) out.push(String(y)); return out; })();
   const accChart =lineChart({years:accYrs,series:[{vals:s.acc_trend,color:'#EF5350'}],pinIndex:0,fmt:v=>v.toFixed(1)+'%',label:'Acceptance rate',project:{n:4,mode:'rate'}});
-  const tuiChart =bandChart({years:yrs,p25:s.tui_trend,p50:s.tui_trend,p75:s.nrt_trend,color:'#FFA726',fmt:v=>'$'+Math.round(v/1000)+'K',label:'Tuition resident to non-resident',project:{n:4,mode:'mult'},yMin:0,yFloorMax:tuiGlobalMax()});
+  const tuiChart =bandChart({years:yrs,p25:s.tui_trend,p50:s.tui_trend,p75:s.nrt_trend,color:'#FFA726',fmt:v=>'$'+Math.round(v/1000)+'K',label:'Tuition resident to non-resident',project:{n:4,mode:'mult'}});
   const barChart =bandChart({years:yrs,p25:s.bar_trend,p50:s.bar_trend,p75:s.bar_2yr_trend,color:'#4A9B6B',fmt:v=>Math.round(v)+'%',label:'Bar passage first-time to 2-yr ultimate',project:{n:4,mode:'rate'}});
   const enrChart =lineChart({years:yrs,series:[{vals:s.enr_trend,color:'#A78BFA'}],pinIndex:0,fmt:v=>Math.round(v).toLocaleString(),label:'Enrollment',project:{n:4,mode:'mult'}});
   const gpaChart =bandChart({years:yrs,p25:s.gpa25_trend,p50:s.gpa_trend,p75:s.gpa75_trend,color:'#9BD1E8',fmt:v=>Number(v).toFixed(2),label:'uGPA 25–75 band',project:{n:4,mode:'linear'}});
@@ -6482,7 +6464,7 @@ function openShareModal(){
   document.body.appendChild(m);
 }
 
-// Disclaimer bar removed v1.51.3 — --banner-h is hardcoded to 0 in the inline
+// Disclaimer bar removed v1.52.0 — --banner-h is hardcoded to 0 in the inline
 // <style> after the header; the dynamic syncBannerHeight observer is no longer
 // needed. Provenance lives in the footer.
 // Honor #school/X or #compare=… in URL on first load
