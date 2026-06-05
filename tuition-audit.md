@@ -1,4 +1,11 @@
-# Tuition anomaly audit — `tui_trend` downward-jump scan (workbook cross-referenced)
+# Tuition anomaly audit
+
+> **Policy update (v1.54.0):** per the data-integrity rule, suspect values are
+> now CALLED OUT, not silently corrected. All tuition value changes made earlier
+> in the session were REVERTED to the original ABA-disclosed numbers. Everything
+> below is a FLAG for review, not a change that was applied.
+
+## Original heading — `tui_trend` downward-jump scan (workbook cross-referenced)
 
 Scan of all 208 schools' resident `tui_trend` for year-over-year drops **> 10%**
 and **>= $2,000** (real tuition rarely falls that fast). Each flag is now
@@ -8,7 +15,7 @@ patch and I'll edit `tui_trend` (+ `nrt` mirrors) and rebuild.
 
 Last refreshed 2026-06-05 against the uploaded workbook. 51 downward jumps flagged.
 
-## Patched in v1.51.2 (decisive cases only)
+## Decisive cases (FLAGGED — reverted, not changed)
 
 Corrected to the ABA source where the evidence was unambiguous (isolated 2x
 spike bracketed by correct years on both sides, scalar-confirmed, or 0-sentinel):
@@ -27,7 +34,7 @@ Verify these against the original 509 disclosure before changing.
 
 
 
-## $0-tuition sweep, patched in v1.51.3
+## $0-tuition cells (FLAGGED — reverted to source $0/blank, not changed)
 
 Separate from the semester/annual flags below. 239 garbage tuition cells (mostly
 stored `$0`, a few truncated like `$70`/`$120`/`$550`) across 39 schools, almost
