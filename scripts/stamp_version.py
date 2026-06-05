@@ -32,6 +32,11 @@ VERSION_FILE = os.path.join(ROOT, "VERSION")
 # stamper rewrote the LinkedIn/Facebook share-icon coordinates every bump.
 VTOKEN = re.compile(r"(?<![A-Za-z0-9.])v\d+\.\d+(?:\.\d+)?")
 
+# Cache-bust query on the inline dataset (index.html <script src> + sw.js SHELL).
+# Bumping it on every release forces a fresh fetch of data/exhibit-data.js instead
+# of the service worker serving a stale copy, so data fixes actually reach users.
+DATA_QS = re.compile(r"(exhibit-data\.js\?v=)\d+\.\d+(?:\.\d+)?")
+
 HTML_FILES = [
     "index.html",
     "methodology.html",
@@ -58,9 +63,10 @@ def stamp_html(path, version):
         return 0
     src = open(full, encoding="utf-8").read()
     new, n = VTOKEN.subn("v" + version, src)
-    if n:
+    new, n2 = DATA_QS.subn(r"\g<1>" + version, new)
+    if n or n2:
         open(full, "w", encoding="utf-8").write(new)
-    return n
+    return n + n2
 
 
 def stamp_sw(version):
@@ -73,9 +79,10 @@ def stamp_sw(version):
         r"\g<1>" + version + r"\g<2>",
         src,
     )
-    if n:
+    new, n2 = DATA_QS.subn(r"\g<1>" + version, new)
+    if n or n2:
         open(full, "w", encoding="utf-8").write(new)
-    return n
+    return n + n2
 
 
 def main():
