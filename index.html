@@ -4102,7 +4102,7 @@ function schoolDetailHTML(s){
   }
   const yrsLabel = yrs.length ? yrs[0]+'–'+yrs[yrs.length-1] : '—';
   const num=v=>(v==null||v==='')?'—':Number(v).toLocaleString();
-  const usd=v=>v==null?'—':'$'+Number(v).toLocaleString();
+  const usd=v=>v==null?'—':'$'+Number(v).toLocaleString(undefined,{maximumFractionDigits:2});
   const pct=v=>v==null?'—':v+'%';
   const row=(k,v,c)=>'<div class="dp-row"><span class="dp-row-k">'+k+'</span><span class="dp-row-v"'+(c?' style="color:'+c+'"':'')+'>'+v+'</span></div>';
   const lsatChart=lineChart({years:yrs,series:[{vals:s.lsat_trend,color:'#FCD34D'}],pinIndex:0,fmt:v=>Math.round(v),label:'LSAT median'});
