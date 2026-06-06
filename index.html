@@ -378,7 +378,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .pb-counsel-header{border-top:3px solid var(--counsel);}
 
 /* Map filters bar */
-/* Map filters relocated v1.69.0, top-of-map horizontal toolbar, docked between the
+/* Map filters relocated v1.72.0, top-of-map horizontal toolbar, docked between the
    left Match Me / Compare sidebar (ends at 380px) and the always-open right school
    panel (400px), sitting just under the global header. The left sidebar is now
    reserved exclusively for Match Me + Compare. */
@@ -455,7 +455,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
    header (school name + bar pass chip) isn't hidden by filter chips or the BLS
    tooltip card. Was top:76px causing the upper ~50px to be eaten. */
 /* schoolPanel sits at the natural top now that map-filter bar moved into the left
-   panel (v1.69.0) — frees ~50px of vertical space at the top of the right column. */
+   panel (v1.72.0), frees ~50px of vertical space at the top of the right column. */
 #schoolPanel{position:fixed;top:76px;right:0;bottom:36px;width:400px;z-index:100;background:rgba(4,13,23,0.97);border-left:1px solid rgba(74,122,155,0.22);overflow-y:auto;transform:translateX(0);transition:transform .3s;}#schoolPanel.hidden{transform:translateX(100%);}
 #schoolPanel.open{transform:translateX(0);}
 .sp-close{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(4,13,23,0.98);border-bottom:1px solid rgba(74,122,155,0.15);}
@@ -465,7 +465,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .sp-tab{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border:1px solid rgba(74,122,155,0.2);background:transparent;color:var(--dim);cursor:pointer;transition:all .2s;}
 .sp-tab+.sp-tab{border-left:none;}
 .sp-tab.on{background:rgba(217,119,87,0.1);color:var(--orange);border-color:rgba(217,119,87,0.35);}
-/* School-panel (right side) typography tightened v1.69.0, was visibly scaled-too-big
+/* School-panel (right side) typography tightened v1.72.0, was visibly scaled-too-big
    per owner. Reduced metric/value sizes by ~15%, tighter section padding, smaller
    section labels, more breathable line-height. */
 .sp-header{padding:14px 16px 10px;border-bottom:1px solid rgba(74,122,155,0.12);}
@@ -606,6 +606,8 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .cmx-act button{background:rgba(74,122,155,0.14);border:1px solid rgba(74,122,155,0.3);color:var(--dim);font-family:var(--mono);font-size:11px;letter-spacing:0.6px;text-transform:uppercase;padding:6px 11px;border-radius:4px;cursor:pointer;}
 .cmx-act button:hover{color:#fff;border-color:#fff;}
 .cmx-title{font-family:var(--sans);font-size:18px;font-weight:700;color:#fff;margin:4px 0 10px;}
+.cmx-school{font-family:var(--sans);font-size:13px;font-weight:700;letter-spacing:0.4px;text-transform:uppercase;color:var(--orange);margin-bottom:3px;}
+.theme-light .cmx-school{color:#C95B2C;}
 .cmx-body{background:rgba(255,255,255,0.02);border-radius:6px;padding:12px;}
 .cmx-body svg{width:100%;height:auto;max-height:68vh;cursor:default;}
 .cmx-src{font-family:var(--mono);font-size:11px;color:var(--dimmer);margin-top:10px;line-height:1.5;}
@@ -648,7 +650,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
   .dp-row{padding:2px 0;}
   .dp-row-v{font-size:15px;}
   .dp-chart-t{margin:9px 0 3px;font-size:11px;}
-  /* "At a glance" is just a teaser — keep it compact: smaller tiles, more per row,
+  /* "At a glance" is just a teaser, keep it compact: smaller tiles, more per row,
      tighter groups, so it takes minimal vertical real estate above the detail. */
   .snap{margin:8px 0 10px;}
   .snap-h{margin-bottom:7px;font-size:12px;}
@@ -672,7 +674,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 }
 
 /* ── SCROLLYTELLING school page (direction A): a single narrative spine that
-   argues "is it worth it?" — cost → outcomes → the math → admissions → cohort.
+   argues "is it worth it?", cost → outcomes → the math → admissions → cohort.
    Each section: eyebrow + headline + data-driven lede, then a dense masonry of
    "modules" (a facts block + one chart each) that pack vertically to fill the
    wide desktop canvas with almost no wasted space. ≤760px = one column. */
@@ -688,7 +690,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 /* Module layout: a CSS GRID (was multi-column masonry). Grid flows in READING
    order, so a section's fact table sits next to its own chart instead of being
    split down separate masonry columns, and the wide cells (min 440px) scale
-   every chart up — auto-fit packs 2 columns on a laptop, 3+ on a big monitor.
+   every chart up, auto-fit packs 2 columns on a laptop, 3+ on a big monitor.
    The min(100%,…) floor keeps a single column from overflowing narrow phones. */
 .story-mods{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:16px 22px;align-items:start;}
 .story-mod{break-inside:avoid;-webkit-column-break-inside:avoid;page-break-inside:avoid;min-width:0;}
@@ -711,7 +713,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .st-wrap.st-tall{height:190px;gap:6px;}
 /* The composition stacks in the full-width employment block render at module
    width (≈ the grant "% over time" chart), not full-bleed across the page. */
-#outcome-mix-slot,#bar-funnel-slot,#emp-evo-slot{max-width:600px;}
+#outcome-mix-slot,#bar-funnel-slot,#emp-evo-slot,#barjuris-slot{max-width:600px;}
 .emp-cat-sel{font-family:var(--sans);font-size:13px;font-weight:600;text-transform:none;letter-spacing:0;background:#0B1826;color:var(--white);border:1px solid rgba(217,119,87,0.5);border-radius:4px;padding:5px 10px;cursor:pointer;}
 .emp-cat-sel:focus{outline:none;border-color:var(--orange);}
 .theme-light .emp-cat-sel{background:#FFFFFF;color:#0C1A2A;border-color:rgba(60,90,120,0.35);}
@@ -824,9 +826,9 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
 /* Bimodal salary infographic */
 /* ── Global callout system (tips · hints · explanations) ──
    .callout         = base wrapper, default = "tip" (cyan)
-   .callout.note    = orange — "look here"
-   .callout.warn    = amber — "be careful with this number"
-   .callout.insight = purple — "interesting strategic angle"
+   .callout.note    = orange, "look here"
+   .callout.warn    = amber, "be careful with this number"
+   .callout.insight = purple, "interesting strategic angle"
    Same DOM shape: .callout > .callout-eye + .callout-p (+ optional <svg>) */
 .callout{margin:24px 0;padding:18px 22px 16px;border-radius:6px;background:linear-gradient(180deg,rgba(90,171,203,0.07) 0%,rgba(90,171,203,0.02) 100%);border:1px solid rgba(90,171,203,0.22);border-left:4px solid var(--blue);position:relative;}
 .callout-eye{font-family:var(--mono);font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--blue);font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
@@ -1093,7 +1095,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
 }
 
 /* ── TOUCH DEVICES: ≥16px form controls so iOS Safari doesn't zoom on focus ─
-   Keyed on (pointer:coarse) — phones AND tablets — so desktop keeps its
+   Keyed on (pointer:coarse), phones AND tablets, so desktop keeps its
    compact control density. !important is needed to beat the inline
    font-size on the in-state <select> (.p-filt) in the net-price calc. */
 @media (pointer:coarse){
@@ -1158,7 +1160,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
 
 /* View tabs (for non-map views) */
 /* bottom:36px leaves the global footer bar visible on every in-app view (Schools,
-   States, Transfers, Net price) — not just the map. Detail overlays already do this. */
+   States, Transfers, Net price), not just the map. Detail overlays already do this. */
 #viewContainer{position:fixed;top:calc(76px + var(--banner-h, 8px));left:0;right:0;bottom:36px;z-index:200;display:none;background:var(--dark);overflow-y:auto;}
 .view-inner{padding:32px 56px;max-width:1720px;margin:0 auto;}
 .view-title{font-family:var(--sans);font-size:38px;font-weight:800;color:var(--white);letter-spacing:-1.5px;margin-bottom:10px;line-height:1.05;}
@@ -1354,7 +1356,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
 .theme-light .cmp-act{color:#374151!important;border-color:rgba(60,90,120,0.3)!important;}
 .theme-light .cmp-bar-track,.theme-light .cmp-emp-track{background:rgba(60,90,120,0.10)!important;}
 /* ──────────────────────────────────────────────────────────────────────────
-   PRINT / SAVE-AS-PDF  (rebuilt v1.69.0)
+   PRINT / SAVE-AS-PDF  (rebuilt v1.72.0)
    The school page is now a sectioned narrative (story-sec / story-mod) with
    historic stacked charts, projections, an interactive loan calculator and
    click-to-zoom widgets. This stylesheet turns that live view into a clean,
@@ -1373,7 +1375,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
   .cmp-toolbar,.dp-back,.dp-actions,.dp-topbar,.ip-toggle,#chartModal,.cmx-box,
   .emp-cat-sel,.loan-calc input[type=range],.lcx-row,.chart-tip,.zoom-hint,
   #floatBack,#tourBtn,#themeToggle,#mobileMenuBtn,.h-right{display:none!important;}
-  /* the dropdown labels read "One category over time [select]" — drop the now
+  /* the dropdown labels read "One category over time [select]", drop the now
      empty control wrapper's flex gap so the label sits flush. */
   .emp-cat{display:block!important;}
   /* 2 ─ both printable views flow statically to the page width. */
@@ -1744,7 +1746,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
     More
   </button>
 </nav>
-<!-- Disclaimer bar removed v1.69.0, provenance now lives in the footer. -->
+<!-- Disclaimer bar removed v1.72.0, provenance now lives in the footer. -->
 <style>:root{--banner-h:0px;}</style>
 
 <div id="cookieBar" style="position:fixed;bottom:0;left:0;right:0;z-index:1000;background:#0B1826;border-top:1px solid rgba(217,119,87,0.4);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;box-shadow:0 -2px 12px rgba(0,0,0,0.5);">
@@ -2009,7 +2011,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
     </a>
   </div>
   <div style="padding:0 16px;font-family:var(--mono);font-size:11px;color:var(--dimmer);border-left:1px solid rgba(74,122,155,0.12);white-space:nowrap;letter-spacing:0.4px;">
-    <span style="color:#4A9B6B;">●</span>&nbsp; Sourced from official ABA Standard 509 disclosures &nbsp;·&nbsp; <span style="color:var(--orange);">Last synced June 5, 2026</span> &nbsp;·&nbsp; <span style="color:#7AAAC8;">v1.69.0</span>
+    <span style="color:#4A9B6B;">●</span>&nbsp; Sourced from official ABA Standard 509 disclosures &nbsp;·&nbsp; <span style="color:var(--orange);">Last synced June 5, 2026</span> &nbsp;·&nbsp; <span style="color:#7AAAC8;">v1.72.0</span>
   </div>
 </div>
 
@@ -2033,14 +2035,14 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
 <!-- Dataset (S, BLS, RPP, FMR) split out of the HTML for cacheability + lighter
      initial document. Classic script, executes before the app script below, so
      the globals are synchronously available exactly as when inlined. -->
-<script src="data/exhibit-data.js?v=1.69.0"></script>
+<script src="data/exhibit-data.js?v=1.72.0"></script>
 <script>
 const IMG={png:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAB/UlEQVR42u1bvU7DMBBO88dPVdoKCSGEqiwsiAGJAQk2xMLWDogN8QjdWJlZeAQW3oNHYGbiEXiE4LOUSm1DIIrPsXNfpFuaxvb3+Wzfne+CgPnphXEWJlvTaHP4FA/23knS0eF3Op7kS6J+K97Tf+kb+jbw8elF6Wm0PX5Jhgdfa0BrCrVBbVGbjqMOR9HGYG4CdCUZqg/qyy3gSmVL1ZpLVF/UZ+tE0GxYBV5GBGmE/UmPM72ZtQV8RWgs1jbMMO0/tDrrFdpAY2MFH/d3X50DvqoNaoxiwbORkOzsf/gCfnFkqjGLm3njmuAz+MYk6N3ec/CF1D4d6Ex18qhrcETWshNcMnJMGkv/N287Br6Qv81m5Vx0SvVLlkKlA6W9uq6CL7SAvEgbs397fpa/3d8YE2qPVQtMr/359UX++XhnTKg91r3AdCTHZQII61oMz/Rac5kAkqUYIwUdpRFAmNnU3wcCFstAm70Mx81vBDzPrvLL45Pakk2OjI9Rm8d0AWGTANMz2chJUtjZjB8fCNBGEZfj4wMB2kESTwCX89P0FLBCFJnFXI17QYASEAACxBMgfROEHSCdAPGmsHhnSLw7LD4ggpAYgqIIi+NiBFdjuBzF9TgSJJAigyQppMkhURKpskiWRro8CiZQMoOiKZTNoXASpbMonpZTPv8DspZXHnlR2eoAAAAASUVORK5CYII=',webp:'data:image/webp;base64,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'};
 (function(){var f=document.getElementById('favicon');if(f)f.href=IMG.png;document.querySelectorAll('img[data-img]').forEach(function(i){i.src=IMG[i.getAttribute('data-img')];});})();
 
 /* dataset (S, BLS, RPP, FMR) now loaded from data/exhibit-data.js */
 // Data hygiene: an LSAT (120–180 scale) or uGPA (0–4.3) of exactly 0 is never a
-// real value — it's a missing-data sentinel a few closed/partial schools carry for
+// real value, it's a missing-data sentinel a few closed/partial schools carry for
 // years they didn't report (e.g. Belmont 2012, Arizona Summit, Whittier, Florida
 // Coastal, Valparaiso). Null them so trend charts OMIT the year instead of plotting
 // a false crash to zero, and so distributions don't show a bogus "0".
@@ -2048,12 +2050,12 @@ const IMG={png:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaX
   if(typeof S==='undefined') return;
   var TK=['lsat_trend','lsat25_trend','lsat75_trend','gpa_trend','gpa25_trend','gpa75_trend'];
   var SK=['lsat25','lsat50','lsat75','gpa25','gpa50','gpa75'];
-  // Tuition: an annual sticker of $0 — or a truncated cell like $35 / $120 / $1,094
-  // (per-credit or single-term fragments the source occasionally carries) — is never
+  // Tuition: an annual sticker of $0, or a truncated cell like $35 / $120 / $1,094
+  // (per-credit or single-term fragments the source occasionally carries), is never
   // real annual tuition. Floor at $1,500 (the largest garbage cell found is $1,094;
   // the cheapest real JD tuition is several thousand) so these render as a GAP, not a
   // false plunge to ~$0. The stored dataset keeps the source value untouched (data-
-  // integrity policy: surface, don't silently rewrite) — this only affects display.
+  // integrity policy: surface, don't silently rewrite), this only affects display.
   var TUI_FLOOR=1500;
   var TUITK=['tui_trend','nrt_trend'];
   var TUISK=['tui','nrt','tui_ft_res','tui_ft_nr'];
@@ -2094,8 +2096,8 @@ function fmtUSD(v){ return v==null?"—":"$"+v.toLocaleString(); }
 // ═══════════════════════════════════════════════════════════════════════════
 const DATA_INVARIANTS = {
   total_schools: 208,         // 197 active/newly + 11 closed/transitioning (now included as historical entries)
-  schools_inline: 208,        // all inline as of v1.69.0, closed entries surface their pre-closure history
-  year_count: 15              // 2011–2025 inclusive (15-year span; pre-2018 added in v1.69.0 from Historic + v2 sheets)
+  schools_inline: 208,        // all inline as of v1.72.0, closed entries surface their pre-closure history
+  year_count: 15              // 2011–2025 inclusive (15-year span; pre-2018 added in v1.72.0 from Historic + v2 sheets)
 };
 // Verifiable count of the data cells actually shipped inline on this page:
 // every non-null scalar field, plus every per-year trend entry, across S.
@@ -2164,7 +2166,7 @@ function populateHeaderStats(){
 // ── Lazy-load full dataset (deferred until first deep-dive interaction) ──
 // Callers: `const ext = await loadFullDataset();` parsed JSON, or null on fail.
 // Subsequent calls return the cached object. Concurrent calls share one fetch.
-// Wired in v1.69.0 — schoolDetailHTML calls getSchoolHistory(id) which awaits
+// Wired in v1.72.0, schoolDetailHTML calls getSchoolHistory(id) which awaits
 // this loader, then renders deep-history charts (employment evolution etc.) into
 // late-paint slots once data is available.
 window.EXT = window.EXT || { data: null, loading: null, byId: null };
@@ -2194,13 +2196,13 @@ async function loadFullDataset(){
         text = new TextDecoder('utf-8').decode(buf);
       }
       // Defensive: the data pipeline can emit bare NaN (Python json.dump default),
-      // which is valid JS but INVALID JSON — one occurrence makes JSON.parse throw
+      // which is valid JS but INVALID JSON, one occurrence makes JSON.parse throw
       // and silently kills every history chart. Coerce value-position NaN → null
       // (lookahead keeps the trailing delimiter so consecutive NaN are all caught).
       text = text.replace(/([:,\[]\s*)NaN(?=\s*[,}\]])/g, '$1null');
       const parsed = JSON.parse(text);
       window.EXT.data = parsed;
-      // Build O(1) id index once — used by getSchoolHistory.
+      // Build O(1) id index once, used by getSchoolHistory.
       window.EXT.byId = {};
       (parsed.schools || []).forEach(s => { if(s && s.id) window.EXT.byId[s.id] = s; });
       return parsed;
@@ -2212,7 +2214,7 @@ async function loadFullDataset(){
   })();
   return window.EXT.loading;
 }
-// Async helper — returns the gz school record for an id (or null if not in gz).
+// Async helper, returns the gz school record for an id (or null if not in gz).
 // 4 inline-only closed schools (Charlotte, Hamline, Indiana Tech, William
 // Mitchell) have no gz record; callers gracefully no-op when this returns null.
 async function getSchoolHistory(id){
@@ -2286,7 +2288,7 @@ function colorBgFor(metric, value){
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
-// MAP SEARCH — typeahead dropdown. Filters S by name/full, sorts by match quality,
+// MAP SEARCH, typeahead dropdown. Filters S by name/full, sorts by match quality,
 // click flyToSchool(id) (which already exists, does flyTo + openSP).
 // ═══════════════════════════════════════════════════════════════════════════
 let typeaheadIdx = -1;
@@ -2383,10 +2385,10 @@ function searchTypeaheadKey(e){
   }
 }
 
-// Disclaimer banner is now persistent (per v1.69.0 owner directive) — no dismiss; always visible.
+// Disclaimer banner is now persistent (per v1.72.0 owner directive), no dismiss; always visible.
 // ── COOKIE notice dismiss (persists via localStorage) ──
 // ── Light/Dark theme toggle (persists via localStorage). Note: many inline styles
-// use literal rgba(4,13,23,...) and won't fully invert — full theming would require
+// use literal rgba(4,13,23,...) and won't fully invert, full theming would require
 // refactoring inline styles to vars. This toggle hits the CSS-var-driven majority.
 function applyTheme(t){
   if(t==='light'){ document.documentElement.classList.add('theme-light'); }
@@ -2394,10 +2396,10 @@ function applyTheme(t){
   const ic=document.getElementById('themeIcon');
   if(ic){
     if(t==='light'){
-      // Sun (we're in light mode — clicking goes to dark)
+      // Sun (we're in light mode, clicking goes to dark)
       ic.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.07" y2="4.93"/></svg>';
     } else {
-      // Moon (we're in dark mode — clicking goes to light)
+      // Moon (we're in dark mode, clicking goes to light)
       ic.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
     }
   }
@@ -2428,7 +2430,7 @@ function dismissMobileBanner(){
   }catch(e){}
 })();
 
-// ── Mobile bottom tab bar — primary IA on phones ───────────────────────
+// ── Mobile bottom tab bar, primary IA on phones ───────────────────────
 function mtbSetActive(tab){
   const ids = {map:'mtbMap', match:'mtbMatch', compare:'mtbCompare', schools:'mtbSchools', more:'mtbMore'};
   Object.values(ids).forEach(id => { const el=document.getElementById(id); if(el) el.classList.remove('on'); });
@@ -2461,7 +2463,7 @@ function mtbSyncBadge(){
   } else { b.style.display='none'; }
 }
 
-// ── Mobile menu drawer — nav, Match Me, Compare, share, tour, tips ──────
+// ── Mobile menu drawer, nav, Match Me, Compare, share, tour, tips ──────
 function openMobileMenu(){
   const m = document.getElementById('mobileMenu'); if(!m) return;
   m.innerHTML =
@@ -2760,7 +2762,7 @@ function showMap(){
   if(!mapInst) initMap();
   // Always re-measure after the container is shown. On first init the map can be
   // built before layout settles (toolbar/fonts/display:block reflow), so Leaflet
-  // caches a stale size and only fetches tiles for the wrong viewport — pins show
+  // caches a stale size and only fetches tiles for the wrong viewport, pins show
   // but the basemap is partial. invalidateSize() forces a re-measure + tile fetch.
   if(mapInst){
     requestAnimationFrame(()=>mapInst.invalidateSize());
@@ -2853,7 +2855,7 @@ const GLOSSARY={
   'Median grant':"The middle scholarship award among students who receive one (half get more, half less).",
   'Grant (25·50·75)':"The 25th, median, and 75th-percentile scholarship award among grant recipients.",
   'Cond. schol. elim.':"Share of conditional-scholarship recipients who lost or had the award cut after year one.",
-  '3-yr sticker total':"Three years of sticker tuition only — no fees, grant, or living costs.",
+  '3-yr sticker total':"Three years of sticker tuition only, no fees, grant, or living costs.",
   '3-yr net total':"Three years of (tuition + mandatory fees − median grant). Out-of-pocket before living costs.",
   'Breakeven · Govt $72K':"Rough years to repay the 3-year net debt on a ~$72K public-sector salary.",
   'Breakeven · BigLaw $225K':"Rough years to repay the 3-year net debt on a ~$225K large-firm salary.",
@@ -2865,7 +2867,7 @@ const GLOSSARY={
   'COL-adj. mean salary':"State mean attorney wage divided by the state's price parity, for cross-state comparison.",
   'Acceptance rate':"Offers of admission ÷ applications. Lower = more selective.",
   'Offers':"Number of applicants offered admission (not all of them enroll).",
-  '1L enrolled':"First-year students who actually enrolled — the entering class size.",
+  '1L enrolled':"First-year students who actually enrolled, the entering class size.",
   'Total enrollment':"All JD students enrolled across all three years.",
   'GRE takers':"Entrants admitted with a GRE score instead of (or alongside) the LSAT.",
   'LSAT (25·50·75)':"LSAT at the 25th, median, and 75th percentile of the entering class (120–180 scale).",
@@ -2875,7 +2877,7 @@ const GLOSSARY={
   'Student : faculty':"Students per full-time-equivalent faculty member; lower = more individual attention.",
   'Transfers in':"Students who transferred into this school after their first year.",
   'Transfers out':"First-year students who transferred out to another school.",
-  'Net flow':"Transfers in minus transfers out — positive = a net gain of students."
+  'Net flow':"Transfers in minus transfers out, positive = a net gain of students."
 };
 function gl(label,key){
   const d=GLOSSARY[key||label];
@@ -3088,7 +3090,7 @@ const STATE_CENTERS = {
 
 function drawBLSLayer(){
   if(!mapInst) return;
-  // BLS is a nested {state:{year:{a_mean,...}}} object — pull the latest mean
+  // BLS is a nested {state:{year:{a_mean,...}}} object, pull the latest mean
   // attorney wage per state via blsMean() rather than treating the value as a number.
   Object.keys(BLS).forEach(state=>{
     const center=STATE_CENTERS[state];
@@ -3231,7 +3233,7 @@ function spTab(tab, btn){
           appsLine+
           '<div class="sp-metric-sub" style="margin:8px 0 4px;">Acceptance rate</div>'+
           (function(){
-            // Acceptance rate x-axis is clamped to 2016+ per owner directive — pre-2016 acc data is
+            // Acceptance rate x-axis is clamped to 2016+ per owner directive, pre-2016 acc data is
             // sparse / methodologically inconsistent.
             const ay=[]; const lastY = yrsAA.length ? +yrsAA[yrsAA.length-1] : 2025;
             for(let y=2016; y<=lastY; y++) ay.push(String(y));
@@ -3259,7 +3261,7 @@ function spTab(tab, btn){
         r(gl('First-Time Bar'),s.bar?s.bar+'%':'—',colorFor('bar',s.bar))+
         r(gl('FTLT Employment'),s.ftlt_pct?s.ftlt_pct+'%':'—',colorFor('ftlt_pct',s.ftlt_pct))+
         r('Graduates',s.grads||'—')+
-        // Job-outcome STATUS BAR — compact stacked viz of all 10 employment categories.
+        // Job-outcome STATUS BAR, compact stacked viz of all 10 employment categories.
         '<div class="sp-metric-sub" style="margin:10px 0 4px;">Job outcome mix</div>'+
         dpStackBar(s, EMP_BUCKETS)+
       '</div>'+
@@ -3297,7 +3299,7 @@ function niceTicks(min, max){
   for(let v=lo; v<=hi+1e-9; v+=step) out.push(+v.toFixed(10));
   return {min:lo, max:hi, ticks:out, step};
 }
-// ── 4-year statistical projection (v1.69.0) ──────────────────────────────────
+// ── 4-year statistical projection (v1.72.0) ──────────────────────────────────
 // Fit the school's own per-year history and extend it. Per-metric model:
 //   'rate'  (0–100% bounded) → logit-linear (stays inside 0–100, eases at bounds)
 //   'mult'  ($/counts, compounding) → log-linear (i.e. a CAGR)
@@ -3308,7 +3310,7 @@ function projectFit(pairs, futureXs, mode, trail){
   if(!pairs || pairs.length<3) return null;            // need ≥3 real years
   // Projection tracks RECENT direction without over-reacting to one year: fit a
   // RECENCY-WEIGHTED regression on the most recent `trail` (default 5) reported
-  // years — most-recent years count more (linear weights 1..n), but 5 points keep
+  // years, most-recent years count more (linear weights 1..n), but 5 points keep
   // the slope stable instead of swinging on a single recent blip. Weights are
   // normalized to average 1 so the uncertainty cone keeps its usual scale.
   pairs = pairs.slice(-(trail||5));
@@ -3333,9 +3335,9 @@ function projectFit(pairs, futureXs, mode, trail){
     const m=inv(a+b*x);
     let l=inv(a+b*x-se), h=inv(a+b*x+se);
     let lo=Math.min(l,h), hi=Math.max(l,h);
-    // Refine (v1.69.0): keep the uncertainty cone honest but bounded. On 'mult'
+    // Refine (v1.72.0): keep the uncertainty cone honest but bounded. On 'mult'
     // (money/counts) the exp() inverse can balloon a few years out, swamping the
-    // chart — cap the half-width to 35% of the mid and floor money at 0. Rates are
+    // chart, cap the half-width to 35% of the mid and floor money at 0. Rates are
     // already 0-100 bounded by the logit inverse.
     if(mode!=='rate'){
       const cap=0.35*Math.abs(m);
@@ -3380,7 +3382,7 @@ function lineChart(opts){
   if(!allv.length) return '<div class="lc-empty">No trend data</div>';
   if(projData) projData.forEach(pd=>{ if(pd) futureXs.forEach(x=>{ allv.push(pd.mid[x],pd.lo[x],pd.hi[x]); }); });
   const dataMin=Math.min(...allv), dataMax=Math.max(...allv);
-  // Headroom (v1.69.0): pad the data range BEFORE snapping to nice ticks, so the
+  // Headroom (v1.72.0): pad the data range BEFORE snapping to nice ticks, so the
   // highest/lowest points never land flush on the top/bottom gridline (where their
   // marker dot + endpoint label would clip past the plot edge). Padding the input
   // also bumps the rounded bound up a step when a value sits exactly on a boundary
@@ -3467,7 +3469,7 @@ function lineChart(opts){
     const pv=years.map(y=>pin.vals?pin.vals[y]:null);
     let li=-1; for(let i=pv.length-1;i>=0;i--){ if(pv[i]!=null){ li=i; break; } }
     if(li>=0){ const v=pv[li], x=X(li), yy=Y(v), last=(li===years.length-1);
-      // Endpoint label placement rule (v1.69.0): if the line is RISING into the
+      // Endpoint label placement rule (v1.72.0): if the line is RISING into the
       // endpoint, drop the label BELOW the marker (clears the ascending line and
       // the top edge it would otherwise clip); if FALLING, lift it ABOVE. Clamp
       // to the chart box so it can never get cut off. The --chart-halo var gives a
@@ -3481,7 +3483,7 @@ function lineChart(opts){
     }
   }
   // Hover crosshair: invisible per-year hit rects drive a shared tooltip <g> that
-  // calls out the value(s) at the hovered point — a dot on EVERY series at that
+  // calls out the value(s) at the hovered point, a dot on EVERY series at that
   // year, a vertical guideline, and a callout box listing each series' value,
   // color-coded to match the lines/legend. (Desktop "cursor" hover.)
   const tfmt = opts.fmt || opts.yfmt || (v=>String(Math.round(v)));
@@ -3542,7 +3544,7 @@ function bandChart(opts){
   const years=opts.years, W=opts.w||340, H=opts.h||190;
   const PL=34,PR=14,PT=12,PB=20, innerW=W-PL-PR, innerH=H-PT-PB;
   const p25=opts.p25||{}, p50=opts.p50||{}, p75=opts.p75||{};
-  const color=opts.color||'#5AABCB', fmt=opts.fmt||(v=>Math.round(v));
+  const color=opts.color||'#5AABCB', color2=opts.color2||color, fmt=opts.fmt||(v=>Math.round(v));
   const proj=opts.project; let axisYears=years, futureXs=[], pmid=null; const baseLen=years.length;
   if(proj && years.length){
     const lastY=+years[years.length-1];
@@ -3582,13 +3584,16 @@ function bandChart(opts){
   if(idx.length>1){
     const top=idx.map(i=>X(i).toFixed(1)+','+Y(+p75[years[i]]).toFixed(1));
     const bot=idx.slice().reverse().map(i=>X(i).toFixed(1)+','+Y(+p25[years[i]]).toFixed(1));
-    svg+='<polygon points="'+top.concat(bot).join(' ')+'" fill="'+color+'" fill-opacity="0.16"/>';
-    svg+='<polyline points="'+idx.map(i=>X(i).toFixed(1)+','+Y(+p75[years[i]]).toFixed(1)).join(' ')+'" fill="none" stroke="'+color+'" stroke-opacity="0.45" stroke-width="1"/>';
+    svg+='<polygon points="'+top.concat(bot).join(' ')+'" fill="'+color2+'" fill-opacity="0.15"/>';
+    // p75 boundary (e.g. 2-yr ultimate bar) gets its own colour + a solid line so it reads as a distinct series, not just a band edge.
+    svg+='<polyline points="'+idx.map(i=>X(i).toFixed(1)+','+Y(+p75[years[i]]).toFixed(1)).join(' ')+'" fill="none" stroke="'+color2+'" stroke-opacity="'+(opts.color2?'0.9':'0.45')+'" stroke-width="'+(opts.color2?2:1)+'"/>';
     svg+='<polyline points="'+idx.map(i=>X(i).toFixed(1)+','+Y(+p25[years[i]]).toFixed(1)).join(' ')+'" fill="none" stroke="'+color+'" stroke-opacity="0.45" stroke-width="1"/>';
   }
   const midIdx=years.map((y,i)=>p50[y]!=null?i:-1).filter(i=>i>=0);
   if(midIdx.length>1) svg+='<polyline points="'+midIdx.map(i=>X(i).toFixed(1)+','+Y(+p50[years[i]]).toFixed(1)).join(' ')+'" fill="none" stroke="'+color+'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>';
   if(midIdx.length){ const li=midIdx[midIdx.length-1], v=+p50[years[li]]; svg+='<circle cx="'+X(li).toFixed(1)+'" cy="'+Y(v).toFixed(1)+'" r="3.2" fill="'+color+'" style="stroke:var(--chart-halo)" stroke-width="1.5"/>'; }
+  // matching endpoint dot for the p75 series when it has its own colour (e.g. 2-yr ultimate bar)
+  if(opts.color2 && idx.length){ const li=idx[idx.length-1]; svg+='<circle cx="'+X(li).toFixed(1)+'" cy="'+Y(+p75[years[li]]).toFixed(1)+'" r="3.2" fill="'+color2+'" style="stroke:var(--chart-halo)" stroke-width="1.5"/>'; }
   if(pmid && midIdx.length){ const bdx=X(baseLen-1), mli=midIdx[midIdx.length-1];
     svg+='<line x1="'+bdx.toFixed(1)+'" y1="'+PT+'" x2="'+bdx.toFixed(1)+'" y2="'+(PT+innerH)+'" stroke="rgba(122,170,200,0.22)" stroke-width="1" stroke-dasharray="2,3"/>';
     svg+='<text x="'+(bdx+3).toFixed(1)+'" y="'+(PT+9)+'" font-family="Geist Mono,ui-monospace,monospace" font-size="8.5" fill="#5E7E94">projected →</text>';
@@ -3611,11 +3616,11 @@ function bandChart(opts){
 
 // ── Full school detail page (items 5 & 9): opens in a new tab via #school/<id> ─
 // ── Scholarship distribution ────────────────────────────────────────────────
-// Canonical buckets per owner directive (v1.69.0): student-favorability gradient.
-// "No grant" is DERIVED = 100 - (lt + mt + full + gt) — the source's none count is
+// Canonical buckets per owner directive (v1.72.0): student-favorability gradient.
+// "No grant" is DERIVED = 100 - (lt + mt + full + gt), the source's none count is
 // known to be unreliable (negatives, mis-reports); the derivation guarantees the
 // stack sums to 100% and avoids fabricated bad data.
-// Canonical employment buckets (firm-size + sector) — used in detail page,
+// Canonical employment buckets (firm-size + sector), used in detail page,
 // side panel status bar, and anywhere the 10-category mix is rendered.
 const EMP_BUCKETS=[
   {k:'emp_megalaw_pct',l:'MegaLaw 500+',c:'#1D4ED8'},
@@ -3678,7 +3683,7 @@ function scholBucketsForBar(s){
 // #12 Detect when we auto-adjusted the source's reported "no grant" figure. The
 // 509's none count is known-unreliable (negatives, mis-reports); we re-derive it
 // as 100 − Σ(grant buckets). When the source value materially disagrees with the
-// derived one, that cell is flagged "adjusted" — a visible trust signal, not a
+// derived one, that cell is flagged "adjusted", a visible trust signal, not a
 // silent change. Returns null when nothing was adjusted.
 function scholAdjusted(s){
   if(s==null || s.schol_none_pct==null) return null;
@@ -3769,11 +3774,11 @@ function histStackCols(history, buckets, opts){
   return '<div class="st-wrap'+(opts.tall?' st-tall':'')+'" role="img" aria-label="'+(opts.aria||'Composition by year')+'">'+cols+'</div><div class="st-axis">'+axis+'</div><div class="dp-leg">'+leg+'</div>';
 }
 // 100%-stacked "where the whole class went" by year. Unlike histStackCols, this
-// does NOT rescale to the reported sum — every sector sits at its true % of
+// does NOT rescale to the reported sum, every sector sits at its true % of
 // GRADUATES and an explicit grey "Unknown / other" segment = 100 − Σ(reported)
 // fills each column to 100%. That remainder is real (further-degree, employed
-// abroad, non-FTLT, status not reported); showing it — instead of inflating the
-// known bars to hide it — is the honest read, and keeps every year's column the
+// abroad, non-FTLT, status not reported); showing it, instead of inflating the
+// known bars to hide it, is the honest read, and keeps every year's column the
 // same height so the mix shift is legible side-by-side. Reads the gz history.
 const EMP_DEST_BUCKETS = EMP_BUCKETS.concat([{k:'emp_seeking_pct',l:'Seeking work',c:'#EF5350'}]);
 const EMP_UNKNOWN_FILL = 'repeating-linear-gradient(45deg,#33414F,#33414F 4px,#2A3744 4px,#2A3744 8px)';
@@ -3844,6 +3849,39 @@ const BAR_RESULT_BUCKETS=[
   {k:'failed',    l:'Sat, did not pass', c:'#EF5350'},
   {k:'didnotsit', l:'Did not sit',       c:'#9CA3AF'}
 ];
+// 100%-stacked "where the class went" by year, built from the per-year bar-exam
+// jurisdictions in the gz (where graduates SAT THE BAR = their intended practice
+// state). Top ~6 jurisdictions across all years get fixed colours; everything
+// else (incl. the source's "remaining jurisdictions" bucket) is Other. Each
+// column is one class year's takers, normalized to 100%.
+function barJurisStackTime(history){
+  if(!history) return '';
+  const isRem=j=>/remaining|other/i.test(j&&j.jurisdiction||'');
+  const ys=Object.keys(history).filter(y=>/^\d{4}$/.test(y)&&Array.isArray(history[y].bar_jurisdictions)&&history[y].bar_jurisdictions.length).map(Number).sort((a,b)=>a-b);
+  if(ys.length<2) return '';
+  const agg={};
+  ys.forEach(y=>history[String(y)].bar_jurisdictions.forEach(j=>{ if(isRem(j))return; const k=j.jurisdiction; if(k) agg[k]=(agg[k]||0)+(+j.takers||0); }));
+  const top=Object.keys(agg).sort((a,b)=>agg[b]-agg[a]).slice(0,6);
+  if(!top.length) return '';
+  const PAL=['#5AABCB','#4A9B6B','#FFA726','#A78BFA','#D6A520','#EF5350'];
+  const colorOf={}; top.forEach((k,i)=>colorOf[k]=PAL[i%PAL.length]);
+  const tc=s=>String(s).toLowerCase().replace(/\b\w/g,c=>c.toUpperCase()).replace(/\bOf\b/g,'of');
+  const start=ys[0], end=ys[ys.length-1];
+  let cols='',axis='';
+  for(let y=start;y<=end;y++){
+    const d=history[String(y)]; axis+='<div class="st-yr">’'+String(y).slice(2)+'</div>';
+    const js=d&&Array.isArray(d.bar_jurisdictions)?d.bar_jurisdictions:null;
+    if(js&&js.length){
+      const total=js.reduce((a,j)=>a+(+j.takers||0),0)||1; let known=0,segs='';
+      top.forEach(k=>{ const j=js.find(x=>x.jurisdiction===k&&!isRem(x)); const t=j?(+j.takers||0):0; if(t>0){const pct=t/total*100; known+=pct; segs+='<div class="st-seg" style="height:'+pct.toFixed(2)+'%;background:'+colorOf[k]+'" title="'+tc(k)+' '+pct.toFixed(1)+'% ('+t+' takers)"></div>';} });
+      const other=Math.max(0,100-known);
+      if(other>0.05) segs+='<div class="st-seg" style="height:'+other.toFixed(2)+'%;background:#39506A" title="Other jurisdictions '+other.toFixed(1)+'%"></div>';
+      cols+='<div class="st-col">'+segs+'</div>';
+    } else cols+='<div class="st-col-miss" title="Not reported '+y+'">–</div>';
+  }
+  const leg=top.map(k=>'<span class="dp-leg-i"><span class="dp-leg-dot" style="background:'+colorOf[k]+'"></span>'+tc(k)+'</span>').join('')+'<span class="dp-leg-i"><span class="dp-leg-dot" style="background:#39506A"></span>Other</span>';
+  return '<div class="st-wrap st-tall" role="img" aria-label="Bar-exam jurisdiction mix by year, share of takers">'+cols+'</div><div class="st-axis">'+axis+'</div><div class="dp-leg">'+leg+'</div>';
+}
 function barFunnelHistory(hist){
   if(!hist) return null;
   const out={}; let any=false;
@@ -4097,7 +4135,7 @@ function renderYoYTable(){
       if(Math.abs(delta)<1e-9){ dCell='<span class="traj traj-flat">no change</span>'; }
       else { const up=delta>0, better=(m.dir==='desc')?!up:up; dCell='<span class="traj traj-'+(better?'up':'down')+'">'+(up?'↑':'↓')+' '+yoyDelta(m.u,delta)+'</span>'; }
     }
-    // This school vs ITSELF over time only — cross-school comparison lives in the Compare tool.
+    // This school vs ITSELF over time only, cross-school comparison lives in the Compare tool.
     html+='<div class="yoy-row"><span class="yoy-m">'+m.l+'</span><span>'+yoyVal(m.u,a)+'</span>'+(three?'<span>'+yoyVal(m.u,b)+'</span>':'')+'<span>'+yoyVal(m.u,c)+'</span><span class="yoy-chg">'+dCell+'</span></div>';
   });
   tEl.innerHTML=html+'</div>';
@@ -4107,7 +4145,7 @@ function yoySection(history){
   if(!panel) return '';
   return '<section class="story-sec"><div class="story-eyebrow"><span class="sx-num">Δ</span>How it changed</div>'
     + '<h2 class="story-title">This school: then, midway &amp; now</h2>'
-    + '<p class="story-lede">Three reporting years — start, midpoint, latest — so you see the <em>path</em>, not just the endpoints. The change column tracks the full span; green is the direction that helps an applicant. Pick any years to recompute.</p>'
+    + '<p class="story-lede">Three reporting years, start, midpoint, latest, so you see the <em>path</em>, not just the endpoints. The change column tracks the full span; green is the direction that helps an applicant. Pick any years to recompute.</p>'
     + panel + '</section>';
 }
 
@@ -4191,7 +4229,7 @@ function jobOutcomeDetail(s){
     const dCls = delta==null ? '' : (isSeek ? (delta < 0 ? 'jo-delta-up' : delta > 0 ? 'jo-delta-down' : 'jo-delta-flat')
                                             : (delta > 0 ? 'jo-delta-up' : delta < 0 ? 'jo-delta-down' : 'jo-delta-flat'));
     const dTxt = delta==null ? '' : (delta>0?'+':'')+delta.toFixed(1)+' vs natl';
-    // Trailing 10/5/3/2-yr change line — filled async once the gz history loads.
+    // Trailing 10/5/3/2-yr change line, filled async once the gz history loads.
     const hk = isSeek ? 'emp_seeking_pct' : cat.k;
     return '<div class="jo-row">'
       + '<div class="jo-dot" style="background:'+cat.c+'"></div>'
@@ -4304,12 +4342,12 @@ function outcomeFunnel(s){
 }
 
 function navSchool(id){
-  // HASH ROUTES — safest, work anywhere, no 404.html or server-side rewrites needed.
-  // Reverted from clean /school/<slug> paths in v1.69.0 because GH Pages without a
+  // HASH ROUTES, safest, work anywhere, no 404.html or server-side rewrites needed.
+  // Reverted from clean /school/<slug> paths in v1.72.0 because GH Pages without a
   // deployed 404.html serves real 404s for any unknown path. When the project moves
   // to a custom domain with rewrites (Netlify _redirects, Vercel rewrites, Cloudflare),
   // flip CLEAN_URLS to true and the deep-link helpers below will re-engage.
-  // Navigate IN-PLACE (same tab) — opening a new tab/window was hostile to crawlers
+  // Navigate IN-PLACE (same tab), opening a new tab/window was hostile to crawlers
   // and to users arriving from search. Setting the hash renders the school view here;
   // if we're already on that hash (e.g. the side panel for the active school), the
   // hashchange won't fire, so render directly to keep "View full page" responsive.
@@ -4317,7 +4355,7 @@ function navSchool(id){
   if(location.hash === '#school/' + enc){ renderSchoolPage(id); }
   else { location.hash = '#school/' + enc; }
 }
-// Address-bar updater. No-op while we're on hash routes — kept so re-enabling
+// Address-bar updater. No-op while we're on hash routes, kept so re-enabling
 // clean URLs in the future is a single config flip rather than a rewrite.
 function pushCleanSchoolURL(/*id*/){ /* no-op on hash routes */ }
 
@@ -4361,7 +4399,7 @@ function refreshCmpButtons(){
 }
 function cmpBtnHTML(id, cls){ const base=cls||'cmp-btn'; return '<button class="'+base+(inCompare(id)?' on':'')+'" data-cmp="'+id+'" onclick="event.stopPropagation();toggleCompare(\''+id+'\')">'+(inCompare(id)?'✓ Comparing':'+ Compare')+'</button>'; }
 function renderCompareTray(){
-  // Update the nav badge in lockstep with the tray (Compare is first-class — visible from every view).
+  // Update the nav badge in lockstep with the tray (Compare is first-class, visible from every view).
   const navN = document.getElementById('navCompareN');
   if(navN){
     if(compareSet.length){ navN.textContent = compareSet.length; navN.style.display='inline-block'; }
@@ -4370,7 +4408,7 @@ function renderCompareTray(){
   if(typeof mtbSyncBadge==='function') mtbSyncBadge();
   const tray=document.getElementById('compareTray'); if(!tray) return;
   // LOCKED TO MAP: only show the compare tray while the map view is active.
-  // (Per owner directive — bleeding into Profiles/States/Calc/Transfers was confusing.)
+  // (Per owner directive, bleeding into Profiles/States/Calc/Transfers was confusing.)
   const onMap = document.getElementById('mapRoot') && document.getElementById('mapRoot').style.display!=='none';
   if(!compareSet.length || !onMap){ tray.style.display='none'; tray.innerHTML=''; return; }
   const chips=compareSet.map(id=>{ const s=S.find(x=>x.id===id); return s?'<span class="cmp-chip">'+s.name+'<button aria-label="Remove '+s.name+'" onclick="toggleCompare(\''+id+'\')">×</button></span>':''; }).join('');
@@ -4393,7 +4431,7 @@ function openCompareFirstClass(){
     if(tray && compareSet.length){ tray.style.display='flex'; tray.style.animation='cmpPulse 1.4s ease-in-out 2'; setTimeout(()=>{ tray.style.animation=''; }, 3200); }
   }, 60);
 }
-// Cost-per-outcome helpers — synthesize $/applicant-outcome from inline data.
+// Cost-per-outcome helpers, synthesize $/applicant-outcome from inline data.
 // Mandatory fees (ft_fee, ABA "FT annual fees" column, 2025 cycle) are a real,
 // unavoidable part of every student's bill that the ABA reports SEPARATELY from
 // sticker tuition. Fold them into the true annual cost. A blank/zero fee is taken
@@ -4512,7 +4550,7 @@ const CMP_GROUPS=[
 const CMP_COLORS=['#D97757','#5AABCB','#4A9B6B','#A78BFA','#FCD34D','#EC4899'];
 function cmpColor(i){ return CMP_COLORS[i%CMP_COLORS.length]; }
 
-// Horizontal "at a glance" bar charts — one bar per school per metric.
+// Horizontal "at a glance" bar charts, one bar per school per metric.
 // lo/hi give a fixed scale for bounded metrics; otherwise scale to the max among
 // the compared schools. lowerBetter flips which value earns the star.
 const CMP_BARS=[
@@ -4734,7 +4772,7 @@ function printSchool(){
   window.addEventListener('afterprint',restore);
   setTimeout(()=>{ try{ window.print(); }catch(e){} setTimeout(restore,1500); }, 60);
 }
-// Apply compare state from URL hash (#compare=id1,id2,...) — opens the view automatically.
+// Apply compare state from URL hash (#compare=id1,id2,...), opens the view automatically.
 function applyCompareHash(){
   const m = (location.hash||'').match(/^#compare=([^&]+)/i);
   if(!m) return false;
@@ -4754,7 +4792,7 @@ const SITE_URL='https://exhibit509.com/';
 // (per-school crawl/share metadata; reset when leaving the detail view).
 function setSchoolSEO(s){
   // Canonical points to the STATIC pre-rendered page (/school/<slug>.html),
-  // not the SPA hash route. The static page is the indexable form — search
+  // not the SPA hash route. The static page is the indexable form, search
   // engines and AI crawlers should unify here. The SPA hash route remains
   // the in-app navigation path and continues to work for users.
   const slug = (s.id || '').toLowerCase().replace(/[^a-z0-9-]+/g,'-').replace(/-+/g,'-').replace(/^-+|-+$/g,'');
@@ -4766,7 +4804,7 @@ function setSchoolSEO(s){
   set('ogTitle','content','Exhibit 509 · '+s.full); set('ogUrl','content',url);
   set('linkCanonical','href',url);
   const ld=document.getElementById('ldSchool');
-  // CollegeOrUniversity is the precise schema.org type for a school like this — better than the generic EducationalOrganization. We also emit the school's lat/lng as geo, a hasCredential entry for the JD, and the underlying public 509 data source as a citation/sameAs. Together these unlock richer Google knowledge-panel rendering than the prior minimal entry.
+  // CollegeOrUniversity is the precise schema.org type for a school like this, better than the generic EducationalOrganization. We also emit the school's lat/lng as geo, a hasCredential entry for the JD, and the underlying public 509 data source as a citation/sameAs. Together these unlock richer Google knowledge-panel rendering than the prior minimal entry.
   if(ld) ld.textContent=JSON.stringify({
     "@context":"https://schema.org",
     "@type":"CollegeOrUniversity",
@@ -4793,7 +4831,7 @@ function resetSEO(){
 function exitSchoolPage(){
   // Return to the homepage URL form when leaving a school detail page.
   // Case-insensitive match BUT preserves the actual deployed case via the capture
-  // group — the deploy lives at /Exhibit/ (capital E), so a hardcoded lowercase
+  // group, the deploy lives at /Exhibit/ (capital E), so a hardcoded lowercase
   // base would 404 on every back-to-home navigation.
   if(location.protocol !== 'file:'){
     const m = location.pathname.match(/^(\/[Ee]xhibit)(\/|$)/);
@@ -4926,12 +4964,12 @@ const TUI_IRREGULAR = {
   'north-texas-at-dallas-university-of':'a 2025 dip in a short series'
 };
 // Rule-based companion to the curated list above: surfaces ANY school whose
-// (display-cleaned) resident tuition makes a violent one-year swing — the
+// (display-cleaned) resident tuition makes a violent one-year swing, the
 // signature of a doubled cell or a semester-vs-annual reporting flip in the
 // source (e.g. the ~50% halvings the audit flagged for Cornell, Ohio State,
 // LSU, South Carolina …). Conservative thresholds (≥30% AND ≥$6K in one step)
 // so ordinary increases don't trip it. Returns a human reason or '', and never
-// alters data — it only decides whether to show the "under review" caveat.
+// alters data, it only decides whether to show the "under review" caveat.
 // "2018,2019,2020,2022" → "2018–2020, 2022": compact, human year ranges for the
 // not-disclosed callout so a long contiguous hole reads as one span, not a list.
 function fmtYearList(years){
@@ -4973,7 +5011,7 @@ function chartZoom(ev){
   let title='Trend';
   const mod=t.closest('.story-mod,.cmp-chart,.emp-cat')||g.closest('[id$="-slot"]')||g.parentElement;
   // Pick the title that immediately PRECEDES this chart, not just the first in the
-  // module — slots like the employment evolution hold several charts, each under
+  // module, slots like the employment evolution hold several charts, each under
   // its own .dp-chart-t, so "first" would mislabel every chart but the top one.
   let tEl=null;
   if(mod){
@@ -4989,7 +5027,9 @@ function chartZoom(ev){
     m.addEventListener('click',function(e){ if(e.target===m) closeChartModal(); });
     document.body.appendChild(m);
   }
-  document.getElementById('cmxTitle').textContent=title;
+  // Attribute the enlarged chart to its school (when zoomed from a school page).
+  const sp=t.closest('#schoolPage'); const schoolNm=sp?((sp.querySelector('.dp-name')||{}).textContent||'').trim():'';
+  document.getElementById('cmxTitle').innerHTML=(schoolNm?'<div class="cmx-school">'+schoolNm+'</div>':'')+title;
   document.getElementById('cmxSrc').textContent='Source: '+src+'. Dashed = 4-yr model projection, not a forecast of fact. · exhibit509.com';
   const body=document.getElementById('cmxBody'); body.innerHTML='';
   const c=g.cloneNode(true);
@@ -5083,7 +5123,7 @@ function curriculumBars(s){
 // 1–10 lawyers $75K rising to 500+ lawyers $215K; public-interest median ~$62K).
 // Firm-size buckets and the public-service sectors are mapped to the nearest NALP
 // figure; intermediate sizes are interpolated. Used ONLY to estimate where a
-// school's graduates sit on the bimodal curve — it blends the school's DISCLOSED
+// school's graduates sit on the bimodal curve, it blends the school's DISCLOSED
 // job mix with these published medians, so the result is always shown as an
 // estimate, never a reported number.
 const SECTOR_PAY={
@@ -5104,7 +5144,7 @@ function salaryDist(s){
         p75=blsField(s.state,'a_pct75'), p90=blsField(s.state,'a_pct90'), mean=blsMean(s.state);
   if(med==null) return '';
   // BLS top-codes annual wages above ~$239,200 (the OES "#" annotation), so the
-  // 90th percentile comes back blank for high-wage states (MA, CA, NY, DC) — the
+  // 90th percentile comes back blank for high-wage states (MA, CA, NY, DC), the
   // very states the top schools sit in. Fall back to the cap and mark it "≥" so
   // the distribution still renders instead of silently disappearing.
   const CAP=239200;
@@ -5146,24 +5186,24 @@ function salaryDist(s){
     // dark backing so the label stays legible when the estimate sits on a hump label
     svg+='<rect x="'+erx.toFixed(1)+'" y="1.5" width="'+egw.toFixed(1)+'" height="11" rx="2" fill="#0A1726" opacity="0.95"/>';
     svg+='<text x="'+(erx+egw/2).toFixed(1)+'" y="10" font-family="Geist Mono,monospace" font-size="9.5" fill="#9BD1E8" text-anchor="middle">'+egl+'</text>'; }
-  // #4b interactive humps — hover either hump to light it up and read what it is.
+  // #4b interactive humps, hover either hump to light it up and read what it is.
   const splitI=xs.findIndex(p=>p[0]>=137000), h1=pts.slice(0,splitI+1), h2=pts.slice(splitI);
-  svg+='<g class="hump-zone"><title>Public-service / small-firm hump — most first jobs (~$70–90K): government, public interest, small firms, clerkships</title>'
+  svg+='<g class="hump-zone"><title>Public-service / small-firm hump, most first jobs (~$70–90K): government, public interest, small firms, clerkships</title>'
     +'<path class="hump-hi" d="M'+X(lo).toFixed(1)+','+yBase+' L'+h1.join(' L')+' L'+X(137000).toFixed(1)+','+yBase+' Z" fill="rgba(90,171,203,0.34)"/>'
     +'<rect x="'+X(lo).toFixed(1)+'" y="'+yTop+'" width="'+(X(137000)-X(lo)).toFixed(1)+'" height="'+(yBase-yTop)+'" fill="transparent"/></g>';
-  svg+='<g class="hump-zone"><title>BigLaw hump — the ~$190–225K starting-salary spike at the largest firms</title>'
+  svg+='<g class="hump-zone"><title>BigLaw hump, the ~$190–225K starting-salary spike at the largest firms</title>'
     +'<path class="hump-hi" d="M'+X(137000).toFixed(1)+','+yBase+' L'+h2.join(' L')+' L'+X(hi).toFixed(1)+','+yBase+' Z" fill="rgba(252,211,77,0.28)"/>'
     +'<rect x="'+X(137000).toFixed(1)+'" y="'+yTop+'" width="'+(X(hi)-X(137000)).toFixed(1)+'" height="'+(yBase-yTop)+'" fill="transparent"/></g>';
   svg+='</svg>';
   const inValley = (mean!=null && mean>med);
-  // #4a — words first: the explainer reads ABOVE the chart, then the plot.
+  // #4a, words first: the explainer reads ABOVE the chart, then the plot.
   const words = '<div class="callout" style="margin-top:0;margin-bottom:8px;"><div class="callout-eye">Read it as two humps, not one average</div>'
-    + '<p class="callout-p">New-graduate salaries nationally (<a href="https://www.nalp.org/salariescompensation" target="_blank" rel="noopener" style="color:#9BD1E8;">NALP</a>) cluster in <strong>two humps</strong> — most first jobs pay <strong>~$70–90K</strong> (government, public interest, small firms, clerkships), with a separate spike near <strong>~$190–225K</strong> at the largest firms, and very little in between. The blue curve is that national shape; the markers are <strong>'+(s.state||'state')+'</strong> BLS attorney wages (all experience levels). <em>Hover either hump to light it up.</em></p>'
+    + '<p class="callout-p">New-graduate salaries nationally (<a href="https://www.nalp.org/salariescompensation" target="_blank" rel="noopener" style="color:#9BD1E8;">NALP</a>) cluster in <strong>two humps</strong>, most first jobs pay <strong>~$70–90K</strong> (government, public interest, small firms, clerkships), with a separate spike near <strong>~$190–225K</strong> at the largest firms, and very little in between. The blue curve is that national shape; the markers are <strong>'+(s.state||'state')+'</strong> BLS attorney wages (all experience levels). <em>Hover either hump to light it up.</em></p>'
     + '<ul style="margin:8px 0 0;padding-left:18px;font-size:13px;color:#C6D8E6;line-height:1.5;">'
-    + '<li><b style="color:#4A9B6B;">Median</b> — the middle '+(s.state||'state')+' attorney; half earn less, half more. <em>Experienced</em> lawyers, not new grads.</li>'
-    + '<li><b style="color:#FFA726;">State mean</b> — '+(inValley?'sits <strong>above</strong> the median, pulled up by the high-earning (BigLaw) tail, so a single average overstates what a typical attorney earns':'tracks the median closely in this state')+'.</li>'
-    + '<li><b style="color:#7AAAC8;">10th &amp; 90th</b> — the spread: the low-market / entry floor up to the established-partner ceiling.'+(p90c?' BLS top-codes wages above '+k(CAP)+', so here the 90th shows as ≥ that cap.':'')+'</li>'
-    + (egp!=null?'<li><b style="color:#5AABCB;">Est. grad pay (this school)</b> — <strong>'+k(egp)+'</strong>, weighting this school&rsquo;s <em>disclosed</em> job mix by typical sector pay (<a href="https://www.nalp.org/salariescompensation" target="_blank" rel="noopener" style="color:#5AABCB;">NALP Class of 2023</a>). An <strong>estimate</strong>, not a reported figure — and when grads split between the two humps, even this blended average can land in the valley.</li>':'')
+    + '<li><b style="color:#4A9B6B;">Median</b>, the middle '+(s.state||'state')+' attorney; half earn less, half more. <em>Experienced</em> lawyers, not new grads.</li>'
+    + '<li><b style="color:#FFA726;">State mean</b>, '+(inValley?'sits <strong>above</strong> the median, pulled up by the high-earning (BigLaw) tail, so a single average overstates what a typical attorney earns':'tracks the median closely in this state')+'.</li>'
+    + '<li><b style="color:#7AAAC8;">10th &amp; 90th</b>, the spread: the low-market / entry floor up to the established-partner ceiling.'+(p90c?' BLS top-codes wages above '+k(CAP)+', so here the 90th shows as ≥ that cap.':'')+'</li>'
+    + (egp!=null?'<li><b style="color:#5AABCB;">Est. grad pay (this school)</b>, <strong>'+k(egp)+'</strong>, weighting this school&rsquo;s <em>disclosed</em> job mix by typical sector pay (<a href="https://www.nalp.org/salariescompensation" target="_blank" rel="noopener" style="color:#5AABCB;">NALP Class of 2023</a>). An <strong>estimate</strong>, not a reported figure, and when grads split between the two humps, even this blended average can land in the valley.</li>':'')
     + '</ul>'
     + '<p class="callout-p" style="margin-top:8px;">Anchor your expectation to the <strong>hump your realistic job type sits in</strong> (see the employment mix), not the single average.</p></div>';
   return '<div class="dp-chart-t" style="font-size:13px;">'+(s.state||'State')+' attorney pay vs the bimodal new-grad market</div>'+words+svg;
@@ -5195,7 +5235,7 @@ function schoolDetailHTML(s){
   const accYrs=(()=>{ const out=[]; const lastY=yrs.length?+yrs[yrs.length-1]:2025; for(let y=2016;y<=lastY;y++) out.push(String(y)); return out; })();
   const accChart =lineChart({years:accYrs,series:[{vals:s.acc_trend,color:'#EF5350'}],pinIndex:0,fmt:v=>v.toFixed(1)+'%',label:'Acceptance rate',project:{n:4,mode:'rate'}});
   const tuiChart =bandChart({years:yrs,p25:s.tui_trend,p50:s.tui_trend,p75:s.nrt_trend,color:'#FFA726',fmt:v=>'$'+Math.round(v/1000)+'K',label:'Tuition resident to non-resident',project:{n:4,mode:'mult'}});
-  const barChart =bandChart({years:yrs,p25:s.bar_trend,p50:s.bar_trend,p75:s.bar_2yr_trend,color:'#4A9B6B',fmt:v=>Math.round(v)+'%',label:'Bar passage first-time to 2-yr ultimate',project:{n:4,mode:'rate'}});
+  const barChart =bandChart({years:yrs,p25:s.bar_trend,p50:s.bar_trend,p75:s.bar_2yr_trend,color:'#4A9B6B',color2:'#5AABCB',fmt:v=>Math.round(v)+'%',label:'Bar passage first-time to 2-yr ultimate',project:{n:4,mode:'rate'}});
   const enrChart =lineChart({years:yrs,series:[{vals:s.enr_trend,color:'#A78BFA'}],pinIndex:0,fmt:v=>Math.round(v).toLocaleString(),label:'Enrollment',project:{n:4,mode:'mult'}});
   const gpaChart =bandChart({years:yrs,p25:s.gpa25_trend,p50:s.gpa_trend,p75:s.gpa75_trend,color:'#9BD1E8',fmt:v=>Number(v).toFixed(2),label:'uGPA 25–75 band',project:{n:4,mode:'linear'},yMin:1.9,yMax:4.5});
   const appsChart=lineChart({years:yrs,series:[{vals:s.apps_trend,color:'#A4C8DD'},{vals:s.offers_trend,color:'#5AABCB'}],pinIndex:0,fmt:v=>Math.round(v).toLocaleString(),label:'Applications & offers',project:{n:4,mode:'mult'}});
@@ -5226,11 +5266,11 @@ function schoolDetailHTML(s){
     arcMod(s.bar_2yr_trend,'2-yr ultimate bar',v=>Math.round(v)+'%','#5AABCB','asc','rate')+
     arcMod(s.tui_trend,'Resident tuition',v=>'$'+Math.round(v/1000)+'K','#FFA726','desc','mult')+
     arcMod(s.enr_trend,'Enrollment',v=>Math.round(v).toLocaleString(),'#A78BFA','asc','mult');
-  // A "how to read these" card rides in the grid alongside the charts — it explains
+  // A "how to read these" card rides in the grid alongside the charts, it explains
   // the solid/dashed/colour encoding AND fills the odd cell so the row isn't blank.
   const arcExplain = arcCharts ? '<div class="story-mod" style="background:rgba(74,122,155,0.05);border:1px solid rgba(74,122,155,0.14);border-radius:6px;padding:14px 16px;align-self:stretch;display:flex;flex-direction:column;justify-content:center;">'
     +'<div class="story-mod-t">How to read these</div>'
-    +'<p style="font-size:13px;line-height:1.55;color:#C6D8E6;margin:0;">Each chart is one metric over the school’s reported years. The <strong>solid line</strong> is what was actually reported; the <strong>dashed line</strong> is a projection fit to the <strong>last 3 years</strong> — a sketch of “if the recent trend holds,” not a forecast. The <strong>first → last</strong> figure under each is the net change: <span style="color:#4A9B6B;font-weight:700;">green</span> when the direction helps applicants, <span style="color:#EF5350;font-weight:700;">red</span> when it doesn’t. Click any chart to enlarge.</p>'
+    +'<p style="font-size:13px;line-height:1.55;color:#C6D8E6;margin:0;">Each chart is one metric over the school’s reported years. The <strong>solid line</strong> is what was actually reported; the <strong>dashed line</strong> is a projection fit to the <strong>last 3 years</strong>, a sketch of “if the recent trend holds,” not a forecast. The <strong>first → last</strong> figure under each is the net change: <span style="color:#4A9B6B;font-weight:700;">green</span> when the direction helps applicants, <span style="color:#EF5350;font-weight:700;">red</span> when it doesn’t. Click any chart to enlarge.</p>'
     +'</div>' : '';
   const arcInner = arcCharts + arcExplain;
   const _aL=arcDelta(s.lsat_trend), _aB=arcDelta(s.bar_trend), _aT=arcDelta(s.tui_trend), _aA=arcDelta(s.acc_trend);
@@ -5264,7 +5304,7 @@ function schoolDetailHTML(s){
     schoolSnapshot(s)+
     '<div class="story">'+
       '<div class="chart-tip"><b>Tip</b> · click any chart to open it full-screen</div>'+
-      // Phase 2 lead beat — "then & now" year-vs-year (painted async from the gz).
+      // Phase 2 lead beat, "then & now" year-vs-year (painted async from the gz).
       '<div id="yoy-slot"></div>'+
       arcSection+
       sec('cost','2','Cost','What three years actually costs', ledeCost,
@@ -5280,7 +5320,7 @@ function schoolDetailHTML(s){
             (s.tui?'<div class="dp-row dp-row-net"><span class="dp-row-k"><strong>Net annual</strong> <span style="color:var(--dimmer);font-weight:400;">tuition + fees − grant</span></span><span class="dp-row-v" style="color:var(--orange);"><strong>'+usd(netAnnualCost(s))+'</strong></span></div>':'')+
             (s.tui?'<div class="dp-row dp-row-net"><span class="dp-row-k">3-yr sticker total <span style="color:var(--dimmer);font-weight:400;">tuition only</span></span><span class="dp-row-v">'+usd(s.tui*3)+'</span></div>':'')+
             (s.tui&&(s.grant_med!=null||_fee)?'<div class="dp-row dp-row-net"><span class="dp-row-k"><strong>3-yr net total</strong></span><span class="dp-row-v" style="color:var(--orange);"><strong>'+usd(net3yr(s))+'</strong></span></div>':'')
-            +((s.tui&&!_fee&&!s.closed_status)?'<div class="dp-note" style="font-size:11px;color:#7AAAC8;margin-top:5px;line-height:1.5;">⚠ Mandatory fees <strong>not disclosed</strong> for this school — net and 3-yr totals are tuition-only and may understate the true bill.</div>':'')
+            +((s.tui&&!_fee&&!s.closed_status)?'<div class="dp-note" style="font-size:11px;color:#7AAAC8;margin-top:5px;line-height:1.5;">⚠ Mandatory fees <strong>not disclosed</strong> for this school, net and 3-yr totals are tuition-only and may understate the true bill.</div>':'')
           )+
           cm('Tuition · resident → non-resident · '+yrsLabel, tuiChart+'<div class="dp-leg" style="margin-top:4px;"><span class="dp-leg-i"><span class="dp-leg-dot" style="background:#FFA726"></span>resident (line)</span><span class="dp-leg-i"><span class="dp-leg-dot" style="background:rgba(255,167,38,0.32)"></span>up to non-resident (band)</span></div>'+(s._tuiMissing?'<div class="dp-note" style="font-size:11px;color:#7AAAC8;margin-top:5px;line-height:1.5;">⚠ Gaps = tuition <strong>not disclosed</strong> for '+(s._tuiMissing.length>3?s._tuiMissing.length+' years':s._tuiMissing.join(', '))+'. The source carried $0 or a truncated figure there; we show a gap rather than a false number.</div>':''))+
           cm('% by grant size · over time '+adjFlag(scholAdjusted(s),'No-grant share'), scholStackTime(s))+
@@ -5288,7 +5328,7 @@ function schoolDetailHTML(s){
         )+
         ((s.cond!=null&&s.cond>5)?'<div class="callout warn story-full"><div class="callout-eye">Conditional scholarship risk</div><p class="callout-p"><strong>'+s.cond+'%</strong> of conditional-scholarship recipients had their award cut or eliminated after Year 1. If your offer hinges on a GPA threshold, assume a <strong>'+s.cond+'% chance</strong> you lose it and budget for full sticker in years 2 and 3.</p></div>':'')
         +(function(){ var r=tuiAnomalyReason(s); return r?'<div class="callout warn story-full"><div class="callout-eye">⚠ Tuition history under review</div><p class="callout-p">This school\'s reported tuition shows an <strong>irregular year-over-year pattern</strong> ('+r+'). It may reflect a real tuition reset or a semester-vs-annual reporting inconsistency in the source. We\'re verifying it against the original ABA 509 disclosure, treat the tuition trend here with caution until then. See the <a href="methodology.html#data-corrections" style="color:var(--blue);">Methodology</a> for details.</p></div>':''; })()
-        +(s._tuiMissing?'<div class="callout warn story-full"><div class="callout-eye">⚠ Tuition data not disclosed — '+s._tuiMissing.length+' year'+(s._tuiMissing.length>1?'s':'')+'</div><p class="callout-p">For <strong>'+fmtYearList(s._tuiMissing)+'</strong>, the source carried no usable tuition figure (a stored $0 or a truncated fragment), so those years are shown as a <strong>gap</strong> rather than an invented number. Any net-cost or 3-year total that spans these years is therefore incomplete. Sourcing the original figures from the ABA 509 filings is a <strong>planned update</strong> — for now we flag the hole instead of guessing.</p></div>':'')
+        +(s._tuiMissing?'<div class="callout warn story-full"><div class="callout-eye">⚠ Tuition data not disclosed, '+s._tuiMissing.length+' year'+(s._tuiMissing.length>1?'s':'')+'</div><p class="callout-p">For <strong>'+fmtYearList(s._tuiMissing)+'</strong>, the source carried no usable tuition figure (a stored $0 or a truncated fragment), so those years are shown as a <strong>gap</strong> rather than an invented number. Any net-cost or 3-year total that spans these years is therefore incomplete. Sourcing the original figures from the ABA 509 filings is a <strong>planned update</strong>, for now we flag the hole instead of guessing.</p></div>':'')
       )+
       sec('outcomes','3','Outcomes','What graduates get', ledeOut,
         mods(
@@ -5298,7 +5338,7 @@ function schoolDetailHTML(s){
             row(gl('State avg bar'),pct(s.bar_state_avg))+
             row(gl('vs state'),s.bar_state_diff!=null?(s.bar_state_diff>0?'+':'')+s.bar_state_diff+'pt':'—',s.bar_state_diff>=0?'#4A9B6B':'#EF5350')
           )+
-          cm('Bar passage · first-time → 2-yr ultimate · '+yrsLabel, barChart+'<div class="dp-leg" style="margin-top:4px;"><span class="dp-leg-i"><span class="dp-leg-dot" style="background:#4A9B6B"></span>first-time (line)</span><span class="dp-leg-i"><span class="dp-leg-dot" style="background:rgba(74,155,107,0.32)"></span>second-chance gap, up to 2-yr ultimate (band)</span></div>')
+          cm('Bar passage · first-time → 2-yr ultimate · '+yrsLabel, barChart+'<div class="dp-leg" style="margin-top:4px;"><span class="dp-leg-i"><span class="dp-leg-dot" style="background:#4A9B6B"></span>first-time</span><span class="dp-leg-i"><span class="dp-leg-dot" style="background:#5AABCB"></span>2-yr ultimate</span><span class="dp-leg-i"><span class="dp-leg-dot" style="background:rgba(90,171,203,0.30)"></span>second-chance gap (band)</span></div>')
         )+
         '<div class="story-full">'+
           jobOutcomeHero(s)+
@@ -5309,6 +5349,7 @@ function schoolDetailHTML(s){
           '<div class="dp-chart-t">Employment mix at a glance</div>'+dpStackBar(s,empBuckets)+
           '<div id="emp-evo-slot"></div>'+
           (s.place_top3?'<div class="dp-chart-t">Top destination states</div>'+placementGeo(s)+placementStack(s):'')+
+          '<div id="barjuris-slot"></div>'+
           '<div class="callout" style="margin-top:14px;"><div class="callout-eye">How to read this</div><p class="callout-p"><strong>Counts</strong> are estimated from each % times graduates. The <strong>vs natl</strong> badge compares this school to the all-school average, green = better for the applicant (more BigLaw and clerkships, less seeking; the seeking row inverts).</p></div>'+
           '<div style="font-family:var(--mono);font-size:11px;color:var(--dimmer);line-height:1.5;margin:8px 0 2px;">First-time bar reflects '+latestBarCohort().grad+' graduates (entered ~'+latestBarCohort().enter+'); the admissions section describes the most recent entering class, a different cohort.</div>'+
         '</div>'
@@ -5417,14 +5458,14 @@ async function paintEmpEvolution(s){
     if(hist){ window._YOY_HIST = hist; const sec = yoySection(hist); if(sec){ yslot.innerHTML = sec; renderYoYTable(); } else yslot.remove(); }
     else yslot.remove();
   }
-  // (1) Employment over time — a big, prominent stacked composition for every
+  // (1) Employment over time, a big, prominent stacked composition for every
   //     reporting year, PLUS a dropdown to inspect any single category's trend.
   if(slot){
     const cols = empDestStackTime(hist);
     if(cols){
       window._EMP_HIST = hist;
       const opts = EMP_CAT_LIST.map(c=>'<option value="'+c.k+'"'+(c.k==='ftlt_pct'?' selected':'')+'>'+c.l+'</option>').join('');
-      // #9 — always-on "JD jobs over time" line directly under the outcome bars.
+      // #9, always-on "JD jobs over time" line directly under the outcome bars.
       const ehy=Object.keys(hist).filter(y=>/^\d{4}$/.test(y)).map(Number).sort((a,b)=>a-b);
       const ftltV={}; ehy.forEach(y=>{ const d=hist[String(y)]; if(d&&d.ftlt_pct!=null&&!isNaN(d.ftlt_pct)) ftltV[y]=+d.ftlt_pct; });
       let ftltChart=''; if(Object.keys(ftltV).length>=2){ const yf=[]; for(let y=ehy[0];y<=ehy[ehy.length-1];y++) yf.push(String(y));
@@ -5432,7 +5473,7 @@ async function paintEmpEvolution(s){
           +lineChart({years:yf,series:[{vals:ftltV,color:'#4A9B6B'}],pinIndex:0,fmt:v=>Math.round(v)+'%',label:'FTLT JD jobs over time',project:{n:4,mode:'rate'}}); }
       slot.innerHTML = ftltChart +
           '<div class="dp-chart-t" style="margin-top:16px;font-size:13px;">Where the whole class went · every reporting year</div>'
-        + '<div style="font-family:var(--mono);font-size:11px;color:var(--dimmer);margin-bottom:8px;">Each column is one class year as a share of <b>graduates</b>. Sectors sit at their true %, and the grey <b>Unknown / other</b> band fills each column to 100% — that gap (further-degree, employed abroad, non-FTLT, or not reported) is shown rather than hidden. Equal-height columns make the year-to-year shift easy to compare. Hover any segment for its share.</div>'
+        + '<div style="font-family:var(--mono);font-size:11px;color:var(--dimmer);margin-bottom:8px;">Each column is one class year as a share of <b>graduates</b>. Sectors sit at their true %, and the grey <b>Unknown / other</b> band fills each column to 100%, that gap (further-degree, employed abroad, non-FTLT, or not reported) is shown rather than hidden. Equal-height columns make the year-to-year shift easy to compare. Hover any segment for its share.</div>'
         + cols
         + (function(){ var abs=empCountStack(hist); return abs ? (
             '<div class="dp-chart-t" style="margin-top:20px;font-size:13px;">Employed graduates by sector · head counts · 2018–2025</div>'
@@ -5474,7 +5515,7 @@ async function paintEmpEvolution(s){
     else if(stage==='ftlt') series = gzSeries(hist, 'ftlt');
     el.innerHTML = trailingBadges(series, {dir:'asc', fmt:v=>Math.round(v).toLocaleString(), vfmt:v=>Math.round(v).toLocaleString()});
   });
-  // (3) Demographics — bigger race composition over time + a per-group dropdown.
+  // (3) Demographics, bigger race composition over time + a per-group dropdown.
   if(dslot){
     const dcols = histStackCols(hist, RACE_BUCKETS, {aria:'Demographic composition by year', tall:true});
     if(dcols){
@@ -5487,7 +5528,7 @@ async function paintEmpEvolution(s){
       demoCatPaint('women');
     } else { dslot.remove(); }
   }
-  // (4) Curriculum & program mix over time — experiential offerings normalised
+  // (4) Curriculum & program mix over time, experiential offerings normalised
   //     to 100% per year (clinics / field / simulation / seminars / co-curric).
   const cslot=document.getElementById('curric-evo-slot');
   if(cslot){
@@ -5499,7 +5540,7 @@ async function paintEmpEvolution(s){
         + ccols;
     } else cslot.remove();
   }
-  // (5) Faculty head-count composition over time — full-time vs part-time stacked
+  // (5) Faculty head-count composition over time, full-time vs part-time stacked
   //     per year (complements the full-time line above with the total + the split).
   const fslot=document.getElementById('fac-evo-slot');
   if(fslot){
@@ -5524,7 +5565,7 @@ async function paintEmpEvolution(s){
         + omcols;
     } else omslot.remove();
   }
-  // Bar funnel over time — who sat for the bar and the first-time result, each as
+  // Bar funnel over time, who sat for the bar and the first-time result, each as
   // 100% of that graduating class (the per-year version of the outcome funnel's
   // "Sat for bar" / "Passed 1st" stages).
   const bfslot=document.getElementById('bar-funnel-slot');
@@ -5538,6 +5579,16 @@ async function paintEmpEvolution(s){
         + (resCols?'<div class="dp-chart-t" style="margin-top:16px;font-size:13px;">First-time bar result · share of each graduating class · by year</div>'
         + '<div style="font-family:var(--mono);font-size:11px;color:var(--dimmer);margin-bottom:8px;">Of each graduating class: passed on the first try, sat but did not pass, or did not sit. The passed / did-not-pass split applies that class\'s disclosed first-time pass rate to its takers (the ABA reports passers on a taker basis, not a graduate basis). ABA 509.</div>'+resCols:'');
     } else bfslot.remove();
+  }
+  // Per-year "where the class went", bar-exam jurisdiction mix, 100% stacked.
+  const bjslot=document.getElementById('barjuris-slot');
+  if(bjslot){
+    const bj=barJurisStackTime(hist);
+    if(bj){
+      bjslot.innerHTML='<div class="dp-chart-t" style="margin-top:16px;font-size:13px;">Where the class sat the bar · by jurisdiction · % per year</div>'
+        + '<div style="font-family:var(--mono);font-size:11px;color:var(--dimmer);margin-bottom:8px;">Each column is one class year’s first-time bar takers, split by the state they sat in (a proxy for where graduates intend to practice). Top jurisdictions are coloured; the rest are Other. ABA 509.</div>'
+        + bj;
+    } else bjslot.remove();
   }
 }
 // Paint one demographic group's % share across all reporting years into #demoCatChart.
@@ -5656,7 +5707,7 @@ function schoolRouter(){
   if(m){ renderSchoolPage(decodeURIComponent(m[1])); return; }
   if(/^#compare=/i.test(h)){ applyCompareHash(); return; }
   if(/^#match=/i.test(h)){ applyMatchHash(); return; }
-  // #view=<name> — lets the standalone pages (about/contact/etc.) deep-link into
+  // #view=<name>, lets the standalone pages (about/contact/etc.) deep-link into
   // an in-app view via the shared global header.
   const vm = h.match(/^#view=([a-z]+)$/i);
   if(vm){
@@ -5670,7 +5721,7 @@ function schoolRouter(){
 window.addEventListener('hashchange', schoolRouter);
 window.addEventListener('popstate', schoolRouter);
 
-// ── Match Me — shareable hash + share helpers ──────────────────────────
+// ── Match Me, shareable hash + share helpers ──────────────────────────
 function applyMatchHash(){
   const m = (location.hash||'').match(/^#match=(.+)$/i);
   if(!m) return;
@@ -5853,7 +5904,7 @@ async function nationalTrends(){
     const dict={}, ndict={};
     years.forEach(y=>{
       const vals=[];
-      // znull metrics (tuition, grant) encode missing money as 0 — drop those so the median isn't dragged down.
+      // znull metrics (tuition, grant) encode missing money as 0, drop those so the median isn't dragged down.
       ext.schools.forEach(s=>{ const r=(s.history||{})[y]; const v=r&&r[m.k]; if(v!=null && !isNaN(+v) && (!m.znull || +v>0)) vals.push(+v); });
       const md=median(vals);
       if(md!=null){ dict[y]=+md.toFixed(2); ndict[y]=vals.length; }
@@ -5891,7 +5942,7 @@ async function renderTrends(){
   const nt=await nationalTrends();
   if(!nt){ vi.innerHTML='<div class="view-title">State of legal education</div><p class="view-sub">The full-history dataset is unavailable in this browser.</p>'; return; }
   const yrs=nt.years;
-  // Phase 3 — benchmark window: From/To year selects re-pin every chart + badge.
+  // Phase 3, benchmark window: From/To year selects re-pin every chart + badge.
   const optF=yrs.slice(0,-1).map(y=>'<option value="'+y+'"'+(y===yrs[0]?' selected':'')+'>'+y+'</option>').join('');
   const optT=yrs.slice(1).map(y=>'<option value="'+y+'"'+(y===yrs[yrs.length-1]?' selected':'')+'>'+y+'</option>').join('');
   vi.innerHTML='<div class="view-title">State of legal education</div>'
@@ -6036,7 +6087,7 @@ function renderCalc(){
   if(!prev.lsat && ap.lsat!=null) prev.lsat = ap.lsat;
   if(!prev.gpa && ap.gpa !=null) prev.gpa = ap.gpa;
   if(!prev.state && ap.state) prev.state = ap.state;
-  // Bimodal infographic FIRST — sets context for what the numbers mean before the title.
+  // Bimodal infographic FIRST, sets context for what the numbers mean before the title.
   vi.innerHTML = bimodalInfographic()
     +'<div class="view-title">Net price</div>'
     +'<p class="view-sub">Your stats, your home state, what you\'d borrow. We estimate the scholarship you\'d likely get at each school, build a 3-yr cost-of-attendance, and add the real cost of your loans after interest. <strong>Concept tool, verify before deciding.</strong></p>'
@@ -6090,7 +6141,7 @@ function renderCalc(){
     +' <strong>How "Est. grant" is estimated:</strong> if your LSAT and uGPA are both ≥ the school\'s 75th percentile (Safety), we use grant_p75. If both are ≥ 25th (Target), we use the median grant. Otherwise (Reach) we use grant_p25. Rough, actual offers vary hugely by cycle, essays, demographics, and yield.<br>'
     +' <strong>"3-yr net" = 3 × (sticker + mandatory fees − est. grant)</strong>, excluding cost of living. Mandatory fees are the ABA "FT annual fees" figure (2025); where a school doesn\'t disclose them the fee is treated as $0. <strong>"Loan interest"</strong> assumes the per-year borrow amount × 3 funds the program; payment uses standard fixed amortization at your stated rate over your stated term. <strong>"Net price"</strong> = 3-yr net cost + 3-yr living + total loan interest, your all-in cost: the price of the degree, the cost of living while you earn it, and the cost of financing it.<br>'
     +' Sticker is <strong>resident</strong> when your home state matches the school\'s state, otherwise non-resident (if reported).<br>'
-    +' Loan math is illustrative. For entrants from July 1, 2026, Grad PLUS ends and federal grad borrowing is capped at $50k/yr ($200k lifetime), so costs above that fall to private loans — confirm current federal and private rates before deciding. School figures sourced from ABA 509, last synced May 2026.'
+    +' Loan math is illustrative. For entrants from July 1, 2026, Grad PLUS ends and federal grad borrowing is capped at $50k/yr ($200k lifetime), so costs above that fall to private loans, confirm current federal and private rates before deciding. School figures sourced from ABA 509, last synced May 2026.'
     +'</div>';
   renderCalcResults();
 }
@@ -6124,7 +6175,7 @@ function renderCalcResults(){
     const overYr = Math.max(0, l1p - FED_CAP_YR);
     capWarn = '<div class="calc-capwarn">⚠ <strong>2026 federal loan cliff:</strong> for entrants from July 1, 2026, Grad PLUS ends and federal loans are capped at '+fmt$(FED_CAP_YR)+'/yr ('+fmt$(FED_CAP_LIFE)+' lifetime). '
       + (overYr>0
-          ? 'About '+fmt$(overYr)+'/yr of your federal line would have to come from <strong>private loans</strong> instead — higher rates, no PSLF or income-driven repayment.'
+          ? 'About '+fmt$(overYr)+'/yr of your federal line would have to come from <strong>private loans</strong> instead, higher rates, no PSLF or income-driven repayment.'
           : 'Your federal total exceeds the '+fmt$(FED_CAP_LIFE)+' lifetime cap; the excess must be private.')
       + '</div>';
   }
@@ -6221,7 +6272,7 @@ function bimodalInfographic(){
   // Highlight "trough" region
   const t1=X(105), t2=X(185);
   // Smooth bimodal CURVE traced through the bar tops via Catmull-Rom Bezier.
-  // The curve drives home that "bimodal" means TWO PEAKS with a trough — much
+  // The curve drives home that "bimodal" means TWO PEAKS with a trough, much
   // clearer than reading bar heights one at a time.
   function catmullRomBezier(pts){
     if(pts.length<2) return '';
@@ -6461,7 +6512,7 @@ function updateMapStats(){
   });
   const lbl=document.getElementById('msMetricLabel'); if(lbl) lbl.textContent='By '+cfg.label;
   ms_animateCount(document.getElementById('msTotal'), list.length);
-  // Active-filter readout — makes clear which filters produced this count (#5/#6).
+  // Active-filter readout, makes clear which filters produced this count (#5/#6).
   const filtEl=document.getElementById('msFilters');
   if(filtEl){
     const chips=activeMapFilters();
@@ -6487,7 +6538,7 @@ function updateMapStats(){
 })();
 try{ updateMapStats(); }catch(e){}
 
-// ── Compare hint on the school detail page (#7) — injected at runtime so we don't
+// ── Compare hint on the school detail page (#7), injected at runtime so we don't
 //    depend on renderSchoolPage internals. Placed right after the back link. ──
 function cmpHintAdd(btn){
   const id=btn.dataset.id;
@@ -6537,7 +6588,7 @@ renderShareWidget();
     else setTimeout(kick, 3000);
   }catch(e){}
 })();
-// ── Onboarding tour — guided spotlight showcase, dismissable, never auto-fires again ──
+// ── Onboarding tour, guided spotlight showcase, dismissable, never auto-fires again ──
 function startTour(){
   // Steps: each can target an actual element on the page (spotlight) and/or
   // run a side-effect (before) that sets up the demo state for that step.
@@ -6561,7 +6612,7 @@ function startTour(){
     },
     {
       title:'The school read-out',
-      body:'Click any pin to open this panel, admissions distributions, scholarship mix, bar pass, employment outcomes, and a 15-year trajectory for each. The "+ Compare" button adds a school to your shortlist.',
+      body:'Click any pin for this quick panel: admissions, scholarship mix, bar pass, and employment at a glance. Then hit "View full page" for the full deep-dive, which opens with a 15-year trajectory of every metric, then cost, outcomes (first-time vs 2-yr bar, where the class went by year), the bimodal salary chart, and admissions. Every chart is click-to-enlarge. "+ Compare" adds a school to your shortlist.',
       target:'#schoolPanel', pos:'left',
       before:()=>{ if(sampleSchool && typeof openSP==='function'){ try{ openSP(sampleSchool); }catch(e){} } }
     },
@@ -6699,7 +6750,7 @@ function relaunchTour(){
   // Auto-start the tour ~1.5s after first paint on first visit.
   setTimeout(startTour, 1500);
 })();
-// ── Share widget — major social platforms + Reddit + email + copy link ──
+// ── Share widget, major social platforms + Reddit + email + copy link ──
 const SHARE_URL = 'https://exhibit509.com/';
 const SHARE_TITLE = 'Exhibit 509: free ABA 509 law school data, 15 years, every accredited school. The evidence on every school.';
 // Ready-to-post LinkedIn synopsis. URL is embedded so the post still links out
@@ -6727,7 +6778,7 @@ function shareTo(platform){
     // LinkedIn's preview-card scraper has been failing on this URL (data-URI
     // og:image is rejected). Workaround: copy a ready-to-post synopsis + link
     // to the clipboard, then open the LinkedIn composer so the user pastes it
-    // directly. Bypasses the broken preview entirely — the post stands on its
+    // directly. Bypasses the broken preview entirely, the post stands on its
     // own copy + a tappable link, no preview card needed.
     const open = () => window.open('https://www.linkedin.com/feed/?shareActive=true&mini=true', '_blank', 'noopener');
     if(navigator.clipboard && navigator.clipboard.writeText){
@@ -6799,7 +6850,7 @@ function openShareModal(){
   document.body.appendChild(m);
 }
 
-// Disclaimer bar removed v1.69.0 — --banner-h is hardcoded to 0 in the inline
+// Disclaimer bar removed v1.72.0, --banner-h is hardcoded to 0 in the inline
 // <style> after the header; the dynamic syncBannerHeight observer is no longer
 // needed. Provenance lives in the footer.
 // Honor #school/X or #compare=… in URL on first load

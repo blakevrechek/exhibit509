@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Exhibit — per-school static HTML generator.
+Exhibit, per-school static HTML generator.
 
 Reads the inline `const S` array from index.html, writes one
 self-contained HTML page per school to /school/<slug>.html. The
