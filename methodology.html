@@ -75,7 +75,7 @@ body{padding-top:52px;padding-bottom:42px;background-image:radial-gradient(rgba(
 <header class="gh"><a class="gh-logo" href="index.html"><b>Exhibit 509 <em>by 509α</em></b></a><nav class="gh-nav"><span class="gh-nav-grp"><a href="index.html">Map</a><a href="index.html#view=profiles">Schools</a><a href="index.html#view=states">States</a><a href="index.html#view=transfers">Transfers</a><a href="index.html#view=calc">Net price</a></span><span class="gh-nav-grp gh-nav-writ"><a href="blog.html">Blog</a><a href="methodology.html" class="on">Methodology</a><a href="glossary.html">Glossary</a><a href="about.html">About</a><a href="contact.html">Contact</a></span></nav><a class="gh-cta" href="https://docs.google.com/forms/d/e/1FAIpQLScvkEp7vEwHAtpbMbk06AmtdUqHTy595OiQFcNBanSBXm0qDA/viewform?usp=publish-editor" target="_blank" rel="noopener">Email updates</a></header>
 <div class="wrap">
   <a class="back" href="index.html">Back to Exhibit</a>
-  <div class="eyebrow">Methodology · v1.54.0</div>
+  <div class="eyebrow">Methodology · v1.59.0</div>
   <h1>How Exhibit works</h1>
   <div class="sub">Where each number comes from · how we classify schools · how we refresh · how we handle data anomalies.</div>
 
@@ -128,20 +128,18 @@ body{padding-top:52px;padding-bottom:42px;background-image:radial-gradient(rgba(
   <ul>
     <li><strong>Negative scholarship counts</strong> in Historic (a known reporting artifact in 2015 and 2024 for ~10 schools) are nulled, not interpolated.</li>
     <li><strong>Bar pass rates</strong> reported as fractions instead of percents are auto-normalized to %.</li>
-    <li><strong>Tuition values</strong> within a school's history that are 1.8× – 3.5× that school's whole-trend median are flagged as semester-misreports and halved; values above 3.5× the median are nulled. (This catches the small set of schools that briefly reported a per-academic-year credit-cost rather than an annual figure.)</li>
+    <li><strong>Tuition values</strong> that are impossible as an annual sticker — a stored <code>$0</code> or a truncated single-term fragment (e.g. <code>$35</code>, <code>$120</code>, <code>$1,094</code>) — are shown as a <strong>gap</strong> ("not disclosed") rather than plotted as a false near-zero. We do <em>not</em> silently rewrite the number: the stored dataset keeps the source value; only the display omits it. Implausible single-year <em>spikes or halvings</em> are left in place and carry an "under review" flag (see below).</li>
     <li><strong>Per-credit-only schools</strong> (≈33 in 2025) are converted to annual using ≈ 29 credits per full-time academic year, the standard JD pacing.</li>
   </ul>
   <p>Every transformation is reversible from the original public disclosure. The methodology is public; the input files are public; the transformations are documented above.</p>
 
-  <h3 id="data-corrections">Specific tuition corrections + flags (June 2026 audit)</h3>
-  <p>A year-over-year scan of every school's tuition flagged abnormal moves (any single-year change above +18% or below −10%). Four were unambiguous single-year semester-vs-annual misreports and were <strong>corrected directly</strong> in the dataset; the replacement is interpolated from the school's neighboring years, pending a re-pull of the original 509 figure:</p>
+  <h3 id="data-corrections">Tuition anomalies — flagged, not corrected (June 2026 audit)</h3>
+  <p><strong>Policy:</strong> where the source data looks wrong, we <em>surface and explain it</em> rather than silently overwrite it. Earlier in development a handful of tuition cells were point-edited; those edits have all been <strong>reverted</strong>, and the dataset now mirrors the ABA Standard 509 disclosure exactly. Two kinds of anomaly are flagged on the school page:</p>
   <ul>
-    <li><strong>University of Chicago</strong> — 2018 tuition $43,532 → $65,134 (it sat between $62,865 and $76,479).</li>
-    <li><strong>Indiana University–Indianapolis</strong> — 2017 $14,316 → $26,736 (a half-year figure between $26k and $29k).</li>
-    <li><strong>University of Detroit Mercy</strong> — 2025 $27,800 → $56,143 (one semester reported; the prior year was $54,508).</li>
-    <li><strong>University of Montana</strong> — 2023 $19,494 → $12,263 (a one-year spike reverting to ~$12k).</li>
+    <li><strong>Not-disclosed years.</strong> A year whose stored tuition is <code>$0</code> or a truncated fragment is rendered as a <strong>gap</strong> with a "not disclosed" note under the chart — about 40 schools carry at least one such year, almost all 2018–2022.</li>
+    <li><strong>Irregular year-over-year moves.</strong> Any school whose resident tuition makes a violent one-year swing (≥30% and ≥$6,000 — the signature of a doubled cell or a semester-vs-annual reporting flip) carries an <strong>"under review"</strong> caveat naming the year. This is detected automatically, so it stays accurate as the data refreshes; it also covers the hand-curated multi-year level shifts (<em>Baylor, Texas Southern, Tulsa, Ohio Northern, Roger Williams, Brooklyn Law, Iowa, Texas A&amp;M, North Carolina Central, Mississippi, Elon, Howard, Toledo, Arizona,</em> and <em>North Texas at Dallas</em>), several of which may be <strong>genuine tuition resets</strong> rather than errors.</li>
   </ul>
-  <p>A larger set shows <strong>multi-year level shifts</strong> that we are deliberately <em>not</em> auto-correcting, because several are likely <strong>genuine tuition resets</strong> (a number of schools cut tuition during the 2014–2015 enrollment downturn) rather than reporting errors. Fabricating a "correction" would erase real history. These carry an <strong>"under review"</strong> flag on their school page until verified against the original disclosure: <em>Baylor, Texas Southern, Tulsa, Ohio Northern, Roger Williams, Brooklyn Law, Iowa, Texas A&amp;M, North Carolina Central, Mississippi, Elon, Howard, Toledo, Arizona,</em> and <em>North Texas at Dallas</em>.</p>
+  <p>The full anomaly inventory, cross-referenced cell-by-cell against the workbook, lives in the project's <code>tuition-audit.md</code>. Nothing in that list has been auto-changed; each is a flag awaiting verification against the original disclosure.</p>
 
   <h2 id="projections">4-year projections</h2>
   <p>Trend charts extend the last reported year with a <strong>dashed 4-year projection</strong> and a shaded uncertainty cone. This is a <strong>model output, not a forecast of fact</strong> — it answers "if this school's own recent trend simply continued, where would it land?" and nothing more. A school can break its trend at any time; treat the dashed region as a sketch, not a promise.</p>
@@ -182,6 +180,6 @@ body{padding-top:52px;padding-bottom:42px;background-image:radial-gradient(rgba(
 #floatBack{position:fixed;bottom:24px;right:24px;z-index:9000;display:flex;align-items:center;gap:8px;background:#D97757;color:#06111E;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;padding:12px 18px;border-radius:4px;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,0.4),0 0 0 1px rgba(217,119,87,0.3);transition:transform .15s,box-shadow .15s;}
 #floatBack:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,0,0,0.5),0 0 0 1px rgba(217,119,87,0.5);}
 </style>
-<div class="gf"><span class="gf-brand"><b>Exhibit 509 <em>by 509α</em></b></span><a class="gf-accent" href="https://docs.google.com/forms/d/e/1FAIpQLScvkEp7vEwHAtpbMbk06AmtdUqHTy595OiQFcNBanSBXm0qDA/viewform?usp=publish-editor" target="_blank" rel="noopener">Sign up for email updates</a><a href="terms.html">Terms · Privacy</a><a class="gf-accent" href="https://skool.com/509alpha" target="_blank" rel="noopener">Join 509α on Skool</a><span class="gf-src"><span style="color:#4A9B6B;">●</span> Sourced from official ABA Standard 509 disclosures · <span style="color:#D97757;">Last synced June 5, 2026</span> · <span style="color:#7AAAC8;">v1.54.0</span></span></div>
+<div class="gf"><span class="gf-brand"><b>Exhibit 509 <em>by 509α</em></b></span><a class="gf-accent" href="https://docs.google.com/forms/d/e/1FAIpQLScvkEp7vEwHAtpbMbk06AmtdUqHTy595OiQFcNBanSBXm0qDA/viewform?usp=publish-editor" target="_blank" rel="noopener">Sign up for email updates</a><a href="terms.html">Terms · Privacy</a><a class="gf-accent" href="https://skool.com/509alpha" target="_blank" rel="noopener">Join 509α on Skool</a><span class="gf-src"><span style="color:#4A9B6B;">●</span> Sourced from official ABA Standard 509 disclosures · <span style="color:#D97757;">Last synced June 5, 2026</span> · <span style="color:#7AAAC8;">v1.59.0</span></span></div>
 </body>
 </html>

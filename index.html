@@ -26,8 +26,11 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Exhibit">
-<link rel="apple-touch-icon" href="icon192.png">
-<link rel="icon" id="favicon" type="image/png">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" id="favicon" type="image/png" sizes="32x32" href="/favicon32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon48.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/icon180.png">
 <link href="/fonts/fonts.css" rel="stylesheet">
 <link rel="stylesheet" href="/vendor/leaflet/leaflet.css" integrity="sha512-xwwBn7YBII4WryXcPpa1qciCiCLEWFVIPijj9DwNnq9JOGmYW4VM4geg+v0pZBkfp/cXkr6W1YYxlNN8U4QY9g==" crossorigin="anonymous"/>
 <script src="/vendor/leaflet/leaflet.js" integrity="sha512-BwHfrr4c9kmRkLw6iXFdzcdWV/PGkVgiIyIWLLlTSXzWQzxuSg4DiQUCpauz/EWjgk5TYQqX/kvn9pG1NpYfqg==" crossorigin="anonymous"></script>
@@ -375,7 +378,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .pb-counsel-header{border-top:3px solid var(--counsel);}
 
 /* Map filters bar */
-/* Map filters relocated v1.54.0, top-of-map horizontal toolbar, docked between the
+/* Map filters relocated v1.59.0, top-of-map horizontal toolbar, docked between the
    left Match Me / Compare sidebar (ends at 380px) and the always-open right school
    panel (400px), sitting just under the global header. The left sidebar is now
    reserved exclusively for Match Me + Compare. */
@@ -452,7 +455,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
    header (school name + bar pass chip) isn't hidden by filter chips or the BLS
    tooltip card. Was top:76px causing the upper ~50px to be eaten. */
 /* schoolPanel sits at the natural top now that map-filter bar moved into the left
-   panel (v1.54.0) — frees ~50px of vertical space at the top of the right column. */
+   panel (v1.59.0) — frees ~50px of vertical space at the top of the right column. */
 #schoolPanel{position:fixed;top:76px;right:0;bottom:36px;width:400px;z-index:100;background:rgba(4,13,23,0.97);border-left:1px solid rgba(74,122,155,0.22);overflow-y:auto;transform:translateX(0);transition:transform .3s;}#schoolPanel.hidden{transform:translateX(100%);}
 #schoolPanel.open{transform:translateX(0);}
 .sp-close{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(4,13,23,0.98);border-bottom:1px solid rgba(74,122,155,0.15);}
@@ -462,7 +465,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .sp-tab{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border:1px solid rgba(74,122,155,0.2);background:transparent;color:var(--dim);cursor:pointer;transition:all .2s;}
 .sp-tab+.sp-tab{border-left:none;}
 .sp-tab.on{background:rgba(217,119,87,0.1);color:var(--orange);border-color:rgba(217,119,87,0.35);}
-/* School-panel (right side) typography tightened v1.54.0, was visibly scaled-too-big
+/* School-panel (right side) typography tightened v1.59.0, was visibly scaled-too-big
    per owner. Reduced metric/value sizes by ~15%, tighter section padding, smaller
    section labels, more breathable line-height. */
 .sp-header{padding:14px 16px 10px;border-bottom:1px solid rgba(74,122,155,0.12);}
@@ -659,8 +662,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
   .story-sec{padding:13px 0 3px;}
   .story-title{font-size:20px;margin:0 0 4px;}
   .story-lede{font-size:13.5px;line-height:1.4;margin:0 0 9px;max-width:900px;}
-  .story-mods{column-width:250px;column-gap:16px;}
-  .story-mod{margin:0 0 10px;}
+  .story-mods{gap:14px 18px;}
   .story-full{margin-top:9px;}
 }
 
@@ -678,10 +680,14 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .story-title{font-family:var(--serif);font-size:23px;font-weight:700;color:var(--white);letter-spacing:-0.4px;line-height:1.1;margin:0 0 5px;}
 .story-lede{font-family:var(--sans);font-size:14.5px;line-height:1.45;color:#C6D8E6;max-width:780px;margin:0 0 13px;}
 .story-lede strong{color:var(--white);font-weight:700;}
-/* Masonry module flow: CSS multi-column packs mixed-height blocks tightly.
-   Wider columns (was 288) make every chart noticeably larger on big displays. */
-.story-mods{column-width:340px;column-gap:24px;}
-.story-mod{break-inside:avoid;-webkit-column-break-inside:avoid;page-break-inside:avoid;margin:0 0 13px;display:inline-block;width:100%;}
+/* Module layout: a CSS GRID (was multi-column masonry). Grid flows in READING
+   order, so a section's fact table sits next to its own chart instead of being
+   split down separate masonry columns, and the wide cells (min 440px) scale
+   every chart up — auto-fit packs 2 columns on a laptop, 3+ on a big monitor.
+   The min(100%,…) floor keeps a single column from overflowing narrow phones. */
+.story-mods{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:16px 22px;align-items:start;}
+.story-mod{break-inside:avoid;-webkit-column-break-inside:avoid;page-break-inside:avoid;min-width:0;}
+.story-mod.span2,.story-mods .story-full{grid-column:1/-1;}
 .story-mod .dp-chart-t{margin-top:0;}
 .story-mod-t{font-family:var(--mono);font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:var(--orange);font-weight:700;margin:0 0 5px;}
 .story-full{margin-top:12px;}
@@ -689,7 +695,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,[tabindex]:fo
 .theme-light .story-title{color:#0C1A2A;}
 .theme-light .story-lede{color:#2A3F52;}
 @media(max-width:760px){
-  .story-mods{column-width:auto;columns:1;}
+  .story-mods{grid-template-columns:1fr;}
   .story-title{font-size:22px;}
   .story-lede{font-size:15px;}
   .story-sec{padding:20px 0 4px;}
@@ -1338,7 +1344,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
 .theme-light .cmp-act{color:#374151!important;border-color:rgba(60,90,120,0.3)!important;}
 .theme-light .cmp-bar-track,.theme-light .cmp-emp-track{background:rgba(60,90,120,0.10)!important;}
 /* ──────────────────────────────────────────────────────────────────────────
-   PRINT / SAVE-AS-PDF  (rebuilt v1.54.0)
+   PRINT / SAVE-AS-PDF  (rebuilt v1.59.0)
    The school page is now a sectioned narrative (story-sec / story-mod) with
    historic stacked charts, projections, an interactive loan calculator and
    click-to-zoom widgets. This stylesheet turns that live view into a clean,
@@ -1380,8 +1386,8 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
   .story-eyebrow{color:#06111E!important;font-size:9.5px!important;break-after:avoid;}
   .story-title{break-after:avoid;}
   .story-lede{break-after:avoid;font-size:13px!important;}
-  /* collapse the masonry to a single column so nothing is clipped or reordered. */
-  .story-mods{columns:1!important;column-width:auto!important;column-gap:0!important;}
+  /* collapse the grid to a single column so nothing is clipped or reordered. */
+  .story-mods{display:block!important;}
   .story-mod{break-inside:avoid;page-break-inside:avoid;display:block!important;width:100%!important;margin:0 0 9px!important;}
   .story-mod-t,.dp-chart-t{font-size:10.5px!important;margin-bottom:4px!important;color:#06111E!important;}
   .dp-row{padding:2px 0!important;font-size:11px!important;}
@@ -1728,7 +1734,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
     More
   </button>
 </nav>
-<!-- Disclaimer bar removed v1.54.0, provenance now lives in the footer. -->
+<!-- Disclaimer bar removed v1.59.0, provenance now lives in the footer. -->
 <style>:root{--banner-h:0px;}</style>
 
 <div id="cookieBar" style="position:fixed;bottom:0;left:0;right:0;z-index:1000;background:#0B1826;border-top:1px solid rgba(217,119,87,0.4);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;box-shadow:0 -2px 12px rgba(0,0,0,0.5);">
@@ -1984,7 +1990,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
 <!-- MAP FOOTER BAR -->
 <div id="mapFooter" style="position:fixed;bottom:0;left:0;right:0;z-index:98;background:rgba(4,13,23,0.97);border-top:1px solid rgba(74,122,155,0.2);display:flex;align-items:center;gap:0;height:36px;overflow:hidden;">
   <div style="display:flex;align-items:center;height:100%;flex:1;overflow:hidden;">
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLScvkEp7vEwHAtpbMbk06AmtdUqHTy595OiQFcNBanSBXm0qDA/viewform?usp=publish-editor" target="_blank" style="display:flex;align-items:center;gap:5px;padding:0 14px;height:100%;border-right:1px solid rgba(74,122,155,0.12);text-decoration:none;font-family:var(--mono);font-size:12px;color:#A78BFA;letter-spacing:0.5px;white-space:nowrap;"><svg width="14" height="14" viewBox="0 0 48 48" fill="none"><path d="M30 2H10C7.8 2 6 3.8 6 6v36c0 2.2 1.8 4 4 4h28c2.2 0 4-1.8 4-4V14L30 2z" fill="#7B4FD4"/><path d="M30 2v12h12L30 2z" fill="#5E35B1"/><path d="M20 22h-4v2h4v-2zm12 0H24v2h8v-2zm-12 6h-4v2h4v-2zm12 0H24v2h8v-2zm-12 6h-4v2h4v-2zm12 0H24v2h8v-2z" fill="white"/></svg> Email list</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLScvkEp7vEwHAtpbMbk06AmtdUqHTy595OiQFcNBanSBXm0qDA/viewform?usp=publish-editor" target="_blank" style="display:flex;align-items:center;gap:5px;padding:0 14px;height:100%;border-right:1px solid rgba(74,122,155,0.12);text-decoration:none;font-family:var(--mono);font-size:12px;color:#A78BFA;letter-spacing:0.5px;white-space:nowrap;"><svg width="14" height="14" viewBox="0 0 48 48" fill="none"><path d="M30 2H10C7.8 2 6 3.8 6 6v36c0 2.2 1.8 4 4 4h28c2.2 0 4-1.8 4-4V14L30 2z" fill="#7B4FD4"/><path d="M30 2v12h12L30 2z" fill="#5E35B1"/><path d="M20 22h-4v2h4v-2zm12 0H24v2h8v-2zm-12 6h-4v2h4v-2zm12 0H24v2h8v-2zm-12 6h-4v2h4v-2zm12 0H24v2h8v-2z" fill="white"/></svg> Feedback</a>
     <a href="terms.html" style="display:flex;align-items:center;gap:6px;padding:0 14px;height:100%;border-right:1px solid rgba(74,122,155,0.12);text-decoration:none;font-family:var(--mono);font-size:12px;color:#FDE68A;letter-spacing:0.5px;white-space:nowrap;">Terms · Privacy</a>
     <a href="#" onclick="relaunchTour();return false;" style="display:flex;align-items:center;gap:6px;padding:0 14px;height:100%;border-right:1px solid rgba(74,122,155,0.12);text-decoration:none;font-family:var(--mono);font-size:12px;color:#5AABCB;letter-spacing:0.5px;white-space:nowrap;">Take the tour</a>
     <span id="shareWidget" style="display:flex;align-items:center;gap:6px;padding:0 12px;height:100%;border-right:1px solid rgba(74,122,155,0.12);"></span>
@@ -1993,7 +1999,7 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
     </a>
   </div>
   <div style="padding:0 16px;font-family:var(--mono);font-size:11px;color:var(--dimmer);border-left:1px solid rgba(74,122,155,0.12);white-space:nowrap;letter-spacing:0.4px;">
-    <span style="color:#4A9B6B;">●</span>&nbsp; Sourced from official ABA Standard 509 disclosures &nbsp;·&nbsp; <span style="color:var(--orange);">Last synced June 5, 2026</span> &nbsp;·&nbsp; <span style="color:#7AAAC8;">v1.54.0</span>
+    <span style="color:#4A9B6B;">●</span>&nbsp; Sourced from official ABA Standard 509 disclosures &nbsp;·&nbsp; <span style="color:var(--orange);">Last synced June 5, 2026</span> &nbsp;·&nbsp; <span style="color:#7AAAC8;">v1.59.0</span>
   </div>
 </div>
 
@@ -2010,14 +2016,14 @@ select.calc-inp{text-align:left;font-family:var(--mono);font-size:15.5px;backgro
     <div class="modal-trend" id="mTrend"></div>
     <div class="modal-ft">
       <span class="modal-ftn"><span style="color:#4A9B6B;">●</span> Sourced from <a href="https://abarequireddisclosures.org/" target="_blank" style="color:var(--blue);text-decoration:none;">abarequireddisclosures.org</a> · Last synced June 5, 2026 · <a href="methodology.html" style="color:var(--blue);text-decoration:none;">Methodology</a></span>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLScvkEp7vEwHAtpbMbk06AmtdUqHTy595OiQFcNBanSBXm0qDA/viewform?usp=publish-editor" class="modal-ftcta" target="_blank">Email list</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScvkEp7vEwHAtpbMbk06AmtdUqHTy595OiQFcNBanSBXm0qDA/viewform?usp=publish-editor" class="modal-ftcta" target="_blank">Feedback</a>
     </div>
   </div>
 </div>
 <!-- Dataset (S, BLS, RPP, FMR) split out of the HTML for cacheability + lighter
      initial document. Classic script, executes before the app script below, so
      the globals are synchronously available exactly as when inlined. -->
-<script src="data/exhibit-data.js?v=1.54.0"></script>
+<script src="data/exhibit-data.js?v=1.59.0"></script>
 <script>
 const IMG={png:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAB/UlEQVR42u1bvU7DMBBO88dPVdoKCSGEqiwsiAGJAQk2xMLWDogN8QjdWJlZeAQW3oNHYGbiEXiE4LOUSm1DIIrPsXNfpFuaxvb3+Wzfne+CgPnphXEWJlvTaHP4FA/23knS0eF3Op7kS6J+K97Tf+kb+jbw8elF6Wm0PX5Jhgdfa0BrCrVBbVGbjqMOR9HGYG4CdCUZqg/qyy3gSmVL1ZpLVF/UZ+tE0GxYBV5GBGmE/UmPM72ZtQV8RWgs1jbMMO0/tDrrFdpAY2MFH/d3X50DvqoNaoxiwbORkOzsf/gCfnFkqjGLm3njmuAz+MYk6N3ec/CF1D4d6Ex18qhrcETWshNcMnJMGkv/N287Br6Qv81m5Vx0SvVLlkKlA6W9uq6CL7SAvEgbs397fpa/3d8YE2qPVQtMr/359UX++XhnTKg91r3AdCTHZQII61oMz/Rac5kAkqUYIwUdpRFAmNnU3wcCFstAm70Mx81vBDzPrvLL45Pakk2OjI9Rm8d0AWGTANMz2chJUtjZjB8fCNBGEZfj4wMB2kESTwCX89P0FLBCFJnFXI17QYASEAACxBMgfROEHSCdAPGmsHhnSLw7LD4ggpAYgqIIi+NiBFdjuBzF9TgSJJAigyQppMkhURKpskiWRro8CiZQMoOiKZTNoXASpbMonpZTPv8DspZXHnlR2eoAAAAASUVORK5CYII=',webp:'data:image/webp;base64,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'};
 (function(){var f=document.getElementById('favicon');if(f)f.href=IMG.png;document.querySelectorAll('img[data-img]').forEach(function(i){i.src=IMG[i.getAttribute('data-img')];});})();
@@ -2032,9 +2038,23 @@ const IMG={png:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaX
   if(typeof S==='undefined') return;
   var TK=['lsat_trend','lsat25_trend','lsat75_trend','gpa_trend','gpa25_trend','gpa75_trend'];
   var SK=['lsat25','lsat50','lsat75','gpa25','gpa50','gpa75'];
+  // Tuition: an annual sticker of $0 — or a truncated cell like $35 / $120 / $1,094
+  // (per-credit or single-term fragments the source occasionally carries) — is never
+  // real annual tuition. Floor at $1,500 (the largest garbage cell found is $1,094;
+  // the cheapest real JD tuition is several thousand) so these render as a GAP, not a
+  // false plunge to ~$0. The stored dataset keeps the source value untouched (data-
+  // integrity policy: surface, don't silently rewrite) — this only affects display.
+  var TUI_FLOOR=1500;
+  var TUITK=['tui_trend','nrt_trend'];
+  var TUISK=['tui','nrt','tui_ft_res','tui_ft_nr'];
+  var tuiBad=function(v){ return v!=null && v!=='' && !isNaN(+v) && +v<TUI_FLOOR; };
   S.forEach(function(s){
     TK.forEach(function(k){ var t=s[k]; if(t) for(var y in t){ if(t[y]===0) t[y]=null; } });
     SK.forEach(function(k){ if(s[k]===0) s[k]=null; });
+    var miss=[];
+    TUITK.forEach(function(k){ var t=s[k]; if(t) for(var y in t){ if(/^\d{4}$/.test(y)&&tuiBad(t[y])){ miss.push(y); t[y]=null; } } });
+    TUISK.forEach(function(k){ if(tuiBad(s[k])) s[k]=null; });
+    if(miss.length){ s._tuiMissing=[...new Set(miss)].sort(); }
   });
 })();
 // ── External state-level datasets (BLS OES lawyers, BEA RPP, HUD SAFMR) ─
@@ -2064,8 +2084,8 @@ function fmtUSD(v){ return v==null?"—":"$"+v.toLocaleString(); }
 // ═══════════════════════════════════════════════════════════════════════════
 const DATA_INVARIANTS = {
   total_schools: 208,         // 197 active/newly + 11 closed/transitioning (now included as historical entries)
-  schools_inline: 208,        // all inline as of v1.54.0, closed entries surface their pre-closure history
-  year_count: 15              // 2011–2025 inclusive (15-year span; pre-2018 added in v1.54.0 from Historic + v2 sheets)
+  schools_inline: 208,        // all inline as of v1.59.0, closed entries surface their pre-closure history
+  year_count: 15              // 2011–2025 inclusive (15-year span; pre-2018 added in v1.59.0 from Historic + v2 sheets)
 };
 // Verifiable count of the data cells actually shipped inline on this page:
 // every non-null scalar field, plus every per-year trend entry, across S.
@@ -2134,7 +2154,7 @@ function populateHeaderStats(){
 // ── Lazy-load full dataset (deferred until first deep-dive interaction) ──
 // Callers: `const ext = await loadFullDataset();` parsed JSON, or null on fail.
 // Subsequent calls return the cached object. Concurrent calls share one fetch.
-// Wired in v1.54.0 — schoolDetailHTML calls getSchoolHistory(id) which awaits
+// Wired in v1.59.0 — schoolDetailHTML calls getSchoolHistory(id) which awaits
 // this loader, then renders deep-history charts (employment evolution etc.) into
 // late-paint slots once data is available.
 window.EXT = window.EXT || { data: null, loading: null, byId: null };
@@ -2348,7 +2368,7 @@ function searchTypeaheadKey(e){
   }
 }
 
-// Disclaimer banner is now persistent (per v1.54.0 owner directive) — no dismiss; always visible.
+// Disclaimer banner is now persistent (per v1.59.0 owner directive) — no dismiss; always visible.
 // ── COOKIE notice dismiss (persists via localStorage) ──
 // ── Light/Dark theme toggle (persists via localStorage). Note: many inline styles
 // use literal rgba(4,13,23,...) and won't fully invert — full theming would require
@@ -2466,7 +2486,7 @@ function openMobileMenu(){
     + '<a class="mm-link" href="about.html">About Exhibit</a>'
     + '<a class="mm-link" href="contact.html">Contact<span class="mm-sub">Email, LinkedIn, Skool community</span></a>'
     + '<a class="mm-link" href="terms.html">Terms · Privacy</a>'
-    + '<a class="mm-link" href="https://docs.google.com/forms/d/e/1FAIpQLScvkEp7vEwHAtpbMbk06AmtdUqHTy595OiQFcNBanSBXm0qDA/viewform?usp=publish-editor" target="_blank">Email list</a>'
+    + '<a class="mm-link" href="https://docs.google.com/forms/d/e/1FAIpQLScvkEp7vEwHAtpbMbk06AmtdUqHTy595OiQFcNBanSBXm0qDA/viewform?usp=publish-editor" target="_blank">Feedback</a>'
     + '</div>';
   m.classList.add('open');
   document.body.style.overflow='hidden';
@@ -2796,8 +2816,8 @@ const GLOSSARY={
   'Clerkships (all)':"Federal + state + administrative-judge clerkships combined.",
   // Cost
   '3-yr living':"3-year living-cost estimate = (housing + other monthly) × 9 academic months × 3 years. Add this to net tuition to get your total cost of attendance for the JD.",
-  'Net annual':"Sticker tuition minus the median grant award for that school's most recent cycle. Real out-of-pocket before living costs.",
-  '3-yr net':"Net annual tuition × 3 years. Compare to BigLaw starting salary ($225K in 2024) to gauge debt-to-income.",
+  'Net annual':"Sticker tuition plus mandatory fees, minus the median grant award for that school's most recent cycle. Real out-of-pocket before living costs.",
+  '3-yr net':"Net annual cost (tuition + mandatory fees − grant) × 3 years. Compare to BigLaw starting salary ($225K in 2024) to gauge debt-to-income.",
   'Grad PLUS':"Federal Direct Graduate PLUS Loan. Currently ~9.08% fixed. Available to fill the gap between Direct Unsubsidized and total cost of attendance.",
   'Conditional scholarship':"A merit award that requires you to maintain a GPA threshold (often top 25–50% of class) to keep in years 2–3. Loss rate = % of recipients who lost it after year 1.",
   // Admissions
@@ -3230,7 +3250,7 @@ function niceTicks(min, max){
   for(let v=lo; v<=hi+1e-9; v+=step) out.push(+v.toFixed(10));
   return {min:lo, max:hi, ticks:out, step};
 }
-// ── 4-year statistical projection (v1.54.0) ──────────────────────────────────
+// ── 4-year statistical projection (v1.59.0) ──────────────────────────────────
 // Fit the school's own per-year history and extend it. Per-metric model:
 //   'rate'  (0–100% bounded) → logit-linear (stays inside 0–100, eases at bounds)
 //   'mult'  ($/counts, compounding) → log-linear (i.e. a CAGR)
@@ -3258,7 +3278,7 @@ function projectFit(pairs, futureXs, mode){
     const m=inv(a+b*x);
     let l=inv(a+b*x-se), h=inv(a+b*x+se);
     let lo=Math.min(l,h), hi=Math.max(l,h);
-    // Refine (v1.54.0): keep the uncertainty cone honest but bounded. On 'mult'
+    // Refine (v1.59.0): keep the uncertainty cone honest but bounded. On 'mult'
     // (money/counts) the exp() inverse can balloon a few years out, swamping the
     // chart — cap the half-width to 35% of the mid and floor money at 0. Rates are
     // already 0-100 bounded by the logit inverse.
@@ -3305,7 +3325,7 @@ function lineChart(opts){
   if(!allv.length) return '<div class="lc-empty">No trend data</div>';
   if(projData) projData.forEach(pd=>{ if(pd) futureXs.forEach(x=>{ allv.push(pd.mid[x],pd.lo[x],pd.hi[x]); }); });
   const dataMin=Math.min(...allv), dataMax=Math.max(...allv);
-  // Headroom (v1.54.0): pad the data range BEFORE snapping to nice ticks, so the
+  // Headroom (v1.59.0): pad the data range BEFORE snapping to nice ticks, so the
   // highest/lowest points never land flush on the top/bottom gridline (where their
   // marker dot + endpoint label would clip past the plot edge). Padding the input
   // also bumps the rounded bound up a step when a value sits exactly on a boundary
@@ -3387,7 +3407,7 @@ function lineChart(opts){
     const pv=years.map(y=>pin.vals?pin.vals[y]:null);
     let li=-1; for(let i=pv.length-1;i>=0;i--){ if(pv[i]!=null){ li=i; break; } }
     if(li>=0){ const v=pv[li], x=X(li), yy=Y(v), last=(li===years.length-1);
-      // Endpoint label placement rule (v1.54.0): if the line is RISING into the
+      // Endpoint label placement rule (v1.59.0): if the line is RISING into the
       // endpoint, drop the label BELOW the marker (clears the ascending line and
       // the top edge it would otherwise clip); if FALLING, lift it ABOVE. Clamp
       // to the chart box so it can never get cut off. The --chart-halo var gives a
@@ -3527,7 +3547,7 @@ function bandChart(opts){
 
 // ── Full school detail page (items 5 & 9): opens in a new tab via #school/<id> ─
 // ── Scholarship distribution ────────────────────────────────────────────────
-// Canonical buckets per owner directive (v1.54.0): student-favorability gradient.
+// Canonical buckets per owner directive (v1.59.0): student-favorability gradient.
 // "No grant" is DERIVED = 100 - (lt + mt + full + gt) — the source's none count is
 // known to be unreliable (negatives, mis-reports); the derivation guarantees the
 // stack sums to 100% and avoids fabricated bad data.
@@ -3683,6 +3703,41 @@ function histStackCols(history, buckets, opts){
   }
   const leg=buckets.map(b=>'<span class="dp-leg-i"><span class="dp-leg-dot" style="background:'+b.c+'"></span>'+b.l+'</span>').join('');
   return '<div class="st-wrap'+(opts.tall?' st-tall':'')+'" role="img" aria-label="'+(opts.aria||'Composition by year')+'">'+cols+'</div><div class="st-axis">'+axis+'</div><div class="dp-leg">'+leg+'</div>';
+}
+// 100%-stacked "where the whole class went" by year. Unlike histStackCols, this
+// does NOT rescale to the reported sum — every sector sits at its true % of
+// GRADUATES and an explicit grey "Unknown / other" segment = 100 − Σ(reported)
+// fills each column to 100%. That remainder is real (further-degree, employed
+// abroad, non-FTLT, status not reported); showing it — instead of inflating the
+// known bars to hide it — is the honest read, and keeps every year's column the
+// same height so the mix shift is legible side-by-side. Reads the gz history.
+const EMP_DEST_BUCKETS = EMP_BUCKETS.concat([{k:'emp_seeking_pct',l:'Seeking work',c:'#EF5350'}]);
+const EMP_UNKNOWN_FILL = 'repeating-linear-gradient(45deg,#33414F,#33414F 4px,#2A3744 4px,#2A3744 8px)';
+function empDestStackTime(history){
+  if(!history) return '';
+  const ys=Object.keys(history).filter(y=>/^\d{4}$/.test(y)).map(Number);
+  const valid=ys.filter(y=>{const d=history[String(y)]; return d && EMP_DEST_BUCKETS.some(b=>+d[b.k]>0);}).sort((a,b)=>a-b);
+  if(valid.length<1) return '';
+  const start=valid[0], end=valid[valid.length-1];
+  let cols='', axis='';
+  for(let y=start;y<=end;y++){
+    const d=history[String(y)];
+    axis+='<div class="st-yr">’'+String(y).slice(2)+'</div>';
+    const has=d && EMP_DEST_BUCKETS.some(b=>+d[b.k]>0);
+    if(has){
+      const known=EMP_DEST_BUCKETS.reduce((a,b)=>a+(+d[b.k]||0),0);
+      const scale=known>100?100/known:1;            // guard tiny rounding overshoot
+      const unknown=Math.max(0,100-known*scale);
+      let segs=EMP_DEST_BUCKETS.map(b=>{const v=(+d[b.k]||0)*scale; return v>0.05?'<div class="st-seg" style="height:'+v.toFixed(2)+'%;background:'+b.c+'" title="'+b.l+' '+v.toFixed(1)+'%"></div>':'';}).join('');
+      segs+= unknown>0.05?'<div class="st-seg" style="height:'+unknown.toFixed(2)+'%;background:'+EMP_UNKNOWN_FILL+'" title="Unknown / other '+unknown.toFixed(1)+'% (further-degree, abroad, non-FTLT, or not reported)"></div>':'';
+      cols+='<div class="st-col">'+segs+'</div>';
+    } else {
+      cols+='<div class="st-col-miss" title="Not reported '+y+'">–</div>';
+    }
+  }
+  const leg=EMP_DEST_BUCKETS.map(b=>'<span class="dp-leg-i"><span class="dp-leg-dot" style="background:'+b.c+'"></span>'+b.l+'</span>').join('')
+    +'<span class="dp-leg-i"><span class="dp-leg-dot" style="background:#33414F"></span>Unknown / other</span>';
+  return '<div class="st-wrap st-tall" role="img" aria-label="Where graduates went by year, percent of graduates per sector, grey remainder is the share not accounted for, each column totals 100 percent">'+cols+'</div><div class="st-axis">'+axis+'</div><div class="dp-leg">'+leg+'</div>';
 }
 // Absolute (head-count) employment stacked bar across the gz years (2018-2025).
 // Complements the normalised mix: column HEIGHT encodes the size of each year's
@@ -4179,7 +4234,7 @@ function outcomeFunnel(s){
 
 function navSchool(id){
   // HASH ROUTES — safest, work anywhere, no 404.html or server-side rewrites needed.
-  // Reverted from clean /school/<slug> paths in v1.54.0 because GH Pages without a
+  // Reverted from clean /school/<slug> paths in v1.59.0 because GH Pages without a
   // deployed 404.html serves real 404s for any unknown path. When the project moves
   // to a custom domain with rewrites (Netlify _redirects, Vercel rewrites, Cloudflare),
   // flip CLEAN_URLS to true and the deep-link helpers below will re-engage.
@@ -4268,10 +4323,16 @@ function openCompareFirstClass(){
   }, 60);
 }
 // Cost-per-outcome helpers — synthesize $/applicant-outcome from inline data.
+// Mandatory fees (ft_fee, ABA "FT annual fees" column, 2025 cycle) are a real,
+// unavoidable part of every student's bill that the ABA reports SEPARATELY from
+// sticker tuition. Fold them into the true annual cost. A blank/zero fee is taken
+// as $0 here (the school bundled it into tuition or didn't itemize) and is flagged
+// on the school page so the reader knows the total may understate.
+function feeOf(s){ return (s.ft_fee!=null && +s.ft_fee>0) ? +s.ft_fee : 0; }
+function netAnnualCost(s){ if(s.tui==null) return null; return Math.max(0, s.tui + feeOf(s) - (s.grant_med||0)); }
 function net3yr(s){
   if(!s.tui) return null;
-  const g = s.grant_med || 0;
-  return Math.max(0, (s.tui - g) * 3);
+  return netAnnualCost(s) * 3;
 }
 function costPerFTLT(s){       // 3-yr net ÷ FTLT probability
   const n = net3yr(s); const p = s.ftlt_pct;
@@ -4321,7 +4382,7 @@ const CMP_GROUPS=[
     {l:'Nonresident tuition',k:'nrt',hi:-1,fmt:cfUSD},
     {l:'Mandatory fees',k:'ft_fee',hi:-1,fmt:cfUSD},
     {l:'Living cost (9mo)',k:'living',hi:-1,fmt:cfUSD},
-    {l:'3-yr net tuition',v:net3yr,hi:-1,fmt:cfUSD},
+    {l:'3-yr net cost',v:net3yr,hi:-1,fmt:cfUSD},
     {l:'Median grant',k:'grant_med',hi:1,fmt:cfUSD},
     {l:'Grant 25th',k:'grant_p25',hi:1,fmt:cfUSD},
     {l:'Grant 75th',k:'grant_p75',hi:1,fmt:cfUSD},
@@ -4389,7 +4450,7 @@ const CMP_BARS=[
   {l:'First-Time Bar',       v:s=>s.bar,      fmt:v=>v!=null?v+'%':'—',                               lo:0,   hi:100},
   {l:'FTLT Employment',      v:s=>s.ftlt_pct, fmt:v=>v!=null?v+'%':'—',                               lo:0,   hi:100},
   {l:'Acceptance rate',      v:s=>s.acc,      fmt:v=>v!=null?v+'%':'—',                               lo:0,   hi:100, lowerBetter:true},
-  {l:'3-yr net tuition',     v:net3yr,        fmt:v=>v!=null?'$'+Math.round(v).toLocaleString():'—',  lowerBetter:true},
+  {l:'3-yr net cost',     v:net3yr,        fmt:v=>v!=null?'$'+Math.round(v).toLocaleString():'—',  lowerBetter:true},
   {l:'Median grant',         v:s=>s.grant_med,fmt:v=>v!=null?'$'+Math.round(v).toLocaleString():'—'},
   {l:'State atty mean wage', v:s=>s.bls_mean, fmt:v=>v!=null?'$'+Math.round(v).toLocaleString():'—'}
 ];
@@ -4754,7 +4815,7 @@ function schoolSnapshot(s){
   const noneTrend={}; stYrs.forEach(y=>{ const d=stTr[String(y)]; if(d&&d.none!=null) noneTrend[String(y)]=d.none; });
   const noneNow=stYrs.length?(stTr[String(stYrs[stYrs.length-1])]||{}).none:null;
   const meanV=blsMean(s.state);
-  const netAnnual=(s.tui!=null)?(s.grant_med!=null?s.tui-s.grant_med:s.tui):null;
+  const netAnnual=netAnnualCost(s);
   const beGov=s.tui?Math.round(((s.tui*3)*1.07)/72000*2)+' yr':'—';
   const beBig=s.tui?Math.round(((s.tui*3)*1.07)/225000*2)+' yr':'—';
   // Concise teaser: just the headline metric per theme, one row. Each tile jumps
@@ -4793,6 +4854,36 @@ const TUI_IRREGULAR = {
   'arizona-the-university-of':'a 2013 dip',
   'north-texas-at-dallas-university-of':'a 2025 dip in a short series'
 };
+// Rule-based companion to the curated list above: surfaces ANY school whose
+// (display-cleaned) resident tuition makes a violent one-year swing — the
+// signature of a doubled cell or a semester-vs-annual reporting flip in the
+// source (e.g. the ~50% halvings the audit flagged for Cornell, Ohio State,
+// LSU, South Carolina …). Conservative thresholds (≥30% AND ≥$6K in one step)
+// so ordinary increases don't trip it. Returns a human reason or '', and never
+// alters data — it only decides whether to show the "under review" caveat.
+// "2018,2019,2020,2022" → "2018–2020, 2022": compact, human year ranges for the
+// not-disclosed callout so a long contiguous hole reads as one span, not a list.
+function fmtYearList(years){
+  const ys=years.map(Number).filter(y=>!isNaN(y)).sort((a,b)=>a-b);
+  if(!ys.length) return '';
+  const out=[]; let a=ys[0], p=ys[0];
+  for(let i=1;i<=ys.length;i++){ const y=ys[i];
+    if(y===p+1){ p=y; continue; }
+    out.push(a===p?String(a):a+'–'+p); a=y; p=y;
+  }
+  return out.join(', ');
+}
+function tuiAnomalyReason(s){
+  if(TUI_IRREGULAR[s.id]) return TUI_IRREGULAR[s.id];
+  const t=s.tui_trend; if(!t) return '';
+  const ys=Object.keys(t).filter(y=>/^\d{4}$/.test(y)&&t[y]!=null).sort();
+  for(let i=1;i<ys.length;i++){ const a=+t[ys[i-1]], b=+t[ys[i]]; if(!a||!b) continue;
+    const d=b-a, pct=d/a;
+    if(Math.abs(pct)>=0.30 && Math.abs(d)>=6000)
+      return 'a '+(d<0?'sharp drop':'sharp jump')+' in '+ys[i]+' ('+(d<0?'−':'+')+Math.round(Math.abs(pct)*100)+'%)';
+  }
+  return '';
+}
 // ── #7 Click any chart → full-screen branded modal (+ open as its own tab) ──
 // Event-delegated so EVERY chart (line/band/stacked, school + compare) is clickable
 // with no per-chart wiring. The modal is screenshot-ready; "open in new tab"
@@ -4903,25 +4994,86 @@ function curriculumBars(s){
   const max=Math.max.apply(null,items.map(x=>+x[1]))||1;
   return items.map(x=>'<div class="cmp-bar-row"><span class="cmp-bar-name" style="flex-basis:96px;">'+x[0]+'</span><span class="cmp-bar-track"><span class="cmp-bar-fill" style="width:'+Math.max(3,(+x[1]/max)*100).toFixed(1)+'%;background:#5AABCB"></span></span><span class="cmp-bar-v">'+Math.round(+x[1]).toLocaleString()+'</span></div>').join('');
 }
+// First-year JD salary by employment sector, anchored to NALP's Jobs & JDs:
+// Class of 2023 (national median $90K; private-practice median $165K; law firms
+// 1–10 lawyers $75K rising to 500+ lawyers $215K; public-interest median ~$62K).
+// Firm-size buckets and the public-service sectors are mapped to the nearest NALP
+// figure; intermediate sizes are interpolated. Used ONLY to estimate where a
+// school's graduates sit on the bimodal curve — it blends the school's DISCLOSED
+// job mix with these published medians, so the result is always shown as an
+// estimate, never a reported number.
+const SECTOR_PAY={
+  emp_megalaw_pct:215000, // firms 500+ (NALP median)
+  emp_biglaw_pct: 205000, // firms 251–500
+  emp_mid_pct:    180000, // firms 101–250
+  emp_small_pct:   90000, // firms 2–100 (NALP 1–10 $75K … 51–100 ~$140K, blended)
+  emp_solo_pct:    60000, // solo
+  emp_clk_pct:     70000, // judicial clerkships (federal scale; state lower)
+  emp_gov_pct:     70000, // government
+  emp_pi_pct:      63000, // public interest (NALP PI median ~$62K)
+  emp_biz_pct:     98000, // business / industry
+  emp_edu_pct:     62000  // academic
+};
+function estGradPay(s){ let num=0,den=0; for(const kk in SECTOR_PAY){ const p=+s[kk]; if(p>0){ num+=p*SECTOR_PAY[kk]; den+=p; } } return den>0?Math.round(num/den):null; }
 function salaryDist(s){
   const p10=blsField(s.state,'a_pct10'), p25=blsField(s.state,'a_pct25'), med=blsField(s.state,'a_median'),
         p75=blsField(s.state,'a_pct75'), p90=blsField(s.state,'a_pct90'), mean=blsMean(s.state);
-  if(med==null||p10==null||p90==null) return '';
-  const W=680,H=72,PL=12,PR=12,innerW=W-PL-PR, yb=40;
-  const lo=p10, hi=p90, rng=(hi-lo)||1, X=v=>PL+(Math.max(lo,Math.min(hi,v))-lo)/rng*innerW;
+  if(med==null) return '';
+  // BLS top-codes annual wages above ~$239,200 (the OES "#" annotation), so the
+  // 90th percentile comes back blank for high-wage states (MA, CA, NY, DC) — the
+  // very states the top schools sit in. Fall back to the cap and mark it "≥" so
+  // the distribution still renders instead of silently disappearing.
+  const CAP=239200;
+  const p90c=(p90==null), p90v=(p90!=null?p90:CAP);
+  const p10v=(p10!=null?p10:(p25!=null?Math.round(p25*0.72):Math.round(med*0.5)));
+  const egp=estGradPay(s);
+  const W=680,H=190,PL=16,PR=16,innerW=W-PL-PR, yTop=30, yBase=124, curveH=yBase-yTop;
+  // Axis spans both national new-grad humps (≈$75K, ≈$200K) AND the BLS spread.
+  const lo=Math.min(38000, p10v*0.9), hi=Math.max(238000, p90v*1.04), rng=(hi-lo)||1;
+  const X=v=>PL+(Math.max(lo,Math.min(hi,v))-lo)/rng*innerW;
   const k=v=>'$'+Math.round(v/1000)+'K';
+  // Illustrative national NALP new-grad density = two Gaussian humps (a tall
+  // ~$75K public-service/small-firm hump + a ~$200K BigLaw spike).
+  const c1=75000,sg1=15000,wt1=1.0, c2=200000,sg2=12000,wt2=0.55;
+  const dens=x=>wt1*Math.exp(-Math.pow((x-c1)/sg1,2)/2)+wt2*Math.exp(-Math.pow((x-c2)/sg2,2)/2);
+  let peak=0; const xs=[];
+  for(let i=0;i<=140;i++){ const x=lo+(hi-lo)*i/140, d=dens(x); xs.push([x,d]); if(d>peak)peak=d; }
+  const pts=xs.map(p=>X(p[0]).toFixed(1)+','+(yBase-(p[1]/peak)*curveH).toFixed(1));
   let svg='<svg viewBox="0 0 '+W+' '+H+'" class="lc" style="background:none;border:none;" preserveAspectRatio="xMidYMid meet">';
-  svg+='<line x1="'+X(lo).toFixed(1)+'" y1="'+yb+'" x2="'+X(hi).toFixed(1)+'" y2="'+yb+'" stroke="rgba(122,170,200,0.4)" stroke-width="2"/>';
-  if(p25!=null&&p75!=null) svg+='<rect x="'+X(p25).toFixed(1)+'" y="'+(yb-7)+'" width="'+(X(p75)-X(p25)).toFixed(1)+'" height="14" rx="2" fill="rgba(74,155,107,0.22)" stroke="rgba(74,155,107,0.5)"/>';
-  svg+='<line x1="'+X(med).toFixed(1)+'" y1="'+(yb-11)+'" x2="'+X(med).toFixed(1)+'" y2="'+(yb+11)+'" stroke="#4A9B6B" stroke-width="2.5"/>';
-  svg+='<text x="'+X(med).toFixed(1)+'" y="'+(yb+24)+'" font-family="Geist Mono,ui-monospace,monospace" font-size="10" fill="#4A9B6B" text-anchor="middle">median '+k(med)+'</text>';
-  if(mean!=null){ const mx=X(mean); svg+='<polygon points="'+mx.toFixed(1)+','+(yb-9)+' '+(mx-4).toFixed(1)+','+(yb-16)+' '+(mx+4).toFixed(1)+','+(yb-16)+'" fill="#FFA726"/><text x="'+mx.toFixed(1)+'" y="'+(yb-19)+'" font-family="Geist Mono,ui-monospace,monospace" font-size="9.5" fill="#FFA726" text-anchor="middle">mean '+k(mean)+'</text>'; }
-  svg+='<text x="'+X(lo).toFixed(1)+'" y="'+(yb+24)+'" font-family="Geist Mono,ui-monospace,monospace" font-size="9.5" fill="#7AAAC8" text-anchor="start">10th '+k(lo)+'</text>';
-  svg+='<text x="'+X(hi).toFixed(1)+'" y="'+(yb+24)+'" font-family="Geist Mono,ui-monospace,monospace" font-size="9.5" fill="#7AAAC8" text-anchor="end">90th '+k(hi)+'</text>';
+  svg+='<path d="M'+PL+','+yBase+' L'+pts.join(' L')+' L'+(PL+innerW)+','+yBase+' Z" fill="rgba(90,171,203,0.12)"/>';
+  svg+='<polyline points="'+pts.join(' ')+'" fill="none" stroke="rgba(90,171,203,0.55)" stroke-width="1.5"/>';
+  svg+='<text x="'+X(c1).toFixed(1)+'" y="'+(yTop-7).toFixed(1)+'" font-family="Geist Mono,monospace" font-size="9.5" fill="#9FC3DB" text-anchor="middle">most first jobs ≈'+k(c1)+'</text>';
+  svg+='<text x="'+X(c2).toFixed(1)+'" y="'+(yBase-(dens(c2)/peak)*curveH-7).toFixed(1)+'" font-family="Geist Mono,monospace" font-size="9.5" fill="#9FC3DB" text-anchor="middle">BigLaw ≈'+k(c2)+'</text>';
+  svg+='<text x="'+X(137000).toFixed(1)+'" y="'+(yBase-12).toFixed(1)+'" font-family="Geist Mono,monospace" font-size="8.5" fill="#5E7E94" text-anchor="middle">few jobs here</text>';
+  svg+='<line x1="'+X(lo).toFixed(1)+'" y1="'+yBase+'" x2="'+X(hi).toFixed(1)+'" y2="'+yBase+'" stroke="rgba(122,170,200,0.4)" stroke-width="2"/>';
+  if(p25!=null&&p75!=null) svg+='<rect x="'+X(p25).toFixed(1)+'" y="'+(yBase-6)+'" width="'+(X(p75)-X(p25)).toFixed(1)+'" height="12" rx="2" fill="rgba(74,155,107,0.18)" stroke="rgba(74,155,107,0.45)"/>';
+  if(p10!=null){ svg+='<line x1="'+X(p10v).toFixed(1)+'" y1="'+(yBase-5)+'" x2="'+X(p10v).toFixed(1)+'" y2="'+(yBase+5)+'" stroke="#7AAAC8" stroke-width="1.5"/>';
+    svg+='<text x="'+X(p10v).toFixed(1)+'" y="'+(yBase+16)+'" font-family="Geist Mono,monospace" font-size="9" fill="#7AAAC8" text-anchor="middle">10th '+k(p10v)+'</text>'; }
+  svg+='<line x1="'+X(p90v).toFixed(1)+'" y1="'+(yBase-5)+'" x2="'+X(p90v).toFixed(1)+'" y2="'+(yBase+5)+'" stroke="#7AAAC8" stroke-width="1.5"/>';
+  svg+='<text x="'+X(p90v).toFixed(1)+'" y="'+(yBase+16)+'" font-family="Geist Mono,monospace" font-size="9" fill="#7AAAC8" text-anchor="middle">90th '+(p90c?'≥':'')+k(p90v)+'</text>';
+  svg+='<line x1="'+X(med).toFixed(1)+'" y1="'+(yBase-11)+'" x2="'+X(med).toFixed(1)+'" y2="'+(yBase+11)+'" stroke="#4A9B6B" stroke-width="2.5"/>';
+  svg+='<text x="'+X(med).toFixed(1)+'" y="'+(yBase+28)+'" font-family="Geist Mono,monospace" font-size="10" fill="#4A9B6B" text-anchor="middle">median '+k(med)+'</text>';
+  if(mean!=null){ const mx=X(mean); svg+='<line x1="'+mx.toFixed(1)+'" y1="'+(yBase-11)+'" x2="'+mx.toFixed(1)+'" y2="'+(yBase+11)+'" stroke="#FFA726" stroke-width="2" stroke-dasharray="3,2"/>';
+    svg+='<text x="'+mx.toFixed(1)+'" y="'+(yBase+40)+'" font-family="Geist Mono,monospace" font-size="9.5" fill="#FFA726" text-anchor="middle">state mean '+k(mean)+'</text>'; }
+  if(egp!=null){ const gx=X(egp), egl='est. grad pay ≈'+k(egp), egw=egl.length*5.7+10;
+    let erx=gx-egw/2; if(erx<2)erx=2; if(erx+egw>W-2)erx=W-2-egw;
+    svg+='<line x1="'+gx.toFixed(1)+'" y1="16" x2="'+gx.toFixed(1)+'" y2="'+yBase+'" stroke="#5AABCB" stroke-width="2"/>';
+    svg+='<circle cx="'+gx.toFixed(1)+'" cy="16" r="3.5" fill="#5AABCB"/>';
+    // dark backing so the label stays legible when the estimate sits on a hump label
+    svg+='<rect x="'+erx.toFixed(1)+'" y="1.5" width="'+egw.toFixed(1)+'" height="11" rx="2" fill="#0A1726" opacity="0.95"/>';
+    svg+='<text x="'+(erx+egw/2).toFixed(1)+'" y="10" font-family="Geist Mono,monospace" font-size="9.5" fill="#9BD1E8" text-anchor="middle">'+egl+'</text>'; }
   svg+='</svg>';
-  const skew=(mean!=null&&mean>med)?('the mean (<strong>'+k(mean)+'</strong>) sits above the median (<strong>'+k(med)+'</strong>) — the signature of a long high-earning tail'):'pay is spread widely';
-  return '<div class="dp-chart-t" style="font-size:13px;">'+(s.state||'State')+' attorney pay distribution · BLS (2024)</div>'+svg
-    + '<div class="callout" style="margin-top:6px;"><div class="callout-eye">Lawyer pay is bimodal, not a bell curve</div><p class="callout-p">Among new graduates nationally (NALP), starting salaries fall into <strong>two humps</strong>: most first jobs pay roughly <strong>$70–90K</strong>, while a separate spike sits near <strong>$225K</strong> at large firms — with very few salaries in between. So a single "average" is misleading for a new grad. The bar above is <em>all</em> '+(s.state||'state')+' lawyers (experienced included); even there, '+skew+'. Anchor your expectations to the <strong>median</strong> and your realistic job type (see the employment mix), not the mean.</p></div>';
+  const inValley = (mean!=null && mean>med);
+  return '<div class="dp-chart-t" style="font-size:13px;">'+(s.state||'State')+' attorney pay vs the bimodal new-grad market</div>'+svg
+    + '<div class="callout" style="margin-top:6px;"><div class="callout-eye">Read it as two humps, not one average</div>'
+    + '<p class="callout-p">New-graduate salaries nationally (NALP) cluster in <strong>two humps</strong> — most first jobs pay <strong>~$70–90K</strong> (government, public interest, small firms, clerkships), with a separate spike near <strong>~$190–225K</strong> at the largest firms, and very little in between. The blue curve is that national shape; the markers are <strong>'+(s.state||'state')+'</strong> BLS attorney wages (all experience levels).</p>'
+    + '<ul style="margin:8px 0 0;padding-left:18px;font-size:13px;color:#C6D8E6;line-height:1.5;">'
+    + '<li><b style="color:#4A9B6B;">Median</b> — the middle '+(s.state||'state')+' attorney; half earn less, half more. <em>Experienced</em> lawyers, not new grads.</li>'
+    + '<li><b style="color:#FFA726;">State mean</b> — '+(inValley?'sits <strong>above</strong> the median, pulled up by the high-earning (BigLaw) tail, so a single average overstates what a typical attorney earns':'tracks the median closely in this state')+'.</li>'
+    + '<li><b style="color:#7AAAC8;">10th &amp; 90th</b> — the spread: the low-market / entry floor up to the established-partner ceiling.'+(p90c?' BLS top-codes wages above '+k(CAP)+', so here the 90th shows as ≥ that cap.':'')+'</li>'
+    + (egp!=null?'<li><b style="color:#5AABCB;">Est. grad pay (this school)</b> — <strong>'+k(egp)+'</strong>, weighting this school&rsquo;s <em>disclosed</em> job mix by typical sector pay (NALP Class of 2023). An <strong>estimate</strong>, not a reported figure — and when grads split between the two humps, even this blended average can land in the valley.</li>':'')
+    + '</ul>'
+    + '<p class="callout-p" style="margin-top:8px;">Anchor your expectation to the <strong>hump your realistic job type sits in</strong> (see the employment mix), not the single average.</p></div>';
 }
 function schoolDetailHTML(s){
   // Compute a CONTIGUOUS year range (min..max) across this card's trends. Contiguous
@@ -4961,11 +5113,12 @@ function schoolDetailHTML(s){
   const cm=(t,svg)=>'<div class="story-mod"><div class="dp-chart-t">'+t+'<span class="zoom-hint">⤢ enlarge</span></div>'+svg+'</div>'; // chart module
   const tm=(t,inner)=>'<div class="story-mod"><div class="story-mod-t">'+t+'</div>'+inner+'</div>'; // titled module
   const sec=(id,n,kicker,headline,lede,body)=>'<section class="story-sec" id="sec-'+id+'"><div class="story-eyebrow"><span class="sx-num">'+n+'</span>'+kicker+'</div><h2 class="story-title">'+headline+'</h2>'+(lede?'<p class="story-lede">'+lede+'</p>':'')+body+'</section>';
-  const _net=(s.tui!=null)?(s.grant_med!=null?s.tui-s.grant_med:s.tui):null;
-  const _mult=(s.tui!=null&&s.grant_med!=null&&s.bls_mean)?(((s.tui-s.grant_med)*3)/s.bls_mean).toFixed(2):null;
-  const _beG=s.tui?Math.round(((s.tui*3)*1.07)/72000*2):null;
-  const _beB=s.tui?Math.round(((s.tui*3)*1.07)/225000*2):null;
-  const ledeCost = s.tui ? ('Three years of sticker tuition come to <strong>'+usd(s.tui*3)+'</strong>.'+(s.grant_med!=null?' After the median grant the net is about <strong>'+usd(_net)+'/yr</strong>, <strong>'+usd(_net*3)+'</strong> across the JD.':'')) : 'Current-cycle cost figures are limited for this school.';
+  const _net=netAnnualCost(s);
+  const _fee=feeOf(s);
+  const _mult=(s.tui!=null&&s.grant_med!=null&&s.bls_mean)?((_net*3)/s.bls_mean).toFixed(2):null;
+  const _beG=s.tui?Math.round(((_net*3)*1.07)/72000*2):null;
+  const _beB=s.tui?Math.round(((_net*3)*1.07)/225000*2):null;
+  const ledeCost = s.tui ? ('Three years of sticker tuition'+(_fee?' plus fees':'')+' come to <strong>'+usd((s.tui+_fee)*3)+'</strong>'+(_fee?' (tuition '+usd(s.tui)+' + '+usd(_fee)+' mandatory fees, per year)':'')+'.'+(s.grant_med!=null?' After the median grant the net is about <strong>'+usd(_net)+'/yr</strong>, <strong>'+usd(_net*3)+'</strong> across the JD.':'')) : 'Current-cycle cost figures are limited for this school.';
   const ledeOut = (s.bar!=null||s.ftlt_pct!=null) ? ('<strong>'+(s.bar!=null?s.bar+'%':'—')+'</strong> pass the bar first-time'+(s.ftlt_pct!=null?(' and <strong>'+s.ftlt_pct.toFixed(1)+'%</strong> land full-time, long-term JD-required jobs'):'')+'.') : 'Outcome reporting is limited for this school.';
   const ledeMath = _mult ? ('That net debt is about <strong>'+_mult+'×</strong> a typical '+(meanV?usd(meanV):'')+' attorney wage in '+(s.state||'this state')+(_beB&&_beG?', roughly <strong>'+_beB+'–'+_beG+' years</strong> to break even depending on the job you land':'')+'.') : 'Weigh the net cost against the local legal market below.';
   const _w25=blsField(s.state,'a_pct25'), _w75=blsField(s.state,'a_pct75');
@@ -4994,20 +5147,22 @@ function schoolDetailHTML(s){
             row('Resident tuition',usd(s.tui)+trajBadge(s.tui_trend,{dir:'desc',fmt:v=>'$'+Math.round(Math.abs(v)/1000)+'K'}),colorFor('tui',s.tui))+
             row('Non-resident',s.nrt&&s.nrt!==s.tui?usd(s.nrt):'Same as resident')+
             row('COL-adj. tuition',usd(realUSD(s.tui,s.state)))+
-            row('Fees',usd(s.ft_fee))+row('Living (est.)',usd(s.living))+
+            row('Mandatory fees',_fee?usd(_fee)+' <span style="color:var(--dimmer);font-size:11px;">(in net)</span>':'<span style="color:#7AAAC8;">not disclosed</span>')+row('Living (est.)',usd(s.living))+
             row('Median grant',usd(s.grant_med))+
             row('Grant (25·50·75)',pctTriple(s.grant_p25,s.grant_med,s.grant_p75, usd))+
             row('Cond. schol. elim.',pct(s.cond))+
-            (s.tui?'<div class="dp-row dp-row-net"><span class="dp-row-k"><strong>Net annual</strong></span><span class="dp-row-v" style="color:var(--orange);"><strong>'+(s.grant_med!=null?usd(s.tui-s.grant_med):usd(s.tui))+'</strong></span></div>':'')+
-            (s.tui?'<div class="dp-row dp-row-net"><span class="dp-row-k">3-yr sticker total</span><span class="dp-row-v">'+usd(s.tui*3)+'</span></div>':'')+
-            (s.tui&&s.grant_med!=null?'<div class="dp-row dp-row-net"><span class="dp-row-k"><strong>3-yr net total</strong></span><span class="dp-row-v" style="color:var(--orange);"><strong>'+usd((s.tui-s.grant_med)*3)+'</strong></span></div>':'')
+            (s.tui?'<div class="dp-row dp-row-net"><span class="dp-row-k"><strong>Net annual</strong> <span style="color:var(--dimmer);font-weight:400;">tuition + fees − grant</span></span><span class="dp-row-v" style="color:var(--orange);"><strong>'+usd(netAnnualCost(s))+'</strong></span></div>':'')+
+            (s.tui?'<div class="dp-row dp-row-net"><span class="dp-row-k">3-yr sticker total <span style="color:var(--dimmer);font-weight:400;">tuition only</span></span><span class="dp-row-v">'+usd(s.tui*3)+'</span></div>':'')+
+            (s.tui&&(s.grant_med!=null||_fee)?'<div class="dp-row dp-row-net"><span class="dp-row-k"><strong>3-yr net total</strong></span><span class="dp-row-v" style="color:var(--orange);"><strong>'+usd(net3yr(s))+'</strong></span></div>':'')
+            +((s.tui&&!_fee&&!s.closed_status)?'<div class="dp-note" style="font-size:11px;color:#7AAAC8;margin-top:5px;line-height:1.5;">⚠ Mandatory fees <strong>not disclosed</strong> for this school — net and 3-yr totals are tuition-only and may understate the true bill.</div>':'')
           )+
-          cm('Tuition · resident → non-resident · '+yrsLabel, tuiChart+'<div class="dp-leg" style="margin-top:4px;"><span class="dp-leg-i"><span class="dp-leg-dot" style="background:#FFA726"></span>resident (line)</span><span class="dp-leg-i"><span class="dp-leg-dot" style="background:rgba(255,167,38,0.32)"></span>up to non-resident (band)</span></div>')+
+          cm('Tuition · resident → non-resident · '+yrsLabel, tuiChart+'<div class="dp-leg" style="margin-top:4px;"><span class="dp-leg-i"><span class="dp-leg-dot" style="background:#FFA726"></span>resident (line)</span><span class="dp-leg-i"><span class="dp-leg-dot" style="background:rgba(255,167,38,0.32)"></span>up to non-resident (band)</span></div>'+(s._tuiMissing?'<div class="dp-note" style="font-size:11px;color:#7AAAC8;margin-top:5px;line-height:1.5;">⚠ Gaps = tuition <strong>not disclosed</strong> for '+(s._tuiMissing.length>3?s._tuiMissing.length+' years':s._tuiMissing.join(', '))+'. The source carried $0 or a truncated figure there; we show a gap rather than a false number.</div>':''))+
           cm('% by grant size · over time '+adjFlag(scholAdjusted(s),'No-grant share'), scholStackTime(s))+
           fm(scholBreakdown(s))
         )+
         ((s.cond!=null&&s.cond>5)?'<div class="callout warn story-full"><div class="callout-eye">Conditional scholarship risk</div><p class="callout-p"><strong>'+s.cond+'%</strong> of conditional-scholarship recipients had their award cut or eliminated after Year 1. If your offer hinges on a GPA threshold, assume a <strong>'+s.cond+'% chance</strong> you lose it and budget for full sticker in years 2 and 3.</p></div>':'')
-        +(TUI_IRREGULAR[s.id]?'<div class="callout warn story-full"><div class="callout-eye">⚠ Tuition history under review</div><p class="callout-p">This school\'s reported tuition shows an <strong>irregular year-over-year pattern</strong> ('+TUI_IRREGULAR[s.id]+'). It may reflect a real tuition reset or a semester-vs-annual reporting inconsistency in the source. We\'re verifying it against the original ABA 509 disclosure, treat the tuition trend here with caution until then. See the <a href="methodology.html#data-corrections" style="color:var(--blue);">Methodology</a> for details.</p></div>':'')
+        +(function(){ var r=tuiAnomalyReason(s); return r?'<div class="callout warn story-full"><div class="callout-eye">⚠ Tuition history under review</div><p class="callout-p">This school\'s reported tuition shows an <strong>irregular year-over-year pattern</strong> ('+r+'). It may reflect a real tuition reset or a semester-vs-annual reporting inconsistency in the source. We\'re verifying it against the original ABA 509 disclosure, treat the tuition trend here with caution until then. See the <a href="methodology.html#data-corrections" style="color:var(--blue);">Methodology</a> for details.</p></div>':''; })()
+        +(s._tuiMissing?'<div class="callout warn story-full"><div class="callout-eye">⚠ Tuition data not disclosed — '+s._tuiMissing.length+' year'+(s._tuiMissing.length>1?'s':'')+'</div><p class="callout-p">For <strong>'+fmtYearList(s._tuiMissing)+'</strong>, the source carried no usable tuition figure (a stored $0 or a truncated fragment), so those years are shown as a <strong>gap</strong> rather than an invented number. Any net-cost or 3-year total that spans these years is therefore incomplete. Sourcing the original figures from the ABA 509 filings is a <strong>planned update</strong> — for now we flag the hole instead of guessing.</p></div>':'')
       )+
       sec('outcomes','2','Outcomes','What graduates get', ledeOut,
         mods(
@@ -5057,7 +5212,7 @@ function schoolDetailHTML(s){
           fm(
             row('Price parity (US=100)',rppV!=null?rppV.toFixed(1):'—')+
             row('COL-adj. mean salary',fmtUSD(realMean))+
-            row('COL-adj. 3-yr net tuition',usd(realUSD(_net!=null?_net*3:null,s.state)))
+            row('COL-adj. 3-yr net cost',usd(realUSD(_net!=null?_net*3:null,s.state)))
           )
         )+
         '<div style="font-family:var(--mono);font-size:11px;color:var(--dimmer);line-height:1.5;margin-top:8px;">State-level context, not school-specific: attorney wages from U.S. BLS OEWS (2024, all lawyers in '+(s.state||'the state')+'); cost of living from BEA RPP (2024); rent from HUD SAFMR (2025).</div>'
@@ -5139,7 +5294,7 @@ async function paintEmpEvolution(s){
   // (1) Employment over time — a big, prominent stacked composition for every
   //     reporting year, PLUS a dropdown to inspect any single category's trend.
   if(slot){
-    const cols = histStackCols(hist, EMP_BUCKETS, {aria:'Employment mix composition by year', tall:true});
+    const cols = empDestStackTime(hist);
     if(cols){
       window._EMP_HIST = hist;
       const opts = EMP_CAT_LIST.map(c=>'<option value="'+c.k+'"'+(c.k==='ftlt_pct'?' selected':'')+'>'+c.l+'</option>').join('');
@@ -5150,8 +5305,8 @@ async function paintEmpEvolution(s){
         ftltChart='<div class="dp-chart-t" style="font-size:13px;">Full-time, long-term JD jobs over time</div>'
           +lineChart({years:yf,series:[{vals:ftltV,color:'#4A9B6B'}],pinIndex:0,fmt:v=>Math.round(v)+'%',label:'FTLT JD jobs over time',project:{n:4,mode:'rate'}}); }
       slot.innerHTML = ftltChart +
-          '<div class="dp-chart-t" style="margin-top:16px;font-size:13px;">Where graduates work · every reporting year</div>'
-        + '<div style="font-family:var(--mono);font-size:11px;color:var(--dimmer);margin-bottom:8px;">Each column is one class year, normalised to 100% of reported sector employment (ABA 509). Hover any segment for its share.</div>'
+          '<div class="dp-chart-t" style="margin-top:16px;font-size:13px;">Where the whole class went · every reporting year</div>'
+        + '<div style="font-family:var(--mono);font-size:11px;color:var(--dimmer);margin-bottom:8px;">Each column is one class year as a share of <b>graduates</b>. Sectors sit at their true %, and the grey <b>Unknown / other</b> band fills each column to 100% — that gap (further-degree, employed abroad, non-FTLT, or not reported) is shown rather than hidden. Equal-height columns make the year-to-year shift easy to compare. Hover any segment for its share.</div>'
         + cols
         + (function(){ var abs=empCountStack(hist); return abs ? (
             '<div class="dp-chart-t" style="margin-top:20px;font-size:13px;">Employed graduates by sector · head counts · 2018–2025</div>'
@@ -5807,7 +5962,7 @@ function renderCalc(){
     +'</tr></thead><tbody id="calcRows"></tbody></table></div>'
     +'<div class="calc-note">'
     +' <strong>How "Est. grant" is estimated:</strong> if your LSAT and uGPA are both ≥ the school\'s 75th percentile (Safety), we use grant_p75. If both are ≥ 25th (Target), we use the median grant. Otherwise (Reach) we use grant_p25. Rough, actual offers vary hugely by cycle, essays, demographics, and yield.<br>'
-    +' <strong>"3-yr net" = 3 × (sticker − est. grant)</strong>, ignoring fees and cost of living. <strong>"Loan interest"</strong> assumes the per-year borrow amount × 3 funds the program; payment uses standard fixed amortization at your stated rate over your stated term. <strong>"Net price"</strong> = 3-yr net tuition + 3-yr living + total loan interest, your all-in cost: the price of the degree, the cost of living while you earn it, and the cost of financing it.<br>'
+    +' <strong>"3-yr net" = 3 × (sticker + mandatory fees − est. grant)</strong>, excluding cost of living. Mandatory fees are the ABA "FT annual fees" figure (2025); where a school doesn\'t disclose them the fee is treated as $0. <strong>"Loan interest"</strong> assumes the per-year borrow amount × 3 funds the program; payment uses standard fixed amortization at your stated rate over your stated term. <strong>"Net price"</strong> = 3-yr net cost + 3-yr living + total loan interest, your all-in cost: the price of the degree, the cost of living while you earn it, and the cost of financing it.<br>'
     +' Sticker is <strong>resident</strong> when your home state matches the school\'s state, otherwise non-resident (if reported).<br>'
     +' Loan math is illustrative. For entrants from July 1, 2026, Grad PLUS ends and federal grad borrowing is capped at $50k/yr ($200k lifetime), so costs above that fall to private loans — confirm current federal and private rates before deciding. School figures sourced from ABA 509, last synced May 2026.'
     +'</div>';
@@ -5878,10 +6033,11 @@ function renderCalcResults(){
     else if(fit==='reach'){ grant = s.grant_p25 || 0; fitLabel='Reach'; }
     else if(fit==='target'){ grant = s.grant_med || 0; fitLabel='Target'; }
     else { grant = s.grant_med || 0; fitLabel='—'; }
-    const netYr = Math.max(0, sticker - grant);
+    const fee = feeOf(s);
+    const netYr = Math.max(0, sticker + fee - grant);
     const net3 = netYr * 3;
     const total = net3 + living3 + totalInterest;
-    return {s, fit, fitLabel, sticker, grant, netYr, net3, total, inState};
+    return {s, fit, fitLabel, sticker, fee, grant, netYr, net3, total, inState};
   }).filter(Boolean);
   rows.sort((a,b)=>a.total - b.total);
   const minTotal = rows.length ? rows[0].total : 0;
@@ -6517,7 +6673,7 @@ function openShareModal(){
   document.body.appendChild(m);
 }
 
-// Disclaimer bar removed v1.54.0 — --banner-h is hardcoded to 0 in the inline
+// Disclaimer bar removed v1.59.0 — --banner-h is hardcoded to 0 in the inline
 // <style> after the header; the dynamic syncBannerHeight observer is no longer
 // needed. Provenance lives in the footer.
 // Honor #school/X or #compare=… in URL on first load
