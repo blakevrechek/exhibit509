@@ -85,12 +85,47 @@ def stamp_sw(version):
     return n + n2
 
 
+# Single source of truth for the visible "Last synced" date. The date had drifted
+# across templates (homepage said May 31, school pages said June 5). We read ONE
+# value from the top-level SYNC_DATE file and stamp it onto every "synced <date>"
+# string so the pages can no longer disagree. build_school_pages.py reads the same
+# file for the per-school eyebrow. Matches "synced June 5, 2026", "synced: June
+# 2026", "synced May 2026" — the date token after "synced[:]", not the literal
+# word in prose like "the 'Last synced' date" (apostrophe, no month follows).
+SYNC_DATE_FILE = os.path.join(ROOT, "SYNC_DATE")
+# Tolerate an optional closing tag between "synced[:]" and the date (methodology
+# writes "<strong>Last synced:</strong> June 2026"). The date is either
+# "Month D, YYYY" or "Month YYYY"; both collapse to the canonical SYNC_DATE.
+SYNC_RE = re.compile(
+    r"(synced:?\s*(?:</[a-z]+>)?\s*)(?:[A-Z][a-z]+ \d{1,2}, \d{4}|[A-Z][a-z]+ \d{4})")
+
+
+def read_sync_date():
+    if not os.path.exists(SYNC_DATE_FILE):
+        return None
+    return open(SYNC_DATE_FILE, encoding="utf-8").read().strip()
+
+
+def stamp_date(path, sync_date):
+    full = os.path.join(ROOT, path)
+    if not os.path.exists(full):
+        return 0
+    src = open(full, encoding="utf-8").read()
+    new, n = SYNC_RE.subn(r"\g<1>" + sync_date, src)
+    if n:
+        open(full, "w", encoding="utf-8").write(new)
+    return n
+
+
 def main():
     version = read_version()
+    sync_date = read_sync_date()
     total = 0
     log = []
     for f in HTML_FILES:
         n = stamp_html(f, version)
+        if sync_date:
+            n += stamp_date(f, sync_date)
         total += n
         log.append(f"  {f}: {n}")
     n = stamp_sw(version)
