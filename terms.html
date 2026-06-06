@@ -74,7 +74,7 @@ body{padding-top:52px;padding-bottom:42px;background-image:radial-gradient(rgba(
   <a class="back" href="index.html">Back to Exhibit</a>
   <div class="eyebrow">Exhibit 509 · by 509α</div>
   <h1>Terms of Service</h1>
-  <div class="updated">Last updated: 2026-05-31</div>
+  <div class="updated">Last updated: 2026-06-06</div>
 
   <div class="note">Exhibit is an independent project. It is NOT affiliated with, associated with, or endorsed by the American Bar Association (ABA) or any law school. Data is sourced directly from public ABA Standard 509 disclosures and U.S. government datasets, verify all figures against the original source before relying on them.</div>
 
@@ -122,7 +122,7 @@ body{padding-top:52px;padding-bottom:42px;background-image:radial-gradient(rgba(
   <h3>8.2 Hosting &amp; cache</h3>
   <p>Exhibit is hosted on <strong>Cloudflare Pages</strong>. As the hosting and content-delivery network, Cloudflare receives standard web request data (IP address, user-agent, request URL, timestamp) for every page load, this is what lets the Site serve and lets Cloudflare detect abuse, mitigate denial-of-service attacks, and route requests to the nearest edge location. Cloudflare's data handling is governed by its <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Privacy Policy</a> and <a href="https://www.cloudflare.com/cookie-policy/" target="_blank" rel="noopener">Cookie Policy</a>. Cloudflare may set its own technical cookies under its own privacy practices to operate the security and performance layer; we do not control those and we do not access their contents.</p>
   <p>Static files (HTML, CSS, JS, images, the compressed ABA dataset) are cached on Cloudflare's global edge network so the Site loads quickly. Your browser also caches static assets to avoid re-downloading them on repeat visits. Cache headers are public and conservative, HTML refreshes every 5 minutes; images and the dataset bundle cache for one year with an <code>immutable</code> hint (a content change ships under a new filename, so the cache is safe).</p>
-  <p>The Site also installs a <strong>Service Worker</strong> (<code>sw.js</code>) that caches the app shell locally on your device for offline use and fast repeat loads. The cache is named after the current build (e.g. <code>exhibit-v1.74.0</code>); when a new build deploys, the old cache is purged automatically on your next visit. You can manually clear it via your browser's site-data settings.</p>
+  <p>The Site also installs a <strong>Service Worker</strong> (<code>sw.js</code>) that caches the app shell locally on your device for offline use and fast repeat loads. The cache is named after the current build (e.g. <code>exhibit-v1.74.1</code>); when a new build deploys, the old cache is purged automatically on your next visit. You can manually clear it via your browser's site-data settings.</p>
 
   <h3>8.3 Third-party assets</h3>
   <p>To render the map and typography, the Site loads a small number of assets from third parties. When your browser fetches these, those providers may receive your IP address and user-agent and may log them under their own privacy policies. We do not control that processing and we set no cookies through it. The third parties currently used:</p>
@@ -148,10 +148,13 @@ body{padding-top:52px;padding-bottom:42px;background-image:radial-gradient(rgba(
   <h2>11. AI Crawler Policy</h2>
   <p>Exhibit explicitly welcomes AI training and retrieval crawlers (GPTBot, ClaudeBot, anthropic-ai, Google-Extended, PerplexityBot, Applebot-Extended, CCBot, cohere-ai, Meta-ExternalAgent, Bytespider, Amazonbot, and others), and publishes a machine-readable summary at <a href="https://exhibit509.com/llms.txt">/llms.txt</a> per the llmstxt.org proposed standard. If your assistant cites Exhibit data, please link to either the relevant Exhibit page or the underlying ABA disclosure at abarequireddisclosures.org, the authoritative source is the disclosure itself.</p>
 
-  <h2>12. Changes to These Terms</h2>
+  <h2>12. AI-Assisted Development</h2>
+  <p>Portions of this Site, including its code, layout, and copy, were built with the assistance of <strong>Claude Code</strong>, an AI coding tool from Anthropic. A human reviews and is responsible for what ships, but you should be aware that AI tooling was used in development. As with any data product, verify figures against the original ABA Standard 509 disclosure and the underlying government datasets before relying on them.</p>
+
+  <h2>13. Changes to These Terms</h2>
   <p>We may update these Terms at any time. Continued use of the Site after changes are posted constitutes acceptance of the revised Terms. The "Last updated" date at the top reflects the latest version.</p>
 
-  <h2>13. Contact</h2>
+  <h2>14. Contact</h2>
   <p>Questions about these Terms or the Site: <a href="mailto:blake@exhibit509.com">blake@exhibit509.com</a>.</p>
 
   <div style="margin-top:52px;border-top:1px solid rgba(74,122,155,0.3);"></div>
@@ -198,6 +201,6 @@ body{padding-top:52px;padding-bottom:42px;background-image:radial-gradient(rgba(
 #floatBack{position:fixed;bottom:24px;right:24px;z-index:9000;display:flex;align-items:center;gap:8px;background:#D97757;color:#06111E;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;padding:12px 18px;border-radius:4px;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,0.4),0 0 0 1px rgba(217,119,87,0.3);transition:transform .15s,box-shadow .15s;}
 #floatBack:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,0,0,0.5),0 0 0 1px rgba(217,119,87,0.5);}
 </style>
-<div class="gf"><span class="gf-brand"><b>Exhibit 509 <em>by 509α</em></b></span><a class="gf-accent" href="https://docs.google.com/forms/d/e/1FAIpQLScvkEp7vEwHAtpbMbk06AmtdUqHTy595OiQFcNBanSBXm0qDA/viewform?usp=publish-editor" target="_blank" rel="noopener">Sign up for email updates</a><a href="terms.html">Terms · Privacy</a><a class="gf-accent" href="https://skool.com/509alpha" target="_blank" rel="noopener">Join 509α on Skool</a><span class="gf-src"><span style="color:#4A9B6B;">●</span> Sourced from official ABA Standard 509 disclosures · <span style="color:#D97757;">Last synced June 5, 2026</span> · <span style="color:#7AAAC8;">v1.74.0</span></span></div>
+<div class="gf"><span class="gf-brand"><b>Exhibit 509 <em>by 509α</em></b></span><a class="gf-accent" href="https://docs.google.com/forms/d/e/1FAIpQLScvkEp7vEwHAtpbMbk06AmtdUqHTy595OiQFcNBanSBXm0qDA/viewform?usp=publish-editor" target="_blank" rel="noopener">Sign up for email updates</a><a href="terms.html">Terms · Privacy</a><a class="gf-accent" href="https://skool.com/509alpha" target="_blank" rel="noopener">Join 509α on Skool</a><span class="gf-src"><span style="color:#4A9B6B;">●</span> Sourced from official ABA Standard 509 disclosures · <span style="color:#D97757;">Last synced June 5, 2026</span> · <span style="color:#7AAAC8;">v1.74.1</span></span></div>
 </body>
 </html>
