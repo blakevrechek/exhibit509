@@ -4814,6 +4814,18 @@ const TUI_IRREGULAR = {
 // LSU, South Carolina …). Conservative thresholds (≥30% AND ≥$6K in one step)
 // so ordinary increases don't trip it. Returns a human reason or '', and never
 // alters data — it only decides whether to show the "under review" caveat.
+// "2018,2019,2020,2022" → "2018–2020, 2022": compact, human year ranges for the
+// not-disclosed callout so a long contiguous hole reads as one span, not a list.
+function fmtYearList(years){
+  const ys=years.map(Number).filter(y=>!isNaN(y)).sort((a,b)=>a-b);
+  if(!ys.length) return '';
+  const out=[]; let a=ys[0], p=ys[0];
+  for(let i=1;i<=ys.length;i++){ const y=ys[i];
+    if(y===p+1){ p=y; continue; }
+    out.push(a===p?String(a):a+'–'+p); a=y; p=y;
+  }
+  return out.join(', ');
+}
 function tuiAnomalyReason(s){
   if(TUI_IRREGULAR[s.id]) return TUI_IRREGULAR[s.id];
   const t=s.tui_trend; if(!t) return '';
@@ -5040,6 +5052,7 @@ function schoolDetailHTML(s){
         )+
         ((s.cond!=null&&s.cond>5)?'<div class="callout warn story-full"><div class="callout-eye">Conditional scholarship risk</div><p class="callout-p"><strong>'+s.cond+'%</strong> of conditional-scholarship recipients had their award cut or eliminated after Year 1. If your offer hinges on a GPA threshold, assume a <strong>'+s.cond+'% chance</strong> you lose it and budget for full sticker in years 2 and 3.</p></div>':'')
         +(function(){ var r=tuiAnomalyReason(s); return r?'<div class="callout warn story-full"><div class="callout-eye">⚠ Tuition history under review</div><p class="callout-p">This school\'s reported tuition shows an <strong>irregular year-over-year pattern</strong> ('+r+'). It may reflect a real tuition reset or a semester-vs-annual reporting inconsistency in the source. We\'re verifying it against the original ABA 509 disclosure, treat the tuition trend here with caution until then. See the <a href="methodology.html#data-corrections" style="color:var(--blue);">Methodology</a> for details.</p></div>':''; })()
+        +(s._tuiMissing?'<div class="callout warn story-full"><div class="callout-eye">⚠ Tuition data not disclosed — '+s._tuiMissing.length+' year'+(s._tuiMissing.length>1?'s':'')+'</div><p class="callout-p">For <strong>'+fmtYearList(s._tuiMissing)+'</strong>, the source carried no usable tuition figure (a stored $0 or a truncated fragment), so those years are shown as a <strong>gap</strong> rather than an invented number. Any net-cost or 3-year total that spans these years is therefore incomplete. Sourcing the original figures from the ABA 509 filings is a <strong>planned update</strong> — for now we flag the hole instead of guessing.</p></div>':'')
       )+
       sec('outcomes','2','Outcomes','What graduates get', ledeOut,
         mods(
