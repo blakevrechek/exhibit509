@@ -32,6 +32,11 @@ OUT_DIR = os.path.join(ROOT, "school")
 SITEMAP_PATH = os.path.join(ROOT, "sitemap.xml")
 SITE_URL = "https://exhibit509.com"
 
+# Single source of truth for the visible "Last synced" date, shared with
+# stamp_version.py (which stamps it into the static HTML pages). Read from the
+# top-level SYNC_DATE file so every template shows one date, not per-file strings.
+SYNC_DATE = open(os.path.join(ROOT, "SYNC_DATE"), encoding="utf-8").read().strip()
+
 
 def slugify(school_id):
     """URL-safe slug: lowercase alphanumerics + hyphens only."""
@@ -490,7 +495,7 @@ def render_page(s, all_schools=None):
   <nav class="nav"><a href="/">Map</a><a href="/schools.html">All schools</a><a href="/law-school-bar-passage-rates.html">Bar passage</a><a href="/cheapest-law-schools.html">Tuition</a><a href="/law-school-employment-outcomes.html">Employment</a><a href="/methodology.html">Methodology</a></nav>
   {crumb_html}
   {closed_banner}
-  <div class="eyebrow">ABA Standard 509 · 2025 cycle · Last synced June 5, 2026</div>
+  <div class="eyebrow">ABA Standard 509 · 2025 cycle · Last synced {SYNC_DATE}</div>
   <h1>{lname}</h1>
   <div class="meta">{state}{f' · {school_type}' if school_type else ''} · School ID: {sid}</div>
   {lead_html}
@@ -673,8 +678,8 @@ def build_pillar(schools, *, fname, h1, title, desc, intro, key, fmt, reverse, z
             f'<p class="lead">{intro}</p>',
             f'<table class="rank"><tr><th>#</th><th>Law school</th><th>State</th><th>{esc(unit)}</th><th>{second_h}</th><th>Tuition</th></tr>'
             + "".join(trs) + "</table>",
-            '<p style="font-family:var(--mono);font-size:12px;color:var(--dimmer);">Ranked from the most recent ABA Standard 509 cycle. '
-            + str(len(rows)) + ' schools shown. Explore any school for full outcomes, cost and trajectory, or open the '
+            '<p style="font-family:var(--mono);font-size:12px;color:var(--dimmer);">Ranked from the most recent ABA Standard 509 cycle — all ABA-accredited U.S. law schools that report this metric ('
+            + str(len(rows)) + ' of ' + str(len(schools)) + ' in the dataset). Explore any school for full outcomes, cost and trajectory, or open the '
             '<a href="/">interactive map</a>.</p>']
     ld = {"@context": "https://schema.org", "@type": "ItemList", "name": h1,
           "numberOfItems": len(rows),
