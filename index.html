@@ -2032,9 +2032,23 @@ const IMG={png:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaX
   if(typeof S==='undefined') return;
   var TK=['lsat_trend','lsat25_trend','lsat75_trend','gpa_trend','gpa25_trend','gpa75_trend'];
   var SK=['lsat25','lsat50','lsat75','gpa25','gpa50','gpa75'];
+  // Tuition: an annual sticker of $0 — or a truncated cell like $35 / $120 / $1,094
+  // (per-credit or single-term fragments the source occasionally carries) — is never
+  // real annual tuition. Floor at $1,500 (the largest garbage cell found is $1,094;
+  // the cheapest real JD tuition is several thousand) so these render as a GAP, not a
+  // false plunge to ~$0. The stored dataset keeps the source value untouched (data-
+  // integrity policy: surface, don't silently rewrite) — this only affects display.
+  var TUI_FLOOR=1500;
+  var TUITK=['tui_trend','nrt_trend'];
+  var TUISK=['tui','nrt','tui_ft_res','tui_ft_nr'];
+  var tuiBad=function(v){ return v!=null && v!=='' && !isNaN(+v) && +v<TUI_FLOOR; };
   S.forEach(function(s){
     TK.forEach(function(k){ var t=s[k]; if(t) for(var y in t){ if(t[y]===0) t[y]=null; } });
     SK.forEach(function(k){ if(s[k]===0) s[k]=null; });
+    var miss=[];
+    TUITK.forEach(function(k){ var t=s[k]; if(t) for(var y in t){ if(/^\d{4}$/.test(y)&&tuiBad(t[y])){ miss.push(y); t[y]=null; } } });
+    TUISK.forEach(function(k){ if(tuiBad(s[k])) s[k]=null; });
+    if(miss.length){ s._tuiMissing=[...new Set(miss)].sort(); }
   });
 })();
 // ── External state-level datasets (BLS OES lawyers, BEA RPP, HUD SAFMR) ─
@@ -4793,6 +4807,24 @@ const TUI_IRREGULAR = {
   'arizona-the-university-of':'a 2013 dip',
   'north-texas-at-dallas-university-of':'a 2025 dip in a short series'
 };
+// Rule-based companion to the curated list above: surfaces ANY school whose
+// (display-cleaned) resident tuition makes a violent one-year swing — the
+// signature of a doubled cell or a semester-vs-annual reporting flip in the
+// source (e.g. the ~50% halvings the audit flagged for Cornell, Ohio State,
+// LSU, South Carolina …). Conservative thresholds (≥30% AND ≥$6K in one step)
+// so ordinary increases don't trip it. Returns a human reason or '', and never
+// alters data — it only decides whether to show the "under review" caveat.
+function tuiAnomalyReason(s){
+  if(TUI_IRREGULAR[s.id]) return TUI_IRREGULAR[s.id];
+  const t=s.tui_trend; if(!t) return '';
+  const ys=Object.keys(t).filter(y=>/^\d{4}$/.test(y)&&t[y]!=null).sort();
+  for(let i=1;i<ys.length;i++){ const a=+t[ys[i-1]], b=+t[ys[i]]; if(!a||!b) continue;
+    const d=b-a, pct=d/a;
+    if(Math.abs(pct)>=0.30 && Math.abs(d)>=6000)
+      return 'a '+(d<0?'sharp drop':'sharp jump')+' in '+ys[i]+' ('+(d<0?'−':'+')+Math.round(Math.abs(pct)*100)+'%)';
+  }
+  return '';
+}
 // ── #7 Click any chart → full-screen branded modal (+ open as its own tab) ──
 // Event-delegated so EVERY chart (line/band/stacked, school + compare) is clickable
 // with no per-chart wiring. The modal is screenshot-ready; "open in new tab"
@@ -5002,12 +5034,12 @@ function schoolDetailHTML(s){
             (s.tui?'<div class="dp-row dp-row-net"><span class="dp-row-k">3-yr sticker total</span><span class="dp-row-v">'+usd(s.tui*3)+'</span></div>':'')+
             (s.tui&&s.grant_med!=null?'<div class="dp-row dp-row-net"><span class="dp-row-k"><strong>3-yr net total</strong></span><span class="dp-row-v" style="color:var(--orange);"><strong>'+usd((s.tui-s.grant_med)*3)+'</strong></span></div>':'')
           )+
-          cm('Tuition · resident → non-resident · '+yrsLabel, tuiChart+'<div class="dp-leg" style="margin-top:4px;"><span class="dp-leg-i"><span class="dp-leg-dot" style="background:#FFA726"></span>resident (line)</span><span class="dp-leg-i"><span class="dp-leg-dot" style="background:rgba(255,167,38,0.32)"></span>up to non-resident (band)</span></div>')+
+          cm('Tuition · resident → non-resident · '+yrsLabel, tuiChart+'<div class="dp-leg" style="margin-top:4px;"><span class="dp-leg-i"><span class="dp-leg-dot" style="background:#FFA726"></span>resident (line)</span><span class="dp-leg-i"><span class="dp-leg-dot" style="background:rgba(255,167,38,0.32)"></span>up to non-resident (band)</span></div>'+(s._tuiMissing?'<div class="dp-note" style="font-size:11px;color:#7AAAC8;margin-top:5px;line-height:1.5;">⚠ Gaps = tuition <strong>not disclosed</strong> for '+(s._tuiMissing.length>3?s._tuiMissing.length+' years':s._tuiMissing.join(', '))+'. The source carried $0 or a truncated figure there; we show a gap rather than a false number.</div>':''))+
           cm('% by grant size · over time '+adjFlag(scholAdjusted(s),'No-grant share'), scholStackTime(s))+
           fm(scholBreakdown(s))
         )+
         ((s.cond!=null&&s.cond>5)?'<div class="callout warn story-full"><div class="callout-eye">Conditional scholarship risk</div><p class="callout-p"><strong>'+s.cond+'%</strong> of conditional-scholarship recipients had their award cut or eliminated after Year 1. If your offer hinges on a GPA threshold, assume a <strong>'+s.cond+'% chance</strong> you lose it and budget for full sticker in years 2 and 3.</p></div>':'')
-        +(TUI_IRREGULAR[s.id]?'<div class="callout warn story-full"><div class="callout-eye">⚠ Tuition history under review</div><p class="callout-p">This school\'s reported tuition shows an <strong>irregular year-over-year pattern</strong> ('+TUI_IRREGULAR[s.id]+'). It may reflect a real tuition reset or a semester-vs-annual reporting inconsistency in the source. We\'re verifying it against the original ABA 509 disclosure, treat the tuition trend here with caution until then. See the <a href="methodology.html#data-corrections" style="color:var(--blue);">Methodology</a> for details.</p></div>':'')
+        +(function(){ var r=tuiAnomalyReason(s); return r?'<div class="callout warn story-full"><div class="callout-eye">⚠ Tuition history under review</div><p class="callout-p">This school\'s reported tuition shows an <strong>irregular year-over-year pattern</strong> ('+r+'). It may reflect a real tuition reset or a semester-vs-annual reporting inconsistency in the source. We\'re verifying it against the original ABA 509 disclosure, treat the tuition trend here with caution until then. See the <a href="methodology.html#data-corrections" style="color:var(--blue);">Methodology</a> for details.</p></div>':''; })()
       )+
       sec('outcomes','2','Outcomes','What graduates get', ledeOut,
         mods(
