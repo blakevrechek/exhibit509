@@ -444,8 +444,9 @@ def render_page(s, all_schools=None):
 {crumb_ld_json}
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="192x192" href="/icon192.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon48.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon32.png">
-<link rel="apple-touch-icon" href="/icon192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/icon180.png">
 <style>
   :root{{--navy:#06111E;--orange:#D97757;--white:#F4F8FB;--dim:#A4C8DD;--dimmer:#7AAAC8;--blue:#5AABCB;--mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;--serif:Georgia,'Times New Roman',serif;}}
   *{{box-sizing:border-box;}}
@@ -592,8 +593,9 @@ def page_shell(title, desc, canonical, body, ld_json=""):
 {f'<script type="application/ld+json">{ld_json}</script>' if ld_json else ''}
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="192x192" href="/icon192.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon48.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon32.png">
-<link rel="apple-touch-icon" href="/icon192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/icon180.png">
 {STYLE}
 </head>
 <body>
