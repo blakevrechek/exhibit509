@@ -1,0 +1,11 @@
+# The_Basics_Academic_Calendar_2019.xlsx  (year=2019, guessed section=UNKNOWN)
+
+## sheet: '2019_The BasicsAcademic Calend'  dims=A1:I204 max_row=204 max_col=9
+  r0: ['School List', 'Type of School', 'Application Deadline', 'Application Fee', 'Fin Aid Deadline', 'Term', 'Months students begin', 'Months degrees conferred', '# of Credit Hours for JD']
+  r1: ['AKRON, UNIVERSITY OF', 'Public', '3/31/2020, 4/15/2020, 11/30/2020', '$0', '3/31/2020, 11/30/2020', 'Semester', 'August, January, May', 'December, May', '88']
+  r2: ['ALABAMA, UNIVERSITY OF', 'Public', '', '$40', '', 'Semester', 'August', 'May/December', '90']
+  r3: ['ALBANY LAW SCHOOL', 'Private', 'December 31, 2019; August 1, 2020', '$0', '', 'Semester', 'January, August', 'May, July, December', '87']
+  r4: ['AMERICAN UNIVERSITY', 'Private', 'March 1', '$70.00', 'March 1', 'Semester', 'August', 'May, August, December', '86']
+  r5: ['APPALACHIAN SCHOOL OF LAW', 'Private', 'August 1', '$0', 'August 1', 'Semester', 'August and January', 'May and December', '93']
+  r6: ['ARIZONA STATE UNIVERSITY', 'Public', '11/15, 3/1', '$0', '3/15/2020', 'Semester', 'August, January', 'May, December', '88']
+  r7: ['ARIZONA SUMMIT LAW SCHOOL', '', '', '', '', '', '', '', '']

@@ -249,7 +249,7 @@ SECTIONS = {
                             "Part Time Resident Semester"], clean_money),
             "tui_pt_nonres": (["PT_NonResident_Annual", "PT_NonResident_Semester",
                                "Part Time Non resident Semester"], clean_money),
-            "ft_fee": (["FTRS_AnnualFees", "FTRS Annual Fees"], clean_money),
+            "ft_fee": (["FTRS_AnnualFees", "FTRS Annual Fees", "FTRS Fees"], clean_money),
             "living_on_campus": (["Living_On_Campus", "Living On Campus"], clean_money),
             "living_off_campus": (["Living_Off_Campus", "Living Off Campus"], clean_money),
             "living_at_home": (["Living_At_Home", "Living At Home"], clean_money),
@@ -268,7 +268,7 @@ COLLISIONS = []  # (year, section, sid, field, kept_name, kept_val, dropped_name
 # 2020 value); 2021+ report annual. So for these years we annualize (×2) the
 # four tuition fields on extract. Earlier years get added here as the oracle /
 # curated trends confirm them.
-PER_SEMESTER_TUITION_YEARS = {2020}
+PER_SEMESTER_TUITION_YEARS = {2019, 2020}
 ANNUALIZE_FIELDS = {"tui_ft_res", "tui_ft_nonres", "tui_pt_res", "tui_pt_nonres"}
 
 # fields that legitimately exist only in some years' workbooks — a missing header
