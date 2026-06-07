@@ -129,13 +129,17 @@ SECTIONS = {
         "glob": "Transfers*",
         "fields": {
             "trans_out": (["JD1 Transfers Out", "1L Transfers Out"], clean_int),
-            "trans_in": (["TransferIn", "Transfer In", "Transfers In"], clean_int),
+            "trans_in": (["TransferIn", "Transfer In", "Transfers In",
+                          "Total # of Transfer in Students"], clean_int),
             "trans_gpa75": (["75th Percentile JD1 GPA",
-                             "75th percentile 1L GPA (12 or more transfers in)"], clean_zeronull),
+                             "75th percentile 1L GPA (12 or more transfers in)",
+                             "75th Percentile 1L GPA"], clean_zeronull),
             "trans_gpa50": (["50th Percentile JD1 GPA", "GPA50thPercentile",
-                             "50th percentile 1L GPA (12 or more transfers in)"], clean_zeronull),
+                             "50th percentile 1L GPA (12 or more transfers in)",
+                             "50th Percentile 1L GPA"], clean_zeronull),
             "trans_gpa25": (["25th Percentile JD1 GPA", "GPA25thPercentile",
-                             "25th percentile 1L GPA (12 or more transfers in)"], clean_zeronull),
+                             "25th percentile 1L GPA (12 or more transfers in)",
+                             "25th Percentile 1L GPA"], clean_zeronull),
         },
     },
     "bar_first": {
@@ -231,7 +235,7 @@ SECTIONS = {
         "glob": "JD_Enrollment_and_Ethnicity*",
         "fields": {
             "enr": (["TotalGrandTotal", "Total Grand Total"], clean_int),
-            "grads": ("Total Degrees Awarded", clean_int),
+            "grads": (["Total Degrees Awarded", "#Total J.D. Deg Awd"], clean_int),
             "race_white": (["WhiteGrandTotal", "White Grand Total"], clean_int),
             "race_black": (["BlackGrandTotal", "Black or African American Grand Total"], clean_int),
             "race_hisp": (["HispGrandTotal", "OtherHispGrandTotal", "Hispanic Grand Total"], clean_int),
@@ -259,17 +263,21 @@ SECTIONS = {
         "glob": "Tuitions_and_Fees*",
         "fields": {
             "tui_ft_res": (["FT_Resident_Annual", "FT_Resident_Semester",
-                            "Full Time Resident Semester", "Full Time Resident"], clean_money),
+                            "Full Time Resident Semester", "Full Time Resident",
+                            "Full-Time Resident"], clean_money),
             "tui_ft_nonres": (["FT_NonResident_Annual", "FT_NonResident_Semester",
-                               "Full Time Non resident Semester", "Full Time Non resident"], clean_money),
+                               "Full Time Non resident Semester", "Full Time Non resident",
+                               "Full-Time Non-Resident"], clean_money),
             "tui_pt_res": (["PT_Resident_Annual", "PT_Resident_Semester",
-                            "Part Time Resident Semester", "Part Time Resident"], clean_money),
+                            "Part Time Resident Semester", "Part Time Resident",
+                            "Part-Time Resident"], clean_money),
             "tui_pt_nonres": (["PT_NonResident_Annual", "PT_NonResident_Semester",
-                               "Part Time Non resident Semester", "Part Time Non resident"], clean_money),
+                               "Part Time Non resident Semester", "Part Time Non resident",
+                               "Part-Time Non-Resident"], clean_money),
             "ft_fee": (["FTRS_AnnualFees", "FTRS Annual Fees", "FTRS Fees"], clean_money),
-            "living_on_campus": (["Living_On_Campus", "Living On Campus"], clean_money),
+            "living_on_campus": (["Living_On_Campus", "Living On Campus", "Living on Campus"], clean_money),
             "living_off_campus": (["Living_Off_Campus", "Living Off Campus"], clean_money),
-            "living_at_home": (["Living_At_Home", "Living At Home"], clean_money),
+            "living_at_home": (["Living_At_Home", "Living At Home", "Living at Home"], clean_money),
             # stored raw to mirror the gz, which is faithful to each year's source
             # ('Yes'/'No' in 2023, 'Y'/'N' in 2024+); column absent pre-2023.
             "cond_offered": ("OfferScholorships", clean_str),
@@ -299,7 +307,12 @@ OPTIONAL_FIELDS = {"race_nr", "enr_1l_entering",
                    "enr_1l_ft", "enr_1l_pt", "librarians_total",
                    "clinics_filled", "sim_courses_filled", "co_curricular",
                    "atr_acad_1l", "atr_acad_1l_pct", "atr_acad_ul_pct",
-                   "atr_other_1l", "atr_other_1l_pct", "atr_other_ul_pct"}
+                   "atr_other_1l", "atr_other_1l_pct", "atr_other_ul_pct",
+                   "trans_out", "credit_hours_required",
+                   # ≤2016 enrollment is #/%-per-sex with no per-race grand totals;
+                   # race/enr totals are deferred (need aggregation, not trend-checked):
+                   "enr", "race_white", "race_black", "race_hisp", "race_asian",
+                   "race_indian", "race_native", "race_multi", "race_nr", "race_unknown"}
 
 
 def hkey(s):

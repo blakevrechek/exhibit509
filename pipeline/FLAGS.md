@@ -36,9 +36,24 @@ decision before any edit to `data/exhibit-data.js` or the gz.
 
 ---
 
-## OPEN
+## OPEN (informational — primary source authoritative, no action needed unless you disagree)
 
-_(none)_
+### F3 — curated trend divergences below the oracle window (2017↓)
+- Backfill years are reconciled against the curated `*_trend` (not the gz). Most
+  cells match; a minority diverge where the curated trend is itself wrong and the
+  ABA primary source is authoritative. The rebuild uses the source value.
+- Extraction is verified correct at these (e.g. 2016 `trans_in`: 149/170 match
+  the trend exactly, ruling out a parser/year-convention issue).
+- Known so far: 2017 — 5 cells (DC transfers, IU tuition); 2016 — ~21 `trans_in`
+  + IU `nrt`. Listed for visibility; tell me if you'd rather keep any curated
+  value over the source.
+
+### D1 — 2016-and-earlier enrollment race/total deferred
+- The ≤2016 JD-Enrollment sheets are `#/%`-per-race-per-sex with **no per-race
+  grand-total columns** (totals exist only by sex/FT/PT). `grads` is taken from
+  `#Total J.D. Deg Awd`; `enr` + `race_*` are left unextracted (would require
+  summing, and are not trend-validated). Revisit with a dedicated aggregating
+  pass if full historical demographics are wanted.
 
 <!-- template for future flags
 ### F2 — <title>
