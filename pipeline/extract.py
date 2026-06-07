@@ -158,6 +158,28 @@ SECTIONS = {
             "bar_state_diff": ("TotalDifferencePercent***", clean_pct),
         },
     },
+    # ≤2016 single bar-passage sheet (replaced by First/Two-Year split in 2018+).
+    # Multiple rows per school (exam-year × jurisdiction) + embedded prior report
+    # years, so filter to this report year; school-level Composite columns are
+    # identical across a school's jurisdiction rows (dedup via collision skip).
+    "bar_rates": {
+        "glob": "Bar_Passage_Rates*",
+        "name_col_alt": "School Name",
+        "row_filter": ("Reporting Year", "{Y}"),
+        "fields": {
+            "bar": ("Composite Avg. School Pass %", clean_pct),
+            "bar_state_avg": ("Composite Avg. State Pass %", clean_pct),
+            "bar_state_diff": ("Composite Avg. Pass Diff. %", clean_pct),
+            "bar_first_takers": ("Total First-Time Takers", clean_int),
+        },
+    },
+    "conditional": {
+        "glob": "Conditional_Scholarships*",
+        "fields": {
+            "cond_enter": ("{Y-1}-{Y} # Entering With", clean_int),
+            "cond_elim": ("{Y-1}-{Y} # Eliminated", clean_int),
+        },
+    },
     "bar_2yr": {
         "glob": "TwoYear_Ultimate_Bar*",
         "name_col_alt": "School Name",
@@ -337,7 +359,8 @@ def candidates(src, year):
     opts = src if isinstance(src, (list, tuple)) else [src]
     out = []
     for o in opts:
-        o = o.replace("{Y-1}", str(year - 1)).replace("{Y-3}", str(year - 3))
+        o = (o.replace("{Y-1}", str(year - 1)).replace("{Y-3}", str(year - 3))
+              .replace("{Y}", str(year)))
         out.append(o)
     return out
 
@@ -358,6 +381,12 @@ def extract_year(year, resolve, conn):
         rows = list(ws.iter_rows(values_only=True))
         header = [hkey(c) for c in rows[0]]
         hidx = {h: i for i, h in enumerate(header)}
+        # optional row filter (header, value) — e.g. keep only this report year
+        rf = spec.get("row_filter")
+        rf_idx, rf_val = None, None
+        if rf:
+            rf_idx = hidx.get(hkey(rf[0]))
+            rf_val = hkey(candidates(rf[1], int(year))[0])
         # resolve each field's column index once
         colmap = {}
         for gzf, (src, cleaner) in spec["fields"].items():
@@ -375,6 +404,8 @@ def extract_year(year, resolve, conn):
             sid = resolve(r[0])
             if not sid:
                 continue  # footnote / unmatched (reported by crosswalk probe)
+            if rf_idx is not None and (rf_idx >= len(r) or hkey(r[rf_idx]) != rf_val):
+                continue  # row filtered out (wrong report year)
             for gzf, (i, cleaner) in colmap.items():
                 if i >= len(r):
                     continue

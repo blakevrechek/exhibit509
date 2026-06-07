@@ -45,6 +45,7 @@ FIELD_TREND = {
     "fac_ft": "fac_trend",
     "tui_ft_res": "tui_trend", "tui_ft_nonres": "nrt_trend",
     "trans_in": "trans_in_trend", "trans_out": "trans_out_trend",
+    "cond_enter": "cond_enter_trend", "cond_elim": "cond_elim_trend",
 }
 FLOAT_FIELDS = {"acc", "bar", "bar_2yr", "gpa25", "gpa50", "gpa75",
                 "lsat25", "lsat50", "lsat75"}
