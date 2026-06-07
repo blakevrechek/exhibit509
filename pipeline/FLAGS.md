@@ -45,8 +45,11 @@ decision before any edit to `data/exhibit-data.js` or the gz.
 - Extraction is verified correct at these (e.g. 2016 `trans_in`: 149/170 match
   the trend exactly, ruling out a parser/year-convention issue).
 - Known so far: 2017 — 5 cells (DC transfers, IU tuition); 2016 — ~21 `trans_in`
-  + IU `nrt`. Listed for visibility; tell me if you'd rather keep any curated
-  value over the source.
+  + IU `nrt` + 8 `fac_ft`; 2015 — incl. large Cooley `apps`/`offers` (source
+  1222/1072 vs curated 469/400; Cooley = WMU Cooley, an unusual multi-campus
+  school, one slug `cooley-law-school`; its 2015 employment sheet lists both the
+  old "Thomas M. Cooley" and new "Western Michigan University" names — collision
+  keeps one). Listed for visibility; tell me if you'd rather keep a curated value.
 
 ### D1 — 2016-and-earlier enrollment race/total deferred
 - The ≤2016 JD-Enrollment sheets are `#/%`-per-race-per-sex with **no per-race
