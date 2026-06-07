@@ -28,8 +28,18 @@ NAME_OVERRIDES = {
     "Pennsylvania State University - Penn State Law": "penn-state-law",
 }
 
+# Entries are either a bare slug (whole school adjudicated) or a (slug, field)
+# tuple (just that metric). Reported separately by the reconciler and excluded
+# from the parser-fidelity match rate — a difference here is an intended
+# correction, not a parser bug.
 ADJUDICATED = {
-    "penn-state-dickinson-law",  # F1 — gz carries University Park figures
+    "penn-state-dickinson-law",                  # F1 — gz carries UP figures
+    # F2 — Rutgers merged Newark+Camden (2015) into one school; gz's 2022 bar
+    # used the Newark-campus sub-row, not the combined RUTGERS UNIVERSITY row.
+    ("rutgers-university", "bar_2yr"),
+    ("rutgers-university", "bar_2yr_grads"),
+    ("rutgers-university", "bar_2yr_takers"),
+    ("rutgers-university", "bar_2yr_passers"),
 }
 
 # New slugs introduced by overrides that the gz does not yet have. Metadata

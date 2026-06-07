@@ -121,10 +121,10 @@ SECTIONS = {
         "glob": "Transfers*",
         "fields": {
             "trans_out": ("JD1 Transfers Out", clean_int),
-            "trans_in": ("TransferIn", clean_int),
+            "trans_in": (["TransferIn", "Transfer In"], clean_int),
             "trans_gpa75": ("75th Percentile JD1 GPA", clean_zeronull),
-            "trans_gpa50": ("50th Percentile JD1 GPA", clean_zeronull),
-            "trans_gpa25": ("25th Percentile JD1 GPA", clean_zeronull),
+            "trans_gpa50": (["50th Percentile JD1 GPA", "GPA50thPercentile"], clean_zeronull),
+            "trans_gpa25": (["25th Percentile JD1 GPA", "GPA25thPercentile"], clean_zeronull),
         },
     },
     "bar_first": {
@@ -143,9 +143,9 @@ SECTIONS = {
         "glob": "TwoYear_Ultimate_Bar*",
         "name_col_alt": "School Name",
         "fields": {
-            "bar_2yr_grads": ("{Y-3} Graduates", clean_int),
-            "bar_2yr_takers": ("{Y-3} Takers", clean_int),
-            "bar_2yr_passers": ("{Y-3} Passers", clean_int),
+            "bar_2yr_grads": (["{Y-3} Graduates", "No. of Graduates"], clean_int),
+            "bar_2yr_takers": (["{Y-3} Takers", "No. of Takers"], clean_int),
+            "bar_2yr_passers": (["{Y-3} Passers", "No. of Passers"], clean_int),
             "bar_2yr": ("%Passers", clean_pct),
         },
     },
@@ -216,31 +216,35 @@ SECTIONS = {
             "race_native": ("NativeGrandTotal", clean_int),
             "race_multi": (["MultiracialGrandTotal", "RaceGrandTotal"], clean_int),
             "race_nr": ("NRGrandTotal", clean_int),
-            "race_unknown": ("UnknownGrandTotal", clean_int),
+            "race_unknown": (["UnknownGrandTotal", "UnknownRaceGrandTotal"], clean_int),
         },
     },
     "basics": {
         "glob": "The_Basics*",
         "fields": {
-            "school_type": ("SchoolType", clean_str),
-            "app_fee": ("AppFee", clean_money),
+            "school_type": (["SchoolType", "Type of School"], clean_str),
+            "app_fee": (["AppFee", "Application Fee"], clean_money),
             "term": ("Term", clean_str),
-            "credit_hours_required": ("RequiredCreditHours", clean_int),
+            "credit_hours_required": (["RequiredCreditHours", "# of Credit Hours for JD"], clean_int),
         },
     },
     "tuition": {
         "glob": "Tuitions_and_Fees*",
         "fields": {
-            "tui_ft_res": (["FT_Resident_Annual", "FT_Resident_Semester"], clean_money),
-            "tui_ft_nonres": (["FT_NonResident_Annual", "FT_NonResident_Semester"], clean_money),
-            "tui_pt_res": (["PT_Resident_Annual", "PT_Resident_Semester"], clean_money),
-            "tui_pt_nonres": (["PT_NonResident_Annual", "PT_NonResident_Semester"], clean_money),
-            "ft_fee": ("FTRS_AnnualFees", clean_money),
-            "living_on_campus": ("Living_On_Campus", clean_money),
-            "living_off_campus": ("Living_Off_Campus", clean_money),
-            "living_at_home": ("Living_At_Home", clean_money),
+            "tui_ft_res": (["FT_Resident_Annual", "FT_Resident_Semester",
+                            "Full Time Resident Semester"], clean_money),
+            "tui_ft_nonres": (["FT_NonResident_Annual", "FT_NonResident_Semester",
+                               "Full Time Non resident Semester"], clean_money),
+            "tui_pt_res": (["PT_Resident_Annual", "PT_Resident_Semester",
+                            "Part Time Resident Semester"], clean_money),
+            "tui_pt_nonres": (["PT_NonResident_Annual", "PT_NonResident_Semester",
+                               "Part Time Non resident Semester"], clean_money),
+            "ft_fee": (["FTRS_AnnualFees", "FTRS Annual Fees"], clean_money),
+            "living_on_campus": (["Living_On_Campus", "Living On Campus"], clean_money),
+            "living_off_campus": (["Living_Off_Campus", "Living Off Campus"], clean_money),
+            "living_at_home": (["Living_At_Home", "Living At Home"], clean_money),
             # stored raw to mirror the gz, which is faithful to each year's source
-            # ('Yes'/'No' in 2023, 'Y'/'N' in 2024+).
+            # ('Yes'/'No' in 2023, 'Y'/'N' in 2024+); column absent pre-2023.
             "cond_offered": ("OfferScholorships", clean_str),
         },
     },
@@ -252,7 +256,8 @@ COLLISIONS = []  # (year, section, sid, field, kept_name, kept_val, dropped_name
 # fields that legitimately exist only in some years' workbooks — a missing header
 # here is expected, not a problem, so it is not warned about.
 OPTIONAL_FIELDS = {"race_nr", "enr_1l_entering",
-                   "clinics_available", "sim_courses_available", "seminars"}
+                   "clinics_available", "sim_courses_available", "seminars",
+                   "cond_offered"}  # cond_offered column absent pre-2023
 
 
 def hkey(s):

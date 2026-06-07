@@ -57,9 +57,9 @@ def main():
 
     score = defaultdict(lambda: [0, 0, 0])  # field -> [match, mismatch, no_gz]
     examples = defaultdict(list)
-    adj_match = adj_mism = 0  # adjudicated schools, reported but excluded
+    adj_match = adj_mism = 0  # adjudicated schools/fields, reported but excluded
     for sid, year, field, val in rows:
-        if sid in ADJUDICATED:
+        if sid in ADJUDICATED or (sid, field) in ADJUDICATED:
             gzf = ALIAS.get(field, field)
             h = hist.get(sid, {}).get(str(year), {})
             gv = h.get(gzf)

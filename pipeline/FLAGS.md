@@ -19,6 +19,21 @@ decision before any edit to `data/exhibit-data.js` or the gz.
   `overrides.py` (`NAME_OVERRIDES` / `NEW_SLUGS`); the extractor's collision
   detector surfaces new ones automatically.
 
+### F2 — Rutgers: gz 2022 bar passage used the Newark-campus sub-row ✅
+- **Where:** 2022, `rutgers-university` two-year bar fields
+  (`bar_2yr`, `bar_2yr_grads/takers/passers`).
+- **What:** Rutgers merged Newark + Camden into one accredited school (2015). The
+  2022 two-year-bar sheet has **two** rows — `RUTGERS UNIVERSITY` (combined:
+  315 grads / 88.33%) and `RUTGERS UNIVERSITY-NEWARK` (224 / 91.2%, a campus
+  sub-row; Camden ≈ the 91 difference). Every other 2022 sheet has a single
+  `RUTGERS UNIVERSITY` row, which the gz uses — but for bar the gz took the
+  **Newark-only** sub-row (224 / 91.2), inconsistent with its own enrollment.
+- **Decision:** this is a merge (not a split like Penn State), so the correct
+  single-school figure is the **combined** `RUTGERS UNIVERSITY` row. The rebuild
+  keeps it; the gz bar value is a pre-existing extraction bug. Adjudicated at
+  field level (`overrides.py` ADJUDICATED) so the gz rebuild writes the combined
+  figures. **Confirm if you'd rather report Newark-only.**
+
 ---
 
 ## OPEN
