@@ -56,13 +56,14 @@ Then scale year by year, newest→oldest (format gets messier going back).
       across 15,904 compared cells** (`reconcile.py 2025`)
 - [x] **2025 → 2020 complete — 12/12 sections each at 100.00%**
       (Penn State F1, Rutgers bar F2 adjudicated/excluded)
-- [~] 2019 — 5/12 sections at 100.00% (in progress)
+- [x] **2019 complete — 12/12 sections at 100.00%**
 - [x] **trend reconciler built + validated** (`reconcile_trends.py`) — for the
       no-oracle backfill: facts vs curated *_trend (2011-2025). On overlap years
       (2019-2021) it agrees 98.8-99.9% on cleanly-comparable fields; residual
       gaps are curated-layer divergences from raw (e.g. fac_trend 2022) that the
       gz rebuild will CORRECT. Excludes enr_trend/schol_trend (curated-divergent).
 - [ ] 2018 (last oracle year), then 2017 → 2011 (trend-referenced)
+      — 2025→2019 done (7 years)
 - [ ] gz rebuild + curated-layer reconcile
 - [ ] gz rebuild + curated-layer reconcile
 
