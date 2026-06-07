@@ -165,13 +165,17 @@ SECTIONS = {
     "employment": {
         "glob": "Employment_Summary*",
         "fields": {
-            "emp_grads": ("Total_GraduatesTotal", clean_int),
+            # 2023 used the 'Number' suffix + 'BarPassageRequired'; 2024+ use
+            # 'Total' + 'BarAdmissionRequired'.
+            "emp_grads": (["Total_GraduatesTotal", "Total_GraduatesNumber"], clean_int),
             "ftlt": ("Total_FTLT", clean_int),
-            "emp_bar_ftlt": ("Employed_BarAdmissionRequiredFTLT", clean_int),
+            "emp_bar_ftlt": (["Employed_BarAdmissionRequiredFTLT",
+                              "Employed_BarPassageRequiredFTLT"], clean_int),
             "emp_jda_ftlt": ("Employed_JDAdvantageFTLT", clean_int),
             "emp_solo_ftlt": ("Solo-FTLT", clean_int),
-            "emp_seeking": ("UnEmployedSeekingTotal", clean_int),
-            "emp_not_seeking": ("UnEmployedNotSeekingTotal", clean_int),
+            "emp_seeking": (["UnEmployedSeekingTotal", "UnEmployedSeekingNumber"], clean_int),
+            "emp_not_seeking": (["UnEmployedNotSeekingTotal",
+                                 "UnEmployedNotSeekingNumber"], clean_int),
         },
     },
     "curriculum": {

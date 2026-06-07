@@ -1,0 +1,21 @@
+# First_Time_Bar_Passage_2023.xlsx  (year=2023, guessed section=bar_passage)
+
+## sheet: '2023_FirstTimeBarPassage'  dims=A1:M199 max_row=199 max_col=13
+  r0: ['School Name', 'Graduates In 2022', 'Graduates who did not take the bar in 2022', 'Graduates with No Information', 'First Time Takers from Prior Years', 'Number of Early-Takers', 'Total First Time Takers', 'Total First Time Passers', 'Grads Admitted via Diploma Privilege', 'AvgSchoolPassPercent*', 'AvgStatePassPercent**', 'TotalDifferencePercent***', 'Pass % including Grads Admitted via Diploma Privilege']
+  r1: ['Akron, The University of', '124', '44', '0', '31', '0', '111', '82', '0', '73.87%', '78.64%', '-4.77%', '73.87%']
+  r2: ['Alabama, The University of', '132', '8', '2', '4', '0', '126', '115', '0', '91.27%', '80.36%', '10.91%', '91.27%']
+  r3: ['Albany Law School', '156', '28', '3', '28', '8', '161', '114', '0', '70.81%', '82.39%', '-11.58%', '70.81%']
+  r4: ['American University', '315', '49', '', '49', '0', '315', '230', '', '73.02%', '78.02%', '-5%', '73.02%']
+  r5: ['Appalachian School of Law', '39', '7', '1', '10', '0', '41', '21', '0', '51.22%', '74.92%', '-23.7%', '51.22%']
+  r6: ['Arizona State University', '267', '28', '4', '16', '7', '258', '218', '0', '84.5%', '71.66%', '12.84%', '84.50%']
+  r7: ['Arizona, The University of', '127', '24', '0', '21', '12', '136', '98', '0', '72.06%', '73.16%', '-1.1%', '72.06%']
+
+## sheet: '2023_Jurisdiction'  dims=A1:G558 max_row=558 max_col=7
+  r0: ['SchoolName', 'Jurisdiction', 'Takers', 'Passers', 'PassPer', 'StatePer', 'Diff']
+  r1: ['Akron, The University of', '8 REMAINING JURISDICTIONS', '13', '9', '69.23', '74.62', '-5.39']
+  r2: ['Akron, The University of', 'OHIO', '98', '73', '74.49', '78.7', '-4.21']
+  r3: ['Alabama, The University of', 'ALABAMA', '85', '79', '92.94', '83.42', '9.52']
+  r4: ['Alabama, The University of', '16 REMAINING JURISDICTIONS', '41', '36', '87.8', '73.62', '14.18']
+  r5: ['Albany Law School', '5 REMAINING JURISDICTIONS', '6', '5', '83.33', '73.41', '9.92']
+  r6: ['Albany Law School', 'NEW YORK', '155', '109', '70.32', '82.69', '-12.37']
+  r7: ['American University', 'CALIFORNIA', '15', '6', '40', '72.15', '-32.15']
