@@ -59,7 +59,11 @@ def probe_xlsx(path, out):
     import openpyxl
     wb = openpyxl.load_workbook(path, read_only=True, data_only=True)
     for ws in wb.worksheets:
-        out.write(f"\n## sheet: {ws.title!r}  dims={ws.dimensions} "
+        try:
+            dims = ws.calculate_dimension()
+        except Exception:
+            dims = "?"
+        out.write(f"\n## sheet: {ws.title!r}  dims={dims} "
                   f"max_row={ws.max_row} max_col={ws.max_column}\n")
         for i, row in enumerate(ws.iter_rows(max_row=8, values_only=True)):
             cells = ["" if c is None else str(c) for c in row]

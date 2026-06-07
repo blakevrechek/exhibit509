@@ -1,0 +1,11 @@
+# The_Basics_Academic_Calendar_2025.xlsx  (year=2025, guessed section=UNKNOWN)
+
+## sheet: '2025_The BasicsAcademic Calend'  dims=A1:J197 max_row=197 max_col=10
+  r0: ['SchoolName', 'SchoolYear', 'SchoolType', 'AppDeadline', 'AppFee', 'FinancialAidDeadline', 'Term', 'BeginningMonth', 'ConfersMonth', 'RequiredCreditHours']
+  r1: ['Akron, The University of', '2025', 'Public', '03/31/2026 and 11/30/2026', '0', '03/31/2026 and 11/30/2026', 'Semesters', 'August, January and May', 'January and May', '88']
+  r2: ['Alabama, The University of', '2025', 'Public', '', '$40', '', 'Semesters', 'August', 'May, August, December', '90']
+  r3: ['Albany Law School', '2025', 'Private', 'December 1 and June 30', '0', '', 'Semesters', 'August and January', 'May, July and December', '87']
+  r4: ['American University', '2025', 'Private', '3/1', '70', '3/1', 'Semesters', 'August', 'May, August, December', '86']
+  r5: ['Appalachian School of Law', '2025', 'Private', 'July 31 and December 31', '0', 'July 31 and December 31', 'Semesters', 'January or August', 'May, August, and December', '92']
+  r6: ['Arizona State University', '2025', 'Public', '3/1', '0', '3/15/26', 'Semesters', 'August, January', 'May, December, August', '88']
+  r7: ['Arizona, The University of', '2025', 'Public', 'June 30, 2026', '$40', 'March 1, 2026', 'Semesters', 'August and January', 'May, August, and December', '88']
