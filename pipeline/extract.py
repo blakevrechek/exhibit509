@@ -235,7 +235,9 @@ SECTIONS = {
             "living_on_campus": ("Living_On_Campus", clean_money),
             "living_off_campus": ("Living_Off_Campus", clean_money),
             "living_at_home": ("Living_At_Home", clean_money),
-            "cond_offered": ("OfferScholorships", clean_yn),
+            # stored raw to mirror the gz, which is faithful to each year's source
+            # ('Yes'/'No' in 2023, 'Y'/'N' in 2024+).
+            "cond_offered": ("OfferScholorships", clean_str),
         },
     },
 }
