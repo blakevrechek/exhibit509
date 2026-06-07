@@ -132,7 +132,7 @@ SECTIONS = {
     "transfers": {
         "glob": "Transfers*",
         "fields": {
-            "trans_out": (["JD1 Transfers Out", "1L Transfers Out"], clean_int),
+            "trans_out": (["JD1 Transfers Out", "1L Transfers Out", "Transfers Out"], clean_int),
             "trans_in": (["TransferIn", "Transfer In", "Transfers In",
                           "Total # of Transfer in Students"], clean_int),
             "trans_gpa75": (["75th Percentile JD1 GPA",
@@ -343,6 +343,7 @@ OPTIONAL_FIELDS = {"race_nr", "enr_1l_entering",
                    "atr_acad_1l", "atr_acad_1l_pct", "atr_acad_ul_pct",
                    "atr_other_1l", "atr_other_1l_pct", "atr_other_ul_pct",
                    "trans_out", "credit_hours_required", "acc",
+                   "trans_gpa75", "trans_gpa50", "trans_gpa25",  # absent ≤2013
                    # ≤2016 enrollment is #/%-per-sex with no per-race grand totals;
                    # race/enr totals are deferred (need aggregation, not trend-checked):
                    "enr", "race_white", "race_black", "race_hisp", "race_asian",
