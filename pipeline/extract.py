@@ -269,7 +269,7 @@ COLLISIONS = []  # (year, section, sid, field, kept_name, kept_val, dropped_name
 # 2020 value); 2021+ report annual. So for these years we annualize (×2) the
 # four tuition fields on extract. Earlier years get added here as the oracle /
 # curated trends confirm them.
-PER_SEMESTER_TUITION_YEARS = {2019, 2020}
+PER_SEMESTER_TUITION_YEARS = {2018, 2019, 2020}
 ANNUALIZE_FIELDS = {"tui_ft_res", "tui_ft_nonres", "tui_pt_res", "tui_pt_nonres"}
 
 # fields that legitimately exist only in some years' workbooks — a missing header
@@ -277,7 +277,8 @@ ANNUALIZE_FIELDS = {"tui_ft_res", "tui_ft_nonres", "tui_pt_res", "tui_pt_nonres"
 OPTIONAL_FIELDS = {"race_nr", "enr_1l_entering",
                    "clinics_available", "sim_courses_available", "seminars",
                    "cond_offered",  # cond_offered column absent pre-2023
-                   "gre_takers"}    # GRE takers count absent pre-2023
+                   "gre_takers",    # GRE takers count absent pre-2023
+                   "ft_fee"}        # fee column absent some years (e.g. 2018)
 
 
 def hkey(s):
