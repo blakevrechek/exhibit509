@@ -54,9 +54,9 @@ Then scale year by year, newest→oldest (format gets messier going back).
 - [x] extractors — **all 12 sections** — `extract.py` → `facts.sqlite`
 - [x] reconcile vs existing gz (oracle) — **2025: 100.00% match, 0 mismatches
       across 15,904 compared cells** (`reconcile.py 2025`)
-- [x] **2025 / 2024 / 2023 complete — 12/12 sections each at 100.00%**
-      (Penn State adjudicated/excluded per F1)
-- [ ] scale 2022 → 2018 (oracle-checked), then 2017 → 2011 (no oracle)
+- [x] **2025 / 2024 / 2023 / 2022 complete — 12/12 sections each at 100.00%**
+      (Penn State F1, Rutgers bar F2 adjudicated/excluded)
+- [ ] scale 2021 → 2018 (oracle-checked), then 2017 → 2011 (no oracle)
 - [ ] gz rebuild + curated-layer reconcile
 
 ## Cross-year drift handled (so the same code spans 2011–2025)
