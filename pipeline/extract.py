@@ -339,6 +339,7 @@ OPTIONAL_FIELDS = {"race_nr", "enr_1l_entering",
                    # absent in the older (≤2017) workbook structures:
                    "enr_1l_ft", "enr_1l_pt", "librarians_total",
                    "clinics_filled", "sim_courses_filled", "co_curricular",
+                   "field_placements_filled",  # FT/PT-split (no combined) in ≤2014
                    "atr_acad_1l", "atr_acad_1l_pct", "atr_acad_ul_pct",
                    "atr_other_1l", "atr_other_1l_pct", "atr_other_ul_pct",
                    "trans_out", "credit_hours_required", "acc",
