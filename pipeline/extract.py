@@ -92,17 +92,24 @@ SECTIONS = {
             "apps": (["Applications", "CompletedApplications", "Completed Apps"], clean_int),
             "offers": (["Offers", "OffersAdmission", "Offer"], clean_int),
             "acc": (["AcceptanceRate", "Acceptence Rate", "Acceptance Rate"], clean_pct),
-            "enr_1l": (["TotalEnrollees", "TotalFYClassAll", "Total FY class ALL"], clean_int),
+            "enr_1l": (["TotalEnrollees", "TotalFYClassAll", "Total FY class ALL",
+                        "Total FY class"], clean_int),
             "enr_1l_entering": (["Enrollees", "EnrolleesFromApplicantPool",
                                  "Enrollees from App pool"], clean_int),
             "enr_1l_ft": (["FTEnrollees", "TotalFYClassFT", "Total FY class FT"], clean_int),
             "enr_1l_pt": (["PTEnrollees", "TotalFYClassPT", "Total FY class PT"], clean_int),
-            "gpa75": (["All75thPercentileUGPA", "All75GPA", "75th percentile UGPA ALL"], clean_zeronull),
-            "gpa50": (["All50thPercentileUGPA", "All50GPA", "50th percentile UGPA ALL"], clean_zeronull),
-            "gpa25": (["All25thPercentileUGPA", "All25GPA", "25th percentile UGPA ALL"], clean_zeronull),
-            "lsat75": (["All75thPercentileLSAT", "All75LSAT", "75th percentile LSAT ALL"], clean_zeronull),
-            "lsat50": (["All50thPercentileLSAT", "All50LSAT", "50th percentile LSAT ALL"], clean_zeronull),
-            "lsat25": (["All25thPercentileLSAT", "All25LSAT", "25th percentile LSAT ALL"], clean_zeronull),
+            "gpa75": (["All75thPercentileUGPA", "All75GPA", "75th percentile UGPA ALL",
+                       "75th percentile UGPA"], clean_zeronull),
+            "gpa50": (["All50thPercentileUGPA", "All50GPA", "50th percentile UGPA ALL",
+                       "50th percentile UGPA"], clean_zeronull),
+            "gpa25": (["All25thPercentileUGPA", "All25GPA", "25th percentile UGPA ALL",
+                       "25th percentile UGPA"], clean_zeronull),
+            "lsat75": (["All75thPercentileLSAT", "All75LSAT", "75th percentile LSAT ALL",
+                        "75th percentile LSAT"], clean_zeronull),
+            "lsat50": (["All50thPercentileLSAT", "All50LSAT", "50th percentile LSAT ALL",
+                        "50th percentile LSAT"], clean_zeronull),
+            "lsat25": (["All25thPercentileLSAT", "All25LSAT", "25th percentile LSAT ALL",
+                        "25th percentile LSAT"], clean_zeronull),
             "gre_takers": ("GRETotalEnrollees", clean_int),  # absent pre-2023
         },
     },
@@ -192,11 +199,14 @@ SECTIONS = {
         "fields": {
             # pre-2025 reported a single count (= filled); 2025 split into
             # Available + Filled, and dropped the Seminars column.
-            "clinics_available": ("LawClinicsAvailable", clean_int),
+            "clinics_available": (["LawClinicsAvailable",
+                                   "# of clinic seats available"], clean_int),
             "clinics_filled": (["LawClinicsFilled", "LawClinics", "ClincicSum"], clean_int),
             "field_placements_filled": (["FieldPlacementsFilled", "FieldPlacements",
-                                         "FieldPlacementSum"], clean_int),
-            "sim_courses_available": ("SimulationCoursesAvailable", clean_int),
+                                         "FieldPlacementSum",
+                                         "# of field placement positions filled"], clean_int),
+            "sim_courses_available": (["SimulationCoursesAvailable",
+                                       "# of simulation course seats available"], clean_int),
             "sim_courses_filled": (["SimulationCoursesFilled", "SimulationCourses",
                                     "SimulationSum"], clean_int),
             "seminars": (["Seminars", "Seminarcount"], clean_int),
@@ -284,7 +294,12 @@ OPTIONAL_FIELDS = {"race_nr", "enr_1l_entering",
                    "clinics_available", "sim_courses_available", "seminars",
                    "cond_offered",  # cond_offered column absent pre-2023
                    "gre_takers",    # GRE takers count absent pre-2023
-                   "ft_fee"}        # fee column absent some years (e.g. 2018)
+                   "ft_fee",        # fee column absent some years (e.g. 2018)
+                   # absent in the older (≤2017) workbook structures:
+                   "enr_1l_ft", "enr_1l_pt", "librarians_total",
+                   "clinics_filled", "sim_courses_filled", "co_curricular",
+                   "atr_acad_1l", "atr_acad_1l_pct", "atr_acad_ul_pct",
+                   "atr_other_1l", "atr_other_1l_pct", "atr_other_ul_pct"}
 
 
 def hkey(s):

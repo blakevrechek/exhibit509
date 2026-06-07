@@ -1,0 +1,11 @@
+# Faculty_Resources_2017.xlsx  (year=2017, guessed section=faculty)
+
+## sheet: '2017_Faculty Resources'  dims=A1:P203 max_row=203 max_col=16
+  r0: ['School List', 'FT Male', 'NONFT Male', 'Total Male', 'FT Female', 'NonFT Female', 'Total Female', 'FT Other', 'NonFT Other', 'Total Other', 'FT Minority', 'NonFT Minority', 'Total Minority', 'Total FT ', 'Total NonFT', 'Total']
+  r1: ['AKRON, UNIVERSITY OF', '19', '27', '46', '13', '13', '26', '0', '0', '0', '6', '2', '8', '32', '40', '72']
+  r2: ['ALABAMA, UNIVERSITY OF', '26', '48', '74', '19', '10', '29', '0', '0', '0', '9', '2', '11', '45', '58', '103']
+  r3: ['ALBANY LAW SCHOOL', '22', '27', '49', '16', '19', '35', '0', '0', '0', '6', '2', '8', '38', '46', '84']
+  r4: ['AMERICAN UNIVERSITY', '44', '181', '225', '50', '115', '165', '0', '0', '0', '26', '48', '74', '94', '296', '390']
+  r5: ['APPALACHIAN SCHOOL OF LAW', '8', '5', '13', '2', '5', '7', '0', '0', '0', '0', '1', '1', '10', '10', '20']
+  r6: ['ARIZONA STATE UNIVERSITY', '39', '86', '125', '30', '29', '59', '0', '0', '0', '14', '11', '25', '69', '115', '184']
+  r7: ['ARIZONA SUMMIT LAW SCHOOL', '8', '19', '27', '18', '10', '28', '0', '0', '0', '7', '5', '12', '26', '29', '55']

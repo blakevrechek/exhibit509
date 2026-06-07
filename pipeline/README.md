@@ -62,7 +62,10 @@ Then scale year by year, newest→oldest (format gets messier going back).
       (2019-2021) it agrees 98.8-99.9% on cleanly-comparable fields; residual
       gaps are curated-layer divergences from raw (e.g. fac_trend 2022) that the
       gz rebuild will CORRECT. Excludes enr_trend/schol_trend (curated-divergent).
-- [ ] 2017 → 2011 backfill (trend-referenced; no gz oracle)
+- [x] **2017 complete — 10/12 section-types (no bar-passage workbooks exist in
+      the 2017 disclosure format); trend match 99.79%** (LSAT/GPA 169/169;
+      5 minor curated divergences where the primary source is authoritative)
+- [ ] 2016 → 2011 backfill (trend-referenced; no gz oracle)
 - [ ] gz rebuild + curated-layer reconcile
 
 ## Cross-year drift handled (so the same code spans 2011–2025)
