@@ -1,0 +1,21 @@
+# First_Time_Bar_Admission_2025.xlsx  (year=2025, guessed section=admissions)
+
+## sheet: '2025_FirstTimeBarAdmission'  dims=A1:N199 max_row=199 max_col=14
+  r0: ['School Name', 'Graduates In 2024', 'Graduates who did not take the bar in 2024', 'Graduates with No Information', 'First Time Takers from Prior Years', 'Graduates who took bar exam before graduation', 'Graduates who took bar exam after graduation', 'Total First Time Takers', 'Total First Time Passers', 'Grads Admitted via Alternative Pathways', 'AvgSchoolPassPercent*', 'AvgStatePassPercent**', 'TotalDifferencePercent***', 'Pass % including Grads Admitted via Alternative Pathways']
+  r1: ['Akron, The University of', '138', '54', '0', '45', '0', '84', '129', '93', '0', '72.09%', '80.46%', '-8.37%', '72.09%']
+  r2: ['Alabama, The University of', '153', '8', '1', '7', '0', '144', '151', '138', '0', '91.39%', '80.44%', '10.95%', '91.39%']
+  r3: ['Albany Law School', '197', '36', '1', '46', '14', '146', '206', '153', '0', '74.27%', '85.75%', '-11.48%', '74.27%']
+  r4: ['American University', '380', '28', '9', '31', '4', '339', '374', '304', '0', '81.28%', '81.98%', '-0.7%', '81.28%']
+  r5: ['Appalachian School of Law', '39', '5', '0', '4', '0', '34', '38', '24', '0', '63.16%', '77.16%', '-14%', '63.16%']
+  r6: ['Arizona State University', '287', '28', '3', '33', '4', '252', '289', '253', '0', '87.54%', '75.03%', '12.51%', '87.54%']
+  r7: ['Arizona, The University of', '116', '11', '1', '11', '16', '88', '115', '83', '0', '72.17%', '75.3%', '-3.13%', '72.17%']
+
+## sheet: '2025_Jurisdiction'  dims=A1:G582 max_row=582 max_col=7
+  r0: ['SchoolName', 'Jurisdiction', 'Takers', 'Passers', 'PassPer', 'StatePer', 'Diff']
+  r1: ['Akron, The University of', 'OHIO', '112', '80', '71.43', '80.59', '-9.16']
+  r2: ['Akron, The University of', '10 REMAINING JURISDICTIONS', '17', '13', '76.47', '78.71', '-2.24']
+  r3: ['Alabama, The University of', '20 REMAINING JURISDICTIONS', '54', '49', '90.74', '79.23', '11.51']
+  r4: ['Alabama, The University of', 'ALABAMA', '77', '72', '93.51', '81.22', '12.29']
+  r5: ['Alabama, The University of', 'GEORGIA', '10', '8', '80', '79.89', '0.11']
+  r6: ['Alabama, The University of', 'TEXAS', '10', '9', '90', '81.48', '8.52']
+  r7: ['Albany Law School', 'NEW YORK', '194', '146', '75.26', '86.3', '-11.04']

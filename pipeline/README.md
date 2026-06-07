@@ -48,10 +48,24 @@ it overlaps the gz oracle) to prove the crosswalk + extractor + reconcile loop.
 Then scale year by year, newest→oldest (format gets messier going back).
 
 ## Status
-- [ ] sources uploaded
-- [ ] inventory + schema probe
-- [ ] identity crosswalk
-- [ ] extractors (per section)
-- [ ] reconcile vs existing gz (oracle)
-- [ ] 2011–2017 backfill
+- [x] sources uploaded — 2025: **10 of 12** (pending: JD Attrition, Curriculum)
+- [x] inventory + schema probe (`inspect_sources.py`)
+- [x] identity crosswalk — 196/196 schools resolve to gz ids
+- [x] extractors (10 sections) — `extract.py` → `facts.sqlite` (13.5k facts/yr)
+- [x] reconcile vs existing gz (oracle) — **2025: 100.00% match, 0 mismatches
+      across 13,552 compared cells** (`reconcile.py 2025`)
+- [ ] add Attrition + Curriculum extractors (await files)
+- [ ] scale 2024 → 2018 (oracle-checked), then 2017 → 2011 (no oracle)
 - [ ] gz rebuild + curated-layer reconcile
+
+## Field-definition notes (learned from the 2025 oracle pass)
+- `enr_1l` = First Year Class **TotalEnrollees** (incl. "other first-year"),
+  NOT the `Enrollees` column. `enr_1l_ft`+`enr_1l_pt` sum to it.
+- `grads` = **Total Degrees Awarded** (JD Enrollment & Ethnicity sheet), NOT the
+  Employment Summary graduate count — that count is `emp_grads`.
+- Bar sheets: `School Name` (space), no year column, cohort year baked into
+  headers (first-time = "Graduates In 2024"; two-year = "2022 Graduates").
+- Sentinels nulled on extract: `$`/`N`/`N/A`, `*`/`**`/`***`, and `0` for
+  LSAT / uGPA / transfer-GPA (the ABA "not reported" zero).
+- Extract layer is **raw reads only**; derived pcts / firm-size buckets /
+  `schol_none` are deferred to the rebuild step so the oracle stays meaningful.
