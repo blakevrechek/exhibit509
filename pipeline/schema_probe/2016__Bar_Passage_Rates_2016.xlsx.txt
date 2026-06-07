@@ -1,0 +1,11 @@
+# Bar_Passage_Rates_2016.xlsx  (year=2016, guessed section=bar_passage)
+
+## sheet: '2016_Bar Passage Rates'  dims=A1:O1384 max_row=1384 max_col=15
+  r0: ['School Name', 'Reporting Year', 'Exam Year', 'Jurisdiction', 'Total First-Time Takers', 'Jurisdiction Takers', 'Jurisdiction Passers', 'Pass %', 'State %', 'Diff. %', ' ', 'Composite School Reporting %', 'Composite Avg. School Pass %', 'Composite Avg. State Pass %', 'Composite Avg. Pass Diff. %']
+  r1: ['AKRON, UNIVERSITY OF', '2016', '2015', 'Ohio', '135', '101', '86', '85.15%', '78.57%', '6.58%', ' ', '74.81%', '85.15%', '78.57%', '6.58%']
+  r2: ['AKRON, UNIVERSITY OF', '2015', '2014', 'Ohio', '138', '110', '92', '83.64%', '81.13%', '2.51%', ' ', '88.41%', '84.43%', '80.74%', '3.69%']
+  r3: ['AKRON, UNIVERSITY OF', '2015', '2014', 'Pennsylvania', '138', '4', '4', '100.00%', '80.85%', '19.15%', ' ', '', '', '', '']
+  r4: ['AKRON, UNIVERSITY OF', '2015', '2014', 'Florida', '138', '4', '4', '100.00%', '72.09%', '27.91%', ' ', '', '', '', '']
+  r5: ['AKRON, UNIVERSITY OF', '2015', '2014', 'New York', '138', '4', '3', '75.00%', '78.60%', '-3.60%', ' ', '', '', '', '']
+  r6: ['AKRON, UNIVERSITY OF', '2014', '2013', 'Ohio', '161', '148', '124', '83.78%', '86.22%', '-2.44%', ' ', '91.93%', '83.78%', '86.22%', '-2.44%']
+  r7: ['ALABAMA, UNIVERSITY OF', '2016', '2015', 'Alabama', '138', '85', '79', '92.94%', '82.19%', '10.75%', ' ', '75.36%', '91.34%', '81.01%', '10.33%']
