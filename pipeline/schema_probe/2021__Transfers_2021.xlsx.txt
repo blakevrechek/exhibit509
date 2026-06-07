@@ -1,0 +1,11 @@
+# Transfers_2021.xlsx  (year=2021, guessed section=transfers)
+
+## sheet: '2021_Transfers'  dims=A1:F198 max_row=198 max_col=6
+  r0: ['School List', 'JD1 Transfers Out', 'Transfer In', '75th Percentile JD1 GPA', '50th Percentile JD1 GPA', '25th Percentile JD1 GPA']
+  r1: ['AKRON, UNIVERSITY OF', '1', '0', '0', '0', '0']
+  r2: ['ALABAMA, UNIVERSITY OF', '0', '7', '0', '3.7', '0']
+  r3: ['ALBANY LAW SCHOOL', '7', '3', '0', '0', '0']
+  r4: ['AMERICAN UNIVERSITY', '25', '3', '0', '0', '0']
+  r5: ['APPALACHIAN SCHOOL OF LAW', '5', '1', '0', '0', '0']
+  r6: ['ARIZONA STATE UNIVERSITY', '7', '43', '3.85', '3.77', '3.28']
+  r7: ['ARIZONA, UNIVERSITY OF', '6', '4', '0', '0', '0']

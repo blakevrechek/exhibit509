@@ -1,0 +1,11 @@
+# The_Basics_Academic_Calendar_2021.xlsx  (year=2021, guessed section=UNKNOWN)
+
+## sheet: '2021_The BasicsAcademic Calend'  dims=A1:I198 max_row=198 max_col=9
+  r0: ['School List', 'Type of School', 'Application Deadline', 'Application Fee', 'Fin Aid Deadline', 'Term', 'Months students begin', 'Months degrees conferred', '# of Credit Hours for JD']
+  r1: ['AKRON, UNIVERSITY OF', 'Public', '03/31/2022, 07/02/2022, 11/30/2022', '$0', '03/31/2022, 07/02/2022, 11/30/2022', 'Semester', 'August, January, May', 'January, May', '88']
+  r2: ['ALABAMA, UNIVERSITY OF', 'Public', '', '$40', '', 'Semester', 'August', 'May/ December', '90']
+  r3: ['ALBANY LAW SCHOOL', 'Private', 'December 31 and August 1', '$0', '', 'Semester', 'August, January', 'May,July,December', '87']
+  r4: ['AMERICAN UNIVERSITY', 'Private', '3/1', '$70', '3/1', 'Semester', 'August', 'May, August, December', '86']
+  r5: ['APPALACHIAN SCHOOL OF LAW', 'Private', 'August 1', '$0', 'August 1', 'Semester', 'August and January', 'May, August, and December', '92']
+  r6: ['ARIZONA STATE UNIVERSITY', 'Public', '3/1', '$0', '3/15/2022', 'Semester', 'August, January', 'May, December, August', '88']
+  r7: ['ARIZONA, UNIVERSITY OF', 'Public', 'July 15, 2022', '$0', 'March 1, 2022', 'Semester', 'August and January', 'May, August, and December', '88']
