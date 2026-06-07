@@ -37,6 +37,13 @@ VTOKEN = re.compile(r"(?<![A-Za-z0-9.])v\d+\.\d+(?:\.\d+)?")
 # of the service worker serving a stale copy, so data fixes actually reach users.
 DATA_QS = re.compile(r"(exhibit-data\.js\?v=)\d+\.\d+(?:\.\d+)?")
 
+# Cache-bust query on the brand icons (favicon set + schema logo). Bumping it on
+# each release forces browsers, the CDN, and search/LLM crawlers to refetch the
+# icon instead of serving a stale (e.g. pre-tilt) copy from the year-long cache.
+ICON_QS = re.compile(
+    r"((?:favicon\.ico|favicon32\.png|favicon48\.png|icon192\.png|icon180\.png|icon512\.png)\?v=)"
+    r"\d+\.\d+(?:\.\d+)?")
+
 HTML_FILES = [
     "index.html",
     "methodology.html",
@@ -64,9 +71,10 @@ def stamp_html(path, version):
     src = open(full, encoding="utf-8").read()
     new, n = VTOKEN.subn("v" + version, src)
     new, n2 = DATA_QS.subn(r"\g<1>" + version, new)
-    if n or n2:
+    new, n3 = ICON_QS.subn(r"\g<1>" + version, new)
+    if n or n2 or n3:
         open(full, "w", encoding="utf-8").write(new)
-    return n + n2
+    return n + n2 + n3
 
 
 def stamp_sw(version):

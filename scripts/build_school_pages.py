@@ -36,6 +36,9 @@ SITE_URL = "https://exhibit509.com"
 # stamp_version.py (which stamps it into the static HTML pages). Read from the
 # top-level SYNC_DATE file so every template shows one date, not per-file strings.
 SYNC_DATE = open(os.path.join(ROOT, "SYNC_DATE"), encoding="utf-8").read().strip()
+# Canonical build version, used to cache-bust the icon URLs (?v=) so a re-tilted
+# favicon/logo reaches browsers and search/LLM crawlers instead of a stale CDN copy.
+VERSION = open(os.path.join(ROOT, "VERSION"), encoding="utf-8").read().strip()
 
 
 def slugify(school_id):
@@ -447,11 +450,11 @@ def render_page(s, all_schools=None):
 <script type="application/ld+json">{ld_json}</script>
 {faq_ld_json}
 {crumb_ld_json}
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" type="image/png" sizes="192x192" href="/icon192.png">
-<link rel="icon" type="image/png" sizes="48x48" href="/favicon48.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon32.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/icon180.png">
+<link rel="icon" href="/favicon.ico?v={VERSION}" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon192.png?v={VERSION}">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon48.png?v={VERSION}">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon32.png?v={VERSION}">
+<link rel="apple-touch-icon" sizes="180x180" href="/icon180.png?v={VERSION}">
 <style>
   :root{{--navy:#06111E;--orange:#D97757;--white:#F4F8FB;--dim:#A4C8DD;--dimmer:#7AAAC8;--blue:#5AABCB;--mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;--serif:Georgia,'Times New Roman',serif;}}
   *{{box-sizing:border-box;}}
@@ -596,11 +599,11 @@ def page_shell(title, desc, canonical, body, ld_json=""):
 <meta property="og:site_name" content="Exhibit 509">
 <meta name="twitter:card" content="summary">
 {f'<script type="application/ld+json">{ld_json}</script>' if ld_json else ''}
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" type="image/png" sizes="192x192" href="/icon192.png">
-<link rel="icon" type="image/png" sizes="48x48" href="/favicon48.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon32.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/icon180.png">
+<link rel="icon" href="/favicon.ico?v={VERSION}" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon192.png?v={VERSION}">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon48.png?v={VERSION}">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon32.png?v={VERSION}">
+<link rel="apple-touch-icon" sizes="180x180" href="/icon180.png?v={VERSION}">
 {STYLE}
 </head>
 <body>
