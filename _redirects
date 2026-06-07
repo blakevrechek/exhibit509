@@ -13,3 +13,11 @@
 # of the new domain so any pre-launch shares still resolve.
 /Exhibit/*   /:splat        301
 /exhibit/*   /:splat        301
+
+# Catch-all: send any unknown path to the map instead of a dead 404. This is the
+# LAST rule, so the specific rewrites above still win, and Cloudflare serves real
+# static assets (pages, images, data) before consulting redirects — so this only
+# fires for paths that would otherwise 404. 302 (temporary) so it never poisons a
+# URL we might add later.
+/*           /              302
+
