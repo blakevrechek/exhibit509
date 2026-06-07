@@ -30,6 +30,10 @@ def norm(s):
 
 
 def build_resolver(gz_path=GZ):
+    try:
+        from overrides import NAME_OVERRIDES, NEW_SLUGS
+    except ImportError:
+        from pipeline.overrides import NAME_OVERRIDES, NEW_SLUGS
     gz = json.load(gzip.open(gz_path))
     exact, normed = {}, {}
     for s in gz["schools"]:
@@ -42,9 +46,11 @@ def build_resolver(gz_path=GZ):
     for k, v in gz["meta"].get("name_aliases", {}).items():
         aliases[k] = v
         normed.setdefault(norm(k), v)
-    valid_ids = {s["id"] for s in gz["schools"]}
+    valid_ids = {s["id"] for s in gz["schools"]} | set(NEW_SLUGS)
 
     def resolve(name):
+        if name in NAME_OVERRIDES:        # human-decided identity layer wins
+            return NAME_OVERRIDES[name]
         if name in exact:
             return exact[name]
         if name in aliases:

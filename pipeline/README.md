@@ -54,8 +54,19 @@ Then scale year by year, newest→oldest (format gets messier going back).
 - [x] extractors — **all 12 sections** — `extract.py` → `facts.sqlite`
 - [x] reconcile vs existing gz (oracle) — **2025: 100.00% match, 0 mismatches
       across 15,904 compared cells** (`reconcile.py 2025`)
-- [ ] scale 2024 → 2018 (oracle-checked), then 2017 → 2011 (no oracle)
+- [~] scale 2024 → 2018 (oracle-checked) — **2024: 10/12 sections at 100.00%**
+      (pending Attrition + Curriculum); then 2017 → 2011 (no oracle)
 - [ ] gz rebuild + curated-layer reconcile
+
+## Cross-year drift handled (so the same code spans 2011–2025)
+- **Year-relative cohort headers:** `{Y-1}` (first-time bar), `{Y-3}` (two-year
+  ultimate bar) — the cohort year is baked into ABA headers and shifts yearly.
+- **Candidate-header fallbacks** (ABA renames columns): tuition `*_Annual` /
+  `*_Semester` (values identical — oracle-verified), enrollment `Hisp*` /
+  `OtherHisp*`, race-multi `Multiracial*` / `Race*`.
+- **Optional fields** present only some years: `race_nr` (`NRGrandTotal`).
+- **Identity layer** (`overrides.py`): schools the gz merged are split back out;
+  the collision detector flags any new two-rows-one-slug case automatically.
 
 ## Field-definition notes (learned from the 2025 oracle pass)
 - `enr_1l` = First Year Class **TotalEnrollees** (incl. "other first-year"),

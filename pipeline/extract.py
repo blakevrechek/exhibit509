@@ -240,6 +240,10 @@ SECTIONS = {
 
 COLLISIONS = []  # (year, section, sid, field, kept_name, kept_val, dropped_name, dropped_val)
 
+# fields that legitimately exist only in some years' workbooks — a missing header
+# here is expected, not a problem, so it is not warned about.
+OPTIONAL_FIELDS = {"race_nr", "enr_1l_entering"}
+
 
 def hkey(s):
     return re.sub(r"\s+", " ", str(s or "").strip()).lower()
@@ -279,7 +283,8 @@ def extract_year(year, resolve, conn):
             i = next((hidx[hkey(c)] for c in candidates(src, int(year))
                       if hkey(c) in hidx), None)
             if i is None:
-                print(f"  !! {section}: header {src!r} not found in {fname}")
+                if gzf not in OPTIONAL_FIELDS:
+                    print(f"  !! {section}: header {src!r} not found in {fname}")
                 continue
             colmap[gzf] = (i, cleaner)
         seen = {}  # (sid, field) -> (value, source_name) within this sheet

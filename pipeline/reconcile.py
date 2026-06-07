@@ -21,6 +21,11 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DB = os.path.join(ROOT, "pipeline", "facts.sqlite")
 GZ = os.path.join(ROOT, "data", "exhibit_data.json.gz")
 
+try:
+    from overrides import ADJUDICATED
+except ImportError:
+    from pipeline.overrides import ADJUDICATED
+
 # fields whose gz key differs from the extract field name
 ALIAS = {}
 
@@ -52,7 +57,18 @@ def main():
 
     score = defaultdict(lambda: [0, 0, 0])  # field -> [match, mismatch, no_gz]
     examples = defaultdict(list)
+    adj_match = adj_mism = 0  # adjudicated schools, reported but excluded
     for sid, year, field, val in rows:
+        if sid in ADJUDICATED:
+            gzf = ALIAS.get(field, field)
+            h = hist.get(sid, {}).get(str(year), {})
+            gv = h.get(gzf)
+            en, gn = as_num(val), as_num(gv)
+            ok = (en is not None and gn is not None and abs(en - gn) <= 0.5) or \
+                 str(val).strip().lower() == str(gv).strip().lower()
+            adj_match += ok
+            adj_mism += not ok
+            continue
         gzf = ALIAS.get(field, field)
         h = hist.get(sid, {}).get(str(year))
         if not h or gzf not in h or h[gzf] is None:
@@ -84,6 +100,9 @@ def main():
     print(f"{'TOTAL':24} {tot[0]:7} {tot[1]:6} {tot[2]:6}")
     pct = 100 * tot[0] / (tot[0] + tot[1]) if (tot[0] + tot[1]) else 0
     print(f"\nmatch rate (excl. noGZ): {pct:.2f}%")
+    if adj_match or adj_mism:
+        print(f"adjudicated schools (excluded; see FLAGS.md): "
+              f"{adj_match} agree / {adj_mism} differ-by-design")
 
     mismatched = [f for f in sorted(examples) if examples[f]]
     if mismatched:
