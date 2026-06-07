@@ -131,7 +131,7 @@ SECTIONS = {
         "glob": "First_Time_Bar*",
         "name_col_alt": "School Name",
         "fields": {
-            "bar_grads": ("Graduates In 2024", clean_int),
+            "bar_grads": ("Graduates In {Y-1}", clean_int),
             "bar_first_takers": ("Total First Time Takers", clean_int),
             "bar_first_passers": ("Total First Time Passers", clean_int),
             "bar": ("AvgSchoolPassPercent*", clean_pct),
@@ -143,9 +143,9 @@ SECTIONS = {
         "glob": "TwoYear_Ultimate_Bar*",
         "name_col_alt": "School Name",
         "fields": {
-            "bar_2yr_grads": ("2022 Graduates", clean_int),
-            "bar_2yr_takers": ("2022 Takers", clean_int),
-            "bar_2yr_passers": ("2022 Passers", clean_int),
+            "bar_2yr_grads": ("{Y-3} Graduates", clean_int),
+            "bar_2yr_takers": ("{Y-3} Takers", clean_int),
+            "bar_2yr_passers": ("{Y-3} Passers", clean_int),
             "bar_2yr": ("%Passers", clean_pct),
         },
     },
@@ -203,11 +203,12 @@ SECTIONS = {
             "grads": ("Total Degrees Awarded", clean_int),
             "race_white": ("WhiteGrandTotal", clean_int),
             "race_black": ("BlackGrandTotal", clean_int),
-            "race_hisp": ("HispGrandTotal", clean_int),
+            "race_hisp": (["HispGrandTotal", "OtherHispGrandTotal"], clean_int),
             "race_asian": ("AsianGrandTotal", clean_int),
             "race_indian": ("AmericanIndianGrandTotal", clean_int),
             "race_native": ("NativeGrandTotal", clean_int),
-            "race_multi": ("MultiracialGrandTotal", clean_int),
+            "race_multi": (["MultiracialGrandTotal", "RaceGrandTotal"], clean_int),
+            "race_nr": ("NRGrandTotal", clean_int),
             "race_unknown": ("UnknownGrandTotal", clean_int),
         },
     },
@@ -223,10 +224,10 @@ SECTIONS = {
     "tuition": {
         "glob": "Tuitions_and_Fees*",
         "fields": {
-            "tui_ft_res": ("FT_Resident_Annual", clean_money),
-            "tui_ft_nonres": ("FT_NonResident_Annual", clean_money),
-            "tui_pt_res": ("PT_Resident_Annual", clean_money),
-            "tui_pt_nonres": ("PT_NonResident_Annual", clean_money),
+            "tui_ft_res": (["FT_Resident_Annual", "FT_Resident_Semester"], clean_money),
+            "tui_ft_nonres": (["FT_NonResident_Annual", "FT_NonResident_Semester"], clean_money),
+            "tui_pt_res": (["PT_Resident_Annual", "PT_Resident_Semester"], clean_money),
+            "tui_pt_nonres": (["PT_NonResident_Annual", "PT_NonResident_Semester"], clean_money),
             "ft_fee": ("FTRS_AnnualFees", clean_money),
             "living_on_campus": ("Living_On_Campus", clean_money),
             "living_off_campus": ("Living_Off_Campus", clean_money),
@@ -237,8 +238,23 @@ SECTIONS = {
 }
 
 
+COLLISIONS = []  # (year, section, sid, field, kept_name, kept_val, dropped_name, dropped_val)
+
+
 def hkey(s):
     return re.sub(r"\s+", " ", str(s or "").strip()).lower()
+
+
+def candidates(src, year):
+    """A field's source header may be a str or a list of fallbacks (ABA renames
+    columns across years). Tokens {Y-1}/{Y-3} expand to cohort years (e.g. the
+    two-year-ultimate bar cohort is report-year minus 3)."""
+    opts = src if isinstance(src, (list, tuple)) else [src]
+    out = []
+    for o in opts:
+        o = o.replace("{Y-1}", str(year - 1)).replace("{Y-3}", str(year - 3))
+        out.append(o)
+    return out
 
 
 def extract_year(year, resolve, conn):
@@ -260,11 +276,13 @@ def extract_year(year, resolve, conn):
         # resolve each field's column index once
         colmap = {}
         for gzf, (src, cleaner) in spec["fields"].items():
-            i = hidx.get(hkey(src))
+            i = next((hidx[hkey(c)] for c in candidates(src, int(year))
+                      if hkey(c) in hidx), None)
             if i is None:
                 print(f"  !! {section}: header {src!r} not found in {fname}")
                 continue
             colmap[gzf] = (i, cleaner)
+        seen = {}  # (sid, field) -> (value, source_name) within this sheet
         for r in rows[1:]:
             if not r or not r[0]:
                 continue
@@ -277,6 +295,17 @@ def extract_year(year, resolve, conn):
                 val = cleaner(r[i])
                 if val is None:
                     continue
+                key = (sid, gzf)
+                if key in seen and str(seen[key][0]) != str(val):
+                    # two distinct source rows collapse to one slug — FLAG, keep
+                    # first (canonical), record the collision for adjudication.
+                    COLLISIONS.append(
+                        (int(year), section, sid, gzf,
+                         seen[key][1], seen[key][0], r[0], val))
+                    continue
+                if key in seen:
+                    continue
+                seen[key] = (val, r[0])
                 conn.execute(
                     "INSERT INTO facts VALUES (?,?,?,?,?,?,?,?,?)",
                     (sid, int(year), section, gzf,
@@ -305,6 +334,12 @@ def main():
         total += n
     conn.commit()
     print(f"\n{total} facts -> {DB}")
+    if COLLISIONS:
+        seen_pairs = {(c[2], c[6]) for c in COLLISIONS}
+        print(f"\n!! {len(COLLISIONS)} id collisions (two source rows -> one slug) "
+              f"across {len(seen_pairs)} school-pairs — FLAG for adjudication:")
+        for yr, sec, sid, fld, kn, kv, dn, dv in COLLISIONS[:12]:
+            print(f"   {yr} {sid}.{fld}: kept {kn!r}={kv} / dropped {dn!r}={dv}")
     conn.close()
 
 
