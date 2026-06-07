@@ -113,7 +113,7 @@ SECTIONS = {
             "fac_total": (["TotalFaculties", "Total"], clean_int),
             "fac_men": (["MaleTotal", "Total Male"], clean_int),
             "fac_women": (["FemaleTotal", "Total Female"], clean_int),
-            "fac_poc": (["POCTotal", "Total People of Color"], clean_int),
+            "fac_poc": (["POCTotal", "Total People of Color", "Total Minority"], clean_int),
             "librarians_total": ("TotalLibrarians", clean_int),
         },
     },
