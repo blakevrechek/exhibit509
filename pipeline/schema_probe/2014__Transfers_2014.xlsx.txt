@@ -1,0 +1,11 @@
+# Transfers_2014.xlsx  (year=2014, guessed section=transfers)
+
+## sheet: '2014_Transfers In'  dims=A1:G191 max_row=191 max_col=7
+  r0: ['School Name', 'Reporting Year', 'Total # of Transfer in Students', '75th Percentile 1L GPA', '50th Percentile 1L GPA', '25th Percentile 1L GPA', '50th Percentile\n  \n 1L GPA ']
+  r1: ['AKRON, UNIVERSITY OF', '2014', '2', '', '', '', '']
+  r2: ['ALABAMA, UNIVERSITY OF', '2014', '12', '3.52', '3.30', '3.27', '']
+  r3: ['ALBANY LAW SCHOOL', '2014', '3', '', '', '', '']
+  r4: ['AMERICAN UNIVERSITY', '2014', '44', '3.25', '2.94', '2.78', '']
+  r5: ['APPALACHIAN SCHOOL OF LAW', '2014', '3', '', '', '', '']
+  r6: ['ARIZONA STATE UNIVERSITY', '2014', '66', '3.51', '3.23', '2.97', '']
+  r7: ['ARIZONA SUMMIT LAW SCHOOL', '2014', '2', '', '', '', '']
