@@ -1,0 +1,11 @@
+# Transfers_2017.xlsx  (year=2017, guessed section=transfers)
+
+## sheet: '2017_Transfers'  dims=A1:F203 max_row=203 max_col=6
+  r0: ['School List', '1L Transfers Out', 'Transfers In', '75th percentile 1L GPA (12 or more transfers in)', '50th percentile 1L GPA (12 or more transfers in)', '25th percentile 1L GPA (12 or more transfers in)']
+  r1: ['AKRON, UNIVERSITY OF', '1', '2', '0', '0', '0']
+  r2: ['ALABAMA, UNIVERSITY OF', '4', '9', '0', '0', '0']
+  r3: ['ALBANY LAW SCHOOL', '0', '0', '0', '0', '0']
+  r4: ['AMERICAN UNIVERSITY', '60', '26', '3.22', '3.09', '2.88']
+  r5: ['APPALACHIAN SCHOOL OF LAW', '0', '21', '3.18', '2.87', '2.51']
+  r6: ['ARIZONA STATE UNIVERSITY', '0', '56', '3.44', '3.22', '3.06']
+  r7: ['ARIZONA SUMMIT LAW SCHOOL', '15', '0', '0', '0', '0']
