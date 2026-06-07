@@ -89,31 +89,31 @@ SECTIONS = {
     "admissions": {
         "glob": "First_Year_Class*",
         "fields": {
-            "apps": ("Applications", clean_int),
-            "offers": ("Offers", clean_int),
+            "apps": (["Applications", "CompletedApplications"], clean_int),
+            "offers": (["Offers", "OffersAdmission"], clean_int),
             "acc": ("AcceptanceRate", clean_pct),
-            "enr_1l": ("TotalEnrollees", clean_int),
-            "enr_1l_entering": ("Enrollees", clean_int),
-            "enr_1l_ft": ("FTEnrollees", clean_int),
-            "enr_1l_pt": ("PTEnrollees", clean_int),
-            "gpa75": ("All75thPercentileUGPA", clean_zeronull),
-            "gpa50": ("All50thPercentileUGPA", clean_zeronull),
-            "gpa25": ("All25thPercentileUGPA", clean_zeronull),
-            "lsat75": ("All75thPercentileLSAT", clean_zeronull),
-            "lsat50": ("All50thPercentileLSAT", clean_zeronull),
-            "lsat25": ("All25thPercentileLSAT", clean_zeronull),
-            "gre_takers": ("GRETotalEnrollees", clean_int),
+            "enr_1l": (["TotalEnrollees", "TotalFYClassAll"], clean_int),
+            "enr_1l_entering": (["Enrollees", "EnrolleesFromApplicantPool"], clean_int),
+            "enr_1l_ft": (["FTEnrollees", "TotalFYClassFT"], clean_int),
+            "enr_1l_pt": (["PTEnrollees", "TotalFYClassPT"], clean_int),
+            "gpa75": (["All75thPercentileUGPA", "All75GPA"], clean_zeronull),
+            "gpa50": (["All50thPercentileUGPA", "All50GPA"], clean_zeronull),
+            "gpa25": (["All25thPercentileUGPA", "All25GPA"], clean_zeronull),
+            "lsat75": (["All75thPercentileLSAT", "All75LSAT"], clean_zeronull),
+            "lsat50": (["All50thPercentileLSAT", "All50LSAT"], clean_zeronull),
+            "lsat25": (["All25thPercentileLSAT", "All25LSAT"], clean_zeronull),
+            "gre_takers": ("GRETotalEnrollees", clean_int),  # absent pre-2023
         },
     },
     "faculty": {
         "glob": "Faculty_Resources*",
         "fields": {
-            "fac_ft": ("FTTotal", clean_int),
-            "fac_pt": ("NONFTTotal", clean_int),
-            "fac_total": ("TotalFaculties", clean_int),
-            "fac_men": ("MaleTotal", clean_int),
-            "fac_women": ("FemaleTotal", clean_int),
-            "fac_poc": ("POCTotal", clean_int),
+            "fac_ft": (["FTTotal", "Total FT"], clean_int),
+            "fac_pt": (["NONFTTotal", "Total NonFT"], clean_int),
+            "fac_total": (["TotalFaculties", "Total"], clean_int),
+            "fac_men": (["MaleTotal", "Total Male"], clean_int),
+            "fac_women": (["FemaleTotal", "Total Female"], clean_int),
+            "fac_poc": (["POCTotal", "Total People of Color"], clean_int),
             "librarians_total": ("TotalLibrarians", clean_int),
         },
     },
@@ -131,7 +131,7 @@ SECTIONS = {
         "glob": "First_Time_Bar*",
         "name_col_alt": "School Name",
         "fields": {
-            "bar_grads": ("Graduates In {Y-1}", clean_int),
+            "bar_grads": (["Graduates In {Y-1}", "Total Graduates"], clean_int),
             "bar_first_takers": ("Total First Time Takers", clean_int),
             "bar_first_passers": ("Total First Time Passers", clean_int),
             "bar": ("AvgSchoolPassPercent*", clean_pct),
@@ -152,11 +152,16 @@ SECTIONS = {
     "grants": {
         "glob": "Grants_and_Scholarships*",
         "fields": {
-            "schol_total": ("Total Number # of Recieving Grants Total #", clean_int),
-            "schol_lt": ("Less than half tuition Total Number #", clean_int),
-            "schol_mt": ("Half to full tuition total Number #", clean_int),
-            "schol_full": ("Full tuition total Number #", clean_int),
-            "schol_gt": ("More than full tuition total Number #", clean_int),
+            "schol_total": (["Total Number # of Recieving Grants Total #",
+                             "Total # receiving grants total #"], clean_int),
+            "schol_lt": (["Less than half tuition Total Number #",
+                          "Less than half tuition total #"], clean_int),
+            "schol_mt": (["Half to full tuition total Number #",
+                          "Half to full tuition total #"], clean_int),
+            "schol_full": (["Full tuition total Number #",
+                            "Full tuition total #"], clean_int),
+            "schol_gt": (["More than full tuition total Number #",
+                          "More than full tuition total #"], clean_int),
             "grant_med_ft": ("FT 50th percentile grant amount", clean_money),
             "grant_p25_ft": ("FT 25th percentile grant amount", clean_money),
             "grant_p75_ft": ("FT 75th percentile grant amount", clean_money),
@@ -257,7 +262,8 @@ COLLISIONS = []  # (year, section, sid, field, kept_name, kept_val, dropped_name
 # here is expected, not a problem, so it is not warned about.
 OPTIONAL_FIELDS = {"race_nr", "enr_1l_entering",
                    "clinics_available", "sim_courses_available", "seminars",
-                   "cond_offered"}  # cond_offered column absent pre-2023
+                   "cond_offered",  # cond_offered column absent pre-2023
+                   "gre_takers"}    # GRE takers count absent pre-2023
 
 
 def hkey(s):

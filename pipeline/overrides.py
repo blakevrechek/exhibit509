@@ -40,6 +40,12 @@ ADJUDICATED = {
     ("rutgers-university", "bar_2yr_grads"),
     ("rutgers-university", "bar_2yr_takers"),
     ("rutgers-university", "bar_2yr_passers"),
+    ("rutgers-university", "bar"),
+    ("rutgers-university", "bar_grads"),
+    ("rutgers-university", "bar_first_takers"),
+    ("rutgers-university", "bar_first_passers"),
+    ("rutgers-university", "bar_state_avg"),
+    ("rutgers-university", "bar_state_diff"),
 }
 
 # New slugs introduced by overrides that the gz does not yet have. Metadata
