@@ -1,0 +1,11 @@
+# Curricular_Offerings_2024.xlsx  (year=2024, guessed section=curriculum)
+
+## sheet: '2024_Curricular Offerings'  dims=A1:N197 max_row=197 max_col=14
+  r0: ['SchoolName', 'SchoolYear', 'FirstYearSectionSize', 'FirstYearCurriculum', 'Under25', 'Between25to49', 'Between50to74', 'Between75to99', 'Above100', 'LawClinics', 'FieldPlacements', 'SimulationCourses', 'Seminars', 'CoCurricularOfferings']
+  r1: ['Akron, The University of', '2024', '35', '98', '91', '34', '8', '2', '0', '92', '69', '927', '21', '23']
+  r2: ['Alabama, The University of', '2024', '53.7', '119', '101', '11', '4', '6', '1', '288', '139', '338', '23', '61']
+  r3: ['Albany Law School', '2024', '54', '120', '87', '21', '17', '0', '1', '108', '230', '334', '27', '8']
+  r4: ['American University', '2024', '89', '245', '276', '39', '17', '14', '0', '184', '235', '874', '62', '119']
+  r5: ['Appalachian School of Law', '2024', '54', '74', '69', '11', '0', '0', '0', '86', '53', '360', '7', '2']
+  r6: ['Arizona State University', '2024', '43', '216', '251', '46', '11', '11', '0', '231', '575', '770', '43', '42']
+  r7: ['Arizona, The University of', '2024', '61', '159', '200', '15', '2', '2', '0', '278', '180', '1200', '26', '53']

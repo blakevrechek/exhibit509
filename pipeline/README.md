@@ -54,8 +54,9 @@ Then scale year by year, newest→oldest (format gets messier going back).
 - [x] extractors — **all 12 sections** — `extract.py` → `facts.sqlite`
 - [x] reconcile vs existing gz (oracle) — **2025: 100.00% match, 0 mismatches
       across 15,904 compared cells** (`reconcile.py 2025`)
-- [~] scale 2024 → 2018 (oracle-checked) — **2024: 10/12 sections at 100.00%**
-      (pending Attrition + Curriculum); then 2017 → 2011 (no oracle)
+- [x] **2024 complete — 12/12 sections at 100.00%** (15,839 cells; Penn State
+      adjudicated/excluded per F1)
+- [ ] scale 2023 → 2018 (oracle-checked), then 2017 → 2011 (no oracle)
 - [ ] gz rebuild + curated-layer reconcile
 
 ## Cross-year drift handled (so the same code spans 2011–2025)
@@ -64,7 +65,9 @@ Then scale year by year, newest→oldest (format gets messier going back).
 - **Candidate-header fallbacks** (ABA renames columns): tuition `*_Annual` /
   `*_Semester` (values identical — oracle-verified), enrollment `Hisp*` /
   `OtherHisp*`, race-multi `Multiracial*` / `Race*`.
-- **Optional fields** present only some years: `race_nr` (`NRGrandTotal`).
+- **Optional fields** present only some years: `race_nr` (`NRGrandTotal`),
+  `seminars` (dropped 2025), clinics/sim `*_available` (pre-2025 reported a
+  single count = filled; 2025 split into Available + Filled).
 - **Identity layer** (`overrides.py`): schools the gz merged are split back out;
   the collision detector flags any new two-rows-one-slug case automatically.
 

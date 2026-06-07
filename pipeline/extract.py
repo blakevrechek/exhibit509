@@ -177,11 +177,14 @@ SECTIONS = {
     "curriculum": {
         "glob": "Curricular_Offerings*",
         "fields": {
+            # pre-2025 reported a single count (= filled); 2025 split into
+            # Available + Filled, and dropped the Seminars column.
             "clinics_available": ("LawClinicsAvailable", clean_int),
-            "clinics_filled": ("LawClinicsFilled", clean_int),
-            "field_placements_filled": ("FieldPlacementsFilled", clean_int),
+            "clinics_filled": (["LawClinicsFilled", "LawClinics"], clean_int),
+            "field_placements_filled": (["FieldPlacementsFilled", "FieldPlacements"], clean_int),
             "sim_courses_available": ("SimulationCoursesAvailable", clean_int),
-            "sim_courses_filled": ("SimulationCoursesFilled", clean_int),
+            "sim_courses_filled": (["SimulationCoursesFilled", "SimulationCourses"], clean_int),
+            "seminars": ("Seminars", clean_int),
             "co_curricular": ("CoCurricularOfferings", clean_int),
         },
     },
@@ -242,7 +245,8 @@ COLLISIONS = []  # (year, section, sid, field, kept_name, kept_val, dropped_name
 
 # fields that legitimately exist only in some years' workbooks — a missing header
 # here is expected, not a problem, so it is not warned about.
-OPTIONAL_FIELDS = {"race_nr", "enr_1l_entering"}
+OPTIONAL_FIELDS = {"race_nr", "enr_1l_entering",
+                   "clinics_available", "sim_courses_available", "seminars"}
 
 
 def hkey(s):
