@@ -48,13 +48,12 @@ it overlaps the gz oracle) to prove the crosswalk + extractor + reconcile loop.
 Then scale year by year, newest→oldest (format gets messier going back).
 
 ## Status
-- [x] sources uploaded — 2025: **10 of 12** (pending: JD Attrition, Curriculum)
+- [x] sources uploaded — 2025: **12 of 12** ✅
 - [x] inventory + schema probe (`inspect_sources.py`)
 - [x] identity crosswalk — 196/196 schools resolve to gz ids
-- [x] extractors (10 sections) — `extract.py` → `facts.sqlite` (13.5k facts/yr)
+- [x] extractors — **all 12 sections** — `extract.py` → `facts.sqlite`
 - [x] reconcile vs existing gz (oracle) — **2025: 100.00% match, 0 mismatches
-      across 13,552 compared cells** (`reconcile.py 2025`)
-- [ ] add Attrition + Curriculum extractors (await files)
+      across 15,904 compared cells** (`reconcile.py 2025`)
 - [ ] scale 2024 → 2018 (oracle-checked), then 2017 → 2011 (no oracle)
 - [ ] gz rebuild + curated-layer reconcile
 

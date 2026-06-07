@@ -174,6 +174,28 @@ SECTIONS = {
             "emp_not_seeking": ("UnEmployedNotSeekingTotal", clean_int),
         },
     },
+    "curriculum": {
+        "glob": "Curricular_Offerings*",
+        "fields": {
+            "clinics_available": ("LawClinicsAvailable", clean_int),
+            "clinics_filled": ("LawClinicsFilled", clean_int),
+            "field_placements_filled": ("FieldPlacementsFilled", clean_int),
+            "sim_courses_available": ("SimulationCoursesAvailable", clean_int),
+            "sim_courses_filled": ("SimulationCoursesFilled", clean_int),
+            "co_curricular": ("CoCurricularOfferings", clean_int),
+        },
+    },
+    "attrition": {
+        "glob": "Attrition*",
+        "fields": {
+            "atr_acad_1l": ("AcademicAttrition_TotalJD1Total", clean_int),
+            "atr_acad_1l_pct": ("AcademicAttrition_TotalJD1Percentage", clean_pct),
+            "atr_acad_ul_pct": ("AcademicAttrition_TotalULPercentage", clean_pct),
+            "atr_other_1l": ("OtherAttrition_TotalJD1Total", clean_int),
+            "atr_other_1l_pct": ("OtherAttrition_TotalJD1Percentage", clean_pct),
+            "atr_other_ul_pct": ("OtherAttrition_TotalULPercentage", clean_pct),
+        },
+    },
     "enrollment": {
         "glob": "JD_Enrollment_and_Ethnicity*",
         "fields": {
