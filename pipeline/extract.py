@@ -263,6 +263,14 @@ SECTIONS = {
 
 COLLISIONS = []  # (year, section, sid, field, kept_name, kept_val, dropped_name, dropped_val)
 
+# The canonical tui_* fields are ANNUAL. Through 2020 the ABA reported tuition
+# PER SEMESTER (verified: gz/source ratio is exactly 2.0 for every non-zero
+# 2020 value); 2021+ report annual. So for these years we annualize (×2) the
+# four tuition fields on extract. Earlier years get added here as the oracle /
+# curated trends confirm them.
+PER_SEMESTER_TUITION_YEARS = {2020}
+ANNUALIZE_FIELDS = {"tui_ft_res", "tui_ft_nonres", "tui_pt_res", "tui_pt_nonres"}
+
 # fields that legitimately exist only in some years' workbooks — a missing header
 # here is expected, not a problem, so it is not warned about.
 OPTIONAL_FIELDS = {"race_nr", "enr_1l_entering",
@@ -326,6 +334,9 @@ def extract_year(year, resolve, conn):
                 val = cleaner(r[i])
                 if val is None:
                     continue
+                if (int(year) in PER_SEMESTER_TUITION_YEARS
+                        and gzf in ANNUALIZE_FIELDS and isinstance(val, (int, float))):
+                    val = val * 2  # per-semester -> annual
                 key = (sid, gzf)
                 if key in seen and str(seen[key][0]) != str(val):
                     # two distinct source rows collapse to one slug — FLAG, keep

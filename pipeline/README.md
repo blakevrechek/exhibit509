@@ -65,6 +65,10 @@ Then scale year by year, newest→oldest (format gets messier going back).
 - **Candidate-header fallbacks** (ABA renames columns): tuition `*_Annual` /
   `*_Semester` (values identical — oracle-verified), enrollment `Hisp*` /
   `OtherHisp*`, race-multi `Multiracial*` / `Race*`.
+- **Per-semester tuition (≤2020):** through 2020 the ABA reported tuition per
+  *semester*; the canonical `tui_*` fields are *annual*, so those years are ×2'd
+  on extract (verified: gz/source ratio is exactly 2.0 for every 2020 value).
+  2021+ already annual. (`PER_SEMESTER_TUITION_YEARS`)
 - **Optional fields** present only some years: `race_nr` (`NRGrandTotal`),
   `seminars` (dropped 2025), clinics/sim `*_available` (pre-2025 reported a
   single count = filled; 2025 split into Available + Filled).
