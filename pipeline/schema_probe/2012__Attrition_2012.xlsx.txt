@@ -1,0 +1,11 @@
+# Attrition_2012.xlsx  (year=2012, guessed section=attrition)
+
+## sheet: '2012_J.D. Attrition'  dims=A1:R207 max_row=207 max_col=18
+  r0: ['School Name', 'Reporting Year', '#1st Year Academic', '#1st Year Other', '#1st Year Total', '%1st Year', '#2nd Year Academic', '#2nd Year Other', '#2nd Year Total', '%2nd Year', '#3rd Year Academic', '#3rd Year Other', '#3rd Year Total', '%3rd Year', '#4th Year Academic', '#4th Year Other', '#4th Year Total', '%4th Year']
+  r1: ['AKRON, UNIVERSITY OF', '2012', '11', '18', '29', '16', '1', '2', '3', '1.6', '0', '0', '0', '0', '0', '0', '0', '0']
+  r2: ['ALABAMA, UNIVERSITY OF', '2012', '6', '5', '11', '6.7', '1', '1', '2', '1.2', '0', '2', '2', '1.1', '0', '0', '0', '0']
+  r3: ['ALBANY LAW SCHOOL', '2012', '13', '1', '14', '5.7', '0', '19', '19', '9.5', '0', '1', '1', '0.4', '0', '0', '0', '0']
+  r4: ['AMERICAN UNIVERSITY', '2012', '0', '53', '53', '11.1', '0', '4', '4', '0.8', '0', '0', '0', '0', '0', '0', '0', '0']
+  r5: ['APPALACHIAN SCHOOL OF LAW', '2012', '22', '19', '41', '28.3', '4', '6', '10', '10.6', '0', '0', '0', '0', '0', '0', '0', '0']
+  r6: ['ARIZONA STATE UNIVERSITY', '2012', '1', '7', '8', '4.7', '0', '14', '14', '6.8', '0', '0', '0', '0', '0', '0', '0', '0']
+  r7: ['ARIZONA SUMMIT LAW SCHOOL', '2012', '21', '23', '44', '8.4', '18', '77', '95', '34.6', '2', '0', '2', '1.2', '0', '0', '0', '0']
