@@ -65,8 +65,12 @@ Then scale year by year, newest→oldest (format gets messier going back).
 - [x] **2017 complete — 10/12 section-types (no bar-passage workbooks exist in
       the 2017 disclosure format); trend match 99.79%** (LSAT/GPA 169/169;
       5 minor curated divergences where the primary source is authoritative)
-- [ ] 2016 → 2011 backfill (trend-referenced; no gz oracle)
-- [ ] gz rebuild + curated-layer reconcile
+- [x] **2011 → 2016 backfill complete (trend-referenced)** — all years
+      reconcile 98.4-99.8% on comparable fields; residual divergences are
+      curated-layer errors (F3/F4, ABA source authoritative); bar passage
+      gap-filled for 2012-2017.
+- [x] **FULL 2011-2025 RE-DERIVATION DATA-COMPLETE**
+- [ ] gz rebuild from facts.sqlite + curated-layer reconcile
 
 ## Cross-year drift handled (so the same code spans 2011–2025)
 - **Year-relative cohort headers:** `{Y-1}` (first-time bar), `{Y-3}` (two-year

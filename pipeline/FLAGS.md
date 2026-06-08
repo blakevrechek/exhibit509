@@ -38,6 +38,21 @@ decision before any edit to `data/exhibit-data.js` or the gz.
 
 ## OPEN (informational — primary source authoritative, no action needed unless you disagree)
 
+### F4 — 2011 bar pass-% : ABA composite vs curated `bar_trend` (your call)
+- **Where:** 2011 (the only ≤2017 year `bar_trend` covers — it has a 2012-2017
+  gap). `bar` field, ~88/188 schools diverge.
+- **What:** the rebuild uses the ABA workbook's official **"Composite Avg. School
+  Pass %"** (verified correctly extracted; e.g. Arizona Summit 2011 = 76.46%).
+  The curated `bar_trend` has different values (Arizona Summit = 94.58%, which is
+  implausibly high for that school). Bar passer/taker **counts** match (190/0), so
+  this is purely the pass-% definition/value, not row selection.
+- **Why likely curated-wrong:** the modern bar extraction (First_Time_Bar sheet,
+  the analogous "AvgSchoolPassPercent") reconciles 100% vs the gz for 2018-2025.
+  `bar_trend` itself is flagged in validate_data.py as a quirky cohort series.
+- **Default:** rebuild uses the ABA composite (primary source). The 2012-2017
+  bar gap-fill values are the same composite (couldn't be trend-checked — no
+  `bar_trend` there). **Tell me if you'd rather keep the curated `bar_trend`.**
+
 ### F3 — curated trend divergences below the oracle window (2017↓)
 - Backfill years are reconciled against the curated `*_trend` (not the gz). Most
   cells match; a minority diverge where the curated trend is itself wrong and the

@@ -1,0 +1,11 @@
+# Bar_Passage_Rates_2011.xlsx  (year=2011, guessed section=bar_passage)
+
+## sheet: '2011_Bar Passage Rates'  dims=A1:O1289 max_row=1289 max_col=15
+  r0: ['School Name', 'Reporting Year', 'Exam Year', 'Jurisdiction', 'Total First-Time Takers', 'Jurisdiction Takers', 'Jurisdiction Passers', 'Pass %', 'State %', 'Diff. %', ' ', 'Composite School Reporting %', 'Composite Avg. School Pass %', 'Composite Avg. State Pass %', 'Composite Avg. Pass Diff. %']
+  r1: ['AKRON, UNIVERSITY OF', '2011', '2010', 'Ohio', '125', '91', '86', '94.51%', '86.14%', '8.37%', ' ', '72.80%', '94.51%', '86.14%', '8.37%']
+  r2: ['AKRON, UNIVERSITY OF', '2010', '2009', 'Ohio', '130', '107', '96', '89.72%', '86.03%', '3.69%', ' ', '82.31%', '89.72%', '86.03%', '3.69%']
+  r3: ['AKRON, UNIVERSITY OF', '2009', '2008', 'Ohio', '118', '118', '107', '90.68%', '88.09%', '2.59%', ' ', '100.00%', '90.68%', '88.09%', '2.59%']
+  r4: ['ALABAMA, UNIVERSITY OF', '2011', '2010', 'Alabama', '176', '128', '122', '95.31%', '84.91%', '10.40%', ' ', '72.73%', '95.31%', '84.91%', '10.40%']
+  r5: ['ALABAMA, UNIVERSITY OF', '2010', '2009', 'Alabama', '149', '105', '101', '96.19%', '86.51%', '9.68%', ' ', '78.52%', '96.58%', '86.49%', '10.09%']
+  r6: ['ALABAMA, UNIVERSITY OF', '2010', '2009', 'Georgia', '149', '12', '12', '100.00%', '86.28%', '13.72%', ' ', '', '', '', '']
+  r7: ['ALABAMA, UNIVERSITY OF', '2009', '2008', 'Alabama', '136', '98', '95', '96.94%', '89.02%', '7.92%', ' ', '77.21%', '97.15%', '88.96%', '8.19%']
