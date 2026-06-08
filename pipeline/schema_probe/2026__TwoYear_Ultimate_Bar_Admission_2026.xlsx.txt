@@ -1,0 +1,11 @@
+# TwoYear_Ultimate_Bar_Admission_2026.xlsx  (year=2026, guessed section=admissions)
+
+## sheet: '2026_TwoYearUltimateBarAdmiss'  dims=A1:I197 max_row=197 max_col=9
+  r0: ['School Name', '2023 Graduates', '2023 Takers', '2023 Passers', '%Passers', '2023 Graduates with no information', '2023 Graduates who did not take the bar', '2023 Graduates with Alternative Pathways*', 'Pass % (including Alternative Pathways)']
+  r1: ['Akron, The University of', '120', '118', '105', '88.98%', '0', '2', '0', '88.98%']
+  r2: ['Alabama, The University of', '122', '118', '117', '99.15%', '1', '3', '0', '99.15%']
+  r3: ['Albany Law School', '182', '181', '165', '91.16%', '0', '1', '0', '91.16%']
+  r4: ['American University', '320', '316', '289', '91.46%', '0', '4', '0', '91.46%']
+  r5: ['Appalachian School of Law', '50', '47', '43', '91.49%', '1', '2', '0', '91.49%']
+  r6: ['Arizona State University', '263', '254', '240', '94.49%', '2', '7', '0', '94.49%']
+  r7: ['Arizona, The University of', '116', '108', '103', '95.37%', '0', '8', '0', '95.37%']
