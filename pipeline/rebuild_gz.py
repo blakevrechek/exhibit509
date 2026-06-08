@@ -33,7 +33,9 @@ GZ = os.path.join(ROOT, "data", "exhibit_data.json.gz")
 DB = os.path.join(ROOT, "pipeline", "facts.sqlite")
 
 # facts fields whose gz key differs / are new (no gz history key yet)
-NEW_FIELDS = {"cond_enter", "cond_elim", "seminars", "race_nr", "enr_1l_entering"}
+NEW_FIELDS = {"cond_enter", "cond_elim", "seminars", "race_nr", "enr_1l_entering",
+              "gre_v25", "gre_v50", "gre_v75", "gre_q25", "gre_q50", "gre_q75",
+              "gre_a25", "gre_a50", "gre_a75", "jdnext25", "jdnext50", "jdnext75"}
 
 
 def infer_types(gz):

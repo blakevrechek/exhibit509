@@ -333,6 +333,27 @@ def render_page(s, all_schools=None):
         if closed else ""
     )
 
+    # Optional alternative-admission-test rows (only where the school reports them):
+    # GRE section percentiles (2023+) and JD-Next (2024+).
+    def _g(v):
+        return "—" if v is None else (f"{v:g}")
+
+    def trip_row(label, p25, p50, p75):
+        if s.get(p50) is None:
+            return ""
+        return row(label, f"{_g(s.get(p25))} / {_g(s.get(p50))} / {_g(s.get(p75))}")
+
+    alt_test_rows = "".join([
+        trip_row("GRE Verbal (25 / 50 / 75)", "gre_v25", "gre_v50", "gre_v75"),
+        trip_row("GRE Quant (25 / 50 / 75)", "gre_q25", "gre_q50", "gre_q75"),
+        trip_row("GRE Analytical (25 / 50 / 75)", "gre_a25", "gre_a50", "gre_a75"),
+        trip_row("JD-Next (25 / 50 / 75)", "jdnext25", "jdnext50", "jdnext75"),
+    ])
+    atr_row = ""
+    if s.get("atr_acad_1l") is not None or s.get("atr_other_1l") is not None:
+        atr_row = row("1L attrition (academic / other)",
+                      f"{fmt_int(s.get('atr_acad_1l'))} / {fmt_int(s.get('atr_other_1l'))}")
+
     # Admissions
     adm_rows = "".join([
         row("LSAT (25 / 50 / 75)", f"{s.get('lsat25') or '—'} / {lsat50 or '—'} / {s.get('lsat75') or '—'}"),
@@ -343,6 +364,8 @@ def render_page(s, all_schools=None):
         row("1L enrollment", fmt_int(s.get("enr_1l"))),
         row("Total JD enrollment", fmt_int(s.get("enr"))),
         row("GRE-only takers", fmt_int(s.get("gre_takers"))),
+        alt_test_rows,
+        atr_row,
         row("Transfers in / out", f"{fmt_int(s.get('trans_in'))} / {fmt_int(s.get('trans_out'))}"),
     ])
 

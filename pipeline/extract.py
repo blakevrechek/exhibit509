@@ -114,6 +114,20 @@ SECTIONS = {
             "lsat25": (["All25thPercentileLSAT", "All25LSAT", "25th percentile LSAT ALL",
                         "25th percentile LSAT", "25th Percentile LSAT Total"], clean_zeronull),
             "gre_takers": ("GRETotalEnrollees", clean_int),  # absent pre-2023
+            # GRE section percentiles (all-enrollee), reported 2023+.
+            "gre_v25": ("GREAll25thPercentileVerbal", clean_zeronull),
+            "gre_v50": ("GREAll50thPercentileVerbal", clean_zeronull),
+            "gre_v75": ("GREAll75thPercentileVerbal", clean_zeronull),
+            "gre_q25": ("GREAll25thPercentileQuant", clean_zeronull),
+            "gre_q50": ("GREAll50thPercentileQuant", clean_zeronull),
+            "gre_q75": ("GREAll75thPercentileQuant", clean_zeronull),
+            "gre_a25": ("GREAll25thPercentileAnalytical", clean_zeronull),
+            "gre_a50": ("GREAll50thPercentileAnalytical", clean_zeronull),
+            "gre_a75": ("GREAll75thPercentileAnalytical", clean_zeronull),
+            # JD-Next admission-test percentiles, reported 2024+.
+            "jdnext25": ("All25thPercentileJDNEXT", clean_zeronull),
+            "jdnext50": ("All50thPercentileJDNEXT", clean_zeronull),
+            "jdnext75": ("All75thPercentileJDNEXT", clean_zeronull),
         },
     },
     "faculty": {
@@ -253,13 +267,15 @@ SECTIONS = {
     "attrition": {
         "glob": "Attrition*",
         "fields": {
+            # 2011-2017 sheets use '#1st Year Academic'/'#1st Year Other' counts
+            # (no percentage columns); 2018+ use the TotalJD1 naming.
             "atr_acad_1l": (["AcademicAttrition_TotalJD1Total",
-                             "AcadAttrition_TotalJD1Total"], clean_int),
+                             "AcadAttrition_TotalJD1Total", "#1st Year Academic"], clean_int),
             "atr_acad_1l_pct": (["AcademicAttrition_TotalJD1Percentage",
                                  "AcadAttrition_TotalJD1Percentage"], clean_pct),
             "atr_acad_ul_pct": (["AcademicAttrition_TotalULPercentage",
                                  "AcadAttrition_TotalULPercentage"], clean_pct),
-            "atr_other_1l": ("OtherAttrition_TotalJD1Total", clean_int),
+            "atr_other_1l": (["OtherAttrition_TotalJD1Total", "#1st Year Other"], clean_int),
             "atr_other_1l_pct": ("OtherAttrition_TotalJD1Percentage", clean_pct),
             "atr_other_ul_pct": ("OtherAttrition_TotalULPercentage", clean_pct),
         },
@@ -348,6 +364,9 @@ OPTIONAL_FIELDS = {"race_nr", "enr_1l_entering",
                    "clinics_available", "sim_courses_available", "seminars",
                    "cond_offered",  # cond_offered column absent pre-2023
                    "gre_takers",    # GRE takers count absent pre-2023
+                   "gre_v25", "gre_v50", "gre_v75", "gre_q25", "gre_q50", "gre_q75",
+                   "gre_a25", "gre_a50", "gre_a75",  # GRE percentiles, 2023+
+                   "jdnext25", "jdnext50", "jdnext75",  # JD-Next percentiles, 2024+
                    "ft_fee",        # fee column absent some years (e.g. 2018)
                    # absent in the older (≤2017) workbook structures:
                    "enr_1l_ft", "enr_1l_pt", "librarians_total",
