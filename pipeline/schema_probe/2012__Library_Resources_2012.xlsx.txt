@@ -1,0 +1,11 @@
+# Library_Resources_2012.xlsx  (year=2012, guessed section=faculty)
+
+## sheet: '2012_Informational and Library'  dims=A1:G188 max_row=188 max_col=7
+  r0: ['School Name', 'School Year', 'Total amount spent on library materials', 'Study seating capacity inside the library', 'Study FTE professional librarians', 'Hours per week library is open', 'Require computer?']
+  r1: ['AKRON, UNIVERSITY OF', '2012', '$927,297', '283', '6', '105', 'No']
+  r2: ['ALABAMA, UNIVERSITY OF', '2012', '$1,305,512', '530', '9', '87', 'No']
+  r3: ['APPALACHIAN SCHOOL OF LAW', '2012', '$945,846', '232', '6', '79', 'No']
+  r4: ['ARIZONA STATE UNIVERSITY', '2012', '$861,690', '584', '6', '112', 'No']
+  r5: ['ARIZONA SUMMIT LAW SCHOOL', '2012', '$727,573', '338', '6', '104', 'Yes']
+  r6: ['ARIZONA, UNIVERSITY OF', '2012', '$851,503', '379', '5', '101', 'No']
+  r7: ['ARKANSAS, FAYETTEVILLE, UNIVERSITY OF', '2012', '$918,402', '401', '7', '98', 'No']
