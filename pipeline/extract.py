@@ -267,20 +267,33 @@ SECTIONS = {
     "enrollment": {
         "glob": "JD_Enrollment_and_Ethnicity*",
         "fields": {
-            "enr": (["TotalGrandTotal", "Total Grand Total"], clean_int),
+            # 2017+ report combined "Grand Total" columns; 2011-2016 report a
+            # "<x> Total" column (= Men+Women summed) alongside the #/%-per-sex
+            # breakdown. Both era's headers are listed so one extractor covers all.
+            "enr": (["TotalGrandTotal", "Total Grand Total", "#Total Total"], clean_int),
             "grads": (["Total Degrees Awarded", "#Total J.D. Deg Awd"], clean_int),
-            "race_white": (["WhiteGrandTotal", "White Grand Total"], clean_int),
-            "race_black": (["BlackGrandTotal", "Black or African American Grand Total"], clean_int),
-            "race_hisp": (["HispGrandTotal", "OtherHispGrandTotal", "Hispanic Grand Total"], clean_int),
-            "race_asian": (["AsianGrandTotal", "Asian Grand Total"], clean_int),
-            "race_indian": (["AmericanIndianGrandTotal", "AmerIndian Grand Total"], clean_int),
+            "race_white": (["WhiteGrandTotal", "White Grand Total", "#White Total"], clean_int),
+            "race_black": (["BlackGrandTotal", "Black or African American Grand Total",
+                            "#Black or African American Total"], clean_int),
+            "race_hisp": (["HispGrandTotal", "OtherHispGrandTotal", "Hispanic Grand Total",
+                           "#Hispanics of any race Total"], clean_int),
+            "race_asian": (["AsianGrandTotal", "Asian Grand Total", "#Asian Total"], clean_int),
+            "race_indian": (["AmericanIndianGrandTotal", "AmerIndian Grand Total",
+                             "#American Indian or Alaska Native Total"], clean_int),
             "race_native": (["NativeGrandTotal",
-                             "Native Hawaiian Pacific Islander Grand Total"], clean_int),
+                             "Native Hawaiian Pacific Islander Grand Total",
+                             "#Native Hawaiian or Other Pacific Islander Total"], clean_int),
             "race_multi": (["MultiracialGrandTotal", "RaceGrandTotal",
-                            "Two or more Races Grand Total"], clean_int),
-            "race_nr": (["NRGrandTotal", "NonRes Alien Grand Total"], clean_int),
+                            "Two or more Races Grand Total", "#Two or more races Total"], clean_int),
+            "race_nr": (["NRGrandTotal", "NonRes Alien Grand Total",
+                         "#Nonresident Alien Total"], clean_int),
             "race_unknown": (["UnknownGrandTotal", "UnknownRaceGrandTotal",
-                              "Race Unk Grand Total"], clean_int),
+                              "Race Unk Grand Total", "#Race and Ethnicity Unknown Total"], clean_int),
+            # sex grand totals: 2011-2016 expose '#Total Men'/'#Total Women' directly;
+            # 2017+ have no sex subtotal column (gz already carries 2018-2026), so these
+            # backfill 2011-2016 only.
+            "sex_men": ("#Total Men", clean_int),
+            "sex_women": ("#Total Women", clean_int),
         },
     },
     "basics": {
@@ -348,6 +361,7 @@ OPTIONAL_FIELDS = {"race_nr", "enr_1l_entering",
                    # race/enr totals are deferred (need aggregation, not trend-checked):
                    "enr", "race_white", "race_black", "race_hisp", "race_asian",
                    "race_indian", "race_native", "race_multi", "race_nr", "race_unknown",
+                   "sex_men", "sex_women",  # '#Total Men/Women' only in 2011-2016 sheets
                    "grant_med_ft", "grant_p25_ft", "grant_p75_ft"}  # renamed ≤2011
 
 
@@ -439,6 +453,45 @@ def extract_year(year, resolve, conn):
     return rows_out
 
 
+def extract_2017_sex(resolve, conn):
+    """2017 is the one JD-enrollment year with neither a '#Total Men' column
+    (2011-2016) nor gz-carried sex (2018-2026). Its sheet does expose per-JD-level
+    'Total {n}L Men/Women' subtotals, so sex_{men,women} = sum of the three levels."""
+    matches = glob.glob(os.path.join(SRC, "2017", "JD_Enrollment_and_Ethnicity*.xls*"))
+    if not matches:
+        return 0
+    men_cols = [hkey(c) for c in ("Total 1L Men", "Total 2L Men", "Total 3L Men")]
+    wom_cols = [hkey(c) for c in ("Total 1L Women", "Total 2L Women", "Total 3L Women")]
+    wb = openpyxl.load_workbook(matches[0], read_only=True, data_only=True)
+    ws = wb.worksheets[0]
+    rows = list(ws.iter_rows(values_only=True))
+    hidx = {hkey(c): i for i, c in enumerate(rows[0])}
+    fname = os.path.basename(matches[0])
+    n = 0
+    for field, cols in (("sex_men", men_cols), ("sex_women", wom_cols)):
+        idxs = [hidx[c] for c in cols if c in hidx]
+        if len(idxs) != 3:
+            print(f"  !! 2017 sex: expected 3 level cols for {field}, found {len(idxs)}")
+            continue
+        for r in rows[1:]:
+            if not r or not r[0]:
+                continue
+            sid = resolve(r[0])
+            if not sid:
+                continue
+            vals = [clean_int(r[i]) for i in idxs if i < len(r)]
+            vals = [v for v in vals if v is not None]
+            if not vals:
+                continue
+            conn.execute("INSERT INTO facts VALUES (?,?,?,?,?,?,?,?,?)",
+                         (sid, 2017, "enrollment", field, str(sum(vals)),
+                          fname, ws.title, None, None))
+            n += 1
+    wb.close()
+    print(f"2017 sex aggregation: {n} facts")
+    return n
+
+
 def main():
     years = sys.argv[1:] or sorted(
         d for d in os.listdir(SRC) if d.isdigit() and os.path.isdir(os.path.join(SRC, d))
@@ -455,6 +508,8 @@ def main():
         n = extract_year(y, resolve, conn)
         print(f"{y}: {n} facts")
         total += n
+    if not sys.argv[1:] or "2017" in years:
+        total += extract_2017_sex(resolve, conn)
     conn.commit()
     print(f"\n{total} facts -> {DB}")
     if COLLISIONS:
