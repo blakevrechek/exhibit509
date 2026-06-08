@@ -1,0 +1,11 @@
+# Library_Resources_2011.xlsx  (year=2011, guessed section=faculty)
+
+## sheet: '2011_Informational and Library'  dims=A1:J191 max_row=191 max_col=10
+  r0: ['School Name', 'School Year', 'Total amount spent on library materials', 'Study seating capacity inside the library', 'Study FTE professional librarians', 'Hours per week library is open', '# of open wired connections available to students', '# of networked computers available for use by students', 'Has wireless network', 'Require computer?']
+  r1: ['AKRON, UNIVERSITY OF', '2011', '$873,286', '274', '4', '105', '38', '68', 'Yes', 'No']
+  r2: ['ALABAMA, UNIVERSITY OF', '2011', '$1,296,621', '506', '16', '100', '73', '81', 'Yes', 'No']
+  r3: ['ALBANY LAW SCHOOL', '2011', '$1,804,101', '432', '7', '104', '1142', '95', 'Yes', 'No']
+  r4: ['APPALACHIAN SCHOOL OF LAW', '2011', '$849,954', '232', '5', '83', '772', '30', 'Yes', 'No']
+  r5: ['ARIZONA STATE UNIVERSITY', '2011', '$956,196', '584', '7', '111', '187', '65', 'Yes', 'No']
+  r6: ['ARIZONA SUMMIT LAW SCHOOL', '2011', '$839,351', '212', '7', '107', '0', '19', 'Yes', 'Yes']
+  r7: ['ARIZONA, UNIVERSITY OF', '2011', '$895,135', '379', '9', '101', '0', '32', 'Yes', 'No']

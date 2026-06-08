@@ -1,0 +1,11 @@
+# Faculty_Resources_2022.xlsx  (year=2022, guessed section=faculty)
+
+## sheet: '2022_Faculty Resources'  dims=A1:S201 max_row=201 max_col=19
+  r0: ['School List', 'FT Male', 'NONFT Male', 'Total Male', 'FT Female', 'NonFT Female', 'Total Female', 'FT Other', 'NonFT Other', 'Total Other', 'FT People of Color', 'NonFT People of Color', 'Total People of Color', 'Total FT ', 'Total NonFT', 'Total', 'FullTimeLibrarians', 'PartTimeLibrarians', 'TotalLibrarians']
+  r1: ['AKRON, UNIVERSITY OF', '15', '22', '37', '8', '12', '20', '0', '0', '0', '3', '1', '4', '23', '34', '57', '3', '0', '3']
+  r2: ['ALABAMA, UNIVERSITY OF', '23', '40', '63', '18', '15', '33', '0', '0', '0', '10', '7', '17', '41', '55', '96', '6', '1', '7']
+  r3: ['ALBANY LAW SCHOOL', '21', '29', '50', '23', '17', '40', '0', '1', '1', '11', '3', '14', '44', '47', '91', '6', '1', '7']
+  r4: ['AMERICAN UNIVERSITY', '27', '99', '126', '44', '89', '133', '0', '0', '0', '19', '34', '53', '71', '188', '259', '7', '1', '8']
+  r5: ['APPALACHIAN SCHOOL OF LAW', '8', '6', '14', '5', '2', '7', '0', '3', '3', '0', '2', '2', '13', '11', '24', '3', '1', '4']
+  r6: ['ARIZONA STATE UNIVERSITY', '39', '110', '149', '28', '40', '68', '0', '0', '0', '16', '23', '39', '67', '150', '217', '5', '0', '5']
+  r7: ['ARIZONA, UNIVERSITY OF', '20', '63', '83', '32', '41', '73', '0', '0', '0', '16', '18', '34', '52', '104', '156', '9', '1', '10']

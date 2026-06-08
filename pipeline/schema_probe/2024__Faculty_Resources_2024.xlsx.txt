@@ -1,0 +1,11 @@
+# Faculty_Resources_2024.xlsx  (year=2024, guessed section=faculty)
+
+## sheet: '2024_Faculty Resources'  dims=A1:W197 max_row=197 max_col=23
+  r0: ['SchoolName', 'SchoolYear', 'FTMale', 'FTFemale', 'FTAGI', 'FTPNR', 'FTPOC', 'FTTotal', 'NONFTMale', 'NONFTFemale', 'NONFTAGI', 'NONFTPNR', 'NONFTPOC', 'NONFTTotal', 'MaleTotal', 'FemaleTotal', 'AGITotal', 'PNRTotal', 'POCTotal', 'TotalFaculties', 'FTLibrarians', 'PTLibrarians', 'TotalLibrarians']
+  r1: ['Akron, The University of', '2024', '16', '15', '0', '0', '5', '31', '27', '16', '0', '0', '3', '43', '43', '31', '0', '0', '8', '74', '4', '0', '4']
+  r2: ['Alabama, The University of', '2024', '29', '19', '0', '0', '6', '48', '40', '18', '0', '0', '10', '58', '69', '37', '0', '0', '16', '106', '7', '1', '8']
+  r3: ['Albany Law School', '2024', '19', '30', '0', '0', '13', '49', '25', '18', '1', '0', '8', '44', '44', '48', '1', '0', '21', '93', '6', '1', '7']
+  r4: ['American University', '2024', '38', '41', '0', '0', '28', '79', '127', '107', '0', '0', '50', '234', '165', '148', '0', '0', '78', '313', '7', '1', '8']
+  r5: ['Appalachian School of Law', '2024', '10', '7', '0', '0', '1', '17', '5', '2', '0', '0', '1', '7', '15', '9', '0', '0', '2', '24', '1', '1', '2']
+  r6: ['Arizona State University', '2024', '41', '33', '0', '0', '16', '74', '101', '45', '0', '0', '22', '146', '142', '78', '0', '0', '38', '220', '11', '2', '13']
+  r7: ['Arizona, The University of', '2024', '36', '39', '0', '0', '28', '75', '59', '44', '0', '0', '27', '103', '95', '83', '0', '0', '55', '178', '8', '1', '9']

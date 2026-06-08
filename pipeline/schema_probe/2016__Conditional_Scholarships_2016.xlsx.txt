@@ -1,0 +1,11 @@
+# Conditional_Scholarships_2016.xlsx  (year=2016, guessed section=grants)
+
+## sheet: '2016_Conditional Scholarships'  dims=A1:I205 max_row=205 max_col=9
+  r0: ['School Name', 'Reporting Year', 'Conditional Scholarship', '2015-2016 # Entering With      ', '2015-2016 # Eliminated         ', '2014-2015 # Entering With      ', '2014-2015 # Eliminated         ', '2013-2014 # Entering With      ', '2013-2014 # Eliminated         ']
+  r1: ['AKRON, UNIVERSITY OF', '2016', "The school does not award scholarships that may be reduced or eliminated based on law school academic performance other than failure to maintain good academic standing. Therefore, the school does not complete a 'conditional sch\n  \nolarship retention chart.", '', '', '', '', '', '']
+  r2: ['ALABAMA, UNIVERSITY OF', '2016', 'Yes', '', '', '', '', '108 ', '38  ']
+  r3: ['ALBANY LAW SCHOOL', '2016', 'Yes', '62  ', '18  ', '42  ', '12  ', '102 ', '24  ']
+  r4: ['AMERICAN UNIVERSITY', '2016', 'Yes', '5   ', '0   ', '5   ', '0   ', '8   ', '0   ']
+  r5: ['APPALACHIAN SCHOOL OF LAW', '2016', 'Yes', '20  ', '7   ', '22  ', '12  ', '26  ', '18  ']
+  r6: ['ARIZONA STATE UNIVERSITY', '2016', "The school does not award scholarships that may be reduced or eliminated based on law school academic performance other than failure to maintain good academic standing. Therefore, the school does not complete a 'conditional sch\n  \nolarship retention chart.", '', '', '', '', '', '']
+  r7: ['ARIZONA SUMMIT LAW SCHOOL', '2016', 'Yes', '186 ', '88  ', '184 ', '105 ', '149 ', '66  ']

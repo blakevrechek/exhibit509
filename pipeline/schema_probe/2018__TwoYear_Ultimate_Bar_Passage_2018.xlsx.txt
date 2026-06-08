@@ -1,0 +1,11 @@
+# TwoYear_Ultimate_Bar_Passage_2018.xlsx  (year=2018, guessed section=bar_passage)
+
+## sheet: '2018_TwoYearUltimateBarPassage'  dims=A1:J205 max_row=205 max_col=10
+  r0: ['School Name', 'Graduate Year', 'No. of Graduates', 'No. of Takers', 'No. of Passers', '%Passers', 'No. of Graduates with no information', 'No. of Graduates who did not take the bar', 'No. of Graduates with Alternative Pathways*', 'Pass % (including Alternative Pathways)']
+  r1: ['AKRON, UNIVERSITY OF', '2015', '144', '135', '120', '88.89%', '8', '1', '', '88.89%']
+  r2: ['ALABAMA, UNIVERSITY OF', '2015', '144', '140', '127', '90.71%', '0', '4', '', '90.71%']
+  r3: ['ALBANY LAW SCHOOL', '2015', '172', '169', '147', '86.98%', '3', '0', '', '86.98%']
+  r4: ['AMERICAN UNIVERSITY', '2015', '460', '404', '310', '76.73%', '9', '47', '', '76.73%']
+  r5: ['APPALACHIAN SCHOOL OF LAW', '2015', '60', '60', '47', '78.33%', '0', '0', '', '78.33%']
+  r6: ['ARIZONA STATE UNIVERSITY', '2015', '219', '212', '198', '93.40%', '2', '5', '', '93.40%']
+  r7: ['ARIZONA SUMMIT LAW SCHOOL', '2015', '417', '395', '236', '59.75%', '0', '22', '', '59.75%']

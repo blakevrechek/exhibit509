@@ -1,0 +1,11 @@
+# Transfers_2016.xlsx  (year=2016, guessed section=transfers)
+
+## sheet: '2016_Transfers In'  dims=A1:G178 max_row=178 max_col=7
+  r0: ['School Name', 'Reporting Year', 'Total # of Transfer in Students', '75th Percentile 1L GPA', '50th Percentile 1L GPA', '25th Percentile 1L GPA', '50th Percentile\n  \n 1L GPA ']
+  r1: ['ALABAMA, UNIVERSITY OF', '2016', '5', '', '', '', '']
+  r2: ['ALBANY LAW SCHOOL', '2016', '1', '', '', '', '']
+  r3: ['AMERICAN UNIVERSITY', '2016', '31', '3.17', '2.99', '2.81', '']
+  r4: ['ARIZONA STATE UNIVERSITY', '2016', '65', '3.40', '3.09', '2.96', '']
+  r5: ['ARIZONA SUMMIT LAW SCHOOL', '2016', '1', '', '', '', '']
+  r6: ['ARIZONA, UNIVERSITY OF', '2016', '7', '', '', '', '2.95']
+  r7: ['ARKANSAS, FAYETTEVILLE, UNIVERSITY OF', '2016', '2', '', '', '', '']

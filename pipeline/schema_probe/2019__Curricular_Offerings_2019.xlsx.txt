@@ -1,0 +1,11 @@
+# Curricular_Offerings_2019.xlsx  (year=2019, guessed section=curriculum)
+
+## sheet: '2019_Curricular Offerings'  dims=A1:M207 max_row=207 max_col=13
+  r0: ['School Name', 'FirstYearSectionSize', 'NumberOfCourseTitles', 'Under25', '25-49', '50-74', '75-99', '100+', 'ClincicSum', 'FieldPlacementSum', 'SimulationSum', 'Seminarcount', 'CocurricularCount']
+  r1: ['AKRON, UNIVERSITY OF', '40', '94', '108', '34', '17', '1', '0', '179', '54', '897', '19', '5']
+  r2: ['ALABAMA, UNIVERSITY OF', '58', '127', '103', '19', '8', '0', '0', '90', '58', '344', '17', '40']
+  r3: ['ALBANY LAW SCHOOL', '59', '100', '111', '16', '5', '1', '1', '120', '151', '384', '39', '31']
+  r4: ['AMERICAN UNIVERSITY', '100', '240', '300', '51', '21', '10', '0', '286', '305', '738', '50', '115']
+  r5: ['APPALACHIAN SCHOOL OF LAW', '61', '48', '36', '5', '7', '', '', '0', '54', '230', '4', '2']
+  r6: ['ARIZONA STATE UNIVERSITY', '60', '202', '203', '52', '19', '11', '2', '203', '416', '374', '67', '39']
+  r7: ['ARIZONA SUMMIT LAW SCHOOL', '', '', '', '', '', '', '', '', '', '', '', '']

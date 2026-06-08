@@ -1,0 +1,11 @@
+# The_Basics_Academic_Calendar_2012.xlsx  (year=2012, guessed section=UNKNOWN)
+
+## sheet: '2012_The Basics'  dims=A1:M207 max_row=207 max_col=13
+  r0: ['School Name', 'School Year', 'Type of school', 'Term', 'Application Deadline1', 'Application Deadline2', 'Application Deadline3', 'Application Fee', 'Financial Aid Deadline1', 'Financial Aid Deadline2', 'Financial Aid Deadline3', 'Can first year start other than fall?', 'Student faculty ratio']
+  r1: ['AKRON, UNIVERSITY OF', '2012', 'PUBLIC    ', 'Semester  ', '3/1/2012  ', '          ', '          ', '$ 0       ', '5/1/2013  ', '', '', 'No  ', '12.07   to 1']
+  r2: ['ALABAMA, UNIVERSITY OF', '2012', 'PUBLIC    ', 'Semester  ', '          ', '          ', '          ', '$ 40      ', '', '', '', 'No  ', '10.14   to 1']
+  r3: ['ALBANY LAW SCHOOL', '2012', 'PRIVATE   ', 'Semester  ', '3/1/2013  ', '          ', '          ', '$ 70      ', '', '', '', 'No  ', '12.90   to 1']
+  r4: ['AMERICAN UNIVERSITY', '2012', 'PRIVATE   ', 'Semester  ', '3/1/2014  ', '          ', '          ', '$ 70      ', '3/1/2014  ', '3/1/2014  ', '3/1/2014  ', 'No  ', '11.02   to 1']
+  r5: ['APPALACHIAN SCHOOL OF LAW', '2012', 'PRIVATE   ', 'Semester  ', '8/10/2013 ', '          ', '          ', '$ 60      ', '7/1/2013  ', '', '', 'No  ', '15.90   to 1']
+  r6: ['ARIZONA STATE UNIVERSITY', '2012', 'PUBLIC    ', 'Semester  ', '11/15/2013', '2/1/2014  ', '          ', '$ 65      ', '3/15/2013 ', '', '', 'No  ', '10.19   to 1']
+  r7: ['ARIZONA SUMMIT LAW SCHOOL', '2012', 'PRIVATE   ', 'Semester  ', '          ', '          ', '          ', '$ 50      ', '', '', '', 'Yes ', '19.85   to 1']

@@ -1,0 +1,11 @@
+# Tuitions_and_Fees_Living_Expenses_Cond._Scholarships_2017.xlsx  (year=2017, guessed section=tuition)
+
+## sheet: '2017_Tuitions and FeesLiving E'  dims=A1:O203 max_row=203 max_col=15
+  r0: ['school list', 'Full Time Resident', 'Full Time Non resident', 'Part Time Resident', 'Part Time Non resident', 'Tuition Guarantee Program', 'Living On Campus', 'Living Off Campus', 'Living At Home', '16-17 Entering scholarships', '16-17 Reduced/Eliminated Scholarships', '15-16 Entering scholarships', '15-16 Reduced/Eliminated Scholarships', '14-15 Entering scholarships', '14-15 Reduced/Eliminated Scholarships']
+  r1: ['AKRON, UNIVERSITY OF', '24,214', '24,314', '14,819', '14,919', 'No', '22,199', '22,199', '6,834', '0', '0', '0', '0', '0', '0']
+  r2: ['ALABAMA, UNIVERSITY OF', '23,720', '40,670', '0', '0', 'No', '18,254', '18,254', '18,254', '0', '0', '0', '0', '0', '0']
+  r3: ['ALBANY LAW SCHOOL', '46,072', '46,072', '34,600', '34,600', 'No', '0', '15,970', '8,180', '97', '26', '62', '18', '42', '12']
+  r4: ['AMERICAN UNIVERSITY', '54,832', '54,832', '38,284', '38,284', 'No', '23,688', '23,688', '23,688', '7', '0', '5', '0', '5', '0']
+  r5: ['APPALACHIAN SCHOOL OF LAW', '0', '31,700', '0', '0', 'Yes', '0', '18,100', '18,100', '19', '6', '20', '7', '22', '12']
+  r6: ['ARIZONA STATE UNIVERSITY', '27,388', '44,888', '0', '0', 'No', '21,710', '21,710', '21,710', '0', '0', '0', '0', '0', '0']
+  r7: ['ARIZONA SUMMIT LAW SCHOOL', '45,284', '45,284', '36,622', '36,622', 'No', '0', '22,100', '22,100', '86', '30', '186', '88', '184', '105']

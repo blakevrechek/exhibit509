@@ -1,0 +1,11 @@
+# Transfers_2025.xlsx  (year=2025, guessed section=transfers)
+
+## sheet: '2025_Transfers'  dims=A1:G197 max_row=197 max_col=7
+  r0: ['SchoolName', 'SchoolYear', 'JD1 Transfers Out', 'TransferIn', '75th Percentile JD1 GPA', '50th Percentile JD1 GPA', '25th Percentile JD1 GPA']
+  r1: ['Akron, The University of', '2025', '0', '3', '0', '0', '0']
+  r2: ['Alabama, The University of', '2025', '1', '4', '0', '0', '0']
+  r3: ['Albany Law School', '2025', '7', '0', '0', '0', '0']
+  r4: ['American University', '2025', '51', '13', '3.37', '3.21', '3.04']
+  r5: ['Appalachian School of Law', '2025', '9', '0', '0', '0', '0']
+  r6: ['Arizona State University', '2025', '6', '24', '3.43', '3.26', '2.94']
+  r7: ['Arizona, The University of', '2025', '0', '1', '0', '0', '0']

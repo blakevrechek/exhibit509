@@ -1,0 +1,11 @@
+# Transfers_2019.xlsx  (year=2019, guessed section=transfers)
+
+## sheet: '2019_Transfers'  dims=A1:F204 max_row=204 max_col=6
+  r0: ['School List', 'JD1 Transfers Out', 'Transfer In', '75th Percentile JD1 GPA', '50th Percentile JD1 GPA', '25th Percentile JD1 GPA']
+  r1: ['AKRON, UNIVERSITY OF', '3', '2', '0', '0', '0']
+  r2: ['ALABAMA, UNIVERSITY OF', '1', '8', '0', '3.48', '0']
+  r3: ['ALBANY LAW SCHOOL', '0', '0', '0', '0', '0']
+  r4: ['AMERICAN UNIVERSITY', '49', '2', '0', '0', '0']
+  r5: ['APPALACHIAN SCHOOL OF LAW', '1', '1', '0', '0', '0']
+  r6: ['ARIZONA STATE UNIVERSITY', '4', '22', '3.35', '3.29', '3.11']
+  r7: ['ARIZONA SUMMIT LAW SCHOOL', '0', '0', '0', '0', '0']

@@ -2,3 +2,15 @@
 # Python bytecode
 __pycache__/
 *.pyc
+
+# Raw ABA 509 source workbooks — public + re-downloadable from
+# abarequireddisclosures.org, byte-pinned by pipeline/manifest.csv (sha256).
+# Kept out of git to avoid bloat; the manifest + pipeline make them reproducible.
+sources/509/**/*.xlsx
+sources/509/**/*.xls
+sources/509/**/*.xlsb
+sources/509/**/*.csv
+sources/509/**/*.zip
+
+# Derived intermediate (rebuilt from sources by the pipeline)
+pipeline/facts.sqlite

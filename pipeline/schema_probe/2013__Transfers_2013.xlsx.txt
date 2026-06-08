@@ -1,0 +1,11 @@
+# Transfers_2013.xlsx  (year=2013, guessed section=transfers)
+
+## sheet: '2013_Transfers In'  dims=A1:D204 max_row=204 max_col=4
+  r0: ['School Name', 'Reporting Year', 'Transfers In', 'Transfers Out']
+  r1: ['AKRON, UNIVERSITY OF', '2013', '1', '10']
+  r2: ['ALABAMA, UNIVERSITY OF', '2013', '15', '1']
+  r3: ['ALBANY LAW SCHOOL', '2013', '6', '7']
+  r4: ['AMERICAN UNIVERSITY', '2013', '68', '89']
+  r5: ['APPALACHIAN SCHOOL OF LAW', '2013', '6', '4']
+  r6: ['ARIZONA STATE UNIVERSITY', '2013', '73', '4']
+  r7: ['ARIZONA SUMMIT LAW SCHOOL', '2013', '3', '95']

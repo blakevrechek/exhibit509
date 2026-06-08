@@ -1,0 +1,11 @@
+# Tuitions_and_Fees_Living_Expenses_Cond._Scholarships_2012.xlsx  (year=2012, guessed section=tuition)
+
+## sheet: '2012_Tuition and Fees and Livi'  dims=A1:J204 max_row=204 max_col=10
+  r0: ['School Name', 'Reporting Year', 'Full-Time Resident', 'Full-Time Non-Resident', 'Part-Time Resident', 'Part-Time Non-Resident', 'Tuition Guarantee Program', 'Living on Campus', 'Living Off Campus', 'Living at Home']
+  r1: ['AKRON, UNIVERSITY OF', '2012', '$23,085', '$36,268', '$14,842', '$23,191', 'No', '$16,134', '$16,134', '$16,134']
+  r2: ['ALABAMA, UNIVERSITY OF', '2012', '$19,660', '$32,920', '$0', '$0', 'No', '$16,322', '$16,322', '$16,322']
+  r3: ['ALBANY LAW SCHOOL', '2012', '$42,675', '$42,675', '$32,075', '$32,075', 'No', '', '$18,000', '$9,100']
+  r4: ['AMERICAN UNIVERSITY', '2012', '$46,794', '$46,794', '$32,812', '$32,812', 'No', '$23,410', '$23,410', '$23,410']
+  r5: ['APPALACHIAN SCHOOL OF LAW', '2012', '$31,525', '$31,525', '$0', '$0', 'Yes', '$0', '$18,700', '']
+  r6: ['ARIZONA STATE UNIVERSITY', '2012', '$26,267', '$40,815', '$0', '$0', 'No', '$21,388', '$21,388', '$21,388']
+  r7: ['ARIZONA SUMMIT LAW SCHOOL', '2012', '$39,533', '$39,533', '$31,984', '$31,984', 'No', '$0', '$26,100', '$0']

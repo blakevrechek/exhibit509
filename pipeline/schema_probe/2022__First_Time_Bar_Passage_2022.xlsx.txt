@@ -1,0 +1,21 @@
+# First_Time_Bar_Passage_2022.xlsx  (year=2022, guessed section=bar_passage)
+
+## sheet: '2022_FirstTimeBarPassage'  dims=A1:M201 max_row=201 max_col=13
+  r0: ['School Name', 'Graduate Year', 'Total Graduates', 'Graduates who did not take the bar', 'Graduates with No Information', 'First Time Takers from Prior Years', 'Total First Time Takers', 'Total First Time Passers', 'Grads Admitted via Alternative Pathways', 'AvgSchoolPassPercent*', 'AvgStatePassPercent**', 'TotalDifferencePercent***', 'Pass % including Grads Admitted via Alternative Pathways']
+  r1: ['AKRON, UNIVERSITY OF', '2021', '126', '42', '0', '54', '138', '94', '0', '68.11%', '79.22%', '-11.11%', '68.12%']
+  r2: ['ALABAMA, UNIVERSITY OF', '2021', '118', '15', '1', '10', '112', '100', '0', '89.29%', '78.79%', '10.50%', '89.29%']
+  r3: ['ALBANY LAW SCHOOL', '2021', '158', '29', '4', '45', '170', '144', '0', '84.71%', '85.60%', '-0.89%', '84.71%']
+  r4: ['AMERICAN UNIVERSITY', '2021', '407', '36', '14', '70', '427', '341', '0', '79.86%', '78.56%', '1.30%', '79.86%']
+  r5: ['APPALACHIAN SCHOOL OF LAW', '2021', '53', '12', '0', '12', '53', '18', '0', '33.96%', '73.89%', '-39.93%', '33.96%']
+  r6: ['ARIZONA STATE UNIVERSITY', '2021', '269', '27', '5', '47', '284', '248', '0', '87.33%', '77.49%', '9.84%', '87.32%']
+  r7: ['ARIZONA, UNIVERSITY OF', '2021', '129', '24', '1', '11', '115', '91', '0', '79.13%', '77.37%', '1.76%', '79.13%']
+
+## sheet: '2022_Jurisdiction'  dims=A1:G573 max_row=573 max_col=7
+  r0: ['SchoolName', 'Jurisdiction', 'Takers', 'Passers', 'PassPer', 'StatePer', 'Diff']
+  r1: ['AKRON, UNIVERSITY OF', 'OHIO', '118', '85', '72.03', '79.40', '-7.37']
+  r2: ['AKRON, UNIVERSITY OF', '12 REMAINING JURISDICTIONS', '20', '9', '45.00', '75.79', '-30.79']
+  r3: ['ALABAMA, UNIVERSITY OF', 'ALABAMA', '69', '61', '88.41', '80.18', '8.23']
+  r4: ['ALABAMA, UNIVERSITY OF', '14 REMAINING JURISDICTIONS', '43', '39', '90.70', '78.08', '12.62']
+  r5: ['ALBANY LAW SCHOOL', 'NEW YORK', '162', '136', '83.95', '86.19', '-2.24']
+  r6: ['ALBANY LAW SCHOOL', '6 REMAINING JURISDICTIONS', '8', '8', '100.00', '72.63', '27.37']
+  r7: ['AMERICAN UNIVERSITY', 'DISTRICT OF COLUMBIA', '170', '147', '86.47', '80.57', '5.90']

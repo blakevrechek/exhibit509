@@ -1,0 +1,11 @@
+# Curricular_Offerings_2021.xlsx  (year=2021, guessed section=curriculum)
+
+## sheet: '2021_Curricular Offerings'  dims=A1:M201 max_row=201 max_col=13
+  r0: ['School Name', 'FirstYearSectionSize', 'NumberOfCourseTitles', 'Under25', '25-49', '50-74', '75-99', '100+', 'ClincicSum', 'FieldPlacementSum', 'SimulationSum', 'Seminarcount', 'CocurricularCount']
+  r1: ['AKRON, UNIVERSITY OF', '36', '95', '112', '33', '8', '2', '0', '76', '165', '956', '25', '23']
+  r2: ['ALABAMA, UNIVERSITY OF', '62', '104', '87', '21', '5', '1', '0', '110', '54', '524', '15', '11']
+  r3: ['ALBANY LAW SCHOOL', '61', '109', '92', '31', '11', '0', '1', '144', '174', '384', '40', '13']
+  r4: ['AMERICAN UNIVERSITY', '74', '257', '266', '50', '22', '6', '0', '204', '194', '843', '86', '103']
+  r5: ['APPALACHIAN SCHOOL OF LAW', '71', '61', '47', '14', '1', '0', '0', '20', '68', '380', '5', '2']
+  r6: ['ARIZONA STATE UNIVERSITY', '57', '194', '192', '48', '17', '11', '0', '209', '444', '617', '51', '35']
+  r7: ['ARIZONA, UNIVERSITY OF', '59', '156', '131', '22', '4', '2', '0', '272', '160', '958', '46', '53']

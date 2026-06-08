@@ -1,0 +1,11 @@
+# The_Basics_Academic_Calendar_2011.xlsx  (year=2011, guessed section=UNKNOWN)
+
+## sheet: '2011_The Basics'  dims=A1:P207 max_row=207 max_col=16
+  r0: ['School Name', 'Reporting Year', 'Type of school', 'Term', 'Application Deadline1', 'Application Deadline2', 'Application Deadline3', 'Application Fee', 'Financial Aid Deadline1', 'Financial Aid Deadline2', 'Financial Aid Deadline3', 'Can first year start other than fall?', 'Student faculty ratio', '# of housing spaces available', 'Restricted to law students', 'Graduate housing for which Law students are eligible']
+  r1: ['AKRON, UNIVERSITY OF', '2011', 'PUBLIC    ', 'Semester  ', '3/1/2012  ', '', '', '$ 0       ', '5/1/2012  ', '', '', 'No  ', '13.77   to 1', '', '0 ', '0   ']
+  r2: ['ALABAMA, UNIVERSITY OF', '2011', 'PUBLIC    ', 'Semester  ', '', '', '', '$ 40      ', '', '', '', 'No  ', '10.49   to 1', '', '0 ', '0   ']
+  r3: ['ALBANY LAW SCHOOL', '2011', 'PRIVATE   ', 'Semester  ', '3/1/2012  ', '', '', '$ 70      ', '', '', '', 'No  ', '13.10   to 1', '', '0 ', '0   ']
+  r4: ['AMERICAN UNIVERSITY', '2011', 'PRIVATE   ', 'Semester  ', '3/1/2012  ', '', '', '$ 70      ', '3/1/2013  ', '3/1/2013  ', '3/1/2013  ', 'No  ', '11.09   to 1', '', '0 ', '25  ']
+  r5: ['APPALACHIAN SCHOOL OF LAW', '2011', 'PRIVATE   ', 'Semester  ', '7/30/2012 ', '', '', '$ 60      ', '7/1/2012  ', '', '', 'No  ', '17.66   to 1', '', '0 ', '0   ']
+  r6: ['ARIZONA STATE UNIVERSITY', '2011', 'PUBLIC    ', 'Semester  ', '11/15/2012', '2/1/2013  ', '', '$ 60      ', '3/15/2013 ', '', '', 'No  ', '9.92    to 1', '', '0 ', '0   ']
+  r7: ['ARIZONA SUMMIT LAW SCHOOL', '2011', 'PRIVATE   ', 'Semester  ', '', '', '', '$ 50      ', '', '', '', 'Yes ', '18.29   to 1', '', '0 ', '0   ']

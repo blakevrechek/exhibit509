@@ -1,0 +1,11 @@
+# TwoYear_Ultimate_Bar_Passage_2024.xlsx  (year=2024, guessed section=bar_passage)
+
+## sheet: '2024_TwoYearUltimateBarPassage'  dims=A1:I197 max_row=197 max_col=9
+  r0: ['School Name', '2021 Graduates', '2021 Takers', '2021 Passers', '%Passers', '2021 Graduates with no information', '2021 Graduates who did not take the bar', '2021 Graduates with Alternative Pathways*', 'Pass % (including Alternative Pathways)']
+  r1: ['Akron, The University of', '126', '117', '100', '85.47%', '0', '9', '0', '85.47%']
+  r2: ['Alabama, The University of', '118', '109', '103', '94.50%', '1', '8', '0', '94.50%']
+  r3: ['Albany Law School', '158', '153', '138', '90.20%', '3', '2', '0', '90.20%']
+  r4: ['American University', '408', '384', '356', '92.71%', '3', '21', '', '92.71%']
+  r5: ['Appalachian School of Law', '53', '51', '43', '84.31%', '0', '2', '0', '84.31%']
+  r6: ['Arizona State University', '267', '263', '252', '95.82%', '2', '2', '0', '95.82%']
+  r7: ['Arizona, The University of', '129', '126', '107', '84.92%', '0', '3', '0', '84.92%']
