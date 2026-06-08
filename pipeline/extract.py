@@ -347,7 +347,8 @@ OPTIONAL_FIELDS = {"race_nr", "enr_1l_entering",
                    # ≤2016 enrollment is #/%-per-sex with no per-race grand totals;
                    # race/enr totals are deferred (need aggregation, not trend-checked):
                    "enr", "race_white", "race_black", "race_hisp", "race_asian",
-                   "race_indian", "race_native", "race_multi", "race_nr", "race_unknown"}
+                   "race_indian", "race_native", "race_multi", "race_nr", "race_unknown",
+                   "grant_med_ft", "grant_p25_ft", "grant_p75_ft"}  # renamed ≤2011
 
 
 def hkey(s):
