@@ -70,7 +70,10 @@ Then scale year by year, newest→oldest (format gets messier going back).
       curated-layer errors (F3/F4, ABA source authoritative); bar passage
       gap-filled for 2012-2017.
 - [x] **FULL 2011-2025 RE-DERIVATION DATA-COMPLETE**
-- [ ] gz rebuild from facts.sqlite + curated-layer reconcile
+- [x] gz rebuild from facts.sqlite + curated-layer reconcile (shipped)
+- [x] **independent cross-validation (June 2026): vs the hand-built Exhibit 509
+      Master compilation, 99.86% agreement on 28,747/28,786 headline cells —
+      residual = adjudicated Rutgers case.** See `COMPARISON.md` + `ACCURACY_REPORT.md`.
 
 ## Cross-year drift handled (so the same code spans 2011–2025)
 - **Year-relative cohort headers:** `{Y-1}` (first-time bar), `{Y-3}` (two-year
