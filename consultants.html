@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="/favicon.ico?v=1.88.0" sizes="any">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon32.png?v=1.88.0">
-<link rel="icon" type="image/png" sizes="48x48" href="/favicon48.png?v=1.88.0">
-<link rel="icon" type="image/png" sizes="192x192" href="/icon192.png?v=1.88.0">
-<link rel="apple-touch-icon" sizes="180x180" href="/icon180.png?v=1.88.0">
+<link rel="icon" href="/favicon.ico?v=1.88.1" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon32.png?v=1.88.1">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon48.png?v=1.88.1">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon192.png?v=1.88.1">
+<link rel="apple-touch-icon" sizes="180x180" href="/icon180.png?v=1.88.1">
 <title>Consultant's Corner · Exhibit 509</title>
 <meta name="description" content="The independent law school dataset for admissions consultants: branded client reports, a saved roster, and 15 years of reconciled ABA Standard 509 data — independent of LSAC and every school.">
-<meta name="robots" content="index,follow">
+<meta name="robots" content="noindex,nofollow">
 <link rel="canonical" href="https://exhibit509.com/consultants.html">
 <style>
   :root{
@@ -53,6 +53,11 @@
   .faq-q{font-family:var(--mono);font-size:14px;font-weight:700;color:var(--white);letter-spacing:0.3px;margin-bottom:6px;}
   .note{border-left:2px solid rgba(217,119,87,0.5);padding:10px 16px;background:rgba(217,119,87,0.06);font-family:var(--mono);font-size:12px;color:var(--dim);line-height:1.6;margin:26px 0 0;}
   footer{margin-top:50px;padding-top:20px;border-top:1px solid rgba(74,122,155,0.2);font-family:var(--mono);font-size:11px;color:var(--dimmer);letter-spacing:0.5px;}
+  /* coming-soon preview gate */
+  .cc-gate{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:34px;padding-top:22px;border-top:1px solid rgba(74,122,155,0.18);}
+  #ccPass{font-family:var(--mono);font-size:14px;padding:11px 14px;border-radius:5px;border:1px solid rgba(74,122,155,0.4);background:rgba(255,255,255,0.04);color:var(--white);min-width:190px;}
+  #ccPass:focus{outline:none;border-color:var(--orange);}
+  .cc-err{font-family:var(--mono);font-size:12px;color:#E5757A;letter-spacing:0.3px;}
 </style>
 
 <style id="ghfChrome">
@@ -87,9 +92,29 @@ body{padding-top:52px;padding-bottom:42px;background-image:radial-gradient(rgba(
 <link href="/fonts/fonts.css" rel="stylesheet">
 </head>
 <body>
-<header class="gh"><a class="gh-logo" href="index.html"><b>Exhibit 509 <em>by 509α</em></b></a><nav class="gh-nav"><span class="gh-nav-grp"><a href="index.html">Map</a><a href="index.html#view=profiles">Schools</a><a href="index.html#view=states">States</a><a href="index.html#view=transfers">Transfers</a><a href="index.html#view=calc">Net price</a></span><span class="gh-nav-grp gh-nav-writ"><a href="blog.html">Blog</a><a href="methodology.html">Methodology</a><a href="glossary.html">Glossary</a><a href="about.html">About</a><a href="contact.html">Contact</a></span></nav><a class="gh-cta" href="mailto:blake@exhibit509.com?subject=Free%20first%20report%20%E2%80%94%20Exhibit%20Consultant%27s%20Corner">Free first report</a></header>
+<header class="gh"><a class="gh-logo" href="index.html"><b>Exhibit 509 <em>by 509α</em></b></a><nav class="gh-nav"><span class="gh-nav-grp"><a href="index.html">Map</a><a href="index.html#view=profiles">Schools</a><a href="index.html#view=states">States</a><a href="index.html#view=transfers">Transfers</a><a href="index.html#view=calc">Net price</a></span><span class="gh-nav-grp gh-nav-writ"><a href="blog.html">Blog</a><a href="methodology.html">Methodology</a><a href="glossary.html">Glossary</a><a href="about.html">About</a><a href="contact.html">Contact</a></span></nav><a class="gh-cta" href="mailto:blake@exhibit509.com?subject=Be%20among%20the%20first%20in%20%E2%80%94%20Exhibit%20Consultant%27s%20Corner">Be among the first in</a></header>
 <div class="wrap">
   <a class="back" href="index.html">Back to Exhibit</a>
+
+  <!-- COMING SOON gate (public). Preview password 'sell' reveals the full page. -->
+  <div id="ccSoon">
+    <div class="eyebrow">Consultant's Corner · Exhibit 509</div>
+    <h1>Coming soon.</h1>
+    <p class="sub">An independent, branded law-school data service for admissions consultants — client-ready reports under your own name, straight from the official ABA Standard 509 disclosures. No LSAC, no school advertising.</p>
+    <p class="sub-mono">First 10 advisors get founding terms, locked for life.</p>
+    <div class="cta-row">
+      <a class="cta cta-primary" href="mailto:blake@exhibit509.com?subject=Be%20among%20the%20first%20in%20%E2%80%94%20Exhibit%20Consultant%27s%20Corner&amp;body=I%20advise%20law%20school%20applicants%20and%20want%20in%20on%20the%20founding%20cohort.">Be among the first in</a>
+    </div>
+    <p class="cta-note">Or email <a href="mailto:blake@exhibit509.com">blake@exhibit509.com</a> directly.</p>
+    <form class="cc-gate" onsubmit="return ccGate(event)">
+      <input id="ccPass" type="password" autocomplete="off" placeholder="Preview password" aria-label="Preview password">
+      <button class="cta cta-ghost" type="submit">Enter</button>
+      <span id="ccErr" class="cc-err"></span>
+    </form>
+  </div>
+
+  <!-- Full page, revealed once unlocked -->
+  <div id="ccFull" style="display:none;">
   <div class="eyebrow">Consultant's Corner · Exhibit 509</div>
 
   <!-- HERO -->
@@ -166,7 +191,13 @@ body{padding-top:52px;padding-bottom:42px;background-image:radial-gradient(rgba(
   <div class="note">⚠ Exhibit is an independent project, not affiliated with, associated with, or endorsed by the ABA, LSAC, or any law school. Data originates from the official ABA Standard 509 disclosures (2011–2025); verify all figures against the original disclosure before relying on them for a client decision.</div>
 
   <footer>Exhibit: independent ABA Standard 509 data, built by 509α. Not affiliated with the ABA or LSAC.</footer>
+  </div><!-- /ccFull -->
 </div>
-<div class="gf"><span class="gf-brand"><b>Exhibit 509 <em>by 509α</em></b></span><a class="gf-accent" href="mailto:blake@exhibit509.com?subject=Free%20first%20report%20%E2%80%94%20Exhibit%20Consultant%27s%20Corner">Get your free first report</a><a href="about.html">About</a><a href="methodology.html">Methodology</a><span class="gf-src"><span style="color:#4A9B6B;">●</span> Sourced from official ABA Standard 509 disclosures · <span style="color:#D97757;">Last synced June 8, 2026</span> · <span style="color:#7AAAC8;">v1.88.0</span></span></div>
+<div class="gf"><span class="gf-brand"><b>Exhibit 509 <em>by 509α</em></b></span><a class="gf-accent" href="mailto:blake@exhibit509.com?subject=Free%20first%20report%20%E2%80%94%20Exhibit%20Consultant%27s%20Corner">Get your free first report</a><a href="about.html">About</a><a href="methodology.html">Methodology</a><span class="gf-src"><span style="color:#4A9B6B;">●</span> Sourced from official ABA Standard 509 disclosures · <span style="color:#D97757;">Last synced June 8, 2026</span> · <span style="color:#7AAAC8;">v1.88.1</span></span></div>
+<script>
+function ccUnlock(){var s=document.getElementById('ccSoon'),f=document.getElementById('ccFull');if(s)s.style.display='none';if(f)f.style.display='';try{sessionStorage.setItem('cc_ok','1');}catch(e){}}
+function ccGate(e){e.preventDefault();var p=((document.getElementById('ccPass')||{}).value||'').trim().toLowerCase();if(p==='sell'){ccUnlock();}else{var el=document.getElementById('ccErr');if(el)el.textContent='Not quite — try again.';}return false;}
+try{if(sessionStorage.getItem('cc_ok')==='1')ccUnlock();}catch(e){}
+</script>
 </body>
 </html>
