@@ -837,6 +837,12 @@ def update_sitemap(schools, states=None):
     <lastmod>2026-06-04</lastmod>
   </url>
   <url>
+    <loc>https://exhibit509.com/consultants.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <lastmod>2026-06-09</lastmod>
+  </url>
+  <url>
     <loc>https://exhibit509.com/schools.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
