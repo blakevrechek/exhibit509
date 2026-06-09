@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="/favicon.ico?v=1.88.1" sizes="any">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon32.png?v=1.88.1">
-<link rel="icon" type="image/png" sizes="48x48" href="/favicon48.png?v=1.88.1">
-<link rel="icon" type="image/png" sizes="192x192" href="/icon192.png?v=1.88.1">
-<link rel="apple-touch-icon" sizes="180x180" href="/icon180.png?v=1.88.1">
+<link rel="icon" href="/favicon.ico?v=1.89.0" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon32.png?v=1.89.0">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon48.png?v=1.89.0">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon192.png?v=1.89.0">
+<link rel="apple-touch-icon" sizes="180x180" href="/icon180.png?v=1.89.0">
 <title>Methodology · Exhibit 509</title>
 <meta name="description" content="How Exhibit classifies Safety / Target / Reach, where each number comes from, how often we refresh, and how we handle data anomalies.">
 <meta name="robots" content="index,follow">
@@ -78,7 +78,7 @@ body{padding-top:52px;padding-bottom:42px;background-image:radial-gradient(rgba(
 <header class="gh"><a class="gh-logo" href="index.html"><b>Exhibit 509 <em>by 509α</em></b></a><nav class="gh-nav"><span class="gh-nav-grp"><a href="index.html">Map</a><a href="index.html#view=profiles">Schools</a><a href="index.html#view=states">States</a><a href="index.html#view=transfers">Transfers</a><a href="index.html#view=calc">Net price</a></span><span class="gh-nav-grp gh-nav-writ"><a href="blog.html">Blog</a><a href="methodology.html" class="on">Methodology</a><a href="glossary.html">Glossary</a><a href="about.html">About</a><a href="contact.html">Contact</a></span></nav><a class="gh-cta" href="https://docs.google.com/forms/d/e/1FAIpQLScvkEp7vEwHAtpbMbk06AmtdUqHTy595OiQFcNBanSBXm0qDA/viewform?usp=publish-editor" target="_blank" rel="noopener">Email updates</a></header>
 <div class="wrap">
   <a class="back" href="index.html">Back to Exhibit</a>
-  <div class="eyebrow">Methodology · v1.88.1</div>
+  <div class="eyebrow">Methodology · v1.89.0</div>
   <h1>How Exhibit works</h1>
   <div class="sub">Where each number comes from · how we classify schools · how we refresh · how we handle data anomalies.</div>
 
@@ -127,7 +127,7 @@ body{padding-top:52px;padding-bottom:42px;background-image:radial-gradient(rgba(
   <p>Every line chart on the site is built from year-by-year ABA 509 disclosures back to 2011. Where a metric was not collected in a given year (most notably the bar pass cadence change 2012-2017), the chart renders a <strong>dashed bridge</strong> through the missing years with hollow markers labeled <em>"YYYY not reported (interpolated)"</em>. The interpolation is for visual continuity only, we never replace null values with synthetic numbers anywhere a real cell exists.</p>
 
   <h2>Data quality + outlier handling</h2>
-  <p>Two source files are reconciled, a hand-maintained <a href="https://docs.google.com/spreadsheets/d/1iFHIkqiZ1_VdMkpblE4yvuOe0Q5PJuu6BZHXMDDtlqo/edit?usp=sharing" target="_blank" rel="noopener">"Historic" spreadsheet</a> (treated as primary because it has been spot-checked against PDFs since 2011) and a machine-generated <a href="https://docs.google.com/spreadsheets/d/1PUvqEXyQp02Has5t2ko2cQWVoWtoB0DiQQuWHxiarXQ/edit?usp=sharing" target="_blank" rel="noopener">"v2" spreadsheet</a> (used to fill gaps the Historic file does not cover). The two files agree on 91.8% of overlapping cells; remaining disagreements are documented in a separate file shared with the maintainers.</p>
+  <p><strong>Two independent compilations stand behind the data, and what Exhibit displays is their reconciliation.</strong> The first is a hand-built <a href="https://docs.google.com/spreadsheets/d/1iFHIkqiZ1_VdMkpblE4yvuOe0Q5PJuu6BZHXMDDtlqo/edit?usp=sharing" target="_blank" rel="noopener">master workbook</a> of the ABA Standard 509 disclosures, spot-checked against the source PDFs since 2011 &mdash; about <strong>2.44&nbsp;million</strong> non-null data points (2,437,481) across its 14 section sheets, spanning <strong>218</strong> school identifiers at roughly <strong>12,200 facts per full-history school</strong> (median 12,178; range 75&ndash;12,821; the two widest sheets, Attrition and JD&nbsp;Enrollment&nbsp;&amp;&nbsp;Ethnicity, alone hold ~1.4&nbsp;million of them). The second is an independent <a href="https://docs.google.com/spreadsheets/d/1PUvqEXyQp02Has5t2ko2cQWVoWtoB0DiQQuWHxiarXQ/edit?usp=sharing" target="_blank" rel="noopener">primary-source re-derivation</a> built straight from the original ABA workbooks, cell by cell. Across ~28,800 overlapping headline cells &mdash; LSAT and uGPA percentiles, acceptance, applications, offers, enrollment, first-time bar, takers and passers, and tuition &mdash; the two compilations agree on <strong>99.86%</strong>. The remaining 0.14% is concentrated in a single adjudicated identity case (the Rutgers Camden/Newark split) and is documented cell-by-cell rather than silently resolved.</p>
   <!-- TODO: replace https://docs.google.com/spreadsheets/d/1iFHIkqiZ1_VdMkpblE4yvuOe0Q5PJuu6BZHXMDDtlqo/edit?usp=sharing and https://docs.google.com/spreadsheets/d/1PUvqEXyQp02Has5t2ko2cQWVoWtoB0DiQQuWHxiarXQ/edit?usp=sharing with the actual Google Sheets URLs once published. -->
 
   <h3>Sanitization rules applied at inline time</h3>
@@ -186,6 +186,6 @@ body{padding-top:52px;padding-bottom:42px;background-image:radial-gradient(rgba(
 #floatBack{position:fixed;bottom:24px;right:24px;z-index:9000;display:flex;align-items:center;gap:8px;background:#D97757;color:#06111E;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;padding:12px 18px;border-radius:4px;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,0.4),0 0 0 1px rgba(217,119,87,0.3);transition:transform .15s,box-shadow .15s;}
 #floatBack:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,0,0,0.5),0 0 0 1px rgba(217,119,87,0.5);}
 </style>
-<div class="gf"><span class="gf-brand"><b>Exhibit 509 <em>by 509α</em></b></span><a class="gf-accent" href="https://docs.google.com/forms/d/e/1FAIpQLScvkEp7vEwHAtpbMbk06AmtdUqHTy595OiQFcNBanSBXm0qDA/viewform?usp=publish-editor" target="_blank" rel="noopener">Sign up for email updates</a><a href="terms.html">Terms · Privacy</a><a class="gf-accent" href="https://skool.com/509alpha" target="_blank" rel="noopener">Join 509α on Skool</a><span class="gf-src"><span style="color:#4A9B6B;">●</span> Sourced from official ABA Standard 509 disclosures · <span style="color:#D97757;">Last synced June 8, 2026</span> · <span style="color:#7AAAC8;">v1.88.1</span></span></div>
+<div class="gf"><span class="gf-brand"><b>Exhibit 509 <em>by 509α</em></b></span><a class="gf-accent" href="https://docs.google.com/forms/d/e/1FAIpQLScvkEp7vEwHAtpbMbk06AmtdUqHTy595OiQFcNBanSBXm0qDA/viewform?usp=publish-editor" target="_blank" rel="noopener">Sign up for email updates</a><a href="terms.html">Terms · Privacy</a><a class="gf-accent" href="https://skool.com/509alpha" target="_blank" rel="noopener">Join 509α on Skool</a><span class="gf-src"><span style="color:#4A9B6B;">●</span> Sourced from official ABA Standard 509 disclosures · <span style="color:#D97757;">Last synced June 8, 2026</span> · <span style="color:#7AAAC8;">v1.89.0</span></span></div>
 </body>
 </html>
