@@ -6,6 +6,16 @@ crosswalk). Verdict: **they agree wherever directly comparable** — strong mutu
 validation. The remaining differences are architectural/policy choices, each
 explainable, not data disagreements.
 
+> **Full-run cross-validation (June 9, 2026).** Across all years and 17 headline
+> metrics, the two compilations agree on **99.86%** of overlapping cells —
+> **28,747 / 28,786**. Acceptance, applications, offers, 1L enrollment, bar
+> graduates, and resident/non-resident tuition match **100%**; LSAT/uGPA
+> percentiles and bar figures sit at 99.7–99.9%. The entire 0.14% residual is the
+> adjudicated **Rutgers Camden/Newark** identity case (see `FLAGS.md` F2). The
+> Master compilation itself holds ~**2.44M** non-null facts (2,437,481) across
+> **218** school ids (~12,200 per full-history school; median 12,178, range
+> 75–12,821). Full per-metric table + method: **[`ACCURACY_REPORT.md`](ACCURACY_REPORT.md)**.
+
 ## Agreement (value concordance)
 | field | 2023 | 2024 | 2025 | old era |
 |---|---|---|---|---|
