@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="/favicon.ico?v=1.91.1" sizes="any">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon32.png?v=1.91.1">
-<link rel="icon" type="image/png" sizes="48x48" href="/favicon48.png?v=1.91.1">
-<link rel="icon" type="image/png" sizes="192x192" href="/icon192.png?v=1.91.1">
-<link rel="apple-touch-icon" sizes="180x180" href="/icon180.png?v=1.91.1">
+<link rel="icon" href="/favicon.ico?v=1.92.0" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon32.png?v=1.92.0">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon48.png?v=1.92.0">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon192.png?v=1.92.0">
+<link rel="apple-touch-icon" sizes="180x180" href="/icon180.png?v=1.92.0">
 <title>Methodology · Exhibit 509</title>
 <meta name="description" content="How Exhibit classifies Safety / Target / Reach, where each number comes from, how often we refresh, and how we handle data anomalies.">
 <meta name="robots" content="index,follow">
@@ -78,7 +78,7 @@ body{padding-top:52px;padding-bottom:42px;background-image:radial-gradient(rgba(
 <header class="gh"><a class="gh-logo" href="index.html"><b>Exhibit 509 <em>by 509α</em></b></a><nav class="gh-nav"><span class="gh-nav-grp"><a href="index.html">Map</a><a href="index.html#view=profiles">Schools</a><a href="index.html#view=states">States</a><a href="index.html#view=transfers">Transfers</a><a href="index.html#view=calc">Net price</a></span><span class="gh-nav-grp gh-nav-writ"><a href="blog.html">Blog</a><a href="methodology.html" class="on">Methodology</a><a href="glossary.html">Glossary</a><a href="about.html">About</a><a href="contact.html">Contact</a></span></nav><a class="gh-cta" href="https://docs.google.com/forms/d/e/1FAIpQLScvkEp7vEwHAtpbMbk06AmtdUqHTy595OiQFcNBanSBXm0qDA/viewform?usp=publish-editor" target="_blank" rel="noopener">Email updates</a></header>
 <div class="wrap">
   <a class="back" href="index.html">Back to Exhibit</a>
-  <div class="eyebrow">Methodology · v1.91.1</div>
+  <div class="eyebrow">Methodology · v1.92.0</div>
   <h1>How Exhibit works</h1>
   <div class="sub">Where each number comes from · how we classify schools · how we refresh · how we handle data anomalies.</div>
 
@@ -122,6 +122,17 @@ body{padding-top:52px;padding-bottom:42px;background-image:radial-gradient(rgba(
   <h2>Employment outcomes</h2>
   <p>FTLT Employment = "Full-Time, Long-Term, JD-Required or JD-Advantage" employment 10 months after graduation, per the school's ABA 509 outcome report. We display it as both a percent of the graduating class and an estimated graduate count (<code>graduates × pct / 100</code>).</p>
   <p>The 10-category employment breakdown (MegaLaw 500+ / BigLaw 251-500 / Mid 101-250 / Small 2-100 / Clerkships / Public Interest / Government / Business / Academia / Solo / Seeking) is reported by the school in the same disclosure. We rank rows by applicant-mental-model desirability rather than alphabetically. The "vs national average" delta on each row compares the school's percent against the unweighted average across all 197 reporting schools.</p>
+
+  <h3 id="adjusted-employment">Adjusted ("real-world") employment</h3>
+  <p>The headline FTLT rate counts <strong>law-school/university-funded</strong> positions — short-term fellowships the school itself pays for — the same as market jobs. The ABA discloses these separately, so we surface a second figure that strips them out:</p>
+  <p><code>Real-world FTLT % = (Total FTLT − Funded FTLT) ÷ graduates × 100</code>, where <em>Funded FTLT</em> = the school-funded full-time, long-term Bar-Passage-Required and JD-Advantage positions from the school's own ABA Employment Summary. We show the reported rate, the funded share, and the adjusted rate side by side, plus the gap over time. For most schools the two are nearly identical; where a school leans on funded roles the difference is the point. This is the school's <em>own reported</em> funded count — we subtract, we do not estimate.</p>
+
+  <h2 id="splitter">Splitter lean (LSAT vs GPA)</h2>
+  <p>A <strong>splitter</strong> has a high LSAT and a lower GPA; a <strong>reverse splitter</strong> the opposite. We surface a per-school <strong>lean</strong>: the national percentile rank of the school's <strong>median LSAT</strong> minus the national percentile rank of its <strong>median GPA</strong>, for the same cycle. A positive lean means the LSAT is the more selective of the two numbers (the class skews splitter); negative means the GPA is (skews reverse). We bucket <code>+12 or more</code> as splitter-leaning and <code>−12 or less</code> as reverse, and trend the lean across all 15 years so you can see whether the tilt is consistent.</p>
+  <p><strong>Important limitation, stated plainly.</strong> The ABA publishes LSAT and GPA as <em>separate (marginal) distributions</em> — never the joint distribution of who was admitted. So this metric <strong>cannot measure a splitter admit rate</strong>, and we never claim it does. It measures what a school's class numbers <em>weight</em>, which is a strong, defensible proxy for application strategy — but it is an inference from marginal data, not a count of admitted splitters. Treat the lean and the <a href="/splitter-friendly-law-schools.html">splitter index</a> as a starting hypothesis to pressure-test, not a guarantee.</p>
+
+  <h3 id="conditional-scholarships">Conditional-scholarship attrition (the "risk factor")</h3>
+  <p>A conditional scholarship requires you to hold a class-rank or GPA threshold to keep it past year one. The ABA reports, per year, how many students <em>entered</em> with one and how many had it <em>reduced or eliminated</em>. We compute the <strong>stripped rate</strong> over the most recent reporting window (up to 5 years): <code>Σ eliminated ÷ Σ entered × 100</code>, and flag it as a <strong>risk factor</strong> — <em>moderate</em> at ≥15%, <em>high</em> at ≥33%. Because only a fixed slice of any class can finish above the school's own curve, a structurally high strip rate is a budgeting warning, not a moral judgment of the school; we frame it as a number to plan around.</p>
 
   <h2>Trend charts + the 15-year history</h2>
   <p>Every line chart on the site is built from year-by-year ABA 509 disclosures back to 2011. Where a metric was not collected in a given year (most notably the bar pass cadence change 2012-2017), the chart renders a <strong>dashed bridge</strong> through the missing years with hollow markers labeled <em>"YYYY not reported (interpolated)"</em>. The interpolation is for visual continuity only, we never replace null values with synthetic numbers anywhere a real cell exists.</p>
@@ -191,6 +202,6 @@ body{padding-top:52px;padding-bottom:42px;background-image:radial-gradient(rgba(
 #floatBack{position:fixed;bottom:24px;right:24px;z-index:9000;display:flex;align-items:center;gap:8px;background:#D97757;color:#06111E;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;padding:12px 18px;border-radius:4px;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,0.4),0 0 0 1px rgba(217,119,87,0.3);transition:transform .15s,box-shadow .15s;}
 #floatBack:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,0,0,0.5),0 0 0 1px rgba(217,119,87,0.5);}
 </style>
-<div class="gf"><span class="gf-brand"><b>Exhibit 509 <em>by 509α</em></b></span><a class="gf-accent" href="https://docs.google.com/forms/d/e/1FAIpQLScvkEp7vEwHAtpbMbk06AmtdUqHTy595OiQFcNBanSBXm0qDA/viewform?usp=publish-editor" target="_blank" rel="noopener">Sign up for email updates</a><a href="terms.html">Terms · Privacy</a><a class="gf-accent" href="https://skool.com/509alpha" target="_blank" rel="noopener">Join 509α on Skool</a><span class="gf-src"><span style="color:#4A9B6B;">●</span> Sourced from official ABA Standard 509 disclosures · <span style="color:#D97757;">Last synced June 8, 2026</span> · <span style="color:#7AAAC8;">v1.91.1</span></span></div>
+<div class="gf"><span class="gf-brand"><b>Exhibit 509 <em>by 509α</em></b></span><a class="gf-accent" href="https://docs.google.com/forms/d/e/1FAIpQLScvkEp7vEwHAtpbMbk06AmtdUqHTy595OiQFcNBanSBXm0qDA/viewform?usp=publish-editor" target="_blank" rel="noopener">Sign up for email updates</a><a href="terms.html">Terms · Privacy</a><a class="gf-accent" href="https://skool.com/509alpha" target="_blank" rel="noopener">Join 509α on Skool</a><span class="gf-src"><span style="color:#4A9B6B;">●</span> Sourced from official ABA Standard 509 disclosures · <span style="color:#D97757;">Last synced June 8, 2026</span> · <span style="color:#7AAAC8;">v1.92.0</span></span></div>
 </body>
 </html>
