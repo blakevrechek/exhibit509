@@ -518,7 +518,7 @@ def render_page(s, all_schools=None):
 </head>
 <body>
 <div class="wrap">
-  <nav class="nav"><a href="/">Map</a><a href="/schools.html">All schools</a><a href="/law-school-bar-passage-rates.html">Bar passage</a><a href="/cheapest-law-schools.html">Tuition</a><a href="/law-school-employment-outcomes.html">Employment</a><a href="/methodology.html">Methodology</a></nav>
+  <nav class="nav"><a href="/">Map</a><a href="/schools.html">All schools</a><a href="/law-school-bar-passage-rates.html">Bar passage</a><a href="/cheapest-law-schools.html">Tuition</a><a href="/law-school-employment-outcomes.html">Employment</a><a href="/splitter-friendly-law-schools.html">Splitter index</a><a href="/methodology.html">Methodology</a></nav>
   {crumb_html}
   {closed_banner}
   <div class="eyebrow">ABA Standard 509 · 2025 cycle · Last synced {SYNC_DATE}</div>
@@ -602,6 +602,7 @@ PILLAR_NAV = ('<nav class="nav"><a href="/">Map</a><a href="/schools.html">All s
               '<a href="/law-school-bar-passage-rates.html">Bar passage</a>'
               '<a href="/cheapest-law-schools.html">Tuition</a>'
               '<a href="/law-school-employment-outcomes.html">Employment</a>'
+              '<a href="/splitter-friendly-law-schools.html">Splitter index</a>'
               '<a href="/methodology.html">Methodology</a></nav>')
 
 
@@ -717,6 +718,75 @@ def build_pillar(schools, *, fname, h1, title, desc, intro, key, fmt, reverse, z
     print(f"Wrote {fname} ({len(rows)} ranked).")
 
 
+def build_splitter_page(schools):
+    """Ranked 'splitter index' reference page. Ranks schools by splitter_lean — an
+    HONEST, marginal-data signal of whether a school's median LSAT is nationally
+    more selective than its median GPA (splitter-leaning, favours high-LSAT/low-GPA)
+    or vice-versa. NOT a measured admit rate; the ABA data is marginal, not joint.
+    A prominent caveat says exactly that."""
+    rows = [(s.get("splitter_lean"), s) for s in schools
+            if not s.get("closed_status") and isinstance(s.get("splitter_lean"), (int, float))]
+    rows.sort(key=lambda t: t[0], reverse=True)
+
+    def tag(v):
+        if v >= 12:
+            return '<span style="color:#D97757;font-weight:700;">splitter</span>'
+        if v <= -12:
+            return '<span style="color:#5AABCB;font-weight:700;">reverse</span>'
+        return '<span style="color:#7AAAC8;">balanced</span>'
+
+    trs = "".join(
+        f'<tr><td class="num">{i}</td>'
+        f'<td><a href="/school/{slugify(s["id"])}.html">{esc(law_name(s))}</a></td>'
+        f'<td>{esc(s.get("state") or "—")}</td>'
+        f'<td class="v">{("+" if v > 0 else "")}{v}</td>'
+        f'<td>{tag(v)}</td>'
+        f'<td>{fmt_int(s.get("lsat50"))}</td>'
+        f'<td>{fmt_gpa(s.get("gpa50"))}</td></tr>'
+        for i, (v, s) in enumerate(rows, 1))
+    h1 = "Splitter-friendly law schools (the splitter index)"
+    title = "Splitter-Friendly Law Schools: LSAT-vs-GPA Index (ABA 509) | Exhibit 509"
+    desc = ("Law schools ranked by whether their median LSAT is nationally more selective than "
+            "their median GPA — a marginal-data signal of splitter (high-LSAT/low-GPA) vs "
+            "reverse-splitter friendliness, from 15 years of ABA Standard 509 data.")
+    intro = ("Law schools ranked by the <strong>splitter index</strong>: how a school&rsquo;s "
+             "<strong>median LSAT</strong> ranks nationally versus its <strong>median GPA</strong>. "
+             "A positive lean means the LSAT is the more selective number, so the class skews "
+             "toward <strong>splitters</strong> (high LSAT, lower GPA); a negative lean skews toward "
+             "<strong>reverse splitters</strong> (high GPA, lower LSAT). Click any school for its "
+             "15-year lean trend.")
+    caveat = ('<div style="border-left:3px solid #FFA726;background:rgba(255,167,38,0.06);'
+              'padding:12px 16px;margin:18px 0;font-family:var(--mono);font-size:12.5px;'
+              'color:#A4C8DD;line-height:1.6;"><strong style="color:#FFA726;">Read this first.</strong> '
+              'The ABA reports LSAT and GPA <em>separately</em> (marginal distributions), not the '
+              'joint distribution of who got in. So this index cannot prove a school &ldquo;admits '
+              'splitters&rdquo; at any rate — it measures what the class&rsquo;s numbers <em>weight</em>, '
+              'which is a strong proxy for application strategy but is not a measured admit rate. Treat '
+              'it as a starting point, not a guarantee. <a href="/methodology.html#splitter">Full method →</a></div>')
+    body = [PILLAR_NAV,
+            '<nav class="crumbs"><a href="/">Home</a> › <a href="/schools.html">All law schools</a> › <span>'
+            + esc("Splitter index") + "</span></nav>",
+            f"<h1>{esc(h1)}</h1>",
+            f'<p class="lead">{intro}</p>',
+            caveat,
+            '<table class="rank"><tr><th>#</th><th>Law school</th><th>State</th><th>Lean</th>'
+            '<th>Skew</th><th>LSAT</th><th>GPA</th></tr>' + trs + "</table>",
+            '<p style="font-family:var(--mono);font-size:12px;color:var(--dimmer);">Lean = national '
+            'percentile rank of the median LSAT minus that of the median GPA (latest ABA Standard 509 '
+            'cycle); +12 or more reads as splitter-leaning, −12 or less as reverse. ' + str(len(rows))
+            + ' of ' + str(len(schools)) + ' schools report both. Open any school for its 15-year lean '
+            'trend, or the <a href="/">interactive map</a>.</p>']
+    ld = {"@context": "https://schema.org", "@type": "ItemList", "name": h1,
+          "numberOfItems": len(rows),
+          "itemListElement": [{"@type": "ListItem", "position": i,
+                               "url": f"{SITE_URL}/school/{slugify(s['id'])}.html",
+                               "name": law_name(s)} for i, (v, s) in enumerate(rows[:50], 1)]}
+    html = page_shell(title, desc, f"{SITE_URL}/splitter-friendly-law-schools.html",
+                      "\n".join(body), json.dumps(ld, ensure_ascii=False))
+    open(os.path.join(ROOT, "splitter-friendly-law-schools.html"), "w").write(html)
+    print(f"Wrote splitter-friendly-law-schools.html ({len(rows)} ranked).")
+
+
 def build_state_pages(schools):
     """Per-state SEO landing pages ('{state}-law-schools.html'): each ranks that
     state's ABA-accredited schools by first-time bar passage (with FTLT + tuition)
@@ -792,6 +862,7 @@ def build_pillar_pages(schools):
                  desc="ABA-accredited law schools ranked by full-time, long-term JD-required/JD-advantage employment (FTLT) from official ABA Standard 509 disclosures.",
                  intro="ABA-accredited law schools ranked by <strong>full-time, long-term JD-required or JD-advantage employment</strong> (FTLT) about ten months after graduation, from the latest ABA Standard 509 disclosures.",
                  key="ftlt_pct", fmt=lambda v: f"{v}%", reverse=True, unit="FTLT employed")
+    build_splitter_page(schools)
 
 
 def update_sitemap(schools, states=None):
@@ -850,6 +921,12 @@ def update_sitemap(schools, states=None):
   </url>
   <url>
     <loc>https://exhibit509.com/cheapest-law-schools.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>2026-06-05</lastmod>
+  </url>
+  <url>
+    <loc>https://exhibit509.com/splitter-friendly-law-schools.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <lastmod>2026-06-05</lastmod>
