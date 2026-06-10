@@ -1,5 +1,53 @@
 # Exhibit 509 — Session Handoff
 
+**Last updated:** 2026-06-10
+**Repo:** `blakevrechek/exhibit509` · **Live:** https://exhibit509.com (Cloudflare Pages, auto-deploys from `main`)
+**On `main`:** `v1.92.3` (HEAD `310154d`) — everything through the consultant password gate is LIVE.
+**Working branch:** `claude/zealous-carson-2rq9pz` @ `v1.93.2` (HEAD `eb639ce`) — open in **draft PR #69**, not yet merged.
+**Version sync:** `VERSION` is the single source of truth; `stamp_version.py` propagates it to the chrome HTML + `sw.js`.
+
+## This session (v1.90.1 → v1.93.2)
+
+### Live on `main` (PR #67 → 1.92.2, PR #68 → 1.92.3)
+- **Data — "Cond. Schl. Offered"** raw conditional-scholarship count row (falls back to latest `cond_enter_trend` year).
+- **Methodology — dataset-scale breakdown** ("How big is the dataset, exactly": ~2.44M non-null facts).
+- **Direct-to-data links** — every key chart/section has a permanent `/school/<id>/<chart>` URL; 🔗 copy buttons; router scrolls + flashes the anchor.
+- **Embeddable widgets** — standalone **`/embed.html`** renders one branded trend chart per school; `</>` button → iframe snippet with live preview. `_headers` scopes a framing relaxation to `/embed*` (detaches global `X-Frame-Options: DENY`, opens `frame-ancestors *`); `_redirects` adds `/embed/<school>/<chart>`.
+- **Bluebook "Cite this data"** — page-level + per-chart citation popover.
+- **Three value-add data modules** — `pipeline/add_outcome_metrics.py` promotes derived fields into `data/exhibit-data.js`:
+  1. **Splitter index** — `splitter_lean` = national pctile rank(median LSAT) − rank(median GPA); per-school module w/ 15-yr trend + ranked `splitter-friendly-law-schools.html` pillar. HONEST framing: ABA data is *marginal, not joint* → NOT a measured admit rate (caveats on module, pillar, `methodology#splitter`).
+  2. **Conditional-scholarship risk** — stripped % over recent window + Risk Factor badge (moderate ≥15%, high ≥33%). Drops impossible rows (`elim>enter`, e.g. SMU 2023), caps 100%, shows year span.
+  3. **Real-world employment** — `emp_adj_pct` = reported FTLT − school-funded (`raw_emp.Funded_*` in the gz), charted vs reported.
+- **consultants.html** — full **"Exhibit A"** rewrite; softened competitive absolutes; "Book a call" → `cal.com/blakev`.
+- **terms.html §3.1** — Consultant / Exhibit A report limitation (informational, not advice; advisor verifies figures).
+- **Consultant gate (server-side)** — **`functions/_middleware.js`** (Cloudflare Pages Function) does HTTP Basic Auth on `/consultants*`; HTML not served until authed. Password `sell` fallback; override via `CONSULTANTS_PASSWORD` env var. Page auto-reveals once past auth.
+
+### Branch only — draft PR #69 (v1.93.0 → 1.93.2), NOT yet on `main`
+- **Chart "Enlarge" affordance** — a `MutationObserver` wraps every `svg.lc` / `.st-wrap` chart and attaches an "⤢ Enlarge" badge — only on charts that actually zoom (div infographics excluded by design, so no false affordances).
+- **Enlarge modal** actions: **Save · Print · Embed · Copy link · Close** (Embed/Copy-link appear when the chart has a per-school key; `window.__schoolId` set in `renderSchoolPage`).
+- **Nav / IA** — removed **Methodology + Glossary** from the global header (standalone + SPA desktop + mobile drawer; footer/body links kept). New **"Reference & data indexes"** hub on the Blog. Data-index links KEPT in the SEO-page nav (PILLAR_NAV) for internal linking, per decision.
+- **Header logo → map** — `logoHome()` tears down a school/compare overlay then shows the map (fixes `showMap()` leaving the school page on top).
+- **"Blog" renamed to "Explained"** (label only; URL stays `/blog.html`).
+
+## Open items / next session
+- **Merge PR #69** to ship 1.93.x (chart enlarge, nav restructure, Explained) — currently draft, stacked on `main` @ 1.92.3.
+- **Splitter caveat tone** — owner to confirm it's conservative enough; one wording call flagged: kept "a widely-used transparency tool" vs the deck's "best-known".
+- **Embed framing** — verify a cross-origin `/embed.html` iframe actually loads on the live deploy (depends on Cloudflare honoring `! X-Frame-Options`).
+- **Consultant password** — set `CONSULTANTS_PASSWORD` in Cloudflare to keep it out of the repo, then drop the `'sell'` fallback in `functions/_middleware.js`.
+- **Cloudflare Web Analytics** — enable via dashboard automatic setup (cookieless, no code; chosen earlier this session).
+- **Tuition audit** — list of schools to verify against source 509s handed off this session (see `tuition-audit.md` for prior cell-by-cell detail; the app already flags these as "under review" via `TUI_IRREGULAR` + the rule-based `tuiAnomalyReason`).
+- Carried from before: F2 Rutgers identity case; the ~12 genuine tuition gaps; `enr_trend` ~1yr offset.
+
+## Build / deploy quick-ref
+- Bump `VERSION` → `bash scripts/build.sh` (validate_data → build_school_pages → stamp_version). Gate = `validate_data.py` 0 errors + inline-JS syntax (`vm.Script` per `<script>`).
+- Data injectors (run with `--write` before build when data changes): `pipeline/build_curated_records.py`, `pipeline/add_outcome_metrics.py`.
+- Push branch → draft PR → merge to `main` triggers the Cloudflare Pages deploy; SW cache-busts on the version bump.
+- **Squash-merge norm** → a commit pushed *after* a PR merges needs its own PR (that's why the gate became PR #68 after #67).
+
+---
+
+## Prior session notes (2026-06-05)
+
 **Last updated:** 2026-06-05
 **Repo:** `blakevrechek/exhibit509`
 **Live:** https://exhibit509.com (Cloudflare Pages, auto-deploys from `main`)
