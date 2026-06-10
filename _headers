@@ -10,6 +10,19 @@
   X-Frame-Options: DENY
   Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://*.basemaps.cartocdn.com; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://docs.google.com; object-src 'none'; upgrade-insecure-requests
 
+# Embed widgets: allow third-party framing. SCOPED relaxation of the global
+# "X-Frame-Options: DENY" / "frame-ancestors 'none'" above — only the embed route
+# may be iframed, so our branded trend charts can live on other sites/blogs.
+# "! X-Frame-Options" detaches the inherited DENY (Cloudflare Pages header-detach
+# syntax); the CSP re-asserts every other protection while opening frame-ancestors.
+# Verify on deploy that a cross-origin iframe of /embed.html actually loads.
+/embed.html
+  ! X-Frame-Options
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; frame-ancestors *; base-uri 'self'; object-src 'none'; upgrade-insecure-requests
+/embed/*
+  ! X-Frame-Options
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; frame-ancestors *; base-uri 'self'; object-src 'none'; upgrade-insecure-requests
+
 # HTML files: short cache so updates ship fast.
 /*.html
   Cache-Control: public, max-age=300, must-revalidate
