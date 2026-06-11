@@ -34,7 +34,7 @@ SITE_URL = "https://exhibit509.com"
 
 # Schools carrying at least one adjudicated correction off the raw ABA cell.
 # Drives the ⚠ "Data corrected" banner on the static school page. Mirrors the
-# CORRECTED set in index.html; the canonical record is corrections.md.
+# CORRECTED set in index.html; the canonical record is corrections.txt.
 CORRECTED_IDS = {
     "baylor-university", "boston-college", "campbell-university", "cincinnati-university-of",
     "cornell-university", "dayton-university-of", "denver-university-of", "detroit-mercy-university-of",
@@ -541,6 +541,8 @@ def render_page(s, all_schools=None):
 </style>
 </head>
 <body>
+<div id="scrollProg" style="position:fixed;top:0;left:0;height:2px;width:0;background:#D97757;z-index:2000;pointer-events:none;transition:width .08s linear;"></div>
+<script>(function(){{var b=document.getElementById('scrollProg');function u(){{var e=document.documentElement,m=e.scrollHeight-e.clientHeight,p=m>0?e.scrollTop/m:0;b.style.width=(Math.max(0,Math.min(1,p))*100).toFixed(2)+'%';}}addEventListener('scroll',u,{{passive:true}});addEventListener('resize',u);u();}})();</script>
 <div class="wrap">
   <nav class="nav"><a href="/">Map</a><a href="/schools.html">All schools</a><a href="/law-school-bar-passage-rates.html">Bar passage</a><a href="/cheapest-law-schools.html">Tuition</a><a href="/law-school-employment-outcomes.html">Employment</a><a href="/splitter-friendly-law-schools.html">Splitter index</a><a href="/methodology.html">Methodology</a></nav>
   {crumb_html}
