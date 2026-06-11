@@ -32,6 +32,22 @@ OUT_DIR = os.path.join(ROOT, "school")
 SITEMAP_PATH = os.path.join(ROOT, "sitemap.xml")
 SITE_URL = "https://exhibit509.com"
 
+# Schools carrying at least one adjudicated correction off the raw ABA cell.
+# Drives the ⚠ "Data corrected" banner on the static school page. Mirrors the
+# CORRECTED set in index.html; the canonical record is corrections.md.
+CORRECTED_IDS = {
+    "baylor-university", "boston-college", "campbell-university", "cincinnati-university-of",
+    "cornell-university", "dayton-university-of", "denver-university-of", "detroit-mercy-university-of",
+    "florida-coastal-school-of-law", "florida-state-university", "illinois-chicago-university-of",
+    "indiana-university-indianapolis", "inter-american-university-of-puerto-rico",
+    "mitchell/hamline-school-of-law", "montana-university-of", "nevada-las-vegas-university-of",
+    "northwestern-university", "oklahoma-university-of", "south-carolina-university-of",
+    "south-dakota-university-of", "stanford-university", "texas-southern-university",
+    "texas-university-of", "the-ohio-state-university", "washburn-university",
+    "widener-university-commonwealth-law-scho", "widener-university-delaware-law-school",
+    "willamette-university",
+}
+
 # Single source of truth for the visible "Last synced" date, shared with
 # stamp_version.py (which stamps it into the static HTML pages). Read from the
 # top-level SYNC_DATE file so every template shows one date, not per-file strings.
@@ -332,6 +348,12 @@ def render_page(s, all_schools=None):
         f'<div class="closed-banner">{closed}, historical data shown below</div>'
         if closed else ""
     )
+    corr_banner = (
+        '<div class="corr-banner">&#9888; <strong>Data corrected.</strong> One or more '
+        'figures on this page were adjudicated against the ABA source to make the series '
+        'true. See <a href="/methodology.html#data-corrections">how we handle anomalies</a>.</div>'
+        if sid in CORRECTED_IDS else ""
+    )
 
     # Optional alternative-admission-test rows (only where the school reports them):
     # GRE section percentiles (2023+) and JD-Next (2024+).
@@ -499,6 +521,8 @@ def render_page(s, all_schools=None):
   .cta{{display:inline-block;background:var(--orange);color:#06111E;padding:12px 22px;font-family:var(--mono);font-size:13px;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;font-weight:700;margin:18px 0 30px;border-radius:3px;}}
   .cta:hover{{background:#E68660;}}
   .closed-banner{{background:rgba(255,167,38,0.12);border:1px solid rgba(255,167,38,0.4);padding:10px 14px;font-family:var(--mono);font-size:12px;letter-spacing:1px;color:#FFA726;margin-bottom:20px;}}
+  .corr-banner{{background:rgba(255,209,102,0.09);border:1px solid rgba(255,209,102,0.45);padding:10px 14px;font-family:var(--mono);font-size:12px;letter-spacing:0.4px;line-height:1.5;color:#FFD166;margin:16px 0 4px;}}
+  .corr-banner a{{color:#FFD166;}}
   .crumbs{{font-family:var(--mono);font-size:11px;letter-spacing:0.5px;color:var(--dimmer);margin-bottom:14px;}}
   .crumbs a{{color:var(--dim);text-decoration:none;}}
   .crumbs a:hover{{color:var(--orange);}}
@@ -524,6 +548,7 @@ def render_page(s, all_schools=None):
   <div class="eyebrow">ABA Standard 509 · 2025 cycle · Last synced {SYNC_DATE}</div>
   <h1>{lname}</h1>
   <div class="meta">{state}{f' · {school_type}' if school_type else ''} · School ID: {sid}</div>
+  {corr_banner}
   {lead_html}
   <a class="cta" href="{spa_url}">Open interactive map &amp; comparison view</a>
 

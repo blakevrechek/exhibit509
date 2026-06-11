@@ -3556,6 +3556,12 @@ const FIXES = {
 };
 try{ window.FIXES=FIXES; }catch(e){}
 
+// Schools whose displayed data carries at least one adjudicated correction off the
+// raw ABA cell (de-oscillation, de-doubling, $0/text-marker recovery, percentile/
+// enrollment/stale-sticker fixes). Drives the ⚠ banner on the school full page.
+// Keep in sync with corrections.md.
+const CORRECTED = new Set(["baylor-university","boston-college","campbell-university","cincinnati-university-of","cornell-university","dayton-university-of","denver-university-of","detroit-mercy-university-of","florida-coastal-school-of-law","florida-state-university","illinois-chicago-university-of","indiana-university-indianapolis","inter-american-university-of-puerto-rico","mitchell/hamline-school-of-law","montana-university-of","nevada-las-vegas-university-of","northwestern-university","oklahoma-university-of","south-carolina-university-of","south-dakota-university-of","stanford-university","texas-southern-university","texas-university-of","the-ohio-state-university","washburn-university","widener-university-commonwealth-law-scho","widener-university-delaware-law-school","willamette-university"]);
+
 function lineChart(opts){
   const years=opts.years, W=opts.w||340, H=opts.h||190;
   const PL=32, PR=40, PT=12, PB=20, innerW=W-PL-PR, innerH=H-PT-PB;
@@ -5812,6 +5818,7 @@ function schoolDetailHTML(s){
     '</span></div>'+
     '<div class="dp-print-head"><b>Exhibit 509 · by 509α</b><span>exhibit509.com · sourced from ABA Standard 509 disclosures</span></div>'+
     '<div class="dp-name">'+s.full+'</div>'+
+    (CORRECTED.has(s.id)?'<div class="dp-corr" style="font-family:var(--mono);font-size:12px;letter-spacing:0.5px;color:#FFD166;margin:8px 0 4px;border:1px solid rgba(255,209,102,0.45);background:rgba(255,209,102,0.07);padding:7px 12px;display:inline-block;max-width:560px;line-height:1.5;">&#9888; <strong>Data corrected.</strong> One or more figures here were adjudicated against the ABA source to make the series true. Corrected chart points carry an amber ring with a hover note; see <a href="methodology.html#data-corrections" style="color:#FFD166;text-decoration:underline;">how we handle anomalies</a>.</div>':'')+
     (s.closed_status?'<div style="font-family:var(--mono);font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:#FFA726;margin:6px 0 12px;border:1px solid rgba(255,167,38,0.4);padding:6px 12px;display:inline-block;">'+s.closed_status+', historical data shown</div>':'')+
     '<div class="dp-loc">'+(s.state||'—')+(s.school_type?' · '+s.school_type:'')+' · ABA 509 · Last synced June 8, 2026 (2025 cycle) · <a href="methodology.html" style="color:var(--blue);text-decoration:none;border-bottom:1px dotted rgba(90,171,203,0.5);">Methodology</a></div>'+
     // Dense at-a-glance snapshot: every section's headline metric, its 5-yr
