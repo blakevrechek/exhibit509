@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="/favicon.ico?v=1.94.0" sizes="any">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon32.png?v=1.94.0">
-<link rel="icon" type="image/png" sizes="48x48" href="/favicon48.png?v=1.94.0">
-<link rel="icon" type="image/png" sizes="192x192" href="/icon192.png?v=1.94.0">
-<link rel="apple-touch-icon" sizes="180x180" href="/icon180.png?v=1.94.0">
+<link rel="icon" href="/favicon.ico?v=1.94.2" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon32.png?v=1.94.2">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon48.png?v=1.94.2">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon192.png?v=1.94.2">
+<link rel="apple-touch-icon" sizes="180x180" href="/icon180.png?v=1.94.2">
 <title>Methodology · Exhibit 509</title>
 <meta name="description" content="How Exhibit classifies Safety / Target / Reach, where each number comes from, how often we refresh, and how we handle data anomalies.">
 <meta name="robots" content="index,follow">
@@ -78,7 +78,7 @@ body{padding-top:52px;padding-bottom:42px;background-image:radial-gradient(rgba(
 <header class="gh"><a class="gh-logo" href="index.html"><b>Exhibit 509 <em>by 509α</em></b></a><nav class="gh-nav"><span class="gh-nav-grp"><a href="index.html">Map</a><a href="index.html#view=profiles">Schools</a><a href="index.html#view=states">States</a><a href="index.html#view=transfers">Transfers</a><a href="index.html#view=calc">Net price</a></span><span class="gh-nav-grp gh-nav-writ"><a href="blog.html">Explained</a><a href="about.html">About</a><a href="contact.html">Contact</a></span></nav><a class="gh-cta" href="https://docs.google.com/forms/d/e/1FAIpQLScvkEp7vEwHAtpbMbk06AmtdUqHTy595OiQFcNBanSBXm0qDA/viewform?usp=publish-editor" target="_blank" rel="noopener">Email updates</a></header>
 <div class="wrap">
   <a class="back" href="index.html">Back to Exhibit</a>
-  <div class="eyebrow">Methodology · v1.94.0</div>
+  <div class="eyebrow">Methodology · v1.94.2</div>
   <h1>How Exhibit works</h1>
   <div class="sub">Where each number comes from · how we classify schools · how we refresh · how we handle data anomalies.</div>
 
@@ -156,14 +156,12 @@ body{padding-top:52px;padding-bottom:42px;background-image:radial-gradient(rgba(
   </ul>
   <p>Every transformation is reversible from the original public disclosure. The methodology is public; the input files are public; the transformations are documented above.</p>
 
-  <h3 id="data-corrections">Tuition anomalies: corrected, ringed, and logged (June 2026 audit)</h3>
-  <p><strong>Policy:</strong> where a source cell is a provable reporting error &mdash; a <code>$0</code>/text-marker corruption, a per-semester or per-quarter value sitting at half or a third of the annual figure, a doubled cell, an inverted percentile, or a stale sticker left up after a school cut tuition &mdash; we <em>correct it against the disclosure and the school's own adjacent years, then show our work</em>. Every correction is (1) drawn on the chart as an <strong>amber hollow ring with a hover note</strong> explaining the change, and (2) recorded cell-by-cell, old&nbsp;&rarr;&nbsp;new with the reason, in the project's public <code>corrections.md</code> ledger. The raw gz layer keeps the original ABA value, so every edit is reversible. We do not change a value we cannot adjudicate.</p>
+  <h3 id="data-corrections">Tuition anomalies: corrected, ringed, and logged</h3>
+  <p>When a cell is a provable reporting error &mdash; a <code>$0</code>/text-marker corruption, a per-term value at half or a third of the annual figure, a doubled cell, an inverted percentile, a stale sticker after a price cut &mdash; we correct it against the disclosure and the school's own adjacent years. Every correction shows on the chart as an <strong>amber ring with a hover note</strong> and is logged old&nbsp;&rarr;&nbsp;new in our <a href="/corrections.txt" target="_blank" rel="noopener">corrections log</a>. The raw layer keeps the original value, so each edit is reversible. We don't change a value we can't adjudicate.</p>
   <ul>
-    <li><strong>Not-reported years.</strong> A year whose stored tuition is <code>$0</code> or a truncated fragment, with no trustworthy value to recover, is shown as an <strong>open circle</strong> &mdash; a visible "not reported" &mdash; rather than a false near-zero. About 40 schools carry at least one such year, almost all 2018&ndash;2022. Where a reliable figure does exist, we recover it and ring it.</li>
-    <li><strong>Corrected reporting errors.</strong> A halved/doubled cell, a residency swap, an inverted percentile, or a corrupted value carries the amber ring + hover note on the school's tuition (and enrollment) chart; the full old&nbsp;&rarr;&nbsp;new list lives in <code>corrections.md</code>.</li>
-    <li><strong>Genuine resets, left alone.</strong> A school that really did cut or raise tuition (a per-credit restructuring, a deliberate price cut) is not an error; we keep it, and where a one-year move is large but plausible we carry an <strong>"under review"</strong> caveat naming the year rather than overwriting it.</li>
+    <li><strong>Not reported.</strong> A <code>$0</code> or truncated cell with nothing trustworthy to recover renders as an <strong>open circle</strong>, not a false near-zero. Where a reliable figure exists, we recover it.</li>
+    <li><strong>Genuine resets.</strong> A real price cut or per-credit restructuring is kept as-is; a large-but-plausible one-year move carries an &ldquo;under review&rdquo; note rather than an overwrite.</li>
   </ul>
-  <p>Two public records back this up: <code>corrections.md</code> lists every adjudicated change we applied (old&nbsp;&rarr;&nbsp;new, with the reason), and <code>tuition-audit.md</code> holds the wider flag inventory cross-referenced cell-by-cell against the workbook, including items still awaiting verification.</p>
 
   <h2 id="projections">4-year projections</h2>
   <p>Trend charts extend the last reported year with a <strong>dashed 4-year projection</strong> and a shaded uncertainty cone. This is a <strong>model output, not a forecast of fact</strong>, it answers "if this school's own recent trend simply continued, where would it land?" and nothing more. A school can break its trend at any time; treat the dashed region as a sketch, not a promise.</p>
@@ -204,6 +202,6 @@ body{padding-top:52px;padding-bottom:42px;background-image:radial-gradient(rgba(
 #floatBack{position:fixed;bottom:24px;right:24px;z-index:9000;display:flex;align-items:center;gap:8px;background:#D97757;color:#06111E;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;padding:12px 18px;border-radius:4px;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,0.4),0 0 0 1px rgba(217,119,87,0.3);transition:transform .15s,box-shadow .15s;}
 #floatBack:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,0,0,0.5),0 0 0 1px rgba(217,119,87,0.5);}
 </style>
-<div class="gf"><span class="gf-brand"><b>Exhibit 509 <em>by 509α</em></b></span><a class="gf-accent" href="https://docs.google.com/forms/d/e/1FAIpQLScvkEp7vEwHAtpbMbk06AmtdUqHTy595OiQFcNBanSBXm0qDA/viewform?usp=publish-editor" target="_blank" rel="noopener">Sign up for email updates</a><a href="terms.html">Terms · Privacy</a><a class="gf-accent" href="https://skool.com/509alpha" target="_blank" rel="noopener">Join 509α on Skool</a><span class="gf-src"><span style="color:#4A9B6B;">●</span> Sourced from official ABA Standard 509 disclosures · <span style="color:#D97757;">Last synced June 8, 2026</span> · <span style="color:#7AAAC8;">v1.94.0</span></span></div>
+<div class="gf"><span class="gf-brand"><b>Exhibit 509 <em>by 509α</em></b></span><a class="gf-accent" href="https://docs.google.com/forms/d/e/1FAIpQLScvkEp7vEwHAtpbMbk06AmtdUqHTy595OiQFcNBanSBXm0qDA/viewform?usp=publish-editor" target="_blank" rel="noopener">Sign up for email updates</a><a href="terms.html">Terms · Privacy</a><a class="gf-accent" href="https://skool.com/509alpha" target="_blank" rel="noopener">Join 509α on Skool</a><span class="gf-src"><span style="color:#4A9B6B;">●</span> Sourced from official ABA Standard 509 disclosures · <span style="color:#D97757;">Last synced June 8, 2026</span> · <span style="color:#7AAAC8;">v1.94.2</span></span></div>
 </body>
 </html>
