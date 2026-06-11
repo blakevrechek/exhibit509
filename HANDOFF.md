@@ -1,12 +1,45 @@
 # Exhibit 509 — Session Handoff
 
-**Last updated:** 2026-06-10
+**Last updated:** 2026-06-11
 **Repo:** `blakevrechek/exhibit509` · **Live:** https://exhibit509.com (Cloudflare Pages, auto-deploys from `main`)
-**On `main`:** `v1.92.3` (HEAD `310154d`) — everything through the consultant password gate is LIVE.
-**Working branch:** `claude/zealous-carson-2rq9pz` @ `v1.93.2` (HEAD `eb639ce`) — open in **draft PR #69**, not yet merged.
+**On `main`:** `v1.94.0` (HEAD `1dd02e3`, squash of PR #70) — the full June 2026 tuition audit is LIVE.
+**Working branch:** `claude/wonderful-pasteur-uxl4qq` — re-stacked clean on `origin/main` after the merge.
 **Version sync:** `VERSION` is the single source of truth; `stamp_version.py` propagates it to the chrome HTML + `sw.js`.
 
-## This session (v1.90.1 → v1.93.2)
+## Session 2026-06-11 (v1.93.2 → v1.94.0) — tuition audit, master reconciliation, corrections framework
+
+**Shipped to `main` in PR #70 (squash-merged).** All gated through `bash scripts/build.sh` (validator 0 errors).
+
+### Data integrity
+- **Parser fix** — `pipeline/extract.py` `clean_int`/`clean_float` now strip a leading straight/curly apostrophe (Excel text-marker) before parsing, so `'34073`-style cells coerce to a number instead of dropping to `$0`. Takes effect on the next source re-extract.
+- **Per-term annualization** — the ABA switched to per-*term* tuition reporting ~2018. We display **annual** = ×2 (semester) or ×3 (quarter) of the per-term figure. De-oscillated Baylor (per-quarter ×3; 2022/23 nulled; +2026 $69,510), Texas, Cincinnati, Stanford. Confirmed display philosophy (owner ruling).
+- **De-doubling** — Cornell, Ohio State, Campbell, Nevada-Las Vegas (Priority-2/Tier-2 from `audit_t2.xlsx`).
+- **Master reconciliation** — cross-checked every tuition cell vs `Exhibit_509_Master.xlsx` (`Tuition & Fees` sheet, `FT_*_Annual_Final`). 207/210 matched; **>99% faithful** once the per-term unit is accounted for. Resolved the **21 genuine** discrepancies to owner/ABA values (Montana 2023–25, Texas Southern 2024, Indiana-Indianapolis 2017, Cornell 2019 → 67,748, Florida Coastal 2020 → 19,895 [was a doubling], South Carolina 2021 → 9,653, Florida State 2019, Oklahoma 2025). Evidence committed: **`master-reconciliation.md` / `.csv`**.
+- **Detroit Mercy** — tuition cut: 2025 → $27,800 (res=nr); nonresident series mirrored to resident. *2023 & 2024 still carry the old ~$53–54k sticker — pending owner values.*
+- Cleared the Montana/Oklahoma scalar-vs-trend **drift warnings**.
+
+### Transparency framework (the visible "we correct and show our work" system)
+- **Correction rings** — adjudicated chart points get an **amber hollow ring + hover note**. Driven by the `FIXES` registry in `index.html` (school id → trendKey → year → note), read by `lineChart` (wired on the panel tuition+enrollment and deep-dive enrollment charts).
+- **Open-circle missing data** — a missing interior year is stored as an explicit `null` key (not omitted), so `lineChart` draws a dashed bridge + hollow "not reported" circle. Swept all schools (15 omitted gaps filled). `$0` years already render a floor open-circle via `zeroAsMissing`.
+- **⚠ "Data corrected" banner** — on the school full page (in-app deep-dive `dp-corr` + static `school/*.html` `corr-banner`) for the **28** substantively-corrected schools. Sets: `CORRECTED` in `index.html`, `CORRECTED_IDS` in `scripts/build_school_pages.py` — **keep both in sync with `corrections.md`**.
+- **Ledger** — every change logged old→new with reason in **`corrections.md`**.
+- **Methodology** — `methodology.html#data-corrections` rewritten from "all edits reverted / mirrors ABA exactly" to the new **"correct, ring, and log"** policy (raw gz keeps the original).
+
+### Content
+- New **Explained** post (`blog.html#tuition-holes`): *"The holes in 15 years of 509 tuition data — and how we patched them."*
+- **Nebraska** grant > resident tuition explained in methodology (grants are residency-pooled, scaled to the non-resident sticker — not a bug).
+
+### Gotchas learned this session
+- The owner's **`audit_t2.xlsx` (Tier-2 sheet) and `Exhibit_509_Master.xlsx` disagree** on a few cells (Cornell, Florida Coastal, South Carolina). The **master won** every time. Reconcile new audit sheets against the master before applying.
+- The master's `FT_*_Annual_Final` holds **per-term** values for 2018–2020 — a naive diff shows ~1,200 false "mismatches" that are just the annual-vs-term unit. The reconciliation script's classifier handles this (`semester x2` / `quarter x3` / `per-credit`).
+
+### Open / next
+- **Detroit Mercy 2023 & 2024** — need owner values (cut era; currently ~$53–54k stale).
+- **Bulk apostrophe recovery** — parser fix is in; awaiting the ABA 509 **source re-upload + re-extract** to recover the open-school $0 cells (Dayton, Washburn, UIC, Widener ×2, etc. — currently nulled/open-circle).
+- **Closed schools** (Arizona Summit, Whittier, Valparaiso, Florida Coastal $0 years) stay missing — no recoverable source.
+- If the `CORRECTED`/`FIXES` lists grow, regenerate the id set via a value-level diff vs `origin/main`.
+
+## Prior session (v1.90.1 → v1.93.2)
 
 ### Live on `main` (PR #67 → 1.92.2, PR #68 → 1.92.3)
 - **Data — "Cond. Schl. Offered"** raw conditional-scholarship count row (falls back to latest `cond_enter_trend` year).
