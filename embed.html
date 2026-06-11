@@ -52,7 +52,7 @@
     acceptance:{title:'Acceptance rate',lines:[['acc_trend','#EF5350','Acceptance']],fmt:function(v){return v.toFixed(1)+'%';}},
     applications:{title:'Applications & offers',lines:[['apps_trend','#A4C8DD','Applications'],['offers_trend','#5AABCB','Offers']],fmt:function(v){return Math.round(v).toLocaleString();}},
     enrollment:{title:'Enrollment',lines:[['enr_trend','#A78BFA','Enrollment']],fmt:function(v){return Math.round(v).toLocaleString();}},
-    tuition:{title:'Tuition · resident → non-resident',band:['tui_trend','tui_trend','nrt_trend'],color:'#FFA726',fmt:function(v){return '$'+Math.round(v/1000)+'K';}},
+    tuition:{title:'Tuition · resident → non-resident',band:['tui_trend','tui_trend','nrt_trend'],color:'#F472B6',fmt:function(v){return '$'+Math.round(v/1000)+'K';}},
     bar:{title:'Bar passage · first-time → 2-yr ultimate',lines:[['bar_trend','#4A9B6B','First-time'],['bar_2yr_trend','#5AABCB','2-yr ultimate']],fmt:function(v){return Math.round(v)+'%';}},
     conditional:{title:'Conditional scholarships · offered vs. eliminated',lines:[['cond_enter_trend','#5AABCB','Offered'],['cond_elim_trend','#EF5350','Eliminated']],fmt:function(v){return Math.round(v).toLocaleString();}}
   };

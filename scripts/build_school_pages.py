@@ -758,7 +758,7 @@ def build_splitter_page(schools):
 
     def tag(v):
         if v >= 12:
-            return '<span style="color:#D97757;font-weight:700;">splitter</span>'
+            return '<span style="color:#4A9B6B;font-weight:700;">splitter</span>'
         if v <= -12:
             return '<span style="color:#5AABCB;font-weight:700;">reverse</span>'
         return '<span style="color:#7AAAC8;">balanced</span>'
