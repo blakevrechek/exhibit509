@@ -37,7 +37,7 @@ nr mirrors res (private); nr 2017 filled 60,270; nrt scalar 0 → 77,454.
 - 2011 25th/75th were inverted (152/148) → restored to 148 / 152 (50th = 150 unchanged).
 
 ### Nonresident = resident (private; remove divergent nonres) (ledger only)
-- Detroit Mercy: `nrt_trend` mirrored to resident for all years (2023–25 nr 45,037/45,936/46,864 dropped); nrt scalar 46,864 → 56,143. ($27,800 post-cut resident rate deferred per owner.)
+- Detroit Mercy: `nrt_trend` mirrored to resident for all years (2023–25 nr 45,037/45,936/46,864 dropped); nrt scalar 46,864 → 56,143. **2025 resident → $27,800** (tuition cut; res=nr; scalar updated). **2023 & 2024 still pending** owner values — they carry the old ~$53–54k sticker, inconsistent with a 2025 of $27,800.
 - Northwestern 2025 nr 79,722 → 79,772 (+ scalar); Boston College 2016 nr 50,700 → 50,770; Denver 2012 nr 39,480 → 39,840; Willamette 2020 nr 46,530 → 47,130; Mitchell/Hamline 2016 nr 40,470 → 40,570.
 
 ### Public — nonresident correction (ledger only)
