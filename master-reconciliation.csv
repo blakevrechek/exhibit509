@@ -1,0 +1,1281 @@
+school,year,field,ours_displayed,master_final,master_raw_reported,category,master_flag
+Boston College,2016,nr,50770,50700,,GENUINE,missing
+Cornell University,2019,res,65541,67748,,GENUINE,
+Cornell University,2019,nr,65541,67748,,GENUINE,
+Denver,2012,nr,39840,39480,,GENUINE,missing
+Florida Coastal School of Law,2020,res,79580,19895,,GENUINE,yoy_-50%
+Florida Coastal School of Law,2020,nr,79580,19895,,GENUINE,yoy_-50%
+Florida State University,2019,nr,36144,9036,,GENUINE,yoy_-56%
+Indiana University-Indianapolis,2017,res,26736,28631,,GENUINE,missing
+Mitchell/Hamline,2016,nr,40570,40470,,GENUINE,missing
+Montana,2023,res,12263,19494,,GENUINE,yoy_31%
+Montana,2024,res,12080,24161,,GENUINE,
+Montana,2025,res,12291,24582,24582,GENUINE,
+Northwestern University,2025,nr,79772,79722,79722,GENUINE,res>nonres
+Oklahoma,2025,res,18739,18379,18379,GENUINE,
+South Carolina,2021,res,18556,9653,,GENUINE,
+South Carolina,2021,nr,35342,24661,,GENUINE,
+Stanford University,2019,res,62310,20725,,GENUINE,missing
+Stanford University,2020,res,63330,21450,,GENUINE,missing
+Texas Southern University,2024,res,12645,18582,,GENUINE,yoy_47%
+Texas Southern University,2024,nr,20049,25632,,GENUINE,yoy_47%
+Willamette University,2020,nr,47130,23265,,GENUINE,res>nonres
+Albany Law School,2018,res,47450,23725,,semester x2 (ours annual),
+Albany Law School,2018,nr,47450,23725,,semester x2 (ours annual),
+Albany Law School,2019,res,49624,24812,,semester x2 (ours annual),
+Albany Law School,2019,nr,49624,24812,,semester x2 (ours annual),
+Albany Law School,2020,res,52106,26053,,semester x2 (ours annual),
+Albany Law School,2020,nr,52106,26053,,semester x2 (ours annual),
+American University,2018,res,56724,28362,,semester x2 (ours annual),
+American University,2018,nr,56724,28362,,semester x2 (ours annual),
+American University,2019,res,56684,28342,,semester x2 (ours annual),
+American University,2019,nr,56684,28342,,semester x2 (ours annual),
+American University,2020,res,52036,26018,,semester x2 (ours annual),
+American University,2020,nr,52036,26018,,semester x2 (ours annual),
+Appalachian,2011,nr,29825,0,,"master blank/0 (ours carries value, e.g. private nr=res)",missing
+Appalachian,2017,res,31700,0,,"master blank/0 (ours carries value, e.g. private nr=res)",missing
+Appalachian,2018,res,35500,17750,,semester x2 (ours annual),
+Appalachian,2018,nr,35500,17750,,semester x2 (ours annual),
+Appalachian,2019,res,35500,17750,,semester x2 (ours annual),
+Appalachian,2019,nr,35500,17750,,semester x2 (ours annual),
+Appalachian,2020,res,35000,17500,,semester x2 (ours annual),
+Appalachian,2020,nr,35000,17500,,semester x2 (ours annual),
+Arizona State University,2018,res,27584,13792,,semester x2 (ours annual),
+Arizona State University,2018,nr,45940,22970,,semester x2 (ours annual),
+Arizona State University,2019,res,28058,14029,,semester x2 (ours annual),
+Arizona State University,2019,nr,47302,23651,,semester x2 (ours annual),
+Arizona State University,2020,res,27170,13585,,semester x2 (ours annual),
+Arizona State University,2020,nr,46414,23207,,semester x2 (ours annual),
+Arizona Summit Law School,2011,nr,37764,0,,"master blank/0 (ours carries value, e.g. private nr=res)",missing
+Arizona Summit Law School,2018,res,0,,,"per-credit (master null, ours converted)",missing
+Arizona Summit Law School,2018,nr,0,,,"per-credit (master null, ours converted)",missing
+Arizona Summit Law School,2019,res,0,,,"per-credit (master null, ours converted)",missing
+Arizona Summit Law School,2019,nr,0,,,"per-credit (master null, ours converted)",missing
+Arkansas,2023,res,14993,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Arkansas,2023,nr,36076,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Arkansas,2025,res,15689,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Arkansas,2025,nr,37816,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Arkansas at Little Rock,2023,res,12905,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Arkansas at Little Rock,2023,nr,28333,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Arkansas at Little Rock,2024,res,13311,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Arkansas at Little Rock,2024,nr,29174,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Arkansas at Little Rock,2025,nr,29174,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Atlanta's John Marshall Law School,2014,res,,0,,ours-open-circle (master has value),missing
+Atlanta's John Marshall Law School,2014,nr,,0,,ours-open-circle (master has value),missing
+Atlanta's John Marshall Law School,2018,res,43736,21868,,semester x2 (ours annual),
+Atlanta's John Marshall Law School,2018,nr,43736,21868,,semester x2 (ours annual),
+Atlanta's John Marshall Law School,2019,res,44130,22065,,semester x2 (ours annual),
+Atlanta's John Marshall Law School,2019,nr,44130,22065,,semester x2 (ours annual),
+Atlanta's John Marshall Law School,2020,res,44130,22065,,semester x2 (ours annual),
+Atlanta's John Marshall Law School,2020,nr,44130,22065,,semester x2 (ours annual),
+Ave Maria,2018,res,42206,21103,,semester x2 (ours annual),
+Ave Maria,2018,nr,42206,21103,,semester x2 (ours annual),
+Ave Maria,2019,res,39950,19975,,semester x2 (ours annual),
+Ave Maria,2019,nr,39950,19975,,semester x2 (ours annual),
+Ave Maria,2020,res,39950,19975,,semester x2 (ours annual),
+Ave Maria,2020,nr,39950,19975,,semester x2 (ours annual),
+Baltimore,2018,res,31954,15977,,semester x2 (ours annual),
+Baltimore,2018,nr,46622,23311,,semester x2 (ours annual),
+Baltimore,2019,res,30744,15372,,semester x2 (ours annual),
+Baltimore,2019,nr,45852,22926,,semester x2 (ours annual),
+Baltimore,2020,res,30744,15372,,semester x2 (ours annual),
+Baltimore,2020,nr,45852,22926,,semester x2 (ours annual),
+Barry University,2018,res,37430,18715,,semester x2 (ours annual),
+Barry University,2018,nr,37430,18715,,semester x2 (ours annual),
+Barry University,2019,res,37280,18640,,semester x2 (ours annual),
+Barry University,2019,nr,37280,18640,,semester x2 (ours annual),
+Barry University,2020,res,39900,19950,,semester x2 (ours annual),
+Barry University,2020,nr,39900,19950,,semester x2 (ours annual),
+Baylor University,2018,res,62421,20807,,quarter x3 (ours annual),
+Baylor University,2018,nr,62421,20807,,quarter x3 (ours annual),
+Baylor University,2019,res,61782,20594,,quarter x3 (ours annual),
+Baylor University,2019,nr,61782,20594,,quarter x3 (ours annual),
+Baylor University,2020,res,61782,20594,,quarter x3 (ours annual),
+Baylor University,2020,nr,61782,20594,,quarter x3 (ours annual),
+Baylor University,2025,res,64639,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Baylor University,2025,nr,64639,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Belmont University,2018,res,44470,22235,,semester x2 (ours annual),
+Belmont University,2018,nr,44470,22235,,semester x2 (ours annual),
+Belmont University,2019,res,45140,22570,,semester x2 (ours annual),
+Belmont University,2019,nr,45140,22570,,semester x2 (ours annual),
+Belmont University,2020,res,46880,23440,,semester x2 (ours annual),
+Belmont University,2020,nr,46880,23440,,semester x2 (ours annual),
+Boston College,2012,nr,43511,0,,"master blank/0 (ours carries value, e.g. private nr=res)",missing
+Boston College,2014,nr,,0,,ours-open-circle (master has value),missing
+Boston College,2018,res,54750,27375,,semester x2 (ours annual),
+Boston College,2018,nr,54750,27375,,semester x2 (ours annual),
+Boston College,2019,res,56940,,,"per-credit (master null, ours converted)",missing
+Boston College,2019,nr,56940,28470,,semester x2 (ours annual),missing
+Boston College,2020,res,59220,,,"per-credit (master null, ours converted)",missing
+Boston College,2020,nr,59220,29610,,semester x2 (ours annual),missing
+Boston University,2018,res,55076,27538,,semester x2 (ours annual),
+Boston University,2018,nr,55076,27538,,semester x2 (ours annual),
+Boston University,2019,res,55700,27850,,semester x2 (ours annual),
+Boston University,2019,nr,55700,27850,,semester x2 (ours annual),
+Boston University,2020,res,57650,28825,,semester x2 (ours annual),
+Boston University,2020,nr,57650,28825,,semester x2 (ours annual),
+Brigham Young University,2018,res,13060,6530,,semester x2 (ours annual),
+Brigham Young University,2018,nr,26120,13060,,semester x2 (ours annual),
+Brigham Young University,2019,res,13450,6725,,semester x2 (ours annual),
+Brigham Young University,2019,nr,26900,13450,,semester x2 (ours annual),
+Brigham Young University,2020,res,13860,6930,,semester x2 (ours annual),
+Brigham Young University,2020,nr,27720,13860,,semester x2 (ours annual),
+Brooklyn Law School,2018,res,54840,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Brooklyn Law School,2018,nr,54840,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Brooklyn Law School,2019,res,59790,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Brooklyn Law School,2019,nr,59790,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Brooklyn Law School,2020,res,61550,30775,,semester x2 (ours annual),
+Brooklyn Law School,2020,nr,61550,30775,,semester x2 (ours annual),
+California Western,2018,res,52470,26235,,semester x2 (ours annual),
+California Western,2018,nr,52470,26235,,semester x2 (ours annual),
+California Western,2019,res,54160,27080,,semester x2 (ours annual),
+California Western,2019,nr,54160,27080,,semester x2 (ours annual),
+California Western,2020,res,56080,28040,,semester x2 (ours annual),
+California Western,2020,nr,56080,28040,,semester x2 (ours annual),
+California-Berkeley,2018,res,54132,27066,,semester x2 (ours annual),
+California-Berkeley,2018,nr,58082,29041,,semester x2 (ours annual),
+California-Berkeley,2019,res,52016,26008,,semester x2 (ours annual),
+California-Berkeley,2019,nr,55346,27673,,semester x2 (ours annual),
+California-Berkeley,2020,res,60658,30329,,semester x2 (ours annual),
+California-Berkeley,2020,nr,63316,31658,,semester x2 (ours annual),
+California-Davis,2018,res,47722,23861,,semester x2 (ours annual),
+California-Davis,2018,nr,56974,28487,,semester x2 (ours annual),
+California-Davis,2019,res,47332,23666,,semester x2 (ours annual),
+California-Davis,2019,nr,56436,28218,,semester x2 (ours annual),
+California-Davis,2020,res,50530,25265,,semester x2 (ours annual),
+California-Davis,2020,nr,60510,30255,,semester x2 (ours annual),
+California-Irvine,2018,res,45098,22549,,semester x2 (ours annual),
+California-Irvine,2018,nr,51592,25796,,semester x2 (ours annual),
+California-Irvine,2019,res,45578,22789,,semester x2 (ours annual),
+California-Irvine,2019,nr,51642,25821,,semester x2 (ours annual),
+California-Irvine,2020,res,48138,24069,,semester x2 (ours annual),
+California-Irvine,2020,nr,53738,26869,,semester x2 (ours annual),
+California-Los Angeles,2018,res,45600,22800,,semester x2 (ours annual),
+California-Los Angeles,2018,nr,52094,26047,,semester x2 (ours annual),
+California-Los Angeles,2019,res,47988,23994,,semester x2 (ours annual),
+California-Los Angeles,2019,nr,54052,27026,,semester x2 (ours annual),
+California-Los Angeles,2020,res,48138,24069,,semester x2 (ours annual),
+California-Los Angeles,2020,nr,53736,26868,,semester x2 (ours annual),
+Campbell University,2018,res,41130,20565,,semester x2 (ours annual),
+Campbell University,2018,nr,41130,20565,,semester x2 (ours annual),
+Campbell University,2020,res,44950,22475,,semester x2 (ours annual),yoy_-47%
+Campbell University,2020,nr,44950,22475,,semester x2 (ours annual),yoy_-47%
+Case Western Reserve University,2018,res,52070,26035,,semester x2 (ours annual),
+Case Western Reserve University,2018,nr,52070,26035,,semester x2 (ours annual),
+Case Western Reserve University,2019,res,53500,26750,,semester x2 (ours annual),
+Case Western Reserve University,2019,nr,53500,26750,,semester x2 (ours annual),
+Case Western Reserve University,2020,res,55100,27550,,semester x2 (ours annual),
+Case Western Reserve University,2020,nr,55100,27550,,semester x2 (ours annual),
+Catholic University of America,2018,res,51560,25780,,semester x2 (ours annual),
+Catholic University of America,2018,nr,51560,25780,,semester x2 (ours annual),
+Catholic University of America,2019,res,51400,25700,,semester x2 (ours annual),
+Catholic University of America,2019,nr,51400,25700,,semester x2 (ours annual),
+Catholic University of America,2020,res,52950,26475,,semester x2 (ours annual),
+Catholic University of America,2020,nr,52950,26475,,semester x2 (ours annual),
+Chapman University,2018,res,53124,26562,,semester x2 (ours annual),
+Chapman University,2018,nr,53124,26562,,semester x2 (ours annual),
+Chapman University,2019,res,54718,27359,,semester x2 (ours annual),
+Chapman University,2019,nr,54718,27359,,semester x2 (ours annual),
+Chapman University,2020,res,56360,28180,,semester x2 (ours annual),
+Chapman University,2020,nr,56360,28180,,semester x2 (ours annual),
+Charleston,2018,res,42134,21067,,semester x2 (ours annual),
+Charleston,2018,nr,42134,21067,,semester x2 (ours annual),
+Charleston,2019,res,41100,20550,,semester x2 (ours annual),
+Charleston,2019,nr,41100,20550,,semester x2 (ours annual),
+Charleston,2020,res,41100,20550,,semester x2 (ours annual),
+Charleston,2020,nr,41100,20550,,semester x2 (ours annual),
+"Chicago-Kent, Illinois Institute of Technology",2025,res,53070,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+"Chicago-Kent, Illinois Institute of Technology",2025,nr,53070,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Cincinnati,2018,res,24010,12005,,semester x2 (ours annual),
+Cincinnati,2018,nr,29010,14505,,semester x2 (ours annual),
+Cincinnati,2019,res,24010,12005,,semester x2 (ours annual),
+Cincinnati,2019,nr,29010,14505,,semester x2 (ours annual),
+Cincinnati,2020,res,24010,12005,,semester x2 (ours annual),
+Cincinnati,2020,nr,29010,14505,,semester x2 (ours annual),
+Cincinnati,2021,res,24010,12005,,semester x2 (ours annual),
+Cincinnati,2021,nr,29010,14505,,semester x2 (ours annual),
+City University of New York,2018,res,15564,7782,,semester x2 (ours annual),
+City University of New York,2018,nr,25464,12732,,semester x2 (ours annual),
+City University of New York,2019,res,15450,7725,,semester x2 (ours annual),
+City University of New York,2019,nr,25640,12820,,semester x2 (ours annual),
+City University of New York,2020,res,15450,7725,,semester x2 (ours annual),
+City University of New York,2020,nr,25640,12820,,semester x2 (ours annual),
+Cleveland State University,2018,res,27210,13605,,semester x2 (ours annual),
+Cleveland State University,2018,nr,27362,13681,,semester x2 (ours annual),
+Cleveland State University,2019,res,27754,13877,,semester x2 (ours annual),
+Cleveland State University,2019,nr,27854,13927,,semester x2 (ours annual),
+Cleveland State University,2020,res,26700,13350,,semester x2 (ours annual),
+Cleveland State University,2020,nr,26800,13400,,semester x2 (ours annual),
+Colorado,2018,res,31898,15949,,semester x2 (ours annual),
+Colorado,2018,nr,38684,19342,,semester x2 (ours annual),
+Colorado,2019,res,29718,14859,,semester x2 (ours annual),
+Colorado,2019,nr,36504,18252,,semester x2 (ours annual),
+Colorado,2020,res,29718,14859,,semester x2 (ours annual),
+Colorado,2020,nr,36504,18252,,semester x2 (ours annual),
+Columbia University,2018,res,69916,34958,,semester x2 (ours annual),
+Columbia University,2018,nr,69916,34958,,semester x2 (ours annual),
+Columbia University,2019,res,69896,34948,,semester x2 (ours annual),
+Columbia University,2019,nr,69896,34948,,semester x2 (ours annual),
+Columbia University,2020,res,72352,36176,,semester x2 (ours annual),
+Columbia University,2020,nr,72352,36176,,semester x2 (ours annual),
+Concordia Law School,2018,res,29250,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Concordia Law School,2018,nr,29250,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Concordia Law School,2019,res,29250,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Concordia Law School,2019,nr,29250,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Connecticut,2018,res,30338,15169,,semester x2 (ours annual),
+Connecticut,2018,nr,61080,30540,,semester x2 (ours annual),
+Connecticut,2019,res,30354,15177,,semester x2 (ours annual),
+Connecticut,2019,nr,61396,30698,,semester x2 (ours annual),
+Connecticut,2020,res,30354,15177,,semester x2 (ours annual),
+Connecticut,2020,nr,61396,30698,,semester x2 (ours annual),
+Cooley Law School,2023,res,44080,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Cooley Law School,2023,nr,44080,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Cooley Law School,2024,res,45820,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Cooley Law School,2024,nr,45820,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Cooley Law School,2025,res,45820,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Cooley Law School,2025,nr,45820,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Cornell University,2020,res,70188,35094,,semester x2 (ours annual),yoy_-48%
+Cornell University,2020,nr,70188,35094,,semester x2 (ours annual),yoy_-48%
+Creighton University,2018,res,40096,20048,,semester x2 (ours annual),
+Creighton University,2018,nr,40096,20048,,semester x2 (ours annual),
+Creighton University,2019,res,41494,20747,,semester x2 (ours annual),
+Creighton University,2019,nr,41494,20747,,semester x2 (ours annual),
+Creighton University,2020,res,41274,20637,,semester x2 (ours annual),
+Creighton University,2020,nr,41274,20637,,semester x2 (ours annual),
+Creighton University,2021,res,42750,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Creighton University,2021,nr,42750,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Creighton University,2022,res,44040,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Creighton University,2022,nr,44040,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Creighton University,2023,res,43413,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Creighton University,2023,nr,43413,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Creighton University,2024,res,44718,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Creighton University,2024,nr,44718,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Creighton University,2025,res,44718,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Creighton University,2025,nr,44718,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Dayton,2011,nr,31598,0,,"master blank/0 (ours carries value, e.g. private nr=res)",missing
+Dayton,2012,nr,33630,0,,"master blank/0 (ours carries value, e.g. private nr=res)",missing
+Dayton,2018,res,,209,,ours-open-circle (master has value),
+Dayton,2018,nr,,209,,ours-open-circle (master has value),
+Dayton,2019,res,,209,,ours-open-circle (master has value),
+Dayton,2019,nr,,209,,ours-open-circle (master has value),
+Dayton,2020,res,,209,,ours-open-circle (master has value),
+Dayton,2020,nr,,209,,ours-open-circle (master has value),
+Dayton,2021,res,0,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Dayton,2021,nr,0,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Dayton,2022,res,0,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Dayton,2022,nr,0,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Dayton,2023,res,38425,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Dayton,2023,nr,38425,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Dayton,2024,res,39208,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Dayton,2024,nr,39208,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Dayton,2025,res,40020,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Dayton,2025,nr,40020,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+DePaul University,2018,res,48166,24083,,semester x2 (ours annual),
+DePaul University,2018,nr,48166,24083,,semester x2 (ours annual),
+DePaul University,2019,res,48670,24335,,semester x2 (ours annual),
+DePaul University,2019,nr,48670,24335,,semester x2 (ours annual),
+DePaul University,2020,res,48670,24335,,semester x2 (ours annual),
+DePaul University,2020,nr,48670,24335,,semester x2 (ours annual),
+Denver,2018,res,50942,25471,,semester x2 (ours annual),
+Denver,2018,nr,50942,25471,,semester x2 (ours annual),
+Denver,2019,res,52590,26295,,semester x2 (ours annual),
+Denver,2019,nr,52590,26295,,semester x2 (ours annual),
+Denver,2020,res,53880,26940,,semester x2 (ours annual),
+Denver,2020,nr,53880,26940,,semester x2 (ours annual),
+Detroit Mercy,2018,res,43820,21910,,semester x2 (ours annual),
+Detroit Mercy,2018,nr,43820,21910,,semester x2 (ours annual),
+Detroit Mercy,2019,res,44790,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Detroit Mercy,2019,nr,44790,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Detroit Mercy,2020,res,44790,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Detroit Mercy,2020,nr,44790,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Detroit Mercy,2021,res,44790,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Detroit Mercy,2021,nr,44790,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Detroit Mercy,2022,res,45690,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Detroit Mercy,2022,nr,45690,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Detroit Mercy,2023,res,53440,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Detroit Mercy,2023,nr,53440,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Detroit Mercy,2024,res,54508,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Detroit Mercy,2024,nr,54508,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Detroit Mercy,2025,res,27800,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Detroit Mercy,2025,nr,27800,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+District of Columbia,2018,res,12838,6419,,semester x2 (ours annual),
+District of Columbia,2018,nr,24674,12337,,semester x2 (ours annual),
+District of Columbia,2019,res,12134,6067,,semester x2 (ours annual),
+District of Columbia,2019,nr,24266,12133,,semester x2 (ours annual),
+District of Columbia,2020,res,12438,6219,,semester x2 (ours annual),
+District of Columbia,2020,nr,24874,12437,,semester x2 (ours annual),
+Drake University,2018,res,41512,20756,,semester x2 (ours annual),
+Drake University,2018,nr,41512,20756,,semester x2 (ours annual),
+Drake University,2019,res,42400,21200,,semester x2 (ours annual),
+Drake University,2019,nr,42400,21200,,semester x2 (ours annual),
+Drake University,2020,res,43500,21750,,semester x2 (ours annual),
+Drake University,2020,nr,43500,21750,,semester x2 (ours annual),
+Drexel University,2018,res,44850,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Drexel University,2018,nr,44850,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Drexel University,2019,res,46200,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Drexel University,2019,nr,46200,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Drexel University,2020,res,47700,23850,,semester x2 (ours annual),
+Drexel University,2020,nr,47700,23850,,semester x2 (ours annual),
+Duke University,2011,nr,49617,0,,"master blank/0 (ours carries value, e.g. private nr=res)",missing
+Duke University,2018,res,64722,32361,,semester x2 (ours annual),
+Duke University,2018,nr,64722,32361,,semester x2 (ours annual),
+Duke University,2019,res,66000,33000,,semester x2 (ours annual),
+Duke University,2019,nr,66000,33000,,semester x2 (ours annual),
+Duke University,2020,res,66000,33000,,semester x2 (ours annual),
+Duke University,2020,nr,66000,33000,,semester x2 (ours annual),
+Duquesne University,2012,nr,35354,0,,"master blank/0 (ours carries value, e.g. private nr=res)",missing
+Duquesne University,2018,res,44944,22472,,semester x2 (ours annual),
+Duquesne University,2018,nr,44944,22472,,semester x2 (ours annual),
+Duquesne University,2019,res,46124,23062,,semester x2 (ours annual),
+Duquesne University,2019,nr,46124,23062,,semester x2 (ours annual),
+Duquesne University,2020,res,48314,24157,,semester x2 (ours annual),
+Duquesne University,2020,nr,48314,24157,,semester x2 (ours annual),
+Elon University,2018,res,44550,22275,,semester x2 (ours annual),
+Elon University,2018,nr,44550,22275,,semester x2 (ours annual),
+Elon University,2019,res,30760,15380,,semester x2 (ours annual),yoy_-31%
+Elon University,2019,nr,30760,15380,,semester x2 (ours annual),yoy_-31%
+Elon University,2020,res,31572,15786,,semester x2 (ours annual),
+Elon University,2020,nr,31572,15786,,semester x2 (ours annual),
+Emory University,2018,res,57348,28674,,semester x2 (ours annual),
+Emory University,2018,nr,57348,28674,,semester x2 (ours annual),
+Emory University,2019,res,59062,29531,,semester x2 (ours annual),
+Emory University,2019,nr,59062,29531,,semester x2 (ours annual),
+Emory University,2020,res,59950,29975,,semester x2 (ours annual),
+Emory University,2020,nr,59950,29975,,semester x2 (ours annual),
+Faulkner University,2018,res,39184,19592,,semester x2 (ours annual),
+Faulkner University,2018,nr,39184,19592,,semester x2 (ours annual),
+Faulkner University,2019,res,39000,19500,,semester x2 (ours annual),
+Faulkner University,2019,nr,39000,19500,,semester x2 (ours annual),
+Faulkner University,2020,res,39000,19500,,semester x2 (ours annual),
+Faulkner University,2020,nr,39000,19500,,semester x2 (ours annual),
+Florida,2018,res,21804,10902,,semester x2 (ours annual),
+Florida,2018,nr,38040,19020,,semester x2 (ours annual),
+Florida,2019,res,21802,10901,,semester x2 (ours annual),
+Florida,2019,nr,38038,19019,,semester x2 (ours annual),
+Florida,2020,res,19140,9570,,semester x2 (ours annual),
+Florida,2020,nr,34602,17301,,semester x2 (ours annual),
+Florida A&M University,2018,res,13676,6838,,semester x2 (ours annual),
+Florida A&M University,2018,nr,32936,16468,,semester x2 (ours annual),
+Florida A&M University,2019,res,13676,6838,,semester x2 (ours annual),
+Florida A&M University,2019,nr,32936,16468,,semester x2 (ours annual),
+Florida A&M University,2020,res,13680,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Florida A&M University,2020,nr,13680,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Florida A&M University,2021,res,13680,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Florida A&M University,2021,nr,13680,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Florida A&M University,2022,res,13680,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Florida A&M University,2022,nr,13680,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Florida A&M University,2023,res,13224,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Florida A&M University,2023,nr,31842,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Florida A&M University,2024,res,13224,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Florida A&M University,2024,nr,31842,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Florida A&M University,2025,res,13224,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Florida A&M University,2025,nr,31842,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Florida Coastal School of Law,2018,res,46068,23034,,semester x2 (ours annual),
+Florida Coastal School of Law,2018,nr,46068,23034,,semester x2 (ours annual),
+Florida Coastal School of Law,2021,res,0,,,"per-credit (master null, ours converted)",missing
+Florida Coastal School of Law,2021,nr,0,,,"per-credit (master null, ours converted)",missing
+Florida International University,2018,res,20730,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Florida International University,2018,nr,34530,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Florida International University,2019,res,20730,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Florida International University,2019,nr,34500,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Florida International University,2020,res,20730,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Florida International University,2020,nr,34500,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Florida International University,2021,res,20730,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Florida International University,2021,nr,34500,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Florida International University,2022,res,20730,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Florida International University,2022,nr,34500,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Florida International University,2023,res,20039,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Florida International University,2023,nr,33350,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Florida International University,2024,res,20039,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Florida International University,2024,nr,33350,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Florida International University,2025,res,20039,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Florida International University,2025,nr,34684,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Florida State University,2018,res,20694,10347,,semester x2 (ours annual),
+Florida State University,2018,nr,40710,20355,,semester x2 (ours annual),
+Florida State University,2019,res,18072,9036,,semester x2 (ours annual),yoy_-56%
+Florida State University,2020,res,18090,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Florida State University,2020,nr,37140,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Florida State University,2021,res,18090,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Florida State University,2021,nr,37140,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Florida State University,2022,res,18060,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Florida State University,2022,nr,37110,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Florida State University,2023,res,17458,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Florida State University,2023,nr,35902,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Florida State University,2024,res,17458,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Florida State University,2024,nr,35902,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Florida State University,2025,res,19952,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Florida State University,2025,nr,41238,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Fordham University,2018,res,60406,30203,,semester x2 (ours annual),
+Fordham University,2018,nr,60406,30203,,semester x2 (ours annual),
+Fordham University,2019,res,61770,30885,,semester x2 (ours annual),
+Fordham University,2019,nr,61770,30885,,semester x2 (ours annual),
+Fordham University,2020,res,63932,31966,,semester x2 (ours annual),
+Fordham University,2020,nr,63932,31966,,semester x2 (ours annual),
+George Mason University,2018,res,25354,12677,,semester x2 (ours annual),
+George Mason University,2018,nr,40740,20370,,semester x2 (ours annual),
+George Mason University,2019,res,22702,11351,,semester x2 (ours annual),
+George Mason University,2019,nr,38088,19044,,semester x2 (ours annual),
+George Mason University,2020,res,22702,11351,,semester x2 (ours annual),
+George Mason University,2020,nr,38088,19044,,semester x2 (ours annual),
+George Washington University,2018,res,60790,30395,,semester x2 (ours annual),
+George Washington University,2018,nr,60790,30395,,semester x2 (ours annual),
+George Washington University,2019,res,63206,31603,,semester x2 (ours annual),
+George Washington University,2019,nr,63206,31603,,semester x2 (ours annual),
+George Washington University,2020,res,63206,31603,,semester x2 (ours annual),
+George Washington University,2020,nr,63206,31603,,semester x2 (ours annual),
+Georgetown University,2012,nr,48835,0,,"master blank/0 (ours carries value, e.g. private nr=res)",missing
+Georgetown University,2018,res,62244,31122,,semester x2 (ours annual),
+Georgetown University,2018,nr,62244,31122,,semester x2 (ours annual),
+Georgetown University,2019,res,64548,32274,,semester x2 (ours annual),
+Georgetown University,2019,nr,64548,32274,,semester x2 (ours annual),
+Georgetown University,2020,res,66872,33436,,semester x2 (ours annual),
+Georgetown University,2020,nr,66872,33436,,semester x2 (ours annual),
+Georgia,2018,res,19708,9854,,semester x2 (ours annual),
+Georgia,2018,nr,38146,19073,,semester x2 (ours annual),
+Georgia,2019,res,17604,8802,,semester x2 (ours annual),
+Georgia,2019,nr,36362,18181,,semester x2 (ours annual),
+Georgia,2020,res,17604,8802,,semester x2 (ours annual),
+Georgia,2020,nr,36362,18181,,semester x2 (ours annual),
+Georgia State University,2018,res,17050,8525,,semester x2 (ours annual),
+Georgia State University,2018,nr,36658,18329,,semester x2 (ours annual),
+Georgia State University,2019,res,15768,7884,,semester x2 (ours annual),
+Georgia State University,2019,nr,35376,17688,,semester x2 (ours annual),
+Georgia State University,2020,res,15768,7884,,semester x2 (ours annual),
+Georgia State University,2020,nr,35336,17668,,semester x2 (ours annual),
+Golden Gate University,2018,res,50000,25000,,semester x2 (ours annual),
+Golden Gate University,2018,nr,50000,25000,,semester x2 (ours annual),
+Golden Gate University,2019,res,51000,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Golden Gate University,2019,nr,51000,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Golden Gate University,2020,res,51000,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Golden Gate University,2020,nr,51000,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Golden Gate University,2021,res,52500,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Golden Gate University,2021,nr,52500,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Golden Gate University,2022,res,52500,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Golden Gate University,2022,nr,52500,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Golden Gate University,2023,res,52500,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Golden Gate University,2023,nr,52500,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Gonzaga University,2019,res,42540,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Gonzaga University,2019,nr,42540,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Gonzaga University,2020,res,44700,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Gonzaga University,2020,nr,44700,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Gonzaga University,2021,res,47670,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Gonzaga University,2021,nr,47670,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Harvard University,2018,res,64978,32489,,semester x2 (ours annual),
+Harvard University,2018,nr,64978,32489,,semester x2 (ours annual),
+Harvard University,2019,res,67080,33540,,semester x2 (ours annual),
+Harvard University,2019,nr,67080,33540,,semester x2 (ours annual),
+Harvard University,2020,res,65874,32937,,semester x2 (ours annual),
+Harvard University,2020,nr,65874,32937,,semester x2 (ours annual),
+Hawaii,2018,res,22392,11196,,semester x2 (ours annual),
+Hawaii,2018,nr,45816,22908,,semester x2 (ours annual),
+Hawaii,2019,res,22392,11196,,semester x2 (ours annual),
+Hawaii,2019,nr,45816,22908,,semester x2 (ours annual),
+Hawaii,2020,res,22392,11196,,semester x2 (ours annual),
+Hawaii,2020,nr,45816,22908,,semester x2 (ours annual),
+Hofstra University,2018,res,59214,29607,,semester x2 (ours annual),
+Hofstra University,2018,nr,59214,29607,,semester x2 (ours annual),
+Hofstra University,2019,res,60254,30127,,semester x2 (ours annual),
+Hofstra University,2019,nr,60254,30127,,semester x2 (ours annual),
+Hofstra University,2020,res,62064,31032,,semester x2 (ours annual),
+Hofstra University,2020,nr,62064,31032,,semester x2 (ours annual),
+Houston,2019,res,33180,16590,,semester x2 (ours annual),yoy_-48%
+Houston,2019,nr,48432,24216,,semester x2 (ours annual),yoy_-48%
+Houston,2020,res,28674,14337,,semester x2 (ours annual),
+Houston,2020,nr,43522,21761,,semester x2 (ours annual),
+Howard University,2018,res,34194,17097,,semester x2 (ours annual),
+Howard University,2018,nr,35814,17907,,semester x2 (ours annual),
+Howard University,2019,res,32654,16327,,semester x2 (ours annual),
+Howard University,2019,nr,32654,16327,,semester x2 (ours annual),
+Howard University,2020,res,33660,16830,,semester x2 (ours annual),
+Howard University,2020,nr,33660,16830,,semester x2 (ours annual),
+Idaho,2018,res,20986,10493,,semester x2 (ours annual),
+Idaho,2018,nr,38622,19311,,semester x2 (ours annual),
+Idaho,2019,res,22260,11130,,semester x2 (ours annual),
+Idaho,2019,nr,41496,20748,,semester x2 (ours annual),
+Idaho,2020,res,22760,11380,,semester x2 (ours annual),
+Idaho,2020,nr,41996,20998,,semester x2 (ours annual),
+Illinois,2018,res,38118,19059,,semester x2 (ours annual),
+Illinois,2018,nr,48118,24059,,semester x2 (ours annual),
+Illinois,2019,res,35000,17500,,semester x2 (ours annual),
+Illinois,2019,nr,45000,22500,,semester x2 (ours annual),
+Illinois,2020,res,35000,17500,,semester x2 (ours annual),
+Illinois,2020,nr,45000,22500,,semester x2 (ours annual),
+Illinois-Chicago,2018,res,,275,,ours-open-circle (master has value),
+Illinois-Chicago,2018,nr,,275,,ours-open-circle (master has value),
+Illinois-Chicago,2020,res,0,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Illinois-Chicago,2020,nr,0,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Illinois-Chicago,2021,res,36000,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Illinois-Chicago,2021,nr,45000,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Illinois-Chicago,2022,res,36000,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Illinois-Chicago,2022,nr,45000,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Illinois-Chicago,2023,res,34800,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Illinois-Chicago,2023,nr,43500,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Illinois-Chicago,2024,res,34800,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Illinois-Chicago,2024,nr,43500,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Illinois-Chicago,2025,res,36192,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Illinois-Chicago,2025,nr,45240,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Indiana University-Bloomington,2018,res,35588,17794,,semester x2 (ours annual),
+Indiana University-Bloomington,2018,nr,55338,27669,,semester x2 (ours annual),
+Indiana University-Bloomington,2019,res,35276,17638,,semester x2 (ours annual),
+Indiana University-Bloomington,2019,nr,55500,27750,,semester x2 (ours annual),
+Indiana University-Bloomington,2020,res,36326,18163,,semester x2 (ours annual),
+Indiana University-Bloomington,2020,nr,57000,28500,,semester x2 (ours annual),
+Indiana University-Indianapolis,2018,res,,547,,ours-open-circle (master has value),
+Indiana University-Indianapolis,2018,nr,,547,,ours-open-circle (master has value),
+Indiana University-Indianapolis,2019,res,28672,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Indiana University-Indianapolis,2019,nr,48736,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Indiana University-Indianapolis,2020,res,27420,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Indiana University-Indianapolis,2020,nr,46230,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Indiana University-Indianapolis,2023,res,0,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Indiana University-Indianapolis,2023,nr,0,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Indiana University-Indianapolis,2024,res,29232,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Indiana University-Indianapolis,2024,nr,47415,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Indiana University-Indianapolis,2025,res,29812,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Indiana University-Indianapolis,2025,nr,47995,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Inter American University of Puerto Rico,2012,nr,15243,0,,"master blank/0 (ours carries value, e.g. private nr=res)",missing
+Inter American University of Puerto Rico,2020,res,14550,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Inter American University of Puerto Rico,2020,nr,14550,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Iowa,2018,res,27342,13671,,semester x2 (ours annual),
+Iowa,2018,nr,46822,23411,,semester x2 (ours annual),
+Iowa,2019,res,26180,13090,,semester x2 (ours annual),
+Iowa,2019,nr,45796,22898,,semester x2 (ours annual),
+Iowa,2020,res,26180,13090,,semester x2 (ours annual),
+Iowa,2020,nr,45796,22898,,semester x2 (ours annual),
+Jacksonville University,2024,res,34800,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Jacksonville University,2024,nr,34800,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Jacksonville University,2025,res,34800,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Jacksonville University,2025,nr,34800,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Kentucky,2018,res,24046,12023,,semester x2 (ours annual),
+Kentucky,2018,nr,48474,24237,,semester x2 (ours annual),
+Kentucky,2019,res,24722,12361,,semester x2 (ours annual),
+Kentucky,2019,nr,50352,25176,,semester x2 (ours annual),
+Kentucky,2020,res,23446,11723,,semester x2 (ours annual),
+Kentucky,2020,nr,49836,24918,,semester x2 (ours annual),
+Liberty University,2011,nr,30604,0,,"master blank/0 (ours carries value, e.g. private nr=res)",missing
+Liberty University,2018,res,36862,18431,,semester x2 (ours annual),
+Liberty University,2018,nr,36862,18431,,semester x2 (ours annual),
+Liberty University,2019,res,35712,17856,,semester x2 (ours annual),
+Liberty University,2019,nr,35712,17856,,semester x2 (ours annual),
+Liberty University,2020,res,36782,18391,,semester x2 (ours annual),
+Liberty University,2020,nr,36782,18391,,semester x2 (ours annual),
+Liberty University,2024,nr,41800,,,"per-credit (master null, ours converted)",missing
+Lincoln Memorial University,2024,res,42340,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Lincoln Memorial University,2024,nr,42340,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Lincoln Memorial University,2025,res,43210,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Lincoln Memorial University,2025,nr,43210,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Louisiana State University,2018,res,23660,11830,,semester x2 (ours annual),
+Louisiana State University,2018,nr,39100,19550,,semester x2 (ours annual),
+Louisiana State University,2019,res,19750,9875,,semester x2 (ours annual),
+Louisiana State University,2019,nr,35190,17595,,semester x2 (ours annual),
+Louisiana State University,2020,res,19750,9875,,semester x2 (ours annual),
+Louisiana State University,2020,nr,35190,17595,,semester x2 (ours annual),
+Louisiana State University,2024,nr,39500,19750,,semester x2 (ours annual),yoy_-44%
+Louisiana State University,2025,nr,39500,19750,19750,semester x2 (ours annual),
+Louisville,2018,res,21196,10598,,semester x2 (ours annual),
+Louisville,2018,nr,39402,19701,,semester x2 (ours annual),
+Louisville,2019,res,22534,11267,,semester x2 (ours annual),
+Louisville,2019,nr,41944,20972,,semester x2 (ours annual),
+Louisville,2020,res,23106,11553,,semester x2 (ours annual),yoy_-33%
+Louisville,2020,nr,28106,14053,,semester x2 (ours annual),yoy_-33%
+Loyola Marymount University-Los Angeles,2018,res,57230,28615,,semester x2 (ours annual),
+Loyola Marymount University-Los Angeles,2018,nr,57230,28615,,semester x2 (ours annual),
+Loyola Marymount University-Los Angeles,2019,res,58470,,,"per-credit (master null, ours converted)",missing
+Loyola Marymount University-Los Angeles,2019,nr,58470,29235,,semester x2 (ours annual),missing
+Loyola Marymount University-Los Angeles,2020,res,59990,,,"per-credit (master null, ours converted)",missing
+Loyola Marymount University-Los Angeles,2020,nr,59990,29995,,semester x2 (ours annual),missing
+Loyola Marymount University-Los Angeles,2021,res,59990,,,"per-credit (master null, ours converted)",missing
+Loyola Marymount University-Los Angeles,2022,res,62390,,,"per-credit (master null, ours converted)",missing
+Loyola Marymount University-Los Angeles,2023,res,64890,,,"per-credit (master null, ours converted)",missing
+Loyola University-Chicago,2018,res,48962,24481,,semester x2 (ours annual),
+Loyola University-Chicago,2018,nr,48962,24481,,semester x2 (ours annual),
+Loyola University-Chicago,2019,res,48570,24285,,semester x2 (ours annual),
+Loyola University-Chicago,2019,nr,48570,24285,,semester x2 (ours annual),
+Loyola University-Chicago,2020,res,49690,24845,,semester x2 (ours annual),
+Loyola University-Chicago,2020,nr,49690,24845,,semester x2 (ours annual),
+Loyola University-New Orleans,2018,res,44580,22290,,semester x2 (ours annual),
+Loyola University-New Orleans,2018,nr,44580,22290,,semester x2 (ours annual),
+Loyola University-New Orleans,2019,res,43696,21848,,semester x2 (ours annual),
+Loyola University-New Orleans,2019,nr,43696,21848,,semester x2 (ours annual),
+Loyola University-New Orleans,2020,res,45226,22613,,semester x2 (ours annual),
+Loyola University-New Orleans,2020,nr,45226,22613,,semester x2 (ours annual),
+Maine,2018,res,23640,11820,,semester x2 (ours annual),
+Maine,2018,nr,34710,17355,,semester x2 (ours annual),
+Maine,2019,res,23182,11591,,semester x2 (ours annual),
+Maine,2019,nr,34694,17347,,semester x2 (ours annual),
+Maine,2020,res,23190,11595,,semester x2 (ours annual),
+Maine,2020,nr,34680,17340,,semester x2 (ours annual),
+Maine,2023,res,23084,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Maine,2023,nr,34800,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Maine,2024,res,23780,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Maine,2024,nr,34800,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Marquette University,2018,res,46170,23085,,semester x2 (ours annual),
+Marquette University,2018,nr,46170,23085,,semester x2 (ours annual),
+Marquette University,2019,res,47550,23775,,semester x2 (ours annual),
+Marquette University,2019,nr,47550,23775,,semester x2 (ours annual),
+Marquette University,2020,res,48980,24490,,semester x2 (ours annual),
+Marquette University,2020,nr,48980,24490,,semester x2 (ours annual),
+Maryland,2018,res,33650,16825,,semester x2 (ours annual),
+Maryland,2018,nr,48742,24371,,semester x2 (ours annual),
+Maryland,2019,res,32808,16404,,semester x2 (ours annual),
+Maryland,2019,nr,48426,24213,,semester x2 (ours annual),
+Maryland,2020,res,32808,16404,,semester x2 (ours annual),
+Maryland,2020,nr,48426,24213,,semester x2 (ours annual),
+Mercer University,2018,res,38716,19358,,semester x2 (ours annual),
+Mercer University,2018,nr,38716,19358,,semester x2 (ours annual),
+Mercer University,2019,res,39184,19592,,semester x2 (ours annual),
+Mercer University,2019,nr,39184,19592,,semester x2 (ours annual),
+Mercer University,2020,res,39968,19984,,semester x2 (ours annual),
+Mercer University,2020,nr,39968,19984,,semester x2 (ours annual),
+Miami,2018,res,52390,26195,,semester x2 (ours annual),
+Miami,2018,nr,52390,26195,,semester x2 (ours annual),
+Miami,2019,res,53000,26500,,semester x2 (ours annual),
+Miami,2019,nr,53000,26500,,semester x2 (ours annual),
+Miami,2020,res,54750,27375,,semester x2 (ours annual),
+Miami,2020,nr,54750,27375,,semester x2 (ours annual),
+Michigan,2018,res,59762,29881,,semester x2 (ours annual),
+Michigan,2018,nr,62762,31381,,semester x2 (ours annual),
+Michigan,2019,res,61526,30763,,semester x2 (ours annual),
+Michigan,2019,nr,64526,32263,,semester x2 (ours annual),
+Michigan,2020,res,63680,31840,,semester x2 (ours annual),
+Michigan,2020,nr,66680,33340,,semester x2 (ours annual),
+Michigan State University,2018,res,44200,22100,,semester x2 (ours annual),
+Michigan State University,2018,nr,44200,22100,,semester x2 (ours annual),
+Michigan State University,2019,res,45600,22800,,semester x2 (ours annual),
+Michigan State University,2019,nr,45600,22800,,semester x2 (ours annual),
+Michigan State University,2020,res,41040,20520,,semester x2 (ours annual),
+Michigan State University,2020,nr,45600,22800,,semester x2 (ours annual),
+Minnesota,2018,res,42840,21420,,semester x2 (ours annual),
+Minnesota,2018,nr,51528,25764,,semester x2 (ours annual),
+Minnesota,2019,res,43704,21852,,semester x2 (ours annual),
+Minnesota,2019,nr,52560,26280,,semester x2 (ours annual),
+Minnesota,2020,res,43704,21852,,semester x2 (ours annual),
+Minnesota,2020,nr,52560,26280,,semester x2 (ours annual),
+Mississippi College,2014,res,32680,0,,"master blank/0 (ours carries value, e.g. private nr=res)",missing
+Mississippi College,2015,res,33630,0,,"master blank/0 (ours carries value, e.g. private nr=res)",missing
+Mississippi College,2016,res,33630,0,,"master blank/0 (ours carries value, e.g. private nr=res)",missing
+Mississippi College,2018,res,35510,17755,,semester x2 (ours annual),
+Mississippi College,2018,nr,35510,17755,,semester x2 (ours annual),
+Mississippi College,2019,res,33870,16935,,semester x2 (ours annual),
+Mississippi College,2019,nr,33870,16935,,semester x2 (ours annual),
+Mississippi College,2020,res,34800,17400,,semester x2 (ours annual),
+Mississippi College,2020,nr,34800,17400,,semester x2 (ours annual),
+Missouri,2018,res,21192,10596,,semester x2 (ours annual),
+Missouri,2018,nr,39104,19552,,semester x2 (ours annual),
+Missouri,2019,res,21590,10795,,semester x2 (ours annual),
+Missouri,2019,nr,39842,19921,,semester x2 (ours annual),
+Missouri,2020,res,20700,10350,,semester x2 (ours annual),
+Missouri,2020,nr,39360,19680,,semester x2 (ours annual),
+Missouri,2023,res,22069,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Missouri,2023,nr,27869,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Missouri,2024,res,22881,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Missouri,2024,nr,28971,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Missouri,2025,res,23548,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Missouri,2025,nr,29812,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Missouri-Kansas City,2018,res,19440,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Missouri-Kansas City,2018,nr,36960,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Missouri-Kansas City,2019,res,18450,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Missouri-Kansas City,2019,nr,36390,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Missouri-Kansas City,2020,res,18900,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Missouri-Kansas City,2020,nr,37290,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Missouri-Kansas City,2021,res,19500,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Missouri-Kansas City,2021,nr,38490,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Missouri-Kansas City,2022,res,21060,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Missouri-Kansas City,2022,nr,27060,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Missouri-Kansas City,2023,res,20880,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Missouri-Kansas City,2023,nr,26680,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Missouri-Kansas City,2024,res,21808,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Missouri-Kansas City,2024,nr,27869,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Missouri-Kansas City,2025,res,22794,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Missouri-Kansas City,2025,nr,28594,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Mitchell/Hamline,2018,res,43460,21730,,semester x2 (ours annual),
+Mitchell/Hamline,2018,nr,43460,21730,,semester x2 (ours annual),
+Mitchell/Hamline,2019,res,44980,22490,,semester x2 (ours annual),
+Mitchell/Hamline,2019,nr,44980,22490,,semester x2 (ours annual),
+Mitchell/Hamline,2020,res,46550,23275,,semester x2 (ours annual),
+Mitchell/Hamline,2020,nr,46550,23275,,semester x2 (ours annual),
+Montana,2018,res,13176,6588,,semester x2 (ours annual),
+Montana,2018,nr,32436,16218,,semester x2 (ours annual),
+Montana,2019,res,14014,7007,,semester x2 (ours annual),
+Montana,2019,nr,34546,17273,,semester x2 (ours annual),
+Montana,2020,res,12738,6369,,semester x2 (ours annual),
+Montana,2020,nr,34268,17134,,semester x2 (ours annual),
+Nebraska,2018,res,16084,8042,,semester x2 (ours annual),
+Nebraska,2018,nr,36940,18470,,semester x2 (ours annual),
+Nebraska,2019,res,11850,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Nebraska,2019,nr,31620,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Nebraska,2020,res,12180,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Nebraska,2020,nr,32820,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Nebraska,2021,res,12180,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Nebraska,2021,nr,32820,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Nebraska,2022,res,12180,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Nebraska,2022,nr,32820,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Nebraska,2023,res,12180,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Nebraska,2023,nr,32828,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Nebraska,2024,res,12586,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Nebraska,2024,nr,33930,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Nebraska,2025,res,13224,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Nebraska,2025,nr,35641,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+New England Law/Boston,2012,res,42570,0,,"master blank/0 (ours carries value, e.g. private nr=res)",missing
+New England Law/Boston,2015,res,,0,,ours-open-circle (master has value),missing
+New England Law/Boston,2017,nr,,47992,,ours-open-circle (master has value),missing
+New England Law/Boston,2018,res,49488,24744,,semester x2 (ours annual),
+New England Law/Boston,2018,nr,49488,24744,,semester x2 (ours annual),
+New England Law/Boston,2019,res,50888,25444,,semester x2 (ours annual),
+New England Law/Boston,2019,nr,50888,25444,,semester x2 (ours annual),
+New England Law/Boston,2020,res,50888,25444,,semester x2 (ours annual),
+New England Law/Boston,2020,nr,50888,25444,,semester x2 (ours annual),
+New Hampshire,2018,res,37406,18703,,semester x2 (ours annual),
+New Hampshire,2018,nr,43306,21653,,semester x2 (ours annual),
+New Hampshire,2019,res,38000,19000,,semester x2 (ours annual),
+New Hampshire,2019,nr,44000,22000,,semester x2 (ours annual),
+New Hampshire,2020,res,39000,19500,,semester x2 (ours annual),
+New Hampshire,2020,nr,45000,22500,,semester x2 (ours annual),
+New York Law School,2018,res,51732,25866,,semester x2 (ours annual),
+New York Law School,2018,nr,51732,25866,,semester x2 (ours annual),
+New York Law School,2019,res,52552,26276,,semester x2 (ours annual),
+New York Law School,2019,nr,52552,26276,,semester x2 (ours annual),
+New York Law School,2020,res,52552,26276,,semester x2 (ours annual),
+New York Law School,2020,nr,52552,26276,,semester x2 (ours annual),
+New York University,2018,res,66422,33211,,semester x2 (ours annual),
+New York University,2018,nr,66422,33211,,semester x2 (ours annual),
+New York University,2019,res,68934,34467,,semester x2 (ours annual),
+New York University,2019,nr,68934,34467,,semester x2 (ours annual),
+New York University,2020,res,68348,34174,,semester x2 (ours annual),
+New York University,2020,nr,68348,34174,,semester x2 (ours annual),
+North Carolina,2018,res,24172,12086,,semester x2 (ours annual),
+North Carolina,2018,nr,40802,20401,,semester x2 (ours annual),
+North Carolina,2019,res,21142,10571,,semester x2 (ours annual),
+North Carolina,2019,nr,38288,19144,,semester x2 (ours annual),
+North Carolina,2020,res,21140,10570,,semester x2 (ours annual),
+North Carolina,2020,nr,38286,19143,,semester x2 (ours annual),
+North Carolina Central University,2018,res,18738,9369,,semester x2 (ours annual),
+North Carolina Central University,2018,nr,41410,20705,,semester x2 (ours annual),
+North Carolina Central University,2019,res,13444,6722,,semester x2 (ours annual),yoy_-28%
+North Carolina Central University,2019,nr,36116,18058,,semester x2 (ours annual),yoy_-28%
+North Carolina Central University,2020,res,13444,6722,,semester x2 (ours annual),
+North Carolina Central University,2020,nr,36116,18058,,semester x2 (ours annual),
+North Dakota,2018,res,13024,6512,,semester x2 (ours annual),
+North Dakota,2018,nr,29644,14822,,semester x2 (ours annual),
+North Dakota,2019,res,15618,7809,,semester x2 (ours annual),yoy_45%
+North Dakota,2019,nr,42836,21418,,semester x2 (ours annual),yoy_45%
+North Dakota,2020,res,14296,7148,,semester x2 (ours annual),
+North Dakota,2020,nr,42888,21444,,semester x2 (ours annual),
+North Dakota,2022,res,15240,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+North Dakota,2022,nr,30480,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+North Dakota,2025,res,17139,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+North Dakota,2025,nr,34249,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+North Texas at Dallas,2023,res,16298,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+North Texas at Dallas,2023,nr,28768,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+North Texas at Dallas,2025,res,16298,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+North Texas at Dallas,2025,nr,28333,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Northeastern University,2011,nr,42296,0,,"master blank/0 (ours carries value, e.g. private nr=res)",missing
+Northeastern University,2018,res,50700,25350,,semester x2 (ours annual),
+Northeastern University,2018,nr,50700,25350,,semester x2 (ours annual),
+Northeastern University,2019,res,52800,26400,,semester x2 (ours annual),
+Northeastern University,2019,nr,52800,26400,,semester x2 (ours annual),
+Northeastern University,2020,res,54750,27375,,semester x2 (ours annual),
+Northeastern University,2020,nr,54750,27375,,semester x2 (ours annual),
+Northern Illinois University,2018,res,22180,11090,,semester x2 (ours annual),
+Northern Illinois University,2018,nr,22180,11090,,semester x2 (ours annual),
+Northern Illinois University,2019,res,21970,10985,,semester x2 (ours annual),
+Northern Illinois University,2019,nr,21970,10985,,semester x2 (ours annual),
+Northern Illinois University,2020,res,21970,10985,,semester x2 (ours annual),
+Northern Illinois University,2020,nr,21970,10985,,semester x2 (ours annual),
+Northern Kentucky University,2018,res,20332,10166,,semester x2 (ours annual),
+Northern Kentucky University,2018,nr,32890,16445,,semester x2 (ours annual),
+Northern Kentucky University,2019,res,21346,10673,,semester x2 (ours annual),
+Northern Kentucky University,2019,nr,34528,17264,,semester x2 (ours annual),
+Northern Kentucky University,2020,res,22204,11102,,semester x2 (ours annual),
+Northern Kentucky University,2020,nr,35906,17953,,semester x2 (ours annual),
+Northwestern University,2016,nr,,0,,ours-open-circle (master has value),missing
+Northwestern University,2018,res,64402,32201,,semester x2 (ours annual),
+Northwestern University,2018,nr,64402,32201,,semester x2 (ours annual),
+Northwestern University,2019,res,66506,33253,,semester x2 (ours annual),
+Northwestern University,2019,nr,66506,33253,,semester x2 (ours annual),
+Northwestern University,2020,res,68500,34250,,semester x2 (ours annual),
+Northwestern University,2020,nr,68500,34250,,semester x2 (ours annual),
+Notre Dame,2018,res,58358,29179,,semester x2 (ours annual),
+Notre Dame,2018,nr,58358,29179,,semester x2 (ours annual),
+Notre Dame,2019,res,60240,30120,,semester x2 (ours annual),
+Notre Dame,2019,nr,60240,30120,,semester x2 (ours annual),
+Notre Dame,2020,res,62590,31295,,semester x2 (ours annual),
+Notre Dame,2020,nr,62590,31295,,semester x2 (ours annual),
+Nova Southeastern University,2018,res,40950,20475,,semester x2 (ours annual),
+Nova Southeastern University,2018,nr,40950,20475,,semester x2 (ours annual),
+Nova Southeastern University,2019,res,41790,20895,,semester x2 (ours annual),
+Nova Southeastern University,2019,nr,41790,20895,,semester x2 (ours annual),
+Nova Southeastern University,2020,res,43044,21522,,semester x2 (ours annual),
+Nova Southeastern University,2020,nr,43044,21522,,semester x2 (ours annual),
+Ohio Northern University,2015,nr,,0,,ours-open-circle (master has value),missing
+Ohio Northern University,2016,nr,,0,,ours-open-circle (master has value),missing
+Ohio Northern University,2018,res,29160,14580,,semester x2 (ours annual),
+Ohio Northern University,2018,nr,29160,14580,,semester x2 (ours annual),
+Ohio Northern University,2019,res,30200,15100,,semester x2 (ours annual),
+Ohio Northern University,2019,nr,30200,15100,,semester x2 (ours annual),
+Ohio Northern University,2020,res,30130,15065,,semester x2 (ours annual),
+Ohio Northern University,2020,nr,30130,15065,,semester x2 (ours annual),
+Ohio Northern University,2024,nr,33900,,,"per-credit (master null, ours converted)",missing
+Oklahoma,2018,res,20904,10452,,semester x2 (ours annual),
+Oklahoma,2018,nr,32288,16144,,semester x2 (ours annual),
+Oklahoma,2019,res,21504,10752,,semester x2 (ours annual),
+Oklahoma,2019,nr,33338,16669,,semester x2 (ours annual),
+Oklahoma,2020,res,15720,7860,,semester x2 (ours annual),yoy_-27%
+Oklahoma,2020,nr,27556,13778,,semester x2 (ours annual),yoy_-27%
+Oklahoma City University,2018,res,35630,17815,,semester x2 (ours annual),
+Oklahoma City University,2018,nr,35630,17815,,semester x2 (ours annual),
+Oklahoma City University,2019,res,30886,15443,,semester x2 (ours annual),
+Oklahoma City University,2019,nr,30886,15443,,semester x2 (ours annual),
+Oklahoma City University,2020,res,30886,15443,,semester x2 (ours annual),
+Oklahoma City University,2020,nr,30886,15443,,semester x2 (ours annual),
+Oklahoma City University,2022,res,31950,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Oklahoma City University,2022,nr,31950,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Oklahoma City University,2023,res,30885,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Oklahoma City University,2023,nr,30885,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Oklahoma City University,2024,res,30885,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Oklahoma City University,2024,nr,30885,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Oklahoma City University,2025,res,32103,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Oklahoma City University,2025,nr,32103,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Oregon,2018,res,35418,17709,,semester x2 (ours annual),
+Oregon,2018,nr,44022,22011,,semester x2 (ours annual),
+Oregon,2019,res,35604,17802,,semester x2 (ours annual),
+Oregon,2019,nr,44820,22410,,semester x2 (ours annual),
+Oregon,2020,res,38088,19044,,semester x2 (ours annual),
+Oregon,2020,nr,47952,23976,,semester x2 (ours annual),
+Pace University,2018,res,48614,24307,,semester x2 (ours annual),
+Pace University,2018,nr,48614,24307,,semester x2 (ours annual),
+Pace University,2019,res,49000,24500,,semester x2 (ours annual),
+Pace University,2019,nr,49000,24500,,semester x2 (ours annual),
+Pace University,2020,res,49736,24868,,semester x2 (ours annual),
+Pace University,2020,nr,49736,24868,,semester x2 (ours annual),
+Pennsylvania,2018,res,65804,32902,,semester x2 (ours annual),
+Pennsylvania,2018,nr,65804,32902,,semester x2 (ours annual),
+Pennsylvania,2019,res,67998,33999,,semester x2 (ours annual),
+Pennsylvania,2019,nr,67998,33999,,semester x2 (ours annual),
+Pennsylvania,2020,res,63610,31805,,semester x2 (ours annual),
+Pennsylvania,2020,nr,63610,31805,,semester x2 (ours annual),
+Pepperdine University,2018,res,55830,27915,,semester x2 (ours annual),
+Pepperdine University,2018,nr,55830,27915,,semester x2 (ours annual),
+Pepperdine University,2019,res,57500,28750,,semester x2 (ours annual),
+Pepperdine University,2019,nr,57500,28750,,semester x2 (ours annual),
+Pepperdine University,2020,res,59280,29640,,semester x2 (ours annual),
+Pepperdine University,2020,nr,59280,29640,,semester x2 (ours annual),
+Pittsburgh,2018,res,34834,17417,,semester x2 (ours annual),
+Pittsburgh,2018,nr,44576,22288,,semester x2 (ours annual),
+Pittsburgh,2019,res,34962,17481,,semester x2 (ours annual),
+Pittsburgh,2019,nr,44996,22498,,semester x2 (ours annual),
+Pittsburgh,2020,res,34962,17481,,semester x2 (ours annual),
+Pittsburgh,2020,nr,44996,22498,,semester x2 (ours annual),
+Pontifical Catholic University of Puerto Rico,2023,res,15080,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Pontifical Catholic University of Puerto Rico,2023,nr,15080,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Pontifical Catholic University of Puerto Rico,2024,res,15370,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Pontifical Catholic University of Puerto Rico,2024,nr,15370,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Pontifical Catholic University of Puerto Rico,2025,res,15660,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Pontifical Catholic University of Puerto Rico,2025,nr,15660,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Puerto Rico,2015,nr,,0,,ours-open-circle (master has value),missing
+Puerto Rico,2018,res,6144,3072,,semester x2 (ours annual),
+Puerto Rico,2019,res,7700,3850,,semester x2 (ours annual),yoy_25%
+Puerto Rico,2020,res,7700,3850,,semester x2 (ours annual),
+Puerto Rico,2022,res,9150,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Puerto Rico,2022,nr,9150,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Puerto Rico,2023,res,8845,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Puerto Rico,2023,nr,8845,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Puerto Rico,2024,res,8845,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Puerto Rico,2024,nr,8845,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Puerto Rico,2025,res,8845,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Puerto Rico,2025,nr,8845,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Quinnipiac University,2018,res,49540,24770,,semester x2 (ours annual),
+Quinnipiac University,2018,nr,49540,24770,,semester x2 (ours annual),
+Quinnipiac University,2019,res,49520,24760,,semester x2 (ours annual),
+Quinnipiac University,2019,nr,49520,24760,,semester x2 (ours annual),
+Quinnipiac University,2020,res,50510,25255,,semester x2 (ours annual),
+Quinnipiac University,2020,nr,50510,25255,,semester x2 (ours annual),
+Regent University,2018,res,36620,18310,,semester x2 (ours annual),
+Regent University,2018,nr,36620,18310,,semester x2 (ours annual),
+Regent University,2019,res,36000,18000,,semester x2 (ours annual),
+Regent University,2019,nr,36000,18000,,semester x2 (ours annual),
+Regent University,2020,res,36000,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Regent University,2020,nr,36000,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Regent University,2021,res,36000,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Regent University,2021,nr,36000,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Regent University,2022,res,37050,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Regent University,2022,nr,37050,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Regent University,2023,res,37555,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Regent University,2023,nr,37555,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Regent University,2024,res,39440,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Regent University,2024,nr,39440,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Regent University,2025,res,40600,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Regent University,2025,nr,40600,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Richmond,2018,res,44700,22350,,semester x2 (ours annual),
+Richmond,2018,nr,44700,22350,,semester x2 (ours annual),
+Richmond,2019,res,46400,23200,,semester x2 (ours annual),
+Richmond,2019,nr,46400,23200,,semester x2 (ours annual),
+Richmond,2020,res,48600,24300,,semester x2 (ours annual),
+Richmond,2020,nr,48600,24300,,semester x2 (ours annual),
+Richmond,2023,nr,53440,,,"per-credit (master null, ours converted)",missing
+Richmond,2024,nr,55550,,,"per-credit (master null, ours converted)",missing
+Richmond,2025,nr,57700,,0,"per-credit (master null, ours converted)",missing
+Roger Williams University,2018,res,36814,18407,,semester x2 (ours annual),
+Roger Williams University,2018,nr,36814,18407,,semester x2 (ours annual),
+Roger Williams University,2019,res,37524,18762,,semester x2 (ours annual),
+Roger Williams University,2019,nr,37524,18762,,semester x2 (ours annual),
+Roger Williams University,2020,res,39864,19932,,semester x2 (ours annual),
+Roger Williams University,2020,nr,39864,19932,,semester x2 (ours annual),
+Rutgers University,2018,res,28358,14179,,semester x2 (ours annual),
+Rutgers University,2018,nr,41294,20647,,semester x2 (ours annual),
+Rutgers University,2019,res,25804,12902,,semester x2 (ours annual),
+Rutgers University,2019,nr,39114,19557,,semester x2 (ours annual),
+Rutgers University,2020,res,25804,12902,,semester x2 (ours annual),
+Rutgers University,2020,nr,39114,19557,,semester x2 (ours annual),
+Saint Louis University,2018,res,42154,21077,,semester x2 (ours annual),
+Saint Louis University,2018,nr,42154,21077,,semester x2 (ours annual),
+Saint Louis University,2019,res,42540,21270,,semester x2 (ours annual),
+Saint Louis University,2019,nr,42540,21270,,semester x2 (ours annual),
+Saint Louis University,2020,res,43600,21800,,semester x2 (ours annual),
+Saint Louis University,2020,nr,43600,21800,,semester x2 (ours annual),
+Samford University,2018,res,40150,20075,,semester x2 (ours annual),
+Samford University,2018,nr,40150,20075,,semester x2 (ours annual),
+Samford University,2019,res,40788,20394,,semester x2 (ours annual),
+Samford University,2019,nr,40788,20394,,semester x2 (ours annual),
+Samford University,2020,res,41970,20985,,semester x2 (ours annual),
+Samford University,2020,nr,41970,20985,,semester x2 (ours annual),
+San Diego,2018,res,54640,27320,,semester x2 (ours annual),
+San Diego,2018,nr,54640,27320,,semester x2 (ours annual),
+San Diego,2019,res,56230,28115,,semester x2 (ours annual),
+San Diego,2019,nr,56230,28115,,semester x2 (ours annual),
+San Diego,2020,res,58340,29170,,semester x2 (ours annual),
+San Diego,2020,nr,58340,29170,,semester x2 (ours annual),
+San Francisco,2018,res,49820,24910,,semester x2 (ours annual),
+San Francisco,2018,nr,49820,24910,,semester x2 (ours annual),
+San Francisco,2019,res,50690,25345,,semester x2 (ours annual),
+San Francisco,2019,nr,50690,25345,,semester x2 (ours annual),
+San Francisco,2020,res,51650,25825,,semester x2 (ours annual),
+San Francisco,2020,nr,51650,25825,,semester x2 (ours annual),
+Santa Clara University,2018,res,54240,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Santa Clara University,2018,nr,54240,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Santa Clara University,2019,res,56280,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Santa Clara University,2019,nr,56280,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Santa Clara University,2020,res,56280,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Santa Clara University,2020,nr,56280,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Santa Clara University,2021,res,58680,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Santa Clara University,2021,nr,58680,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Santa Clara University,2022,res,60480,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Santa Clara University,2022,nr,60480,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Santa Clara University,2023,res,60552,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Santa Clara University,2023,nr,60552,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Santa Clara University,2024,res,62988,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Santa Clara University,2024,nr,62988,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Santa Clara University,2025,res,65540,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Santa Clara University,2025,nr,65540,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Seattle University,2018,res,46586,23293,,semester x2 (ours annual),
+Seattle University,2018,nr,46586,23293,,semester x2 (ours annual),
+Seattle University,2019,res,48330,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Seattle University,2019,nr,48330,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Seattle University,2020,res,50220,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Seattle University,2020,nr,50220,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Seattle University,2021,res,51240,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Seattle University,2021,nr,51240,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Seattle University,2022,res,53160,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Seattle University,2022,nr,53160,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Seattle University,2023,res,54462,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Seattle University,2023,nr,54462,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Seattle University,2024,res,56927,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Seattle University,2024,nr,56927,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Seattle University,2025,res,59769,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Seattle University,2025,nr,59769,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Seton Hall University,2018,res,54090,27045,,semester x2 (ours annual),
+Seton Hall University,2018,nr,54090,27045,,semester x2 (ours annual),
+Seton Hall University,2019,res,54848,27424,,semester x2 (ours annual),
+Seton Hall University,2019,nr,54848,27424,,semester x2 (ours annual),
+Seton Hall University,2020,res,56494,28247,,semester x2 (ours annual),
+Seton Hall University,2020,nr,56494,28247,,semester x2 (ours annual),
+South Carolina,2018,res,29608,14804,,semester x2 (ours annual),
+South Carolina,2018,nr,54502,27251,,semester x2 (ours annual),
+South Carolina,2019,res,19306,9653,,semester x2 (ours annual),yoy_-35%
+South Carolina,2019,nr,49322,24661,,semester x2 (ours annual),yoy_-35%
+South Carolina,2020,res,19306,9653,,semester x2 (ours annual),
+South Carolina,2020,nr,49322,24661,,semester x2 (ours annual),
+South Dakota,2018,res,17000,8500,,semester x2 (ours annual),
+South Dakota,2018,nr,45040,22520,,semester x2 (ours annual),
+South Dakota,2019,res,17000,8500,,semester x2 (ours annual),
+South Dakota,2019,nr,45040,22520,,semester x2 (ours annual),
+South Dakota,2020,res,11620,5810,,semester x2 (ours annual),yoy_-32%
+South Dakota,2020,nr,30966,15483,,semester x2 (ours annual),yoy_-32%
+South Texas Houston,2018,res,32400,16200,,semester x2 (ours annual),
+South Texas Houston,2018,nr,32400,16200,,semester x2 (ours annual),
+South Texas Houston,2019,res,33450,16725,,semester x2 (ours annual),
+South Texas Houston,2019,nr,33450,16725,,semester x2 (ours annual),
+South Texas Houston,2020,res,34950,17475,,semester x2 (ours annual),
+South Texas Houston,2020,nr,34950,17475,,semester x2 (ours annual),
+Southern California,2018,res,64908,32454,,semester x2 (ours annual),
+Southern California,2018,nr,64908,32454,,semester x2 (ours annual),
+Southern California,2019,res,66306,33153,,semester x2 (ours annual),
+Southern California,2019,nr,66306,33153,,semester x2 (ours annual),
+Southern California,2020,res,68628,34314,,semester x2 (ours annual),
+Southern California,2020,nr,68628,34314,,semester x2 (ours annual),
+Southern Illinois University,2025,res,15863,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Southern Illinois University,2025,nr,15863,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Southern Methodist University,2018,res,54094,27047,,semester x2 (ours annual),
+Southern Methodist University,2018,nr,54094,27047,,semester x2 (ours annual),
+Southern Methodist University,2019,res,49404,24702,,semester x2 (ours annual),
+Southern Methodist University,2019,nr,49404,24702,,semester x2 (ours annual),
+Southern Methodist University,2020,res,50984,25492,,semester x2 (ours annual),
+Southern Methodist University,2020,nr,50984,25492,,semester x2 (ours annual),
+Southern University,2018,res,16530,8265,,semester x2 (ours annual),
+Southern University,2018,nr,29130,14565,,semester x2 (ours annual),
+Southern University,2019,res,11338,5669,,semester x2 (ours annual),yoy_-31%
+Southern University,2019,nr,11338,5669,,semester x2 (ours annual),yoy_-31%
+Southern University,2020,res,11338,5669,,semester x2 (ours annual),
+Southern University,2020,nr,11338,5669,,semester x2 (ours annual),
+Southwestern Law School,2018,res,54166,27083,,semester x2 (ours annual),
+Southwestern Law School,2018,nr,54166,27083,,semester x2 (ours annual),
+Southwestern Law School,2019,res,55316,27658,,semester x2 (ours annual),
+Southwestern Law School,2019,nr,55316,27658,,semester x2 (ours annual),
+Southwestern Law School,2020,res,55316,27658,,semester x2 (ours annual),
+Southwestern Law School,2020,nr,55316,27658,,semester x2 (ours annual),
+St. John's University,2018,res,59480,29740,,semester x2 (ours annual),
+St. John's University,2018,nr,59480,29740,,semester x2 (ours annual),
+St. John's University,2019,res,61150,30575,,semester x2 (ours annual),
+St. John's University,2019,nr,61150,30575,,semester x2 (ours annual),
+St. John's University,2020,res,63290,31645,,semester x2 (ours annual),
+St. John's University,2020,nr,63290,31645,,semester x2 (ours annual),
+St. Mary's University,2018,res,37410,18705,,semester x2 (ours annual),
+St. Mary's University,2018,nr,37410,18705,,semester x2 (ours annual),
+St. Mary's University,2019,res,37830,18915,,semester x2 (ours annual),
+St. Mary's University,2019,nr,37830,18915,,semester x2 (ours annual),
+St. Mary's University,2020,res,38890,19445,,semester x2 (ours annual),
+St. Mary's University,2020,nr,38890,19445,,semester x2 (ours annual),
+Stanford University,2017,nr,60270,0,,"master blank/0 (ours carries value, e.g. private nr=res)",missing
+Stanford University,2018,res,61290,,,"per-credit (master null, ours converted)",missing
+Stanford University,2018,nr,61290,,,"per-credit (master null, ours converted)",missing
+Stanford University,2019,nr,62310,,,"per-credit (master null, ours converted)",missing
+Stanford University,2020,nr,63330,,,"per-credit (master null, ours converted)",missing
+Stanford University,2021,nr,64350,,,"per-credit (master null, ours converted)",yoy_200%
+Stanford University,2022,nr,66924,,,"per-credit (master null, ours converted)",missing
+Stanford University,2023,nr,71610,,,"per-credit (master null, ours converted)",missing
+Stanford University,2024,nr,74475,,,"per-credit (master null, ours converted)",missing
+Stanford University,2025,nr,77454,,0,"per-credit (master null, ours converted)",missing
+Stetson University,2018,res,43880,21940,,semester x2 (ours annual),
+Stetson University,2018,nr,43880,21940,,semester x2 (ours annual),
+Stetson University,2019,res,44468,22234,,semester x2 (ours annual),
+Stetson University,2019,nr,44468,22234,,semester x2 (ours annual),
+Stetson University,2020,res,45580,22790,,semester x2 (ours annual),
+Stetson University,2020,nr,45580,22790,,semester x2 (ours annual),
+Suffolk University,2018,res,48090,24045,,semester x2 (ours annual),
+Suffolk University,2018,nr,48090,24045,,semester x2 (ours annual),
+Suffolk University,2019,res,49410,24705,,semester x2 (ours annual),
+Suffolk University,2019,nr,49410,24705,,semester x2 (ours annual),
+Suffolk University,2020,res,51060,25530,,semester x2 (ours annual),
+Suffolk University,2020,nr,51060,25530,,semester x2 (ours annual),
+Syracuse University,2018,res,51422,25711,,semester x2 (ours annual),
+Syracuse University,2018,nr,51422,25711,,semester x2 (ours annual),
+Syracuse University,2019,res,51500,25750,,semester x2 (ours annual),
+Syracuse University,2019,nr,51500,25750,,semester x2 (ours annual),
+Syracuse University,2020,res,53530,26765,,semester x2 (ours annual),
+Syracuse University,2020,nr,53530,26765,,semester x2 (ours annual),
+Temple University,2018,res,27104,13552,,semester x2 (ours annual),
+Temple University,2018,nr,41342,20671,,semester x2 (ours annual),
+Temple University,2019,res,26980,13490,,semester x2 (ours annual),
+Temple University,2019,nr,41354,20677,,semester x2 (ours annual),
+Temple University,2020,res,26980,13490,,semester x2 (ours annual),
+Temple University,2020,nr,41354,20677,,semester x2 (ours annual),
+Tennessee,2018,res,19674,9837,,semester x2 (ours annual),
+Tennessee,2018,nr,38348,19174,,semester x2 (ours annual),
+Tennessee,2019,res,16696,8348,,semester x2 (ours annual),
+Tennessee,2019,nr,35140,17570,,semester x2 (ours annual),
+Tennessee,2020,res,16696,8348,,semester x2 (ours annual),
+Tennessee,2020,nr,35140,17570,,semester x2 (ours annual),
+Texas,2017,res,35714,17857,,semester x2 (ours annual),missing
+Texas,2017,nr,53034,26517,,semester x2 (ours annual),missing
+Texas,2018,res,35714,17857,,semester x2 (ours annual),
+Texas,2018,nr,53034,26517,,semester x2 (ours annual),
+Texas,2019,res,36428,18214,,semester x2 (ours annual),
+Texas,2019,nr,54096,27048,,semester x2 (ours annual),
+Texas,2020,res,36428,18214,,semester x2 (ours annual),
+Texas,2020,nr,54096,27048,,semester x2 (ours annual),
+Texas A&M University,2013,nr,30580,0,,"master blank/0 (ours carries value, e.g. private nr=res)",missing
+Texas A&M University,2018,res,31000,15500,,semester x2 (ours annual),
+Texas A&M University,2018,nr,38100,19050,,semester x2 (ours annual),
+Texas A&M University,2019,res,31256,15628,,semester x2 (ours annual),
+Texas A&M University,2019,nr,39250,19625,,semester x2 (ours annual),
+Texas A&M University,2020,res,31900,15950,,semester x2 (ours annual),
+Texas A&M University,2020,nr,47304,23652,,semester x2 (ours annual),
+Texas Southern University,2018,res,20418,10209,,semester x2 (ours annual),
+Texas Southern University,2018,nr,27618,13809,,semester x2 (ours annual),
+Texas Southern University,2019,res,20418,10209,,semester x2 (ours annual),
+Texas Southern University,2019,nr,27618,13809,,semester x2 (ours annual),
+Texas Southern University,2020,res,20418,10209,,semester x2 (ours annual),
+Texas Southern University,2020,nr,27438,13719,,semester x2 (ours annual),
+Texas Tech University,2018,res,26840,13420,,semester x2 (ours annual),
+Texas Tech University,2018,nr,42140,21070,,semester x2 (ours annual),
+Texas Tech University,2019,res,22590,11295,,semester x2 (ours annual),
+Texas Tech University,2019,nr,34350,17175,,semester x2 (ours annual),
+Texas Tech University,2020,res,22590,11295,,semester x2 (ours annual),
+Texas Tech University,2020,nr,33960,16980,,semester x2 (ours annual),
+Thomas Jefferson School of Law,2018,res,49500,24750,,semester x2 (ours annual),
+Thomas Jefferson School of Law,2018,nr,49500,24750,,semester x2 (ours annual),
+Thomas Jefferson School of Law,2019,res,51000,25500,,semester x2 (ours annual),
+Thomas Jefferson School of Law,2019,nr,51000,25500,,semester x2 (ours annual),
+Touro University,2018,res,49800,24900,,semester x2 (ours annual),
+Touro University,2018,nr,49800,24900,,semester x2 (ours annual),
+Touro University,2019,res,50860,25430,,semester x2 (ours annual),
+Touro University,2019,nr,50860,25430,,semester x2 (ours annual),
+Touro University,2020,res,53400,26700,,semester x2 (ours annual),
+Touro University,2020,nr,53400,26700,,semester x2 (ours annual),
+Tulane University,2018,res,56572,28286,,semester x2 (ours annual),
+Tulane University,2018,nr,56572,28286,,semester x2 (ours annual),
+Tulane University,2019,res,54310,27155,,semester x2 (ours annual),
+Tulane University,2019,nr,54310,27155,,semester x2 (ours annual),
+Tulane University,2020,res,56374,28187,,semester x2 (ours annual),
+Tulane University,2020,nr,56374,28187,,semester x2 (ours annual),
+Tulane University,2024,nr,66264,,,"per-credit (master null, ours converted)",missing
+Tulane University,2025,nr,69578,,0,"per-credit (master null, ours converted)",missing
+University of Kansas,2023,res,22388,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+University of Kansas,2023,nr,28739,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+University of Kansas,2024,res,24563,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+University of Kansas,2024,nr,31117,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+University of Kansas,2025,res,24853,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+University of Kansas,2025,nr,31726,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Valparaiso University,2018,res,0,,,"per-credit (master null, ours converted)",missing
+Valparaiso University,2018,nr,0,,,"per-credit (master null, ours converted)",missing
+Valparaiso University,2019,res,0,,,"per-credit (master null, ours converted)",missing
+Valparaiso University,2019,nr,0,,,"per-credit (master null, ours converted)",missing
+Vanderbilt University,2018,res,57558,28779,,semester x2 (ours annual),
+Vanderbilt University,2018,nr,57558,28779,,semester x2 (ours annual),
+Vanderbilt University,2019,res,59550,29775,,semester x2 (ours annual),
+Vanderbilt University,2019,nr,59550,29775,,semester x2 (ours annual),
+Vanderbilt University,2020,res,62230,31115,,semester x2 (ours annual),
+Vanderbilt University,2020,nr,62230,31115,,semester x2 (ours annual),
+Vermont Law School,2018,res,48254,24127,,semester x2 (ours annual),
+Vermont Law School,2018,nr,48254,24127,,semester x2 (ours annual),
+Vermont Law School,2019,res,48254,24127,,semester x2 (ours annual),
+Vermont Law School,2019,nr,48254,24127,,semester x2 (ours annual),
+Vermont Law School,2020,res,48254,24127,,semester x2 (ours annual),
+Vermont Law School,2020,nr,48254,24127,,semester x2 (ours annual),
+Vermont Law School,2025,nr,55382,,0,"per-credit (master null, ours converted)",missing
+Villanova University,2018,res,46536,23268,,semester x2 (ours annual),
+Villanova University,2018,nr,46536,23268,,semester x2 (ours annual),
+Villanova University,2019,res,47360,23680,,semester x2 (ours annual),
+Villanova University,2019,nr,47360,23680,,semester x2 (ours annual),
+Villanova University,2020,res,49000,24500,,semester x2 (ours annual),
+Villanova University,2020,nr,49000,24500,,semester x2 (ours annual),
+Virginia,2018,res,60700,30350,,semester x2 (ours annual),
+Virginia,2018,nr,63700,31850,,semester x2 (ours annual),
+Virginia,2019,res,63200,31600,,semester x2 (ours annual),
+Virginia,2019,nr,66200,33100,,semester x2 (ours annual),
+Virginia,2020,res,62352,31176,,semester x2 (ours annual),
+Virginia,2020,nr,64670,32335,,semester x2 (ours annual),
+Wake Forest University,2011,nr,38756,0,,"master blank/0 (ours carries value, e.g. private nr=res)",missing
+Wake Forest University,2012,nr,39190,0,,"master blank/0 (ours carries value, e.g. private nr=res)",missing
+Wake Forest University,2013,nr,41364,0,,"master blank/0 (ours carries value, e.g. private nr=res)",missing
+Wake Forest University,2014,nr,,0,,ours-open-circle (master has value),missing
+Wake Forest University,2015,nr,,0,,ours-open-circle (master has value),missing
+Wake Forest University,2017,nr,,0,,ours-open-circle (master has value),missing
+Wake Forest University,2018,res,45360,22680,,semester x2 (ours annual),
+Wake Forest University,2018,nr,45360,22680,,semester x2 (ours annual),
+Wake Forest University,2019,res,46268,23134,,semester x2 (ours annual),
+Wake Forest University,2019,nr,46268,23134,,semester x2 (ours annual),
+Wake Forest University,2020,res,47610,23805,,semester x2 (ours annual),
+Wake Forest University,2020,nr,47610,23805,,semester x2 (ours annual),
+Washburn University,2018,res,,35,,ours-open-circle (master has value),
+Washburn University,2018,nr,,35,,ours-open-circle (master has value),
+Washburn University,2019,res,,35,,ours-open-circle (master has value),
+Washburn University,2019,nr,,35,,ours-open-circle (master has value),
+Washburn University,2020,res,0,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Washburn University,2020,nr,0,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Washburn University,2021,res,0,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Washburn University,2021,nr,0,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Washburn University,2022,res,25320,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Washburn University,2022,nr,38730,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Washburn University,2023,res,25462,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Washburn University,2023,nr,38570,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Washburn University,2024,res,25462,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Washburn University,2024,nr,38570,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Washburn University,2025,res,27028,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Washburn University,2025,nr,40397,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Washington,2018,res,35988,17994,,semester x2 (ours annual),
+Washington,2018,nr,47190,23595,,semester x2 (ours annual),
+Washington,2019,res,23970,11985,,semester x2 (ours annual),yoy_-33%
+Washington,2019,nr,31662,15831,,semester x2 (ours annual),yoy_-33%
+Washington,2020,res,25168,12584,,semester x2 (ours annual),
+Washington,2020,nr,32770,16385,,semester x2 (ours annual),
+Washington University (St. Louis),2023,nr,67008,,,"per-credit (master null, ours converted)",missing
+Washington and Lee University,2011,nr,41947,0,,"master blank/0 (ours carries value, e.g. private nr=res)",missing
+Washington and Lee University,2018,res,49356,24678,,semester x2 (ours annual),
+Washington and Lee University,2018,nr,49356,24678,,semester x2 (ours annual),
+Washington and Lee University,2019,res,49076,24538,,semester x2 (ours annual),missing
+Washington and Lee University,2019,nr,49076,,,"per-credit (master null, ours converted)",missing
+Washington and Lee University,2020,res,50060,25030,,semester x2 (ours annual),missing
+Washington and Lee University,2020,nr,50060,,,"per-credit (master null, ours converted)",missing
+Wayne State University,2018,res,32882,16441,,semester x2 (ours annual),
+Wayne State University,2018,nr,35860,17930,,semester x2 (ours annual),
+Wayne State University,2019,res,31666,15833,,semester x2 (ours annual),
+Wayne State University,2019,nr,34740,17370,,semester x2 (ours annual),
+Wayne State University,2020,res,31666,15833,,semester x2 (ours annual),
+Wayne State University,2020,nr,34740,17370,,semester x2 (ours annual),
+West Virginia University,2018,res,24084,12042,,semester x2 (ours annual),
+West Virginia University,2018,nr,39870,19935,,semester x2 (ours annual),
+West Virginia University,2019,res,22914,11457,,semester x2 (ours annual),
+West Virginia University,2019,nr,38934,19467,,semester x2 (ours annual),
+West Virginia University,2020,res,24228,12114,,semester x2 (ours annual),
+West Virginia University,2020,nr,40248,20124,,semester x2 (ours annual),
+Western New England University,2018,res,42218,21109,,semester x2 (ours annual),
+Western New England University,2018,nr,42218,21109,,semester x2 (ours annual),
+Western New England University,2019,res,42058,21029,,semester x2 (ours annual),
+Western New England University,2019,nr,42058,21029,,semester x2 (ours annual),
+Western New England University,2020,res,43424,21712,,semester x2 (ours annual),
+Western New England University,2020,nr,43424,21712,,semester x2 (ours annual),
+Whittier Law School,2018,res,0,,,"per-credit (master null, ours converted)",missing
+Whittier Law School,2018,nr,0,,,"per-credit (master null, ours converted)",missing
+Whittier Law School,2019,res,0,,,"per-credit (master null, ours converted)",missing
+Whittier Law School,2019,nr,0,,,"per-credit (master null, ours converted)",missing
+Widener University Commonwealth Law School,2023,res,51765,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Widener University Commonwealth Law School,2023,nr,51765,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Widener University Commonwealth Law School,2024,res,52780,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Widener University Commonwealth Law School,2024,nr,52780,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Widener University Commonwealth Law School,2025,res,54375,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Widener University Commonwealth Law School,2025,nr,54375,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Widener University Delaware Law School,2023,res,53650,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Widener University Delaware Law School,2023,nr,53650,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Widener University Delaware Law School,2024,res,55042,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Widener University Delaware Law School,2024,nr,55042,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Widener University Delaware Law School,2025,res,56550,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Widener University Delaware Law School,2025,nr,56550,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Willamette University,2018,res,44380,22190,,semester x2 (ours annual),
+Willamette University,2018,nr,44380,22190,,semester x2 (ours annual),
+Willamette University,2019,res,45530,22765,,semester x2 (ours annual),
+Willamette University,2019,nr,45530,22765,,semester x2 (ours annual),
+Willamette University,2020,res,47130,23565,,semester x2 (ours annual),res>nonres
+William & Mary,2018,res,34000,17000,,semester x2 (ours annual),
+William & Mary,2018,nr,43000,21500,,semester x2 (ours annual),
+William & Mary,2019,res,35000,17500,,semester x2 (ours annual),
+William & Mary,2019,nr,44000,22000,,semester x2 (ours annual),
+William & Mary,2020,res,28724,14362,,semester x2 (ours annual),
+William & Mary,2020,nr,37152,18576,,semester x2 (ours annual),
+Wilmington University,2025,res,24302,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Wilmington University,2025,nr,24302,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Wisconsin,2018,res,23518,11759,,semester x2 (ours annual),
+Wisconsin,2018,nr,42214,21107,,semester x2 (ours annual),
+Wisconsin,2019,res,24236,12118,,semester x2 (ours annual),
+Wisconsin,2019,nr,42932,21466,,semester x2 (ours annual),
+Wisconsin,2020,res,26236,13118,,semester x2 (ours annual),
+Wisconsin,2020,nr,44932,22466,,semester x2 (ours annual),
+Wyoming,2018,res,16350,8175,,semester x2 (ours annual),
+Wyoming,2018,nr,33124,16562,,semester x2 (ours annual),
+Wyoming,2019,res,13920,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Wyoming,2019,nr,29700,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Wyoming,2020,res,14490,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Wyoming,2020,nr,30900,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Wyoming,2022,res,15960,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Wyoming,2022,nr,34080,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Wyoming,2024,res,16066,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Wyoming,2024,nr,34278,,,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Wyoming,2025,res,16704,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Wyoming,2025,nr,35641,,0,"per-credit (master null, ours converted)",period_zero:per-credit_only
+Yale University,2013,nr,54650,0,,"master blank/0 (ours carries value, e.g. private nr=res)",missing
+Yale University,2014,nr,,0,,ours-open-circle (master has value),missing
+Yale University,2018,res,64266,32133,,semester x2 (ours annual),
+Yale University,2018,nr,64266,32133,,semester x2 (ours annual),
+Yale University,2019,res,66128,33064,,semester x2 (ours annual),
+Yale University,2019,nr,66128,33064,,semester x2 (ours annual),
+Yale University,2020,res,65792,32896,,semester x2 (ours annual),
+Yale University,2020,nr,65792,32896,,semester x2 (ours annual),
