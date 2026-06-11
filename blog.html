@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="/favicon.ico?v=1.93.9" sizes="any">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon32.png?v=1.93.9">
-<link rel="icon" type="image/png" sizes="48x48" href="/favicon48.png?v=1.93.9">
-<link rel="icon" type="image/png" sizes="192x192" href="/icon192.png?v=1.93.9">
-<link rel="apple-touch-icon" sizes="180x180" href="/icon180.png?v=1.93.9">
+<link rel="icon" href="/favicon.ico?v=1.94.0" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon32.png?v=1.94.0">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon48.png?v=1.94.0">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon192.png?v=1.94.0">
+<link rel="apple-touch-icon" sizes="180x180" href="/icon180.png?v=1.94.0">
 <title>Explained · Exhibit 509: notes on the law-school numbers</title>
 <meta name="description" content="Short, plain-English writing from 509α on what the ABA Standard 509 numbers actually mean: is law school worth it, how to read a disclosure, and the bimodal salary trap.">
 <meta name="robots" content="index,follow">
@@ -86,6 +86,19 @@ body{padding-top:52px;padding-bottom:42px;background-image:radial-gradient(rgba(
   <div class="stale">This section is just getting started. The posts below are our first drafts of the explainers we point people to most. More on the way, and if there is a question you want answered with the 509 data, <a href="contact.html">tell us</a>.</div>
 
   <article class="post">
+    <div class="post-meta">509&alpha; · June 2026 · 6 min read</div>
+    <h2 id="tuition-holes">The holes in 15 years of 509 tuition data &mdash; and how we patched them</h2>
+    <p>The ABA Standard 509 disclosures are the best public record of what law school costs. They are also, in places, wrong &mdash; not from bad faith, just the residue of spreadsheets kept by two hundred schools across fifteen years. We read every tuition cell against our master workbook, and the same handful of failure modes kept turning up. Here is the field guide, and what we do about each.</p>
+    <p><strong>The apostrophe that ate the tuition.</strong> A single leading apostrophe in a source cell &mdash; Excel's &ldquo;treat this as text&rdquo; marker &mdash; makes a number fail to parse. Downstream it lands as <code>$0</code>, or a truncated fragment like <code>$70</code>, <code>$120</code>, or <code>$1,094</code>. We found these across roughly a dozen schools, almost all in 2018&ndash;2019. Where a trustworthy figure exists we recover it; where it doesn't, we show an <strong>open circle</strong> &mdash; a visible &ldquo;not reported&rdquo; &mdash; instead of a fake near-zero.</p>
+    <p><strong>The per-term trap.</strong> Around 2018 the ABA began reporting tuition by the term &mdash; per semester, or for a few schools per quarter &mdash; rather than as a flat annual sticker. Read literally, a chart shows a school's tuition halving overnight and doubling back a few years later. It never did; the number just switched units. We convert everything to a single annual figure (&times;2 for semester schools, &times;3 for quarter schools), which is why our Harvard, Yale, or Baylor line stays smooth where a raw plot zig-zags.</p>
+    <p><strong>Doubles and halves.</strong> Some cells are simply entered at twice or half the real number &mdash; a <code>$135,496</code> where <code>$67,748</code> belongs, a <code>$12,005</code> where the school charges <code>$24,010</code>. These are the easy ones: the years on either side bracket the truth, and the school's own per-credit rate confirms it.</p>
+    <p><strong>Flipped, stale, and corrupted.</strong> A scattering of other faults: a school's 25th and 75th LSAT percentiles entered in the wrong order (152&thinsp;/&thinsp;150&thinsp;/&thinsp;148, which is impossible); a tuition sticker left standing after a school cut its price (one school dropped to about <code>$27,800</code> while the old ~<code>$56k</code> figure lingered); an enrollment of &ldquo;3&rdquo; where the real number was 248. Each is obvious once you look, and invisible if you don't.</p>
+    <p><strong>The thing that looks wrong but isn't.</strong> At a public school you'll sometimes see a median scholarship larger than resident tuition. That's not an error: the ABA reports grants school-wide, pooling residents and non-residents, and scholarships are scaled to the higher non-resident sticker. The number is real; it just isn't measuring what a quick glance assumes.</p>
+    <p><strong>What we actually do.</strong> We don't quietly rewrite history. Every value we adjudicate is drawn on the chart as a small <strong>amber ring</strong> with a hover note explaining the change, and logged cell by cell &mdash; old to new, with the reason &mdash; in a public corrections ledger. The raw layer keeps the original ABA figure, so every edit is reversible. When we cross-checked our entire tuition series against the master workbook, it reconciled to better than <strong>99%</strong> once the per-term unit was accounted for; the genuine disagreements numbered in the low dozens, and we fixed them by hand against the source.</p>
+    <p>The point of all this isn't perfection. It's that you can see the work. A number on Exhibit 509 either matches the school's disclosure, or it carries a ring that tells you why it doesn't.</p>
+  </article>
+
+  <article class="post">
     <div class="post-meta">509α · June 2026 · 4 min read</div>
     <h2 id="is-it-worth-it">Is law school worth it? Ask three numbers, not one ranking</h2>
     <p>"Worth it" is not a school-wide verdict, it is a personal break-even. Three figures on every Exhibit 509 school page get you most of the way: the <strong>three-year net cost</strong> (sticker tuition minus the median grant, times three), the <strong>FTLT employment rate</strong> (full-time, long-term, JD-required jobs ten months out), and the <strong>local attorney wage</strong> where you will actually practice. Divide net cost by the odds of a real legal job and you have a cost-per-outcome that no ranking will sell you.</p>
@@ -118,6 +131,6 @@ body{padding-top:52px;padding-bottom:42px;background-image:radial-gradient(rgba(
 
   <footer>Exhibit 509: free law school data, by 509α. Writing here is explanatory and reflects our reading of public ABA Standard 509 disclosures; verify figures against each school's source report.</footer>
 </div>
-<div class="gf"><span class="gf-brand"><b>Exhibit 509 <em>by 509α</em></b></span><a class="gf-accent" href="https://docs.google.com/forms/d/e/1FAIpQLScvkEp7vEwHAtpbMbk06AmtdUqHTy595OiQFcNBanSBXm0qDA/viewform?usp=publish-editor" target="_blank" rel="noopener">Sign up for email updates</a><a href="terms.html">Terms · Privacy</a><a class="gf-accent" href="https://skool.com/509alpha" target="_blank" rel="noopener">Join 509α on Skool</a><span class="gf-src"><span style="color:#4A9B6B;">●</span> Sourced from official ABA Standard 509 disclosures · <span style="color:#D97757;">Last synced June 8, 2026</span> · <span style="color:#7AAAC8;">v1.93.9</span></span></div>
+<div class="gf"><span class="gf-brand"><b>Exhibit 509 <em>by 509α</em></b></span><a class="gf-accent" href="https://docs.google.com/forms/d/e/1FAIpQLScvkEp7vEwHAtpbMbk06AmtdUqHTy595OiQFcNBanSBXm0qDA/viewform?usp=publish-editor" target="_blank" rel="noopener">Sign up for email updates</a><a href="terms.html">Terms · Privacy</a><a class="gf-accent" href="https://skool.com/509alpha" target="_blank" rel="noopener">Join 509α on Skool</a><span class="gf-src"><span style="color:#4A9B6B;">●</span> Sourced from official ABA Standard 509 disclosures · <span style="color:#D97757;">Last synced June 8, 2026</span> · <span style="color:#7AAAC8;">v1.94.0</span></span></div>
 </body>
 </html>
