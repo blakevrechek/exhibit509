@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="/favicon.ico?v=1.94.3" sizes="any">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon32.png?v=1.94.3">
-<link rel="icon" type="image/png" sizes="48x48" href="/favicon48.png?v=1.94.3">
-<link rel="icon" type="image/png" sizes="192x192" href="/icon192.png?v=1.94.3">
-<link rel="apple-touch-icon" sizes="180x180" href="/icon180.png?v=1.94.3">
+<link rel="icon" href="/favicon.ico?v=1.94.6" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon32.png?v=1.94.6">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon48.png?v=1.94.6">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon192.png?v=1.94.6">
+<link rel="apple-touch-icon" sizes="180x180" href="/icon180.png?v=1.94.6">
 <title>About · Exhibit 509</title>
 <meta name="description" content="About Exhibit: a free, honest, public viewer of ABA Standard 509 disclosure data for every U.S. law school. Built by 509α.">
 <meta name="robots" content="index,follow">
@@ -136,7 +136,26 @@ body{padding-top:52px;padding-bottom:42px;background-image:radial-gradient(rgba(
 
   <p style="margin-top:36px;"><a href="index.html" style="font-family:var(--mono);font-size:13px;letter-spacing:1px;background:var(--orange);color:#06111E;padding:10px 18px;text-decoration:none;font-weight:700;">Open the Exhibit map</a> &nbsp; <a href="terms.html" style="font-family:var(--mono);font-size:12px;color:var(--dim);">Terms &amp; Privacy</a></p>
 
-  <footer>Exhibit: Free law school data, built by 509α. Not affiliated with the ABA. Concept site; data may contain errors.</footer>
+  <!-- SITEMAP:START (shared block; keep in sync across utility pages) -->
+<style>
+.sitemap{border-top:1px solid rgba(74,122,155,0.2);margin-top:48px;padding-top:24px;}
+.sitemap-h{font-family:var(--mono,ui-monospace,monospace);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--orange,#D97757);margin-bottom:16px;}
+.sitemap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px 24px;}
+.sitemap-col h3{font-family:var(--mono,ui-monospace,monospace);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--dimmer,#7AAAC8);margin:0 0 8px;font-weight:600;}
+.sitemap-col a{display:block;font-family:var(--mono,ui-monospace,monospace);font-size:13px;color:var(--dim,#A4C8DD);text-decoration:none;padding:3px 0;border:0;}
+.sitemap-col a:hover{color:var(--orange,#D97757);}
+@media(max-width:640px){.sitemap-grid{grid-template-columns:1fr 1fr;}}
+</style>
+<nav class="sitemap" aria-label="Site map">
+  <div class="sitemap-h">Explore Exhibit 509</div>
+  <div class="sitemap-grid">
+    <div class="sitemap-col"><h3>Explore</h3><a href="/">Map</a><a href="/index.html#view=profiles">Schools</a><a href="/index.html#view=states">States</a><a href="/index.html#view=transfers">Transfers</a><a href="/index.html#view=calc">Net price</a></div>
+    <div class="sitemap-col"><h3>Rankings &amp; data</h3><a href="/cheapest-law-schools.html">Tuition</a><a href="/law-school-bar-passage-rates.html">Bar passage</a><a href="/law-school-employment-outcomes.html">Employment</a><a href="/splitter-friendly-law-schools.html">Splitter index</a><a href="/schools.html">All schools</a></div>
+    <div class="sitemap-col"><h3>Reference</h3><a href="/methodology.html">Methodology</a><a href="/glossary.html">Glossary</a><a href="/blog.html">Explained</a><a href="/about.html">About</a><a href="/contact.html">Contact</a><a href="/corrections.txt">Corrections log</a></div>
+  </div>
+</nav>
+<!-- SITEMAP:END -->
+<footer>Exhibit: Free law school data, built by 509α. Not affiliated with the ABA. Concept site; data may contain errors.</footer>
 </div>
 <a id="floatBack" href="index.html" aria-label="Back to Exhibit map" title="Back to Exhibit map">
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
@@ -146,6 +165,6 @@ body{padding-top:52px;padding-bottom:42px;background-image:radial-gradient(rgba(
 #floatBack{position:fixed;bottom:24px;right:24px;z-index:9000;display:flex;align-items:center;gap:8px;background:#D97757;color:#06111E;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;padding:12px 18px;border-radius:4px;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,0.4),0 0 0 1px rgba(217,119,87,0.3);transition:transform .15s,box-shadow .15s;}
 #floatBack:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,0,0,0.5),0 0 0 1px rgba(217,119,87,0.5);}
 </style>
-<div class="gf"><span class="gf-brand"><b>Exhibit 509 <em>by 509α</em></b></span><a class="gf-accent" href="https://docs.google.com/forms/d/e/1FAIpQLScvkEp7vEwHAtpbMbk06AmtdUqHTy595OiQFcNBanSBXm0qDA/viewform?usp=publish-editor" target="_blank" rel="noopener">Sign up for email updates</a><a href="terms.html">Terms · Privacy</a><a class="gf-accent" href="https://skool.com/509alpha" target="_blank" rel="noopener">Join 509α on Skool</a><span class="gf-src"><span style="color:#4A9B6B;">●</span> Sourced from official ABA Standard 509 disclosures · <span style="color:#D97757;">Last synced June 8, 2026</span> · <span style="color:#7AAAC8;">v1.94.3</span></span></div>
+<div class="gf"><span class="gf-brand"><b>Exhibit 509 <em>by 509α</em></b></span><a class="gf-accent" href="https://docs.google.com/forms/d/e/1FAIpQLScvkEp7vEwHAtpbMbk06AmtdUqHTy595OiQFcNBanSBXm0qDA/viewform?usp=publish-editor" target="_blank" rel="noopener">Sign up for email updates</a><a href="terms.html">Terms · Privacy</a><a class="gf-accent" href="https://skool.com/509alpha" target="_blank" rel="noopener">Join 509α on Skool</a><span class="gf-src"><span style="color:#4A9B6B;">●</span> Sourced from official ABA Standard 509 disclosures · <span style="color:#D97757;">Last synced June 8, 2026</span> · <span style="color:#7AAAC8;">v1.94.6</span></span></div>
 </body>
 </html>
