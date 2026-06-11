@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="/favicon.ico?v=1.93.2" sizes="any">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon32.png?v=1.93.2">
-<link rel="icon" type="image/png" sizes="48x48" href="/favicon48.png?v=1.93.2">
-<link rel="icon" type="image/png" sizes="192x192" href="/icon192.png?v=1.93.2">
-<link rel="apple-touch-icon" sizes="180x180" href="/icon180.png?v=1.93.2">
+<link rel="icon" href="/favicon.ico?v=1.94.0" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon32.png?v=1.94.0">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon48.png?v=1.94.0">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon192.png?v=1.94.0">
+<link rel="apple-touch-icon" sizes="180x180" href="/icon180.png?v=1.94.0">
 <title>Methodology · Exhibit 509</title>
 <meta name="description" content="How Exhibit classifies Safety / Target / Reach, where each number comes from, how often we refresh, and how we handle data anomalies.">
 <meta name="robots" content="index,follow">
@@ -78,7 +78,7 @@ body{padding-top:52px;padding-bottom:42px;background-image:radial-gradient(rgba(
 <header class="gh"><a class="gh-logo" href="index.html"><b>Exhibit 509 <em>by 509α</em></b></a><nav class="gh-nav"><span class="gh-nav-grp"><a href="index.html">Map</a><a href="index.html#view=profiles">Schools</a><a href="index.html#view=states">States</a><a href="index.html#view=transfers">Transfers</a><a href="index.html#view=calc">Net price</a></span><span class="gh-nav-grp gh-nav-writ"><a href="blog.html">Explained</a><a href="about.html">About</a><a href="contact.html">Contact</a></span></nav><a class="gh-cta" href="https://docs.google.com/forms/d/e/1FAIpQLScvkEp7vEwHAtpbMbk06AmtdUqHTy595OiQFcNBanSBXm0qDA/viewform?usp=publish-editor" target="_blank" rel="noopener">Email updates</a></header>
 <div class="wrap">
   <a class="back" href="index.html">Back to Exhibit</a>
-  <div class="eyebrow">Methodology · v1.93.2</div>
+  <div class="eyebrow">Methodology · v1.94.0</div>
   <h1>How Exhibit works</h1>
   <div class="sub">Where each number comes from · how we classify schools · how we refresh · how we handle data anomalies.</div>
 
@@ -114,6 +114,7 @@ body{padding-top:52px;padding-bottom:42px;background-image:radial-gradient(rgba(
   <h2>Cost-of-attendance + loan math</h2>
   <p>The Net Price calculator uses each school's <strong>resident</strong> sticker tuition if your selected home state matches the school's state; otherwise the <strong>non-resident</strong> figure. We subtract the school's <em>median</em> grant amount (from the same 509 disclosure) when no fitClass-based estimate is available; with fitClass we use the band: Safety → school's 75th-pct grant, Target → median grant, Reach → 25th-pct grant.</p>
   <p>Loan amortization uses the standard fixed-rate formula <code>P · r · (1+r)<sup>n</sup> / ((1+r)<sup>n</sup> – 1)</code> over your selected term. The 3-year living cost is <code>(housing + other) × 9 academic months × 3 years</code>. These are illustrative. Important: under the One Big Beautiful Bill Act, students entering from <strong>July 1, 2026</strong> can no longer use Grad PLUS, and federal graduate borrowing is capped at <strong>$50,000/year ($200,000 lifetime)</strong>. Any cost above that cap must come from <strong>private loans</strong> (typically higher rates, and no PSLF or income-driven repayment), so the &ldquo;true cost&rdquo; for 2026+ entrants can be materially higher than a pure federal-borrowing model implies. Confirm current federal and private loan rates with your lender before relying on the total cost number.</p>
+  <p><strong>Why a school's median grant can exceed its resident tuition.</strong> At public schools the 509 grant figures (25th / median / 75th-pct) are reported as a single school-wide distribution — residents and non-residents pooled — and scholarships are typically awarded against the higher <strong>non-resident</strong> sticker. So at a school like <strong>Nebraska</strong> the median grant (~$20,000) sits above the <em>resident</em> tuition (~$13,200) yet below the non-resident figure (~$35,600), and the 75th-pct grant (~$35,100) lands right at the non-resident line. This is an artifact of residency-pooled, sticker-scaled aid reporting, not a data error; the resident-tuition series itself is unaffected.</p>
 
   <h2>Bar passage</h2>
   <p>The headline <strong>First-Time Bar</strong> figure is the ABA-published first-time pass rate for the most recent reporting year (currently 2025, describing the 2024 graduating cohort). The <strong>2-Yr Ultimate</strong> figure is a separate ABA disclosure with a longer measurement window, it captures graduates who passed within two years of graduation. The two figures are not directly comparable across cohorts.</p>
@@ -150,18 +151,19 @@ body{padding-top:52px;padding-bottom:42px;background-image:radial-gradient(rgba(
   <ul>
     <li><strong>Negative scholarship counts</strong> in Historic (a known reporting artifact in 2015 and 2024 for ~10 schools) are nulled, not interpolated.</li>
     <li><strong>Bar pass rates</strong> reported as fractions instead of percents are auto-normalized to %.</li>
-    <li><strong>Tuition values</strong> that are impossible as an annual sticker, a stored <code>$0</code> or a truncated single-term fragment (e.g. <code>$35</code>, <code>$120</code>, <code>$1,094</code>), are shown as a <strong>gap</strong> ("not disclosed") rather than plotted as a false near-zero. We do <em>not</em> silently rewrite the number: the stored dataset keeps the source value; only the display omits it. Implausible single-year <em>spikes or halvings</em> are left in place and carry an "under review" flag (see below).</li>
+    <li><strong>Tuition values</strong> that are impossible as an annual sticker, a stored <code>$0</code> or a truncated single-term fragment (e.g. <code>$35</code>, <code>$120</code>, <code>$1,094</code>), are shown as an <strong>open circle</strong> ("not reported") rather than plotted as a false near-zero; the raw gz layer keeps the original source value. Implausible single-year <em>spikes or halvings</em> are <em>corrected</em> against the source where they can be adjudicated (and ringed with a hover note), or carry an "under review" flag where they can't (see below).</li>
     <li><strong>Per-credit-only schools</strong> (~40 schools, across the 2011&ndash;2025 history) report tuition by the credit hour, not as an annual sticker; we convert to annual using ≈ 30 credits per full-time academic year (the standard JD pacing, calibrated against each school's own adjacent annual years to a median ~5%). Earlier these years showed a $0 gap; they now carry the converted figure, with the per-credit conversion noted here.</li>
   </ul>
   <p>Every transformation is reversible from the original public disclosure. The methodology is public; the input files are public; the transformations are documented above.</p>
 
-  <h3 id="data-corrections">Tuition anomalies, flagged, not corrected (June 2026 audit)</h3>
-  <p><strong>Policy:</strong> where the source data looks wrong, we <em>surface and explain it</em> rather than silently overwrite it. Earlier in development a handful of tuition cells were point-edited; those edits have all been <strong>reverted</strong>, and the dataset now mirrors the ABA Standard 509 disclosure exactly. Two kinds of anomaly are flagged on the school page:</p>
+  <h3 id="data-corrections">Tuition anomalies: corrected, ringed, and logged (June 2026 audit)</h3>
+  <p><strong>Policy:</strong> where a source cell is a provable reporting error &mdash; a <code>$0</code>/text-marker corruption, a per-semester or per-quarter value sitting at half or a third of the annual figure, a doubled cell, an inverted percentile, or a stale sticker left up after a school cut tuition &mdash; we <em>correct it against the disclosure and the school's own adjacent years, then show our work</em>. Every correction is (1) drawn on the chart as an <strong>amber hollow ring with a hover note</strong> explaining the change, and (2) recorded cell-by-cell, old&nbsp;&rarr;&nbsp;new with the reason, in the project's public <code>corrections.md</code> ledger. The raw gz layer keeps the original ABA value, so every edit is reversible. We do not change a value we cannot adjudicate.</p>
   <ul>
-    <li><strong>Not-disclosed years.</strong> A year whose stored tuition is <code>$0</code> or a truncated fragment is rendered as a <strong>gap</strong> with a "not disclosed" note under the chart, about 40 schools carry at least one such year, almost all 2018–2022.</li>
-    <li><strong>Irregular year-over-year moves.</strong> Any school whose resident tuition makes a violent one-year swing (≥30% and ≥$6,000, the signature of a doubled cell or a semester-vs-annual reporting flip) carries an <strong>"under review"</strong> caveat naming the year. This is detected automatically, so it stays accurate as the data refreshes; it also covers the hand-curated multi-year level shifts (<em>Baylor, Texas Southern, Tulsa, Ohio Northern, Roger Williams, Brooklyn Law, Iowa, Texas A&amp;M, North Carolina Central, Mississippi, Elon, Howard, Toledo, Arizona,</em> and <em>North Texas at Dallas</em>), several of which may be <strong>genuine tuition resets</strong> rather than errors.</li>
+    <li><strong>Not-reported years.</strong> A year whose stored tuition is <code>$0</code> or a truncated fragment, with no trustworthy value to recover, is shown as an <strong>open circle</strong> &mdash; a visible "not reported" &mdash; rather than a false near-zero. About 40 schools carry at least one such year, almost all 2018&ndash;2022. Where a reliable figure does exist, we recover it and ring it.</li>
+    <li><strong>Corrected reporting errors.</strong> A halved/doubled cell, a residency swap, an inverted percentile, or a corrupted value carries the amber ring + hover note on the school's tuition (and enrollment) chart; the full old&nbsp;&rarr;&nbsp;new list lives in <code>corrections.md</code>.</li>
+    <li><strong>Genuine resets, left alone.</strong> A school that really did cut or raise tuition (a per-credit restructuring, a deliberate price cut) is not an error; we keep it, and where a one-year move is large but plausible we carry an <strong>"under review"</strong> caveat naming the year rather than overwriting it.</li>
   </ul>
-  <p>The full anomaly inventory, cross-referenced cell-by-cell against the workbook, lives in the project's <code>tuition-audit.md</code>. Nothing in that list has been auto-changed; each is a flag awaiting verification against the original disclosure.</p>
+  <p>Two public records back this up: <code>corrections.md</code> lists every adjudicated change we applied (old&nbsp;&rarr;&nbsp;new, with the reason), and <code>tuition-audit.md</code> holds the wider flag inventory cross-referenced cell-by-cell against the workbook, including items still awaiting verification.</p>
 
   <h2 id="projections">4-year projections</h2>
   <p>Trend charts extend the last reported year with a <strong>dashed 4-year projection</strong> and a shaded uncertainty cone. This is a <strong>model output, not a forecast of fact</strong>, it answers "if this school's own recent trend simply continued, where would it land?" and nothing more. A school can break its trend at any time; treat the dashed region as a sketch, not a promise.</p>
@@ -202,6 +204,6 @@ body{padding-top:52px;padding-bottom:42px;background-image:radial-gradient(rgba(
 #floatBack{position:fixed;bottom:24px;right:24px;z-index:9000;display:flex;align-items:center;gap:8px;background:#D97757;color:#06111E;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;padding:12px 18px;border-radius:4px;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,0.4),0 0 0 1px rgba(217,119,87,0.3);transition:transform .15s,box-shadow .15s;}
 #floatBack:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,0,0,0.5),0 0 0 1px rgba(217,119,87,0.5);}
 </style>
-<div class="gf"><span class="gf-brand"><b>Exhibit 509 <em>by 509α</em></b></span><a class="gf-accent" href="https://docs.google.com/forms/d/e/1FAIpQLScvkEp7vEwHAtpbMbk06AmtdUqHTy595OiQFcNBanSBXm0qDA/viewform?usp=publish-editor" target="_blank" rel="noopener">Sign up for email updates</a><a href="terms.html">Terms · Privacy</a><a class="gf-accent" href="https://skool.com/509alpha" target="_blank" rel="noopener">Join 509α on Skool</a><span class="gf-src"><span style="color:#4A9B6B;">●</span> Sourced from official ABA Standard 509 disclosures · <span style="color:#D97757;">Last synced June 8, 2026</span> · <span style="color:#7AAAC8;">v1.93.2</span></span></div>
+<div class="gf"><span class="gf-brand"><b>Exhibit 509 <em>by 509α</em></b></span><a class="gf-accent" href="https://docs.google.com/forms/d/e/1FAIpQLScvkEp7vEwHAtpbMbk06AmtdUqHTy595OiQFcNBanSBXm0qDA/viewform?usp=publish-editor" target="_blank" rel="noopener">Sign up for email updates</a><a href="terms.html">Terms · Privacy</a><a class="gf-accent" href="https://skool.com/509alpha" target="_blank" rel="noopener">Join 509α on Skool</a><span class="gf-src"><span style="color:#4A9B6B;">●</span> Sourced from official ABA Standard 509 disclosures · <span style="color:#D97757;">Last synced June 8, 2026</span> · <span style="color:#7AAAC8;">v1.94.0</span></span></div>
 </body>
 </html>

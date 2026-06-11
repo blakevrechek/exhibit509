@@ -34,7 +34,9 @@ SENT_STR = {"", "n/a", "na", "n", "*", "**", "***", "-", "--"}
 def clean_int(v):
     if v is None:
         return None
-    s = str(v).strip().replace(",", "").replace("$", "")
+    # leading apostrophe = Excel text-marker ('34073); strip it so the value
+    # parses as a number instead of dropping out to None
+    s = str(v).strip().lstrip("'’").replace(",", "").replace("$", "").strip()
     if s.lower() in SENT_STR:
         return None
     try:
@@ -50,7 +52,7 @@ def clean_money(v):  # tuition/grant $ strings; 0 is a real-but-suspect value, k
 def clean_float(v):
     if v is None:
         return None
-    s = str(v).strip().replace(",", "").replace("%", "").replace("$", "")
+    s = str(v).strip().lstrip("'’").replace(",", "").replace("%", "").replace("$", "").strip()
     if s.lower() in SENT_STR:
         return None
     try:
