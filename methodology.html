@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="/favicon.ico?v=1.93.6" sizes="any">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon32.png?v=1.93.6">
-<link rel="icon" type="image/png" sizes="48x48" href="/favicon48.png?v=1.93.6">
-<link rel="icon" type="image/png" sizes="192x192" href="/icon192.png?v=1.93.6">
-<link rel="apple-touch-icon" sizes="180x180" href="/icon180.png?v=1.93.6">
+<link rel="icon" href="/favicon.ico?v=1.93.7" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon32.png?v=1.93.7">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon48.png?v=1.93.7">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon192.png?v=1.93.7">
+<link rel="apple-touch-icon" sizes="180x180" href="/icon180.png?v=1.93.7">
 <title>Methodology · Exhibit 509</title>
 <meta name="description" content="How Exhibit classifies Safety / Target / Reach, where each number comes from, how often we refresh, and how we handle data anomalies.">
 <meta name="robots" content="index,follow">
@@ -78,7 +78,7 @@ body{padding-top:52px;padding-bottom:42px;background-image:radial-gradient(rgba(
 <header class="gh"><a class="gh-logo" href="index.html"><b>Exhibit 509 <em>by 509α</em></b></a><nav class="gh-nav"><span class="gh-nav-grp"><a href="index.html">Map</a><a href="index.html#view=profiles">Schools</a><a href="index.html#view=states">States</a><a href="index.html#view=transfers">Transfers</a><a href="index.html#view=calc">Net price</a></span><span class="gh-nav-grp gh-nav-writ"><a href="blog.html">Explained</a><a href="about.html">About</a><a href="contact.html">Contact</a></span></nav><a class="gh-cta" href="https://docs.google.com/forms/d/e/1FAIpQLScvkEp7vEwHAtpbMbk06AmtdUqHTy595OiQFcNBanSBXm0qDA/viewform?usp=publish-editor" target="_blank" rel="noopener">Email updates</a></header>
 <div class="wrap">
   <a class="back" href="index.html">Back to Exhibit</a>
-  <div class="eyebrow">Methodology · v1.93.6</div>
+  <div class="eyebrow">Methodology · v1.93.7</div>
   <h1>How Exhibit works</h1>
   <div class="sub">Where each number comes from · how we classify schools · how we refresh · how we handle data anomalies.</div>
 
@@ -114,6 +114,7 @@ body{padding-top:52px;padding-bottom:42px;background-image:radial-gradient(rgba(
   <h2>Cost-of-attendance + loan math</h2>
   <p>The Net Price calculator uses each school's <strong>resident</strong> sticker tuition if your selected home state matches the school's state; otherwise the <strong>non-resident</strong> figure. We subtract the school's <em>median</em> grant amount (from the same 509 disclosure) when no fitClass-based estimate is available; with fitClass we use the band: Safety → school's 75th-pct grant, Target → median grant, Reach → 25th-pct grant.</p>
   <p>Loan amortization uses the standard fixed-rate formula <code>P · r · (1+r)<sup>n</sup> / ((1+r)<sup>n</sup> – 1)</code> over your selected term. The 3-year living cost is <code>(housing + other) × 9 academic months × 3 years</code>. These are illustrative. Important: under the One Big Beautiful Bill Act, students entering from <strong>July 1, 2026</strong> can no longer use Grad PLUS, and federal graduate borrowing is capped at <strong>$50,000/year ($200,000 lifetime)</strong>. Any cost above that cap must come from <strong>private loans</strong> (typically higher rates, and no PSLF or income-driven repayment), so the &ldquo;true cost&rdquo; for 2026+ entrants can be materially higher than a pure federal-borrowing model implies. Confirm current federal and private loan rates with your lender before relying on the total cost number.</p>
+  <p><strong>Why a school's median grant can exceed its resident tuition.</strong> At public schools the 509 grant figures (25th / median / 75th-pct) are reported as a single school-wide distribution — residents and non-residents pooled — and scholarships are typically awarded against the higher <strong>non-resident</strong> sticker. So at a school like <strong>Nebraska</strong> the median grant (~$20,000) sits above the <em>resident</em> tuition (~$13,200) yet below the non-resident figure (~$35,600), and the 75th-pct grant (~$35,100) lands right at the non-resident line. This is an artifact of residency-pooled, sticker-scaled aid reporting, not a data error; the resident-tuition series itself is unaffected.</p>
 
   <h2>Bar passage</h2>
   <p>The headline <strong>First-Time Bar</strong> figure is the ABA-published first-time pass rate for the most recent reporting year (currently 2025, describing the 2024 graduating cohort). The <strong>2-Yr Ultimate</strong> figure is a separate ABA disclosure with a longer measurement window, it captures graduates who passed within two years of graduation. The two figures are not directly comparable across cohorts.</p>
@@ -202,6 +203,6 @@ body{padding-top:52px;padding-bottom:42px;background-image:radial-gradient(rgba(
 #floatBack{position:fixed;bottom:24px;right:24px;z-index:9000;display:flex;align-items:center;gap:8px;background:#D97757;color:#06111E;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;padding:12px 18px;border-radius:4px;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,0.4),0 0 0 1px rgba(217,119,87,0.3);transition:transform .15s,box-shadow .15s;}
 #floatBack:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,0,0,0.5),0 0 0 1px rgba(217,119,87,0.5);}
 </style>
-<div class="gf"><span class="gf-brand"><b>Exhibit 509 <em>by 509α</em></b></span><a class="gf-accent" href="https://docs.google.com/forms/d/e/1FAIpQLScvkEp7vEwHAtpbMbk06AmtdUqHTy595OiQFcNBanSBXm0qDA/viewform?usp=publish-editor" target="_blank" rel="noopener">Sign up for email updates</a><a href="terms.html">Terms · Privacy</a><a class="gf-accent" href="https://skool.com/509alpha" target="_blank" rel="noopener">Join 509α on Skool</a><span class="gf-src"><span style="color:#4A9B6B;">●</span> Sourced from official ABA Standard 509 disclosures · <span style="color:#D97757;">Last synced June 8, 2026</span> · <span style="color:#7AAAC8;">v1.93.6</span></span></div>
+<div class="gf"><span class="gf-brand"><b>Exhibit 509 <em>by 509α</em></b></span><a class="gf-accent" href="https://docs.google.com/forms/d/e/1FAIpQLScvkEp7vEwHAtpbMbk06AmtdUqHTy595OiQFcNBanSBXm0qDA/viewform?usp=publish-editor" target="_blank" rel="noopener">Sign up for email updates</a><a href="terms.html">Terms · Privacy</a><a class="gf-accent" href="https://skool.com/509alpha" target="_blank" rel="noopener">Join 509α on Skool</a><span class="gf-src"><span style="color:#4A9B6B;">●</span> Sourced from official ABA Standard 509 disclosures · <span style="color:#D97757;">Last synced June 8, 2026</span> · <span style="color:#7AAAC8;">v1.93.7</span></span></div>
 </body>
 </html>

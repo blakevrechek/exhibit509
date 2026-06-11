@@ -43,6 +43,20 @@ nr mirrors res (private); nr 2017 filled 60,270; nrt scalar 0 → 77,454.
 ### Public — nonresident correction (ledger only)
 - Indiana-Indianapolis 2016 nr 22,614 → 45,227 (resident 26,379 unchanged).
 
+## 2026-06-11 — E resolutions (apostrophe near-zero cells)
+
+Owner-adjudicated. "null" = explicit missing key → interpolated open-circle on chart.
+- Dayton: tui+nrt 2018, 2019, 2020 → null. (2021, 2022 still $0 — pending.)
+- Indiana-Indianapolis: 2018 → null; **2019 → res $28,672 / nr $48,736**. (2023 still $0 — pending.)
+- Washburn: 2018, 2019 → null. (2020, 2021 still $0 — pending.)
+- Illinois-Chicago (UIC): 2018, 2019 → null. (2020 still $0 — pending.)
+- Widener Delaware: 2018, 2019 → null. (2020 still $0 — pending.)
+- Widener Commonwealth: 2018, 2019 → null. (2020 still $0 — pending.)
+- Inter-American PR: 2019 → null.
+
+Nebraska (F): explanatory note added to methodology.html (grant > resident tuition is
+an artifact of residency-pooled, non-resident-sticker-scaled 509 aid reporting).
+
 ## Deferred / not changed
 - **E — apostrophe near-zero cells** (Stanford 2018 prior, Dayton, Washburn, UIC, Widener ×2, Indiana-Indianapolis, Inter-American PR + closed schools): await the ABA 509 re-upload + re-extract (parser fix already in place). Closed schools stay missing.
 - **F — Nebraska** grant_med > resident tuition: not a bug (grants scaled to nonresident/sticker, pooled school-wide).
