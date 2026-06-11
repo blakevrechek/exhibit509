@@ -57,6 +57,22 @@ Owner-adjudicated. "null" = explicit missing key → interpolated open-circle on
 Nebraska (F): explanatory note added to methodology.html (grant > resident tuition is
 an artifact of residency-pooled, non-resident-sticker-scaled 509 aid reporting).
 
+## 2026-06-11 — master-workbook reconciliation (owner-adjudicated to ABA)
+
+Resolved the 21 genuine display-vs-master discrepancies to the owner's master values:
+- **Montana** 2023/24/25 res 19,494 / 24,161 / 24,582; nr 44,822 / 51,161 / 51,582
+  (was ~$12k; fixes the scalar-vs-trend drift warning too).
+- **Texas Southern** 2024 res 18,582 / nr 25,632 (was 12,645 / 20,049).
+- **Indiana-Indianapolis** 2017 res 28,631 / nr 48,711 (was 26,736).
+- **Cornell** 2019 res=nr 67,748 (superseded the Tier-2 sheet's 65,541).
+- **Florida Coastal** 2020 res=nr 19,895 (was doubled to 79,580; school winding down).
+- **South Carolina** 2021 res 9,653 / nr 25,661 (reverted my fit-trend 18,556; ABA per-semester figure, shown as reported with a note).
+- **Florida State** 2019 res 18,072 / nr 22,634 (nr was 36,144; owner flags a fee/tuition flip, low confidence).
+- **Oklahoma** 2025 res 18,379 / nr 33,357 (was 18,739; fixes the scalar drift).
+
+Reconciliation evidence: `master-reconciliation.md` / `.csv`. Removed the now-stale
+South Carolina "$18,556 plateau" ring note.
+
 ## Deferred / not changed
 - **E — apostrophe near-zero cells** (Stanford 2018 prior, Dayton, Washburn, UIC, Widener ×2, Indiana-Indianapolis, Inter-American PR + closed schools): await the ABA 509 re-upload + re-extract (parser fix already in place). Closed schools stay missing.
 - **F — Nebraska** grant_med > resident tuition: not a bug (grants scaled to nonresident/sticker, pooled school-wide).
