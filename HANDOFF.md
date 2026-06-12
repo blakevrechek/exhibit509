@@ -1,10 +1,38 @@
 # Exhibit 509 — Session Handoff
 
-**Last updated:** 2026-06-11
+**Last updated:** 2026-06-12
 **Repo:** `blakevrechek/exhibit509` · **Live:** https://exhibit509.com (Cloudflare Pages, auto-deploys from `main`)
-**On `main`:** `v1.94.0` (HEAD `1dd02e3`, squash of PR #70) — the full June 2026 tuition audit is LIVE.
-**Working branch:** `claude/wonderful-pasteur-uxl4qq` — re-stacked clean on `origin/main` after the merge.
+**On `main`:** `v1.94.6` (HEAD `079350e`) — the June 2026 tuition audit + the UX/color polish pass are LIVE.
+**Working branch:** `claude/wonderful-pasteur-uxl4qq` — re-stack on `origin/main` (see the re-stack gotcha below) before new work.
 **Version sync:** `VERSION` is the single source of truth; `stamp_version.py` propagates it to the chrome HTML + `sw.js`.
+
+## Session 2026-06-12 (v1.94.0 → v1.94.6) — UX, chart sizing, and color polish
+
+Shipped to `main` across PRs #72–#74 (squash-merged). All gated through `build.sh` (validator 0 errors, app JS `node --check`).
+
+### Charts / UX
+- **Correction rings** — `FIXES` in `index.html` now rings **every** adjusted resident-tuition/enrollment cell (Baylor included). Note in the registry; canonical record `corrections.txt`.
+- **⚠ "Data corrected" banner** — on the school full page (in-app `dp-corr` + static `school/*.html` `.corr-banner`) for the **28** substantively-corrected schools. Sets: `CORRECTED` in `index.html` + `CORRECTED_IDS` in `scripts/build_school_pages.py` — **keep both in sync with `corrections.txt`**.
+- **Right-click chart menu** — `contextmenu` on any chart → Enlarge / Save image / Copy link / Cite / Embed (reuses `chartZoom` + `openShareMenu`).
+- **Scroll-progress bar** — 2px top bar (`#scrollProg`) in the app + static school pages.
+- **Chart x-axis starts at first data year** — `lineChart` trims leading all-empty years (a 2018-start metric no longer pads to 2011).
+- **Chart sizing** — line/band charts default to a **760×240** viewBox (uniform ~240px, scales by aspect on mobile); the dense stacked-bar/head-count + funnel charts are kept SHORTER (`#schoolPage .st-wrap` 170/150px, funnel compacted) so they don't dominate.
+
+### Colors (semantic)
+- **Splitter → green** `#4A9B6B` — the homepage "data" word green (`--green`, `.ip-swap-new`). Applied to the splitter chart + tier (app) and the "splitter" tag on the pillar. (Chosen over purple, which collided with enrollment/faculty.) Note: it *shares* the bar-pass green — owner picked it deliberately; a distinct green is a one-liner if wanted.
+- **COA / cost → pink** `#F472B6` — tuition trend charts (panel + deep-dive band), the Net-annual cost tile, and the `embed.html` tuition widget. Left alone: `colorFor('tui')` cheap→expensive ramp and the amber caution boxes (closed/caveat).
+
+### Content / SEO
+- **North Dakota** 2020 resident 14,296 → 15,296 (owner; nonresident confirmed correct). Ringed + banner + `corrections.txt`.
+- **corrections.md → `corrections.txt`** (plain-text, opens in browser) linked from `methodology#data-corrections`; that section was tightened.
+- **Shared HTML site map** on Explained/About/Contact/Methodology/Glossary — grouped Explore / Rankings & data / Reference, ~16 internal links, marker-delimited `SITEMAP:START/END` (idempotent insert before each page's `<footer>`).
+
+### Gotcha — the re-stack trap (cost us a merge conflict this session)
+A branch was reset to a **stale local `origin/main`** (before a prior PR merged), so it lacked the North Dakota commit and diverged on the version stamps → PR #74 hit a merge conflict and *would have reverted ND*. **Always `git fetch origin main` immediately before `git reset --hard origin/main`**, then re-apply source edits and `build.sh`. Version skipped 1.94.4/1.94.5 (discarded pre-rebase branch).
+
+### Still open
+- **Detroit Mercy 2023 & 2024** — cut-era resident values still pending (currently the old ~$53–54k sticker).
+- **Bulk apostrophe recovery** — parser fix in place; awaiting the ABA 509 source re-upload + re-extract.
 
 ## Session 2026-06-11 (v1.93.2 → v1.94.0) — tuition audit, master reconciliation, corrections framework
 
