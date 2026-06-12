@@ -3,8 +3,14 @@
 **Last updated:** 2026-06-12
 **Repo:** `blakevrechek/exhibit509` · **Live:** https://exhibit509.com (Cloudflare Pages, auto-deploys from `main`)
 **On `main`:** `v1.94.6` (HEAD `079350e`) — the June 2026 tuition audit + the UX/color polish pass are LIVE.
-**Working branch:** `claude/wonderful-pasteur-uxl4qq` — re-stack on `origin/main` (see the re-stack gotcha below) before new work.
+**Working branch:** `claude/eager-knuth-b3bf32` — carries the v1.94.7 apostrophe-handler fix (PR open). Re-stack on `origin/main` (see the re-stack gotcha below) before new work.
 **Version sync:** `VERSION` is the single source of truth; `stamp_version.py` propagates it to the chrome HTML + `sw.js`.
+
+## Session 2026-06-12 (v1.94.6 → v1.94.7) — "View full page" broken for Atlanta's John Marshall
+
+**Bug:** the only school whose `id` carries a literal apostrophe — `atlanta's-john-marshall-law-school` (all 209 others are sanitized slugs) — had a dead "View full page" button (and dead compare/share/profile-card/calc/transfers controls). Root cause: ids are concatenated into **single-quoted inline JS handlers** (`onclick="navSchool('"+s.id+"')"`), so the apostrophe closed the string early → `SyntaxError: missing ) after argument list` → the click no-oped. Verified the exact throw (and the fix) in Node.
+
+**Fix (front-end, contained — no data/gz regen):** added `jss()` next to `escHtml` — escapes a value for safe injection into a single-quoted inline handler (`\` then `'`) — and wrapped **every** school-id (and chart-key) injection across **16 sites**: side-panel CTA ×2, compare table/chips/`cmpBtnHTML`, profile cards, calc table, transfers list, chart link/embed/cite toolbar, full-page Copy-link/Cite. Also HTML-escaped two attribute values that took the raw id (`data-cmp`) / name (`tr-row` title). Deliberately did **not** rename the id: the 6.5 MB history `.gz` keys on it, so a rename forces a gz regen (tied to the pending ABA re-extract). `jss` also immunizes any future apostrophe id. Gated through `build.sh` (validator 0 errors) + `node --check` on the app script.
 
 ## Session 2026-06-12 (v1.94.0 → v1.94.6) — UX, chart sizing, and color polish
 
