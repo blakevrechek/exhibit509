@@ -1,10 +1,28 @@
 # Exhibit 509 — Session Handoff
 
-**Last updated:** 2026-06-12
+**Last updated:** 2026-06-12 (session 2 — planning/triage, no code shipped)
 **Repo:** `blakevrechek/exhibit509` · **Live:** https://exhibit509.com (Cloudflare Pages, auto-deploys from `main`)
 **On `main`:** `v1.94.6` (HEAD `079350e`) — the June 2026 tuition audit + the UX/color polish pass are LIVE.
-**Working branch:** `claude/wonderful-pasteur-uxl4qq` — re-stack on `origin/main` (see the re-stack gotcha below) before new work.
+**Working branch:** `claude/elegant-archimedes-0rera5` — re-stack on `origin/main` (see the re-stack gotcha below) before new work.
 **Version sync:** `VERSION` is the single source of truth; `stamp_version.py` propagates it to the chrome HTML + `sw.js`.
+
+## Session 2026-06-12 (session 2) — design-import attempt + "clean theme" scoping (NO code shipped)
+
+Working tree clean; nothing committed this session. Two threads:
+
+### 1. Design-file import — BLOCKED
+- Asked to fetch `https://api.anthropic.com/v1/design/h/IrHih3FecZJDxOTSxHhXvg`, read its readme, and implement it.
+- **`WebFetch` returned HTTP 404** (endpoint also needs auth, which WebFetch can't supply). No Anthropic-design MCP fetcher is connected — only Canva, Google Drive, GitHub.
+- Did **not** implement anything — refused to guess at a design I couldn't read.
+- **Next session:** get the spec another way — fresh/untruncated link, drop it in Google Drive or Canva (both connected, readable here), or paste the readme into chat. THEN map it onto the clean-theme plan below.
+
+### 2. "Clean version" theme — scoped, not built
+Owner floated a "clean version" of the site, like dark mode. My read:
+- **Mechanism is cheap** — dark mode is already a CSS-variable theme swap over the same DOM; a clean theme reuses that toggle + variable plumbing. No second site. exhibit509 is a data-reading tool, so a stripped reading mode pays off.
+- **Decide what "clean" means first** — three different things easy to conflate: (a) **reading/minimal mode** (hide decorative chrome/greens, max contrast + whitespace, let tables breathe — for cross-school comparison); (b) **print/export mode** (clean as a means to a single-school PDF); (c) **accessibility mode** (high-contrast + larger type as a named a11y feature).
+- **Recommendation:** build it as a **third theme alongside light/dark**, scoped to minimal reading mode first; print/a11y borrow from it later.
+- **Caution:** current theming carries meaning in color (splitter green = bar-pass green; COA pink; `colorFor('tui')` ramp). Desaturating clean mode collapses those signals — open question is how clean mode preserves the information color carries (shape/weight/labels) without the color.
+- **Awaiting owner:** which of (a)/(b)/(c) is the target before any build.
 
 ## Session 2026-06-12 (v1.94.0 → v1.94.6) — UX, chart sizing, and color polish
 
