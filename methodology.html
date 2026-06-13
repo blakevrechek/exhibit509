@@ -3,15 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="/favicon.ico?v=1.94.7" sizes="any">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon32.png?v=1.94.7">
-<link rel="icon" type="image/png" sizes="48x48" href="/favicon48.png?v=1.94.7">
-<link rel="icon" type="image/png" sizes="192x192" href="/icon192.png?v=1.94.7">
-<link rel="apple-touch-icon" sizes="180x180" href="/icon180.png?v=1.94.7">
+<link rel="icon" href="/favicon.ico?v=1.94.14" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon32.png?v=1.94.14">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon48.png?v=1.94.14">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon192.png?v=1.94.14">
+<link rel="apple-touch-icon" sizes="180x180" href="/icon180.png?v=1.94.14">
 <title>Methodology · Exhibit 509</title>
 <meta name="description" content="How Exhibit classifies Safety / Target / Reach, where each number comes from, how often we refresh, and how we handle data anomalies.">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://exhibit509.com/methodology.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Exhibit 509">
+<meta property="og:title" content="Methodology · Exhibit 509">
+<meta property="og:description" content="How Exhibit classifies Safety / Target / Reach, where each number comes from, how often we refresh, and how we handle data anomalies.">
+<meta property="og:url" content="https://exhibit509.com/methodology.html">
+<meta property="og:image" content="https://exhibit509.com/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Exhibit 509 — is law school worth it? Outcomes, true cost, and 15-year trajectory from the official ABA 509 disclosures.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Methodology · Exhibit 509">
+<meta name="twitter:description" content="How Exhibit classifies Safety / Target / Reach, where each number comes from, how often we refresh, and how we handle data anomalies.">
+<meta name="twitter:image" content="https://exhibit509.com/og-card.png">
 <style>
   :root{
     --navy:#06111E; --orange:#D97757; --white:#F4F8FB; --dim:#A4C8DD; --dimmer:#7AAAC8; --blue:#5AABCB;
@@ -39,6 +52,8 @@
   td{color:#D6E5F0;}
   ul{padding-left:20px;}
   footer{margin-top:56px;padding-top:20px;border-top:1px solid rgba(74,122,155,0.2);font-family:var(--mono);font-size:11px;color:var(--dimmer);letter-spacing:0.5px;}
+.skip-link{position:absolute;left:-9999px;top:0;z-index:4000;background:#D97757;color:#06111E;padding:10px 16px;font:700 12px/1 ui-monospace,Menlo,monospace;letter-spacing:1px;text-decoration:none;border-radius:0 0 6px 0;}
+.skip-link:focus{left:0;}
 </style>
 
 <style id="ghfChrome">
@@ -75,10 +90,11 @@ body{padding-top:52px;padding-bottom:42px;background-image:radial-gradient(rgba(
 <link href="/fonts/fonts.css" rel="stylesheet">
 </head>
 <body>
-<header class="gh"><a class="gh-logo" href="index.html"><b>Exhibit 509 <em>by 509α</em></b></a><nav class="gh-nav"><span class="gh-nav-grp"><a href="index.html">Map</a><a href="index.html#view=profiles">Schools</a><a href="index.html#view=states">States</a><a href="index.html#view=transfers">Transfers</a><a href="index.html#view=calc">Net price</a></span><span class="gh-nav-grp gh-nav-writ"><a href="blog.html">Explained</a><a href="about.html">About</a><a href="contact.html">Contact</a></span></nav><a class="gh-cta" href="https://docs.google.com/forms/d/e/1FAIpQLScvkEp7vEwHAtpbMbk06AmtdUqHTy595OiQFcNBanSBXm0qDA/viewform?usp=publish-editor" target="_blank" rel="noopener">Email updates</a></header>
-<div class="wrap">
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="gh"><a class="gh-logo" href="index.html"><b>Exhibit 509 <em>by 509α</em></b></a><nav class="gh-nav"><span class="gh-nav-grp"><a href="index.html">Map</a><a href="index.html#view=profiles">Schools</a><a href="index.html#view=states">States</a><a href="index.html#view=transfers">Transfers</a><a href="index.html#view=calc">Net price</a></span><span class="gh-nav-grp gh-nav-writ"><a href="blog.html">Explained</a><a href="about.html">About</a><a href="contact.html">Contact</a></span></nav><a class="gh-cta" href="consultants.html" title="Consultant's Corner — for admissions advisors">Consultant's Corner</a></header>
+<main class="wrap" id="main">
   <a class="back" href="index.html">Back to Exhibit</a>
-  <div class="eyebrow">Methodology · v1.94.7</div>
+  <div class="eyebrow">Methodology · v1.94.14</div>
   <h1>How Exhibit works</h1>
   <div class="sub">Where each number comes from · how we classify schools · how we refresh · how we handle data anomalies.</div>
 
@@ -140,7 +156,6 @@ body{padding-top:52px;padding-bottom:42px;background-image:radial-gradient(rgba(
 
   <h2>Data quality + outlier handling</h2>
   <p><strong>Two independent compilations stand behind the data, and what Exhibit displays is their reconciliation.</strong> The first is a hand-built <a href="https://docs.google.com/spreadsheets/d/1iFHIkqiZ1_VdMkpblE4yvuOe0Q5PJuu6BZHXMDDtlqo/edit?usp=sharing" target="_blank" rel="noopener">master workbook</a> of the ABA Standard 509 disclosures, spot-checked against the source PDFs since 2011 &mdash; about <strong>2.44&nbsp;million</strong> non-null data points (2,437,481) across its 14 section sheets, spanning <strong>218</strong> school identifiers at roughly <strong>12,200 facts per full-history school</strong> (median 12,178; range 75&ndash;12,821; the two widest sheets, Attrition and JD&nbsp;Enrollment&nbsp;&amp;&nbsp;Ethnicity, alone hold ~1.4&nbsp;million of them). The second is an independent <a href="https://docs.google.com/spreadsheets/d/1PUvqEXyQp02Has5t2ko2cQWVoWtoB0DiQQuWHxiarXQ/edit?usp=sharing" target="_blank" rel="noopener">primary-source re-derivation</a> built straight from the original ABA workbooks, cell by cell. Across ~28,800 overlapping headline cells &mdash; LSAT and uGPA percentiles, acceptance, applications, offers, enrollment, first-time bar, takers and passers, and tuition &mdash; the two compilations agree on <strong>99.86%</strong>. The remaining 0.14% is concentrated in a single adjudicated identity case (the Rutgers Camden/Newark split) and is documented cell-by-cell rather than silently resolved.</p>
-  <!-- TODO: replace https://docs.google.com/spreadsheets/d/1iFHIkqiZ1_VdMkpblE4yvuOe0Q5PJuu6BZHXMDDtlqo/edit?usp=sharing and https://docs.google.com/spreadsheets/d/1PUvqEXyQp02Has5t2ko2cQWVoWtoB0DiQQuWHxiarXQ/edit?usp=sharing with the actual Google Sheets URLs once published. -->
 
   <h3>How big is the dataset, exactly</h3>
   <p><strong>Total: about 2.44&nbsp;million data points</strong> &mdash; <strong>2,437,481</strong> non-null facts across the 14 data sheets (excluding the Dashboard, the hidden list, and the spine columns like School/Year/Status). Two sheets dominate because of their wide demographic column sets: <strong>Attrition</strong> (866K, now including the computed gender-Other residuals) and <strong>JD Enrollment &amp; Ethnicity</strong> (534K), followed by <strong>Employment</strong> (467K). Everything else is under ~125K each.</p>
@@ -207,12 +222,12 @@ body{padding-top:52px;padding-bottom:42px;background-image:radial-gradient(rgba(
   <div class="sitemap-grid">
     <div class="sitemap-col"><h3>Explore</h3><a href="/">Map</a><a href="/index.html#view=profiles">Schools</a><a href="/index.html#view=states">States</a><a href="/index.html#view=transfers">Transfers</a><a href="/index.html#view=calc">Net price</a></div>
     <div class="sitemap-col"><h3>Rankings &amp; data</h3><a href="/cheapest-law-schools.html">Tuition</a><a href="/law-school-bar-passage-rates.html">Bar passage</a><a href="/law-school-employment-outcomes.html">Employment</a><a href="/splitter-friendly-law-schools.html">Splitter index</a><a href="/schools.html">All schools</a></div>
-    <div class="sitemap-col"><h3>Reference</h3><a href="/methodology.html">Methodology</a><a href="/glossary.html">Glossary</a><a href="/blog.html">Explained</a><a href="/about.html">About</a><a href="/contact.html">Contact</a><a href="/corrections.txt">Corrections log</a></div>
+    <div class="sitemap-col"><h3>Reference</h3><a href="/methodology.html">Methodology</a><a href="/glossary.html">Glossary</a><a href="/blog.html">Explained</a><a href="/about.html">About</a><a href="/contact.html">Contact</a><a href="/accessibility.html">Accessibility</a><a href="/corrections.txt">Corrections log</a></div>
   </div>
 </nav>
 <!-- SITEMAP:END -->
 <footer>Exhibit: Free law school data, built by 509α. Sourced from official ABA Standard 509 disclosures. Last synced June 8, 2026.</footer>
-</div>
+</main>
 <a id="floatBack" href="index.html" aria-label="Back to Exhibit map" title="Back to Exhibit map">
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
   Back to Exhibit map
@@ -221,6 +236,6 @@ body{padding-top:52px;padding-bottom:42px;background-image:radial-gradient(rgba(
 #floatBack{position:fixed;bottom:24px;right:24px;z-index:9000;display:flex;align-items:center;gap:8px;background:#D97757;color:#06111E;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;padding:12px 18px;border-radius:4px;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,0.4),0 0 0 1px rgba(217,119,87,0.3);transition:transform .15s,box-shadow .15s;}
 #floatBack:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,0,0,0.5),0 0 0 1px rgba(217,119,87,0.5);}
 </style>
-<div class="gf"><span class="gf-brand"><b>Exhibit 509 <em>by 509α</em></b></span><a class="gf-accent" href="https://docs.google.com/forms/d/e/1FAIpQLScvkEp7vEwHAtpbMbk06AmtdUqHTy595OiQFcNBanSBXm0qDA/viewform?usp=publish-editor" target="_blank" rel="noopener">Sign up for email updates</a><a href="terms.html">Terms · Privacy</a><a class="gf-accent" href="https://skool.com/509alpha" target="_blank" rel="noopener">Join 509α on Skool</a><span class="gf-src"><span style="color:#4A9B6B;">●</span> Sourced from official ABA Standard 509 disclosures · <span style="color:#D97757;">Last synced June 8, 2026</span> · <span style="color:#7AAAC8;">v1.94.7</span></span></div>
+<div class="gf"><span class="gf-brand"><b>Exhibit 509 <em>by 509α</em></b></span><a class="gf-accent" href="https://docs.google.com/forms/d/e/1FAIpQLScvkEp7vEwHAtpbMbk06AmtdUqHTy595OiQFcNBanSBXm0qDA/viewform" target="_blank" rel="noopener">Newsletter</a><a href="terms.html">Terms · Privacy</a><a href="accessibility.html">Accessibility</a><span class="gf-src"><span style="color:#D97757;">Last synced June 8, 2026</span> · <span style="color:#7AAAC8;">v1.94.14</span></span></div>
 </body>
 </html>
