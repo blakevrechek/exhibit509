@@ -1,6 +1,6 @@
 # Exhibit 509 — Session Handoff
 
-**Last updated:** 2026-06-12
+**Last updated:** 2026-06-12 (session 2 — planning/triage, no code shipped)
 **Repo:** `blakevrechek/exhibit509` · **Live:** https://exhibit509.com (Cloudflare Pages, auto-deploys from `main`)
 **On `main`:** `v1.94.6` (HEAD `079350e`) — the June 2026 tuition audit + the UX/color polish pass are LIVE.
 **Working branch:** `claude/eager-knuth-b3bf32` — carries the v1.94.7 apostrophe-handler fix (PR open). Re-stack on `origin/main` (see the re-stack gotcha below) before new work.
