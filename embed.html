@@ -60,8 +60,11 @@
   function esc(t){return String(t==null?'':t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
   function msg(t){ root.innerHTML='<div class="ew-msg">'+esc(t)+'</div>'+foot(); }
   function foot(){
-    var deep=SITE+'school/'+encodeURIComponent(id||'')+(key&&CFG[key]?'/'+encodeURIComponent(key):'');
-    var home=SITE+(s?('school/'+encodeURIComponent(id)):'');
+    // Hash route for the live chart (clean /school/<id> paths 404 — routing is
+    // hash-based), and the canonical static page (sanitized slug + .html) for the source link.
+    var slug=(id||'').toLowerCase().replace(/[^a-z0-9-]+/g,'-').replace(/-+/g,'-').replace(/^-+|-+$/g,'');
+    var deep=SITE+'#school/'+encodeURIComponent(id||'')+(key&&CFG[key]?'/'+encodeURIComponent(key):'');
+    var home=SITE+(s?('school/'+slug+'.html'):'');
     return '<div class="ew-foot"><a class="ew-brand" href="'+esc(s?deep:SITE)+'" target="_blank" rel="noopener">Exhibit 509 <em>by 509α</em></a>'
       +'<div class="ew-src">Source: ABA Standard 509 disclosures<br><a href="'+esc(s?home:SITE)+'" target="_blank" rel="noopener">exhibit509.com</a></div></div>';
   }
