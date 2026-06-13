@@ -53,6 +53,7 @@ HTML_FILES = [
     "glossary.html",
     "blog.html",
     "consultants.html",
+    "accessibility.html",
 ]
 
 

@@ -490,9 +490,14 @@ def render_page(s, all_schools=None):
 <meta property="og:description" content="{desc}">
 <meta property="og:url" content="{canonical}">
 <meta property="og:site_name" content="Exhibit 509">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://exhibit509.com/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Exhibit 509 — is law school worth it? Outcomes, true cost, and 15-year trajectory from the official ABA 509 disclosures.">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{lname}: ABA 509 data">
 <meta name="twitter:description" content="{desc}">
+<meta name="twitter:image" content="https://exhibit509.com/og-card.png">
 <script type="application/ld+json">{ld_json}</script>
 {faq_ld_json}
 {crumb_ld_json}
@@ -504,6 +509,8 @@ def render_page(s, all_schools=None):
 <style>
   :root{{--navy:#06111E;--orange:#D97757;--white:#F4F8FB;--dim:#A4C8DD;--dimmer:#7AAAC8;--blue:#5AABCB;--mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;--serif:Georgia,'Times New Roman',serif;}}
   *{{box-sizing:border-box;}}
+  .skip-link{{position:absolute;left:-9999px;top:0;z-index:4000;background:#D97757;color:#06111E;padding:10px 16px;font:700 12px/1 ui-monospace,Menlo,monospace;letter-spacing:1px;text-decoration:none;border-radius:0 0 6px 0;}}
+  .skip-link:focus{{left:0;}}
   body{{margin:0;background:var(--navy);color:var(--white);font-family:var(--serif);line-height:1.7;}}
   .wrap{{max-width:860px;margin:0 auto;padding:40px 22px 80px;}}
   .nav{{font-family:var(--mono);font-size:12px;letter-spacing:1px;margin-bottom:24px;}}
@@ -542,9 +549,10 @@ def render_page(s, all_schools=None):
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to main content</a>
 <div id="scrollProg" style="position:fixed;top:0;left:0;height:2px;width:0;background:#D97757;z-index:2000;pointer-events:none;transition:width .08s linear;"></div>
 <script>(function(){{var b=document.getElementById('scrollProg');function u(){{var e=document.documentElement,m=e.scrollHeight-e.clientHeight,p=m>0?e.scrollTop/m:0;b.style.width=(Math.max(0,Math.min(1,p))*100).toFixed(2)+'%';}}addEventListener('scroll',u,{{passive:true}});addEventListener('resize',u);u();}})();</script>
-<div class="wrap">
+<main class="wrap" id="main">
   <nav class="nav"><a href="/">Map</a><a href="/schools.html">All schools</a><a href="/law-school-bar-passage-rates.html">Bar passage</a><a href="/cheapest-law-schools.html">Tuition</a><a href="/law-school-employment-outcomes.html">Employment</a><a href="/splitter-friendly-law-schools.html">Splitter index</a><a href="/methodology.html">Methodology</a></nav>
   {crumb_html}
   {closed_banner}
@@ -586,7 +594,7 @@ def render_page(s, all_schools=None):
     Source: ABA Standard 509 Required Disclosure for {full}, published by the American Bar Association at <a href="https://abarequireddisclosures.org/" rel="noopener">abarequireddisclosures.org</a>. State attorney salary data from U.S. Bureau of Labor Statistics OEWS 2024 (occupation code 23-1011). Cost-of-living from U.S. BEA Regional Price Parities. Methodology: <a href="/methodology.html">/methodology.html</a>.
   </div>
   <footer>Exhibit 509: free law school data, by 509α. Hosted on Cloudflare Pages. Independent project, not affiliated with the ABA.</footer>
-</div>
+</main>
 </body>
 </html>
 """
@@ -595,6 +603,8 @@ def render_page(s, all_schools=None):
 STYLE = """<style>
   :root{--navy:#06111E;--orange:#D97757;--white:#F4F8FB;--dim:#A4C8DD;--dimmer:#7AAAC8;--blue:#5AABCB;--mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;--serif:Georgia,'Times New Roman',serif;}
   *{box-sizing:border-box;}
+  .skip-link{position:absolute;left:-9999px;top:0;z-index:4000;background:#D97757;color:#06111E;padding:10px 16px;font:700 12px/1 ui-monospace,Menlo,monospace;letter-spacing:1px;text-decoration:none;border-radius:0 0 6px 0;}
+  .skip-link:focus{left:0;}
   body{margin:0;background:var(--navy);color:var(--white);font-family:var(--serif);line-height:1.7;}
   .wrap{max-width:980px;margin:0 auto;padding:40px 22px 80px;}
   .nav{font-family:var(--mono);font-size:12px;letter-spacing:1px;margin-bottom:18px;}
@@ -649,7 +659,14 @@ def page_shell(title, desc, canonical, body, ld_json=""):
 <meta property="og:description" content="{esc(desc)}">
 <meta property="og:url" content="{canonical}">
 <meta property="og:site_name" content="Exhibit 509">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://exhibit509.com/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Exhibit 509 — is law school worth it? Outcomes, true cost, and 15-year trajectory from the official ABA 509 disclosures.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{esc(title)}">
+<meta name="twitter:description" content="{esc(desc)}">
+<meta name="twitter:image" content="https://exhibit509.com/og-card.png">
 {f'<script type="application/ld+json">{ld_json}</script>' if ld_json else ''}
 <link rel="icon" href="/favicon.ico?v={VERSION}" sizes="any">
 <link rel="icon" type="image/png" sizes="192x192" href="/icon192.png?v={VERSION}">
@@ -659,11 +676,12 @@ def page_shell(title, desc, canonical, body, ld_json=""):
 {STYLE}
 </head>
 <body>
-<div class="wrap">
+<a class="skip-link" href="#main">Skip to main content</a>
+<main class="wrap" id="main">
 {body}
   <div class="src">Source: ABA Standard 509 Required Disclosures (most recent cycle), via <a href="https://abarequireddisclosures.org/" rel="noopener">abarequireddisclosures.org</a>. State attorney-salary context from U.S. BLS OEWS 2024. Methodology: <a href="/methodology.html">/methodology.html</a>.</div>
   <footer>Exhibit 509: free law school data, by 509α. Independent project, not affiliated with the ABA.</footer>
-</div>
+</main>
 </body>
 </html>
 """
@@ -918,6 +936,11 @@ def update_sitemap(schools, states=None):
     <loc>https://exhibit509.com/contact.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://exhibit509.com/accessibility.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
   </url>
   <url>
     <loc>https://exhibit509.com/terms.html</loc>
