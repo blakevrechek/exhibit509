@@ -80,3 +80,9 @@ South Carolina "$18,556 plateau" ring note.
 ## Deferred / not changed
 - **E — apostrophe near-zero cells** (Stanford 2018 prior, Dayton, Washburn, UIC, Widener ×2, Indiana-Indianapolis, Inter-American PR + closed schools): await the ABA 509 re-upload + re-extract (parser fix already in place). Closed schools stay missing.
 - **F — Nebraska** grant_med > resident tuition: not a bug (grants scaled to nonresident/sticker, pooled school-wide).
+
+2026-06-13 (v1.94.33) — anomaly-scan follow-ups:
+- Marquette bar_trend 2024: 0% → 99.46% (WI diploma privilege; ABA Total First-Time incl. alt pathways; 1 of 186 grads took the exam). Source: marquette_2024 ABA 509.
+- trans_gpa50 nulled where an LSAT-scale value sat in the GPA field and no source GPA exists: Georgia State 2014 (151), Mitchell/Hamline 2019 (149), St. Mary's 2015 (146). 2023-25 transfer file does not cover these years.
+- schol_none_pct negatives (Cincinnati -0.3, Penn State Dickinson -0.4, Dayton -1.9, Indiana-Indy -0.8, Mitchell/Hamline -0.3): value KEPT (honest catch-all residual); now surfaces the "adjusted" note. No data change.
+- Bar dips verified CORRECT vs ABA source, no change: DC 2021 (64.18%), Southern 2021 (41.66%), Vermont 2020 (45.76%).
